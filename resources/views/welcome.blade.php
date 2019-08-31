@@ -25,8 +25,6 @@
 <!--nprogress-css-->
 <link href="https://unpkg.com/nprogress@0.2.0/nprogress.css" rel="stylesheet" />
 <link href="/css/custom.css" rel="stylesheet" />
-
-<link rel="stylesheet" href="/css/framework7.css">
 <link rel="stylesheet" href="/css/style.css">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800" rel="stylesheet"> 
 
@@ -38,7 +36,9 @@
           
         </style>
     </head>
-    <body>
+
+    
+    <body id="mobile_wrap">
         <div id='app' v-cloak>
 
      <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
@@ -50,7 +50,5 @@
 
          <script src="https://unpkg.com/nprogress@0.2.0/nprogress.js"></script>
         <script src="{{asset('/js/app.js')}}"></script>
-        <script type="text/javascript" src="/js/jquery-1.12.4.min.js"></script>
-        <script type="text/javascript" src="/js/framework7.js"></script>
     </body>
 </html>

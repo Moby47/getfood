@@ -39,7 +39,7 @@ Template:	UpMobile - Mobile HTML Template
 /*===============================================*/
 /* 1. RESET		 						 */
 /*===============================================*/
-@import "reset.css";
+@import "/css/reset.css";
 
 /*===============================================*/
 /* 2. GENERAL		 						 */
@@ -139,7 +139,7 @@ h6{
 	font-size:14px;
 }
 h2.page_title{
-	width:90%;
+	width:100%;
 	font-size:14px;
 	line-height:25px;
 	font-weight:300;
