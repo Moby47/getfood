@@ -8,7 +8,7 @@
 </p>
 
 
-About
+About<br>
 GetFood is a growing enterprise meal reservation application (SAAS).
 
 Objectives
@@ -68,3 +68,24 @@ Tables:
 
 
 
+Steps to setup the local env.
+
+Install xamp.
+
+Search the keyword "laravel doc" in your browser.
+
+Select documentation.
+
+Download and install composer, its a small file, type the word "composer" in your cmd to verify installation.
+
+Copy the code to install laravel and paste in your CMD, hit enter.
+
+After installation.
+
+Close and reopen cmd then run the word "laravel" to verify Sucesful installation.
+
+Make sure your project is in the local server,  htdoc folder for xamp.
+
+Start xamp.
+
+Then run "php artisan serve" to start the server, then enter the specified localhost url in your browser, usually localhost:8000.
