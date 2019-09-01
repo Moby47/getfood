@@ -95,6 +95,7 @@ if(localStorage.getItem('token')){
  */
 
 Vue.component('index', require('./components/index.vue'));
+Vue.component('menubar', require('./components/includes/menubar.vue'));
 
 const app = new Vue({
     el: '#app',

@@ -1,131 +1,59 @@
 <template>
-    <div class="container">
+    <div class="container back">
         
-        
-<div class="pages">
-    <div data-page="shop" class="page no-toolbar no-navbar">
-      <div class="page-content">
+        <menubar></menubar>
       
-      <div class="navbarpages">
-          <div class="navbar_left">
-        <div class="logo_text"><a href="index.html"><span>Get</span>Food</a></div>
-          </div>				
-                              
-      </div>
+       <div class='container'>
+        <div class="bd-example">
+            <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+              <ol class="carousel-indicators">
+                <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+                <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+              </ol>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img src="/images/photos/photo4.jpg" class="d-block w-100" alt="">
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5>First slide label</h5>
+                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <img src="/images/photos/photo4.jpg" class="d-block w-100" alt="">
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5>Second slide label</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <img src="/images/photos/photo4.jpg" class="d-block w-100" alt="">
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5>Third slide label</h5>
+                    <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                  </div>
+                </div>
+              </div>
+              <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+          </div>
+
+       </div>
+
        
-       <div id="pages_maincontent">
-        
-       <h2 class="page_title">FOOD</h2>
-        
-      <div class="page_single layout_fullwidth_padding">
-        
-        <ul class="shop_items">
-        
-            <li>
-            <div class="shop_thumb"><a href="shop.html"><img src="images/photos/photo1.jpg" alt="" title="" /></a></div>
-            <div class="shop_item_details">
-            <h4><a href="shop.html">Blue Bike</a></h4>
-            <div class="shop_item_price">$100</div>
-              <div class="item_qnty_shop">
-                  <form id="myform" method="POST" action="#">
-                      <input type="button" value="-" class="qntyminusshop" field="quantity" />
-                      <input type="text" name="quantity" value="1" class="qntyshop" />
-                      <input type="button" value="+" class="qntyplusshop" field="quantity" />
-                  </form>
-              </div>
-            <a href="cart.html" id="addtocart">ADD TO CART</a>
-            <a href="#" data-popup=".popup-social" class="open-popup shopfav"><img src="images/icons/black/love.png" alt="" title="" /></a>
-            </div>
-            </li> 
-            
-            <li>
-            <div class="shop_thumb"><a href="shop.html"><img src="images/photos/photo2.jpg" alt="" title="" /></a></div>
-            <div class="shop_item_details">
-            <h4><a href="shop.html">Yellow Car</a></h4>
-            <div class="shop_item_price">$1200</div>
-              <div class="item_qnty_shop">
-                  <form id="myform" method="POST" action="#">
-                      <input type="button" value="-" class="qntyminusshop" field="quantity2" />
-                      <input type="text" name="quantity2" value="1" class="qntyshop" />
-                      <input type="button" value="+" class="qntyplusshop" field="quantity2" />
-                  </form>
-              </div>
-            <a href="cart.html" id="addtocart">ADD TO CART</a>
-            <a href="#" data-popup=".popup-social" class="open-popup shopfav"><img src="images/icons/black/love.png" alt="" title="" /></a>
-            </div>
-            </li>
-            
-            <li>
-            <div class="shop_thumb"><a href="shop.html"><img src="images/photos/photo3.jpg" alt="" title="" /></a></div>
-            <div class="shop_item_details">
-            <h4><a href="shop.html">Summer T-Shirt</a></h4>
-            <div class="shop_item_price">$1200</div>
-              <div class="item_qnty_shop">
-                  <form id="myform" method="POST" action="#">
-                      <input type="button" value="-" class="qntyminusshop" field="quantity3" />
-                      <input type="text" name="quantity3" value="1" class="qntyshop" />
-                      <input type="button" value="+" class="qntyplusshop" field="quantity3" />
-                  </form>
-              </div>
-            <a href="cart.html" id="addtocart">ADD TO CART</a>
-            <a href="#" data-popup=".popup-social" class="open-popup shopfav"><img src="images/icons/black/love.png" alt="" title="" /></a>
-            </div>
-            </li>   
-            
-            <li>
-            <div class="shop_thumb"><a href="shop.html"><img src="images/photos/photo4.jpg" alt="" title="" /></a></div>
-            <div class="shop_item_details">
-            <h4><a href="shop-item.html">Valentines Gift</a></h4>
-            <div class="shop_item_price">$175</div>
-              <div class="item_qnty_shop">
-                  <form id="myform" method="POST" action="#">
-                      <input type="button" value="-" class="qntyminusshop" field="quantity4" />
-                      <input type="text" name="quantity4" value="1" class="qntyshop" />
-                      <input type="button" value="+" class="qntyplusshop" field="quantity4" />
-                  </form>
-              </div>
-            <a href="cart.html" id="addtocart">ADD TO CART</a>
-            <a href="#" data-popup=".popup-social" class="open-popup shopfav"><img src="images/icons/black/love.png" alt="" title="" /></a>
-            </div>
-            </li>
-            
-            <li>
-            <div class="shop_thumb"><a href="shop-item.html"><img src="images/photos/photo5.jpg" alt="" title="" /></a></div>
-            <div class="shop_item_details">
-            <h4><a href="shop.html">Rocket Toy</a></h4>
-            <div class="shop_item_price">$435</div>
-              <div class="item_qnty_shop">
-                  <form id="myform" method="POST" action="#">
-                      <input type="button" value="-" class="qntyminusshop" field="quantity5" />
-                      <input type="text" name="quantity5" value="1" class="qntyshop" />
-                      <input type="button" value="+" class="qntyplusshop" field="quantity5" />
-                  </form>
-              </div>
-            <a href="cart.html" id="addtocart">ADD TO CART</a>
-            <a href="#" data-popup=".popup-social" class="open-popup shopfav"><img src="images/icons/black/love.png" alt="" title="" /></a>
-            </div>
-            </li> 
-            
-        </ul>
-        
-            <div class="shop_pagination">
-            <a href="shop.html" class="prev_shop">PREV PAGE</a>
-            <span class="shop_pagenr">1/37</span>
-            <a href="shop.html" class="next_shop">NEXT PAGE</a>
-            </div>
-        
-        
-        </div>
-        
-        </div>
-        
-        
-      </div>
-    </div>
-  </div>
-        
     </div>
 </template>
+
+<style scoped>
+
+</style>
 
 <script>
     export default {
@@ -166,3 +94,4 @@
         }
     }
 </script>
+

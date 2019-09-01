@@ -10,7 +10,15 @@ import cart from './components/cart.vue'
 import checkout from './components/checkout.vue'
 import favorite from './components/favorite.vue'
 import forgot from './components/forgot.vue'
-import history from './components/history.vue'
+import history2 from './components/history2.vue'
+import login from './components/login.vue'
+import order from './components/order.vue'
+import product from './components/product.vue'
+import register from './components/register.vue'
+import share from './components/share.vue'
+import shop from './components/shop.vue'
+import success from './components/success.vue'
+//import history from './components/history.vue'
 
 export default new Router({
     routes: [
@@ -66,6 +74,70 @@ export default new Router({
             path: '/history',
             name: 'history',
             component: history,
+             meta:{
+              //  auth: true
+            }
+        },
+        {
+            path: '/history2',
+            name: 'history2',
+            component: history2,
+             meta:{
+              //  auth: true
+            }
+        },
+        {
+            path: '/login',
+            name: 'login',
+            component: login,
+             meta:{
+              //  auth: true
+            }
+        },
+        {
+            path: '/order',
+            name: 'order',
+            component: order,
+             meta:{
+              //  auth: true
+            }
+        },
+        {
+            path: '/product',
+            name: 'product',
+            component: product,
+             meta:{
+              //  auth: true
+            }
+        },
+        {
+            path: '/register',
+            name: 'register',
+            component: register,
+             meta:{
+              //  auth: true
+            }
+        },
+        {
+            path: '/share',
+            name: 'share',
+            component: share,
+             meta:{
+              //  auth: true
+            }
+        },
+        {
+            path: '/shop',
+            name: 'shop',
+            component: shop,
+             meta:{
+              //  auth: true
+            }
+        },
+        {
+            path: '/success',
+            name: 'success',
+            component: success,
              meta:{
               //  auth: true
             }

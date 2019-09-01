@@ -15,7 +15,7 @@
         #f3f3f3;
         border-radius: 50%;
         border-top: 16px solid
-        #3498db;
+        #FFA500;
         width:120px;
         height:120px;
         -webkit-animation: spin 2s
@@ -36,3 +36,14 @@
         rotate(360deg);}
     }
     /* ***********styling for cloak******* */
+
+
+
+    .text-white{
+        color:white;
+    }
+
+    .back{
+        background-color: #FFA500;
+        height:700px;
+    }

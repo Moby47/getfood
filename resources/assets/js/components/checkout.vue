@@ -1,24 +1,23 @@
 <template>
     <div class="">
         
-        
 <!--content here-->
 
 <div class="pages">
     <div data-page="checkout" class="page no-toolbar no-navbar">
       <div class="page-content">
       
-      <div class="navbarpages">
-          <div class="navbar_left">
-        <div class="logo_text"><a href="index.html"><span>Get</span>Food</a></div>
-          </div>						
-                              
-      </div>
-       <div id="pages_maincontent">
-       
-       
-       <h2 class="page_title">CHECKOUT</h2>
-        
+            <h2 class="page_title">OWN FOOD</h2>
+            
+            <div id="pages_maincontent">
+             
+             <br>
+                 <nav aria-label="breadcrumb ">
+                         <ol class="breadcrumb">
+                           <li class="breadcrumb-item"><router-link to='/'>Home</router-link></li>
+                           <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+                         </ol>
+                       </nav>
            
               
       <div class="page_single layout_fullwidth_padding">
@@ -55,7 +54,7 @@
                             </div>
                         </div> 
                         
-                        <a href="success.html" class="button_full btyellow">EAT</a> 
+                        <router-link to="/success" class="button_full btyellow">EAT</router-link> 
                 
    
               </div>

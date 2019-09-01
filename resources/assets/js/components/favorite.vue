@@ -1,21 +1,21 @@
 <template>
     <div class="container">
         
-        
 <div class="pages">
     <div data-page="shop" class="page no-toolbar no-navbar">
       <div class="page-content">
       
-      <div class="navbarpages">
-          <div class="navbar_left">
-        <div class="logo_text"><a href="index.html"><span>Get</span>Food</a></div>
-          </div>				
-                              
-      </div>
-       
-       <div id="pages_maincontent">
-        
-       <h2 class="page_title">FAVORITES</h2>
+            <h2 class="page_title">FAVORITE FOOD</h2>
+            
+            <div id="pages_maincontent">
+             
+             <br>
+                 <nav aria-label="breadcrumb ">
+                         <ol class="breadcrumb">
+                           <li class="breadcrumb-item"><router-link to='/'>Home</router-link></li>
+                           <li class="breadcrumb-item active" aria-current="page">Favorite</li>
+                         </ol>
+                       </nav>
         
       <div class="page_single layout_fullwidth_padding">
         
@@ -72,7 +72,9 @@
             
         </ul>
         
-        
+        <div class="text-center">
+                    <router-link to='/cart' class="btn btn-block">View Table</router-link>
+                    </div>
         
         </div>
         

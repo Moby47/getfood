@@ -2640,7 +2640,11 @@ body.with-panel-right-cover .panel-right {
   transform: translate3d(-85%, 0, 0);
 }
 h2.page_title{
+	
+}
 
+.shift{
+	margin-top: 44px;
 }
 .content-block {
 padding:25px 5%;

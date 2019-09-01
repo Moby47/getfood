@@ -23,8 +23,9 @@
                 </div>
             </div>
             <div class="close_popup_button">
-                <a href="index.html" class="close-popup"><img src="images/icons/black/menu_close.png" alt="" title="" /></a>
-            </div>
+                    <router-link to='/'  class="close-popup"><img src="images/icons/black/menu_close.png" 
+                        alt="" title="" /></router-link>
+                      </div>
         </div>
     </div>
 

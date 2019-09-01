@@ -7,17 +7,17 @@
 <div class="pages">
     <div data-page="features" class="page no-navbar">
       <div class="page-content">
-      
-      <div class="navbarpages">
-          <div class="navbar_left">
-        <div class="logo_text"><a href="index.html"><span>Get</span>Food</a></div>
-          </div>						
-                              
-      </div>
-       
-       <div id="pages_maincontent">
-        
-        <h2 class="page_title">SMART FEATURES</h2>
+          <h2 class="page_title">FOOD TRAY</h2>
+            
+          <div id="pages_maincontent">
+           
+           <br>
+               <nav aria-label="breadcrumb ">
+                       <ol class="breadcrumb">
+                         <li class="breadcrumb-item"><router-link to='/'>Home</router-link></li>
+                         <li class="breadcrumb-item active" aria-current="page">Food (3 ITEMS)</li>
+                       </ol>
+                     </nav>
         
       <div class="page_single layout_fullwidth_padding toolbarpage">  
         
