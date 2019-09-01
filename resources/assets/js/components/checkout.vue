@@ -7,7 +7,7 @@
     <div data-page="checkout" class="page no-toolbar no-navbar">
       <div class="page-content">
       
-            <h2 class="page_title">OWN FOOD</h2>
+            <h2 class="page_title">FOOD IS READY</h2>
             
             <div id="pages_maincontent">
              

@@ -72,9 +72,9 @@
             
         </ul>
         
-        <div class="text-center">
-                    <router-link to='/cart' class="btn btn-block">View Table</router-link>
-                    </div>
+        <div class="signup_bottom">
+          <router-link to="/cart">VIEW TABLE</router-link>
+      </div>
         
         </div>
         

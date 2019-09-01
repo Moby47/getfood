@@ -21,6 +21,10 @@
                 <div class="signup_bottom">
                     <p>Check your email and follow the instructions to reset your password.</p>
                 </div>
+
+                <div class="signup_bottom">
+                    <router-link to="/login">BACK</router-link>
+                </div>
             </div>
             <div class="close_popup_button">
                     <router-link to='/'  class="close-popup"><img src="images/icons/black/menu_close.png" 

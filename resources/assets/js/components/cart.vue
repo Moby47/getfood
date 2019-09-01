@@ -8,7 +8,7 @@
 <div class="pages">
     <div data-page="cart" class="page no-toolbar no-navbar">
       <div class="page-content">
-            <h2 class="page_title">FOOD TRAY</h2>
+            <h2 class="page_title">SELECTED FOOD</h2>
             
             <div id="pages_maincontent">
              

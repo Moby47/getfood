@@ -4,7 +4,7 @@
 <div class="pages">
     <div data-page="shop" class="page no-toolbar no-navbar">
       <div class="page-content">
-      <h2 class="page_title">CHOOSE FOOD</h2>
+      <h2 class="page_title">AVAILABLE FOOD</h2>
             
        <div id="pages_maincontent">
         
@@ -32,7 +32,7 @@
                       <input type="button" value="+" class="qntyplusshop" field="quantity" />
                   </form>
               </div>
-            <a href="cart.html" id="addtocart"><router-link to='/cart'>ADD TABLE</router-link></a>
+            <a href="cart.html" id="addtocart"><router-link to='/cart'>ADD TO TABLE</router-link></a>
             <a href="#" data-popup=".popup-social" class="open-popup shopfav"><img src="images/icons/black/love.png" alt="" title="" /></a>
             </div>
             </li> 
@@ -49,7 +49,7 @@
                       <input type="button" value="+" class="qntyplusshop" field="quantity2" />
                   </form>
               </div>
-            <a href="cart.html" id="addtocart"><router-link to='/cart'>ADD TABLE</router-link></a>
+            <a href="cart.html" id="addtocart"><router-link to='/cart'>ADD TO TABLE</router-link></a>
             <a href="#" data-popup=".popup-social" class="open-popup shopfav"><img src="images/icons/black/love.png" alt="" title="" /></a>
             </div>
             </li>
@@ -66,7 +66,7 @@
                       <input type="button" value="+" class="qntyplusshop" field="quantity3" />
                   </form>
               </div>
-            <a href="cart.html" id="addtocart"><router-link to='/cart'>ADD TABLE</router-link></a>
+            <a href="cart.html" id="addtocart"><router-link to='/cart'>ADD TO TABLE</router-link></a>
             <a href="#" data-popup=".popup-social" class="open-popup shopfav"><img src="images/icons/black/love.png" alt="" title="" /></a>
             </div>
             </li>   
@@ -83,7 +83,7 @@
                       <input type="button" value="+" class="qntyplusshop" field="quantity4" />
                   </form>
               </div>
-            <a href="cart.html" id="addtocart">ADD TABLE</a>
+            <a href="cart.html" id="addtocart">ADD TO TABLE</a>
             <a href="#" data-popup=".popup-social" class="open-popup shopfav"><img src="images/icons/black/love.png" alt="" title="" /></a>
             </div>
             </li>
@@ -100,7 +100,7 @@
                       <input type="button" value="+" class="qntyplusshop" field="quantity5" />
                   </form>
               </div>
-            <a href="cart.html" id="addtocart">ADD TABLE</a>
+            <a href="cart.html" id="addtocart">ADD TO TABLE</a>
             <a href="#" data-popup=".popup-social" class="open-popup shopfav"><img src="images/icons/black/love.png" alt="" title="" /></a>
             </div>
             </li> 
@@ -115,9 +115,9 @@
             </div>
         
         
-            <div class="text-center">
-                    <router-link to='/cart' class="btn btn-block">View Table</router-link>
-                    </div>
+            <div class="signup_bottom">
+                <router-link to="/cart">VIEW TABLE</router-link>
+            </div>
 
         </div>
         

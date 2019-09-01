@@ -22,6 +22,9 @@
                     </form>
                     
                 </div>
+                <div class="signup_bottom">
+                    <router-link to="/login">BACK</router-link>
+                </div>
                 <div class="close_popup_button">
                         <router-link to='/'  class="close-popup"><img src="images/icons/black/menu_close.png" 
                             alt="" title="" /></router-link>

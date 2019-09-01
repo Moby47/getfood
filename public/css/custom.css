@@ -43,7 +43,28 @@
         color:white;
     }
 
+    .text-black{
+color:black !important;
+    }
+
     .back{
-        background-color: #FFA500;
-        height:700px;
+        height:650px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-image: url('/images/jollof.jpg');
+    }
+
+
+    #nprogress .bar{
+        height:6px!important;
+        background:#FFA500!important;
+        border:#FFA500!important
+    }
+        #nprogress .spinner-icon{
+            border-top-color:#FFA500!important;
+            border-left-color:white!important
+    }
+
+    .radius{
+        border-radius: 6px;
     }
