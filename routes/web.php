@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/get-foods', 'guestcontroller@get_foods');
+
+Route::get('/hh', function () {
+    return 7;
+});
