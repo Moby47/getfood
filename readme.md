@@ -89,3 +89,9 @@ Make sure your project is in the local server,  htdoc folder for xamp.
 Start xamp.
 
 Then run "php artisan serve" to start the server, then enter the specified localhost url in your browser, usually localhost:8000.
+
+
+*You need to install nodeJs to run vue. 
+https://git-scm.com/download/win
+
+open the project and run 'npm run watch to start the vue server, along side laravel as backend'
