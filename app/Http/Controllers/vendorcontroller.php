@@ -5,14 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\food;
 use App\order;
+use DB;
 
-//resource
+//Api resource
 use App\Http\Resources\foodresource as foodres;
 use App\Http\Resources\orderresource as orderres;
+use App\Http\Resources\favresource as favres;
 
 class vendorcontroller extends Controller
 {
-    //vendor create food
+    //vendor create food record
     public function create_food(Request $request){
         $save = new food();
         $save->title = $request->input('title');
@@ -36,35 +38,30 @@ class vendorcontroller extends Controller
 
         //view total cash
         public function total_cash(){
-            $cash = order::select('amt')->sum('amt')->get();
-            return orderres::collection($cash);
+            return $cash = order::select('amt')->sum('amt');
             }
 
 
 
-            //view daily total cash
-            public function daily_cash(){
-             //   $dailycash = order::select('amt''created_at')where('created_at', '<', 'now+7days')->sum('amt')->get();
-                return orderres::collection($dailycash);
+            //view reporting based on date range 
+            public function reporting(Request $request){
+                $from = date('2018-01-01'); //$from = $request->input('from');
+                $to = date('2018-05-02');   //$to = $request->input('to');
+                $rep =order::whereBetween('amt', [$from, $to])->get();
+                return orderres::collection($rep);
                 }
+               
                 
-                
-                
-           //view monthly total cash     
-                public function monthly_cash(){
-               // $monthlycash = order::select('amt','created_at')where('created_at', '<', 'now+31days')->sum('amt')->get();
-               return orderres::collection($monthlycash);
-                }
-                
-                
-                
-                
+                //see customer favorite food
                 public function favorites(){
-                //$fav =  favorite::select //list a title and count occurance.
-                //return favres::collection($fav);
+
+              /* issue: need to show and count favorite food    
+               $fav = DB::table('favourites')
+                    ->select('title', DB::raw('count(*) as title'))
+                    ->groupBy('title')->toArray();
+                    return favres::collection($fav);
+                    */
                 }
-                
-                
                 
                 
                 public function delete_food(Request $request){

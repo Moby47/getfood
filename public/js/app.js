@@ -56633,35 +56633,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -56760,8 +56731,6 @@ var render = function() {
                       _vm._v(" "),
                       _vm._m(2),
                       _vm._v(" "),
-                      _vm._m(3),
-                      _vm._v(" "),
                       _c(
                         "router-link",
                         {
@@ -56803,27 +56772,6 @@ var staticRenderFns = [
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "item_qnty" }, [
-        _c("form", { attrs: { id: "myform", method: "POST", action: "#" } }, [
-          _c("label", [_vm._v("QUANTITY")]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "qntyminus",
-            attrs: { type: "button", value: "-", field: "quantity" }
-          }),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "qnty",
-            attrs: { type: "text", name: "quantity", value: "1" }
-          }),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "qntyplus",
-            attrs: { type: "button", value: "+", field: "quantity" }
-          })
-        ])
-      ]),
-      _vm._v(" "),
       _c(
         "a",
         { staticClass: "item_delete", attrs: { href: "#", id: "cartitem1" } },
@@ -56851,27 +56799,6 @@ var staticRenderFns = [
         _c("a", { staticClass: "close-panel", attrs: { href: "shop.html" } }, [
           _c("img", {
             attrs: { src: "images/photos/photo2.jpg", alt: "", title: "" }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "item_qnty" }, [
-        _c("form", { attrs: { id: "myform", method: "POST", action: "#" } }, [
-          _c("label", [_vm._v("QUANTITY")]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "qntyminus",
-            attrs: { type: "button", value: "-", field: "quantity2" }
-          }),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "qnty",
-            attrs: { type: "text", name: "quantity2", value: "1" }
-          }),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "qntyplus",
-            attrs: { type: "button", value: "+", field: "quantity2" }
           })
         ])
       ]),
@@ -56907,26 +56834,7 @@ var staticRenderFns = [
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "item_qnty" }, [
-        _c("form", { attrs: { id: "myform", method: "POST", action: "#" } }, [
-          _c("label", [_vm._v("QUANTITY")]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "qntyminus",
-            attrs: { type: "button", value: "-", field: "quantity3" }
-          }),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "qnty",
-            attrs: { type: "text", name: "quantity3", value: "1" }
-          }),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "qntyplus",
-            attrs: { type: "button", value: "+", field: "quantity3" }
-          })
-        ])
-      ]),
+      _c("div", { staticClass: "item_qnty" }),
       _vm._v(" "),
       _c(
         "a",
@@ -56937,30 +56845,6 @@ var staticRenderFns = [
           })
         ]
       )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "carttotal" }, [
-      _c("div", { staticClass: "carttotal_row" }, [
-        _c("div", { staticClass: "carttotal_left" }, [_vm._v("CART TOTAL")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "carttotal_right" }, [_vm._v("$ 1,320.00")])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "carttotal_row" }, [
-        _c("div", { staticClass: "carttotal_left" }, [_vm._v("Charges")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "carttotal_right" }, [_vm._v("50.00")])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "carttotal_row_last" }, [
-        _c("div", { staticClass: "carttotal_left" }, [_vm._v("TOTAL")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "carttotal_right" }, [_vm._v("$ 1,518.00")])
-      ])
     ])
   }
 ]

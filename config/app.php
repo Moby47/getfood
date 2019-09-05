@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'GetFoods'),
 
     /*
     |--------------------------------------------------------------------------
@@ -163,6 +163,8 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        //for cart package
+        Darryldecode\Cart\CartServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -177,6 +179,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         'Tymon\JWTAuth\Providers\JWTAuthServiceProvider',
+       
     ],
 
     /*
@@ -227,6 +230,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'JWTAuth' => 'Tymon\JWTAuth\Facades\JWTAuth',
         'JWTFactory' => 'Tymon\JWTAuth\Facades\JWTFactory',
+         //cart package
+         'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
     ],
 
 ];
