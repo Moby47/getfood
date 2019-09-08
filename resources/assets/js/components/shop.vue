@@ -12,112 +12,86 @@
             <nav aria-label="breadcrumb ">
                     <ol class="breadcrumb">
                       <li class="breadcrumb-item"><router-link to='/'>Home</router-link></li>
-                      <li class="breadcrumb-item active" aria-current="page">Food (3 ITEMS)</li>
+                      <li class="breadcrumb-item active" aria-current="page">Food ({{food_count}})</li>
                     </ol>
                   </nav>
         
+                      <!-- ********************************************** empty -->
+                           
+                        <div v-if='empty' class='text-center alert alert-info'>
+                           Sorry, the Kitchen is empty.
+                                </div>
+        
+                                 <!--loading -->
+     <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
+    <div v-if='data_load' class='text-center'>
+      <template>
+          <b>  Fetching Food</b>
+         <v-progress-circular 
+         color="orange"
+         indeterminate
+         ></v-progress-circular>
+                </template>
+                 </div>
+        </transition>
+                                      
+             <!--loading temp-->
+<transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
+                    <div v-if='wait' class='text-center'>
+                      <template>
+                        <b>Kitchen delay, please wait.</b>
+                         <v-progress-circular 
+                        color="red"
+                        indeterminate
+                        >
+                        </v-progress-circular>
+                                </template>
+                                 </div>
+                        </transition>
+             
+
       <div class="page_single layout_fullwidth_padding">
         
-        <ul class="shop_items">
         
-            <li>
-            <div class="shop_thumb"><a href="shop.html"><img src="images/photos/photo1.jpg" alt="" title="" /></a></div>
+        <ul class="shop_items">
+                
+            <li v-for='con in content' v-bind:key='con.id'>
+            <div class="shop_thumb">
+                <v-img 
+                :src="'/storage/food/'+con.img"
+                :alt="con.title"
+                :lazy-src="`/images/black-spinner.gif`"
+                title="" ></v-img>
+            </div>
             <div class="shop_item_details">
-            <h4><a href="shop.html">Blue Bike</a></h4>
-            <div class="shop_item_price">$100</div>
+            <h4>{{con.title}}</h4>
+            <div class="shop_item_price"><strike>N</strike>{{con.amt}}</div>
               <div class="item_qnty_shop">
                   <form id="myform" method="POST" action="#">
-                      <input type="button" value="-" class="qntyminusshop" field="quantity" />
-                      <input type="text" name="quantity" value="1" class="qntyshop" />
-                      <input type="button" value="+" class="qntyplusshop" field="quantity" />
+                      <input type="button" value="-" class="qntyminusshop" field="quantity" @click.prevent='decre()'/>
+                      <input type="text" name="quantity" :value="qty" class="qntyshop" />
+                      <input type="button" value="+" class="qntyplusshop" field="quantity" @click.prevent='incre()'/>
                   </form>
               </div>
-            <a href="cart.html" id="addtocart"><router-link to='/cart'>ADD TO TABLE</router-link></a>
-            <a href="#" data-popup=".popup-social" class="open-popup shopfav"><img src="images/icons/black/love.png" alt="" title="" /></a>
+            <a href="cart.html" id="addtocart" @click.prevent='cart(con)' >ADD TO TABLE</a>
+            <a href="#" data-popup=".popup-social" class="open-popup shopfav" @click.prevent='like(con.id)'>
+                <img src="images/icons/black/love.png" alt="" title="" /></a>
             </div>
             </li> 
-            
-            <li>
-            <div class="shop_thumb"><a href="shop.html"><img src="images/photos/photo2.jpg" alt="" title="" /></a></div>
-            <div class="shop_item_details">
-            <h4><a href="shop.html">Yellow Car</a></h4>
-            <div class="shop_item_price">$1200</div>
-              <div class="item_qnty_shop">
-                  <form id="myform" method="POST" action="#">
-                      <input type="button" value="-" class="qntyminusshop" field="quantity2" />
-                      <input type="text" name="quantity2" value="1" class="qntyshop" />
-                      <input type="button" value="+" class="qntyplusshop" field="quantity2" />
-                  </form>
-              </div>
-            <a href="cart.html" id="addtocart"><router-link to='/cart'>ADD TO TABLE</router-link></a>
-            <a href="#" data-popup=".popup-social" class="open-popup shopfav"><img src="images/icons/black/love.png" alt="" title="" /></a>
-            </div>
-            </li>
-            
-            <li>
-            <div class="shop_thumb"><a href="shop.html"><img src="images/photos/photo3.jpg" alt="" title="" /></a></div>
-            <div class="shop_item_details">
-            <h4><a href="shop.html">Summer T-Shirt</a></h4>
-            <div class="shop_item_price">$1200</div>
-              <div class="item_qnty_shop">
-                  <form id="myform" method="POST" action="#">
-                      <input type="button" value="-" class="qntyminusshop" field="quantity3" />
-                      <input type="text" name="quantity3" value="1" class="qntyshop" />
-                      <input type="button" value="+" class="qntyplusshop" field="quantity3" />
-                  </form>
-              </div>
-            <a href="cart.html" id="addtocart"><router-link to='/cart'>ADD TO TABLE</router-link></a>
-            <a href="#" data-popup=".popup-social" class="open-popup shopfav"><img src="images/icons/black/love.png" alt="" title="" /></a>
-            </div>
-            </li>   
-            
-            <li>
-            <div class="shop_thumb"><a href="shop.html"><img src="images/photos/photo4.jpg" alt="" title="" /></a></div>
-            <div class="shop_item_details">
-            <h4><a href="shop-item.html">Valentines Gift</a></h4>
-            <div class="shop_item_price">$175</div>
-              <div class="item_qnty_shop">
-                  <form id="myform" method="POST" action="#">
-                      <input type="button" value="-" class="qntyminusshop" field="quantity4" />
-                      <input type="text" name="quantity4" value="1" class="qntyshop" />
-                      <input type="button" value="+" class="qntyplusshop" field="quantity4" />
-                  </form>
-              </div>
-            <a href="cart.html" id="addtocart">ADD TO TABLE</a>
-            <a href="#" data-popup=".popup-social" class="open-popup shopfav"><img src="images/icons/black/love.png" alt="" title="" /></a>
-            </div>
-            </li>
-            
-            <li>
-            <div class="shop_thumb"><a href="shop-item.html"><img src="images/photos/photo5.jpg" alt="" title="" /></a></div>
-            <div class="shop_item_details">
-            <h4><a href="shop.html">Rocket Toy</a></h4>
-            <div class="shop_item_price">$435</div>
-              <div class="item_qnty_shop">
-                  <form id="myform" method="POST" action="#">
-                      <input type="button" value="-" class="qntyminusshop" field="quantity5" />
-                      <input type="text" name="quantity5" value="1" class="qntyshop" />
-                      <input type="button" value="+" class="qntyplusshop" field="quantity5" />
-                  </form>
-              </div>
-            <a href="cart.html" id="addtocart">ADD TO TABLE</a>
-            <a href="#" data-popup=".popup-social" class="open-popup shopfav"><img src="images/icons/black/love.png" alt="" title="" /></a>
-            </div>
-            </li> 
-            
         </ul>
 
-      
-            <div class="shop_pagination">
-            <a href="shop.html" class="prev_shop">PREV PAGE</a>
-            <span class="shop_pagenr">1/37</span>
-            <a href="shop.html" class="next_shop">NEXT PAGE</a>
+      <span v-if='!empty'>
+            <div class="shop_pagination" >
+            <a href="" class="prev_shop" @click.prevent="fetch(pagination.prev_page_url)" :disabled="!pagination.prev_page_url">PREV PAGE</a>
+            <span class="shop_pagenr">  <span>{{pagination.current_page}} of {{pagination.last_page}}</span></span>
+            <a href="shop.html" class="next_shop" @click.prevent="fetch(pagination.next_page_url)" :disabled="!pagination.next_page_url">NEXT PAGE</a>
             </div>
         
         
             <div class="signup_bottom">
                 <router-link to="/cart">VIEW TABLE</router-link>
             </div>
+     </span>
 
         </div>
         
@@ -136,37 +110,171 @@
 
         data(){
             return {
-
+                content:[],
+                empty:false,
+                wait:false,
+                data_load: true,
+                pagination: [],
+                food_count:'',
+                qty:1,
             }
         },
 
         methods: {
-/*
-            this.$validator.validateAll().then(() => {
-           
-           if (!this.errors.any()) {
-            //
-            }else{
-            //
-            }
-         
-                    //
-            })
-            .catch(err=>{
-                
-            }),
-      
-         setTimeout(func=>{
-             //this.errors.clear()
-            // this.$validator.reset()
-         },1) 
+    //fetch blogs
+    fetch(page_url){
+                    if(page_url){
+                    NProgress.start();
+                    }
+                    //off snackbar
+                    this.snackbar = false;
+                  var   page_url = page_url || '/get-foods';
         
-         }); //validator
-*/
+                  fetch(page_url)
+                  .then(res => res.json())
+                  .then(res=>{
+                    this.content = res.data;
+                    console.log(this.content)
+                    //to determine if obj is empty 
+                            //console.log(res.data[0]);
+                            if(res.data[0] == undefined){
+                                this.empty = true;
+                            }else{
+                                this.empty = false;
+                            }
+                    //to determine if obj is empty
+                    this.makePagination(res.meta, res.links);
+                    this.wait = false;
+                    this.food_count = res.meta.total;
+                    NProgress.done();
+                  })
+                  .catch(error =>{
+                      //off loader
+                      this.data_load = false;
+                        this.wait = true;
+                        setTimeout(func=>{
+                            this.fetch();
+                        },2000)
+                        NProgress.done();        
+                      })
+                      
+                 
+                },
+        
+                 makePagination(meta, links){
+            var pagination = {
+                            current_page: meta.current_page,
+                            last_page: meta.last_page,
+                            next_page_url: links.next,
+                            prev_page_url: links.prev
+                             }
+              document.body.scrollTop = 0;
+             document.documentElement.scrollTop = 0;
+            this.pagination = pagination;
+                },
+
+
+                like(id){
+                   
+                    //this.$toasted.clear();
+                   // this.loading = true;
+                    var check = localStorage.getItem('userId');
+                    if(check){
+                        NProgress.start()
+                        //Id exists, send both User and Post Id to DB
+                        var userId = check;
+                        var foodId = id;
+        
+                        var input = {'userId':userId, 'foodId':foodId};
+        
+                        axios.post('/add-favorite',input)
+                        .then(res=>{
+                            if(res.data == 1){
+                        alert('Food added to Favourites!');
+                        //this.fetch();
+                            }else if(res.data == 0){
+                        alert('Food was already added to Favorites');
+                       
+                            }else{
+                       alert('Favorite Maxed out!');       
+                            }
+                            NProgress.done();
+                           
+                        })
+                        .catch(error =>{
+                  alert("Failed to add food. Try again");
+                  
+                    NProgress.done();        
+                      })
+                        
+                    }else{
+                        NProgress.start();
+                        //create id for user  
+                    var userId = Math.floor(Math.random()*1000);
+                    //store locally
+                    localStorage.setItem('userId',userId);
+                    var foodId = id;
+        
+                    //go to server
+                    var input = {'userId':userId, 'foodId':foodId};
+                    axios.post('/add-favorite',input)
+                        .then(res=>{
+                            if(res.data == 1){
+                        alert('Food Liked!');
+                       
+                            }
+                            NProgress.done();
+                            
+                        })
+                        .catch(error =>{
+                  alert("The like action failed...");
+                  
+                    NProgress.done();        
+                      })
+                    }
+                    
+                },
+
+            incre(){
+                this.qty = this.qty + 1;
+            },
+            decre(){
+                this.qty = this.qty - 1;
+            },
+
+            cart(con){
+                console.log(con)
+                
+                axios.post('/add-to-cart',con)
+                        .then(res=>{
+                            if(res.data == 1){
+                        alert('Food added to Favourites!');
+                        //this.fetch();
+                            }
+                            NProgress.done();
+                           
+                        })
+                        .catch(error =>{
+                  alert("Failed. Try again");
+                    NProgress.done();        
+                      })
+            },
+
         },
 
+             //watch data load
+             watch : {
+              content(a,b){
+               if(a){
+                //data content loaded, it is safe to display
+                this.data_load = false;
+                this.data = true;
+               }
+            },
+        },
+        
         mounted() {
-            console.log('Component mounted.')
+            this.fetch()
         }
     }
 </script>

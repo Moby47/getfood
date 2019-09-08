@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\food;
+
+//Api resource
+use App\Http\Resources\cartresource as cartres;
 
 class cartcontroller extends Controller
 {
@@ -12,20 +16,17 @@ class cartcontroller extends Controller
 public function addToCart(Request $request){
 
 	//expected params, user id and food id
-$userId = $request->input('id');
-$foodId =  $request->input('id');
+$userId = 5;//$request->input('id');
 
-//fetch food details
-$food = food::findorfail($foodId);
 
 // add to cart for a specific user
 
-Cart::session($userId)->add(array(
-    'id' => $food->id,
-    'name' => $food->names,
-    'price' => $food->price,
-    'quantity' => $food->quantity,
-	'image' => $food->image
+\Cart::session($userId)->add(array(
+    'id' => $request->input('id'),
+    'name' => $request->input('title'),
+    'price' => $request->input('amt'),
+    'quantity' => $request->input('qty'),
+	'image' => $request->input('img')
 ));
 	return 1;
 }
@@ -43,6 +44,17 @@ Cart::session($userId)->remove($foodId);
 return 1;
 }
 
+
+// Getting cart's contents for a specific user
+public function cartItems(){
+   // $userId = $request->input('userId');
+   //userid = 5
+   //foodid = 9
+    $cart = \Cart::session(5)->getContent(9);
+    return cartres::collection($cart);
+  // $cart = Cart::session($userId)->getContent($itemId);
+    //$cartCollection->count();
+    }
 
 
 }

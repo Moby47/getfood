@@ -55,12 +55,11 @@ class vendorcontroller extends Controller
                 //see customer favorite food
                 public function favorites(){
 
-              /* issue: need to show and count favorite food    
-               $fav = DB::table('favourites')
-                    ->select('title', DB::raw('count(*) as title'))
-                    ->groupBy('title')->toArray();
+              return $fav = DB::table('favourites')
+                    ->select('title', DB::raw('count(*) as total'))
+                    ->groupBy('title')->get();
                     return favres::collection($fav);
-                    */
+                    
                 }
                 
                 

@@ -16,7 +16,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//guest
+//guest routes
+Route::Post('/add-to-cart', 'cartcontroller@addToCart');
+Route::Post('/remove-from-cart', 'cartcontroller@removeFromCart');
+Route::get('/cart-items', 'cartcontroller@cartItems');
+Route::Post('/add-favorite', 'guestcontroller@addFavorite');
 Route::get('/get-foods', 'guestcontroller@get_foods');
 
 
@@ -35,9 +39,7 @@ Route::get('/my-orders/{id}', 'customercontroller@my_orders');
 Route::get('/my-reporting/{id}', 'vendorcontroller@my_reporting');
 
 
-//cart
-Route::Post('/add-cart', 'vendorcontroller@addToCart');
-Route::Post('/remove-cart', 'vendorcontroller@removeFromCart');
+
 
 //don't delete, will be used later to fix route bug
 /*

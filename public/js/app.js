@@ -57330,6 +57330,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -57426,6 +57428,17 @@ var render = function() {
                     [
                       _c("router-link", { attrs: { to: "/cart" } }, [
                         _vm._v("VIEW TABLE")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "signup_bottom" },
+                    [
+                      _c("router-link", { attrs: { to: "/cart" } }, [
+                        _vm._v("CLEAR FAVORITES")
                       ])
                     ],
                     1
@@ -60549,66 +60562,166 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
-        return {};
+        return {
+            content: [],
+            empty: false,
+            wait: false,
+            data_load: true,
+            pagination: [],
+            food_count: '',
+            qty: 1
+        };
     },
 
 
     methods: {
-        /*
-                    this.$validator.validateAll().then(() => {
-                   
-                   if (!this.errors.any()) {
-                    //
-                    }else{
-                    //
+        //fetch blogs
+        fetch: function (_fetch) {
+            function fetch(_x) {
+                return _fetch.apply(this, arguments);
+            }
+
+            fetch.toString = function () {
+                return _fetch.toString();
+            };
+
+            return fetch;
+        }(function (page_url) {
+            var _this = this;
+
+            if (page_url) {
+                NProgress.start();
+            }
+            //off snackbar
+            this.snackbar = false;
+            var page_url = page_url || '/get-foods';
+
+            fetch(page_url).then(function (res) {
+                return res.json();
+            }).then(function (res) {
+                _this.content = res.data;
+                console.log(_this.content);
+                //to determine if obj is empty 
+                //console.log(res.data[0]);
+                if (res.data[0] == undefined) {
+                    _this.empty = true;
+                } else {
+                    _this.empty = false;
+                }
+                //to determine if obj is empty
+                _this.makePagination(res.meta, res.links);
+                _this.wait = false;
+                _this.food_count = res.meta.total;
+                NProgress.done();
+            }).catch(function (error) {
+                //off loader
+                _this.data_load = false;
+                _this.wait = true;
+                setTimeout(function (func) {
+                    _this.fetch();
+                }, 2000);
+                NProgress.done();
+            });
+        }),
+        makePagination: function makePagination(meta, links) {
+            var pagination = {
+                current_page: meta.current_page,
+                last_page: meta.last_page,
+                next_page_url: links.next,
+                prev_page_url: links.prev
+            };
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+            this.pagination = pagination;
+        },
+        like: function like(id) {
+
+            //this.$toasted.clear();
+            // this.loading = true;
+            var check = localStorage.getItem('userId');
+            if (check) {
+                NProgress.start();
+                //Id exists, send both User and Post Id to DB
+                var userId = check;
+                var foodId = id;
+
+                var input = { 'userId': userId, 'foodId': foodId };
+
+                axios.post('/add-favorite', input).then(function (res) {
+                    if (res.data == 1) {
+                        alert('Food added to Favourites!');
+                        //this.fetch();
+                    } else if (res.data == 0) {
+                        alert('Food was already added to Favorites');
+                    } else {
+                        alert('Favorite Maxed out!');
                     }
-                 
-                            //
-                    })
-                    .catch(err=>{
-                        
-                    }),
-              
-                 setTimeout(func=>{
-                     //this.errors.clear()
-                    // this.$validator.reset()
-                 },1) 
-                
-                 }); //validator
-        */
+                    NProgress.done();
+                }).catch(function (error) {
+                    alert("Failed to add food. Try again");
+
+                    NProgress.done();
+                });
+            } else {
+                NProgress.start();
+                //create id for user  
+                var userId = Math.floor(Math.random() * 1000);
+                //store locally
+                localStorage.setItem('userId', userId);
+                var foodId = id;
+
+                //go to server
+                var input = { 'userId': userId, 'foodId': foodId };
+                axios.post('/add-favorite', input).then(function (res) {
+                    if (res.data == 1) {
+                        alert('Food Liked!');
+                    }
+                    NProgress.done();
+                }).catch(function (error) {
+                    alert("The like action failed...");
+
+                    NProgress.done();
+                });
+            }
+        },
+        incre: function incre() {
+            this.qty = this.qty + 1;
+        },
+        decre: function decre() {
+            this.qty = this.qty - 1;
+        },
+        cart: function cart(con) {
+            console.log(con);
+
+            axios.post('/add-to-cart', con).then(function (res) {
+                if (res.data == 1) {
+                    alert('Food added to Favourites!');
+                    //this.fetch();
+                }
+                NProgress.done();
+            }).catch(function (error) {
+                alert("Failed. Try again");
+                NProgress.done();
+            });
+        }
+    },
+
+    //watch data load
+    watch: {
+        content: function content(a, b) {
+            if (a) {
+                //data content loaded, it is safe to display
+                this.data_load = false;
+                this.data = true;
+            }
+        }
     },
 
     mounted: function mounted() {
-        console.log('Component mounted.');
+        this.fetch();
     }
 });
 
@@ -60632,461 +60745,311 @@ var render = function() {
           _c("div", { staticClass: "page-content" }, [
             _c("h2", { staticClass: "page_title" }, [_vm._v("AVAILABLE FOOD")]),
             _vm._v(" "),
-            _c("div", { attrs: { id: "pages_maincontent" } }, [
-              _c("br"),
-              _vm._v(" "),
-              _c("nav", { attrs: { "aria-label": "breadcrumb " } }, [
-                _c("ol", { staticClass: "breadcrumb" }, [
-                  _c(
-                    "li",
-                    { staticClass: "breadcrumb-item" },
-                    [
-                      _c("router-link", { attrs: { to: "/" } }, [
-                        _vm._v("Home")
-                      ])
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "li",
-                    {
-                      staticClass: "breadcrumb-item active",
-                      attrs: { "aria-current": "page" }
-                    },
-                    [_vm._v("Food (3 ITEMS)")]
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "page_single layout_fullwidth_padding" },
-                [
-                  _c("ul", { staticClass: "shop_items" }, [
-                    _c("li", [
-                      _vm._m(0),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "shop_item_details" }, [
-                        _vm._m(1),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "shop_item_price" }, [
-                          _vm._v("$100")
-                        ]),
-                        _vm._v(" "),
-                        _vm._m(2),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          { attrs: { href: "cart.html", id: "addtocart" } },
+            _c(
+              "div",
+              { attrs: { id: "pages_maincontent" } },
+              [
+                _c("br"),
+                _vm._v(" "),
+                _c("nav", { attrs: { "aria-label": "breadcrumb " } }, [
+                  _c("ol", { staticClass: "breadcrumb" }, [
+                    _c(
+                      "li",
+                      { staticClass: "breadcrumb-item" },
+                      [
+                        _c("router-link", { attrs: { to: "/" } }, [
+                          _vm._v("Home")
+                        ])
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      {
+                        staticClass: "breadcrumb-item active",
+                        attrs: { "aria-current": "page" }
+                      },
+                      [_vm._v("Food (" + _vm._s(_vm.food_count) + ")")]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm.empty
+                  ? _c("div", { staticClass: "text-center alert alert-info" }, [
+                      _vm._v(
+                        "\n                           Sorry, the Kitchen is empty.\n                                "
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c(
+                  "transition",
+                  {
+                    attrs: {
+                      name: "anime",
+                      "enter-active-class": "animated fadeIn",
+                      duration: 200,
+                      "leave-active-class": "animated fadeOut"
+                    }
+                  },
+                  [
+                    _vm.data_load
+                      ? _c(
+                          "div",
+                          { staticClass: "text-center" },
                           [
-                            _c("router-link", { attrs: { to: "/cart" } }, [
-                              _vm._v("ADD TO TABLE")
-                            ])
+                            [
+                              _c("b", [_vm._v("  Fetching Food")]),
+                              _vm._v(" "),
+                              _c("v-progress-circular", {
+                                attrs: { color: "orange", indeterminate: "" }
+                              })
+                            ]
                           ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _vm._m(3)
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("li", [
-                      _vm._m(4),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "shop_item_details" }, [
-                        _vm._m(5),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "shop_item_price" }, [
-                          _vm._v("$1200")
-                        ]),
-                        _vm._v(" "),
-                        _vm._m(6),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          { attrs: { href: "cart.html", id: "addtocart" } },
+                          2
+                        )
+                      : _vm._e()
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "transition",
+                  {
+                    attrs: {
+                      name: "anime",
+                      "enter-active-class": "animated fadeIn",
+                      duration: 200,
+                      "leave-active-class": "animated fadeOut"
+                    }
+                  },
+                  [
+                    _vm.wait
+                      ? _c(
+                          "div",
+                          { staticClass: "text-center" },
                           [
-                            _c("router-link", { attrs: { to: "/cart" } }, [
-                              _vm._v("ADD TO TABLE")
-                            ])
+                            [
+                              _c("b", [_vm._v("Kitchen delay, please wait.")]),
+                              _vm._v(" "),
+                              _c("v-progress-circular", {
+                                attrs: { color: "red", indeterminate: "" }
+                              })
+                            ]
                           ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _vm._m(7)
-                      ])
-                    ]),
+                          2
+                        )
+                      : _vm._e()
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "page_single layout_fullwidth_padding" },
+                  [
+                    _c(
+                      "ul",
+                      { staticClass: "shop_items" },
+                      _vm._l(_vm.content, function(con) {
+                        return _c("li", { key: con.id }, [
+                          _c(
+                            "div",
+                            { staticClass: "shop_thumb" },
+                            [
+                              _c("v-img", {
+                                attrs: {
+                                  src: "/storage/food/" + con.img,
+                                  alt: con.title,
+                                  "lazy-src": "/images/black-spinner.gif",
+                                  title: ""
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "shop_item_details" }, [
+                            _c("h4", [_vm._v(_vm._s(con.title))]),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "shop_item_price" },
+                              [
+                                _c("strike", [_vm._v("N")]),
+                                _vm._v(_vm._s(con.amt))
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "item_qnty_shop" }, [
+                              _c(
+                                "form",
+                                {
+                                  attrs: {
+                                    id: "myform",
+                                    method: "POST",
+                                    action: "#"
+                                  }
+                                },
+                                [
+                                  _c("input", {
+                                    staticClass: "qntyminusshop",
+                                    attrs: {
+                                      type: "button",
+                                      value: "-",
+                                      field: "quantity"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        _vm.decre()
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    staticClass: "qntyshop",
+                                    attrs: { type: "text", name: "quantity" },
+                                    domProps: { value: _vm.qty }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    staticClass: "qntyplusshop",
+                                    attrs: {
+                                      type: "button",
+                                      value: "+",
+                                      field: "quantity"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        _vm.incre()
+                                      }
+                                    }
+                                  })
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              {
+                                attrs: { href: "cart.html", id: "addtocart" },
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.cart(con)
+                                  }
+                                }
+                              },
+                              [_vm._v("ADD TO TABLE")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "open-popup shopfav",
+                                attrs: {
+                                  href: "#",
+                                  "data-popup": ".popup-social"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.like(con.id)
+                                  }
+                                }
+                              },
+                              [
+                                _c("img", {
+                                  attrs: {
+                                    src: "images/icons/black/love.png",
+                                    alt: "",
+                                    title: ""
+                                  }
+                                })
+                              ]
+                            )
+                          ])
+                        ])
+                      }),
+                      0
+                    ),
                     _vm._v(" "),
-                    _c("li", [
-                      _vm._m(8),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "shop_item_details" }, [
-                        _vm._m(9),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "shop_item_price" }, [
-                          _vm._v("$1200")
-                        ]),
-                        _vm._v(" "),
-                        _vm._m(10),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          { attrs: { href: "cart.html", id: "addtocart" } },
-                          [
-                            _c("router-link", { attrs: { to: "/cart" } }, [
-                              _vm._v("ADD TO TABLE")
-                            ])
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _vm._m(11)
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _vm._m(12),
-                    _vm._v(" "),
-                    _vm._m(13)
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(14),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "signup_bottom" },
-                    [
-                      _c("router-link", { attrs: { to: "/cart" } }, [
-                        _vm._v("VIEW TABLE")
-                      ])
-                    ],
-                    1
-                  )
-                ]
-              )
-            ])
+                    !_vm.empty
+                      ? _c("span", [
+                          _c("div", { staticClass: "shop_pagination" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "prev_shop",
+                                attrs: {
+                                  href: "",
+                                  disabled: !_vm.pagination.prev_page_url
+                                },
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.fetch(_vm.pagination.prev_page_url)
+                                  }
+                                }
+                              },
+                              [_vm._v("PREV PAGE")]
+                            ),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "shop_pagenr" }, [
+                              _c("span", [
+                                _vm._v(
+                                  _vm._s(_vm.pagination.current_page) +
+                                    " of " +
+                                    _vm._s(_vm.pagination.last_page)
+                                )
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "next_shop",
+                                attrs: {
+                                  href: "shop.html",
+                                  disabled: !_vm.pagination.next_page_url
+                                },
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.fetch(_vm.pagination.next_page_url)
+                                  }
+                                }
+                              },
+                              [_vm._v("NEXT PAGE")]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "signup_bottom" },
+                            [
+                              _c("router-link", { attrs: { to: "/cart" } }, [
+                                _vm._v("VIEW TABLE")
+                              ])
+                            ],
+                            1
+                          )
+                        ])
+                      : _vm._e()
+                  ]
+                )
+              ],
+              1
+            )
           ])
         ]
       )
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "shop_thumb" }, [
-      _c("a", { attrs: { href: "shop.html" } }, [
-        _c("img", {
-          attrs: { src: "images/photos/photo1.jpg", alt: "", title: "" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("h4", [
-      _c("a", { attrs: { href: "shop.html" } }, [_vm._v("Blue Bike")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "item_qnty_shop" }, [
-      _c("form", { attrs: { id: "myform", method: "POST", action: "#" } }, [
-        _c("input", {
-          staticClass: "qntyminusshop",
-          attrs: { type: "button", value: "-", field: "quantity" }
-        }),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "qntyshop",
-          attrs: { type: "text", name: "quantity", value: "1" }
-        }),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "qntyplusshop",
-          attrs: { type: "button", value: "+", field: "quantity" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "open-popup shopfav",
-        attrs: { href: "#", "data-popup": ".popup-social" }
-      },
-      [
-        _c("img", {
-          attrs: { src: "images/icons/black/love.png", alt: "", title: "" }
-        })
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "shop_thumb" }, [
-      _c("a", { attrs: { href: "shop.html" } }, [
-        _c("img", {
-          attrs: { src: "images/photos/photo2.jpg", alt: "", title: "" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("h4", [
-      _c("a", { attrs: { href: "shop.html" } }, [_vm._v("Yellow Car")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "item_qnty_shop" }, [
-      _c("form", { attrs: { id: "myform", method: "POST", action: "#" } }, [
-        _c("input", {
-          staticClass: "qntyminusshop",
-          attrs: { type: "button", value: "-", field: "quantity2" }
-        }),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "qntyshop",
-          attrs: { type: "text", name: "quantity2", value: "1" }
-        }),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "qntyplusshop",
-          attrs: { type: "button", value: "+", field: "quantity2" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "open-popup shopfav",
-        attrs: { href: "#", "data-popup": ".popup-social" }
-      },
-      [
-        _c("img", {
-          attrs: { src: "images/icons/black/love.png", alt: "", title: "" }
-        })
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "shop_thumb" }, [
-      _c("a", { attrs: { href: "shop.html" } }, [
-        _c("img", {
-          attrs: { src: "images/photos/photo3.jpg", alt: "", title: "" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("h4", [
-      _c("a", { attrs: { href: "shop.html" } }, [_vm._v("Summer T-Shirt")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "item_qnty_shop" }, [
-      _c("form", { attrs: { id: "myform", method: "POST", action: "#" } }, [
-        _c("input", {
-          staticClass: "qntyminusshop",
-          attrs: { type: "button", value: "-", field: "quantity3" }
-        }),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "qntyshop",
-          attrs: { type: "text", name: "quantity3", value: "1" }
-        }),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "qntyplusshop",
-          attrs: { type: "button", value: "+", field: "quantity3" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "open-popup shopfav",
-        attrs: { href: "#", "data-popup": ".popup-social" }
-      },
-      [
-        _c("img", {
-          attrs: { src: "images/icons/black/love.png", alt: "", title: "" }
-        })
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("div", { staticClass: "shop_thumb" }, [
-        _c("a", { attrs: { href: "shop.html" } }, [
-          _c("img", {
-            attrs: { src: "images/photos/photo4.jpg", alt: "", title: "" }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "shop_item_details" }, [
-        _c("h4", [
-          _c("a", { attrs: { href: "shop-item.html" } }, [
-            _vm._v("Valentines Gift")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "shop_item_price" }, [_vm._v("$175")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "item_qnty_shop" }, [
-          _c("form", { attrs: { id: "myform", method: "POST", action: "#" } }, [
-            _c("input", {
-              staticClass: "qntyminusshop",
-              attrs: { type: "button", value: "-", field: "quantity4" }
-            }),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "qntyshop",
-              attrs: { type: "text", name: "quantity4", value: "1" }
-            }),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "qntyplusshop",
-              attrs: { type: "button", value: "+", field: "quantity4" }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("a", { attrs: { href: "cart.html", id: "addtocart" } }, [
-          _vm._v("ADD TO TABLE")
-        ]),
-        _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass: "open-popup shopfav",
-            attrs: { href: "#", "data-popup": ".popup-social" }
-          },
-          [
-            _c("img", {
-              attrs: { src: "images/icons/black/love.png", alt: "", title: "" }
-            })
-          ]
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("div", { staticClass: "shop_thumb" }, [
-        _c("a", { attrs: { href: "shop-item.html" } }, [
-          _c("img", {
-            attrs: { src: "images/photos/photo5.jpg", alt: "", title: "" }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "shop_item_details" }, [
-        _c("h4", [
-          _c("a", { attrs: { href: "shop.html" } }, [_vm._v("Rocket Toy")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "shop_item_price" }, [_vm._v("$435")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "item_qnty_shop" }, [
-          _c("form", { attrs: { id: "myform", method: "POST", action: "#" } }, [
-            _c("input", {
-              staticClass: "qntyminusshop",
-              attrs: { type: "button", value: "-", field: "quantity5" }
-            }),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "qntyshop",
-              attrs: { type: "text", name: "quantity5", value: "1" }
-            }),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "qntyplusshop",
-              attrs: { type: "button", value: "+", field: "quantity5" }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("a", { attrs: { href: "cart.html", id: "addtocart" } }, [
-          _vm._v("ADD TO TABLE")
-        ]),
-        _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass: "open-popup shopfav",
-            attrs: { href: "#", "data-popup": ".popup-social" }
-          },
-          [
-            _c("img", {
-              attrs: { src: "images/icons/black/love.png", alt: "", title: "" }
-            })
-          ]
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "shop_pagination" }, [
-      _c("a", { staticClass: "prev_shop", attrs: { href: "shop.html" } }, [
-        _vm._v("PREV PAGE")
-      ]),
-      _vm._v(" "),
-      _c("span", { staticClass: "shop_pagenr" }, [_vm._v("1/37")]),
-      _vm._v(" "),
-      _c("a", { staticClass: "next_shop", attrs: { href: "shop.html" } }, [
-        _vm._v("NEXT PAGE")
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

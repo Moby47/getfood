@@ -75,7 +75,9 @@
         <div class="signup_bottom">
           <router-link to="/cart">VIEW TABLE</router-link>
       </div>
-        
+      <div class="signup_bottom">
+          <router-link to="/cart">CLEAR FAVORITES</router-link>
+      </div>
         </div>
         
         </div>
