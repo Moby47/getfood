@@ -73,9 +73,18 @@
                       <input type="button" value="+" class="qntyplusshop" field="quantity" @click.prevent='incre()'/>
                   </form>
               </div>
-            <a href="cart.html" id="addtocart" @click.prevent='cart(con)' >ADD TO TABLE</a>
-            <a href="#" data-popup=".popup-social" class="open-popup shopfav" @click.prevent='like(con.id)'>
-                <img src="images/icons/black/love.png" alt="" title="" /></a>
+               
+            <cartButton
+            :id=con
+            >
+            </cartButton>
+          
+            <favButton
+            :id=con.id
+            >
+            </favButton>
+
+               
             </div>
             </li> 
         </ul>
@@ -120,7 +129,10 @@
             }
         },
 
+    
+
         methods: {
+        
     //fetch blogs
     fetch(page_url){
                     if(page_url){
@@ -244,11 +256,13 @@
 
             cart(con){
                 console.log(con)
-                
+                var tempUserCartID = Math.floor(Math.random()*10000);
+                localStorage.setItem('tempUserCartID',tempUserCartID);
+              //  con.assign(tempUserCartID);
                 axios.post('/add-to-cart',con)
                         .then(res=>{
                             if(res.data == 1){
-                        alert('Food added to Favourites!');
+                        alert('Food added to Cart!');
                         //this.fetch();
                             }
                             NProgress.done();

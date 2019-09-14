@@ -53,7 +53,7 @@ router.beforeResolve((to, from, next) => {
   
   router.afterEach((to, from) => {
     // Complete the animation of the route progress bar.
-    NProgress.done()
+   NProgress.done()
   })
 
   /* ------------------------URL interceptor for progressbar ----------------*/
@@ -96,6 +96,8 @@ if(localStorage.getItem('token')){
 
 Vue.component('index', require('./components/index.vue'));
 Vue.component('menubar', require('./components/includes/menubar.vue'));
+Vue.component('favButton', require('./components/includes/favButton.vue'));
+Vue.component('cartButton', require('./components/includes/cartButton.vue'));
 
 const app = new Vue({
     el: '#app',

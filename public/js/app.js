@@ -12661,7 +12661,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(15);
-module.exports = __webpack_require__(102);
+module.exports = __webpack_require__(105);
 
 
 /***/ }),
@@ -12770,6 +12770,8 @@ if(localStorage.getItem('token')){
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('index', __webpack_require__(13));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('menubar', __webpack_require__(100));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('favButton', __webpack_require__(113));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('cartButton', __webpack_require__(116));
 
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     el: '#app',
@@ -60562,6 +60564,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -60578,6 +60589,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
     methods: {
+
         //fetch blogs
         fetch: function (_fetch) {
             function fetch(_x) {
@@ -60695,10 +60707,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         cart: function cart(con) {
             console.log(con);
-
+            var tempUserCartID = Math.floor(Math.random() * 10000);
+            localStorage.setItem('tempUserCartID', tempUserCartID);
+            //  con.assign(tempUserCartID);
             axios.post('/add-to-cart', con).then(function (res) {
                 if (res.data == 1) {
-                    alert('Food added to Favourites!');
+                    alert('Food added to Cart!');
                     //this.fetch();
                 }
                 NProgress.done();
@@ -60868,109 +60882,78 @@ var render = function() {
                             1
                           ),
                           _vm._v(" "),
-                          _c("div", { staticClass: "shop_item_details" }, [
-                            _c("h4", [_vm._v(_vm._s(con.title))]),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              { staticClass: "shop_item_price" },
-                              [
-                                _c("strike", [_vm._v("N")]),
-                                _vm._v(_vm._s(con.amt))
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "item_qnty_shop" }, [
+                          _c(
+                            "div",
+                            { staticClass: "shop_item_details" },
+                            [
+                              _c("h4", [_vm._v(_vm._s(con.title))]),
+                              _vm._v(" "),
                               _c(
-                                "form",
-                                {
-                                  attrs: {
-                                    id: "myform",
-                                    method: "POST",
-                                    action: "#"
-                                  }
-                                },
+                                "div",
+                                { staticClass: "shop_item_price" },
                                 [
-                                  _c("input", {
-                                    staticClass: "qntyminusshop",
+                                  _c("strike", [_vm._v("N")]),
+                                  _vm._v(_vm._s(con.amt))
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "item_qnty_shop" }, [
+                                _c(
+                                  "form",
+                                  {
                                     attrs: {
-                                      type: "button",
-                                      value: "-",
-                                      field: "quantity"
-                                    },
-                                    on: {
-                                      click: function($event) {
-                                        $event.preventDefault()
-                                        _vm.decre()
-                                      }
+                                      id: "myform",
+                                      method: "POST",
+                                      action: "#"
                                     }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("input", {
-                                    staticClass: "qntyshop",
-                                    attrs: { type: "text", name: "quantity" },
-                                    domProps: { value: _vm.qty }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("input", {
-                                    staticClass: "qntyplusshop",
-                                    attrs: {
-                                      type: "button",
-                                      value: "+",
-                                      field: "quantity"
-                                    },
-                                    on: {
-                                      click: function($event) {
-                                        $event.preventDefault()
-                                        _vm.incre()
+                                  },
+                                  [
+                                    _c("input", {
+                                      staticClass: "qntyminusshop",
+                                      attrs: {
+                                        type: "button",
+                                        value: "-",
+                                        field: "quantity"
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          $event.preventDefault()
+                                          _vm.decre()
+                                        }
                                       }
-                                    }
-                                  })
-                                ]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "a",
-                              {
-                                attrs: { href: "cart.html", id: "addtocart" },
-                                on: {
-                                  click: function($event) {
-                                    $event.preventDefault()
-                                    _vm.cart(con)
-                                  }
-                                }
-                              },
-                              [_vm._v("ADD TO TABLE")]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "a",
-                              {
-                                staticClass: "open-popup shopfav",
-                                attrs: {
-                                  href: "#",
-                                  "data-popup": ".popup-social"
-                                },
-                                on: {
-                                  click: function($event) {
-                                    $event.preventDefault()
-                                    _vm.like(con.id)
-                                  }
-                                }
-                              },
-                              [
-                                _c("img", {
-                                  attrs: {
-                                    src: "images/icons/black/love.png",
-                                    alt: "",
-                                    title: ""
-                                  }
-                                })
-                              ]
-                            )
-                          ])
+                                    }),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      staticClass: "qntyshop",
+                                      attrs: { type: "text", name: "quantity" },
+                                      domProps: { value: _vm.qty }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      staticClass: "qntyplusshop",
+                                      attrs: {
+                                        type: "button",
+                                        value: "+",
+                                        field: "quantity"
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          $event.preventDefault()
+                                          _vm.incre()
+                                        }
+                                      }
+                                    })
+                                  ]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("cartButton", { attrs: { id: con } }),
+                              _vm._v(" "),
+                              _c("favButton", { attrs: { id: con.id } })
+                            ],
+                            1
+                          )
                         ])
                       }),
                       0
@@ -87447,10 +87430,297 @@ if (false) {
 }
 
 /***/ }),
-/* 102 */
+/* 102 */,
+/* 103 */,
+/* 104 */,
+/* 105 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 106 */,
+/* 107 */,
+/* 108 */,
+/* 109 */,
+/* 110 */,
+/* 111 */,
+/* 112 */,
+/* 113 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(114)
+/* template */
+var __vue_template__ = __webpack_require__(115)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/includes/favButton.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1b4d97c0", Component.options)
+  } else {
+    hotAPI.reload("data-v-1b4d97c0", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 114 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    props: ['id'],
+    //
+    data: function data() {
+        return {
+            isFavorited: ''
+        };
+    },
+
+    methods: {
+        Favorite: function Favorite(id) {
+            console.log('fav ' + id);
+            this.isFavorited = true;
+        },
+        unFavorite: function unFavorite(id) {
+            console.log('unfav ' + id);
+            this.isFavorited = false;
+        }
+    }
+});
+
+/***/ }),
+/* 115 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.isFavorited
+    ? _c(
+        "a",
+        {
+          staticClass: "open-popup shopfav",
+          attrs: { href: "#", "data-popup": ".popup-social" },
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              _vm.unFavorite(_vm.id)
+            }
+          }
+        },
+        [
+          _c("img", {
+            attrs: { src: "images/icons/black/back.png", alt: "", title: "" }
+          })
+        ]
+      )
+    : _c(
+        "a",
+        {
+          staticClass: "open-popup shopfav",
+          attrs: { href: "#", "data-popup": ".popup-social" },
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              _vm.Favorite(_vm.id)
+            }
+          }
+        },
+        [
+          _c("img", {
+            attrs: { src: "images/icons/black/love.png", alt: "", title: "" }
+          })
+        ]
+      )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-1b4d97c0", module.exports)
+  }
+}
+
+/***/ }),
+/* 116 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(117)
+/* template */
+var __vue_template__ = __webpack_require__(118)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/includes/cartButton.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-d4272c22", Component.options)
+  } else {
+    hotAPI.reload("data-v-d4272c22", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 117 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    props: ['id'],
+    //
+    data: function data() {
+        return {
+            isFavorited: ''
+        };
+    },
+
+    methods: {
+        Favorite: function Favorite(id) {
+            console.log('fav ' + id);
+            this.isFavorited = true;
+        },
+        unFavorite: function unFavorite(id) {
+            console.log('unfav ' + id);
+            this.isFavorited = false;
+        }
+    }
+});
+
+/***/ }),
+/* 118 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm.added
+      ? _c(
+          "a",
+          {
+            attrs: { href: "cart.html", id: "addtocart" },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                _vm.cart(_vm.con)
+              }
+            }
+          },
+          [_vm._v("ADD TO TABLE")]
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _c(
+      "a",
+      {
+        attrs: { else: "", href: "cart.html", id: "addtocart" },
+        on: {
+          click: function($event) {
+            $event.preventDefault()
+            _vm.cart(_vm.con)
+          }
+        }
+      },
+      [_vm._v("CLEAR FOOD")]
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-d4272c22", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

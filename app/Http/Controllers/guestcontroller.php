@@ -25,7 +25,7 @@ public function addFavorite(Request $request){
 
       //check if user likes 3 already
       $count = favourite::where('cusId','=',$userId)->select('title')->count();
-      if($count == 3){
+      if($count == 39){
           //maxed out
           return 2;
       }

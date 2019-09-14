@@ -16,9 +16,9 @@ class cartcontroller extends Controller
 public function addToCart(Request $request){
 
 	//expected params, user id and food id
-$userId = 5;//$request->input('id');
+$userId = 5;//$request->input('id'); //rand and local
 
-
+//return $request;
 // add to cart for a specific user
 
 \Cart::session($userId)->add(array(
@@ -26,7 +26,8 @@ $userId = 5;//$request->input('id');
     'name' => $request->input('title'),
     'price' => $request->input('amt'),
     'quantity' => $request->input('qty'),
-	'image' => $request->input('img')
+    "attributes"=> ['image' => $request->input('img')],
+	
 ));
 	return 1;
 }
