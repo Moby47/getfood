@@ -49,7 +49,9 @@ Design
 User levels:
 1.	Vendor
 2.	Customer
-Modules:
+<br>
+
+<b>Modules:</b>
 1.	Auth
 2.	Cart
 3.	Create product
