@@ -19,8 +19,9 @@ Route::get('/', function () {
 //guest routes
 Route::Post('/add-to-cart', 'cartcontroller@addToCart');
 Route::Post('/remove-from-cart', 'cartcontroller@removeFromCart');
-Route::get('/cart-items', 'cartcontroller@cartItems');
 Route::Post('/add-favorite', 'guestcontroller@addFavorite');
+Route::Post('/remove-favorite', 'guestcontroller@removeFavorite');
+Route::get('/cart-items', 'cartcontroller@cartItems');
 Route::get('/get-foods', 'guestcontroller@get_foods');
 
 

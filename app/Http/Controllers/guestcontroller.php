@@ -51,6 +51,14 @@ public function addFavorite(Request $request){
 }
 
 
+public function removeFavorite(Request $request){
+    $foodId = $request->input('foodId');
+    $userId = $request->input('userId');
 
+     $id = favourite::where('cusId','=',$userId)->where('foodId','=',$foodId)->pluck('id')->first();
+    $del = favourite::findorfail($id);
+    $del->delete();
+    return 1;
+}
 
 }

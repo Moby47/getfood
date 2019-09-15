@@ -12661,7 +12661,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(15);
-module.exports = __webpack_require__(105);
+module.exports = __webpack_require__(108);
 
 
 /***/ }),
@@ -12701,7 +12701,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vee_
 //toated
 // register the plugin on vue
 
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue_toasted___default.a);
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue_toasted___default.a, {
+    duration: 5000
+});
 // you can also pass options, check options reference below
 //Vue.use(Toasted, Options)
 
@@ -12770,8 +12772,8 @@ if(localStorage.getItem('token')){
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('index', __webpack_require__(13));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('menubar', __webpack_require__(100));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('favButton', __webpack_require__(113));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('cartButton', __webpack_require__(116));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('favButton', __webpack_require__(102));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('cartSystem', __webpack_require__(116));
 
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     el: '#app',
@@ -60568,11 +60570,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -60582,8 +60579,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             wait: false,
             data_load: true,
             pagination: [],
-            food_count: '',
-            qty: 1
+            food_count: ''
+
         };
     },
 
@@ -60648,78 +60645,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             document.body.scrollTop = 0;
             document.documentElement.scrollTop = 0;
             this.pagination = pagination;
-        },
-        like: function like(id) {
-
-            //this.$toasted.clear();
-            // this.loading = true;
-            var check = localStorage.getItem('userId');
-            if (check) {
-                NProgress.start();
-                //Id exists, send both User and Post Id to DB
-                var userId = check;
-                var foodId = id;
-
-                var input = { 'userId': userId, 'foodId': foodId };
-
-                axios.post('/add-favorite', input).then(function (res) {
-                    if (res.data == 1) {
-                        alert('Food added to Favourites!');
-                        //this.fetch();
-                    } else if (res.data == 0) {
-                        alert('Food was already added to Favorites');
-                    } else {
-                        alert('Favorite Maxed out!');
-                    }
-                    NProgress.done();
-                }).catch(function (error) {
-                    alert("Failed to add food. Try again");
-
-                    NProgress.done();
-                });
-            } else {
-                NProgress.start();
-                //create id for user  
-                var userId = Math.floor(Math.random() * 1000);
-                //store locally
-                localStorage.setItem('userId', userId);
-                var foodId = id;
-
-                //go to server
-                var input = { 'userId': userId, 'foodId': foodId };
-                axios.post('/add-favorite', input).then(function (res) {
-                    if (res.data == 1) {
-                        alert('Food Liked!');
-                    }
-                    NProgress.done();
-                }).catch(function (error) {
-                    alert("The like action failed...");
-
-                    NProgress.done();
-                });
-            }
-        },
-        incre: function incre() {
-            this.qty = this.qty + 1;
-        },
-        decre: function decre() {
-            this.qty = this.qty - 1;
-        },
-        cart: function cart(con) {
-            console.log(con);
-            var tempUserCartID = Math.floor(Math.random() * 10000);
-            localStorage.setItem('tempUserCartID', tempUserCartID);
-            //  con.assign(tempUserCartID);
-            axios.post('/add-to-cart', con).then(function (res) {
-                if (res.data == 1) {
-                    alert('Food added to Cart!');
-                    //this.fetch();
-                }
-                NProgress.done();
-            }).catch(function (error) {
-                alert("Failed. Try again");
-                NProgress.done();
-            });
         }
     },
 
@@ -60898,57 +60823,9 @@ var render = function() {
                                 1
                               ),
                               _vm._v(" "),
-                              _c("div", { staticClass: "item_qnty_shop" }, [
-                                _c(
-                                  "form",
-                                  {
-                                    attrs: {
-                                      id: "myform",
-                                      method: "POST",
-                                      action: "#"
-                                    }
-                                  },
-                                  [
-                                    _c("input", {
-                                      staticClass: "qntyminusshop",
-                                      attrs: {
-                                        type: "button",
-                                        value: "-",
-                                        field: "quantity"
-                                      },
-                                      on: {
-                                        click: function($event) {
-                                          $event.preventDefault()
-                                          _vm.decre()
-                                        }
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c("input", {
-                                      staticClass: "qntyshop",
-                                      attrs: { type: "text", name: "quantity" },
-                                      domProps: { value: _vm.qty }
-                                    }),
-                                    _vm._v(" "),
-                                    _c("input", {
-                                      staticClass: "qntyplusshop",
-                                      attrs: {
-                                        type: "button",
-                                        value: "+",
-                                        field: "quantity"
-                                      },
-                                      on: {
-                                        click: function($event) {
-                                          $event.preventDefault()
-                                          _vm.incre()
-                                        }
-                                      }
-                                    })
-                                  ]
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("cartButton", { attrs: { id: con } }),
+                              _c("cartSystem", {
+                                attrs: { con: con, stash: con.qty }
+                              }),
                               _vm._v(" "),
                               _c("favButton", { attrs: { id: con.id } })
                             ],
@@ -87430,31 +87307,15 @@ if (false) {
 }
 
 /***/ }),
-/* 102 */,
-/* 103 */,
-/* 104 */,
-/* 105 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 106 */,
-/* 107 */,
-/* 108 */,
-/* 109 */,
-/* 110 */,
-/* 111 */,
-/* 112 */,
-/* 113 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(114)
+var __vue_script__ = __webpack_require__(103)
 /* template */
-var __vue_template__ = __webpack_require__(115)
+var __vue_template__ = __webpack_require__(104)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -87493,7 +87354,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 114 */
+/* 103 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -87520,18 +87381,80 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         Favorite: function Favorite(id) {
-            console.log('fav ' + id);
+            var _this = this;
+
             this.isFavorited = true;
+            //this.$toasted.clear();
+            // this.loading = true;
+            var check = localStorage.getItem('userId');
+            if (check) {
+                NProgress.start();
+                //Id exists, send both User and Post Id to DB
+                var userId = check;
+                var foodId = id;
+
+                var input = { 'userId': userId, 'foodId': foodId };
+
+                axios.post('/add-favorite', input).then(function (res) {
+                    if (res.data == 1) {
+                        _this.$toasted.show("Food added to Favourites!");
+                        //this.fetch();
+                    } else if (res.data == 0) {
+                        _this.$toasted.show("Food was already added to Favorites!");
+                    } else {
+                        _this.$toasted.show("Maximum limit reached, no more Favorites!");
+                    }
+                    NProgress.done();
+                }).catch(function (error) {
+                    _this.$toasted.show("Failed to add food. Try again");
+                    NProgress.done();
+                });
+            } else {
+                NProgress.start();
+                //create id for user  
+                var userId = Math.floor(Math.random() * 1000);
+                //store locally
+                localStorage.setItem('userId', userId);
+                var foodId = id;
+
+                //go to server
+                var input = { 'userId': userId, 'foodId': foodId };
+                axios.post('/add-favorite', input).then(function (res) {
+                    if (res.data == 1) {
+                        alert('Food Liked!');
+                    }
+                    NProgress.done();
+                }).catch(function (error) {
+                    _this.$toasted.show("Failed to add food. Try again");
+                    NProgress.done();
+                });
+            }
         },
         unFavorite: function unFavorite(id) {
-            console.log('unfav ' + id);
+            var _this2 = this;
+
             this.isFavorited = false;
+            NProgress.start();
+
+            var userId = localStorage.getItem('userId', userId);
+            var foodId = id;
+            var input = { 'foodId': foodId, 'userId': userId };
+
+            axios.post('/remove-favorite', input).then(function (res) {
+                if (res.data == 1) {
+                    _this2.$toasted.show("Food removed from Favourites!");
+                }
+                NProgress.done();
+            }).catch(function (error) {
+                _this2.$toasted.show("Failed to remove food. Try again");
+                NProgress.done();
+            });
         }
     }
 });
 
 /***/ }),
-/* 115 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -87553,7 +87476,11 @@ var render = function() {
         },
         [
           _c("img", {
-            attrs: { src: "images/icons/black/back.png", alt: "", title: "" }
+            attrs: {
+              src: "images/icons/black/menu_close.png",
+              alt: "",
+              title: ""
+            }
           })
         ]
       )
@@ -87587,6 +87514,22 @@ if (false) {
 }
 
 /***/ }),
+/* 105 */,
+/* 106 */,
+/* 107 */,
+/* 108 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 109 */,
+/* 110 */,
+/* 111 */,
+/* 112 */,
+/* 113 */,
+/* 114 */,
+/* 115 */,
 /* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -87612,7 +87555,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/includes/cartButton.vue"
+Component.options.__file = "resources/assets/js/components/includes/cartSystem.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -87621,9 +87564,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-d4272c22", Component.options)
+    hotAPI.createRecord("data-v-b2422328", Component.options)
   } else {
-    hotAPI.reload("data-v-d4272c22", Component.options)
+    hotAPI.reload("data-v-b2422328", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -87649,25 +87592,76 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
-    props: ['id'],
+    props: ['con', 'stash'],
     //
     data: function data() {
         return {
-            isFavorited: ''
+            isAdded: false,
+            qty: 1
         };
     },
 
     methods: {
-        Favorite: function Favorite(id) {
-            console.log('fav ' + id);
-            this.isFavorited = true;
+        addToCart: function addToCart(con) {
+            var _this = this;
+
+            NProgress.start();
+            this.isAdded = !this.isAdded;
+
+            if (!localStorage.getItem('tempUserCartID')) {
+                var tempUserCartID = Math.floor(Math.random() * 10000);
+                localStorage.setItem('tempUserCartID', tempUserCartID);
+                console.log('created id');
+            }
+            var input = { 'foodId': con.id, 'userId': localStorage.getItem('tempUserCartID'), 'qty': this.qty };
+            axios.post('/add-to-cart', input).then(function (res) {
+                if (res.data == 1) {
+                    _this.$toasted.show("Food added to Cart!");
+                }
+                NProgress.done();
+            }).catch(function (error) {
+                _this.$toasted.show("Failed to add. Try again");
+                NProgress.done();
+            });
         },
-        unFavorite: function unFavorite(id) {
-            console.log('unfav ' + id);
-            this.isFavorited = false;
+        removeFromCart: function removeFromCart(con) {
+            var _this2 = this;
+
+            NProgress.start();
+            this.isAdded = !this.isAdded;
+            var input = { 'foodId': con.id, 'userId': localStorage.getItem('tempUserCartID') };
+            axios.post('/remove-from-cart', input).then(function (res) {
+                if (res.data == 1) {
+                    _this2.$toasted.show("Food removed from Cart!");
+                }
+                NProgress.done();
+            }).catch(function (error) {
+                _this2.$toasted.show("Failed to remove. Try again");
+                NProgress.done();
+            });
+        },
+        incre: function incre() {
+            this.qty = this.qty + 1;
+        },
+        decre: function decre() {
+            this.qty = this.qty - 1;
         }
     }
 });
@@ -87681,35 +87675,86 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm.added
-      ? _c(
-          "a",
-          {
-            attrs: { href: "cart.html", id: "addtocart" },
-            on: {
-              click: function($event) {
-                $event.preventDefault()
-                _vm.cart(_vm.con)
-              }
-            }
-          },
-          [_vm._v("ADD TO TABLE")]
-        )
+    _vm.stash > 0
+      ? _c("span", [
+          _c("div", { staticClass: "item_qnty_shop" }, [
+            _c(
+              "form",
+              { attrs: { id: "myform", method: "POST", action: "#" } },
+              [
+                _c("input", {
+                  staticClass: "qntyminusshop",
+                  attrs: {
+                    disabled: _vm.qty == 1,
+                    type: "button",
+                    value: "-",
+                    field: "quantity"
+                  },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      _vm.decre()
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "qntyshop",
+                  attrs: { type: "text", name: "quantity" },
+                  domProps: { value: _vm.qty }
+                }),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "qntyplusshop",
+                  attrs: { type: "button", value: "+", field: "quantity" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      _vm.incre()
+                    }
+                  }
+                })
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _vm.isAdded
+            ? _c(
+                "a",
+                {
+                  attrs: { href: "#", id: "addtocart" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      _vm.removeFromCart(_vm.con)
+                    }
+                  }
+                },
+                [_vm._v("CLEAR FOOD")]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          !_vm.isAdded
+            ? _c(
+                "a",
+                {
+                  attrs: { href: "#", id: "addtocart" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      _vm.addToCart(_vm.con)
+                    }
+                  }
+                },
+                [_vm._v("ADD TO TABLE")]
+              )
+            : _vm._e()
+        ])
       : _vm._e(),
     _vm._v(" "),
-    _c(
-      "a",
-      {
-        attrs: { else: "", href: "cart.html", id: "addtocart" },
-        on: {
-          click: function($event) {
-            $event.preventDefault()
-            _vm.cart(_vm.con)
-          }
-        }
-      },
-      [_vm._v("CLEAR FOOD")]
-    )
+    _vm.stash < 1
+      ? _c("div", [_vm._v("\r\n            Out of stock\r\n      ")])
+      : _vm._e()
   ])
 }
 var staticRenderFns = []
@@ -87718,7 +87763,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-d4272c22", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-b2422328", module.exports)
   }
 }
 

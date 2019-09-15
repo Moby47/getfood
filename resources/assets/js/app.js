@@ -19,7 +19,9 @@ Vue.use(VeeValidate);
 //toated
 // register the plugin on vue
 import Toasted from 'vue-toasted';
-Vue.use(Toasted)
+Vue.use(Toasted, {
+    duration: 5000
+})
 // you can also pass options, check options reference below
 //Vue.use(Toasted, Options)
 
@@ -97,7 +99,7 @@ if(localStorage.getItem('token')){
 Vue.component('index', require('./components/index.vue'));
 Vue.component('menubar', require('./components/includes/menubar.vue'));
 Vue.component('favButton', require('./components/includes/favButton.vue'));
-Vue.component('cartButton', require('./components/includes/cartButton.vue'));
+Vue.component('cartSystem', require('./components/includes/cartSystem.vue'));
 
 const app = new Vue({
     el: '#app',

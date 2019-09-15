@@ -66,18 +66,13 @@
             <div class="shop_item_details">
             <h4>{{con.title}}</h4>
             <div class="shop_item_price"><strike>N</strike>{{con.amt}}</div>
-              <div class="item_qnty_shop">
-                  <form id="myform" method="POST" action="#">
-                      <input type="button" value="-" class="qntyminusshop" field="quantity" @click.prevent='decre()'/>
-                      <input type="text" name="quantity" :value="qty" class="qntyshop" />
-                      <input type="button" value="+" class="qntyplusshop" field="quantity" @click.prevent='incre()'/>
-                  </form>
-              </div>
+              
                
-            <cartButton
-            :id=con
+            <cartSystem
+            :con=con
+            :stash=con.qty
             >
-            </cartButton>
+            </cartSystem>
           
             <favButton
             :id=con.id
@@ -125,7 +120,7 @@
                 data_load: true,
                 pagination: [],
                 food_count:'',
-                qty:1,
+               
             }
         },
 
@@ -186,93 +181,6 @@
                 },
 
 
-                like(id){
-                   
-                    //this.$toasted.clear();
-                   // this.loading = true;
-                    var check = localStorage.getItem('userId');
-                    if(check){
-                        NProgress.start()
-                        //Id exists, send both User and Post Id to DB
-                        var userId = check;
-                        var foodId = id;
-        
-                        var input = {'userId':userId, 'foodId':foodId};
-        
-                        axios.post('/add-favorite',input)
-                        .then(res=>{
-                            if(res.data == 1){
-                        alert('Food added to Favourites!');
-                        //this.fetch();
-                            }else if(res.data == 0){
-                        alert('Food was already added to Favorites');
-                       
-                            }else{
-                       alert('Favorite Maxed out!');       
-                            }
-                            NProgress.done();
-                           
-                        })
-                        .catch(error =>{
-                  alert("Failed to add food. Try again");
-                  
-                    NProgress.done();        
-                      })
-                        
-                    }else{
-                        NProgress.start();
-                        //create id for user  
-                    var userId = Math.floor(Math.random()*1000);
-                    //store locally
-                    localStorage.setItem('userId',userId);
-                    var foodId = id;
-        
-                    //go to server
-                    var input = {'userId':userId, 'foodId':foodId};
-                    axios.post('/add-favorite',input)
-                        .then(res=>{
-                            if(res.data == 1){
-                        alert('Food Liked!');
-                       
-                            }
-                            NProgress.done();
-                            
-                        })
-                        .catch(error =>{
-                  alert("The like action failed...");
-                  
-                    NProgress.done();        
-                      })
-                    }
-                    
-                },
-
-            incre(){
-                this.qty = this.qty + 1;
-            },
-            decre(){
-                this.qty = this.qty - 1;
-            },
-
-            cart(con){
-                console.log(con)
-                var tempUserCartID = Math.floor(Math.random()*10000);
-                localStorage.setItem('tempUserCartID',tempUserCartID);
-              //  con.assign(tempUserCartID);
-                axios.post('/add-to-cart',con)
-                        .then(res=>{
-                            if(res.data == 1){
-                        alert('Food added to Cart!');
-                        //this.fetch();
-                            }
-                            NProgress.done();
-                           
-                        })
-                        .catch(error =>{
-                  alert("Failed. Try again");
-                    NProgress.done();        
-                      })
-            },
 
         },
 
