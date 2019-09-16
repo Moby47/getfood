@@ -18,11 +18,14 @@ Route::get('/', function () {
 
 //guest routes
 Route::Post('/add-to-cart', 'cartcontroller@addToCart');
+Route::Post('/increase-qty', 'cartcontroller@increaseQty');
+Route::Post('/decrease-qty', 'cartcontroller@decreaseQty');
 Route::Post('/remove-from-cart', 'cartcontroller@removeFromCart');
 Route::Post('/add-favorite', 'guestcontroller@addFavorite');
 Route::Post('/remove-favorite', 'guestcontroller@removeFavorite');
-Route::get('/cart-items', 'cartcontroller@cartItems');
+Route::get('/cart-items/{id}', 'cartcontroller@cartItems');
 Route::get('/get-foods', 'guestcontroller@get_foods');
+Route::get('/cartCount/{id}', 'cartcontroller@cartCount');
 
 
 //vendor routes

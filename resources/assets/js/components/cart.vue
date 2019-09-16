@@ -16,36 +16,58 @@
                  <nav aria-label="breadcrumb ">
                          <ol class="breadcrumb">
                            <li class="breadcrumb-item"><router-link to='/'>Home</router-link></li>
-                           <li class="breadcrumb-item active" aria-current="page">Food (3 ITEMS)</li>
+                           <li class="breadcrumb-item active" aria-current="page">Food ({{cartConCount}})</li>
                          </ol>
                        </nav>
                 
       <div class="page_single layout_fullwidth_padding">	
         
-           <div class="cartcontainer">            
-              <div class="cart_item" id="cartitem1">
-                  <div class="item_title"><span>01.</span> Bicycle Pedal Driven</div>
-                  <div class="item_price">$100</div>
-                  <div class="item_thumb"><a href="shop.html" class="close-panel"><img src="images/photos/photo1.jpg" alt="" title="" /></a></div>
-                 
-                  <a href="#" class="item_delete" id="cartitem1"><img src="images/icons/black/trash.png" alt="" title="" /></a>           </div>
+           <div class="cartcontainer">   
+                    
               
-              <div class="cart_item" id="cartitem2">
-                  <div class="item_title"><span>02.</span> Yellow Car </div>
-                  <div class="item_price">$1200</div>
-                  <div class="item_thumb"><a href="shop.html" class="close-panel"><img src="images/photos/photo2.jpg" alt="" title="" /></a></div>
-                  
-                  <a href="#" class="item_delete" id="cartitem2"><img src="images/icons/black/trash.png" alt="" title="" /></a>            </div>
-              
-              <div class="cart_item" id="cartitem3">
-                  <div class="item_title"><span>03.</span> Summer T-Shirt</div>
-                  <div class="item_price">$20</div>
-                  <div class="item_thumb"><a href="shop.html" class="close-panel"><img src="images/photos/photo3.jpg" alt="" title="" /></a></div>
-                  <div class="item_qnty">
+ 
+                          <!--loading -->
+<transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
+<div v-if='data_load' class='text-center'>
+<template>
+   <b>  Fetching Food</b>
+  <v-progress-circular 
+  color="orange"
+  indeterminate
+  ></v-progress-circular>
+         </template>
+          </div>
+ </transition>
+
+   <!-- ********************************************** empty -->
                       
-                  </div>
-                  <a href="#" class="item_delete" id="cartitem3"><img src="images/icons/black/trash.png" alt="" title="" /></a>             </div>
-              
+   <div v-show='empty < 1' class='text-center alert alert-info'>
+        Sorry, your Table is empty.
+             </div>
+                               
+      <!--loading temp-->
+<transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
+             <div v-if='wait' class='text-center'>
+               <template>
+                 <b>A little delay, please wait.</b>
+                  <v-progress-circular 
+                 color="red"
+                 indeterminate
+                 >
+                 </v-progress-circular>
+                         </template>
+                          </div>
+                 </transition>
+
+                <div class="cart_item" id="cartitem1" v-for='con in content' v-bind:key='con.id'>
+                   
+                    <cartUpdate
+                    :con=con
+                    >
+
+                    </cartUpdate>
+                  
+                </div>
               
               
                 <router-link to="/checkout" class="button_full btyellow">TAKE FOOD</router-link>           
@@ -72,37 +94,65 @@
 
         data(){
             return {
-
+                content:[],
+                wait:false,
+                data_load: true,
+                empty:47,
+                cartConCount:''
             }
         },
 
         methods: {
-/*
-            this.$validator.validateAll().then(() => {
-           
-           if (!this.errors.any()) {
-            //
-            }else{
-            //
-            }
-         
-                    //
-            })
-            .catch(err=>{
-                
-            }),
-      
-         setTimeout(func=>{
-             //this.errors.clear()
-            // this.$validator.reset()
-         },1) 
-        
-         }); //validator
-*/
+            fetch(){
+                  
+                  fetch('/cart-items'+'/'+ localStorage.getItem('tempUserCartID'))
+                  .then(res => res.json())
+                  .then(res=>{
+                    this.content = res.data;
+                    console.log(this.content)
+                    this.wait = false;
+                   this.empty = this.content.length;
+                  })
+                  .catch(error =>{
+                      //off loader
+                      this.data_load = false;
+                        this.wait = true;
+                        setTimeout(func=>{
+                            this.fetch();
+                        },2000)     
+                      })
+
+                },
+
+                countCartCon(){
+                  
+                  fetch('/cartCount/'+localStorage.getItem('tempUserCartID'))
+                  .then(res => res.json())
+                  .then(res=>{
+                    this.cartConCount = res;
+                      })
+                  .catch(error =>{
+                        setTimeout(func=>{
+                            this.countCartCon();
+                        },2000)     
+                      })
+
+                },
+
+        },
+        watch : {
+              content(a,b){
+               if(a){
+                //data content loaded, it is safe to display
+                this.data_load = false;
+                this.data = true;
+               }
+            },
         },
 
         mounted() {
-            console.log('Component mounted.')
+            this.fetch()
+            this.countCartCon()
         }
     }
 </script>

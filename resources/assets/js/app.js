@@ -99,7 +99,8 @@ if(localStorage.getItem('token')){
 Vue.component('index', require('./components/index.vue'));
 Vue.component('menubar', require('./components/includes/menubar.vue'));
 Vue.component('favButton', require('./components/includes/favButton.vue'));
-Vue.component('cartSystem', require('./components/includes/cartSystem.vue'));
+Vue.component('cartAdd', require('./components/includes/cartAdd.vue'));
+Vue.component('cartUpdate', require('./components/includes/cartUpdate.vue'));
 
 const app = new Vue({
     el: '#app',

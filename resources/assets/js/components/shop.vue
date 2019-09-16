@@ -68,11 +68,11 @@
             <div class="shop_item_price"><strike>N</strike>{{con.amt}}</div>
               
                
-            <cartSystem
+            <cartAdd
             :con=con
             :stash=con.qty
             >
-            </cartSystem>
+            </cartAdd>
           
             <favButton
             :id=con.id
@@ -128,13 +128,10 @@
 
         methods: {
         
-    //fetch blogs
     fetch(page_url){
                     if(page_url){
                     NProgress.start();
                     }
-                    //off snackbar
-                    this.snackbar = false;
                   var   page_url = page_url || '/get-foods';
         
                   fetch(page_url)

@@ -1,0 +1,116 @@
+
+<template>
+       
+    <div :id='con.id'>
+            <div class="item_title"> {{con.name}} </div>
+
+            <span v-if='deleted == false'>
+            <div class="item_price"><strike>N</strike>{{con.attributes.total}} </div>
+            <div class="item_price" v-show='showSub'> Subtotal: <strike>N</strike>{{subtotal}} </div>
+            <div class="item_thumb"><a href="#" class="close-panel">
+            <v-img 
+            :src="'/storage/food/'+con.attributes.image"
+            :alt="con.title"
+            :lazy-src="`/images/black-spinner.gif`"
+            title="" ></v-img>
+            </a></div>
+
+            <div class="item_qnty">
+                <form id="myform" method="POST" action="#">
+                    <label>QUANTITY ({{con.quantity}})</label>
+                    <input type="button" value="-" class="qntyminus" field="quantity" @click.prevent='decre(con)'
+                     :disabled='qty==1'/>
+                    <input type="text" name="quantity" :value="qty" class="qnty" /> 
+                    <input type="button" value="+" class="qntyplus" field="quantity" @click.prevent='incre(con)'/>
+                </form>
+            </div>
+            <a href="#" class="item_delete" id="cartitem1" @click.prevent='removeFromCart(con.id)'>
+                <img src="/images/icons/black/trash.png" alt="" title="" /></a>         
+                </span> 
+            <span v-if='deleted == true'>
+                    <div class="item_qnty">
+                                <label>DELETED</label>
+                            </div>
+            </span>
+    </div>
+                                
+  </template>
+        
+        <script>
+        export default {
+
+props: ['con'],
+//
+data: function() {
+return {
+qty:'',
+deleted:false,
+subtotal:'',
+showSub:false,
+}
+},
+
+methods: {
+
+    removeFromCart(id) {
+       
+        NProgress.start();
+        var input = {'foodId':id, 'userId':localStorage.getItem('tempUserCartID')};
+        axios.post('/remove-from-cart',input)
+                .then(res=>{
+                    if(res.data == 1){
+                this.$toasted.show("Food removed from Cart!");
+                    }
+                    this.deleted = true;
+                    NProgress.done();
+                   
+                })
+                .catch(error =>{
+          this.$toasted.show("Failed to remove. Try again");
+            NProgress.done();        
+              })
+    },
+
+    incre(con){
+                NProgress.start();
+
+                var input = {'foodId':con.id, 'userId':localStorage.getItem('tempUserCartID')};
+                axios.post('/increase-qty',input)
+                        .then(res=>{
+                         //  console.log(res.data)
+                            this.qty = res.data.qty
+                            this.subtotal = res.data.subtotal
+                            this.showSub = true
+                        this.$toasted.show("Cart Updated!");
+                            NProgress.done();
+                        })
+                        .catch(error =>{
+                  this.$toasted.show("Failed to update. Try again");
+                    NProgress.done();        
+                      })
+    },
+
+    decre(con){
+        NProgress.start();
+
+var input = {'foodId':con.id, 'userId':localStorage.getItem('tempUserCartID')};
+axios.post('/decrease-qty',input)
+        .then(res=>{
+         //  console.log(res.data)
+            this.qty = res.data.qty
+            this.subtotal = res.data.subtotal
+            this.showSub = true
+        this.$toasted.show("Cart Updated!");
+            NProgress.done();
+        })
+        .catch(error =>{
+  this.$toasted.show("Failed to update. Try again");
+    NProgress.done();        
+      })
+    },
+ 
+},
+
+}
+        </script>
+

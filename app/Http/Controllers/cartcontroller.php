@@ -49,15 +49,68 @@ return 1;
 
 
 // Getting cart's contents for a specific user
-public function cartItems(){
-   // $userId = $request->input('userId');
-   //userid = 5
-   //foodid = 9
-    $cart = \Cart::session(3511)->getContent();
+public function cartItems($id){
+   
+    $cart = \Cart::session($id)->getContent();
     return cartres::collection($cart);
   // $cart = Cart::session($userId)->getContent($itemId);
     //$cartCollection->count();
     }
+
+
+
+    public function increaseQty(Request $request){
+      $userId = $request->input('userId'); //rand and local
+      $foodId = $request->input('foodId');
+      $food=food::findorfail($foodId);
+     
+      //increament quantity (update)
+      \Cart::session($userId)->update($foodId,array(
+        'quantity'=> 1,
+      ));
+
+      //get total
+      $total = \Cart::get($foodId)->getPriceSum();
+
+      //update total
+      \Cart::session($userId)->update($foodId,array(
+           "attributes"=> ['image' => $food->img,'total'=> $total]
+        ));
+        //return latest quantity
+        return array('qty'=>\Cart::get($foodId)->quantity, 'subtotal'=>\Cart::get($foodId)->attributes->total);
+      }
+
+
+
+      public function decreaseQty(Request $request){
+        $userId = $request->input('userId'); //rand and local
+        $foodId = $request->input('foodId');
+        $food=food::findorfail($foodId);
+       
+        //increament quantity (update)
+        \Cart::session($userId)->update($foodId,array(
+          'quantity'=> -1,
+        ));
+  
+        //get total
+        $total = \Cart::get($foodId)->getPriceSum();
+  
+        //update total
+        \Cart::session($userId)->update($foodId,array(
+             "attributes"=> ['image' => $food->img,'total'=> $total]
+          ));
+          //return latest quantity
+          return array('qty'=>\Cart::get($foodId)->quantity, 'subtotal'=>\Cart::get($foodId)->attributes->total);
+        }
+
+
+        public function cartCount($id){
+         // $cart = \Cart::getContent();
+          $cart = \Cart::session($id)->getContent();
+          return $cart->count();
+        // $cart = Cart::session($userId)->getContent($itemId);
+          //$cartCollection->count();
+          }
 
 
 }
