@@ -12,8 +12,8 @@
       
  <!-- Social Icons Popup -->
  <div class=" popup-social">
-    <div class="content-block">
-      <h4>Share Link</h4>
+    <div class="content-block slideUp">
+      <h4>Share Link</h4> <div class='alert alert-danger'>Under repair</div>
       <p>Share icons solution that allows you share and increase your social popularity.</p>
       <ul class="social_share">
 		  <li><a href="http://twitter.com/" class="external"><img src="images/icons/black/twitter.png" alt="" title="" /><span>TWITTER</span></a></li>

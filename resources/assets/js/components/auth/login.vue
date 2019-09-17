@@ -11,8 +11,8 @@
 
        <!-- Login Popup -->
     <div class=" popup-login">
-      <div class="content-block">
-          <h4>LOGIN</h4>
+      <div class="content-block slideUp">
+          <h4>LOGIN</h4> <div class='alert alert-danger'>Under repair</div>
           <div class="loginform">
               <form id="LoginForm" method="post">
                   <input type="text" name="Username" value="" class="form_input required" placeholder="username" />

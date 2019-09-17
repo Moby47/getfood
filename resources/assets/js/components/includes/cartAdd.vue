@@ -10,14 +10,42 @@
                 </form>
             </div>
 
-        <a  href="#" v-if="isAdded" id="addtocart" @click.prevent='removeFromCart(con)' >CLEAR FOOD</a>
+        <a  href="#" v-if="isAdded" id="addtocart" @click.prevent='removeFromCart(con)' >CLEAR</a>
 
-        <a   href="#" v-if="!isAdded" id="addtocart" @click.prevent='addToCart(con)' >ADD TO TABLE</a>
+        <a   href="#" v-if="!isAdded" id="addtocart" @click.prevent='addToCart(con)' >RESERVE</a>
         </span>
         <div v-if='stash < 1'>
             Out of stock
       </div>
+
+  
+
+      <template>
+        <v-snackbar
+      v-model="snackbar"
+      :timeout="timeout"
+      >
+      {{ text }}
+      <v-btn
+        color="blue"
+        text
+        @click='snackbar=!snackbar'
+      >
+        Close
+      </v-btn>
+      </v-snackbar>
+      </template>
+
+
+      <template>
+        <div class="text-center">
+          <v-overlay :value="overlay">
+            <v-progress-circular indeterminate size="64"></v-progress-circular>
+          </v-overlay>
+        </div>
+      </template>
 </div>
+
 
                         
 </template>
@@ -29,6 +57,10 @@
 //
 data: function() {
     return {
+        overlay:false,
+        snackbar: false,
+        text: '',
+        timeout: 3000,
         isAdded: false,
         qty:1,
     }
@@ -36,7 +68,7 @@ data: function() {
 
         methods: {
             addToCart(con) {
-                NProgress.start();
+                this.overlay = !this.overlay
                 this.isAdded = !this.isAdded
 
                 if(!localStorage.getItem('tempUserCartID')){
@@ -48,34 +80,37 @@ data: function() {
                 axios.post('/add-to-cart',input)
                         .then(res=>{
                             if(res.data == 1){
-                        this.$toasted.show("Food added to Cart!");
+                        this.text='Food added to Cart!'
+                        this.snackbar = true;
                             }
-                            NProgress.done();
+                            this.overlay = !this.overlay
                            
                         })
                         .catch(error =>{
                   this.$toasted.show("Failed to add. Try again");
                   this.isAdded = !this.isAdded
-                    NProgress.done();        
+                    this.overlay = !this.overlay        
                       })
             },
 
             removeFromCart(con) {
                
-                NProgress.start();
+                this.overlay = !this.overlay
                 this.isAdded = !this.isAdded
                 var input = {'foodId':con.id, 'userId':localStorage.getItem('tempUserCartID')};
                 axios.post('/remove-from-cart',input)
                         .then(res=>{
                             if(res.data == 1){
-                        this.$toasted.show("Food removed from Cart!");
+                                
+                        this.text='Food removed from Cart!'
+                        this.snackbar = true;
                             }
-                            NProgress.done();
+                           this.overlay = !this.overlay
                            
                         })
                         .catch(error =>{
                   this.$toasted.show("Failed to remove. Try again");
-                    NProgress.done();        
+                   this.overlay = !this.overlay        
                       })
             },
 

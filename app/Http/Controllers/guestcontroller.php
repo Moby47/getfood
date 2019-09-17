@@ -13,7 +13,7 @@ class guestcontroller extends Controller
 {
     //method to get food list for customers to see and buy
     public function get_foods(){
-        $food = food::orderby('id','desc')->select('id','amt','qty','title','stock','img')->paginate(2);
+        $food = food::orderby('id','desc')->select('id','amt','qty','title','stock','img')->paginate(3);
         return foodres::collection($food);
     }
 

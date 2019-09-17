@@ -11,8 +11,8 @@
           
             <!-- Register Popup -->
         <div class=" popup-signup">
-            <div class="content-block">
-                <h4>REGISTER</h4>
+            <div class="content-block slideUp">
+                <h4>REGISTER</h4> <div class='alert alert-danger'>Under repair</div>
                 <div class="loginform">
                     <form id="RegisterForm" method="post">
                         <input type="text" name="Username" value="" class="form_input required" placeholder="Username" />

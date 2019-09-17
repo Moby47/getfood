@@ -37,8 +37,13 @@
     }
     /* ***********styling for cloak******* */
 
+.menu-over{
+    z-index: 100 !important;
+}
 
-
+.orange{
+    color: #FFA500;
+}
     .text-white{
         color:white;
     }

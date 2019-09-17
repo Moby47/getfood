@@ -12,7 +12,7 @@
        
        <div id="pages_maincontent">
   
-      <div class="page_single layout_fullwidth_padding">
+      <div class="page_single layout_fullwidth_padding bounceIn">
               <div class="success_message">
               <span>Thank You!</span>
               <img src="/images/icons/black/food.png" alt="" title="" />

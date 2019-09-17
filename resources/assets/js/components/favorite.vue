@@ -1,58 +1,24 @@
 <template>
     <div class="container">
-        
+        <menubar></menubar>
 <div class="pages">
     <div data-page="shop" class="page no-toolbar no-navbar">
       <div class="page-content">
       
-            <h2 class="page_title">FAVORITE FOOD</h2>
-            
             <div id="pages_maincontent">
              
              <br>
                  <nav aria-label="breadcrumb ">
                          <ol class="breadcrumb">
                            <li class="breadcrumb-item"><router-link to='/'>Home</router-link></li>
-                           <li class="breadcrumb-item active" aria-current="page">Favorite</li>
+                           <li class="breadcrumb-item active" aria-current="page">FAVORITE FOOD</li>
                          </ol>
                        </nav>
         
       <div class="page_single layout_fullwidth_padding">
-        
+        <div class='alert alert-danger'>Under repair</div>
         <ul class="shop_items">
         
-            <li>
-            <div class="shop_thumb"><a href="shop.html"><img src="images/photos/photo1.jpg" alt="" title="" /></a></div>
-            <div class="shop_item_details">
-            <h4><a href="shop.html">Blue Bike</a></h4>
-            <div class="shop_item_price">$100</div>
-              <div class="item_qnty_shop">
-                  <form id="myform" method="POST" action="#">
-                      <input type="button" value="-" class="qntyminusshop" field="quantity" />
-                      <input type="text" name="quantity" value="1" class="qntyshop" />
-                      <input type="button" value="+" class="qntyplusshop" field="quantity" />
-                  </form>
-              </div>
-            <a href="cart.html" id="addtocart">ADD TO CART</a>
-            </div>
-            </li> 
-            
-            <li>
-            <div class="shop_thumb"><a href="shop.html"><img src="images/photos/photo2.jpg" alt="" title="" /></a></div>
-            <div class="shop_item_details">
-            <h4><a href="shop.html">Yellow Car</a></h4>
-            <div class="shop_item_price">$1200</div>
-              <div class="item_qnty_shop">
-                  <form id="myform" method="POST" action="#">
-                      <input type="button" value="-" class="qntyminusshop" field="quantity2" />
-                      <input type="text" name="quantity2" value="1" class="qntyshop" />
-                      <input type="button" value="+" class="qntyplusshop" field="quantity2" />
-                  </form>
-              </div>
-            <a href="cart.html" id="addtocart">ADD TO CART</a>
-            </div>
-            </li>
-            
             <li>
             <div class="shop_thumb"><a href="shop.html"><img src="images/photos/photo3.jpg" alt="" title="" /></a></div>
             <div class="shop_item_details">

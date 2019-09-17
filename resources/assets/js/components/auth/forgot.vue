@@ -11,7 +11,7 @@
 
       <!-- Forgot Password Popup -->
     <div class=" popup-forgot">
-        <div class="content-block">
+        <div class="content-block slideUp">
             <h4>FORGOT PASSWORD</h4>
             <div class="loginform">
                 <form id="ForgotForm" method="post">

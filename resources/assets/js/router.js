@@ -9,7 +9,7 @@ import about from './components/about.vue'
 import cart from './components/cart.vue'
 import checkout from './components/checkout.vue'
 import favorite from './components/favorite.vue'
-import forgot from './components/forgot.vue'
+import forgot from './components/auth/forgot.vue'
 import history from './components/vendor/history.vue'
 import history2 from './components/customer/history2.vue'
 import login from './components/auth/login.vue'
@@ -22,6 +22,7 @@ import success from './components/success.vue'
 //import history from './components/history.vue'
 
 export default new Router({
+    mode: 'history',
     routes: [
         {
             path: '/',

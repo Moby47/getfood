@@ -1,22 +1,18 @@
 <template>
     <div class="container">
-        
-       
-        
+      <menubar></menubar>
 <!--content here-->
 
 <div class="pages">
     <div data-page="cart" class="page no-toolbar no-navbar">
       <div class="page-content">
-            <h2 class="page_title">SELECTED FOOD</h2>
-            
             <div id="pages_maincontent">
              
              <br>
                  <nav aria-label="breadcrumb ">
                          <ol class="breadcrumb">
-                           <li class="breadcrumb-item"><router-link to='/'>Home</router-link></li>
-                           <li class="breadcrumb-item active" aria-current="page">Food ({{cartConCount}})</li>
+                           <li class="breadcrumb-item"><router-link to='/shop'>KITCHEN</router-link></li>
+                           <li class="breadcrumb-item active" aria-current="page">SELECTED FOOD ({{cartConCount}})</li>
                          </ol>
                        </nav>
                 
@@ -26,7 +22,7 @@
                     
               
  
-                          <!--loading -->
+                          <!--loading 
 <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
 <div v-if='data_load' class='text-center'>
 <template>
@@ -38,13 +34,23 @@
          </template>
           </div>
  </transition>
-
+-->
    <!-- ********************************************** empty -->
-                      
-   <div v-show='empty < 1' class='text-center alert alert-info'>
-        Sorry, your Table is empty.
-             </div>
-                               
+   <v-alert
+   color="blue-grey"
+      dark
+      dense
+      icon="mdi-school"
+      v-show='empty < 1'
+ >
+   <v-row align="center">
+     <v-col class="grow">Your Table is empty.</v-col>
+     <v-col class="shrink">
+       <router-link to='/shop'><v-btn>GET FOOD</v-btn></router-link>
+     </v-col>
+   </v-row>
+ </v-alert>
+           
       <!--loading temp-->
 <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
              <div v-if='wait' class='text-center'>
@@ -59,7 +65,7 @@
                           </div>
                  </transition>
 
-                <div class="cart_item" id="cartitem1" v-for='con in content' v-bind:key='con.id'>
+                <div class="cart_item animated tdExpandInBounce" id="cartitem1" v-for='con in content' v-bind:key='con.id'>
                    
                     <cartUpdate
                     :con=con
@@ -69,8 +75,7 @@
                   
                 </div>
               
-              
-                <router-link to="/checkout" v-show='cartConCount > 0' class="button_full btyellow">TAKE FOOD</router-link>           
+       <router-link to="/checkout" v-show='cartConCount > 0' class="button_full btyellow slideUp">TAKE FOOD</router-link>           
                 
    </div>
                 
@@ -85,7 +90,14 @@
   </div>
   
   <!--content here-->
-     
+  <template>
+    <div class="text-center">
+      <v-overlay :value="overlay">
+        <v-progress-circular indeterminate size="64"></v-progress-circular>
+      </v-overlay>
+    </div>
+  </template>
+
     </div>
 </template>
 
@@ -94,6 +106,7 @@
 
         data(){
             return {
+              overlay:false,
                 content:[],
                 wait:false,
                 data_load: true,
@@ -125,13 +138,15 @@
                 },
 
                 countCartCon(){
-                  
+                  this.overlay = !this.overlay
                   fetch('/cartCount/'+localStorage.getItem('tempUserCartID'))
                   .then(res => res.json())
                   .then(res=>{
                     this.cartConCount = res;
+                    this.overlay = !this.overlay
                       })
                   .catch(error =>{
+                    this.overlay = !this.overlay
                         setTimeout(func=>{
                             this.countCartCon();
                         },2000)     
@@ -148,6 +163,7 @@
                 this.data = true;
                }
             },
+
         },
 
         mounted() {

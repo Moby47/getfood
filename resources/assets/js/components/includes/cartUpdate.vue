@@ -32,6 +32,22 @@
                                 <label>DELETED</label>
                             </div>
             </span>
+
+            <template>
+                <v-snackbar
+              v-model="snackbar"
+              :timeout="timeout"
+              >
+              {{ text }}
+              <v-btn
+                color="blue"
+                text
+                @click='snackbar=!snackbar'
+              >
+                Close
+              </v-btn>
+              </v-snackbar>
+              </template>
     </div>
                                 
   </template>
@@ -43,6 +59,9 @@ props: ['con'],
 //
 data: function() {
 return {
+    snackbar: false,
+        text: '',
+        timeout: 3000,
 qty:'',
 deleted:false,
 subtotal:'',
@@ -59,7 +78,9 @@ methods: {
         axios.post('/remove-from-cart',input)
                 .then(res=>{
                     if(res.data == 1){
-                this.$toasted.show("Food removed from Cart!");
+                      sound.play();
+                this.text='Food removed from Cart!'
+                        this.snackbar = true;
                     }
                     this.deleted = true;
                     NProgress.done();
@@ -81,7 +102,8 @@ methods: {
                             this.qty = res.data.qty
                             this.subtotal = res.data.subtotal
                             this.showSub = true
-                        this.$toasted.show("Cart Updated!");
+                        this.text='Cart Updated!'
+                        this.snackbar = true;
                             NProgress.done();
                         })
                         .catch(error =>{
@@ -100,7 +122,8 @@ axios.post('/decrease-qty',input)
             this.qty = res.data.qty
             this.subtotal = res.data.subtotal
             this.showSub = true
-        this.$toasted.show("Cart Updated!");
+        this.text='Cart Updated!'
+         this.snackbar = true;
             NProgress.done();
         })
         .catch(error =>{

@@ -47,9 +47,7 @@ Route::get('/my-reporting/{id}', 'vendorcontroller@my_reporting');
 
 
 
-//don't delete, will be used later to fix route bug
-/*
+//don't delete,fixes route bug
 Route::get('/{vue_capture?}', function () {
     return view('welcome');
   })->where('vue_capture', '[\/\w\.-]*');
-  */

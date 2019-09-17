@@ -8,9 +8,9 @@
               </div>
             </header>
           
-            <main role="main" class="inner cover">
+            <main role="main" class="inner cover slideUp">
               <h1 class="cover-heading text-uppercase">Reserve your food.</h1>
-              <p class="lead">Reduce your waiting time, with our reliable and efficient restaurant reservation system.</p>
+              <p class="lead orange">Reduce your waiting time, with our reliable and efficient restaurant reservation system.</p>
               <p class="lead">
                 <router-link to="/shop" class="btn btn-lg btn-secondary">Enter Kitchen</router-link>
               </p>

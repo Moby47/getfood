@@ -1,10 +1,27 @@
 <template>
-        <a href="#" v-if="isFavorited" data-popup=".popup-social" class="open-popup shopfav" @click.prevent='unFavorite(id)'>
+   <div> 
+    <a href="#" v-if="isFavorited" data-popup=".popup-social" class="open-popup shopfav" @click.prevent='unFavorite(id)'>
                 <img src="images/icons/black/menu_close.png" alt="" title="" /></a>
 
-                <a href="#" v-else data-popup=".popup-social" class="open-popup shopfav" @click.prevent='Favorite(id)'>
+                <a href="#" v-else data-popup=".popup-social" class="open-popup shopfav pulse" @click.prevent='Favorite(id)'>
                         <img src="images/icons/black/love.png" alt="" title="" /></a>
 
+                        <template>
+                            <v-snackbar
+                          v-model="snackbar"
+                          :timeout="timeout"
+                          >
+                          {{ text }}
+                          <v-btn
+                            color="blue"
+                            text
+                            @click='snackbar=!snackbar'
+                          >
+                            Close
+                          </v-btn>
+                          </v-snackbar>
+                          </template>
+      </div>                  
 </template>
 
 <script>
@@ -14,6 +31,9 @@
 //
 data: function() {
     return {
+        snackbar: false,
+        text: '',
+        timeout: 3000,
         isFavorited: '',
     }
 },
@@ -34,13 +54,18 @@ data: function() {
         
                         axios.post('/add-favorite',input)
                         .then(res=>{
+                            this.snackbar = true;
                             if(res.data == 1){
-                        this.$toasted.show("Food added to Favourites!");
+                                sound.play();
+                        this.text='Food added to Favourites!'
+                        this.snackbar = true;
                         //this.fetch();
                             }else if(res.data == 0){
-                        this.$toasted.show("Food was already added to Favorites!");
-                            }else{
-                       this.$toasted.show("Maximum limit reached, no more Favorites!");     
+                        this.text='Food was already added to Favorites!'
+                        this.snackbar = true;
+                            }else{ 
+                       this.text='Maximum limit reached, no more Favorites!'
+                       this.snackbar = true;    
                             }
                             NProgress.done();
                            
@@ -63,8 +88,9 @@ data: function() {
                     axios.post('/add-favorite',input)
                         .then(res=>{
                             if(res.data == 1){
-                        alert('Food Liked!');
-                       
+                        sound.play();
+                        this.text='Food Liked!'
+                        this.snackbar = true;
                             }
                             NProgress.done();
                             
@@ -87,7 +113,8 @@ data: function() {
                         axios.post('/remove-favorite',input)
                         .then(res=>{
                             if(res.data == 1){
-                        this.$toasted.show("Food removed from Favourites!");
+                        this.text='Food removed from Favourites!'
+                       this.snackbar = true; 
                             }
                             NProgress.done();
                         })
