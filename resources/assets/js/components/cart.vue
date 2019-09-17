@@ -70,7 +70,7 @@
                 </div>
               
               
-                <router-link to="/checkout" class="button_full btyellow">TAKE FOOD</router-link>           
+                <router-link to="/checkout" v-show='cartConCount > 0' class="button_full btyellow">TAKE FOOD</router-link>           
                 
    </div>
                 

@@ -26,6 +26,8 @@ Route::Post('/remove-favorite', 'guestcontroller@removeFavorite');
 Route::get('/cart-items/{id}', 'cartcontroller@cartItems');
 Route::get('/get-foods', 'guestcontroller@get_foods');
 Route::get('/cartCount/{id}', 'cartcontroller@cartCount');
+Route::get('/checkout/{id}', 'cartcontroller@checkout');
+Route::get('/sumtotal/{id}', 'cartcontroller@sumtotal');
 
 
 //vendor routes

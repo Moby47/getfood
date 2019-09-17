@@ -31,6 +31,15 @@ $total = $qty * $food->amt;
     "attributes"=> ['image' => $food->img, 'total'=> $total],
 	
 ));
+
+if($foodId == \Cart::get($foodId)->id){
+  \Cart::session($userId)->update($foodId,array(
+    'quantity'=> array(
+      'relative'=>false,
+      'value'=>$qty )
+  ));
+}
+
 	return 1;
 }
 
@@ -53,8 +62,6 @@ public function cartItems($id){
    
     $cart = \Cart::session($id)->getContent();
     return cartres::collection($cart);
-  // $cart = Cart::session($userId)->getContent($itemId);
-    //$cartCollection->count();
     }
 
 
@@ -105,12 +112,21 @@ public function cartItems($id){
 
 
         public function cartCount($id){
-         // $cart = \Cart::getContent();
           $cart = \Cart::session($id)->getContent();
           return $cart->count();
-        // $cart = Cart::session($userId)->getContent($itemId);
-          //$cartCollection->count();
           }
+
+
+
+          public function checkout($id){
+            $cart = \Cart::session($id)->getContent();
+            return cartres::collection($cart);
+            }
+
+
+            public function sumtotal($id){
+              return \Cart::session($id)->getTotal();
+              }
 
 
 }
