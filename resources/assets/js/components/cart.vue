@@ -70,7 +70,6 @@
                     <cartUpdate
                     :con=con
                     >
-
                     </cartUpdate>
                   
                 </div>

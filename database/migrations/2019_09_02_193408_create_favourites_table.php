@@ -18,6 +18,9 @@ class CreateFavouritesTable extends Migration
             $table->integer('cusId');
             $table->integer('foodId');
             $table->string('title');
+            $table->string('amt');
+            $table->integer('qty');
+            $table->string('img');
             $table->timestamps();
         });
     }

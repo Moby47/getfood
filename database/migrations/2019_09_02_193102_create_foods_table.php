@@ -19,7 +19,6 @@ class CreateFoodsTable extends Migration
             $table->string('amt');
             $table->integer('qty');
             $table->string('img');
-            $table->integer('stock')->default(1);
             $table->timestamps();
         });
     }

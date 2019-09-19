@@ -8,12 +8,13 @@ use App\favourite;
 
 //resource
 use App\Http\Resources\foodresource as foodres;
+use App\Http\Resources\favresource as favres;
 
 class guestcontroller extends Controller
 {
     //method to get food list for customers to see and buy
     public function get_foods(){
-        $food = food::orderby('id','desc')->select('id','amt','qty','title','stock','img')->paginate(3);
+        $food = food::orderby('id','desc')->select('id','amt','qty','title','img')->paginate(3);
         return foodres::collection($food);
     }
 
@@ -44,6 +45,9 @@ public function addFavorite(Request $request){
         $save->title = $food->title;
         $save->cusId = $userId;
         $save->foodId = $foodId;
+        $save->amt = $food->amt;
+        $save->qty = $food->qty;
+        $save->img = $food->img;
         $save->save();
         return 1;
     }
@@ -60,5 +64,72 @@ public function removeFavorite(Request $request){
     $del->delete();
     return 1;
 }
+
+
+public function getFavorites($id){
+  $fav = favourite::where('cusId','=',$id)->select('id','foodId','title','amt','qty','img','cusId')->paginate(3);
+    return favres::collection($fav);
+}
+
+
+
+public function removeFromFav(Request $request){
+    //delete from table //food id for fav //Params: favid foodid . usercartid
+   $favId = $request->input('favId');
+   $fav = favourite::findorfail($favId);
+     $fav->delete();
+
+     //clear from cart if del from fav
+     $userId = $request->input('userId');
+     $foodId = $request->input('foodId');
+     \Cart::session($userId)->remove($foodId);
+
+     return 1;
+  }
+
+
+  //add fav to cart 
+public function addToCart(Request $request){
+	//expected params, user id and food id and qty
+$userId = $request->input('userId'); //rand and local
+$foodId = $request->input('foodId');
+$food=food::findorfail($foodId);
+// add to cart for a specific user
+$qty = $request->input('qty');
+$total = $qty * $food->amt;
+
+\Cart::session($userId)->add(array(
+    'id' => $food->id,
+    'name' => $food->title,
+    'price' => $food->amt,
+    'quantity' => $qty,
+    "attributes"=> ['image' => $food->img, 'total'=> $total],
+	
+));
+
+if($foodId == \Cart::get($foodId)->id){
+  \Cart::session($userId)->update($foodId,array(
+    'quantity'=> array(
+      'relative'=>false,
+      'value'=>$qty )
+  ));
+}
+
+	return 1;
+}
+
+
+//remove from fav from cart
+public function removeFromCart(Request $request){
+// removing cart item for a specific user's cart
+//expected params, user id and food id
+$userId = $request->input('userId'); //rand and local
+$foodId = $request->input('foodId');
+
+\Cart::session($userId)->remove($foodId);
+
+return 1;
+}
+
 
 }

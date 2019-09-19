@@ -20,7 +20,6 @@ class vendorcontroller extends Controller
         $save->title = $request->input('title');
         $save->qty = $request->input('qty');
         $save->amt = $request->input('amt');
-        $save->stock = 1;
         //img
         $save->save();
         return 1;

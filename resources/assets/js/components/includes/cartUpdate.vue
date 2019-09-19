@@ -79,7 +79,7 @@ methods: {
                 .then(res=>{
                     if(res.data == 1){
                       sound.play();
-                this.text='Food removed from Cart!'
+                this.text='Food removed from Table!'
                         this.snackbar = true;
                     }
                     this.deleted = true;
@@ -102,7 +102,7 @@ methods: {
                             this.qty = res.data.qty
                             this.subtotal = res.data.subtotal
                             this.showSub = true
-                        this.text='Cart Updated!'
+                        this.text='Table Updated!'
                         this.snackbar = true;
                             NProgress.done();
                         })
@@ -122,7 +122,7 @@ axios.post('/decrease-qty',input)
             this.qty = res.data.qty
             this.subtotal = res.data.subtotal
             this.showSub = true
-        this.text='Cart Updated!'
+        this.text='Table Updated!'
          this.snackbar = true;
             NProgress.done();
         })

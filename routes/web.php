@@ -23,11 +23,17 @@ Route::Post('/decrease-qty', 'cartcontroller@decreaseQty');
 Route::Post('/remove-from-cart', 'cartcontroller@removeFromCart');
 Route::Post('/add-favorite', 'guestcontroller@addFavorite');
 Route::Post('/remove-favorite', 'guestcontroller@removeFavorite');
+Route::Post('/remove-from-fav', 'guestcontroller@removeFromFav');
+
+Route::Post('/remove-fav-from-cart', 'guestcontroller@removeFromCart');
+Route::Post('/add-fav-to-cart', 'guestcontroller@addToCart');
+
 Route::get('/cart-items/{id}', 'cartcontroller@cartItems');
 Route::get('/get-foods', 'guestcontroller@get_foods');
 Route::get('/cartCount/{id}', 'cartcontroller@cartCount');
 Route::get('/checkout/{id}', 'cartcontroller@checkout');
 Route::get('/sumtotal/{id}', 'cartcontroller@sumtotal');
+Route::get('/get-fav/{id}', 'guestcontroller@getFavorites');
 
 
 //vendor routes

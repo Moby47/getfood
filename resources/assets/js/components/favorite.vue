@@ -11,39 +11,44 @@
                  <nav aria-label="breadcrumb ">
                          <ol class="breadcrumb">
                            <li class="breadcrumb-item"><router-link to='/'>Home</router-link></li>
-                           <li class="breadcrumb-item active" aria-current="page">FAVORITE FOOD</li>
+                           <li class="breadcrumb-item active" aria-current="page">FAVORITE FOOD ({{fav_count}})</li>
                          </ol>
                        </nav>
         
+                         <!-- ********************************************** empty -->
+                         
+                      <div v-if='empty' class='text-center alert alert-info'>
+                      No Food Added as Favorite.
+                             </div>
+     
+
       <div class="page_single layout_fullwidth_padding">
-        <div class='alert alert-danger'>Under repair</div>
-        <ul class="shop_items">
+       
+        <ul class="shop_items ">
+              
+          <li class='animated tdPlopIn' v-for='con in content' v-bind:key='con.id'>
+          <div class="shop_thumb">
+              <v-img 
+              :src="'/storage/food/'+con.img"
+              :alt="con.title"
+              :lazy-src="`/images/black-spinner.gif`"
+              title="" ></v-img>
+          </div>
+          <div class="shop_item_details">
+             
+          <favUpdate
+          :con=con
+          :stash=con.qty
+          >
+          </favUpdate>
+           
+          </div>
+          </li> 
+      </ul>
         
-            <li>
-            <div class="shop_thumb"><a href="shop.html"><img src="images/photos/photo3.jpg" alt="" title="" /></a></div>
-            <div class="shop_item_details">
-            <h4><a href="shop.html">Summer T-Shirt</a></h4>
-            <div class="shop_item_price">$1200</div>
-              <div class="item_qnty_shop">
-                  <form id="myform" method="POST" action="#">
-                      <input type="button" value="-" class="qntyminusshop" field="quantity3" />
-                      <input type="text" name="quantity3" value="1" class="qntyshop" />
-                      <input type="button" value="+" class="qntyplusshop" field="quantity3" />
-                  </form>
-              </div>
-            <a href="cart.html" id="addtocart">ADD TO CART</a>
-            </div>
-            </li>   
-            
-            
-        </ul>
-        
-        <div class="signup_bottom">
-          <router-link to="/cart">VIEW TABLE</router-link>
-      </div>
-      <div class="signup_bottom">
-          <router-link to="/cart">CLEAR FAVORITES</router-link>
-      </div>
+      <span v-if='!empty'><!---->
+        <router-link to="/cart" class="button_full btyellow slideUp">VIEW TABLE</router-link>    
+         </span>
         </div>
         
         </div>
@@ -52,7 +57,16 @@
       </div>
     </div>
   </div>
-     
+     <!--Overlay-->
+  <template>
+    <div class="text-center">
+      <v-overlay :value="overlay">
+        <v-progress-circular indeterminate size="64"></v-progress-circular>
+      </v-overlay>
+    </div>
+  </template>
+  <!--Overlay-->
+
     </div>
 </template>
 
@@ -61,37 +75,46 @@
 
         data(){
             return {
-
+              overlay:false,
+              content:[],
+              empty:false,
+              fav_count:0,
             }
         },
 
         methods: {
-/*
-            this.$validator.validateAll().then(() => {
-           
-           if (!this.errors.any()) {
-            //
-            }else{
-            //
-            }
-         
-                    //
-            })
-            .catch(err=>{
-                
-            }),
-      
-         setTimeout(func=>{
-             //this.errors.clear()
-            // this.$validator.reset()
-         },1) 
-        
-         }); //validator
-*/
+          fetch(){
+            this.overlay = !this.overlay
+                fetch('/get-fav/'+ localStorage.getItem('userId'))
+                .then(res => res.json())
+                .then(res=>{
+                  this.content = res.data;
+                  console.log(this.content)
+                  //to determine if obj is empty 
+                          if(res.data[0] == undefined){
+                              this.empty = true;
+                          }else{
+                              this.empty = false;
+                          }
+                  //to determine if obj is empty
+                  this.fav_count = res.meta.total;
+                  this.overlay = !this.overlay
+                })
+                .catch(error =>{
+                    //off loader
+                    this.overlay = !this.overlay
+                      setTimeout(func=>{
+                          this.fetch();
+                      },2000)
+                              
+                    })
+                    
+               
+              },
         },
 
         mounted() {
-            console.log('Component mounted.')
+            this.fetch()
         }
     }
 </script>

@@ -1,7 +1,23 @@
+
 <template>
        
-<div>
-    <span v-if='stash > 0'>
+    <div >
+       
+        <span v-if='deleted == true'>
+            <div class="item_qnty text-danger">
+                        <label>DELETED</label>
+                    </div>
+    </span>
+
+    <span v-if='deleted == false'>
+      <span v-if='stash > 0'>
+          <a href="#" class="item_delete" id="cartitem1" @click.prevent='removeFromFav(con)'>
+              <img src="/images/icons/black/trash.png" alt="" title="" /></a>         
+              
+          
+
+      <h4>{{con.title}}</h4>
+      <div class="shop_item_price"><strike>N</strike>{{con.amt}}</div>
         <div class="item_qnty_shop">
                 <form id="myform" method="POST" action="#">
               <input :disabled='qty==1' type="button" value="-" class="qntyminusshop" field="quantity" @click.prevent='decre()'/>
@@ -10,64 +26,90 @@
                 </form>
             </div>
 
+           
+
         <a  href="#" v-if="isAdded" id="addtocart" @click.prevent='removeFromCart(con)' >CLEAR</a>
 
         <a   href="#" v-if="!isAdded" id="addtocart" @click.prevent='addToCart(con)' >RESERVE</a>
         </span>
+      </span>
+
         <div v-if='stash < 1'>
             Out of stock
       </div>
 
-  
+            <template>
+                <v-snackbar
+              v-model="snackbar"
+              :timeout="timeout"
+              >
+              {{ text }}
+              <v-btn
+                color="blue"
+                text
+                @click='snackbar=!snackbar'
+              >
+                Close
+              </v-btn>
+              </v-snackbar>
+              </template>
 
-      <template>
-        <v-snackbar
-      v-model="snackbar"
-      :timeout="timeout"
-      >
-      {{ text }}
-      <v-btn
-        color="blue"
-        text
-        @click='snackbar=!snackbar'
-      >
-        Close
-      </v-btn>
-      </v-snackbar>
-      </template>
-
-
-      <template>
+                 <!--Overlay-->
+  <template>
         <div class="text-center">
           <v-overlay :value="overlay">
             <v-progress-circular indeterminate size="64"></v-progress-circular>
           </v-overlay>
         </div>
       </template>
-</div>
+      <!--Overlay-->
 
+    </div>
+                                
+  </template>
+        
+        <script>
+        export default {
 
-                        
-</template>
-
-<script>
-    export default {
-
-        props: ['con','stash'],
+props: ['con','stash'],
 //
 data: function() {
-    return {
-        overlay:false,
-        snackbar: false,
+return {
+    overlay:false,
+    snackbar: false,
         text: '',
         timeout: 3000,
         isAdded: false,
         qty:1,
-    }
+deleted:false,
+}
 },
 
-        methods: {
-            addToCart(con) {
+methods: {
+
+    removeFromFav(con) {
+      //
+        this.overlay = !this.overlay
+        var input = {'favId':con.id, 'foodId':con.foodId, 'userId':localStorage.getItem('tempUserCartID')};
+        axios.post('/remove-from-fav',input)
+                .then(res=>{
+                    if(res.data == 1){
+                      sound.play();
+                this.text='Food removed from Favorites!'
+                        this.snackbar = true;
+                    }
+                    this.deleted = true;
+                     this.overlay = !this.overlay
+                   
+                })
+                .catch(error =>{
+          this.$toasted.show("Failed to remove. Try again");
+             this.overlay = !this.overlay        
+              })
+    },
+
+    addToCart(con) {
+     
                 this.overlay = !this.overlay
                 this.isAdded = !this.isAdded
 
@@ -76,8 +118,8 @@ data: function() {
                      localStorage.setItem('tempUserCartID',tempUserCartID);
                      console.log('created id')
                 }
-                var input = {'foodId':con.id, 'userId':localStorage.getItem('tempUserCartID'),'qty':this.qty};
-                axios.post('/add-to-cart',input)
+                var input = {'foodId':con.foodId, 'userId':localStorage.getItem('tempUserCartID'),'qty':this.qty};
+                axios.post('/add-fav-to-cart',input)
                         .then(res=>{
                             if(res.data == 1){
                         this.text='Food added to Table!'
@@ -97,8 +139,8 @@ data: function() {
                
                 this.overlay = !this.overlay
                 this.isAdded = !this.isAdded
-                var input = {'foodId':con.id, 'userId':localStorage.getItem('tempUserCartID')};
-                axios.post('/remove-from-cart',input)
+                var input = {'foodId':con.foodId, 'userId':localStorage.getItem('tempUserCartID')};
+                axios.post('/remove-fav-from-cart',input)
                         .then(res=>{
                             if(res.data == 1){
                                 
@@ -120,6 +162,9 @@ data: function() {
             decre(){
                 this.qty = this.qty - 1;
             },
-        }
-    }
-</script>
+ 
+},
+
+}
+        </script>
+
