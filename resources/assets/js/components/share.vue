@@ -13,16 +13,18 @@
  <!-- Social Icons Popup -->
  <div class=" popup-social">
     <div class="content-block slideUp">
-      <h4>Share Link</h4> <div class='alert alert-danger'>Under repair</div>
-      <p>Share icons solution that allows you share and increase your social popularity.</p>
-      <ul class="social_share">
-		  <li><a href="http://twitter.com/" class="external"><img src="images/icons/black/twitter.png" alt="" title="" /><span>TWITTER</span></a></li>
-		  <li><a href="http://www.facebook.com/" class="external"><img src="images/icons/black/facebook.png" alt="" title="" /><span>FACEBOOK</span></a></li>
-		  <li><a href="http://plus.google.com" class="external"><img src="images/icons/black/gplus.png" alt="" title="" /><span>GOOGLE</span></a></li>
-		  <li><a href="http://www.dribbble.com/" class="external"><img src="images/icons/black/dribbble.png" alt="" title="" /><span>DRIBBBLE</span></a></li>
-		  <li><a href="http://www.linkedin.com/" class="external"><img src="images/icons/black/linkedin.png" alt="" title="" /><span>LINKEDIN</span></a></li>
-		  <li><a href="http://www.pinterest.com/" class="external"><img src="images/icons/black/pinterest.png" alt="" title="" /><span>PINTEREST</span></a></li>
-      </ul>
+
+    <!--  <p>Sharing is caring..</p> --><h4>SHARING IS CARING</h4>
+
+      <ul class="social_share wiggle">
+          <li class='wiggle'><whats-app  :url="url" title="Get Food" scale="3" ></whats-app> <span>WHATSAPP</span></li>
+          <li class='wiggle'> <email  :url="url" subject="Get Food" scale="3"></email> <span>EMAIL</span> </li>
+          <li class='wiggle'> <facebook  :url="url" scale="3"></facebook> <span>FACEBOOK</span> </li>
+          <li class='wiggle'>  <twitter  :url="url" title="Get Food" scale="3"></twitter> <span>TWITTER</span> </li>
+          <li class='wiggle'> <linkedin  :url="url" scale="3"></linkedin> <span>LINKEDIN</span> </li>
+          <li class='wiggle'> <telegram  :url="url" scale="3"></telegram> <span>TELEGRAM</span> </li>
+        </ul>
+
       <div class="close_popup_button"><router-link to='/' class="close-popup">
           <img src="images/icons/black/menu_close.png" alt="" title="" /></router-link></div>
     </div>
@@ -35,42 +37,43 @@
     </div>
 </template>
 
-<script>
-    export default {
 
-        data(){
-            return {
+      <script>
+         //share icons
+  import {
+  Facebook,
+  Twitter,
+  Linkedin,
+  Pinterest,
+  Reddit,
+  Telegram,
+  WhatsApp,
+  Email,
+} from "vue-socialmedia-share";
+//share icons
+        export default {
+          //share icons
+    components: {
+    Facebook,
+    Twitter,
+    Linkedin,
+    Pinterest,
+    Reddit,
+    Telegram,
+    WhatsApp,
+    Email,
+  },
+  //share icons
+          data: () => ({
+           url:'',
+          }),
 
-            }
-        },
-
-        methods: {
-/*
-            this.$validator.validateAll().then(() => {
-           
-           if (!this.errors.any()) {
-            //
-            }else{
-            //
-            }
-         
-                    //
-            })
-            .catch(err=>{
-                
-            }),
-      
-         setTimeout(func=>{
-             //this.errors.clear()
-            // this.$validator.reset()
-         },1) 
+          mounted(){
+            //url issues
         
-         }); //validator
-*/
-        },
-
-        mounted() {
-            console.log('Component mounted.')
+         var url = String(window.location)
+         this.url = url
+          },
         }
-    }
-</script>
+      
+      </script>

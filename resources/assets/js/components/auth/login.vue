@@ -12,16 +12,22 @@
        <!-- Login Popup -->
     <div class=" popup-login">
       <div class="content-block slideUp">
-          <h4>LOGIN</h4> <div class='alert alert-danger'>Under repair</div>
+          <h4>LOGIN</h4> 
           <div class="loginform">
-              <form id="LoginForm" method="post">
-                  <input type="text" name="Username" value="" class="form_input required" placeholder="username" />
-                  <input type="password" name="Password" value="" class="form_input required" placeholder="password" />
-                  <div class="forgot_pass"><router-link to="/forgot" >Forgot Password?</router-link></div>
-                  <input type="submit" name="submit" class="form_submit" id="submit" value="SIGN IN" />
+              <form id="LoginForm" method="post" data-vv-scope='loginForm'>
+                  <input type="text" name="Email" v-model='logEmail' v-validate='"required|email|max:100"' class="form_input required" placeholder="Email" />
+                  <p class='text-danger shake' v-show="errors.has('loginForm.Email')">{{ errors.first('loginForm.Email') }}</p>
+
+                  <input type="password" v-model='logPassword' name="Password" v-validate='"required|min:6"' class="form_input required" placeholder="password" />
+                  <p class='text-danger shake' v-show="errors.has('loginForm.Password')">{{ errors.first('loginForm.Password') }}</p>
+                 
+                  <div class="forgot_pass"><a href="/forgot-password" >Forgot Password?</a></div>
+                  <input type="submit" name="submit" class="form_submit" id="submit" @click.prevent='login()' value="SIGN IN" />
               </form>
+              
               <div class="signup_bottom">
-                  <p>Don't have an account?</p>
+                  <p class=""><router-link to="/resend-email" >Resend Verification Email</router-link></p>
+                                    <p>Don't have an account?</p>
                   <router-link to="/register">SIGN UP</router-link>
               </div>
           </div>
@@ -34,7 +40,33 @@
   
     </div>
 
-    
+    <template>
+        <v-snackbar
+      v-model="snackbar"
+      :timeout="timeout"
+      >
+      {{ text }}
+      <v-btn
+        color="#FFA500"
+        text
+        @click='snackbar=!snackbar'
+      >
+        Close
+      </v-btn>
+      </v-snackbar>
+      </template>
+
+
+  <!--Overlay-->
+<template>
+<div class="text-center">
+  <v-overlay :value="overlay">
+    <v-progress-circular indeterminate size="64"></v-progress-circular>
+  </v-overlay>
+</div>
+</template>
+<!--Overlay-->
+
     </div>
 </template>
 
@@ -43,37 +75,69 @@
 
         data(){
             return {
-
+                logEmail: '',
+          logPassword: '',
+          snackbar: false,
+        text: '',
+        timeout: 6000,
+        overlay:false,
             }
         },
 
         methods: {
-/*
-            this.$validator.validateAll().then(() => {
-           
-           if (!this.errors.any()) {
-            //
-            }else{
-            //
-            }
-         
-                    //
-            })
-            .catch(err=>{
+
+            login(){
+                          //validate specific reg fields
+        this.$validator.validateAll('loginForm').then(() => {
+             if (!this.errors.any()) {
+              this.overlay = true
+
+                    var input = {'email':this.logEmail, 'password':this.logPassword};
+                    axios.post('/login-user',input)
+                    .then(res => {
+                    var result = res.data.result;
+                  
+                          if(result == 1){
+                            this.text = 'Acount not verified. Please resend a verification email';
+                            this.snackbar = true
+                            this.overlay = false
+                          }else if(result == 2){
+                            this.text = 'Login failed. Invalid credentials';
+                            this.snackbar = true
+                            this.overlay = false
+                          }else{
+                               localStorage.setItem('userToken',res.data.userToken);
+                               localStorage.setItem('userId',res.data.userId);
+                               localStorage.setItem('userName',res.data.userName);
+                               localStorage.setItem('userMail',res.data.userMail);
+                               localStorage.setItem('userStatus',res.data.userStatus);
+                               
+                               var status = localStorage.getItem('userStatus')
+                                sound.play();
+                                if(status == 1){
+                                  //admin
+                                  this.$router.push({name: "admindashboard"});
+                                }else{
+                                  //user
+                                  this.$router.push({name: "userdashboard"});
+                                }
+                          }
+                    })
+                    .catch(error =>{
+                      this.overlay = false
+                    })
+                  }else{ //if error
+                    //error is auto shown, dont worry
+                  } //if error
+                })//val
+              
+                   }, //login
+
                 
-            }),
-      
-         setTimeout(func=>{
-             //this.errors.clear()
-            // this.$validator.reset()
-         },1) 
-        
-         }); //validator
-*/
         },
 
-        mounted() {
-            console.log('Component mounted.')
+        created() {
+          //this.Auth()
         }
     }
 </script>

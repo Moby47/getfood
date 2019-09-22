@@ -9,9 +9,9 @@ import about from './components/about.vue'
 import cart from './components/cart.vue'
 import checkout from './components/checkout.vue'
 import favorite from './components/favorite.vue'
-import forgot from './components/auth/forgot.vue'
-import history from './components/vendor/history.vue'
-import history2 from './components/customer/history2.vue'
+import resendEmail from './components/auth/resendEmail.vue'
+import admindashboard from './components/vendor/admindashboard.vue'
+import userdashboard from './components/customer/userdashboard.vue'
 import login from './components/auth/login.vue'
 import order from './components/customer/order.vue'
 import product from './components/vendor/product.vue'
@@ -19,7 +19,7 @@ import register from './components/auth/register.vue'
 import share from './components/share.vue'
 import shop from './components/shop.vue'
 import success from './components/success.vue'
-//import history from './components/history.vue'
+import notfound from './components/notfound.vue'
 
 export default new Router({
     mode: 'history',
@@ -65,27 +65,27 @@ export default new Router({
             }
         },
         {
-            path: '/forgot',
-            name: 'forgot',
-            component: forgot,
+            path: '/resend-email',
+            name: 'resendemail',
+            component: resendEmail,
              meta:{
               //  auth: true
             }
         },
         {
-            path: '/history',
-            name: 'history',
-            component: history,
+            path: '/userdashboard',
+            name: 'userdashboard',
+            component: userdashboard,
              meta:{
-              //  auth: true
+               customer: true
             }
         },
         {
-            path: '/history2',
-            name: 'history2',
-            component: history2,
+            path: '/admindashboard',
+            name: 'admindashboard',
+            component: admindashboard,
              meta:{
-              //  auth: true
+                vendor: true
             }
         },
         {
@@ -93,7 +93,7 @@ export default new Router({
             name: 'login',
             component: login,
              meta:{
-              //  auth: true
+                authPage: true
             }
         },
         {
@@ -101,7 +101,7 @@ export default new Router({
             name: 'order',
             component: order,
              meta:{
-              //  auth: true
+                customer: true
             }
         },
         {
@@ -109,7 +109,7 @@ export default new Router({
             name: 'product',
             component: product,
              meta:{
-              //  auth: true
+                vendor: true
             }
         },
         {
@@ -117,7 +117,7 @@ export default new Router({
             name: 'register',
             component: register,
              meta:{
-              //  auth: true
+                authPage: true
             }
         },
         {
@@ -144,5 +144,14 @@ export default new Router({
               //  auth: true
             }
         },
+        {
+            path: '*',
+            name: 'notfound',
+            component: notfound,
+             meta:{
+              
+            }
+        },
+
     ]
 })

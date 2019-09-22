@@ -10,11 +10,22 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+//laravel auth routes
+//Auth::routes();
+
+Route::get('/forgot-password', 'customauthcontroller@password');
 
 //initial page load
 Route::get('/', function () {
     return view('welcome');
 });
+
+//Auth routes
+Route::get('/forgot-password', 'customauthcontroller@password');
+Route::Post('/login-user', 'customauthcontroller@login');
+Route::Post('/register-user', 'customauthcontroller@reg');
+Route::get('/verify/{crypt}', 'customauthcontroller@verify');
+Route::Post('/resend-veri', 'customauthcontroller@resend');
 
 //guest routes
 Route::Post('/add-to-cart', 'cartcontroller@addToCart');
@@ -57,3 +68,6 @@ Route::get('/my-reporting/{id}', 'vendorcontroller@my_reporting');
 Route::get('/{vue_capture?}', function () {
     return view('welcome');
   })->where('vue_capture', '[\/\w\.-]*');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

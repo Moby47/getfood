@@ -6,29 +6,109 @@ use Illuminate\Http\Request;
 use App\User;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
+use Illuminate\Support\Str;
+
+//mail6
+use Mail;
+use App\Mail\Verify;
+
 class customauthcontroller extends Controller
 {
     public function login(Request $request){
-        
-        $cre = $request->only('name','password');
+        $this->validate($request, [
+            'email' => 'required|string|email|max:100',
+            'password' => 'required|string|min:6', //|confirmed
+        ]);
+        $cre = $request->only('email','password');
 
         if(!$token=JWTAuth::attempt($cre)){
-            return ['error'=>'Invalid credentials'];
+            return ['result'=>'2']; //invalid cre
         }
 
-        return ['token'=>$token];
+        $user = User::where('email','=',$request->email)->first();
+        
+        if($user->verification == 0){
+            //not verified
+            return ['result'=>'1']; //not verified
+        }
+
+        return ['userToken'=>$token, 'userId'=>$user->id, 'userName'=> $user->name,'userMail'=>$user->email,
+        'userStatus'=>$user->status]; //ok
 
     }
 
     public function reg(Request $request){
-        
+        $this->validate($request, [
+            'name' => 'required|string|max:15',
+            'email' => 'required|string|email|max:100|unique:users',
+            'password' => 'required|string|min:6', //|confirmed
+        ]);
+
         //create
        $user = new User;
        $user->name = $request->name;
+       $user->email = $request->email;
        $user->password = bcrypt($request->password);
+       $user->verifytoken = $verifytoken = Str::random(40);
        $user->save();
        
-        //response
-        return ['success' => 'user created!'];
+       session(['verifytoken' => $verifytoken]);
+       //email to user
+       try{
+           Mail::to($user->email)->send(new Verify());  
+             }
+             catch(\Exception $e){
+        return ['msg' => 0];
+         }
+   //response
+   return ['msg' => 1];
     }
+
+    public function password(Request $request){
+        return view('auth.passwords.email');
+    }
+    
+    public function verify($crypt){
+        $user =User::where('verifytoken','=',$crypt)->select('verifytoken','id')->first();
+        //if user not found
+        if(!isset($user)){
+            return '<a href="http://localhost:8000/login">Verification token expired. Click here to resend</a>';
+        }
+        $id = $user->id;
+        $act = User::findorfail($id);
+        $act->verification = 1;
+        $act->verifytoken = Null;
+        $act->save();
+        return redirect('http://localhost:8000/login');
+   }
+
+
+   public function resend(Request $request){
+       $this->validate($request, [
+           'email' => 'required|string|email|max:100',
+       ]);
+
+       $email = $request->input('email');
+       $user = User::where('email','=',$email)->first();
+       if(!isset($user)){
+           //return not reged 0
+           return 0;
+       }
+       $verifytok = User::where('email','=',$email)->pluck('verifytoken')->first();
+       if($verifytok == Null){
+           //return verified 1
+           return 1;
+       }
+       session(['verifytoken' => $verifytok]);
+           //email to user
+           try{
+               Mail::to($email)->send(new Verify());  
+                 }
+                 catch(\Exception $e){
+            return 2; //err
+             }
+       //response
+       return 3; //success
+   }
+
 }

@@ -21,6 +21,7 @@
     "dependencies": {
         "vee-validate": "^2.1.5",
         "vue-router": "^3.0.2",
+        "vue-socialmedia-share": "^1.0.1",
         "vue-toasted": "^1.1.26",
         "vue2-animate": "^2.1.0",
         "vuetify": "^2.0.17"

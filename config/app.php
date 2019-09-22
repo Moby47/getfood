@@ -165,7 +165,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         //for cart package
         Darryldecode\Cart\CartServiceProvider::class,
-
+        Sichikawa\LaravelSendgridDriver\SendgridTransportServiceProvider::class,
         /*
          * Package Service Providers...
          */

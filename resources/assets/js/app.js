@@ -62,31 +62,67 @@ router.beforeResolve((to, from, next) => {
 
   
 
-/* ------------------------URL interceptor for auth ----------------*/
+/* ------------------------URL interceptor  ----------------*/
 
- /*
+ 
 //route middleware 
 router.beforeEach((to, from, next) => {
 
-        if(to.matched.some(record => record.meta.auth)){
-    
-if(localStorage.getItem('token')){
-    //continue
-    next()
-}else{
-    //redirect
-    next({path: '/'})
-} //inner if close
-
-        }else{
-         //no auth required for this page
+        if(to.matched.some(record => record.meta.customer)){
+    /***************** redirect if not auth customer********* */
+    if(localStorage.getItem('userToken')){
+        //continue
+        if(localStorage.getItem('userStatus') == 0){
             next()
-        } //main if close
+        }else{
+            next({path: '/userdashboard'})
+        }        
+    }else{
+        //redirect
+        next({path: '/'})
+    } //inner if close
+        /************************** */
+
+ }else if(to.matched.some(record => record.meta.vendor)){
+      /***************** redirect if not auth customer********* */
+    if(localStorage.getItem('userToken')){
+        //continue
+        if(localStorage.getItem('userStatus') == 1){
+            next()
+        }else{
+            next({path: '/admindashboard'})
+        }        
+    }else{
+        //redirect
+        next({path: '/'})
+    } //inner if close
+        /************************** */
+      
+ }else if(to.matched.some(record => record.meta.authPage)){
+        /************reirect if auth************** */
+    if(localStorage.getItem('userToken')){
+        //continue
+        if(localStorage.getItem('userStatus') == 1){
+        next({path: '/admindashboard'})
+        }else{
+            next({path: '/userdashboard'})  
+        }
+    }else{
+        //redirect
+        next()
+    } //inner if close
+        /************************** */
+}else{
+    /*********No redirect, just go on***************** */
+ next() 
+
+  }
+        
 
     } //func closure
 ) //router close
 // route middleware 
- */
+ 
 
  /* ------------------------URL interceptor ----------------*/
 
