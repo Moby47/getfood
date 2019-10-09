@@ -59,7 +59,7 @@
               :src="'/storage/food/'+con.img"
               :alt="con.title"
               :lazy-src="`/images/black-spinner.gif`"
-              title="" ></v-img>
+              title="" ></v-img>   <i>food by {{con.vendor_name}}</i>
           </div>
           <div class="shop_item_details">
           <h4>{{con.title}}</h4>
@@ -77,7 +77,7 @@
           >
           </favButton>
 
-             
+          
           </div>
           </li> 
       </ul>
@@ -106,6 +106,7 @@
 
   </div>
 </template>
+
 
 <script>
   export default {

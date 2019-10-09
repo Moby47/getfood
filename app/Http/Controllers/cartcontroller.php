@@ -19,9 +19,15 @@ public function addToCart(Request $request){
 $userId = $request->input('userId'); //rand and local
 $foodId = $request->input('foodId');
 $food=food::findorfail($foodId);
-// add to cart for a specific user
+
+//required params to add to cart for a specific user
 $qty = $request->input('qty');
 $total = $qty * $food->amt;
+
+//check remaining qty
+if($food->qty < $qty){
+  return $food->qty;
+}
 
 \Cart::session($userId)->add(array(
     'id' => $food->id,
@@ -71,6 +77,7 @@ public function cartItems($id){
       $foodId = $request->input('foodId');
       $food=food::findorfail($foodId);
      
+
       //increament quantity (update)
       \Cart::session($userId)->update($foodId,array(
         'quantity'=> 1,

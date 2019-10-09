@@ -69,7 +69,7 @@ data: function() {
         methods: {
             addToCart(con) {
                 this.overlay = !this.overlay
-                this.isAdded = !this.isAdded
+               
 
                 if(!localStorage.getItem('tempUserCartID')){
                     var tempUserCartID = Math.floor(Math.random()*10000);
@@ -82,6 +82,11 @@ data: function() {
                             if(res.data == 1){
                         this.text='Food added to Table!'
                         this.snackbar = true;
+                        
+                        this.isAdded = !this.isAdded
+                            }else{
+                              this.text='Only '+res.data+' remaining for this food'
+                            this.snackbar = true;
                             }
                             this.overlay = !this.overlay
                            

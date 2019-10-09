@@ -38,6 +38,43 @@ class customauthcontroller extends Controller
     }
 
     public function reg(Request $request){
+
+        //check if vendor reg
+        if($request->input('vendor')){
+            $this->validate($request, [
+                'name' => 'required|string|max:15',
+                'email' => 'required|string|email|max:100|unique:users',
+                'password' => 'required|string|min:6', //|confirmed
+                'address' => 'required|string|max:255',
+                'phone' => 'required|string',
+            ]);
+    
+            //create vendor
+           $user = new User;
+           $user->name = $request->name;
+           $user->email = $request->email;
+           $user->address = $request->address;
+           $user->phone = $request->phone;
+           $user->status = 1;
+           $user->password = bcrypt($request->password);
+           $user->verifytoken = $verifytoken = Str::random(40);
+           $user->save();
+           
+           session(['verifytoken' => $verifytoken]);
+           //email to user
+           try{
+               Mail::to($user->email)->send(new Verify());  
+                 }
+                 catch(\Exception $e){
+            return ['msg' => 0];
+             }
+       //response
+       return ['msg' => 1];
+        }
+        //**** */
+
+
+
         $this->validate($request, [
             'name' => 'required|string|max:15',
             'email' => 'required|string|email|max:100|unique:users',
@@ -64,22 +101,28 @@ class customauthcontroller extends Controller
    return ['msg' => 1];
     }
 
+
+
+
     public function password(Request $request){
         return view('auth.passwords.email');
     }
     
+
+
+
     public function verify($crypt){
         $user =User::where('verifytoken','=',$crypt)->select('verifytoken','id')->first();
         //if user not found
         if(!isset($user)){
-            return '<a href="http://localhost:8000/login">Verification token expired. Click here to resend</a>';
+            return '<a href="http://test.henrymoby.tech/login">Verification token expired. Click here to resend</a>';
         }
         $id = $user->id;
         $act = User::findorfail($id);
         $act->verification = 1;
         $act->verifytoken = Null;
         $act->save();
-        return redirect('http://localhost:8000/login');
+        return redirect('http://test.henrymoby.tech/login');
    }
 
 

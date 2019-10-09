@@ -97,6 +97,7 @@
                    this.isAuth();
                    this.loggedOut = true;
                     NProgress.done();
+                    this.$router.push({name: "index"});
                     },
    },
 

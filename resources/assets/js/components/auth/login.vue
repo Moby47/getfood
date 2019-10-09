@@ -26,9 +26,12 @@
               </form>
               
               <div class="signup_bottom">
-                  <p class=""><router-link to="/resend-email" >Resend Verification Email</router-link></p>
+                  
                                     <p>Don't have an account?</p>
                   <router-link to="/register">SIGN UP</router-link>
+                <br><br>
+
+                  <p class=""><router-link to="/resend-email" >Resend Verification Email</router-link></p>
               </div>
           </div>
           <div class="close_popup_button">
@@ -117,9 +120,15 @@
                                 if(status == 1){
                                   //admin
                                   this.$router.push({name: "admindashboard"});
-                                }else{
+                                }else if (status == 0){
                                   //user
                                   this.$router.push({name: "userdashboard"});
+                                }else{
+                                  /* For super admin page
+                                  -status = 47​
+                                  -verifi = 1​
+                                  -approve/decline vendor​
+                                  */
                                 }
                           }
                     })

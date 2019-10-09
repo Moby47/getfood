@@ -13,9 +13,10 @@ import resendEmail from './components/auth/resendEmail.vue'
 import admindashboard from './components/vendor/admindashboard.vue'
 import userdashboard from './components/customer/userdashboard.vue'
 import login from './components/auth/login.vue'
-import order from './components/customer/order.vue'
 import product from './components/vendor/product.vue'
+import orders from './components/vendor/orders.vue'
 import register from './components/auth/register.vue'
+import vendorRegister from './components/auth/vendorRegister.vue'
 import share from './components/share.vue'
 import shop from './components/shop.vue'
 import success from './components/success.vue'
@@ -96,14 +97,7 @@ export default new Router({
                 authPage: true
             }
         },
-        {
-            path: '/order',
-            name: 'order',
-            component: order,
-             meta:{
-                customer: true
-            }
-        },
+     
         {
             path: '/product',
             name: 'product',
@@ -113,9 +107,25 @@ export default new Router({
             }
         },
         {
+            path: '/orders',
+            name: 'orders',
+            component: orders,
+             meta:{
+                vendor: true
+            }
+        },
+        {
             path: '/register',
             name: 'register',
             component: register,
+             meta:{
+                authPage: true
+            }
+        },
+        {
+            path: '/vendor-register',
+            name: 'vendorRegister',
+            component: vendorRegister,
              meta:{
                 authPage: true
             }

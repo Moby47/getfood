@@ -15,24 +15,29 @@
                 <h4>REGISTER</h4> 
                 <div class="loginform">
                     <form id="RegisterForm" method="post" data-vv-scope='regForm'>
-       <input type="text" v-model='regName' name="Name"  v-validate='"required|max:15"' value="" class="form_input required" placeholder="Name" />
+       <input type="text" v-model='regName' name="Name"  v-validate='"required|max:15"' value="" class="form_input required" placeholder="Vendor Name" />
            <p class='text-danger shake' v-show="errors.has('regForm.Name')">{{ errors.first('regForm.Name') }}</p>
         
            <input type="text" v-model='regEmail' v-validate='"required|email|max:100"' name="Email" value="" class="form_input required" placeholder="Email" />
            <p class='text-danger shake' v-show="errors.has('regForm.Email')">{{ errors.first('regForm.Email') }}</p>
 
+           <input type="text" v-model='regAddress' name="Address"  v-validate='"required|max:255"' value="" class="form_input required" placeholder="Address" />
+           <p class='text-danger shake' v-show="errors.has('regForm.Address')">{{ errors.first('regForm.Address') }}</p>
+
+           <input type="text" v-model='regPhone' name="Phone"  v-validate='"required|max:11"' value="" class="form_input required" placeholder="Phone" />
+           <p class='text-danger shake' v-show="errors.has('regForm.Phone')">{{ errors.first('regForm.Phone') }}</p>
+           
            <input type="password" v-model='regPassword' v-validate='"required|min:6"' name="Password" value="" class="form_input required" placeholder="Password" />
            <p class='text-danger shake' v-show="errors.has('regForm.Password')">{{ errors.first('regForm.Password') }}</p>
 
            <input type="submit" @click.prevent='reg()' name="submit" class="form_submit" id="submit" value="SIGN UP" />
-          
-          </form>
-          <div class="signup_bottom">
-            <p class=""><router-link to="/vendor-register" >Register as Vendor</router-link></p>
-            <router-link to="/login">LOGIN</router-link>         
-        </div>
+                    </form>
+                    
                 </div>
-              
+                <div class="signup_bottom">
+                        <router-link to="/register">BACK</router-link>
+                    <router-link to="/login">LOGIN</router-link>
+                </div>
                 <div class="close_popup_button">
                         <router-link to='/'  class="close-popup"><img src="images/icons/black/menu_close.png" 
                             alt="" title="" /></router-link>
@@ -81,6 +86,8 @@
        overlay:false,
        regName:'',
           regEmail:'',
+          regAddress:'',
+          regPhone:'',
           regPassword:'',
           snackbar: false,
         text: '',
@@ -98,7 +105,8 @@
               
               this.overlay = true
            
-    var input = {'name':this.regName,'email':this.regEmail,'password':this.regPassword };
+    var input = {'name':this.regName,'email':this.regEmail,'password':this.regPassword,
+    'address':this.regAddress,'phone':this.regPhone, 'vendor':true};
       
                       //send to database with axios
                           axios.post('/register-user',input)

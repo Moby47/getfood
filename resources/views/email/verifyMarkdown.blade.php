@@ -1,6 +1,6 @@
 @component('mail::message')
  
-<a href="http://localhost:8000/verify/{{$verifytoken}}">
+<a href="http://test.henrymoby.tech/verify/{{$verifytoken}}">
     Click Here To Verify Your GetFoods Account
 </a> 
 

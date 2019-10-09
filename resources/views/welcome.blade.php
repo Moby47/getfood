@@ -18,7 +18,11 @@
     <!-- CSRF Token -->
 <meta name="csrf-token" content="{{ csrf_token() }}">   
 
+<!--home design-->
 <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/cover/">
+<!--dash design-->
+<link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/offcanvas/">
+
 <!--vuetify material icons-->
 <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
 <!--<link href="/css/app.css" rel="stylesheet" />-->
