@@ -58,10 +58,13 @@ Route::get('/create-food', 'vendorcontroller@create_food');
 
 
 //customer routes
-Route::get('/my-orders/{id}', 'customercontroller@my_orders');
-Route::get('/my-reporting/{id}', 'vendorcontroller@my_reporting');
-
-
+//Route::get('/my-orders', 'customercontroller@my_orders');
+Route::post('/my-reporting', 'customercontroller@my_reporting');
+///{id}
+Route::get('/weekly-ex/{userId}', 'customercontroller@weekly_ex');
+Route::get('/monthly-ex/{userId}', 'customercontroller@monthly_ex');
+Route::get('/total-ex/{userId}', 'customercontroller@total_ex');
+Route::get('/orders/{userId}', 'customercontroller@orders');
 
 
 //don't delete,fixes route bug

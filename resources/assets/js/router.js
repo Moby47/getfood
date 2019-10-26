@@ -12,6 +12,7 @@ import favorite from './components/favorite.vue'
 import resendEmail from './components/auth/resendEmail.vue'
 import admindashboard from './components/vendor/admindashboard.vue'
 import userdashboard from './components/customer/userdashboard.vue'
+import filterorders from './components/customer/filterorders.vue'
 import login from './components/auth/login.vue'
 import product from './components/vendor/product.vue'
 import orders from './components/vendor/orders.vue'
@@ -77,6 +78,14 @@ export default new Router({
             path: '/userdashboard',
             name: 'userdashboard',
             component: userdashboard,
+             meta:{
+               customer: true
+            }
+        },
+        {
+            path: '/filter-orders',
+            name: 'filterorders',
+            component: filterorders,
              meta:{
                customer: true
             }

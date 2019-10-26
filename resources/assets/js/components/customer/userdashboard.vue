@@ -11,7 +11,7 @@
                   <br>
                   <nav aria-label="breadcrumb ">
                           <ol class="breadcrumb">
-                            <li class="breadcrumb-item active" aria-current="page">Welcome name</li>
+                            <li class="breadcrumb-item active" aria-current="page">Welcome <b>{{userName}}</b></li>
                           </ol>
                         </nav>
 
@@ -24,63 +24,57 @@
                       <div class="media text-muted pt-3">
                         <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
                         <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                          <strong class="d-block text-gray-dark">47,000</strong>
+                          <strong class="d-block text-gray-dark"> <strike><b>N</b></strike>{{weeklyData}}</strong>
                           Weekly Pay
                         </p>
                       </div>
                       <div class="media text-muted pt-3">
                         <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#e83e8c"/><text x="50%" y="50%" fill="#e83e8c" dy=".3em">32x32</text></svg>
                         <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                          <strong class="d-block text-gray-dark">47,000</strong>
+                          <strong class="d-block text-gray-dark"><strike><b>N</b></strike>{{monthlyData}}</strong>
                           Monthly Pay
                         </p>
                       </div>
                       <div class="media text-muted pt-3">
                         <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#6f42c1"/><text x="50%" y="50%" fill="#6f42c1" dy=".3em">32x32</text></svg>
                         <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                          <strong class="d-block text-gray-dark">47,000</strong>
+                          <strong class="d-block text-gray-dark"><strike><b>N</b></strike>{{totalData}}</strong>
                           Total Pay
                         </p>
                       </div>
                      
                     </div>
                     
-                    <form>
-                        <div class="form-group">
-                          <label for="exampleInputEmail1">From</label>
-                          <input type="date" class="form-control" id="exampleInputEmail1">
-                        </div>
-                        <div class="form-group">
-                          <label for="exampleInputPassword1">To</label>
-                          <input type="date" class="form-control" id="exampleInputEmail1">
-                        </div>
-                       
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                        <br>
-                        <br>
-                      </form>
-
+                    <h6 class="border-bottom border-gray pb-2 mb-0">My Orders</h6>
                     <div class="table-responsive">
                       <table class="table table-striped table-sm">
                         <tr>
-												<th>Customer</th>
-												<th>Amount</th>
+												<th>Food</th>
+                        <th>Amount</th>
+                        <th>Quantity</th>
 												<th>Date</th>
 											</tr>
-
-											<tr>
-												<td>Gabb</td>
-												<td>400</td>
-												<td>2/12/2019</td>
+											<tr class='animated tdPlopIn' v-for='con in content' v-bind:key='con.id'>
+												<td>{{con.title}}</td>
+                        <td>{{con.amt}}</td>
+                        <td>{{con.qty}}</td>
+												<td>{{con.created_at}}</td>
 											</tr>
-											<tr>
-												<td>Tolani</td>
-												<td>200</td>
-												<td>2/12/2019</td>
-											</tr>
+										
                       </table>
                     </div>
-                    <h4>Total: <b><strike>N</strike>600 </b></h4>
+
+                    <div class="shop_pagination slideUp" >
+                      <a href="" class="prev_shop" @click.prevent="fetch(pagination.prev_page_url)" :disabled="!pagination.prev_page_url">PREV PAGE</a>
+                      <span class="shop_pagenr">  <span>{{pagination.current_page}} of {{pagination.last_page}}</span></span>
+                      <a href="" class="next_shop" @click.prevent="fetch(pagination.next_page_url)" :disabled="!pagination.next_page_url">NEXT PAGE</a>
+                      </div>
+
+                   <!-- <h4>Total: <b><strike>N</strike>600 </b></h4> -->
+                   <span><!---->
+                    <router-link to="/filter-orders" class="button_full btyellow slideUp">FILTER ORDERS</router-link>    
+                     </span>
+
                   </main>
               </div>
                   
@@ -93,7 +87,15 @@
       </div>
     </div>
     
-   
+    <!--Overlay-->
+<template>
+  <div class="text-center">
+    <v-overlay :value="overlay">
+      <v-progress-circular indeterminate size="64"></v-progress-circular>
+    </v-overlay>
+  </div>
+  </template>
+  <!--Overlay-->
   
       </div>
 </template>
@@ -200,37 +202,129 @@ body {
 
         data(){
             return {
-
+              userName:'',
+              weeklyData:'Loading...',
+              monthlyData:'Loading...',
+              totalData:'Loading...',
+              content:[],
+              pagination: [],
+              overlay:false,
             }
         },
 
         methods: {
-/*
-            this.$validator.validateAll().then(() => {
-           
-           if (!this.errors.any()) {
-            //
-            }else{
-            //
-            }
-         
-                    //
-            })
-            .catch(err=>{
+
+
+          weekly(){
+            fetch('/weekly-ex/'+ localStorage.getItem('userId'))
+                .then(res => res.json())
+                .then(res=>{
+                  this.weeklyData = res;
+                })
+                .catch(error =>{
+                      setTimeout(func=>{
+                          this.weekly();
+                      },2000)
+                              
+                    })
+          },
+
+
+          monthly(){
+            fetch('/monthly-ex/'+ localStorage.getItem('userId'))
+                .then(res => res.json())
+                .then(res=>{
+                  this.monthlyData = res;
+                })
+                .catch(error =>{
+                      setTimeout(func=>{
+                          this.monthly();
+                      },2000)
+                              
+                    })
+          },
+
+          total(){
+            fetch('/total-ex/'+ localStorage.getItem('userId'))
+                .then(res => res.json())
+                .then(res=>{
+                  this.totalData = res;
+                })
+                .catch(error =>{
+                      setTimeout(func=>{
+                          this.total();
+                      },2000)
+                              
+                    })
+          },
+
+
+             
+  fetch(page_url){
+
+    var userId = localStorage.getItem('userId')
+
+    if(page_url){
+                  NProgress.start();
+                  }else{
+                    this.overlay=true
+                  }
+                var   page_url = page_url || '/orders/'+userId;
+                 
+                fetch(page_url)
+                .then(res => res.json())
+                .then(res=>{
+                  this.content = res.data;
+                 // console.log(this.content)
+                  //to determine if obj is empty 
+                          //console.log(res.data[0]);
+                     /*     if(res.data[0] == undefined){
+                              this.empty = true;
+                          }else{
+                              this.empty = false;
+                          }*/
+                  //to determine if obj is empty
+                  this.overlay = false
+                  this.makePagination(res.meta, res.links);
+//this.wait = false;
                 
-            }),
-      
-         setTimeout(func=>{
-             //this.errors.clear()
-            // this.$validator.reset()
-         },1) 
-        
-         }); //validator
-*/
+                  NProgress.done();
+                })
+                .catch(error =>{
+                    //off loader
+                  //  this.data_load = false;
+                  //    this.wait = true;
+                      setTimeout(func=>{
+                          this.fetch();
+                      },2000)
+                      this.overlay = false
+                      NProgress.done();        
+                    }) 
+              },
+
+              makePagination(meta, links){
+          var pagination = {
+                          current_page: meta.current_page,
+                          last_page: meta.last_page,
+                          next_page_url: links.next,
+                          prev_page_url: links.prev
+                           }
+            document.body.scrollTop = 0;
+           document.documentElement.scrollTop = 0;
+          this.pagination = pagination;
+              },
+
+
         },
 
         mounted() {
-            console.log('Component mounted.')
+            this.userName = localStorage.getItem('userName')
+            //call functions
+            this.weekly()
+            this.monthly()
+            this.total()
+
+            this.fetch()
         }
     }
 </script>
