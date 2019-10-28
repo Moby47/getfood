@@ -277,6 +277,10 @@ padding:20px 0 0 0;
 /*===============================================*/
 /* 5. CUSTOM BUTTONS */
 /*===============================================*/	
+#pay{
+	margin: 0 100px 20px 60px;
+}
+
 a.button_full{
 width:100%; 
 display:inline-block;

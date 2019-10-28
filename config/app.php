@@ -165,7 +165,12 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         //for cart package
         Darryldecode\Cart\CartServiceProvider::class,
+
+        //mail
         Sichikawa\LaravelSendgridDriver\SendgridTransportServiceProvider::class,
+
+        //paystack
+        Unicodeveloper\Paystack\PaystackServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -232,6 +237,7 @@ return [
         'JWTFactory' => 'Tymon\JWTAuth\Facades\JWTFactory',
          //cart package
          'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
+         'Paystack' => Unicodeveloper\Paystack\Facades\Paystack::class,
     ],
 
 ];

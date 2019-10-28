@@ -79,12 +79,25 @@
                             </div>
                         </div> 
                         <!--show only if cart::exist-->
-                        <router-link to="/success"  class="button_full btyellow">EAT</router-link> 
+                        <template>
+                            <paystack
+                                :amount="amount"
+                                :email="email"
+                                :paystackkey="paystackkey"
+                                :reference="reference"
+                                :callback="callback"
+                                :close="close"
+                                :embed="false"
+                            >
+                            <a href="#"  id='pay' class="text-center button_full btyellow">EAT</a> 
+                            </paystack>
+                        </template>
+                       
                 </span>
    
               </div>
        </div>
-           
+         
            
       </div>
     </div>
@@ -105,8 +118,13 @@
 
       
 <script>
-    export default {
 
+import paystack from 'vue-paystack';
+
+    export default {
+      components: {
+        paystack
+    },
         data(){
             return {
               overlay:false,
@@ -116,11 +134,51 @@
                 empty:47,
                 charges:'50.00',
                 subtotal:0, //total food + 50
-                total:0, //amount to pay
+                total:0, //amount in naira
+
+                paystackkey: "pk_test_ad39cbe2a4a48182c6ef83a38736005bbec325f5",
+                email: localStorage.getItem('userMail'),
+                amount: 0, //total in aira * 100 = Kobo equivalent 
             }
         },
 
+        computed: {
+        reference(){
+          let text = "";
+          let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+          for( let i=0; i < 10; i++ )
+            text += possible.charAt(Math.floor(Math.random() * possible.length));
+            console.log('rand ref rand')
+          return text;
+        }
+        },
+
+        
         methods: {
+
+          callback: function(response){
+            console.log(response)
+            
+           if(response.status == 'success'){
+            //save to DB
+            var reference = response.reference;
+            
+            //clear cart
+            
+            //redirect to success page
+            this.$router.push({name: "success"});
+
+           }else{
+             alert('Payment Failed')
+           }
+           
+            
+          },
+          close: function(){
+            console.log("Payment closed")
+          },
+
             fetch(){
                   fetch('/checkout'+'/'+ localStorage.getItem('tempUserCartID'))
                   .then(res => res.json())
@@ -147,7 +205,11 @@
                   .then(res=>{
                     console.log(res)
                     this.subtotal = res
-                    this.total =this.subtotal + 50;
+                    var sum = this.subtotal + 50;
+                    //amount in naira
+                    this.total = sum;
+                    //amount to kobo N500
+                    this.amount = sum * 100;
                     this.overlay = !this.overlay
                   })
                   .catch(error =>{
@@ -171,6 +233,7 @@
         mounted() {
            this.fetch()
            this.getSumTotal()
+
         }
     }
 </script>
