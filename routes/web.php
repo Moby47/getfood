@@ -66,7 +66,8 @@ Route::get('/monthly-ex/{userId}', 'customercontroller@monthly_ex');
 Route::get('/total-ex/{userId}', 'customercontroller@total_ex');
 Route::get('/orders/{userId}', 'customercontroller@orders');
 
-Route::get('/payment-page', 'paymentcontroller@paymentpage'); 
+Route::post('/save-order', 'customercontroller@saveorder'); 
+//Route::get('/payment-page', 'paymentcontroller@paymentpage'); 
 Route::post('/pay', 'paymentcontroller@redirectToGateway')->name('pay'); 
 
 //don't delete,fixes route bug

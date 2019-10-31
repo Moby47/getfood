@@ -56,5 +56,16 @@ class customercontroller extends Controller
         return orderres::collection($orders);
       }
 
+      
+    public  function saveorder(Request $request){
+      
+      $content = $request->input('content');
+       //return $request->input('cusId');
+
+       foreach($content as $con){
+         return $con->data;
+       }
+
+     }
 
 }

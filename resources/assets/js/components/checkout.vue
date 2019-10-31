@@ -93,6 +93,7 @@
                             </paystack>
                         </template>
                        
+                        <button @click='paid()'>paid</button>
                 </span>
    
               </div>
@@ -156,6 +157,22 @@ import paystack from 'vue-paystack';
 
         
         methods: {
+
+           paid(){            
+            
+
+            //save to db. order TB
+           var input = {'content':this.content, 'cusId':localStorage.getItem('userId')}
+
+            axios.post('/save-order',input).then(res=>{
+		
+              console.log(res.data)
+
+		      	})
+      
+            //clear cart
+
+          },
 
           callback: function(response){
             console.log(response)
