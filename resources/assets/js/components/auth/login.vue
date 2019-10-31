@@ -117,7 +117,16 @@
                                
                                var status = localStorage.getItem('userStatus')
                                 sound.play();
-                                if(status == 1){
+
+                                //validate if quest is coming from cart page then gotocheckout not dashboard
+                                if(localStorage.getItem('shopper')){
+                                  localStorage.removeItem('shopper')
+                                  this.$router.push({name: "checkout"});
+                                  return;
+                                  
+                                }else{
+
+                                    if(status == 1){
                                   //admin
                                   this.$router.push({name: "admindashboard"});
                                 }else if (status == 0){
@@ -130,6 +139,9 @@
                                   -approve/decline vendor​
                                   */
                                 }
+                                }
+
+                              
                           }
                     })
                     .catch(error =>{

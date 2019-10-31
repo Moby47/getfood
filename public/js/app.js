@@ -57672,6 +57672,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     _this2.countCartCon();
                 }, 2000);
             });
+        },
+        checkout: function checkout() {
+            if (localStorage.getItem('userToken')) {
+                //authed, proceed
+                this.$router.push({ name: "checkout" });
+            } else {
+                //auth needed
+                //set variable to redirect to checkout page after guest auth
+                localStorage.setItem('shopper', 'shopper');
+                //send to login
+                this.$router.push({ name: "login" });
+            }
         }
     },
     watch: {
@@ -57849,7 +57861,7 @@ var render = function() {
                         }),
                         _vm._v(" "),
                         _c(
-                          "router-link",
+                          "a",
                           {
                             directives: [
                               {
@@ -57860,7 +57872,12 @@ var render = function() {
                               }
                             ],
                             staticClass: "button_full btyellow slideUp",
-                            attrs: { to: "/checkout" }
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.checkout()
+                              }
+                            }
                           },
                           [_vm._v("TAKE FOOD")]
                         )
@@ -61463,18 +61480,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
               var status = localStorage.getItem('userStatus');
               sound.play();
-              if (status == 1) {
-                //admin
-                _this.$router.push({ name: "admindashboard" });
-              } else if (status == 0) {
-                //user
-                _this.$router.push({ name: "userdashboard" });
+
+              //validate if quest is coming from cart page then gotocheckout not dashboard
+              if (localStorage.getItem('shopper')) {
+                localStorage.removeItem('shopper');
+                _this.$router.push({ name: "checkout" });
+                return;
               } else {
-                /* For super admin page
-                -status = 47​
-                -verifi = 1​
-                -approve/decline vendor​
-                */
+
+                if (status == 1) {
+                  //admin
+                  _this.$router.push({ name: "admindashboard" });
+                } else if (status == 0) {
+                  //user
+                  _this.$router.push({ name: "userdashboard" });
+                } else {
+                  /* For super admin page
+                  -status = 47​
+                  -verifi = 1​
+                  -approve/decline vendor​
+                  */
+                }
               }
             }
           }).catch(function (error) {
@@ -105067,7 +105093,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.overlay = !this.overlay;
 
             if (!localStorage.getItem('tempUserCartID')) {
-                var tempUserCartID = Math.floor(Math.random() * 10000);
+                var tempUserCartID = Math.floor(Math.random() * 1234567890);
                 localStorage.setItem('tempUserCartID', tempUserCartID);
                 console.log('created id');
             }
@@ -106075,7 +106101,7 @@ if (false) {
 /* 140 */
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
+throw new Error("Module build failed: ModuleBuildError: Module build failed: Error: Node Sass does not yet support your current environment: Windows 64-bit with Unsupported runtime (72)\nFor more information on which environments are supported please see:\nhttps://github.com/sass/node-sass/releases/tag/v4.11.0\n    at module.exports (C:\\xampp\\htdocs\\getfoods\\node_modules\\node-sass\\lib\\binding.js:13:13)\n    at Object.<anonymous> (C:\\xampp\\htdocs\\getfoods\\node_modules\\node-sass\\lib\\index.js:14:35)\n    at Module._compile (internal/modules/cjs/loader.js:956:30)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:973:10)\n    at Module.load (internal/modules/cjs/loader.js:812:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:724:14)\n    at Module.require (internal/modules/cjs/loader.js:849:19)\n    at require (internal/modules/cjs/helpers.js:74:18)\n    at Object.<anonymous> (C:\\xampp\\htdocs\\getfoods\\node_modules\\sass-loader\\lib\\loader.js:3:14)\n    at Module._compile (internal/modules/cjs/loader.js:956:30)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:973:10)\n    at Module.load (internal/modules/cjs/loader.js:812:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:724:14)\n    at Module.require (internal/modules/cjs/loader.js:849:19)\n    at require (internal/modules/cjs/helpers.js:74:18)\n    at loadLoader (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\loadLoader.js:13:17)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:165:10)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:173:18\n    at loadLoader (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\loadLoader.js:36:3)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:165:10)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:173:18\n    at loadLoader (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\loadLoader.js:36:3)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:165:10)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:173:18\n    at loadLoader (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\loadLoader.js:36:3)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:169:2)\n    at runLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:362:2)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\NormalModule.js:195:19\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:364:11\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:170:18\n    at loadLoader (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\loadLoader.js:27:11)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:165:10)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:173:18\n    at loadLoader (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\loadLoader.js:36:3)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:165:10)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:173:18\n    at loadLoader (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\loadLoader.js:36:3)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:165:10)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:173:18\n    at loadLoader (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\loadLoader.js:36:3)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:169:2)\n    at runLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:362:2)\n    at NormalModule.doBuild (C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\NormalModule.js:182:3)\n    at NormalModule.build (C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\NormalModule.js:275:15)\n    at Compilation.buildModule (C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\Compilation.js:157:10)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\Compilation.js:460:10\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\NormalModuleFactory.js:243:5\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\NormalModuleFactory.js:94:13\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\tapable\\lib\\Tapable.js:268:11\n    at NormalModuleFactory.<anonymous> (C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\CompatibilityPlugin.js:52:5)\n    at NormalModuleFactory.applyPluginsAsyncWaterfall (C:\\xampp\\htdocs\\getfoods\\node_modules\\tapable\\lib\\Tapable.js:272:13)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\NormalModuleFactory.js:69:10\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\NormalModuleFactory.js:196:7\n    at processTicksAndRejections (internal/process/task_queues.js:75:11)");
 
 /***/ })
 /******/ ]);

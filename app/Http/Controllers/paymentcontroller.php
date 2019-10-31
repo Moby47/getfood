@@ -18,11 +18,7 @@ class paymentcontroller extends Controller
     }
 
 
-    public function paymentpage(){
-        //return 56;
-        return view('/welcome');
-    }
-    
+ 
     /**
      * Obtain Paystack payment information
      * @return void
