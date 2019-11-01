@@ -116,7 +116,7 @@ methods: {
                 if(!localStorage.getItem('tempUserCartID')){
                     var tempUserCartID = Math.floor(Math.random()*10000);
                      localStorage.setItem('tempUserCartID',tempUserCartID);
-                     console.log('created id')
+                  //   console.log('created id')
                 }
                 var input = {'foodId':con.foodId, 'userId':localStorage.getItem('tempUserCartID'),'qty':this.qty};
                 axios.post('/add-fav-to-cart',input)

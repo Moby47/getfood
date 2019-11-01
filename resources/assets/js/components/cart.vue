@@ -123,7 +123,7 @@
                   .then(res => res.json())
                   .then(res=>{
                     this.content = res.data;
-                    console.log(this.content)
+                    //console.log(this.content)
                     this.wait = false;
                    this.empty = this.content.length;
                   })

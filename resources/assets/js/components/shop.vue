@@ -134,7 +134,7 @@
                 .then(res => res.json())
                 .then(res=>{
                   this.content = res.data;
-                  console.log(this.content)
+             //     console.log(this.content)
                   //to determine if obj is empty 
                           //console.log(res.data[0]);
                           if(res.data[0] == undefined){

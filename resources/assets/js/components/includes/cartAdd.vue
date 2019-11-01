@@ -74,7 +74,7 @@ data: function() {
                 if(!localStorage.getItem('tempUserCartID')){
                     var tempUserCartID = Math.floor(Math.random()*1234567890);
                      localStorage.setItem('tempUserCartID',tempUserCartID);
-                     console.log('created id')
+                   //  console.log('created id')
                 }
                 var input = {'foodId':con.id, 'userId':localStorage.getItem('tempUserCartID'),'qty':this.qty};
                 axios.post('/add-to-cart',input)

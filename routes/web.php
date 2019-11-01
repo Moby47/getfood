@@ -59,7 +59,7 @@ Route::get('/create-food', 'vendorcontroller@create_food');
 
 //customer routes
 //Route::get('/my-orders', 'customercontroller@my_orders');
-Route::post('/my-reporting', 'customercontroller@my_reporting');
+Route::get('/my-reporting/{userid}/{from}/{to}', 'customercontroller@my_reporting');
 ///{id}
 Route::get('/weekly-ex/{userId}', 'customercontroller@weekly_ex');
 Route::get('/monthly-ex/{userId}', 'customercontroller@monthly_ex');
@@ -67,8 +67,9 @@ Route::get('/total-ex/{userId}', 'customercontroller@total_ex');
 Route::get('/orders/{userId}', 'customercontroller@orders');
 
 Route::post('/save-order', 'customercontroller@saveorder'); 
+Route::post('/clear-cart', 'cartcontroller@clearcart');
 //Route::get('/payment-page', 'paymentcontroller@paymentpage'); 
-Route::post('/pay', 'paymentcontroller@redirectToGateway')->name('pay'); 
+//Route::post('/pay', 'paymentcontroller@redirectToGateway')->name('pay'); 
 
 //don't delete,fixes route bug
 Route::get('/{vue_capture?}', function () {

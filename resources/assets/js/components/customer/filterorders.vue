@@ -14,46 +14,51 @@
                  <div class='bg-light'>
                     <main role="main" class="container">
       
-    
+      <h6 class="border-bottom border-gray pb-2 mb-0">Filter Orders</h6>
                         
                         <form>
                             <div class="form-group">
                               <label for="exampleInputEmail1">From</label>
-                              <input type="date" class="form-control" id="exampleInputEmail1" v-model='from' required>
+                              <input type="date" class="form-control" id="exampleInputEmail1" name='From' v-model='from' v-validate='"required"'>
+                              <p class='text-danger shake' v-show="errors.has('From')">{{ errors.first('From') }}</p>
                             </div>
                             <div class="form-group">
                               <label for="exampleInputPassword1">To</label>
-                              <input type="date" class="form-control" id="exampleInputEmail1" v-model='to' required>
+                              <input type="date" class="form-control" id="exampleInputEmail1" name='To' v-model='to' v-validate='"required"'>
+                              <p class='text-danger shake' v-show="errors.has('To')">{{ errors.first('To') }}</p>
                             </div>
                            
-                            <button type="submit" class="btn btn-primary" @click.prevent='scan'>Submit</button>
+                            <button type="submit" class="btn btn-primary" @click.prevent='fetch()'>Submit</button>
                             <br>
                             <br>
                           </form>
     
                           <!-- *************** filtered content ************ -->
                          
-                            {{content}}
                             <h6 class="border-bottom border-gray pb-2 mb-0">My Orders</h6>
                     <div class="table-responsive">
-                      <table class="table table-striped table-sm">
+                      <table class="table table-striped table-sm table-hover table-bordered">
                         <tr>
 												<th>Food</th>
                         <th>Amount</th>
-                        <th>Quantity</th>
+                         <th>Reference</th>
 												<th>Date</th>
 											</tr>
 											<tr class='animated tdPlopIn' v-for='con in content' v-bind:key='con.id'>
 												<td>{{con.title}}</td>
                         <td>{{con.amt}}</td>
-                        <td>{{con.qty}}</td>
+                        <td>{{con.ref}}</td>
 												<td>{{con.created_at}}</td>
 											</tr>
 										
                       </table>
                     </div>
         
-                         
+                         <div class="shop_pagination slideUp">
+                      <a href="" class="prev_shop" @click.prevent="fetch(pagination.prev_page_url)" :disabled="!pagination.prev_page_url">PREV PAGE</a>
+                      <span class="shop_pagenr">  <span>{{pagination.current_page}} of {{pagination.last_page}}</span></span>
+                      <a href="" class="next_shop" @click.prevent="fetch(pagination.next_page_url)" :disabled="!pagination.next_page_url">NEXT PAGE</a>
+                      </div>
                            <!-- *************** filtered content ************ -->
     
     
@@ -184,10 +189,7 @@
     
             data(){
                 return {
-                  userName:'',
-                  weeklyData:'Loading...',
-                  monthlyData:'Loading...',
-                  totalData:'Loading...',
+                 
                   content:[],
                   pagination: [],
                   overlay:false,
@@ -198,32 +200,65 @@
     
             methods: {
     
-              scan(){
-                
-                var input = {'to':this.to, 'from':this.from, 'userId':localStorage.getItem('userId')};
-                axios.post('/my-reporting',input).then(res=>{
-                
-                  this.content = res.data
-                    //  console.log(this.content)
-                      //to determine if obj is empty 
-                              //console.log(res.data[0]);
-                         /*     if(res.data[0] == undefined){
-                                  this.empty = true;
-                              }else{
-                                  this.empty = false;
-                              }*/
-                      //to determine if obj is empty
-                     // this.makePagination(res.meta, res.links);
-                })
-                .catch(err=>{
-                    console.log(err)
-                   })
-                
-              },
-    
             
     
-    
+     fetch(page_url){
+
+         this.$validator.validateAll().then(() => {
+
+             if (!this.errors.any()) {
+
+ var userId = localStorage.getItem('userId')
+
+    if(page_url){
+                  NProgress.start();
+                  }else{
+                    this.overlay=true
+                  }
+                var   page_url = page_url || '/my-reporting/'+userId+'/'+ this.from+'/'+this.to;
+                 
+                fetch(page_url)
+                .then(res => res.json())
+                .then(res=>{
+                  this.content = res.data;
+                 // console.log(this.content)
+                  
+                  this.overlay = false
+                  this.makePagination(res.meta, res.links);
+//this.wait = false;
+                
+                  NProgress.done();
+                })
+                .catch(error =>{
+                    //off loader
+                  //  this.data_load = false;
+                  //    this.wait = true;
+                      setTimeout(func=>{
+                          this.fetch();
+                      },2000)
+                      this.overlay = false
+                      NProgress.done(); 
+                      console.log(error)
+                    }) 
+                    
+             }
+             
+         })
+
+   
+              },
+
+              makePagination(meta, links){
+          var pagination = {
+                          current_page: meta.current_page,
+                          last_page: meta.last_page,
+                          next_page_url: links.next,
+                          prev_page_url: links.prev
+                           }
+            document.body.scrollTop = 0;
+           document.documentElement.scrollTop = 0;
+          this.pagination = pagination;
+              },
     
            
     
@@ -232,7 +267,7 @@
             },
     
             mounted() {
-               
+             //  this.fetch()
             }
         }
     </script>
