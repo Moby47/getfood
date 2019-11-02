@@ -93,6 +93,7 @@
                             </paystack>
                         </template>
                        
+                        <button @click='paid()'>paid</button>
                 </span>
    
               </div>
@@ -149,7 +150,7 @@ import paystack from 'vue-paystack';
 
           for( let i=0; i < 10; i++ )
             text += possible.charAt(Math.floor(Math.random() * possible.length));
-            console.log('rand ref rand')
+           // console.log('rand ref rand')
           return text;
         }
         },
@@ -157,8 +158,24 @@ import paystack from 'vue-paystack';
         
         methods: {
 
+          paid(){            
+            
+
+            //save to db. order TB
+           var input = {'content':this.content, 'cusId':localStorage.getItem('userId')}
+
+            axios.post('/save-order',input).then(res=>{
+		
+              console.log(res.data)
+
+		      	})
+      
+            //clear cart
+
+          },
+
           callback: function(response){
-            console.log(response)
+           // console.log(response)
             
            if(response.status == 'success'){
             //save to DB
@@ -166,6 +183,7 @@ import paystack from 'vue-paystack';
             
             //clear cart
             
+
             //redirect to success page
             this.$router.push({name: "success"});
 
@@ -184,6 +202,7 @@ import paystack from 'vue-paystack';
                   .then(res => res.json())
                   .then(res=>{
                     this.content = res.data;
+                   
                     this.wait = false;
                    this.empty = this.content.length;
                   })
@@ -203,7 +222,6 @@ import paystack from 'vue-paystack';
                   fetch('/sumtotal'+'/'+ localStorage.getItem('tempUserCartID'))
                   .then(res => res.json())
                   .then(res=>{
-                    console.log(res)
                     this.subtotal = res
                     var sum = this.subtotal + 50;
                     //amount in naira

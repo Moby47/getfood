@@ -58082,6 +58082,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -58115,21 +58116,35 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       for (var i = 0; i < 10; i++) {
         text += possible.charAt(Math.floor(Math.random() * possible.length));
-      }console.log('rand ref rand');
+      } // console.log('rand ref rand')
       return text;
     }
   },
 
   methods: {
+    paid: function paid() {
+
+      //save to db. order TB
+      var input = { 'content': this.content, 'cusId': localStorage.getItem('userId') };
+
+      axios.post('/save-order', input).then(function (res) {
+
+        console.log(res.data);
+      });
+
+      //clear cart
+    },
+
 
     callback: function callback(response) {
-      console.log(response);
+      // console.log(response)
 
       if (response.status == 'success') {
         //save to DB
         var reference = response.reference;
 
         //clear cart
+
 
         //redirect to success page
         this.$router.push({ name: "success" });
@@ -58158,6 +58173,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return res.json();
       }).then(function (res) {
         _this.content = res.data;
+
         _this.wait = false;
         _this.empty = _this.content.length;
       }).catch(function (error) {
@@ -58178,7 +58194,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       fetch('/sumtotal' + '/' + localStorage.getItem('tempUserCartID')).then(function (res) {
         return res.json();
       }).then(function (res) {
-        console.log(res);
         _this2.subtotal = res;
         var sum = _this2.subtotal + 50;
         //amount in naira
@@ -58450,7 +58465,19 @@ var render = function() {
                               )
                             ]
                           )
-                        ]
+                        ],
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            on: {
+                              click: function($event) {
+                                return _vm.paid()
+                              }
+                            }
+                          },
+                          [_vm._v("paid")]
+                        )
                       ],
                       2
                     )
