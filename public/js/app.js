@@ -57645,7 +57645,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 return res.json();
             }).then(function (res) {
                 _this.content = res.data;
-                console.log(_this.content);
+                //console.log(this.content)
                 _this.wait = false;
                 _this.empty = _this.content.length;
             }).catch(function (error) {
@@ -57672,6 +57672,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     _this2.countCartCon();
                 }, 2000);
             });
+        },
+        checkout: function checkout() {
+            if (localStorage.getItem('userToken')) {
+                //authed, proceed
+                this.$router.push({ name: "checkout" });
+            } else {
+                //auth needed
+                //set variable to redirect to checkout page after guest auth
+                localStorage.setItem('shopper', 'shopper');
+                //send to login
+                this.$router.push({ name: "login" });
+            }
         }
     },
     watch: {
@@ -57849,7 +57861,7 @@ var render = function() {
                         }),
                         _vm._v(" "),
                         _c(
-                          "router-link",
+                          "a",
                           {
                             directives: [
                               {
@@ -57860,7 +57872,12 @@ var render = function() {
                               }
                             ],
                             staticClass: "button_full btyellow slideUp",
-                            attrs: { to: "/checkout" }
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.checkout()
+                              }
+                            }
                           },
                           [_vm._v("TAKE FOOD")]
                         )
@@ -58083,6 +58100,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -58101,10 +58119,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       charges: '50.00',
       subtotal: 0, //total food + 50
       total: 0, //amount in naira
+      ref: '',
 
       paystackkey: "pk_test_ad39cbe2a4a48182c6ef83a38736005bbec325f5",
       email: localStorage.getItem('userMail'),
-      amount: 0 //total in aira * 100 = Kobo equivalent 
+      amount: 0 //total in naira * 100 = Kobo equivalent 
+
     };
   },
 
@@ -58116,7 +58136,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       for (var i = 0; i < 10; i++) {
         text += possible.charAt(Math.floor(Math.random() * possible.length));
-      } // console.log('rand ref rand')
+      }this.ref = text;
       return text;
     }
   },
@@ -58141,10 +58161,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       if (response.status == 'success') {
         //save to DB
-        var reference = response.reference;
+
+        var input = { 'total': this.total, 'ref': response.reference, 'trans': response.trans, 'cusId': localStorage.getItem('userId') };
+        axios.post('/save-order', input).then(function (res) {
+          console.log('order saved');
+        }).catch(function (error) {
+          console.log(error);
+        });
 
         //clear cart
-
+        var input = { 'userId': localStorage.getItem('tempUserCartID') };
+        axios.post('/clear-cart', input).then(function (res) {
+          console.log('cart cleared');
+        }).catch(function (error) {
+          console.log(error);
+        });
 
         //redirect to success page
         this.$router.push({ name: "success" });
@@ -58173,7 +58204,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return res.json();
       }).then(function (res) {
         _this.content = res.data;
-
+        //  console.log(this.content)
         _this.wait = false;
         _this.empty = _this.content.length;
       }).catch(function (error) {
@@ -58465,19 +58496,7 @@ var render = function() {
                               )
                             ]
                           )
-                        ],
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            on: {
-                              click: function($event) {
-                                return _vm.paid()
-                              }
-                            }
-                          },
-                          [_vm._v("paid")]
-                        )
+                        ]
                       ],
                       2
                     )
@@ -58519,7 +58538,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "order_item_thumb" }, [
-      _c("a", { staticClass: "close-panel", attrs: { href: "shop-item.html" } })
+      _c("a", { staticClass: "close-panel", attrs: { href: "#" } })
     ])
   }
 ]
@@ -58690,7 +58709,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 return res.json();
             }).then(function (res) {
                 _this.content = res.data;
-                console.log(_this.content);
+                //  console.log(this.content)
                 //to determine if obj is empty 
                 if (res.data[0] == undefined) {
                     _this.empty = true;
@@ -60633,7 +60652,10 @@ var render = function() {
                       _c("div", { staticClass: "table-responsive" }, [
                         _c(
                           "table",
-                          { staticClass: "table table-striped table-sm" },
+                          {
+                            staticClass:
+                              "table table-striped table-sm table-hover table-bordered"
+                          },
                           [
                             _vm._m(0),
                             _vm._v(" "),
@@ -60649,7 +60671,7 @@ var render = function() {
                                   _vm._v(" "),
                                   _c("td", [_vm._v(_vm._s(con.amt))]),
                                   _vm._v(" "),
-                                  _c("td", [_vm._v(_vm._s(con.qty))]),
+                                  _c("td", [_vm._v(_vm._s(con.ref))]),
                                   _vm._v(" "),
                                   _c("td", [_vm._v(_vm._s(con.created_at))])
                                 ]
@@ -60764,7 +60786,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Amount")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Quantity")]),
+      _c("th", [_vm._v("Reference")]),
       _vm._v(" "),
       _c("th", [_vm._v("Date")])
     ])
@@ -61057,48 +61079,93 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      userName: '',
-      weeklyData: 'Loading...',
-      monthlyData: 'Loading...',
-      totalData: 'Loading...',
-      content: [],
-      pagination: [],
-      overlay: false,
-      to: '',
-      from: ''
-    };
-  },
+    data: function data() {
+        return {
+
+            content: [],
+            pagination: [],
+            overlay: false,
+            to: '',
+            from: ''
+        };
+    },
 
 
-  methods: {
-    scan: function scan() {
-      var _this = this;
+    methods: {
+        fetch: function (_fetch) {
+            function fetch(_x) {
+                return _fetch.apply(this, arguments);
+            }
 
-      var input = { 'to': this.to, 'from': this.from, 'userId': localStorage.getItem('userId') };
-      axios.post('/my-reporting', input).then(function (res) {
+            fetch.toString = function () {
+                return _fetch.toString();
+            };
 
-        _this.content = res.data;
-        //  console.log(this.content)
-        //to determine if obj is empty 
-        //console.log(res.data[0]);
-        /*     if(res.data[0] == undefined){
-                 this.empty = true;
-             }else{
-                 this.empty = false;
-             }*/
-        //to determine if obj is empty
-        // this.makePagination(res.meta, res.links);
-      }).catch(function (err) {
-        console.log(err);
-      });
+            return fetch;
+        }(function (page_url) {
+            var _this = this;
+
+            this.$validator.validateAll().then(function () {
+
+                if (!_this.errors.any()) {
+
+                    var userId = localStorage.getItem('userId');
+
+                    if (page_url) {
+                        NProgress.start();
+                    } else {
+                        _this.overlay = true;
+                    }
+                    var page_url = page_url || '/my-reporting/' + userId + '/' + _this.from + '/' + _this.to;
+
+                    fetch(page_url).then(function (res) {
+                        return res.json();
+                    }).then(function (res) {
+                        _this.content = res.data;
+                        // console.log(this.content)
+
+                        _this.overlay = false;
+                        _this.makePagination(res.meta, res.links);
+                        //this.wait = false;
+
+                        NProgress.done();
+                    }).catch(function (error) {
+                        //off loader
+                        //  this.data_load = false;
+                        //    this.wait = true;
+                        setTimeout(function (func) {
+                            _this.fetch();
+                        }, 2000);
+                        _this.overlay = false;
+                        NProgress.done();
+                        console.log(error);
+                    });
+                }
+            });
+        }),
+        makePagination: function makePagination(meta, links) {
+            var pagination = {
+                current_page: meta.current_page,
+                last_page: meta.last_page,
+                next_page_url: links.next,
+                prev_page_url: links.prev
+            };
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+            this.pagination = pagination;
+        }
+    },
+
+    mounted: function mounted() {
+        //  this.fetch()
     }
-  },
-
-  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -61132,6 +61199,12 @@ var render = function() {
                     "main",
                     { staticClass: "container", attrs: { role: "main" } },
                     [
+                      _c(
+                        "h6",
+                        { staticClass: "border-bottom border-gray pb-2 mb-0" },
+                        [_vm._v("Filter Orders")]
+                      ),
+                      _vm._v(" "),
                       _c("form", [
                         _c("div", { staticClass: "form-group" }, [
                           _c(
@@ -61147,13 +61220,19 @@ var render = function() {
                                 rawName: "v-model",
                                 value: _vm.from,
                                 expression: "from"
+                              },
+                              {
+                                name: "validate",
+                                rawName: "v-validate",
+                                value: "required",
+                                expression: '"required"'
                               }
                             ],
                             staticClass: "form-control",
                             attrs: {
                               type: "date",
                               id: "exampleInputEmail1",
-                              required: ""
+                              name: "From"
                             },
                             domProps: { value: _vm.from },
                             on: {
@@ -61164,7 +61243,23 @@ var render = function() {
                                 _vm.from = $event.target.value
                               }
                             }
-                          })
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "p",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: _vm.errors.has("From"),
+                                  expression: "errors.has('From')"
+                                }
+                              ],
+                              staticClass: "text-danger shake"
+                            },
+                            [_vm._v(_vm._s(_vm.errors.first("From")))]
+                          )
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "form-group" }, [
@@ -61181,13 +61276,19 @@ var render = function() {
                                 rawName: "v-model",
                                 value: _vm.to,
                                 expression: "to"
+                              },
+                              {
+                                name: "validate",
+                                rawName: "v-validate",
+                                value: "required",
+                                expression: '"required"'
                               }
                             ],
                             staticClass: "form-control",
                             attrs: {
                               type: "date",
                               id: "exampleInputEmail1",
-                              required: ""
+                              name: "To"
                             },
                             domProps: { value: _vm.to },
                             on: {
@@ -61198,7 +61299,23 @@ var render = function() {
                                 _vm.to = $event.target.value
                               }
                             }
-                          })
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "p",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: _vm.errors.has("To"),
+                                  expression: "errors.has('To')"
+                                }
+                              ],
+                              staticClass: "text-danger shake"
+                            },
+                            [_vm._v(_vm._s(_vm.errors.first("To")))]
+                          )
                         ]),
                         _vm._v(" "),
                         _c(
@@ -61209,7 +61326,7 @@ var render = function() {
                             on: {
                               click: function($event) {
                                 $event.preventDefault()
-                                return _vm.scan($event)
+                                return _vm.fetch()
                               }
                             }
                           },
@@ -61221,11 +61338,6 @@ var render = function() {
                         _c("br")
                       ]),
                       _vm._v(" "),
-                      _vm._v(
-                        "\n                         \n                            " +
-                          _vm._s(_vm.content) +
-                          "\n                            "
-                      ),
                       _c(
                         "h6",
                         { staticClass: "border-bottom border-gray pb-2 mb-0" },
@@ -61235,7 +61347,10 @@ var render = function() {
                       _c("div", { staticClass: "table-responsive" }, [
                         _c(
                           "table",
-                          { staticClass: "table table-striped table-sm" },
+                          {
+                            staticClass:
+                              "table table-striped table-sm table-hover table-bordered"
+                          },
                           [
                             _vm._m(0),
                             _vm._v(" "),
@@ -61251,7 +61366,7 @@ var render = function() {
                                   _vm._v(" "),
                                   _c("td", [_vm._v(_vm._s(con.amt))]),
                                   _vm._v(" "),
-                                  _c("td", [_vm._v(_vm._s(con.qty))]),
+                                  _c("td", [_vm._v(_vm._s(con.ref))]),
                                   _vm._v(" "),
                                   _c("td", [_vm._v(_vm._s(con.created_at))])
                                 ]
@@ -61259,6 +61374,54 @@ var render = function() {
                             })
                           ],
                           2
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "shop_pagination slideUp" }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "prev_shop",
+                            attrs: {
+                              href: "",
+                              disabled: !_vm.pagination.prev_page_url
+                            },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.fetch(_vm.pagination.prev_page_url)
+                              }
+                            }
+                          },
+                          [_vm._v("PREV PAGE")]
+                        ),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "shop_pagenr" }, [
+                          _c("span", [
+                            _vm._v(
+                              _vm._s(_vm.pagination.current_page) +
+                                " of " +
+                                _vm._s(_vm.pagination.last_page)
+                            )
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            staticClass: "next_shop",
+                            attrs: {
+                              href: "",
+                              disabled: !_vm.pagination.next_page_url
+                            },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.fetch(_vm.pagination.next_page_url)
+                              }
+                            }
+                          },
+                          [_vm._v("NEXT PAGE")]
                         )
                       ])
                     ]
@@ -61303,7 +61466,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Amount")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Quantity")]),
+      _c("th", [_vm._v("Reference")]),
       _vm._v(" "),
       _c("th", [_vm._v("Date")])
     ])
@@ -61490,18 +61653,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
               var status = localStorage.getItem('userStatus');
               sound.play();
-              if (status == 1) {
-                //admin
-                _this.$router.push({ name: "admindashboard" });
-              } else if (status == 0) {
-                //user
-                _this.$router.push({ name: "userdashboard" });
+
+              //validate if quest is coming from cart page then gotocheckout not dashboard
+              if (localStorage.getItem('shopper')) {
+                localStorage.removeItem('shopper');
+                _this.$router.push({ name: "checkout" });
+                return;
               } else {
-                /* For super admin page
-                -status = 47​
-                -verifi = 1​
-                -approve/decline vendor​
-                */
+
+                if (status == 1) {
+                  //admin
+                  _this.$router.push({ name: "admindashboard" });
+                } else if (status == 0) {
+                  //user
+                  _this.$router.push({ name: "userdashboard" });
+                } else {
+                  /* For super admin page
+                  -status = 47​
+                  -verifi = 1​
+                  -approve/decline vendor​
+                  */
+                }
               }
             }
           }).catch(function (error) {
@@ -66692,7 +66864,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 return res.json();
             }).then(function (res) {
                 _this.content = res.data;
-                console.log(_this.content);
+                //     console.log(this.content)
                 //to determine if obj is empty 
                 //console.log(res.data[0]);
                 if (res.data[0] == undefined) {
@@ -104032,47 +104204,56 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
-  //share icons
-  data: function data() {
-    return {
-      loggedOut: null,
-      snackbar: false,
-      text: '',
-      timeout: 6000,
-      status: ''
-    };
-  },
-
-  methods: {
-    //meth to check Auth
-    isAuth: function isAuth() {
-      if (localStorage.getItem('userToken')) {
-        this.loggedOut = false;
-        this.status = localStorage.getItem('userStatus');
-        return true;
-      } else {
-        this.loggedOut = true;
-        return false;
-      }
+    //share icons
+    data: function data() {
+        return {
+            loggedOut: null,
+            snackbar: false,
+            text: '',
+            timeout: 6000,
+            status: ''
+        };
     },
-    logout: function logout() {
-      NProgress.start();
-      localStorage.removeItem('userToken');
-      localStorage.removeItem('userId');
-      localStorage.removeItem('userName');
-      localStorage.removeItem('userMail');
-      localStorage.removeItem('userStatus');
-      sound.play();
-      this.isAuth();
-      this.loggedOut = true;
-      NProgress.done();
-      this.$router.push({ name: "index" });
-    }
-  },
 
-  mounted: function mounted() {
-    this.isAuth();
-  }
+    methods: {
+        //meth to check Auth
+        isAuth: function isAuth() {
+            if (localStorage.getItem('userToken')) {
+                this.loggedOut = false;
+                this.status = localStorage.getItem('userStatus');
+                return true;
+            } else {
+                this.loggedOut = true;
+                return false;
+            }
+        },
+        logout: function logout() {
+            NProgress.start();
+            localStorage.removeItem('userToken');
+            localStorage.removeItem('userId');
+            localStorage.removeItem('userName');
+            localStorage.removeItem('userMail');
+            localStorage.removeItem('userStatus');
+            //clear tempcartid
+            localStorage.removeItem('tempUserCartID');
+            //clear cart
+            var input = { 'userId': localStorage.getItem('tempUserCartID') };
+            axios.post('/clear-cart', input).then(function (res) {
+                console.log('cart cleared');
+            }).catch(function (error) {
+                console.log(error);
+            });
+            sound.play();
+            this.isAuth();
+            this.loggedOut = true;
+            NProgress.done();
+            this.$router.push({ name: "index" });
+        }
+    },
+
+    mounted: function mounted() {
+        this.isAuth();
+    }
 });
 
 /***/ }),
@@ -104458,6 +104639,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       localStorage.removeItem('userName');
       localStorage.removeItem('userMail');
       localStorage.removeItem('userStatus');
+      //clear tempcartid
+      localStorage.removeItem('tempUserCartID');
+      //clear cart
+      var input = { 'userId': localStorage.getItem('tempUserCartID') };
+      axios.post('/clear-cart', input).then(function (res) {
+        console.log('cart cleared');
+      }).catch(function (error) {
+        console.log(error);
+      });
       sound.play();
       this.isAuth();
       this.loggedOut = true;
@@ -105094,9 +105284,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.overlay = !this.overlay;
 
             if (!localStorage.getItem('tempUserCartID')) {
-                var tempUserCartID = Math.floor(Math.random() * 10000);
+                var tempUserCartID = Math.floor(Math.random() * 1234567890);
                 localStorage.setItem('tempUserCartID', tempUserCartID);
-                console.log('created id');
+                //  console.log('created id')
             }
             var input = { 'foodId': con.id, 'userId': localStorage.getItem('tempUserCartID'), 'qty': this.qty };
             axios.post('/add-to-cart', input).then(function (res) {
@@ -105847,7 +106037,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (!localStorage.getItem('tempUserCartID')) {
                 var tempUserCartID = Math.floor(Math.random() * 10000);
                 localStorage.setItem('tempUserCartID', tempUserCartID);
-                console.log('created id');
+                //   console.log('created id')
             }
             var input = { 'foodId': con.foodId, 'userId': localStorage.getItem('tempUserCartID'), 'qty': this.qty };
             axios.post('/add-fav-to-cart', input).then(function (res) {

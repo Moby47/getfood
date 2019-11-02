@@ -136,4 +136,12 @@ public function cartItems($id){
               }
 
 
+              public function clearcart(Request $request){
+                \Cart::clear();
+                \Cart::session($request->input('userId'))->clear();
+               return 1;
+                }
+              
+
+
 }

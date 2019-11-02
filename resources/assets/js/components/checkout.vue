@@ -58,9 +58,9 @@
                                   </div>
                          </transition>
 
-
+ 
                       <div class="order_item animated tdExpandInBounce" v-for='con in content' v-bind:key='con.id'>
-                          <div class="order_item_thumb"><a href="shop-item.html" class="close-panel">
+                          <div class="order_item_thumb"><a href="#" class="close-panel">
                             </a></div>
                           <div class="order_item_title"><span>{{con.quantity}} X</span> {{con.name}}</div>
                           <div class="order_item_price"><strike>N</strike>{{con.attributes.total}}</div>           
@@ -93,7 +93,8 @@
                             </paystack>
                         </template>
                        
-                        <button @click='paid()'>paid</button>
+
+                       
                 </span>
    
               </div>
@@ -136,10 +137,12 @@ import paystack from 'vue-paystack';
                 charges:'50.00',
                 subtotal:0, //total food + 50
                 total:0, //amount in naira
+                ref:'',
 
                 paystackkey: "pk_test_ad39cbe2a4a48182c6ef83a38736005bbec325f5",
                 email: localStorage.getItem('userMail'),
-                amount: 0, //total in aira * 100 = Kobo equivalent 
+                amount: 0, //total in naira * 100 = Kobo equivalent 
+                
             }
         },
 
@@ -150,7 +153,8 @@ import paystack from 'vue-paystack';
 
           for( let i=0; i < 10; i++ )
             text += possible.charAt(Math.floor(Math.random() * possible.length));
-           // console.log('rand ref rand')
+
+          this.ref = text
           return text;
         }
         },
@@ -179,9 +183,23 @@ import paystack from 'vue-paystack';
             
            if(response.status == 'success'){
             //save to DB
-            var reference = response.reference;
+
+             var input = {'total':this.total,'ref':response.reference, 'trans':response.trans,'cusId':localStorage.getItem('userId')}
+            axios.post('/save-order',input).then(res=>{
+                console.log('order saved')  
+            })
+            .catch(error =>{
+                console.log(error)    
+               })
             
             //clear cart
+              var input = {'userId':localStorage.getItem('tempUserCartID')}
+            axios.post('/clear-cart',input).then(res=>{
+                console.log('cart cleared')  
+            })
+            .catch(error =>{
+                console.log(error)    
+               })
             
 
             //redirect to success page
@@ -202,7 +220,7 @@ import paystack from 'vue-paystack';
                   .then(res => res.json())
                   .then(res=>{
                     this.content = res.data;
-                   
+                  //  console.log(this.content)
                     this.wait = false;
                    this.empty = this.content.length;
                   })

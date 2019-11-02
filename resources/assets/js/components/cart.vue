@@ -74,7 +74,7 @@
                   
                 </div>
               
-       <router-link to="/checkout" v-show='cartConCount > 0' class="button_full btyellow slideUp">TAKE FOOD</router-link>           
+       <a @click.prevent='checkout()' v-show='cartConCount > 0' class="button_full btyellow slideUp">TAKE FOOD</a>           
                 
    </div>
                 
@@ -123,7 +123,7 @@
                   .then(res => res.json())
                   .then(res=>{
                     this.content = res.data;
-                    console.log(this.content)
+                    //console.log(this.content)
                     this.wait = false;
                    this.empty = this.content.length;
                   })
@@ -154,6 +154,21 @@
                       })
 
                 },
+
+                checkout(){
+                  if(localStorage.getItem('userToken')){
+                    //authed, proceed
+                 this.$router.push({name: "checkout"});
+                  }else{
+                    //auth needed
+                  //set variable to redirect to checkout page after guest auth
+                  localStorage.setItem('shopper','shopper')
+                  //send to login
+                   this.$router.push({name: "login"});
+                  }
+                  
+
+                }
 
         },
         watch : {

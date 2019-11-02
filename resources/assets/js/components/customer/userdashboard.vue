@@ -47,17 +47,17 @@
                     
                     <h6 class="border-bottom border-gray pb-2 mb-0">My Orders</h6>
                     <div class="table-responsive">
-                      <table class="table table-striped table-sm">
+                      <table class="table table-striped table-sm table-hover table-bordered">
                         <tr>
 												<th>Food</th>
                         <th>Amount</th>
-                        <th>Quantity</th>
+                        <th>Reference</th>
 												<th>Date</th>
 											</tr>
 											<tr class='animated tdPlopIn' v-for='con in content' v-bind:key='con.id'>
 												<td>{{con.title}}</td>
                         <td>{{con.amt}}</td>
-                        <td>{{con.qty}}</td>
+                        <td>{{con.ref}}</td>
 												<td>{{con.created_at}}</td>
 											</tr>
 										

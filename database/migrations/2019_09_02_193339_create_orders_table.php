@@ -17,7 +17,8 @@ class CreateOrdersTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('amt');
-            $table->integer('qty');
+            $table->string('ref');
+            $table->string('trans');
             $table->integer('cusId');
             $table->timestamps();
         });
