@@ -35,8 +35,8 @@
                     
                 </div>
                 <div class="signup_bottom">
-                        <router-link to="/register">BACK</router-link>
-                    <router-link to="/login">LOGIN</router-link>
+                        <router-link to="/register">Back</router-link>
+                    <router-link to="/login">Login</router-link>
                 </div>
                 <div class="close_popup_button">
                         <router-link to='/'  class="close-popup"><img src="images/icons/black/menu_close.png" 

@@ -68,5 +68,17 @@ class vendorcontroller extends Controller
                     return 1;
                 }
                 
+                public function new_food(Request $request){
+                  
+                  $save = new food;
+
+                 // $save->
+                    return $request;
+
+                    $data = findorfail($request->input('id'));
+                    $date->delete();
+                    return 1;
+                }
+                
 
 }//class end

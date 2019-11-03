@@ -17,7 +17,7 @@
                     <!-- ********************************************** empty -->
                          
                       <div v-if='empty' class='text-center alert alert-info'>
-                         Sorry, the Kitchen is empty.
+                         Sorry, The Kitchen is Empty.
                               </div>
       
                                <!--loading -->

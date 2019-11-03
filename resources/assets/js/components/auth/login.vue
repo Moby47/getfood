@@ -28,7 +28,7 @@
               <div class="signup_bottom">
                   
                                     <p>Don't have an account?</p>
-                  <router-link to="/register">SIGN UP</router-link>
+                  <router-link to="/register">Sign Up</router-link>
                 <br><br>
 
                   <p class=""><router-link to="/resend-email" >Resend Verification Email</router-link></p>

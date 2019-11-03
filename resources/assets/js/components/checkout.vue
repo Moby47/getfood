@@ -13,7 +13,7 @@
              <br>
                  <nav aria-label="breadcrumb ">
                          <ol class="breadcrumb">
-                           <li class="breadcrumb-item"><router-link to='/cart'>TABLE</router-link></li>
+                           <li class="breadcrumb-item"><router-link to='/cart'>Table</router-link></li>
                            <li class="breadcrumb-item active" aria-current="page" >FOOD IS READY</li>
                          </ol>
                        </nav>
@@ -25,9 +25,11 @@
               <h4 class="checkout_title">ORDER DETAILS</h4>
 
                 <!-- ********************************************** empty -->
-                <span v-show='empty < 1' class='text-center'>
-          <div class='alert alert-info'>NO FOOD TO EAT. <router-link to='/shop'>get food</router-link></div>  
-         </span>
+                
+                    <div v-show='empty < 1' class='text-center alert alert-info'>
+                        Your Table is Empty. <router-link to='/shop'>Add Food</router-link>
+                       </div>
+         
                        <!--loading 
 <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
         <div v-if='data_load' class='text-center'>
@@ -91,6 +93,7 @@
                             >
                             <a href="#"  id='pay' class="text-center button_full btyellow">EAT</a> 
                             </paystack>
+                            
                         </template>
                        
 

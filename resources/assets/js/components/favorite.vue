@@ -18,7 +18,7 @@
                          <!-- ********************************************** empty -->
                          
                       <div v-if='empty' class='text-center alert alert-info'>
-                      No Food Added as Favorite.
+                      You Have No Food Favorite. <router-link class='btn btn-primary' to='/shop'>Add Now</router-link>
                              </div>
      
 

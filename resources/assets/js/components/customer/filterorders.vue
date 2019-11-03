@@ -1,6 +1,6 @@
 <template>
         <div class="container">
-            <menubar></menubar>
+            <usermenubar></usermenubar>
       <!--content here-->
       
       <div class="pages">
@@ -17,7 +17,7 @@
       <h6 class="border-bottom border-gray pb-2 mb-0">Filter Orders</h6>
                         
                         <form>
-                            <div class="form-group">
+                            <div class="mt-4 form-group">
                               <label for="exampleInputEmail1">From</label>
                               <input type="date" class="form-control" id="exampleInputEmail1" name='From' v-model='from' v-validate='"required"'>
                               <p class='text-danger shake' v-show="errors.has('From')">{{ errors.first('From') }}</p>
@@ -27,23 +27,31 @@
                               <input type="date" class="form-control" id="exampleInputEmail1" name='To' v-model='to' v-validate='"required"'>
                               <p class='text-danger shake' v-show="errors.has('To')">{{ errors.first('To') }}</p>
                             </div>
-                           
-                            <button type="submit" class="btn btn-primary" @click.prevent='fetch()'>Submit</button>
+                            <a href='#' @click.prevent='fetch()' class="button_full btyellow slideUp">OK</a> 
+                            
                             <br>
                             <br>
                           </form>
     
                           <!-- *************** filtered content ************ -->
-                         
+                          <div v-if='empty' class='text-center alert alert-info'>
+             You Have No Transaction Between <span class='text-primary'>{{from}}</span> And <span class='text-primary'>{{to}}</span></span>
+                                   </div>
+
+
+                         <span v-if='!empty' v-show='content_details == true'> <!-- **to hide-->
+
                             <h6 class="border-bottom border-gray pb-2 mb-0">My Orders</h6>
                     <div class="table-responsive">
                       <table class="table table-striped table-sm table-hover table-bordered">
+                          <thead class='thead-dark'>
                         <tr>
 												<th>Food</th>
                         <th>Amount</th>
                          <th>Reference</th>
 												<th>Date</th>
-											</tr>
+                      </tr>
+                      </thead>
 											<tr class='animated tdPlopIn' v-for='con in content' v-bind:key='con.id'>
 												<td>{{con.title}}</td>
                         <td>{{con.amt}}</td>
@@ -53,6 +61,7 @@
 										
                       </table>
                     </div>
+                 
         
                          <div class="shop_pagination slideUp">
                       <a href="" class="prev_shop" @click.prevent="fetch(pagination.prev_page_url)" :disabled="!pagination.prev_page_url">PREV PAGE</a>
@@ -60,7 +69,7 @@
                       <a href="" class="next_shop" @click.prevent="fetch(pagination.next_page_url)" :disabled="!pagination.next_page_url">NEXT PAGE</a>
                       </div>
                            <!-- *************** filtered content ************ -->
-    
+                 </span> <!-- **to hide-->
     
                       </main>
                   </div>
@@ -195,6 +204,8 @@
                   overlay:false,
                   to:'',
                   from:'',
+                  content_details: false,
+                  empty:false,
                 }
             },
     
@@ -203,6 +214,8 @@
             
     
      fetch(page_url){
+
+       
 
          this.$validator.validateAll().then(() => {
 
@@ -221,8 +234,17 @@
                 .then(res => res.json())
                 .then(res=>{
                   this.content = res.data;
-                 // console.log(this.content)
-                  
+
+                  this.content_details = true;
+
+                   //to determine if obj is empty 
+                          //console.log(res.data[0]);
+                          if(res.data[0] == undefined){
+                              this.empty = true;
+                          }else{
+                              this.empty = false;
+                          }
+                  //to determine if obj is empty
                   this.overlay = false
                   this.makePagination(res.meta, res.links);
 //this.wait = false;

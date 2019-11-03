@@ -29,7 +29,7 @@
           </form>
           <div class="signup_bottom">
             <p class=""><router-link to="/vendor-register" >Register as Vendor</router-link></p>
-            <router-link to="/login">LOGIN</router-link>         
+            <router-link to="/login">Login</router-link>         
         </div>
                 </div>
               

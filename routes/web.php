@@ -55,6 +55,7 @@ Route::get('/favorites', 'vendorcontroller@favorites');
 
 Route::Post('/delete-food', 'vendorcontroller@delete_food');
 Route::get('/create-food', 'vendorcontroller@create_food');
+Route::Post('/new-food', 'vendorcontroller@new_food');
 
 
 //customer routes

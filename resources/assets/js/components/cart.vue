@@ -11,7 +11,7 @@
              <br>
                  <nav aria-label="breadcrumb ">
                          <ol class="breadcrumb">
-                           <li class="breadcrumb-item"><router-link to='/shop'>KITCHEN</router-link></li>
+                           <li class="breadcrumb-item"><router-link to='/shop'>Kitchen</router-link></li>
                            <li class="breadcrumb-item active" aria-current="page">SELECTED FOOD ({{cartConCount}})</li>
                          </ol>
                        </nav>
@@ -36,20 +36,10 @@
  </transition>
 -->
    <!-- ********************************************** empty -->
-   <v-alert
-   color="blue-grey"
-      dark
-      dense
-      icon="mdi-school"
-      v-show='empty < 1'
- >
-   <v-row align="center">
-     <v-col class="grow">Your Table is empty.</v-col>
-     <v-col class="shrink">
-       <router-link to='/shop'><v-btn>GET FOOD</v-btn></router-link>
-     </v-col>
-   </v-row>
- </v-alert>
+  
+ <div v-show='empty < 1'class='text-center alert alert-info'>
+  Your Table is Empty. <router-link to='/shop'>Add Food</router-link>
+ </div>
            
       <!--loading temp-->
 <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>

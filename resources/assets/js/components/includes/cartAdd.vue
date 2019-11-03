@@ -67,6 +67,7 @@ data: function() {
 },
 
         methods: {
+          
             addToCart(con) {
                 this.overlay = !this.overlay
                

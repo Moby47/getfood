@@ -90,7 +90,13 @@ methods: {
     removeFromFav(con) {
       //
         this.overlay = !this.overlay
+        if(!localStorage.getItem('tempUserCartID')){
+                    var tempUserCartID = Math.floor(Math.random()*1234567890);
+                     localStorage.setItem('tempUserCartID',tempUserCartID);
+                   //  console.log('created id')
+                }
         var input = {'favId':con.id, 'foodId':con.foodId, 'userId':localStorage.getItem('tempUserCartID')};
+       
         axios.post('/remove-from-fav',input)
                 .then(res=>{
                     if(res.data == 1){

@@ -12,17 +12,13 @@
                       <router-link v-if='status == 0' class="nav-link" to='/userdashboard'>Dashboard</router-link>
                       <router-link v-if='status == 1' class="nav-link" to='/admindashboard'>Dashboard</router-link>
                     </li>
-               
-               
+                    <li class="nav-item">
+                            <router-link class="nav-link" to="/filter-orders">Filter Orders</router-link>
+                          </li>
                 <li class="nav-item">
-                  <router-link class="nav-link" to="/product">Add Food</router-link>
+                  <router-link class="nav-link" to="/shop">Enter Kitchen</router-link>
                 </li>
-                <li class="nav-item">
-                        <router-link class="nav-link" to="/orders">Orders</router-link>
-                      </li>
-                <li class="nav-item">
-                        <router-link class="nav-link" to="/shop">Enter Kitchen</router-link>
-                      </li>
+               
                   <li class="nav-item" v-if='loggedOut == true'>
                     <router-link class="nav-link" to="/login">Login</router-link>
                   </li>
@@ -92,16 +88,16 @@
                        localStorage.removeItem('userName');
                        localStorage.removeItem('userMail');
                        localStorage.removeItem('userStatus');
-                       //clear tempcartid
-                       localStorage.removeItem('tempUserCartID');
+                          //clear tempcartid
+                           localStorage.removeItem('tempUserCartID');
                        //clear cart
-                    var input = {'userId':localStorage.getItem('tempUserCartID')}
-                  axios.post('/clear-cart',input).then(res=>{
-                      console.log('cart cleared')  
-                  })
-                  .catch(error =>{
-                      console.log(error)    
-                    })
+                  var input = {'userId':localStorage.getItem('tempUserCartID')}
+                axios.post('/clear-cart',input).then(res=>{
+                    console.log('cart cleared')  
+                })
+                .catch(error =>{
+                    console.log(error)    
+                   })
                        sound.play();
                        this.isAuth();
                        this.loggedOut = true;

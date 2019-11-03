@@ -23,7 +23,7 @@
                 <blockquote class='slideUp'>
                   In order for restaurant owners to keep organized, maximize table turnover, and reduce waiting time for customers, 
                   GetFoods maintains a reliable and efficient food reservation system for Tek-Experts.
-                   <span><a href='https://www.getfoods.com'>GETFOODS.COM</a></span>
+                   <span><router-link to='/'>GETFOODS.COM</router-link></span>
                 </blockquote>  
   
         

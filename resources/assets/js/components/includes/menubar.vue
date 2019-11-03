@@ -19,7 +19,7 @@
                 <router-link class="nav-link" to="/favorite">My Favorite</router-link>
               </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/about">About the App</router-link>
+              <router-link class="nav-link" to="/about">About Getfoods</router-link>
             </li>
             <li class="nav-item">
                 <router-link class="nav-link" to="/share">Tell a Friend</router-link>
