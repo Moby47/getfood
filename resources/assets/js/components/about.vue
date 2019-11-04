@@ -12,7 +12,7 @@
             <nav aria-label="breadcrumb ">
                     <ol class="breadcrumb">
                       <li class="breadcrumb-item"><router-link to='/'>Home</router-link></li>
-                      <li class="breadcrumb-item active" aria-current="page">ABOUT GETFOODS</li>
+                      <li class="breadcrumb-item active" aria-current="page" @click='trry'>ABOUT GETFOODS</li>
                     </ol>
                   </nav>
             
@@ -38,9 +38,9 @@
                 <li>And more...</li>
                 </ul>
                 
-                
+               
+
                 <router-link to="/shop" class="button_full external">GET FOOD NOW!</router-link>
-                
                 
            </div>
         
@@ -58,42 +58,29 @@
 
 
 
+
 <script>
+  //  import {eventBus} from "../app.js";
+
     export default {
 
-        data(){
-            return {
-
-            }
-        },
+//
+data: function() {
+    return {
+       
+    }
+},
 
         methods: {
-/*
-            this.$validator.validateAll().then(() => {
-           
-           if (!this.errors.any()) {
-            //
-            }else{
-            //
+          
+     /*       trry(){
+              console.log('called try meth')
+              eventBus.$emit('fire')
+             //this.$root.$emit('fire')
             }
-         
-                    //
-            })
-            .catch(err=>{
-                
-            }),
-      
-         setTimeout(func=>{
-             //this.errors.clear()
-            // this.$validator.reset()
-         },1) 
-        
-         }); //validator
-*/
+             */
         },
-
-        mounted() {
-            console.log('Component mounted.')
-        }
+       
+     
     }
 </script>

@@ -25,6 +25,8 @@ Vue.use(Toasted, {
 // you can also pass options, check options reference below
 //Vue.use(Toasted, Options)
 
+
+
 //animate.css
 require('vue2-animate/dist/vue2-animate.min.css')
 
@@ -132,6 +134,8 @@ router.beforeEach((to, from, next) => {
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+
+
 Vue.component('index', require('./components/index.vue'));
 Vue.component('menubar', require('./components/includes/menubar.vue'));
 Vue.component('vendormenubar', require('./components/includes/vendormenubar.vue'));
@@ -140,6 +144,8 @@ Vue.component('favButton', require('./components/includes/favButton.vue'));
 Vue.component('cartAdd', require('./components/includes/cartAdd.vue'));
 Vue.component('cartUpdate', require('./components/includes/cartUpdate.vue'));
 Vue.component('favUpdate', require('./components/includes/favUpdate.vue'));
+
+//export const eventBus = new Vue();
 
 const app = new Vue({
     el: '#app',

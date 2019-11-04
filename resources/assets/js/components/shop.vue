@@ -13,7 +13,7 @@
                     <li class="breadcrumb-item active" aria-current="page">AVAILABLE FOOD ({{food_count}})</li>
                     <li >
 
-                       <span class="ma-2 cart" text>
+                       <span class="ma-2 cart" text> 47
              <router-link to='/checkout'> <v-icon color="orange darken-2">shopping_cart</v-icon></router-link>
             </span>
             
@@ -93,7 +93,7 @@
           <div class="shop_pagination slideUp" >
           <a href="" class="prev_shop" @click.prevent="fetch(pagination.prev_page_url)" :disabled="!pagination.prev_page_url">PREV PAGE</a>
           <span class="shop_pagenr">  <span>{{pagination.current_page}} of {{pagination.last_page}}</span></span>
-          <a href="shop.html" class="next_shop" @click.prevent="fetch(pagination.next_page_url)" :disabled="!pagination.next_page_url">NEXT PAGE</a>
+          <a href="" class="next_shop" @click.prevent="fetch(pagination.next_page_url)" :disabled="!pagination.next_page_url">NEXT PAGE</a>
           </div>
       
       
@@ -116,6 +116,9 @@
 
 
 <script>
+
+  //import {eventBus} from "../app.js";
+
   export default {
       data(){
           return {
@@ -179,6 +182,8 @@
            document.documentElement.scrollTop = 0;
           this.pagination = pagination;
               },
+
+            
       },
            //watch data load
            watch : {
@@ -193,6 +198,12 @@
       
       mounted() {
           this.fetch()
+      },
+   /*   created(){
+        eventBus.$on('fire', ()=>{
+          console.log('fired')
+        })
       }
+      */
   }
 </script>

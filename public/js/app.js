@@ -1803,7 +1803,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(16);
-module.exports = __webpack_require__(140);
+module.exports = __webpack_require__(143);
 
 
 /***/ }),
@@ -1848,6 +1848,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue_
 });
 // you can also pass options, check options reference below
 //Vue.use(Toasted, Options)
+
 
 //animate.css
 __webpack_require__(46);
@@ -1954,11 +1955,13 @@ __WEBPACK_IMPORTED_MODULE_3__router__["a" /* default */].beforeEach(function (to
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('index', __webpack_require__(14));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('menubar', __webpack_require__(122));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('vendormenubar', __webpack_require__(125));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('usermenubar', __webpack_require__(142));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('favButton', __webpack_require__(128));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('cartAdd', __webpack_require__(131));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('cartUpdate', __webpack_require__(134));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('favUpdate', __webpack_require__(137));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('usermenubar', __webpack_require__(128));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('favButton', __webpack_require__(131));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('cartAdd', __webpack_require__(134));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('cartUpdate', __webpack_require__(137));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('favUpdate', __webpack_require__(140));
+
+//export const eventBus = new Vue();
 
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     el: '#app',
@@ -57288,41 +57291,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+
+//  import {eventBus} from "../app.js";
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {};
-    },
 
+  //
+  data: function data() {
+    return {};
+  },
 
-    methods: {
-        /*
-                    this.$validator.validateAll().then(() => {
-                   
-                   if (!this.errors.any()) {
-                    //
-                    }else{
-                    //
-                    }
-                 
-                            //
-                    })
-                    .catch(err=>{
-                        
-                    }),
-              
-                 setTimeout(func=>{
-                     //this.errors.clear()
-                    // this.$validator.reset()
-                 },1) 
-                
-                 }); //validator
-        */
-    },
+  methods: {
 
-    mounted: function mounted() {
-        console.log('Component mounted.');
-    }
+    /*       trry(){
+             console.log('called try meth')
+             eventBus.$emit('fire')
+            //this.$root.$emit('fire')
+           }
+            */
+  }
+
 });
 
 /***/ }),
@@ -57368,7 +57357,8 @@ var render = function() {
                       "li",
                       {
                         staticClass: "breadcrumb-item active",
-                        attrs: { "aria-current": "page" }
+                        attrs: { "aria-current": "page" },
+                        on: { click: _vm.trry }
                       },
                       [_vm._v("ABOUT GETFOODS")]
                     )
@@ -67172,6 +67162,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+//import {eventBus} from "../app.js";
+
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
@@ -67320,6 +67313,7 @@ var render = function() {
                           "span",
                           { staticClass: "ma-2 cart", attrs: { text: "" } },
                           [
+                            _vm._v(" 47\n             "),
                             _c(
                               "router-link",
                               { attrs: { to: "/checkout" } },
@@ -67518,7 +67512,7 @@ var render = function() {
                                     {
                                       staticClass: "next_shop",
                                       attrs: {
-                                        href: "shop.html",
+                                        href: "",
                                         disabled: !_vm.pagination.next_page_url
                                       },
                                       on: {
@@ -105281,1438 +105275,6 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/includes/favButton.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-1b4d97c0", Component.options)
-  } else {
-    hotAPI.reload("data-v-1b4d97c0", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 129 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-
-    props: ['id'],
-    //
-    data: function data() {
-        return {
-            snackbar: false,
-            text: '',
-            timeout: 3000,
-            isFavorited: ''
-        };
-    },
-
-    methods: {
-        Favorite: function Favorite(id) {
-            var _this = this;
-
-            this.isFavorited = true;
-            //this.$toasted.clear();
-            // this.loading = true;
-            var check = localStorage.getItem('userId');
-            if (check) {
-                NProgress.start();
-                //Id exists, send both User and Post Id to DB
-                var userId = check;
-                var foodId = id;
-
-                var input = { 'userId': userId, 'foodId': foodId };
-
-                axios.post('/add-favorite', input).then(function (res) {
-                    _this.snackbar = true;
-                    if (res.data == 1) {
-                        sound.play();
-                        _this.text = 'Food added to Favourites!';
-                        _this.snackbar = true;
-                        //this.fetch();
-                    } else if (res.data == 0) {
-                        _this.text = 'Food was already added to Favorites!';
-                        _this.snackbar = true;
-                    } else {
-                        _this.text = 'Maximum limit reached, no more Favorites!';
-                        _this.snackbar = true;
-                    }
-                    NProgress.done();
-                }).catch(function (error) {
-                    _this.$toasted.show("Failed to add food. Try again");
-                    NProgress.done();
-                });
-            } else {
-                NProgress.start();
-                //create id for user  
-                var userId = Math.floor(Math.random() * 1000);
-                //store locally
-                localStorage.setItem('userId', userId);
-                var foodId = id;
-
-                //go to server
-                var input = { 'userId': userId, 'foodId': foodId };
-                axios.post('/add-favorite', input).then(function (res) {
-                    if (res.data == 1) {
-                        sound.play();
-                        _this.text = 'Food Liked!';
-                        _this.snackbar = true;
-                    }
-                    NProgress.done();
-                }).catch(function (error) {
-                    _this.$toasted.show("Failed to add food. Try again");
-                    NProgress.done();
-                });
-            }
-        },
-        unFavorite: function unFavorite(id) {
-            var _this2 = this;
-
-            this.isFavorited = false;
-            NProgress.start();
-
-            var userId = localStorage.getItem('userId', userId);
-            var foodId = id;
-            var input = { 'foodId': foodId, 'userId': userId };
-
-            axios.post('/remove-favorite', input).then(function (res) {
-                if (res.data == 1) {
-                    _this2.text = 'Food removed from Favourites!';
-                    _this2.snackbar = true;
-                }
-                NProgress.done();
-            }).catch(function (error) {
-                _this2.$toasted.show("Failed to remove food. Try again");
-                NProgress.done();
-            });
-        }
-    }
-});
-
-/***/ }),
-/* 130 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _vm.isFavorited
-        ? _c(
-            "a",
-            {
-              staticClass: "open-popup shopfav",
-              attrs: { href: "#", "data-popup": ".popup-social" },
-              on: {
-                click: function($event) {
-                  $event.preventDefault()
-                  return _vm.unFavorite(_vm.id)
-                }
-              }
-            },
-            [
-              _c("img", {
-                attrs: {
-                  src: "images/icons/black/menu_close.png",
-                  alt: "",
-                  title: ""
-                }
-              })
-            ]
-          )
-        : _c(
-            "a",
-            {
-              staticClass: "open-popup shopfav pulse",
-              attrs: { href: "#", "data-popup": ".popup-social" },
-              on: {
-                click: function($event) {
-                  $event.preventDefault()
-                  return _vm.Favorite(_vm.id)
-                }
-              }
-            },
-            [
-              _c("img", {
-                attrs: {
-                  src: "images/icons/black/love.png",
-                  alt: "",
-                  title: ""
-                }
-              })
-            ]
-          ),
-      _vm._v(" "),
-      [
-        _c(
-          "v-snackbar",
-          {
-            attrs: { timeout: _vm.timeout },
-            model: {
-              value: _vm.snackbar,
-              callback: function($$v) {
-                _vm.snackbar = $$v
-              },
-              expression: "snackbar"
-            }
-          },
-          [
-            _vm._v(
-              "\n                       " +
-                _vm._s(_vm.text) +
-                "\n                       "
-            ),
-            _c(
-              "v-btn",
-              {
-                attrs: { color: "blue", text: "" },
-                on: {
-                  click: function($event) {
-                    _vm.snackbar = !_vm.snackbar
-                  }
-                }
-              },
-              [
-                _vm._v(
-                  "\n                         Close\n                       "
-                )
-              ]
-            )
-          ],
-          1
-        )
-      ]
-    ],
-    2
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-1b4d97c0", module.exports)
-  }
-}
-
-/***/ }),
-/* 131 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(132)
-/* template */
-var __vue_template__ = __webpack_require__(133)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/includes/cartAdd.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-21a893b4", Component.options)
-  } else {
-    hotAPI.reload("data-v-21a893b4", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 132 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-
-    props: ['con', 'stash'],
-    //
-    data: function data() {
-        return {
-            overlay: false,
-            snackbar: false,
-            text: '',
-            timeout: 3000,
-            isAdded: false,
-            qty: 1
-        };
-    },
-
-    methods: {
-        addToCart: function addToCart(con) {
-            var _this = this;
-
-            this.overlay = !this.overlay;
-
-            if (!localStorage.getItem('tempUserCartID')) {
-                var tempUserCartID = Math.floor(Math.random() * 1234567890);
-                localStorage.setItem('tempUserCartID', tempUserCartID);
-                //  console.log('created id')
-            }
-            var input = { 'foodId': con.id, 'userId': localStorage.getItem('tempUserCartID'), 'qty': this.qty };
-            axios.post('/add-to-cart', input).then(function (res) {
-                if (res.data == 1) {
-                    _this.text = 'Food added to Table!';
-                    _this.snackbar = true;
-
-                    _this.isAdded = !_this.isAdded;
-                } else {
-                    _this.text = 'Only ' + res.data + ' remaining for this food';
-                    _this.snackbar = true;
-                }
-                _this.overlay = !_this.overlay;
-            }).catch(function (error) {
-                _this.$toasted.show("Failed to add. Try again");
-                _this.isAdded = !_this.isAdded;
-                _this.overlay = !_this.overlay;
-            });
-        },
-        removeFromCart: function removeFromCart(con) {
-            var _this2 = this;
-
-            this.overlay = !this.overlay;
-            this.isAdded = !this.isAdded;
-            var input = { 'foodId': con.id, 'userId': localStorage.getItem('tempUserCartID') };
-            axios.post('/remove-from-cart', input).then(function (res) {
-                if (res.data == 1) {
-
-                    _this2.text = 'Food removed from Table!';
-                    _this2.snackbar = true;
-                }
-                _this2.overlay = !_this2.overlay;
-            }).catch(function (error) {
-                _this2.$toasted.show("Failed to remove. Try again");
-                _this2.overlay = !_this2.overlay;
-            });
-        },
-        incre: function incre() {
-            this.qty = this.qty + 1;
-            this.isAdded = false;
-        },
-        decre: function decre() {
-            this.qty = this.qty - 1;
-            this.isAdded = false;
-        }
-    }
-});
-
-/***/ }),
-/* 133 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _vm.stash > 0
-        ? _c("span", [
-            _c("div", { staticClass: "item_qnty_shop" }, [
-              _c(
-                "form",
-                { attrs: { id: "myform", method: "POST", action: "#" } },
-                [
-                  _c("input", {
-                    staticClass: "qntyminusshop",
-                    attrs: {
-                      disabled: _vm.qty == 1,
-                      type: "button",
-                      value: "-",
-                      field: "quantity"
-                    },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        return _vm.decre()
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("input", {
-                    staticClass: "qntyshop",
-                    attrs: { type: "text", name: "quantity" },
-                    domProps: { value: _vm.qty }
-                  }),
-                  _vm._v(" "),
-                  _c("input", {
-                    staticClass: "qntyplusshop",
-                    attrs: { type: "button", value: "+", field: "quantity" },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        return _vm.incre()
-                      }
-                    }
-                  })
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _vm.isAdded
-              ? _c(
-                  "a",
-                  {
-                    attrs: { href: "#", id: "addtocart" },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        return _vm.removeFromCart(_vm.con)
-                      }
-                    }
-                  },
-                  [_vm._v("CLEAR")]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            !_vm.isAdded
-              ? _c(
-                  "a",
-                  {
-                    attrs: { href: "#", id: "addtocart" },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        return _vm.addToCart(_vm.con)
-                      }
-                    }
-                  },
-                  [_vm._v("RESERVE")]
-                )
-              : _vm._e()
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.stash < 1
-        ? _c("div", [_vm._v("\r\n            Out of stock\r\n      ")])
-        : _vm._e(),
-      _vm._v(" "),
-      [
-        _c(
-          "v-snackbar",
-          {
-            attrs: { timeout: _vm.timeout },
-            model: {
-              value: _vm.snackbar,
-              callback: function($$v) {
-                _vm.snackbar = $$v
-              },
-              expression: "snackbar"
-            }
-          },
-          [
-            _vm._v("\r\n      " + _vm._s(_vm.text) + "\r\n      "),
-            _c(
-              "v-btn",
-              {
-                attrs: { color: "blue", text: "" },
-                on: {
-                  click: function($event) {
-                    _vm.snackbar = !_vm.snackbar
-                  }
-                }
-              },
-              [_vm._v("\r\n        Close\r\n      ")]
-            )
-          ],
-          1
-        )
-      ],
-      _vm._v(" "),
-      [
-        _c(
-          "div",
-          { staticClass: "text-center" },
-          [
-            _c(
-              "v-overlay",
-              { attrs: { value: _vm.overlay } },
-              [
-                _c("v-progress-circular", {
-                  attrs: { indeterminate: "", size: "64" }
-                })
-              ],
-              1
-            )
-          ],
-          1
-        )
-      ]
-    ],
-    2
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-21a893b4", module.exports)
-  }
-}
-
-/***/ }),
-/* 134 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(135)
-/* template */
-var __vue_template__ = __webpack_require__(136)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/includes/cartUpdate.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6ee9d806", Component.options)
-  } else {
-    hotAPI.reload("data-v-6ee9d806", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 135 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-
-    props: ['con'],
-    //
-    data: function data() {
-        return {
-            snackbar: false,
-            text: '',
-            timeout: 3000,
-            qty: '',
-            deleted: false,
-            subtotal: '',
-            showSub: false
-        };
-    },
-
-    methods: {
-        removeFromCart: function removeFromCart(id) {
-            var _this = this;
-
-            NProgress.start();
-            var input = { 'foodId': id, 'userId': localStorage.getItem('tempUserCartID') };
-            axios.post('/remove-from-cart', input).then(function (res) {
-                if (res.data == 1) {
-                    sound.play();
-                    _this.text = 'Food removed from Table!';
-                    _this.snackbar = true;
-                }
-                _this.deleted = true;
-                NProgress.done();
-            }).catch(function (error) {
-                _this.$toasted.show("Failed to remove. Try again");
-                NProgress.done();
-            });
-        },
-        incre: function incre(con) {
-            var _this2 = this;
-
-            NProgress.start();
-
-            var input = { 'foodId': con.id, 'userId': localStorage.getItem('tempUserCartID') };
-            axios.post('/increase-qty', input).then(function (res) {
-                //  console.log(res.data)
-                _this2.qty = res.data.qty;
-                _this2.subtotal = res.data.subtotal;
-                _this2.showSub = true;
-                _this2.text = 'Table Updated!';
-                _this2.snackbar = true;
-                NProgress.done();
-            }).catch(function (error) {
-                _this2.$toasted.show("Failed to update. Try again");
-                NProgress.done();
-            });
-        },
-        decre: function decre(con) {
-            var _this3 = this;
-
-            NProgress.start();
-
-            var input = { 'foodId': con.id, 'userId': localStorage.getItem('tempUserCartID') };
-            axios.post('/decrease-qty', input).then(function (res) {
-                //  console.log(res.data)
-                _this3.qty = res.data.qty;
-                _this3.subtotal = res.data.subtotal;
-                _this3.showSub = true;
-                _this3.text = 'Table Updated!';
-                _this3.snackbar = true;
-                NProgress.done();
-            }).catch(function (error) {
-                _this3.$toasted.show("Failed to update. Try again");
-                NProgress.done();
-            });
-        }
-    }
-
-});
-
-/***/ }),
-/* 136 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { attrs: { id: _vm.con.id } },
-    [
-      _c("div", { staticClass: "item_title" }, [
-        _vm._v(" " + _vm._s(_vm.con.name) + " ")
-      ]),
-      _vm._v(" "),
-      _vm.deleted == false
-        ? _c("span", [
-            _c(
-              "div",
-              { staticClass: "item_price" },
-              [
-                _c("strike", [_vm._v("N")]),
-                _vm._v(_vm._s(_vm.con.attributes.total) + " ")
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.showSub,
-                    expression: "showSub"
-                  }
-                ],
-                staticClass: "item_price"
-              },
-              [
-                _vm._v(" Subtotal: "),
-                _c("strike", [_vm._v("N")]),
-                _vm._v(_vm._s(_vm.subtotal) + " ")
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "item_thumb" }, [
-              _c(
-                "a",
-                { staticClass: "close-panel", attrs: { href: "#" } },
-                [
-                  _c("v-img", {
-                    attrs: {
-                      src: "/storage/food/" + _vm.con.attributes.image,
-                      alt: _vm.con.title,
-                      "lazy-src": "/images/black-spinner.gif",
-                      title: ""
-                    }
-                  })
-                ],
-                1
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "item_qnty" }, [
-              _c(
-                "form",
-                { attrs: { id: "myform", method: "POST", action: "#" } },
-                [
-                  _c("label", [
-                    _vm._v("QUANTITY (" + _vm._s(_vm.con.quantity) + ")")
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    staticClass: "qntyminus",
-                    attrs: {
-                      type: "button",
-                      value: "-",
-                      field: "quantity",
-                      disabled: _vm.qty == 1
-                    },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        return _vm.decre(_vm.con)
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("input", {
-                    staticClass: "qnty",
-                    attrs: { type: "text", name: "quantity" },
-                    domProps: { value: _vm.qty }
-                  }),
-                  _vm._v(" "),
-                  _c("input", {
-                    staticClass: "qntyplus",
-                    attrs: { type: "button", value: "+", field: "quantity" },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        return _vm.incre(_vm.con)
-                      }
-                    }
-                  })
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c(
-              "a",
-              {
-                staticClass: "item_delete",
-                attrs: { href: "#", id: "cartitem1" },
-                on: {
-                  click: function($event) {
-                    $event.preventDefault()
-                    return _vm.removeFromCart(_vm.con.id)
-                  }
-                }
-              },
-              [
-                _c("img", {
-                  attrs: {
-                    src: "/images/icons/black/trash.png",
-                    alt: "",
-                    title: ""
-                  }
-                })
-              ]
-            )
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.deleted == true ? _c("span", [_vm._m(0)]) : _vm._e(),
-      _vm._v(" "),
-      [
-        _c(
-          "v-snackbar",
-          {
-            attrs: { timeout: _vm.timeout },
-            model: {
-              value: _vm.snackbar,
-              callback: function($$v) {
-                _vm.snackbar = $$v
-              },
-              expression: "snackbar"
-            }
-          },
-          [
-            _vm._v("\n          " + _vm._s(_vm.text) + "\n          "),
-            _c(
-              "v-btn",
-              {
-                attrs: { color: "blue", text: "" },
-                on: {
-                  click: function($event) {
-                    _vm.snackbar = !_vm.snackbar
-                  }
-                }
-              },
-              [_vm._v("\n            Close\n          ")]
-            )
-          ],
-          1
-        )
-      ]
-    ],
-    2
-  )
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "item_qnty" }, [
-      _c("label", [_vm._v("DELETED")])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-6ee9d806", module.exports)
-  }
-}
-
-/***/ }),
-/* 137 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(138)
-/* template */
-var __vue_template__ = __webpack_require__(139)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/includes/favUpdate.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-1769f452", Component.options)
-  } else {
-    hotAPI.reload("data-v-1769f452", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 138 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-
-    props: ['con', 'stash'],
-    //
-    data: function data() {
-        return {
-            overlay: false,
-            snackbar: false,
-            text: '',
-            timeout: 3000,
-            isAdded: false,
-            qty: 1,
-            deleted: false
-        };
-    },
-
-    methods: {
-        removeFromFav: function removeFromFav(con) {
-            var _this = this;
-
-            //
-            this.overlay = !this.overlay;
-            if (!localStorage.getItem('tempUserCartID')) {
-                var tempUserCartID = Math.floor(Math.random() * 1234567890);
-                localStorage.setItem('tempUserCartID', tempUserCartID);
-                //  console.log('created id')
-            }
-            var input = { 'favId': con.id, 'foodId': con.foodId, 'userId': localStorage.getItem('tempUserCartID') };
-
-            axios.post('/remove-from-fav', input).then(function (res) {
-                if (res.data == 1) {
-                    sound.play();
-                    _this.text = 'Food removed from Favorites!';
-                    _this.snackbar = true;
-                }
-                _this.deleted = true;
-                _this.overlay = !_this.overlay;
-            }).catch(function (error) {
-                _this.$toasted.show("Failed to remove. Try again");
-                _this.overlay = !_this.overlay;
-            });
-        },
-        addToCart: function addToCart(con) {
-            var _this2 = this;
-
-            this.overlay = !this.overlay;
-            this.isAdded = !this.isAdded;
-
-            if (!localStorage.getItem('tempUserCartID')) {
-                var tempUserCartID = Math.floor(Math.random() * 10000);
-                localStorage.setItem('tempUserCartID', tempUserCartID);
-                //   console.log('created id')
-            }
-            var input = { 'foodId': con.foodId, 'userId': localStorage.getItem('tempUserCartID'), 'qty': this.qty };
-            axios.post('/add-fav-to-cart', input).then(function (res) {
-                if (res.data == 1) {
-                    _this2.text = 'Food added to Table!';
-                    _this2.snackbar = true;
-                }
-                _this2.overlay = !_this2.overlay;
-            }).catch(function (error) {
-                _this2.$toasted.show("Failed to add. Try again");
-                _this2.isAdded = !_this2.isAdded;
-                _this2.overlay = !_this2.overlay;
-            });
-        },
-        removeFromCart: function removeFromCart(con) {
-            var _this3 = this;
-
-            this.overlay = !this.overlay;
-            this.isAdded = !this.isAdded;
-            var input = { 'foodId': con.foodId, 'userId': localStorage.getItem('tempUserCartID') };
-            axios.post('/remove-fav-from-cart', input).then(function (res) {
-                if (res.data == 1) {
-
-                    _this3.text = 'Food removed from Table!';
-                    _this3.snackbar = true;
-                }
-                _this3.overlay = !_this3.overlay;
-            }).catch(function (error) {
-                _this3.$toasted.show("Failed to remove. Try again");
-                _this3.overlay = !_this3.overlay;
-            });
-        },
-        incre: function incre() {
-            this.qty = this.qty + 1;
-        },
-        decre: function decre() {
-            this.qty = this.qty - 1;
-        }
-    }
-
-});
-
-/***/ }),
-/* 139 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _vm.deleted == true ? _c("span", [_vm._m(0)]) : _vm._e(),
-      _vm._v(" "),
-      _vm.deleted == false
-        ? _c("span", [
-            _vm.stash > 0
-              ? _c("span", [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "item_delete",
-                      attrs: { href: "#", id: "cartitem1" },
-                      on: {
-                        click: function($event) {
-                          $event.preventDefault()
-                          return _vm.removeFromFav(_vm.con)
-                        }
-                      }
-                    },
-                    [
-                      _c("img", {
-                        attrs: {
-                          src: "/images/icons/black/trash.png",
-                          alt: "",
-                          title: ""
-                        }
-                      })
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("h4", [_vm._v(_vm._s(_vm.con.title))]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "shop_item_price" },
-                    [_c("strike", [_vm._v("N")]), _vm._v(_vm._s(_vm.con.amt))],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "item_qnty_shop" }, [
-                    _c(
-                      "form",
-                      { attrs: { id: "myform", method: "POST", action: "#" } },
-                      [
-                        _c("input", {
-                          staticClass: "qntyminusshop",
-                          attrs: {
-                            disabled: _vm.qty == 1,
-                            type: "button",
-                            value: "-",
-                            field: "quantity"
-                          },
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              return _vm.decre()
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("input", {
-                          staticClass: "qntyshop",
-                          attrs: { type: "text", name: "quantity" },
-                          domProps: { value: _vm.qty }
-                        }),
-                        _vm._v(" "),
-                        _c("input", {
-                          staticClass: "qntyplusshop",
-                          attrs: {
-                            type: "button",
-                            value: "+",
-                            field: "quantity"
-                          },
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              return _vm.incre()
-                            }
-                          }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _vm.isAdded
-                    ? _c(
-                        "a",
-                        {
-                          attrs: { href: "#", id: "addtocart" },
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              return _vm.removeFromCart(_vm.con)
-                            }
-                          }
-                        },
-                        [_vm._v("CLEAR")]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  !_vm.isAdded
-                    ? _c(
-                        "a",
-                        {
-                          attrs: { href: "#", id: "addtocart" },
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              return _vm.addToCart(_vm.con)
-                            }
-                          }
-                        },
-                        [_vm._v("RESERVE")]
-                      )
-                    : _vm._e()
-                ])
-              : _vm._e()
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.stash < 1
-        ? _c("div", [_vm._v("\n          Out of stock\n    ")])
-        : _vm._e(),
-      _vm._v(" "),
-      [
-        _c(
-          "v-snackbar",
-          {
-            attrs: { timeout: _vm.timeout },
-            model: {
-              value: _vm.snackbar,
-              callback: function($$v) {
-                _vm.snackbar = $$v
-              },
-              expression: "snackbar"
-            }
-          },
-          [
-            _vm._v("\n            " + _vm._s(_vm.text) + "\n            "),
-            _c(
-              "v-btn",
-              {
-                attrs: { color: "blue", text: "" },
-                on: {
-                  click: function($event) {
-                    _vm.snackbar = !_vm.snackbar
-                  }
-                }
-              },
-              [_vm._v("\n              Close\n            ")]
-            )
-          ],
-          1
-        )
-      ],
-      _vm._v(" "),
-      [
-        _c(
-          "div",
-          { staticClass: "text-center" },
-          [
-            _c(
-              "v-overlay",
-              { attrs: { value: _vm.overlay } },
-              [
-                _c("v-progress-circular", {
-                  attrs: { indeterminate: "", size: "64" }
-                })
-              ],
-              1
-            )
-          ],
-          1
-        )
-      ]
-    ],
-    2
-  )
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "item_qnty text-danger" }, [
-      _c("label", [_vm._v("DELETED")])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-1769f452", module.exports)
-  }
-}
-
-/***/ }),
-/* 140 */
-/***/ (function(module, exports) {
-
-throw new Error("Module build failed: ModuleBuildError: Module build failed: Error: Node Sass does not yet support your current environment: Windows 64-bit with Unsupported runtime (72)\nFor more information on which environments are supported please see:\nhttps://github.com/sass/node-sass/releases/tag/v4.11.0\n    at module.exports (C:\\xampp\\htdocs\\getfoods\\node_modules\\node-sass\\lib\\binding.js:13:13)\n    at Object.<anonymous> (C:\\xampp\\htdocs\\getfoods\\node_modules\\node-sass\\lib\\index.js:14:35)\n    at Module._compile (internal/modules/cjs/loader.js:956:30)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:973:10)\n    at Module.load (internal/modules/cjs/loader.js:812:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:724:14)\n    at Module.require (internal/modules/cjs/loader.js:849:19)\n    at require (internal/modules/cjs/helpers.js:74:18)\n    at Object.<anonymous> (C:\\xampp\\htdocs\\getfoods\\node_modules\\sass-loader\\lib\\loader.js:3:14)\n    at Module._compile (internal/modules/cjs/loader.js:956:30)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:973:10)\n    at Module.load (internal/modules/cjs/loader.js:812:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:724:14)\n    at Module.require (internal/modules/cjs/loader.js:849:19)\n    at require (internal/modules/cjs/helpers.js:74:18)\n    at loadLoader (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\loadLoader.js:13:17)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:165:10)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:173:18\n    at loadLoader (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\loadLoader.js:36:3)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:165:10)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:173:18\n    at loadLoader (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\loadLoader.js:36:3)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:165:10)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:173:18\n    at loadLoader (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\loadLoader.js:36:3)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:169:2)\n    at runLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:362:2)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\NormalModule.js:195:19\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:364:11\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:170:18\n    at loadLoader (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\loadLoader.js:27:11)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:165:10)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:173:18\n    at loadLoader (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\loadLoader.js:36:3)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:165:10)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:173:18\n    at loadLoader (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\loadLoader.js:36:3)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:165:10)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:173:18\n    at loadLoader (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\loadLoader.js:36:3)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:169:2)\n    at runLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:362:2)\n    at NormalModule.doBuild (C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\NormalModule.js:182:3)\n    at NormalModule.build (C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\NormalModule.js:275:15)\n    at Compilation.buildModule (C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\Compilation.js:157:10)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\Compilation.js:460:10\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\NormalModuleFactory.js:243:5\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\NormalModuleFactory.js:94:13\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\tapable\\lib\\Tapable.js:268:11\n    at NormalModuleFactory.<anonymous> (C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\CompatibilityPlugin.js:52:5)\n    at NormalModuleFactory.applyPluginsAsyncWaterfall (C:\\xampp\\htdocs\\getfoods\\node_modules\\tapable\\lib\\Tapable.js:272:13)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\NormalModuleFactory.js:69:10\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\NormalModuleFactory.js:196:7\n    at processTicksAndRejections (internal/process/task_queues.js:75:11)");
-
-/***/ }),
-/* 141 */,
-/* 142 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(143)
-/* template */
-var __vue_template__ = __webpack_require__(144)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
 Component.options.__file = "resources/assets/js/components/includes/usermenubar.vue"
 
 /* hot reload */
@@ -106735,7 +105297,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 143 */
+/* 129 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -106860,7 +105422,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 144 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -107082,6 +105644,1437 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-1872e8fc", module.exports)
   }
 }
+
+/***/ }),
+/* 131 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(132)
+/* template */
+var __vue_template__ = __webpack_require__(133)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/includes/favButton.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1b4d97c0", Component.options)
+  } else {
+    hotAPI.reload("data-v-1b4d97c0", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 132 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    props: ['id'],
+    //
+    data: function data() {
+        return {
+            snackbar: false,
+            text: '',
+            timeout: 3000,
+            isFavorited: ''
+        };
+    },
+
+    methods: {
+        Favorite: function Favorite(id) {
+            var _this = this;
+
+            this.isFavorited = true;
+            //this.$toasted.clear();
+            // this.loading = true;
+            var check = localStorage.getItem('userId');
+            if (check) {
+                NProgress.start();
+                //Id exists, send both User and Post Id to DB
+                var userId = check;
+                var foodId = id;
+
+                var input = { 'userId': userId, 'foodId': foodId };
+
+                axios.post('/add-favorite', input).then(function (res) {
+                    _this.snackbar = true;
+                    if (res.data == 1) {
+                        sound.play();
+                        _this.text = 'Food added to Favourites!';
+                        _this.snackbar = true;
+                        //this.fetch();
+                    } else if (res.data == 0) {
+                        _this.text = 'Food was already added to Favorites!';
+                        _this.snackbar = true;
+                    } else {
+                        _this.text = 'Maximum limit reached, no more Favorites!';
+                        _this.snackbar = true;
+                    }
+                    NProgress.done();
+                }).catch(function (error) {
+                    _this.$toasted.show("Failed to add food. Try again");
+                    NProgress.done();
+                });
+            } else {
+                NProgress.start();
+                //create id for user  
+                var userId = Math.floor(Math.random() * 1000);
+                //store locally
+                localStorage.setItem('userId', userId);
+                var foodId = id;
+
+                //go to server
+                var input = { 'userId': userId, 'foodId': foodId };
+                axios.post('/add-favorite', input).then(function (res) {
+                    if (res.data == 1) {
+                        sound.play();
+                        _this.text = 'Food Liked!';
+                        _this.snackbar = true;
+                    }
+                    NProgress.done();
+                }).catch(function (error) {
+                    _this.$toasted.show("Failed to add food. Try again");
+                    NProgress.done();
+                });
+            }
+        },
+        unFavorite: function unFavorite(id) {
+            var _this2 = this;
+
+            this.isFavorited = false;
+            NProgress.start();
+
+            var userId = localStorage.getItem('userId', userId);
+            var foodId = id;
+            var input = { 'foodId': foodId, 'userId': userId };
+
+            axios.post('/remove-favorite', input).then(function (res) {
+                if (res.data == 1) {
+                    _this2.text = 'Food removed from Favourites!';
+                    _this2.snackbar = true;
+                }
+                NProgress.done();
+            }).catch(function (error) {
+                _this2.$toasted.show("Failed to remove food. Try again");
+                NProgress.done();
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 133 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _vm.isFavorited
+        ? _c(
+            "a",
+            {
+              staticClass: "open-popup shopfav",
+              attrs: { href: "#", "data-popup": ".popup-social" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.unFavorite(_vm.id)
+                }
+              }
+            },
+            [
+              _c("img", {
+                attrs: {
+                  src: "images/icons/black/menu_close.png",
+                  alt: "",
+                  title: ""
+                }
+              })
+            ]
+          )
+        : _c(
+            "a",
+            {
+              staticClass: "open-popup shopfav pulse",
+              attrs: { href: "#", "data-popup": ".popup-social" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.Favorite(_vm.id)
+                }
+              }
+            },
+            [
+              _c("img", {
+                attrs: {
+                  src: "images/icons/black/love.png",
+                  alt: "",
+                  title: ""
+                }
+              })
+            ]
+          ),
+      _vm._v(" "),
+      [
+        _c(
+          "v-snackbar",
+          {
+            attrs: { timeout: _vm.timeout },
+            model: {
+              value: _vm.snackbar,
+              callback: function($$v) {
+                _vm.snackbar = $$v
+              },
+              expression: "snackbar"
+            }
+          },
+          [
+            _vm._v(
+              "\n                       " +
+                _vm._s(_vm.text) +
+                "\n                       "
+            ),
+            _c(
+              "v-btn",
+              {
+                attrs: { color: "blue", text: "" },
+                on: {
+                  click: function($event) {
+                    _vm.snackbar = !_vm.snackbar
+                  }
+                }
+              },
+              [
+                _vm._v(
+                  "\n                         Close\n                       "
+                )
+              ]
+            )
+          ],
+          1
+        )
+      ]
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-1b4d97c0", module.exports)
+  }
+}
+
+/***/ }),
+/* 134 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(135)
+/* template */
+var __vue_template__ = __webpack_require__(136)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/includes/cartAdd.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-21a893b4", Component.options)
+  } else {
+    hotAPI.reload("data-v-21a893b4", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 135 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    props: ['con', 'stash'],
+    //
+    data: function data() {
+        return {
+            overlay: false,
+            snackbar: false,
+            text: '',
+            timeout: 3000,
+            isAdded: false,
+            qty: 1
+        };
+    },
+
+    methods: {
+        addToCart: function addToCart(con) {
+            var _this = this;
+
+            this.overlay = !this.overlay;
+
+            if (!localStorage.getItem('tempUserCartID')) {
+                var tempUserCartID = Math.floor(Math.random() * 1234567890);
+                localStorage.setItem('tempUserCartID', tempUserCartID);
+                //  console.log('created id')
+            }
+            var input = { 'foodId': con.id, 'userId': localStorage.getItem('tempUserCartID'), 'qty': this.qty };
+            axios.post('/add-to-cart', input).then(function (res) {
+                if (res.data == 1) {
+                    _this.text = 'Food added to Table!';
+                    _this.snackbar = true;
+
+                    _this.isAdded = !_this.isAdded;
+                } else {
+                    _this.text = 'Only ' + res.data + ' remaining for this food';
+                    _this.snackbar = true;
+                }
+                _this.overlay = !_this.overlay;
+            }).catch(function (error) {
+                _this.$toasted.show("Failed to add. Try again");
+                _this.isAdded = !_this.isAdded;
+                _this.overlay = !_this.overlay;
+            });
+        },
+        removeFromCart: function removeFromCart(con) {
+            var _this2 = this;
+
+            this.overlay = !this.overlay;
+            this.isAdded = !this.isAdded;
+            var input = { 'foodId': con.id, 'userId': localStorage.getItem('tempUserCartID') };
+            axios.post('/remove-from-cart', input).then(function (res) {
+                if (res.data == 1) {
+
+                    _this2.text = 'Food removed from Table!';
+                    _this2.snackbar = true;
+                }
+                _this2.overlay = !_this2.overlay;
+            }).catch(function (error) {
+                _this2.$toasted.show("Failed to remove. Try again");
+                _this2.overlay = !_this2.overlay;
+            });
+        },
+        incre: function incre() {
+            this.qty = this.qty + 1;
+            this.isAdded = false;
+        },
+        decre: function decre() {
+            this.qty = this.qty - 1;
+            this.isAdded = false;
+        }
+    }
+});
+
+/***/ }),
+/* 136 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _vm.stash > 0
+        ? _c("span", [
+            _c("div", { staticClass: "item_qnty_shop" }, [
+              _c(
+                "form",
+                { attrs: { id: "myform", method: "POST", action: "#" } },
+                [
+                  _c("input", {
+                    staticClass: "qntyminusshop",
+                    attrs: {
+                      disabled: _vm.qty == 1,
+                      type: "button",
+                      value: "-",
+                      field: "quantity"
+                    },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.decre()
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "qntyshop",
+                    attrs: { type: "text", name: "quantity" },
+                    domProps: { value: _vm.qty }
+                  }),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "qntyplusshop",
+                    attrs: { type: "button", value: "+", field: "quantity" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.incre()
+                      }
+                    }
+                  })
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _vm.isAdded
+              ? _c(
+                  "a",
+                  {
+                    attrs: { href: "#", id: "addtocart" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.removeFromCart(_vm.con)
+                      }
+                    }
+                  },
+                  [_vm._v("CLEAR")]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            !_vm.isAdded
+              ? _c(
+                  "a",
+                  {
+                    attrs: { href: "#", id: "addtocart" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.addToCart(_vm.con)
+                      }
+                    }
+                  },
+                  [_vm._v("RESERVE")]
+                )
+              : _vm._e()
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.stash < 1
+        ? _c("div", [_vm._v("\r\n            Out of stock\r\n      ")])
+        : _vm._e(),
+      _vm._v(" "),
+      [
+        _c(
+          "v-snackbar",
+          {
+            attrs: { timeout: _vm.timeout },
+            model: {
+              value: _vm.snackbar,
+              callback: function($$v) {
+                _vm.snackbar = $$v
+              },
+              expression: "snackbar"
+            }
+          },
+          [
+            _vm._v("\r\n      " + _vm._s(_vm.text) + "\r\n      "),
+            _c(
+              "v-btn",
+              {
+                attrs: { color: "blue", text: "" },
+                on: {
+                  click: function($event) {
+                    _vm.snackbar = !_vm.snackbar
+                  }
+                }
+              },
+              [_vm._v("\r\n        Close\r\n      ")]
+            )
+          ],
+          1
+        )
+      ],
+      _vm._v(" "),
+      [
+        _c(
+          "div",
+          { staticClass: "text-center" },
+          [
+            _c(
+              "v-overlay",
+              { attrs: { value: _vm.overlay } },
+              [
+                _c("v-progress-circular", {
+                  attrs: { indeterminate: "", size: "64" }
+                })
+              ],
+              1
+            )
+          ],
+          1
+        )
+      ]
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-21a893b4", module.exports)
+  }
+}
+
+/***/ }),
+/* 137 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(138)
+/* template */
+var __vue_template__ = __webpack_require__(139)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/includes/cartUpdate.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-6ee9d806", Component.options)
+  } else {
+    hotAPI.reload("data-v-6ee9d806", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 138 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    props: ['con'],
+    //
+    data: function data() {
+        return {
+            snackbar: false,
+            text: '',
+            timeout: 3000,
+            qty: '',
+            deleted: false,
+            subtotal: '',
+            showSub: false
+        };
+    },
+
+    methods: {
+        removeFromCart: function removeFromCart(id) {
+            var _this = this;
+
+            NProgress.start();
+            var input = { 'foodId': id, 'userId': localStorage.getItem('tempUserCartID') };
+            axios.post('/remove-from-cart', input).then(function (res) {
+                if (res.data == 1) {
+                    sound.play();
+                    _this.text = 'Food removed from Table!';
+                    _this.snackbar = true;
+                }
+                _this.deleted = true;
+                NProgress.done();
+            }).catch(function (error) {
+                _this.$toasted.show("Failed to remove. Try again");
+                NProgress.done();
+            });
+        },
+        incre: function incre(con) {
+            var _this2 = this;
+
+            NProgress.start();
+
+            var input = { 'foodId': con.id, 'userId': localStorage.getItem('tempUserCartID') };
+            axios.post('/increase-qty', input).then(function (res) {
+                //  console.log(res.data)
+                _this2.qty = res.data.qty;
+                _this2.subtotal = res.data.subtotal;
+                _this2.showSub = true;
+                _this2.text = 'Table Updated!';
+                _this2.snackbar = true;
+                NProgress.done();
+            }).catch(function (error) {
+                _this2.$toasted.show("Failed to update. Try again");
+                NProgress.done();
+            });
+        },
+        decre: function decre(con) {
+            var _this3 = this;
+
+            NProgress.start();
+
+            var input = { 'foodId': con.id, 'userId': localStorage.getItem('tempUserCartID') };
+            axios.post('/decrease-qty', input).then(function (res) {
+                //  console.log(res.data)
+                _this3.qty = res.data.qty;
+                _this3.subtotal = res.data.subtotal;
+                _this3.showSub = true;
+                _this3.text = 'Table Updated!';
+                _this3.snackbar = true;
+                NProgress.done();
+            }).catch(function (error) {
+                _this3.$toasted.show("Failed to update. Try again");
+                NProgress.done();
+            });
+        }
+    }
+
+});
+
+/***/ }),
+/* 139 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { attrs: { id: _vm.con.id } },
+    [
+      _c("div", { staticClass: "item_title" }, [
+        _vm._v(" " + _vm._s(_vm.con.name) + " ")
+      ]),
+      _vm._v(" "),
+      _vm.deleted == false
+        ? _c("span", [
+            _c(
+              "div",
+              { staticClass: "item_price" },
+              [
+                _c("strike", [_vm._v("N")]),
+                _vm._v(_vm._s(_vm.con.attributes.total) + " ")
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.showSub,
+                    expression: "showSub"
+                  }
+                ],
+                staticClass: "item_price"
+              },
+              [
+                _vm._v(" Subtotal: "),
+                _c("strike", [_vm._v("N")]),
+                _vm._v(_vm._s(_vm.subtotal) + " ")
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "item_thumb" }, [
+              _c(
+                "a",
+                { staticClass: "close-panel", attrs: { href: "#" } },
+                [
+                  _c("v-img", {
+                    attrs: {
+                      src: "/storage/food/" + _vm.con.attributes.image,
+                      alt: _vm.con.title,
+                      "lazy-src": "/images/black-spinner.gif",
+                      title: ""
+                    }
+                  })
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "item_qnty" }, [
+              _c(
+                "form",
+                { attrs: { id: "myform", method: "POST", action: "#" } },
+                [
+                  _c("label", [
+                    _vm._v("QUANTITY (" + _vm._s(_vm.con.quantity) + ")")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "qntyminus",
+                    attrs: {
+                      type: "button",
+                      value: "-",
+                      field: "quantity",
+                      disabled: _vm.qty == 1
+                    },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.decre(_vm.con)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "qnty",
+                    attrs: { type: "text", name: "quantity" },
+                    domProps: { value: _vm.qty }
+                  }),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "qntyplus",
+                    attrs: { type: "button", value: "+", field: "quantity" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.incre(_vm.con)
+                      }
+                    }
+                  })
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "item_delete",
+                attrs: { href: "#", id: "cartitem1" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.removeFromCart(_vm.con.id)
+                  }
+                }
+              },
+              [
+                _c("img", {
+                  attrs: {
+                    src: "/images/icons/black/trash.png",
+                    alt: "",
+                    title: ""
+                  }
+                })
+              ]
+            )
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.deleted == true ? _c("span", [_vm._m(0)]) : _vm._e(),
+      _vm._v(" "),
+      [
+        _c(
+          "v-snackbar",
+          {
+            attrs: { timeout: _vm.timeout },
+            model: {
+              value: _vm.snackbar,
+              callback: function($$v) {
+                _vm.snackbar = $$v
+              },
+              expression: "snackbar"
+            }
+          },
+          [
+            _vm._v("\n          " + _vm._s(_vm.text) + "\n          "),
+            _c(
+              "v-btn",
+              {
+                attrs: { color: "blue", text: "" },
+                on: {
+                  click: function($event) {
+                    _vm.snackbar = !_vm.snackbar
+                  }
+                }
+              },
+              [_vm._v("\n            Close\n          ")]
+            )
+          ],
+          1
+        )
+      ]
+    ],
+    2
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "item_qnty" }, [
+      _c("label", [_vm._v("DELETED")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-6ee9d806", module.exports)
+  }
+}
+
+/***/ }),
+/* 140 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(141)
+/* template */
+var __vue_template__ = __webpack_require__(142)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/includes/favUpdate.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1769f452", Component.options)
+  } else {
+    hotAPI.reload("data-v-1769f452", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 141 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    props: ['con', 'stash'],
+    //
+    data: function data() {
+        return {
+            overlay: false,
+            snackbar: false,
+            text: '',
+            timeout: 3000,
+            isAdded: false,
+            qty: 1,
+            deleted: false
+        };
+    },
+
+    methods: {
+        removeFromFav: function removeFromFav(con) {
+            var _this = this;
+
+            //
+            this.overlay = !this.overlay;
+            if (!localStorage.getItem('tempUserCartID')) {
+                var tempUserCartID = Math.floor(Math.random() * 1234567890);
+                localStorage.setItem('tempUserCartID', tempUserCartID);
+                //  console.log('created id')
+            }
+            var input = { 'favId': con.id, 'foodId': con.foodId, 'userId': localStorage.getItem('tempUserCartID') };
+
+            axios.post('/remove-from-fav', input).then(function (res) {
+                if (res.data == 1) {
+                    sound.play();
+                    _this.text = 'Food removed from Favorites!';
+                    _this.snackbar = true;
+                }
+                _this.deleted = true;
+                _this.overlay = !_this.overlay;
+            }).catch(function (error) {
+                _this.$toasted.show("Failed to remove. Try again");
+                _this.overlay = !_this.overlay;
+            });
+        },
+        addToCart: function addToCart(con) {
+            var _this2 = this;
+
+            this.overlay = !this.overlay;
+            this.isAdded = !this.isAdded;
+
+            if (!localStorage.getItem('tempUserCartID')) {
+                var tempUserCartID = Math.floor(Math.random() * 10000);
+                localStorage.setItem('tempUserCartID', tempUserCartID);
+                //   console.log('created id')
+            }
+            var input = { 'foodId': con.foodId, 'userId': localStorage.getItem('tempUserCartID'), 'qty': this.qty };
+            axios.post('/add-fav-to-cart', input).then(function (res) {
+                if (res.data == 1) {
+                    _this2.text = 'Food added to Table!';
+                    _this2.snackbar = true;
+                }
+                _this2.overlay = !_this2.overlay;
+            }).catch(function (error) {
+                _this2.$toasted.show("Failed to add. Try again");
+                _this2.isAdded = !_this2.isAdded;
+                _this2.overlay = !_this2.overlay;
+            });
+        },
+        removeFromCart: function removeFromCart(con) {
+            var _this3 = this;
+
+            this.overlay = !this.overlay;
+            this.isAdded = !this.isAdded;
+            var input = { 'foodId': con.foodId, 'userId': localStorage.getItem('tempUserCartID') };
+            axios.post('/remove-fav-from-cart', input).then(function (res) {
+                if (res.data == 1) {
+
+                    _this3.text = 'Food removed from Table!';
+                    _this3.snackbar = true;
+                }
+                _this3.overlay = !_this3.overlay;
+            }).catch(function (error) {
+                _this3.$toasted.show("Failed to remove. Try again");
+                _this3.overlay = !_this3.overlay;
+            });
+        },
+        incre: function incre() {
+            this.qty = this.qty + 1;
+        },
+        decre: function decre() {
+            this.qty = this.qty - 1;
+        }
+    }
+
+});
+
+/***/ }),
+/* 142 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _vm.deleted == true ? _c("span", [_vm._m(0)]) : _vm._e(),
+      _vm._v(" "),
+      _vm.deleted == false
+        ? _c("span", [
+            _vm.stash > 0
+              ? _c("span", [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "item_delete",
+                      attrs: { href: "#", id: "cartitem1" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.removeFromFav(_vm.con)
+                        }
+                      }
+                    },
+                    [
+                      _c("img", {
+                        attrs: {
+                          src: "/images/icons/black/trash.png",
+                          alt: "",
+                          title: ""
+                        }
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("h4", [_vm._v(_vm._s(_vm.con.title))]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "shop_item_price" },
+                    [_c("strike", [_vm._v("N")]), _vm._v(_vm._s(_vm.con.amt))],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "item_qnty_shop" }, [
+                    _c(
+                      "form",
+                      { attrs: { id: "myform", method: "POST", action: "#" } },
+                      [
+                        _c("input", {
+                          staticClass: "qntyminusshop",
+                          attrs: {
+                            disabled: _vm.qty == 1,
+                            type: "button",
+                            value: "-",
+                            field: "quantity"
+                          },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              return _vm.decre()
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("input", {
+                          staticClass: "qntyshop",
+                          attrs: { type: "text", name: "quantity" },
+                          domProps: { value: _vm.qty }
+                        }),
+                        _vm._v(" "),
+                        _c("input", {
+                          staticClass: "qntyplusshop",
+                          attrs: {
+                            type: "button",
+                            value: "+",
+                            field: "quantity"
+                          },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              return _vm.incre()
+                            }
+                          }
+                        })
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm.isAdded
+                    ? _c(
+                        "a",
+                        {
+                          attrs: { href: "#", id: "addtocart" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              return _vm.removeFromCart(_vm.con)
+                            }
+                          }
+                        },
+                        [_vm._v("CLEAR")]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  !_vm.isAdded
+                    ? _c(
+                        "a",
+                        {
+                          attrs: { href: "#", id: "addtocart" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              return _vm.addToCart(_vm.con)
+                            }
+                          }
+                        },
+                        [_vm._v("RESERVE")]
+                      )
+                    : _vm._e()
+                ])
+              : _vm._e()
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.stash < 1
+        ? _c("div", [_vm._v("\n          Out of stock\n    ")])
+        : _vm._e(),
+      _vm._v(" "),
+      [
+        _c(
+          "v-snackbar",
+          {
+            attrs: { timeout: _vm.timeout },
+            model: {
+              value: _vm.snackbar,
+              callback: function($$v) {
+                _vm.snackbar = $$v
+              },
+              expression: "snackbar"
+            }
+          },
+          [
+            _vm._v("\n            " + _vm._s(_vm.text) + "\n            "),
+            _c(
+              "v-btn",
+              {
+                attrs: { color: "blue", text: "" },
+                on: {
+                  click: function($event) {
+                    _vm.snackbar = !_vm.snackbar
+                  }
+                }
+              },
+              [_vm._v("\n              Close\n            ")]
+            )
+          ],
+          1
+        )
+      ],
+      _vm._v(" "),
+      [
+        _c(
+          "div",
+          { staticClass: "text-center" },
+          [
+            _c(
+              "v-overlay",
+              { attrs: { value: _vm.overlay } },
+              [
+                _c("v-progress-circular", {
+                  attrs: { indeterminate: "", size: "64" }
+                })
+              ],
+              1
+            )
+          ],
+          1
+        )
+      ]
+    ],
+    2
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "item_qnty text-danger" }, [
+      _c("label", [_vm._v("DELETED")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-1769f452", module.exports)
+  }
+}
+
+/***/ }),
+/* 143 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);
