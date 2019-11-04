@@ -85,6 +85,7 @@ data: function() {
                         this.snackbar = true;
                         
                         this.isAdded = !this.isAdded
+                        
                             }else{
                               this.text='Only '+res.data+' remaining for this food'
                             this.snackbar = true;
@@ -122,9 +123,11 @@ data: function() {
 
             incre(){
                 this.qty = this.qty + 1;
+                this.isAdded = false
             },
             decre(){
                 this.qty = this.qty - 1;
+                this.isAdded = false
             },
         }
     }

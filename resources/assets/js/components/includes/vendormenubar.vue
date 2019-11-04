@@ -30,7 +30,7 @@
                     <a class="nav-link" @click.prevent="logout()">Log Out</a>
                   </li>
                   <li class="nav-item">
-                      <a href='tel:08053121695'class="nav-link" to="">Contact Developer</a>
+                      <a href='tel:08053121695' class="nav-link" >Contact Developer</a>
                     </li>
               </ul>
              
