@@ -144,7 +144,7 @@ Vue.component('favButton', require('./components/includes/favButton.vue'));
 Vue.component('cartAdd', require('./components/includes/cartAdd.vue'));
 Vue.component('cartUpdate', require('./components/includes/cartUpdate.vue'));
 Vue.component('favUpdate', require('./components/includes/favUpdate.vue'));
-
+Vue.component('floatings', require('./components/includes/floatings.vue'));
 
 
 const app = new Vue({

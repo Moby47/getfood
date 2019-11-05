@@ -16,7 +16,7 @@
             </a></div>
 
             <div class="item_qnty">
-                <form id="myform" method="POST" action="#">
+                <form id="myformup" method="POST" action="#">
                     <label>QUANTITY ({{con.quantity}})</label>
                     <input type="button" value="-" class="qntyminus" field="quantity" @click.prevent='decre(con)'
                      :disabled='qty==1'/>
@@ -81,6 +81,8 @@ methods: {
                       sound.play();
                 this.text='Food removed from Table!'
                         this.snackbar = true;
+                         //update cart count
+                         this.cartcount()
                     }
                     this.deleted = true;
                     NProgress.done();
@@ -91,6 +93,19 @@ methods: {
             NProgress.done();        
               })
     },
+
+    cartcount(){
+              //get user cart count from DB
+            fetch('/cartCount/'+ localStorage.getItem('tempUserCartID'))
+                .then(res => res.json())
+                .then(res=>{
+            var cart_count = res;
+            //save to local storage
+            localStorage.setItem('cart', cart_count )
+            //fetch the store and append
+           this.count = localStorage.getItem('cart')
+                })
+            },
 
     incre(con){
                 NProgress.start();

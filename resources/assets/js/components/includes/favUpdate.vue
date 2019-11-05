@@ -19,7 +19,7 @@
       <h4>{{con.title}}</h4>
       <div class="shop_item_price"><strike>N</strike>{{con.amt}}</div>
         <div class="item_qnty_shop">
-                <form id="myform" method="POST" action="#">
+                <form id="myformfav" method="POST" action="#">
               <input :disabled='qty==1' type="button" value="-" class="qntyminusshop" field="quantity" @click.prevent='decre()'/>
                     <input type="text" name="quantity" :value="qty" class="qntyshop" />
                     <input type="button" value="+" class="qntyplusshop" field="quantity" @click.prevent='incre()'/>
@@ -69,6 +69,9 @@
   </template>
         
         <script>
+
+import {eventBus} from "../../app.js";
+
         export default {
 
 props: ['con','stash'],
@@ -103,6 +106,7 @@ methods: {
                       sound.play();
                 this.text='Food removed from Favorites!'
                         this.snackbar = true;
+                        
                     }
                     this.deleted = true;
                      this.overlay = !this.overlay
@@ -130,6 +134,8 @@ methods: {
                             if(res.data == 1){
                         this.text='Food added to Table!'
                         this.snackbar = true;
+                        //update cart count
+                        this.cartcount()
                             }
                             this.overlay = !this.overlay
                            
@@ -152,6 +158,8 @@ methods: {
                                 
                         this.text='Food removed from Table!'
                         this.snackbar = true;
+                        //update cart count
+                        this.cartcount()
                             }
                            this.overlay = !this.overlay
                            
@@ -160,6 +168,19 @@ methods: {
                   this.$toasted.show("Failed to remove. Try again");
                    this.overlay = !this.overlay        
                       })
+            },
+
+            cartcount(){
+              //get user cart count from DB
+            fetch('/cartCount/'+ localStorage.getItem('tempUserCartID'))
+                .then(res => res.json())
+                .then(res=>{
+            var cart_count = res;
+            //save to local storage
+            localStorage.setItem('cart', cart_count )
+            //fetch the store and append
+           this.count = localStorage.getItem('cart')
+                })
             },
 
             incre(){

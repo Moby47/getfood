@@ -117,7 +117,7 @@ public function cartItems($id){
           return array('qty'=>\Cart::get($foodId)->quantity, 'subtotal'=>\Cart::get($foodId)->attributes->total);
         }
 
-
+//receives tempuserID
         public function cartCount($id){
           $cart = \Cart::session($id)->getContent();
           return $cart->count();
@@ -142,6 +142,7 @@ public function cartItems($id){
                return 1;
                 }
               
+
 
 
 }

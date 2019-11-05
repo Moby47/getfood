@@ -28,7 +28,7 @@
                 <!-- ********************************************** empty -->
                 
                     <div v-show='empty < 1' class='text-center alert alert-info'>
-                        Your Table is Empty. <router-link to='/shop'>Add Food</router-link>
+                        Your Table is Empty. <router-link to='/shop' class='text-center button_full btyellow'>Add Food</router-link>
                        </div>
          
                        <!--loading 
@@ -205,6 +205,8 @@ import paystack from 'vue-paystack';
                 console.log(error)    
                })
             
+          //clear cart count
+            localStorage.removeItem('cart')
 
             //redirect to success page
             this.$router.push({name: "success"});

@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 15);
+/******/ 	return __webpack_require__(__webpack_require__.s = 16);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -179,7 +179,7 @@ module.exports = function normalizeComponent (
 "use strict";
 
 
-var bind = __webpack_require__(7);
+var bind = __webpack_require__(8);
 var isBuffer = __webpack_require__(24);
 
 /*global toString:true*/
@@ -832,6 +832,170 @@ if (false) {
 
 /***/ }),
 /* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "eventBus", function() { return eventBus; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vee_validate__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_toasted__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_toasted___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vue_toasted__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__router__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vuetify__ = __webpack_require__(119);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vuetify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_vuetify__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vuetify_dist_vuetify_min_css__ = __webpack_require__(120);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vuetify_dist_vuetify_min_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_vuetify_dist_vuetify_min_css__);
+
+/**
+ * First we will load all of this project's JavaScript dependencies which
+ * includes Vue and other libraries. It is a great starting point when
+ * building robust, powerful web applications using Vue and Laravel.
+ */
+
+__webpack_require__(17);
+
+window.Vue = __webpack_require__(5);
+
+/* ------------------------- Imports -------------------- */
+
+//vee validate
+
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vee_validate__["a" /* default */]);
+
+//toated
+// register the plugin on vue
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue_toasted___default.a, {
+    duration: 5000
+});
+// you can also pass options, check options reference below
+//Vue.use(Toasted, Options)
+
+
+//animate.css
+__webpack_require__(46);
+
+//vur router
+
+
+//vuetify
+
+
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_4_vuetify___default.a);
+
+/* ------------------------- Imports -------------------- */
+
+/* ------------------------URL interceptor for progressbar ----------------*/
+
+__WEBPACK_IMPORTED_MODULE_3__router__["a" /* default */].beforeResolve(function (to, from, next) {
+    // If this isn't an initial page load.
+    if (to.name) {
+        // Start the route progress bar.
+        NProgress.start();
+    }
+    next();
+});
+
+__WEBPACK_IMPORTED_MODULE_3__router__["a" /* default */].afterEach(function (to, from) {
+    // Complete the animation of the route progress bar.
+    NProgress.done();
+});
+
+/* ------------------------URL interceptor for progressbar ----------------*/
+
+/* ------------------------URL interceptor  ----------------*/
+
+//route middleware 
+__WEBPACK_IMPORTED_MODULE_3__router__["a" /* default */].beforeEach(function (to, from, next) {
+
+    if (to.matched.some(function (record) {
+        return record.meta.customer;
+    })) {
+        /***************** redirect if not auth customer********* */
+        if (localStorage.getItem('userToken')) {
+            //continue
+            if (localStorage.getItem('userStatus') == 0) {
+                next();
+            } else {
+                next({ path: '/userdashboard' });
+            }
+        } else {
+            //redirect
+            next({ path: '/' });
+        } //inner if close
+        /************************** */
+    } else if (to.matched.some(function (record) {
+        return record.meta.vendor;
+    })) {
+        /***************** redirect if not auth customer********* */
+        if (localStorage.getItem('userToken')) {
+            //continue
+            if (localStorage.getItem('userStatus') == 1) {
+                next();
+            } else {
+                next({ path: '/admindashboard' });
+            }
+        } else {
+            //redirect
+            next({ path: '/' });
+        } //inner if close
+        /************************** */
+    } else if (to.matched.some(function (record) {
+        return record.meta.authPage;
+    })) {
+        /************reirect if auth************** */
+        if (localStorage.getItem('userToken')) {
+            //continue
+            if (localStorage.getItem('userStatus') == 1) {
+                next({ path: '/admindashboard' });
+            } else {
+                next({ path: '/userdashboard' });
+            }
+        } else {
+            //redirect
+            next();
+        } //inner if close
+        /************************** */
+    } else {
+        /*********No redirect, just go on***************** */
+        next();
+    }
+} //func closure
+); //router close
+// route middleware 
+
+
+/* ------------------------URL interceptor ----------------*/
+
+/**
+ * Next, we will create a fresh Vue application instance and attach it to
+ * the page. Then, you may begin adding components to this application
+ * or customize the JavaScript scaffolding to fit your unique needs.
+ */
+
+var eventBus = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('index', __webpack_require__(15));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('menubar', __webpack_require__(122));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('vendormenubar', __webpack_require__(125));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('usermenubar', __webpack_require__(128));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('favButton', __webpack_require__(131));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('cartAdd', __webpack_require__(134));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('cartUpdate', __webpack_require__(137));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('favUpdate', __webpack_require__(140));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('floatings', __webpack_require__(143));
+
+var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
+    el: '#app',
+    router: __WEBPACK_IMPORTED_MODULE_3__router__["a" /* default */]
+});
+
+/***/ }),
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -854,10 +1018,10 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(9);
+    adapter = __webpack_require__(10);
   } else if (typeof process !== 'undefined') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(9);
+    adapter = __webpack_require__(10);
   }
   return adapter;
 }
@@ -928,10 +1092,10 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9)))
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -949,7 +1113,7 @@ module.exports = function bind(fn, thisArg) {
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -1139,7 +1303,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1150,7 +1314,7 @@ var settle = __webpack_require__(27);
 var buildURL = __webpack_require__(29);
 var parseHeaders = __webpack_require__(30);
 var isURLSameOrigin = __webpack_require__(31);
-var createError = __webpack_require__(10);
+var createError = __webpack_require__(11);
 var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(32);
 
 module.exports = function xhrAdapter(config) {
@@ -1326,7 +1490,7 @@ module.exports = function xhrAdapter(config) {
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1351,7 +1515,7 @@ module.exports = function createError(message, config, code, request, response) 
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1363,7 +1527,7 @@ module.exports = function isCancel(value) {
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1389,7 +1553,7 @@ module.exports = Cancel;
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -1748,7 +1912,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
@@ -1799,175 +1963,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(16);
-module.exports = __webpack_require__(143);
+__webpack_require__(6);
+module.exports = __webpack_require__(146);
 
-
-/***/ }),
-/* 16 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "eventBus", function() { return eventBus; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vee_validate__ = __webpack_require__(44);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_toasted__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_toasted___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vue_toasted__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__router__ = __webpack_require__(49);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vuetify__ = __webpack_require__(119);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vuetify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_vuetify__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vuetify_dist_vuetify_min_css__ = __webpack_require__(120);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vuetify_dist_vuetify_min_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_vuetify_dist_vuetify_min_css__);
-
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
-__webpack_require__(17);
-
-window.Vue = __webpack_require__(5);
-
-/* ------------------------- Imports -------------------- */
-
-//vee validate
-
-
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vee_validate__["a" /* default */]);
-
-//toated
-// register the plugin on vue
-
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue_toasted___default.a, {
-    duration: 5000
-});
-// you can also pass options, check options reference below
-//Vue.use(Toasted, Options)
-
-
-//animate.css
-__webpack_require__(46);
-
-//vur router
-
-
-//vuetify
-
-
-
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_4_vuetify___default.a);
-
-/* ------------------------- Imports -------------------- */
-
-/* ------------------------URL interceptor for progressbar ----------------*/
-
-__WEBPACK_IMPORTED_MODULE_3__router__["a" /* default */].beforeResolve(function (to, from, next) {
-    // If this isn't an initial page load.
-    if (to.name) {
-        // Start the route progress bar.
-        NProgress.start();
-    }
-    next();
-});
-
-__WEBPACK_IMPORTED_MODULE_3__router__["a" /* default */].afterEach(function (to, from) {
-    // Complete the animation of the route progress bar.
-    NProgress.done();
-});
-
-/* ------------------------URL interceptor for progressbar ----------------*/
-
-/* ------------------------URL interceptor  ----------------*/
-
-//route middleware 
-__WEBPACK_IMPORTED_MODULE_3__router__["a" /* default */].beforeEach(function (to, from, next) {
-
-    if (to.matched.some(function (record) {
-        return record.meta.customer;
-    })) {
-        /***************** redirect if not auth customer********* */
-        if (localStorage.getItem('userToken')) {
-            //continue
-            if (localStorage.getItem('userStatus') == 0) {
-                next();
-            } else {
-                next({ path: '/userdashboard' });
-            }
-        } else {
-            //redirect
-            next({ path: '/' });
-        } //inner if close
-        /************************** */
-    } else if (to.matched.some(function (record) {
-        return record.meta.vendor;
-    })) {
-        /***************** redirect if not auth customer********* */
-        if (localStorage.getItem('userToken')) {
-            //continue
-            if (localStorage.getItem('userStatus') == 1) {
-                next();
-            } else {
-                next({ path: '/admindashboard' });
-            }
-        } else {
-            //redirect
-            next({ path: '/' });
-        } //inner if close
-        /************************** */
-    } else if (to.matched.some(function (record) {
-        return record.meta.authPage;
-    })) {
-        /************reirect if auth************** */
-        if (localStorage.getItem('userToken')) {
-            //continue
-            if (localStorage.getItem('userStatus') == 1) {
-                next({ path: '/admindashboard' });
-            } else {
-                next({ path: '/userdashboard' });
-            }
-        } else {
-            //redirect
-            next();
-        } //inner if close
-        /************************** */
-    } else {
-        /*********No redirect, just go on***************** */
-        next();
-    }
-} //func closure
-); //router close
-// route middleware 
-
-
-/* ------------------------URL interceptor ----------------*/
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-var eventBus = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
-
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('index', __webpack_require__(14));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('menubar', __webpack_require__(122));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('vendormenubar', __webpack_require__(125));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('usermenubar', __webpack_require__(128));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('favButton', __webpack_require__(131));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('cartAdd', __webpack_require__(134));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('cartUpdate', __webpack_require__(137));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('favUpdate', __webpack_require__(140));
-
-var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
-    el: '#app',
-    router: __WEBPACK_IMPORTED_MODULE_3__router__["a" /* default */]
-});
 
 /***/ }),
 /* 17 */
@@ -31971,9 +31972,9 @@ module.exports = __webpack_require__(23);
 
 
 var utils = __webpack_require__(1);
-var bind = __webpack_require__(7);
+var bind = __webpack_require__(8);
 var Axios = __webpack_require__(25);
-var defaults = __webpack_require__(6);
+var defaults = __webpack_require__(7);
 
 /**
  * Create an instance of Axios
@@ -32006,9 +32007,9 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(12);
+axios.Cancel = __webpack_require__(13);
 axios.CancelToken = __webpack_require__(39);
-axios.isCancel = __webpack_require__(11);
+axios.isCancel = __webpack_require__(12);
 
 // Expose all/spread
 axios.all = function all(promises) {
@@ -32056,7 +32057,7 @@ function isSlowBuffer (obj) {
 "use strict";
 
 
-var defaults = __webpack_require__(6);
+var defaults = __webpack_require__(7);
 var utils = __webpack_require__(1);
 var InterceptorManager = __webpack_require__(34);
 var dispatchRequest = __webpack_require__(35);
@@ -32161,7 +32162,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 "use strict";
 
 
-var createError = __webpack_require__(10);
+var createError = __webpack_require__(11);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -32596,8 +32597,8 @@ module.exports = InterceptorManager;
 
 var utils = __webpack_require__(1);
 var transformData = __webpack_require__(36);
-var isCancel = __webpack_require__(11);
-var defaults = __webpack_require__(6);
+var isCancel = __webpack_require__(12);
+var defaults = __webpack_require__(7);
 var isAbsoluteURL = __webpack_require__(37);
 var combineURLs = __webpack_require__(38);
 
@@ -32756,7 +32757,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 "use strict";
 
 
-var Cancel = __webpack_require__(12);
+var Cancel = __webpack_require__(13);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -45054,7 +45055,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(8)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(9)))
 
 /***/ }),
 /* 44 */
@@ -53875,7 +53876,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(13)(content, options);
+var update = __webpack_require__(14)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -54008,7 +54009,7 @@ module.exports = function (css) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_index_vue__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_index_vue__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_index_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_index_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_about_vue__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_about_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_about_vue__);
@@ -57347,8 +57348,7 @@ var render = function() {
                       "li",
                       {
                         staticClass: "breadcrumb-item active",
-                        attrs: { "aria-current": "page" },
-                        on: { click: _vm.trry }
+                        attrs: { "aria-current": "page" }
                       },
                       [_vm._v("ABOUT GETFOODS")]
                     )
@@ -57488,6 +57488,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -57748,9 +57749,14 @@ var render = function() {
                           },
                           [
                             _vm._v("\n  Your Table is Empty. "),
-                            _c("router-link", { attrs: { to: "/shop" } }, [
-                              _vm._v("Add Food")
-                            ])
+                            _c(
+                              "router-link",
+                              {
+                                staticClass: "text-center button_full btyellow",
+                                attrs: { to: "/shop" }
+                              },
+                              [_vm._v("Add Food")]
+                            )
                           ],
                           1
                         ),
@@ -58125,6 +58131,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           console.log(error);
         });
 
+        //clear cart count
+        localStorage.removeItem('cart');
+
         //redirect to success page
         this.$router.push({ name: "success" });
       } else {
@@ -58284,9 +58293,14 @@ var render = function() {
                         _vm._v(
                           "\n                        Your Table is Empty. "
                         ),
-                        _c("router-link", { attrs: { to: "/shop" } }, [
-                          _vm._v("Add Food")
-                        ])
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "text-center button_full btyellow",
+                            attrs: { to: "/shop" }
+                          },
+                          [_vm._v("Add Food")]
+                        )
                       ],
                       1
                     ),
@@ -58623,12 +58637,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -58731,29 +58739,7 @@ var render = function() {
                         attrs: { "aria-current": "page" }
                       },
                       [_vm._v("FAVORITE FOOD (" + _vm._s(_vm.fav_count) + ")")]
-                    ),
-                    _vm._v(" "),
-                    _c("li", [
-                      _c(
-                        "span",
-                        { staticClass: "ma-2 cart", attrs: { text: "" } },
-                        [
-                          _c(
-                            "router-link",
-                            { attrs: { to: "/checkout" } },
-                            [
-                              _c(
-                                "v-icon",
-                                { attrs: { color: "orange darken-2" } },
-                                [_vm._v("shopping_cart")]
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    ])
+                    )
                   ])
                 ]),
                 _vm._v(" "),
@@ -58768,7 +58754,7 @@ var render = function() {
                         _c(
                           "router-link",
                           {
-                            staticClass: "btn btn-primary",
+                            staticClass: "text-center button_full btyellow",
                             attrs: { to: "/shop" }
                           },
                           [_vm._v("Add Now")]
@@ -67176,14 +67162,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
 
-
-//import {eventBus} from "../app.js";
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -67326,29 +67305,7 @@ var render = function() {
                             "AVAILABLE FOOD (" + _vm._s(_vm.food_count) + ")"
                           )
                         ]
-                      ),
-                      _vm._v(" "),
-                      _c("li", [
-                        _c(
-                          "span",
-                          { staticClass: "ma-2 cart", attrs: { text: "" } },
-                          [
-                            _c(
-                              "router-link",
-                              { attrs: { to: "/checkout" } },
-                              [
-                                _c(
-                                  "v-icon",
-                                  { attrs: { color: "orange darken-2" } },
-                                  [_vm._v("shopping_cart")]
-                                )
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        )
-                      ])
+                      )
                     ])
                   ]),
                   _vm._v(" "),
@@ -67568,7 +67525,9 @@ var render = function() {
             ])
           ]
         )
-      ])
+      ]),
+      _vm._v(" "),
+      _c("floatings")
     ],
     1
   )
@@ -104435,7 +104394,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(13)(content, options);
+var update = __webpack_require__(14)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -105381,9 +105340,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -105463,18 +105419,6 @@ var render = function() {
             "router-link",
             { staticClass: "navbar-brand", attrs: { to: "/" } },
             [_vm._v("GetFoods")]
-          ),
-          _vm._v(" "),
-          _c(
-            "v-btn",
-            { staticClass: "ma-2", attrs: { text: "" } },
-            [
-              _vm._v(" 4\n      "),
-              _c("v-icon", { attrs: { color: "orange darken-2" } }, [
-                _vm._v("shopping_cart")
-              ])
-            ],
-            1
           ),
           _vm._v(" "),
           _vm._m(0),
@@ -106002,6 +105946,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_js__ = __webpack_require__(6);
 //
 //
 //
@@ -106054,6 +105999,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
@@ -106086,8 +106034,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 if (res.data == 1) {
                     _this.text = 'Food added to Table!';
                     _this.snackbar = true;
-
                     _this.isAdded = !_this.isAdded;
+                    //get user cart count 
+                    __WEBPACK_IMPORTED_MODULE_0__app_js__["eventBus"].$emit('cart_status');
                 } else {
                     _this.text = 'Only ' + res.data + ' remaining for this food';
                     _this.snackbar = true;
@@ -106110,6 +106059,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
                     _this2.text = 'Food removed from Table!';
                     _this2.snackbar = true;
+                    //get user cart count
+                    __WEBPACK_IMPORTED_MODULE_0__app_js__["eventBus"].$emit('cart_status');
                 }
                 _this2.overlay = !_this2.overlay;
             }).catch(function (error) {
@@ -106144,7 +106095,7 @@ var render = function() {
             _c("div", { staticClass: "item_qnty_shop" }, [
               _c(
                 "form",
-                { attrs: { id: "myform", method: "POST", action: "#" } },
+                { attrs: { id: "myformad", method: "POST", action: "#" } },
                 [
                   _c("input", {
                     staticClass: "qntyminusshop",
@@ -106420,6 +106371,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     sound.play();
                     _this.text = 'Food removed from Table!';
                     _this.snackbar = true;
+                    //update cart count
+                    _this.cartcount();
                 }
                 _this.deleted = true;
                 NProgress.done();
@@ -106428,32 +106381,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 NProgress.done();
             });
         },
-        incre: function incre(con) {
+        cartcount: function cartcount() {
             var _this2 = this;
 
-            NProgress.start();
-
-            var input = { 'foodId': con.id, 'userId': localStorage.getItem('tempUserCartID') };
-            axios.post('/increase-qty', input).then(function (res) {
-                //  console.log(res.data)
-                _this2.qty = res.data.qty;
-                _this2.subtotal = res.data.subtotal;
-                _this2.showSub = true;
-                _this2.text = 'Table Updated!';
-                _this2.snackbar = true;
-                NProgress.done();
-            }).catch(function (error) {
-                _this2.$toasted.show("Failed to update. Try again");
-                NProgress.done();
+            //get user cart count from DB
+            fetch('/cartCount/' + localStorage.getItem('tempUserCartID')).then(function (res) {
+                return res.json();
+            }).then(function (res) {
+                var cart_count = res;
+                //save to local storage
+                localStorage.setItem('cart', cart_count);
+                //fetch the store and append
+                _this2.count = localStorage.getItem('cart');
             });
         },
-        decre: function decre(con) {
+        incre: function incre(con) {
             var _this3 = this;
 
             NProgress.start();
 
             var input = { 'foodId': con.id, 'userId': localStorage.getItem('tempUserCartID') };
-            axios.post('/decrease-qty', input).then(function (res) {
+            axios.post('/increase-qty', input).then(function (res) {
                 //  console.log(res.data)
                 _this3.qty = res.data.qty;
                 _this3.subtotal = res.data.subtotal;
@@ -106463,6 +106411,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 NProgress.done();
             }).catch(function (error) {
                 _this3.$toasted.show("Failed to update. Try again");
+                NProgress.done();
+            });
+        },
+        decre: function decre(con) {
+            var _this4 = this;
+
+            NProgress.start();
+
+            var input = { 'foodId': con.id, 'userId': localStorage.getItem('tempUserCartID') };
+            axios.post('/decrease-qty', input).then(function (res) {
+                //  console.log(res.data)
+                _this4.qty = res.data.qty;
+                _this4.subtotal = res.data.subtotal;
+                _this4.showSub = true;
+                _this4.text = 'Table Updated!';
+                _this4.snackbar = true;
+                NProgress.done();
+            }).catch(function (error) {
+                _this4.$toasted.show("Failed to update. Try again");
                 NProgress.done();
             });
         }
@@ -106540,7 +106507,7 @@ var render = function() {
             _c("div", { staticClass: "item_qnty" }, [
               _c(
                 "form",
-                { attrs: { id: "myform", method: "POST", action: "#" } },
+                { attrs: { id: "myformup", method: "POST", action: "#" } },
                 [
                   _c("label", [
                     _vm._v("QUANTITY (" + _vm._s(_vm.con.quantity) + ")")
@@ -106716,6 +106683,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_js__ = __webpack_require__(6);
 //
 //
 //
@@ -106786,6 +106754,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
@@ -106845,6 +106816,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 if (res.data == 1) {
                     _this2.text = 'Food added to Table!';
                     _this2.snackbar = true;
+                    //update cart count
+                    _this2.cartcount();
                 }
                 _this2.overlay = !_this2.overlay;
             }).catch(function (error) {
@@ -106864,11 +106837,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
                     _this3.text = 'Food removed from Table!';
                     _this3.snackbar = true;
+                    //update cart count
+                    _this3.cartcount();
                 }
                 _this3.overlay = !_this3.overlay;
             }).catch(function (error) {
                 _this3.$toasted.show("Failed to remove. Try again");
                 _this3.overlay = !_this3.overlay;
+            });
+        },
+        cartcount: function cartcount() {
+            var _this4 = this;
+
+            //get user cart count from DB
+            fetch('/cartCount/' + localStorage.getItem('tempUserCartID')).then(function (res) {
+                return res.json();
+            }).then(function (res) {
+                var cart_count = res;
+                //save to local storage
+                localStorage.setItem('cart', cart_count);
+                //fetch the store and append
+                _this4.count = localStorage.getItem('cart');
             });
         },
         incre: function incre() {
@@ -106933,7 +106922,9 @@ var render = function() {
                   _c("div", { staticClass: "item_qnty_shop" }, [
                     _c(
                       "form",
-                      { attrs: { id: "myform", method: "POST", action: "#" } },
+                      {
+                        attrs: { id: "myformfav", method: "POST", action: "#" }
+                      },
                       [
                         _c("input", {
                           staticClass: "qntyminusshop",
@@ -107091,9 +107082,211 @@ if (false) {
 
 /***/ }),
 /* 143 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(144)
+/* template */
+var __vue_template__ = __webpack_require__(145)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/includes/floatings.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-c6471a80", Component.options)
+  } else {
+    hotAPI.reload("data-v-c6471a80", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 144 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_js__ = __webpack_require__(6);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+            data: function data() {
+                        return {
+                                    count: ''
+                        };
+            },
+
+            created: function created() {
+                        var _this = this;
+
+                        __WEBPACK_IMPORTED_MODULE_0__app_js__["eventBus"].$on('cart_status', function () {
+
+                                    //get user cart count from DB
+                                    fetch('/cartCount/' + localStorage.getItem('tempUserCartID')).then(function (res) {
+                                                return res.json();
+                                    }).then(function (res) {
+                                                var cart_count = res;
+                                                //save to local storage
+                                                localStorage.setItem('cart', cart_count);
+                                                //fetch the store and append
+                                                _this.count = localStorage.getItem('cart');
+                                    });
+                        });
+            },
+            mounted: function mounted() {
+
+                        if (localStorage.getItem('cart')) {
+                                    this.count = localStorage.getItem('cart');
+                        } else {
+                                    this.count = 0;
+                        }
+            }
+});
+
+/***/ }),
+/* 145 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "v-btn",
+        {
+          attrs: {
+            fab: "",
+            dark: "",
+            color: "info",
+            small: "",
+            relative: "",
+            bottom: "",
+            left: "",
+            fixed: ""
+          }
+        },
+        [_c("v-icon", { attrs: { dark: "" } }, [_vm._v("close")])],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "router-link",
+        { attrs: { to: "/checkout" } },
+        [
+          _c(
+            "v-btn",
+            {
+              attrs: {
+                fab: "",
+                dark: "",
+                color: "#fbc25b",
+                small: "",
+                relative: "",
+                bottom: "",
+                right: "",
+                fixed: ""
+              }
+            },
+            [
+              _vm._v("\n               " + _vm._s(_vm.count) + " "),
+              _c("v-icon", { attrs: { dark: "" } }, [_vm._v(" shopping_cart")])
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-c6471a80", module.exports)
+  }
+}
+
+/***/ }),
+/* 146 */
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed: ModuleBuildError: Module build failed: Error: Node Sass does not yet support your current environment: Windows 64-bit with Unsupported runtime (72)\nFor more information on which environments are supported please see:\nhttps://github.com/sass/node-sass/releases/tag/v4.11.0\n    at module.exports (C:\\xampp\\htdocs\\getfoods\\node_modules\\node-sass\\lib\\binding.js:13:13)\n    at Object.<anonymous> (C:\\xampp\\htdocs\\getfoods\\node_modules\\node-sass\\lib\\index.js:14:35)\n    at Module._compile (internal/modules/cjs/loader.js:956:30)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:973:10)\n    at Module.load (internal/modules/cjs/loader.js:812:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:724:14)\n    at Module.require (internal/modules/cjs/loader.js:849:19)\n    at require (internal/modules/cjs/helpers.js:74:18)\n    at Object.<anonymous> (C:\\xampp\\htdocs\\getfoods\\node_modules\\sass-loader\\lib\\loader.js:3:14)\n    at Module._compile (internal/modules/cjs/loader.js:956:30)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:973:10)\n    at Module.load (internal/modules/cjs/loader.js:812:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:724:14)\n    at Module.require (internal/modules/cjs/loader.js:849:19)\n    at require (internal/modules/cjs/helpers.js:74:18)\n    at loadLoader (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\loadLoader.js:13:17)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:165:10)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:173:18\n    at loadLoader (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\loadLoader.js:36:3)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:165:10)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:173:18\n    at loadLoader (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\loadLoader.js:36:3)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:165:10)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:173:18\n    at loadLoader (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\loadLoader.js:36:3)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:169:2)\n    at runLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:362:2)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\NormalModule.js:195:19\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:364:11\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:170:18\n    at loadLoader (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\loadLoader.js:27:11)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:165:10)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:173:18\n    at loadLoader (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\loadLoader.js:36:3)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:165:10)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:173:18\n    at loadLoader (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\loadLoader.js:36:3)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:165:10)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:173:18\n    at loadLoader (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\loadLoader.js:36:3)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:169:2)\n    at runLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:362:2)\n    at NormalModule.doBuild (C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\NormalModule.js:182:3)\n    at NormalModule.build (C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\NormalModule.js:275:15)\n    at Compilation.buildModule (C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\Compilation.js:157:10)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\Compilation.js:460:10\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\NormalModuleFactory.js:243:5\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\NormalModuleFactory.js:94:13\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\tapable\\lib\\Tapable.js:268:11\n    at NormalModuleFactory.<anonymous> (C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\CompatibilityPlugin.js:52:5)\n    at NormalModuleFactory.applyPluginsAsyncWaterfall (C:\\xampp\\htdocs\\getfoods\\node_modules\\tapable\\lib\\Tapable.js:272:13)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\NormalModuleFactory.js:69:10\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\NormalModuleFactory.js:196:7\n    at processTicksAndRejections (internal/process/task_queues.js:75:11)");
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

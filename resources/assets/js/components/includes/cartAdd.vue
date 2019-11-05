@@ -3,7 +3,7 @@
 <div>
     <span v-if='stash > 0'>
         <div class="item_qnty_shop">
-                <form id="myform" method="POST" action="#">
+                <form id="myformad" method="POST" action="#">
               <input :disabled='qty==1' type="button" value="-" class="qntyminusshop" field="quantity" @click.prevent='decre()'/>
                     <input type="text" name="quantity" :value="qty" class="qntyshop" />
                     <input type="button" value="+" class="qntyplusshop" field="quantity" @click.prevent='incre()'/>
@@ -51,6 +51,9 @@
 </template>
 
 <script>
+
+import {eventBus} from "../../app.js";
+
     export default {
 
         props: ['con','stash'],
@@ -83,9 +86,10 @@ data: function() {
                             if(res.data == 1){
                         this.text='Food added to Table!'
                         this.snackbar = true;
-                        
                         this.isAdded = !this.isAdded
-                        
+                        //get user cart count 
+                        eventBus.$emit('cart_status')
+
                             }else{
                               this.text='Only '+res.data+' remaining for this food'
                             this.snackbar = true;
@@ -111,6 +115,9 @@ data: function() {
                                 
                         this.text='Food removed from Table!'
                         this.snackbar = true;
+                        //get user cart count
+                        eventBus.$emit('cart_status')
+
                             }
                            this.overlay = !this.overlay
                            

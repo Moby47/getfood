@@ -12,20 +12,14 @@
                          <ol class="breadcrumb">
                            <li class="breadcrumb-item"><router-link to='/'>Home</router-link></li>
                            <li class="breadcrumb-item active" aria-current="page">FAVORITE FOOD ({{fav_count}})</li>
-                           <li >
-
-                       <span class="ma-2 cart" text> 
-             <router-link to='/checkout'> <v-icon color="orange darken-2">shopping_cart</v-icon></router-link>
-            </span>
-            
-                    </li>
+                   
                          </ol>
                        </nav>
         
                          <!-- ********************************************** empty -->
                          
                       <div v-if='empty' class='text-center alert alert-info'>
-                      You Have No Food Favorite. <router-link class='btn btn-primary' to='/shop'>Add Now</router-link>
+                      You Have No Food Favorite. <router-link class='text-center button_full btyellow' to='/shop'>Add Now</router-link>
                              </div>
      
 
