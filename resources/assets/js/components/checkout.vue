@@ -15,6 +15,7 @@
                          <ol class="breadcrumb">
                            <li class="breadcrumb-item"><router-link to='/cart'>Table</router-link></li>
                            <li class="breadcrumb-item active" aria-current="page" >FOOD IS READY</li>
+                           
                          </ol>
                        </nav>
            

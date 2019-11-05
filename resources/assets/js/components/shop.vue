@@ -13,7 +13,7 @@
                     <li class="breadcrumb-item active" aria-current="page">AVAILABLE FOOD ({{food_count}})</li>
                     <li >
 
-                       <span class="ma-2 cart" text> 47
+                       <span class="ma-2 cart" text> 
              <router-link to='/checkout'> <v-icon color="orange darken-2">shopping_cart</v-icon></router-link>
             </span>
             

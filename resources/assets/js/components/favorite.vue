@@ -12,6 +12,13 @@
                          <ol class="breadcrumb">
                            <li class="breadcrumb-item"><router-link to='/'>Home</router-link></li>
                            <li class="breadcrumb-item active" aria-current="page">FAVORITE FOOD ({{fav_count}})</li>
+                           <li >
+
+                       <span class="ma-2 cart" text> 
+             <router-link to='/checkout'> <v-icon color="orange darken-2">shopping_cart</v-icon></router-link>
+            </span>
+            
+                    </li>
                          </ol>
                        </nav>
         

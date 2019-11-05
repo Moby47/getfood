@@ -60,7 +60,7 @@
 
 
 <script>
-  //  import {eventBus} from "../app.js";
+
 
     export default {
 
@@ -71,15 +71,7 @@ data: function() {
     }
 },
 
-        methods: {
-          
-     /*       trry(){
-              console.log('called try meth')
-              eventBus.$emit('fire')
-             //this.$root.$emit('fire')
-            }
-             */
-        },
+     
        
      
     }

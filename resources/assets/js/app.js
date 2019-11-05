@@ -134,7 +134,7 @@ router.beforeEach((to, from, next) => {
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-
+export const eventBus = new Vue();
 
 Vue.component('index', require('./components/index.vue'));
 Vue.component('menubar', require('./components/includes/menubar.vue'));
@@ -145,7 +145,7 @@ Vue.component('cartAdd', require('./components/includes/cartAdd.vue'));
 Vue.component('cartUpdate', require('./components/includes/cartUpdate.vue'));
 Vue.component('favUpdate', require('./components/includes/favUpdate.vue'));
 
-//export const eventBus = new Vue();
+
 
 const app = new Vue({
     el: '#app',
