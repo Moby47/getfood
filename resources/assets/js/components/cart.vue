@@ -37,7 +37,7 @@
 -->
    <!-- ********************************************** empty -->
   
- <div v-show='empty < 1'class='text-center alert alert-info'>
+ <div v-show='empty < 1' class='text-center alert alert-info'>
   Your Table is Empty. <router-link to='/shop' class='text-center button_full btyellow'>Add Food</router-link>
  </div>
            
@@ -87,13 +87,21 @@
     </div>
   </template>
 
-  
+  <floatings
+  :toggle_cart=toggle_cart
+  v-show='cartConCount > 0'
+  >
+  </floatings>
+
     </div>
 </template>
 
 
       
 <script>
+
+import {eventBus} from "../app.js";
+
     export default {
 
         data(){
@@ -103,7 +111,8 @@
                 wait:false,
                 data_load: true,
                 empty:47,
-                cartConCount:''
+                cartConCount:'',
+                toggle_cart:true
             }
         },
 
@@ -162,10 +171,19 @@
                 }
 
         },
+
+                      created(){
+
+              eventBus.$on('rerun_count', ()=>{
+                this.countCartCon()
+              })
+
+
+              },
         watch : {
               content(a,b){
                if(a){
-                //data content loaded, it is safe to display
+                //data content loaded, it is safe to toggle_cart
                 this.data_load = false;
                 this.data = true;
                }

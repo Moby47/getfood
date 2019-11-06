@@ -57488,6 +57488,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_js__ = __webpack_require__(4);
 //
 //
 //
@@ -57583,93 +57584,111 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            overlay: false,
-            content: [],
-            wait: false,
-            data_load: true,
-            empty: 47,
-            cartConCount: ''
-        };
+  data: function data() {
+    return {
+      overlay: false,
+      content: [],
+      wait: false,
+      data_load: true,
+      empty: 47,
+      cartConCount: '',
+      toggle_cart: true
+    };
+  },
+
+
+  methods: {
+    fetch: function (_fetch) {
+      function fetch() {
+        return _fetch.apply(this, arguments);
+      }
+
+      fetch.toString = function () {
+        return _fetch.toString();
+      };
+
+      return fetch;
+    }(function () {
+      var _this = this;
+
+      fetch('/cart-items' + '/' + localStorage.getItem('tempUserCartID')).then(function (res) {
+        return res.json();
+      }).then(function (res) {
+        _this.content = res.data;
+        //console.log(this.content)
+        _this.wait = false;
+        _this.empty = _this.content.length;
+      }).catch(function (error) {
+        //off loader
+        _this.data_load = false;
+        _this.wait = true;
+        setTimeout(function (func) {
+          _this.fetch();
+        }, 2000);
+      });
+    }),
+    countCartCon: function countCartCon() {
+      var _this2 = this;
+
+      this.overlay = !this.overlay;
+      fetch('/cartCount/' + localStorage.getItem('tempUserCartID')).then(function (res) {
+        return res.json();
+      }).then(function (res) {
+        _this2.cartConCount = res;
+        _this2.overlay = !_this2.overlay;
+      }).catch(function (error) {
+        _this2.overlay = !_this2.overlay;
+        setTimeout(function (func) {
+          _this2.countCartCon();
+        }, 2000);
+      });
     },
-
-
-    methods: {
-        fetch: function (_fetch) {
-            function fetch() {
-                return _fetch.apply(this, arguments);
-            }
-
-            fetch.toString = function () {
-                return _fetch.toString();
-            };
-
-            return fetch;
-        }(function () {
-            var _this = this;
-
-            fetch('/cart-items' + '/' + localStorage.getItem('tempUserCartID')).then(function (res) {
-                return res.json();
-            }).then(function (res) {
-                _this.content = res.data;
-                //console.log(this.content)
-                _this.wait = false;
-                _this.empty = _this.content.length;
-            }).catch(function (error) {
-                //off loader
-                _this.data_load = false;
-                _this.wait = true;
-                setTimeout(function (func) {
-                    _this.fetch();
-                }, 2000);
-            });
-        }),
-        countCartCon: function countCartCon() {
-            var _this2 = this;
-
-            this.overlay = !this.overlay;
-            fetch('/cartCount/' + localStorage.getItem('tempUserCartID')).then(function (res) {
-                return res.json();
-            }).then(function (res) {
-                _this2.cartConCount = res;
-                _this2.overlay = !_this2.overlay;
-            }).catch(function (error) {
-                _this2.overlay = !_this2.overlay;
-                setTimeout(function (func) {
-                    _this2.countCartCon();
-                }, 2000);
-            });
-        },
-        checkout: function checkout() {
-            if (localStorage.getItem('userToken')) {
-                //authed, proceed
-                this.$router.push({ name: "checkout" });
-            } else {
-                //auth needed
-                //set variable to redirect to checkout page after guest auth
-                localStorage.setItem('shopper', 'shopper');
-                //send to login
-                this.$router.push({ name: "login" });
-            }
-        }
-    },
-    watch: {
-        content: function content(a, b) {
-            if (a) {
-                //data content loaded, it is safe to display
-                this.data_load = false;
-                this.data = true;
-            }
-        }
-    },
-
-    mounted: function mounted() {
-        this.fetch();
-        this.countCartCon();
+    checkout: function checkout() {
+      if (localStorage.getItem('userToken')) {
+        //authed, proceed
+        this.$router.push({ name: "checkout" });
+      } else {
+        //auth needed
+        //set variable to redirect to checkout page after guest auth
+        localStorage.setItem('shopper', 'shopper');
+        //send to login
+        this.$router.push({ name: "login" });
+      }
     }
+  },
+
+  created: function created() {
+    var _this3 = this;
+
+    __WEBPACK_IMPORTED_MODULE_0__app_js__["eventBus"].$on('rerun_count', function () {
+      _this3.countCartCon();
+    });
+  },
+
+  watch: {
+    content: function content(a, b) {
+      if (a) {
+        //data content loaded, it is safe to toggle_cart
+        this.data_load = false;
+        this.data = true;
+      }
+    }
+  },
+
+  mounted: function mounted() {
+    this.fetch();
+    this.countCartCon();
+  }
 });
 
 /***/ }),
@@ -57860,7 +57879,19 @@ var render = function() {
           ],
           1
         )
-      ]
+      ],
+      _vm._v(" "),
+      _c("floatings", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.cartConCount > 0,
+            expression: "cartConCount > 0"
+          }
+        ],
+        attrs: { toggle_cart: _vm.toggle_cart }
+      })
     ],
     2
   )
@@ -57930,6 +57961,8 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_paystack__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_paystack___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_paystack__);
+//
+//
 //
 //
 //
@@ -62339,71 +62372,91 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            food: '',
-            price: '',
-            quantity: '',
-            overlay: false,
+  data: function data() {
+    return {
+      food: '',
+      price: '',
+      quantity: '',
+      overlay: false,
 
-            snackbar: false,
-            text: '',
-            timeout: 3000
-        };
+      snackbar: false,
+      text: '',
+      timeout: 3000,
+
+      picture: ''
+    };
+  },
+
+
+  methods: {
+    ImageSelect: function ImageSelect(event) {
+      this.picture = event.target.files[0];
     },
+    post: function post() {
+      var _this = this;
+
+      this.$validator.validateAll().then(function () {
+
+        if (!_this.errors.any()) {
+          //run code
+          _this.overlay = true;
+
+          var formdata = new FormData();
+          //append form data to formdata
+          formdata.append('food', _this.food);
+          formdata.append('price', _this.price);
+          formdata.append('quantity', _this.quantity);
+          formdata.append('vendorId', localStorage.getItem('userId'));
+          formdata.append('vendorName', localStorage.getItem('userName'));
+          formdata.append('img', _this.picture);
+
+          axios.post('/new-food', formdata).then(function (res) {
+            if (res.data == 1) {
+              _this.overlay = false;
+
+              sound.play();
+              _this.text = 'Food Added';
+              _this.snackbar = true;
+
+              _this.food = '';
+              _this.quantity = '';
+              _this.price = '';
+
+              setTimeout(function (func) {
+                _this.errors.clear();
+              }, 5);
+            } else {
+              _this.overlay = false;
+              _this.text = 'Operatiion Failed. Try again';
+              _this.snackbar = true;
+            }
+          }).catch(function (err) {
+            console.log(err);
+            _this.overlay = false;
+          });
+        } else {}
+        //do nothing, v validate will work
 
 
-    methods: {
-        post: function post() {
-            var _this = this;
-
-            this.$validator.validateAll().then(function () {
-
-                if (!_this.errors.any()) {
-                    //run code
-                    _this.overlay = true;
-
-                    var input = { food: _this.food, price: _this.price, quantity: _this.quantity,
-                        vendorId: localStorage.getItem('userId'), vendorName: localStorage.getItem('userName'), img: 'xxx' };
-
-                    axios.post('/new-food', input).then(function (res) {
-                        if (res.data == 1) {
-                            _this.overlay = false;
-
-                            sound.play();
-                            _this.text = 'Food Added';
-                            _this.snackbar = true;
-
-                            _this.food = '';
-                            _this.quantity = '';
-                            _this.price = '';
-
-                            setTimeout(function (func) {
-                                _this.errors.clear();
-                            }, 5);
-                        } else {
-                            _this.overlay = false;
-                            _this.text = 'Operatiion Failed. Try again';
-                            _this.snackbar = true;
-                        }
-                    }).catch(function (err) {
-                        console.log(err);
-                        _this.overlay = false;
-                    });
-                } else {}
-                //do nothing, v validate will work
-
-
-                //
-            });
-        }
-    },
-
-    mounted: function mounted() {
-        console.log('Component mounted.');
+        //
+      });
     }
+  },
+
+  mounted: function mounted() {
+    console.log('Component mounted.');
+  }
 });
 
 /***/ }),
@@ -62498,6 +62551,55 @@ var render = function() {
                                   staticClass: "text-danger shake"
                                 },
                                 [_vm._v(_vm._s(_vm.errors.first("food")))]
+                              )
+                            ])
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "form-group" },
+                          [
+                            _c(
+                              "label",
+                              { attrs: { for: "exampleInputEmail1" } },
+                              [_vm._v("Food Image")]
+                            ),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate",
+                                  value: "required|image",
+                                  expression: '"required|image"'
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "file",
+                                name: "picture",
+                                id: "exampleInputEmail1"
+                              },
+                              on: { change: _vm.ImageSelect }
+                            }),
+                            _vm._v(" "),
+                            _c("transition", { attrs: { name: "fadeLeft" } }, [
+                              _c(
+                                "span",
+                                {
+                                  directives: [
+                                    {
+                                      name: "show",
+                                      rawName: "v-show",
+                                      value: _vm.errors.has("picture"),
+                                      expression: "errors.has('picture')"
+                                    }
+                                  ],
+                                  staticClass: "text-danger shake"
+                                },
+                                [_vm._v(_vm._s(_vm.errors.first("picture")))]
                               )
                             ])
                           ],
@@ -67162,6 +67264,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -67172,8 +67277,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             wait: false,
             data_load: true,
             pagination: [],
-            food_count: ''
-
+            food_count: '',
+            toggle_cart: false
         };
     },
 
@@ -67527,7 +67632,7 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("floatings")
+      _c("floatings", { attrs: { toggle_cart: _vm.toggle_cart } })
     ],
     1
   )
@@ -104548,56 +104653,59 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
-    //share icons
-    data: function data() {
-        return {
-            loggedOut: null,
-            snackbar: false,
-            text: '',
-            timeout: 6000,
-            status: ''
-        };
-    },
+  //share icons
+  data: function data() {
+    return {
+      loggedOut: null,
+      snackbar: false,
+      text: '',
+      timeout: 6000,
+      status: ''
+    };
+  },
 
-    methods: {
-        //meth to check Auth
-        isAuth: function isAuth() {
-            if (localStorage.getItem('userToken')) {
-                this.loggedOut = false;
-                this.status = localStorage.getItem('userStatus');
-                return true;
-            } else {
-                this.loggedOut = true;
-                return false;
-            }
-        },
-        logout: function logout() {
-            NProgress.start();
-            localStorage.removeItem('userToken');
-            localStorage.removeItem('userId');
-            localStorage.removeItem('userName');
-            localStorage.removeItem('userMail');
-            localStorage.removeItem('userStatus');
-            //clear tempcartid
-            localStorage.removeItem('tempUserCartID');
-            //clear cart
-            var input = { 'userId': localStorage.getItem('tempUserCartID') };
-            axios.post('/clear-cart', input).then(function (res) {
-                console.log('cart cleared');
-            }).catch(function (error) {
-                console.log(error);
-            });
-            sound.play();
-            this.isAuth();
-            this.loggedOut = true;
-            NProgress.done();
-            this.$router.push({ name: "index" });
-        }
+  methods: {
+    //meth to check Auth
+    isAuth: function isAuth() {
+      if (localStorage.getItem('userToken')) {
+        this.loggedOut = false;
+        this.status = localStorage.getItem('userStatus');
+        return true;
+      } else {
+        this.loggedOut = true;
+        return false;
+      }
     },
+    logout: function logout() {
+      NProgress.start();
+      localStorage.removeItem('userToken');
+      localStorage.removeItem('userId');
+      localStorage.removeItem('userName');
+      localStorage.removeItem('userMail');
+      localStorage.removeItem('userStatus');
+      //clear tempcartid
+      localStorage.removeItem('tempUserCartID');
+      //clear cart
+      if (localStorage.getItem('tempUserCartID')) {
+        var input = { 'userId': localStorage.getItem('tempUserCartID') };
+        axios.post('/clear-cart', input).then(function (res) {
+          console.log('cart cleared');
+        }).catch(function (error) {
+          console.log(error);
+        });
+      }
 
-    mounted: function mounted() {
-        this.isAuth();
+      sound.play();
+      this.isAuth();
+      this.loggedOut = true;
+      NProgress.done();
+      this.$router.push({ name: "index" });
     }
+  },
+
+  mounted: function mounted() {
+    this.isAuth();
+  }
 });
 
 /***/ }),
@@ -104953,56 +105061,58 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
-  //share icons
-  data: function data() {
-    return {
-      loggedOut: null,
-      snackbar: false,
-      text: '',
-      timeout: 6000,
-      status: ''
-    };
-  },
-
-  methods: {
-    //meth to check Auth
-    isAuth: function isAuth() {
-      if (localStorage.getItem('userToken')) {
-        this.loggedOut = false;
-        this.status = localStorage.getItem('userStatus');
-        return true;
-      } else {
-        this.loggedOut = true;
-        return false;
-      }
+    //share icons
+    data: function data() {
+        return {
+            loggedOut: null,
+            snackbar: false,
+            text: '',
+            timeout: 6000,
+            status: ''
+        };
     },
-    logout: function logout() {
-      NProgress.start();
-      localStorage.removeItem('userToken');
-      localStorage.removeItem('userId');
-      localStorage.removeItem('userName');
-      localStorage.removeItem('userMail');
-      localStorage.removeItem('userStatus');
-      //clear tempcartid
-      localStorage.removeItem('tempUserCartID');
-      //clear cart
-      var input = { 'userId': localStorage.getItem('tempUserCartID') };
-      axios.post('/clear-cart', input).then(function (res) {
-        console.log('cart cleared');
-      }).catch(function (error) {
-        console.log(error);
-      });
-      sound.play();
-      this.isAuth();
-      this.loggedOut = true;
-      NProgress.done();
-      this.$router.push({ name: "index" });
-    }
-  },
 
-  mounted: function mounted() {
-    this.isAuth();
-  }
+    methods: {
+        //meth to check Auth
+        isAuth: function isAuth() {
+            if (localStorage.getItem('userToken')) {
+                this.loggedOut = false;
+                this.status = localStorage.getItem('userStatus');
+                return true;
+            } else {
+                this.loggedOut = true;
+                return false;
+            }
+        },
+        logout: function logout() {
+            NProgress.start();
+            localStorage.removeItem('userToken');
+            localStorage.removeItem('userId');
+            localStorage.removeItem('userName');
+            localStorage.removeItem('userMail');
+            localStorage.removeItem('userStatus');
+            //clear tempcartid
+            localStorage.removeItem('tempUserCartID');
+            //clear cart
+            if (localStorage.getItem('tempUserCartID')) {
+                var input = { 'userId': localStorage.getItem('tempUserCartID') };
+                axios.post('/clear-cart', input).then(function (res) {
+                    console.log('cart cleared');
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            }
+            sound.play();
+            this.isAuth();
+            this.loggedOut = true;
+            NProgress.done();
+            this.$router.push({ name: "index" });
+        }
+    },
+
+    mounted: function mounted() {
+        this.isAuth();
+    }
 });
 
 /***/ }),
@@ -105377,12 +105487,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             //clear tempcartid
             localStorage.removeItem('tempUserCartID');
             //clear cart
-            var input = { 'userId': localStorage.getItem('tempUserCartID') };
-            axios.post('/clear-cart', input).then(function (res) {
-                console.log('cart cleared');
-            }).catch(function (error) {
-                console.log(error);
-            });
+            if (localStorage.getItem('tempUserCartID')) {
+                var input = { 'userId': localStorage.getItem('tempUserCartID') };
+                axios.post('/clear-cart', input).then(function (res) {
+                    console.log('cart cleared');
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            }
             sound.play();
             this.isAuth();
             this.loggedOut = true;
@@ -106289,6 +106401,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_js__ = __webpack_require__(4);
 //
 //
 //
@@ -106343,6 +106456,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
@@ -106373,6 +106489,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     _this.snackbar = true;
                     //update cart count
                     _this.cartcount();
+                    //rerun method to recount cart content
+                    __WEBPACK_IMPORTED_MODULE_0__app_js__["eventBus"].$emit('rerun_count');
                 }
                 _this.deleted = true;
                 NProgress.done();
@@ -107174,11 +107292,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+
+            props: ['toggle_cart'],
+
             data: function data() {
                         return {
                                     count: ''
@@ -107202,6 +107325,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                                     });
                         });
             },
+
+            methods: {
+                        clear_cart: function clear_cart() {
+                                    var _this2 = this;
+
+                                    this.$toasted.show("Clearing Cart...");
+                                    //clear cart
+                                    var input = { 'userId': localStorage.getItem('tempUserCartID') };
+                                    axios.post('/clear-cart', input).then(function (res) {
+                                                console.log('cart cleared');
+                                                _this2.$toasted.show("Cart Cleared!");
+                                                //clear cart count
+                                                localStorage.removeItem('cart');
+
+                                                //redirect to food page
+                                                _this2.$router.push({ name: "shop" });
+                                    }).catch(function (error) {
+                                                console.log(error);
+                                    });
+                        }
+            },
+
             mounted: function mounted() {
 
                         if (localStorage.getItem('cart')) {
@@ -107223,51 +107368,67 @@ var render = function() {
   return _c(
     "div",
     [
-      _c(
-        "v-btn",
-        {
-          attrs: {
-            fab: "",
-            dark: "",
-            color: "info",
-            small: "",
-            relative: "",
-            bottom: "",
-            left: "",
-            fixed: ""
-          }
-        },
-        [_c("v-icon", { attrs: { dark: "" } }, [_vm._v("close")])],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "router-link",
-        { attrs: { to: "/checkout" } },
-        [
-          _c(
+      _vm.toggle_cart == true
+        ? _c(
             "v-btn",
             {
               attrs: {
                 fab: "",
                 dark: "",
-                color: "#fbc25b",
+                color: "info",
                 small: "",
                 relative: "",
                 bottom: "",
-                right: "",
+                left: "",
                 fixed: ""
+              },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.clear_cart()
+                }
               }
             },
             [
-              _vm._v("\n               " + _vm._s(_vm.count) + " "),
-              _c("v-icon", { attrs: { dark: "" } }, [_vm._v(" shopping_cart")])
+              _c("v-icon", { attrs: { dark: "" } }, [
+                _vm._v("remove_shopping_cart")
+              ])
             ],
             1
           )
-        ],
-        1
-      )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.toggle_cart == false
+        ? _c(
+            "router-link",
+            { attrs: { to: "/checkout" } },
+            [
+              _c(
+                "v-btn",
+                {
+                  attrs: {
+                    fab: "",
+                    dark: "",
+                    color: "#fbc25b",
+                    small: "",
+                    relative: "",
+                    bottom: "",
+                    right: "",
+                    fixed: ""
+                  }
+                },
+                [
+                  _vm._v("\n               " + _vm._s(_vm.count) + " "),
+                  _c("v-icon", { attrs: { dark: "" } }, [
+                    _vm._v(" shopping_cart")
+                  ])
+                ],
+                1
+              )
+            ],
+            1
+          )
+        : _vm._e()
     ],
     1
   )

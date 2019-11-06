@@ -104,7 +104,10 @@
   </div>
 </div>
       
-<floatings>   </floatings> 
+<floatings
+:toggle_cart=toggle_cart
+>
+</floatings>
 
   </div>
 </template>
@@ -123,7 +126,7 @@
               data_load: true,
               pagination: [],
               food_count:'',
-             
+              toggle_cart:false
           }
       },
   

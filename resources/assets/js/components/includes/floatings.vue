@@ -3,6 +3,7 @@
 
         <!--floating left-->
 			<v-btn 
+      v-if='toggle_cart == true'
 			fab 
 			dark
 			color="info"
@@ -10,13 +11,14 @@
 			relative
 			bottom
 			left
-			fixed
+      fixed
+      @click.prevent='clear_cart()'
 			  >
-			<v-icon dark>close</v-icon>
+			<v-icon dark>remove_shopping_cart</v-icon>
 			</v-btn>
           <!--  floating left-->
             
-            <router-link to='/checkout'>	
+            <router-link to='/checkout'  v-if='toggle_cart == false'>	
 			 <v-btn 
 			 fab 
 			 dark
@@ -43,6 +45,9 @@
 import {eventBus} from "../../app.js";
 
             export default {
+
+                props: ['toggle_cart'],
+
                data: () => ({
 					count:'',				
             }),
@@ -63,6 +68,30 @@ import {eventBus} from "../../app.js";
                 })
 
             })
+
+
+           },
+           methods:{
+
+            clear_cart(){
+              this.$toasted.show("Clearing Cart...");
+               //clear cart
+               var input = {'userId':localStorage.getItem('tempUserCartID')}
+            axios.post('/clear-cart',input).then(res=>{
+                console.log('cart cleared')
+                this.$toasted.show("Cart Cleared!");  
+                 //clear cart count
+                      localStorage.removeItem('cart')
+
+          //redirect to food page
+          this.$router.push({name: "shop"});
+            })
+            .catch(error =>{
+                console.log(error)    
+               })
+            
+         
+            },
 
 
            },

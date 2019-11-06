@@ -53,6 +53,9 @@
   </template>
         
         <script>
+
+import {eventBus} from "../../app.js";
+
         export default {
 
 props: ['con'],
@@ -83,6 +86,8 @@ methods: {
                         this.snackbar = true;
                          //update cart count
                          this.cartcount()
+                         //rerun method to recount cart content
+                         eventBus.$emit('rerun_count')
                     }
                     this.deleted = true;
                     NProgress.done();

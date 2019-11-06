@@ -32,6 +32,15 @@
                                </transition>
                         </div>
                         <div class="form-group">
+                            <label for="exampleInputEmail1">Food Image</label>
+                            <input type="file" class="form-control" name='picture' id="exampleInputEmail1" 
+                            @change='ImageSelect' v-validate='"required|image"'>
+  
+                            <transition  name="fadeLeft">
+                                <span class='text-danger shake' v-show="errors.has('picture')">{{ errors.first('picture') }}</span>
+                                 </transition>
+                          </div>
+                        <div class="form-group">
                           <label for="exampleInputPassword1">Price</label>
                           <input type="text" class="form-control" v-model='price' name='price' v-validate='"required|max:9|numeric"' id="exampleInputEmail1" placeholder="Eg: 500">
                           <transition  name="fadeLeft">
@@ -193,10 +202,17 @@ body {
               snackbar: false,
             text: '',
             timeout: 3000,
+
+            picture:'',
             }
         },
 
         methods: {
+
+          ImageSelect(event){
+          this.picture = event.target.files[0];
+        },
+
           post(){
 
             this.$validator.validateAll().then(() => {
@@ -205,10 +221,16 @@ body {
             //run code
             this.overlay=true
 
-        var input = {food:this.food, price:this.price, quantity:this.quantity,
-           vendorId:localStorage.getItem('userId'), vendorName:localStorage.getItem('userName'),img:'xxx'}
-           
-        axios.post('/new-food',input).then(res=>{
+            const formdata  = new FormData();
+    //append form data to formdata
+    formdata.append('food',  this.food);
+    formdata.append('price', this.price);
+    formdata.append('quantity', this.quantity);
+    formdata.append('vendorId', localStorage.getItem('userId'));
+    formdata.append('vendorName', localStorage.getItem('userName'));
+    formdata.append('img', this.picture);
+
+        axios.post('/new-food',formdata).then(res=>{
 			if(res.data == 1){
         this.overlay=false
 

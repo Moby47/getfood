@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\food;
 use App\order;
 use DB;
+use Image;
 
 //Api resource
 use App\Http\Resources\foodresource as foodres;
@@ -68,16 +69,59 @@ class vendorcontroller extends Controller
                     return 1;
                 }
                 
+
+
                 public function new_food(Request $request){
                   
+                    $food = $request->input('food');
+                    $price = $request->input('price');
+                    $quantity = $request->input('quantity');
+                    $vendorId = $request->input('vendorId');
+                    $vendorName = $request->input('vendorName');
+
+                    //.................compression algorithm...............//
+    
+           if($request->hasfile('img')){
+            //get filename with extension
+            $filenamewithextension = $request->file('img')->getClientOriginalName();
+    
+            //get filename without extension
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+    
+            //get file extension
+            $extension = $request->file('img')->getClientOriginalExtension();
+    
+            //filename to store
+            $filenametostore = $filename.'_'.time().'.'.$extension;
+    
+            //#original
+                //Upload File
+               // $request->file('img')->storeAs('public/food_original', $filenametostore);
+                //#resized
+                $request->file('img')->storeAs('public/food', $filenametostore);
+        
+                // #resized
+                //Resize image here
+                $thumbnailpath = public_path('/storage/food/'.$filenametostore);
+                $img = Image::make($thumbnailpath)->resize(550, 340, function($constraint) {
+                $constraint->aspectRatio();
+            });
+            $img->save($thumbnailpath);
+    
+           // return redirect('images')->with('success', "Image uploaded successfully.");
+          // return response()->Json('success!');
+        }else{
+            $filenametostore = 'noimage.jpg';
+        }
+    
+        //.................compression algorithm...............//
+
                   $save = new food;
 
                  // $save->
                     return $request;
 
-                    $data = findorfail($request->input('id'));
-                    $date->delete();
-                    return 1;
+                  //  return 1;
                 }
                 
 

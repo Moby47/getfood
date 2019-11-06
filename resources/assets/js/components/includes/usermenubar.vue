@@ -94,13 +94,15 @@
                           //clear tempcartid
                            localStorage.removeItem('tempUserCartID');
                        //clear cart
-                  var input = {'userId':localStorage.getItem('tempUserCartID')}
-                axios.post('/clear-cart',input).then(res=>{
-                    console.log('cart cleared')  
-                })
-                .catch(error =>{
-                    console.log(error)    
-                   })
+                       if(localStorage.getItem('tempUserCartID')){
+                    var input = {'userId':localStorage.getItem('tempUserCartID')}
+            axios.post('/clear-cart',input).then(res=>{
+                console.log('cart cleared')  
+            })
+            .catch(error =>{
+                console.log(error)    
+               })
+                   }
                        sound.play();
                        this.isAuth();
                        this.loggedOut = true;
