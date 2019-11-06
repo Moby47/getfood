@@ -3,6 +3,7 @@
 
         <!--floating left-->
 			<v-btn 
+      v-if='display == true'
 			fab 
 			dark
 			color="info"
@@ -12,7 +13,7 @@
 			left
 			fixed
 			  >
-			<v-icon dark>close</v-icon>
+			<v-icon dark>remove_shopping_cart</v-icon>
 			</v-btn>
           <!--  floating left-->
             
@@ -43,6 +44,9 @@
 import {eventBus} from "../../app.js";
 
             export default {
+
+                props: ['display'],
+
                data: () => ({
 					count:'',				
             }),
