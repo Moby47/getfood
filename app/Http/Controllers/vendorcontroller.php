@@ -118,10 +118,16 @@ class vendorcontroller extends Controller
 
                   $save = new food;
 
-                 // $save->
-                    return $request;
+                  $save->vendor_id = $vendorId;
+                  $save->vendor_name = $vendorName;
+                  $save->title = $food;
+                  $save->amt = $price;
+                  $save->qty =$quantity;
+                  $save->img = $filenametostore;
 
-                  //  return 1;
+                  $save->save();
+                  
+                    return 1;
                 }
                 
 

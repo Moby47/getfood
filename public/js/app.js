@@ -566,6 +566,170 @@ function toComment(sourceMap) {
 
 /***/ }),
 /* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "eventBus", function() { return eventBus; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vee_validate__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_toasted__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_toasted___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vue_toasted__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__router__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vuetify__ = __webpack_require__(119);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vuetify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_vuetify__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vuetify_dist_vuetify_min_css__ = __webpack_require__(120);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vuetify_dist_vuetify_min_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_vuetify_dist_vuetify_min_css__);
+
+/**
+ * First we will load all of this project's JavaScript dependencies which
+ * includes Vue and other libraries. It is a great starting point when
+ * building robust, powerful web applications using Vue and Laravel.
+ */
+
+__webpack_require__(17);
+
+window.Vue = __webpack_require__(6);
+
+/* ------------------------- Imports -------------------- */
+
+//vee validate
+
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vee_validate__["a" /* default */]);
+
+//toated
+// register the plugin on vue
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue_toasted___default.a, {
+    duration: 5000
+});
+// you can also pass options, check options reference below
+//Vue.use(Toasted, Options)
+
+
+//animate.css
+__webpack_require__(46);
+
+//vur router
+
+
+//vuetify
+
+
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_4_vuetify___default.a);
+
+/* ------------------------- Imports -------------------- */
+
+/* ------------------------URL interceptor for progressbar ----------------*/
+
+__WEBPACK_IMPORTED_MODULE_3__router__["a" /* default */].beforeResolve(function (to, from, next) {
+    // If this isn't an initial page load.
+    if (to.name) {
+        // Start the route progress bar.
+        NProgress.start();
+    }
+    next();
+});
+
+__WEBPACK_IMPORTED_MODULE_3__router__["a" /* default */].afterEach(function (to, from) {
+    // Complete the animation of the route progress bar.
+    NProgress.done();
+});
+
+/* ------------------------URL interceptor for progressbar ----------------*/
+
+/* ------------------------URL interceptor  ----------------*/
+
+//route middleware 
+__WEBPACK_IMPORTED_MODULE_3__router__["a" /* default */].beforeEach(function (to, from, next) {
+
+    if (to.matched.some(function (record) {
+        return record.meta.customer;
+    })) {
+        /***************** redirect if not auth customer********* */
+        if (localStorage.getItem('userToken')) {
+            //continue
+            if (localStorage.getItem('userStatus') == 0) {
+                next();
+            } else {
+                next({ path: '/userdashboard' });
+            }
+        } else {
+            //redirect
+            next({ path: '/' });
+        } //inner if close
+        /************************** */
+    } else if (to.matched.some(function (record) {
+        return record.meta.vendor;
+    })) {
+        /***************** redirect if not auth customer********* */
+        if (localStorage.getItem('userToken')) {
+            //continue
+            if (localStorage.getItem('userStatus') == 1) {
+                next();
+            } else {
+                next({ path: '/admindashboard' });
+            }
+        } else {
+            //redirect
+            next({ path: '/' });
+        } //inner if close
+        /************************** */
+    } else if (to.matched.some(function (record) {
+        return record.meta.authPage;
+    })) {
+        /************reirect if auth************** */
+        if (localStorage.getItem('userToken')) {
+            //continue
+            if (localStorage.getItem('userStatus') == 1) {
+                next({ path: '/admindashboard' });
+            } else {
+                next({ path: '/userdashboard' });
+            }
+        } else {
+            //redirect
+            next();
+        } //inner if close
+        /************************** */
+    } else {
+        /*********No redirect, just go on***************** */
+        next();
+    }
+} //func closure
+); //router close
+// route middleware 
+
+
+/* ------------------------URL interceptor ----------------*/
+
+/**
+ * Next, we will create a fresh Vue application instance and attach it to
+ * the page. Then, you may begin adding components to this application
+ * or customize the JavaScript scaffolding to fit your unique needs.
+ */
+
+var eventBus = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('index', __webpack_require__(15));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('menubar', __webpack_require__(122));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('vendormenubar', __webpack_require__(125));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('usermenubar', __webpack_require__(128));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('favButton', __webpack_require__(131));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('cartAdd', __webpack_require__(134));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('cartUpdate', __webpack_require__(137));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('favUpdate', __webpack_require__(140));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('floatings', __webpack_require__(143));
+
+var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
+    el: '#app',
+    router: __WEBPACK_IMPORTED_MODULE_3__router__["a" /* default */]
+});
+
+/***/ }),
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -791,170 +955,6 @@ function applyToTag (styleElement, obj) {
   }
 }
 
-
-/***/ }),
-/* 4 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "eventBus", function() { return eventBus; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vee_validate__ = __webpack_require__(44);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_toasted__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_toasted___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vue_toasted__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__router__ = __webpack_require__(49);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vuetify__ = __webpack_require__(119);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vuetify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_vuetify__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vuetify_dist_vuetify_min_css__ = __webpack_require__(120);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vuetify_dist_vuetify_min_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_vuetify_dist_vuetify_min_css__);
-
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
-__webpack_require__(17);
-
-window.Vue = __webpack_require__(6);
-
-/* ------------------------- Imports -------------------- */
-
-//vee validate
-
-
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vee_validate__["a" /* default */]);
-
-//toated
-// register the plugin on vue
-
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue_toasted___default.a, {
-    duration: 5000
-});
-// you can also pass options, check options reference below
-//Vue.use(Toasted, Options)
-
-
-//animate.css
-__webpack_require__(46);
-
-//vur router
-
-
-//vuetify
-
-
-
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_4_vuetify___default.a);
-
-/* ------------------------- Imports -------------------- */
-
-/* ------------------------URL interceptor for progressbar ----------------*/
-
-__WEBPACK_IMPORTED_MODULE_3__router__["a" /* default */].beforeResolve(function (to, from, next) {
-    // If this isn't an initial page load.
-    if (to.name) {
-        // Start the route progress bar.
-        NProgress.start();
-    }
-    next();
-});
-
-__WEBPACK_IMPORTED_MODULE_3__router__["a" /* default */].afterEach(function (to, from) {
-    // Complete the animation of the route progress bar.
-    NProgress.done();
-});
-
-/* ------------------------URL interceptor for progressbar ----------------*/
-
-/* ------------------------URL interceptor  ----------------*/
-
-//route middleware 
-__WEBPACK_IMPORTED_MODULE_3__router__["a" /* default */].beforeEach(function (to, from, next) {
-
-    if (to.matched.some(function (record) {
-        return record.meta.customer;
-    })) {
-        /***************** redirect if not auth customer********* */
-        if (localStorage.getItem('userToken')) {
-            //continue
-            if (localStorage.getItem('userStatus') == 0) {
-                next();
-            } else {
-                next({ path: '/userdashboard' });
-            }
-        } else {
-            //redirect
-            next({ path: '/' });
-        } //inner if close
-        /************************** */
-    } else if (to.matched.some(function (record) {
-        return record.meta.vendor;
-    })) {
-        /***************** redirect if not auth customer********* */
-        if (localStorage.getItem('userToken')) {
-            //continue
-            if (localStorage.getItem('userStatus') == 1) {
-                next();
-            } else {
-                next({ path: '/admindashboard' });
-            }
-        } else {
-            //redirect
-            next({ path: '/' });
-        } //inner if close
-        /************************** */
-    } else if (to.matched.some(function (record) {
-        return record.meta.authPage;
-    })) {
-        /************reirect if auth************** */
-        if (localStorage.getItem('userToken')) {
-            //continue
-            if (localStorage.getItem('userStatus') == 1) {
-                next({ path: '/admindashboard' });
-            } else {
-                next({ path: '/userdashboard' });
-            }
-        } else {
-            //redirect
-            next();
-        } //inner if close
-        /************************** */
-    } else {
-        /*********No redirect, just go on***************** */
-        next();
-    }
-} //func closure
-); //router close
-// route middleware 
-
-
-/* ------------------------URL interceptor ----------------*/
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-var eventBus = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
-
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('index', __webpack_require__(15));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('menubar', __webpack_require__(122));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('vendormenubar', __webpack_require__(125));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('usermenubar', __webpack_require__(128));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('favButton', __webpack_require__(131));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('cartAdd', __webpack_require__(134));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('cartUpdate', __webpack_require__(137));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('favUpdate', __webpack_require__(140));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('floatings', __webpack_require__(143));
-
-var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
-    el: '#app',
-    router: __WEBPACK_IMPORTED_MODULE_3__router__["a" /* default */]
-});
 
 /***/ }),
 /* 5 */
@@ -1966,7 +1966,7 @@ module.exports = Component.exports
 /* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(4);
+__webpack_require__(3);
 module.exports = __webpack_require__(146);
 
 
@@ -56835,7 +56835,7 @@ var content = __webpack_require__(52);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("b65963c8", content, false, {});
+var update = __webpack_require__(4)("b65963c8", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -57488,7 +57488,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_js__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_js__ = __webpack_require__(3);
 //
 //
 //
@@ -59353,7 +59353,7 @@ var content = __webpack_require__(74);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("32857de7", content, false, {});
+var update = __webpack_require__(4)("32857de7", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -60037,7 +60037,7 @@ var content = __webpack_require__(79);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("21e5375b", content, false, {});
+var update = __webpack_require__(4)("21e5375b", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -60918,7 +60918,7 @@ var content = __webpack_require__(84);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("5cdae8c2", content, false, {});
+var update = __webpack_require__(4)("5cdae8c2", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -62155,7 +62155,7 @@ var content = __webpack_require__(92);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("37e2406f", content, false, {});
+var update = __webpack_require__(4)("37e2406f", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -62426,7 +62426,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
               _this.overlay = false;
 
               sound.play();
-              _this.text = 'Food Added';
+              _this.text = 'Food  Successfully';
               _this.snackbar = true;
 
               _this.food = '';
@@ -62887,7 +62887,7 @@ var content = __webpack_require__(97);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("f4b4b6dc", content, false, {});
+var update = __webpack_require__(4)("f4b4b6dc", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -106058,7 +106058,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_js__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_js__ = __webpack_require__(3);
 //
 //
 //
@@ -106401,7 +106401,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_js__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_js__ = __webpack_require__(3);
 //
 //
 //
@@ -106801,7 +106801,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_js__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_js__ = __webpack_require__(3);
 //
 //
 //
@@ -107251,7 +107251,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_js__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_js__ = __webpack_require__(3);
 //
 //
 //

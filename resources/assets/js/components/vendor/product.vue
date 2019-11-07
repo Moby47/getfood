@@ -235,7 +235,7 @@ body {
         this.overlay=false
 
 				  sound.play();
-                this.text='Food Added'
+                this.text='Food  Successfully'
                         this.snackbar = true;
 
 				this.food = '';
