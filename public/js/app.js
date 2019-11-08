@@ -60463,6 +60463,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -60895,6 +60899,12 @@ var render = function() {
                                         _vm._v(" "),
                                         _c("td", [_vm._v(_vm._s(con.ref))]),
                                         _vm._v(" "),
+                                        _c("td", [_vm._v(_vm._s(con.address))]),
+                                        _vm._v(" "),
+                                        _c("td", [
+                                          _vm._v("By " + _vm._s(con.delivery))
+                                        ]),
+                                        _vm._v(" "),
                                         _c("td", [
                                           _vm._v(_vm._s(con.created_at))
                                         ])
@@ -61023,6 +61033,10 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Reference")]),
         _vm._v(" "),
+        _c("th", [_vm._v("Address")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Delivery")]),
+        _vm._v(" "),
         _c("th", [_vm._v("Date")])
       ])
     ])
@@ -61134,6 +61148,10 @@ exports.push([module.i, "\n.bd-placeholder-img[data-v-2d2efe67] {\n        font-
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
 //
 //
 //
@@ -61661,6 +61679,14 @@ var render = function() {
                                           _c("td", [_vm._v(_vm._s(con.ref))]),
                                           _vm._v(" "),
                                           _c("td", [
+                                            _vm._v(_vm._s(con.address))
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            _vm._v("By " + _vm._s(con.delivery))
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("td", [
                                             _vm._v(_vm._s(con.created_at))
                                           ])
                                         ]
@@ -61773,6 +61799,10 @@ var staticRenderFns = [
         _c("th", [_vm._v("Amount")]),
         _vm._v(" "),
         _c("th", [_vm._v("Reference")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Address")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Delivery")]),
         _vm._v(" "),
         _c("th", [_vm._v("Date")])
       ])

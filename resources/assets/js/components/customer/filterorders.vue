@@ -49,13 +49,17 @@
 												<th>Food</th>
                         <th>Amount</th>
                          <th>Reference</th>
-												<th>Date</th>
-                      </tr>
-                      </thead>
-											<tr class='animated tdPlopIn' v-for='con in content' v-bind:key='con.id'>
-												<td>{{con.title}}</td>
-                        <td>{{con.amt}}</td>
-                        <td>{{con.ref}}</td>
+                         <th>Address</th>
+                         <th>Delivery</th>
+                         <th>Date</th>
+                       </tr>
+                     </thead>
+                       <tr class='animated tdPlopIn' v-for='con in content' v-bind:key='con.id'>
+                         <td>{{con.title}}</td>
+                         <td>{{con.amt}}</td>
+                         <td>{{con.ref}}</td>
+                         <td>{{con.address}}</td>
+                         <td>By {{con.delivery}}</td>
 												<td>{{con.created_at}}</td>
 											</tr>
 										
