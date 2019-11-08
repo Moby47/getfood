@@ -6,7 +6,7 @@
   <div class="pages">
       <div data-page="cart" class="page no-toolbar no-navbar">
         <div class="page-content">
-              <div id="pages_maincontent">
+              <div id="pages_maincontent"> 
                
                   <br>
                   <nav aria-label="breadcrumb ">
