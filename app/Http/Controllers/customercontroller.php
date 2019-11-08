@@ -44,7 +44,8 @@ class customercontroller extends Controller
 
     public  function orders($userId){
       
-        $orders = order::orderby('id','desc')->where('cusId','=',$userId)->select('id','amt','ref','title','created_at')->paginate(3);
+        $orders = order::orderby('id','desc')->where('cusId','=',$userId)
+        ->select('id','amt','ref','title','created_at')->paginate(3);
       //  $orderT = order::where('cusId','=',$userId)->select('amt')->sum('amt');
 
       // return $obj = ['orders' => $orders, 'orderT' => $orderT];
@@ -67,6 +68,8 @@ class customercontroller extends Controller
       $save->ref = $ref;
       $save->trans = $trans;
       $save->cusId = $cusId;
+      $save->address = $request->input('address');
+      $save->delivery = $request->input('delivery');
 
       $save->save();
 

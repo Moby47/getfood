@@ -58088,6 +58088,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -58101,6 +58114,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       overlay: false,
       content: [],
       wait: false,
+      go: false,
+      choiceBtn: false,
+      address: '',
+      addText: false,
       data_load: true,
       empty: 47,
       charges: '50.00',
@@ -58129,8 +58146,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   methods: {
-    paid: function paid() {
+    self: function self() {
+      var del = localStorage.getItem('delivery');
+      if (del) {
+        localStorage.removeItem('delivery');
+      }
+      localStorage.setItem('delivery', 'self');
+      localStorage.setItem('address', 'N/A');
 
+      this.choiceBtn = !this.choiceBtn;
+      this.go = !this.go;
+    },
+    vendor: function vendor() {
+      this.addText = true;
+      this.choiceBtn = !this.choiceBtn;
+    },
+    ok: function ok() {
+      var _this = this;
+
+      this.$validator.validateAll().then(function () {
+
+        if (!_this.errors.any()) {
+          //go
+          var add = _this.address;
+          localStorage.setItem('delivery', 'vendor');
+          localStorage.setItem('address', add);
+          _this.addText = !_this.addText;
+          _this.go = !_this.go;
+        }
+      });
+    },
+    paid: function paid() {
       //save to db. order TB
       var input = { 'content': this.content, 'cusId': localStorage.getItem('userId') };
 
@@ -58148,8 +58194,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       if (response.status == 'success') {
         //save to DB
+        //    if(localStorage.getItem('address') && localStorage.getItem('delivery')){
+        var address = localStorage.getItem('address');
+        var delivery = localStorage.getItem('delivery');
+        //  }
 
-        var input = { 'total': this.total, 'ref': response.reference, 'trans': response.trans, 'cusId': localStorage.getItem('userId') };
+        var input = { 'total': this.total, 'ref': response.reference, 'trans': response.trans,
+          'cusId': localStorage.getItem('userId'), 'address': address, 'delivery': delivery };
         axios.post('/save-order', input).then(function (res) {
           console.log('order saved');
         }).catch(function (error) {
@@ -58164,8 +58215,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           console.log(error);
         });
 
-        //clear cart count
+        //clear local sto
         localStorage.removeItem('cart');
+        localStorage.removeItem('address');
+        localStorage.removeItem('delivery');
 
         //redirect to success page
         this.$router.push({ name: "success" });
@@ -58188,44 +58241,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       return fetch;
     }(function () {
-      var _this = this;
+      var _this2 = this;
 
       fetch('/checkout' + '/' + localStorage.getItem('tempUserCartID')).then(function (res) {
         return res.json();
       }).then(function (res) {
-        _this.content = res.data;
+        _this2.content = res.data;
         //  console.log(this.content)
-        _this.wait = false;
-        _this.empty = _this.content.length;
+        _this2.wait = false;
+        _this2.empty = _this2.content.length;
       }).catch(function (error) {
         //off loader
-        _this.data_load = false;
-        _this.wait = true;
+        _this2.data_load = false;
+        _this2.wait = true;
         setTimeout(function (func) {
-          _this.fetch();
+          _this2.fetch();
         }, 2000);
       });
     }),
     //
 
     getSumTotal: function getSumTotal() {
-      var _this2 = this;
+      var _this3 = this;
 
       this.overlay = !this.overlay;
       fetch('/sumtotal' + '/' + localStorage.getItem('tempUserCartID')).then(function (res) {
         return res.json();
       }).then(function (res) {
-        _this2.subtotal = res;
-        var sum = _this2.subtotal + 50;
+        _this3.subtotal = res;
+        var sum = _this3.subtotal + 50;
         //amount in naira
-        _this2.total = sum;
+        _this3.total = sum;
         //amount to kobo N500
-        _this2.amount = sum * 100;
-        _this2.overlay = !_this2.overlay;
+        _this3.amount = sum * 100;
+        _this3.overlay = !_this3.overlay;
       }).catch(function (error) {
-        _this2.overlay = !_this2.overlay;
+        _this3.overlay = !_this3.overlay;
         setTimeout(function (func) {
-          _this2.getSumTotal();
+          _this3.getSumTotal();
         }, 2000);
       });
     }
@@ -58461,33 +58514,161 @@ var render = function() {
                           ])
                         ]),
                         _vm._v(" "),
-                        [
-                          _c(
-                            "paystack",
-                            {
-                              attrs: {
-                                amount: _vm.amount,
-                                email: _vm.email,
-                                paystackkey: _vm.paystackkey,
-                                reference: _vm.reference,
-                                callback: _vm.callback,
-                                close: _vm.close,
-                                embed: false
-                              }
-                            },
-                            [
+                        _vm.go == true
+                          ? [
                               _c(
-                                "a",
+                                "paystack",
                                 {
-                                  staticClass:
-                                    "text-center button_full btyellow",
-                                  attrs: { href: "#", id: "pay" }
+                                  attrs: {
+                                    amount: _vm.amount,
+                                    email: _vm.email,
+                                    paystackkey: _vm.paystackkey,
+                                    reference: _vm.reference,
+                                    callback: _vm.callback,
+                                    close: _vm.close,
+                                    embed: false
+                                  }
                                 },
-                                [_vm._v("EAT")]
+                                [
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass:
+                                        "text-center button_full btyellow",
+                                      attrs: { href: "#", id: "pay" }
+                                    },
+                                    [_vm._v("EAT")]
+                                  )
+                                ]
                               )
                             ]
-                          )
-                        ]
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.choiceBtn == false
+                          ? _c(
+                              "a",
+                              {
+                                staticClass: "button_full btyellow slideUp",
+                                attrs: { href: "#" },
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    return _vm.self()
+                                  }
+                                }
+                              },
+                              [_vm._v("Pick-up By Self")]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.addText == true
+                          ? _c(
+                              "div",
+                              { staticClass: "form-group" },
+                              [
+                                _c(
+                                  "label",
+                                  { attrs: { for: "exampleInputEmail1" } },
+                                  [_vm._v("Food Name")]
+                                ),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.address,
+                                      expression: "address"
+                                    },
+                                    {
+                                      name: "validate",
+                                      rawName: "v-validate",
+                                      value: "required",
+                                      expression: '"required"'
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: {
+                                    type: "text",
+                                    name: "address",
+                                    id: "exampleInputEmail1",
+                                    placeholder:
+                                      "Eg: no 47 nehita, devine homes"
+                                  },
+                                  domProps: { value: _vm.address },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.address = $event.target.value
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "transition",
+                                  { attrs: { name: "fadeLeft" } },
+                                  [
+                                    _c(
+                                      "span",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "show",
+                                            rawName: "v-show",
+                                            value: _vm.errors.has("address"),
+                                            expression: "errors.has('address')"
+                                          }
+                                        ],
+                                        staticClass: "text-danger shake"
+                                      },
+                                      [
+                                        _vm._v(
+                                          _vm._s(_vm.errors.first("address"))
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.addText == true
+                          ? _c(
+                              "a",
+                              {
+                                staticClass: "button_full btyellow slideUp",
+                                attrs: { href: "#" },
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    return _vm.ok()
+                                  }
+                                }
+                              },
+                              [_vm._v("Ok")]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.choiceBtn == false
+                          ? _c(
+                              "a",
+                              {
+                                staticClass: "button_full btyellow slideUp",
+                                attrs: { href: "#" },
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    return _vm.vendor()
+                                  }
+                                }
+                              },
+                              [_vm._v("Vendor delivery")]
+                            )
+                          : _vm._e()
                       ],
                       2
                     )
@@ -107447,7 +107628,7 @@ if (false) {
 /* 146 */
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed: ModuleBuildError: Module build failed: Error: Node Sass does not yet support your current environment: Windows 64-bit with Unsupported runtime (72)\nFor more information on which environments are supported please see:\nhttps://github.com/sass/node-sass/releases/tag/v4.11.0\n    at module.exports (C:\\xampp\\htdocs\\getfoods\\node_modules\\node-sass\\lib\\binding.js:13:13)\n    at Object.<anonymous> (C:\\xampp\\htdocs\\getfoods\\node_modules\\node-sass\\lib\\index.js:14:35)\n    at Module._compile (internal/modules/cjs/loader.js:956:30)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:973:10)\n    at Module.load (internal/modules/cjs/loader.js:812:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:724:14)\n    at Module.require (internal/modules/cjs/loader.js:849:19)\n    at require (internal/modules/cjs/helpers.js:74:18)\n    at Object.<anonymous> (C:\\xampp\\htdocs\\getfoods\\node_modules\\sass-loader\\lib\\loader.js:3:14)\n    at Module._compile (internal/modules/cjs/loader.js:956:30)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:973:10)\n    at Module.load (internal/modules/cjs/loader.js:812:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:724:14)\n    at Module.require (internal/modules/cjs/loader.js:849:19)\n    at require (internal/modules/cjs/helpers.js:74:18)\n    at loadLoader (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\loadLoader.js:13:17)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:165:10)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:173:18\n    at loadLoader (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\loadLoader.js:36:3)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:165:10)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:173:18\n    at loadLoader (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\loadLoader.js:36:3)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:165:10)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:173:18\n    at loadLoader (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\loadLoader.js:36:3)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:169:2)\n    at runLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:362:2)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\NormalModule.js:195:19\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:364:11\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:170:18\n    at loadLoader (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\loadLoader.js:27:11)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:165:10)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:173:18\n    at loadLoader (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\loadLoader.js:36:3)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:165:10)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:173:18\n    at loadLoader (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\loadLoader.js:36:3)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:165:10)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:173:18\n    at loadLoader (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\loadLoader.js:36:3)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:169:2)\n    at runLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:362:2)\n    at NormalModule.doBuild (C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\NormalModule.js:182:3)\n    at NormalModule.build (C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\NormalModule.js:275:15)\n    at Compilation.buildModule (C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\Compilation.js:157:10)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\Compilation.js:460:10\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\NormalModuleFactory.js:243:5\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\NormalModuleFactory.js:94:13\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\tapable\\lib\\Tapable.js:268:11\n    at NormalModuleFactory.<anonymous> (C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\CompatibilityPlugin.js:52:5)\n    at NormalModuleFactory.applyPluginsAsyncWaterfall (C:\\xampp\\htdocs\\getfoods\\node_modules\\tapable\\lib\\Tapable.js:272:13)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\NormalModuleFactory.js:69:10\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\NormalModuleFactory.js:196:7\n    at processTicksAndRejections (internal/process/task_queues.js:75:11)");
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

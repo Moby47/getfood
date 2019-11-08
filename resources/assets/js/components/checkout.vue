@@ -82,7 +82,7 @@
                             </div>
                         </div> 
                         <!--show only if cart::exist-->
-                        <template>
+                        <template v-if='go == true'>
                             <paystack
                                 :amount="amount"
                                 :email="email"
@@ -97,7 +97,20 @@
                             
                         </template>
                        
+       <a href="#" class="button_full btyellow slideUp" v-if='choiceBtn == false' @click.prevent='self()'>Pick-up By Self</a> 
+            
+       <div class="form-group" v-if='addText == true'>
+        <label for="exampleInputEmail1">Food Name</label>
+        <input type="text" class="form-control" name='address' id="exampleInputEmail1" 
+        v-model='address' v-validate='"required"' placeholder="Eg: no 47 nehita, devine homes">
 
+        <transition  name="fadeLeft">
+            <span class='text-danger shake' v-show="errors.has('address')">{{ errors.first('address') }}</span>
+             </transition>
+      </div>
+      <a href="#" v-if='addText == true' class="button_full btyellow slideUp" @click.prevent='ok()'>Ok</a> 
+
+       <a href="#" class="button_full btyellow slideUp" v-if='choiceBtn == false' @click.prevent='vendor()'>Vendor delivery</a> 
                        
                 </span>
    
@@ -138,6 +151,10 @@ import paystack from 'vue-paystack';
               overlay:false,
                 content:[],
                 wait:false,
+                go:false,
+                choiceBtn:false,
+                address:'',
+                addText:false,
                 data_load: true,
                 empty:47,
                 charges:'50.00',
@@ -168,9 +185,39 @@ import paystack from 'vue-paystack';
         
         methods: {
 
-          paid(){            
-            
+          self(){
+            var del = localStorage.getItem('delivery')
+            if(del){
+              localStorage.removeItem('delivery')
+            }
+            localStorage.setItem('delivery','self')
+            localStorage.setItem('address', 'N/A')
 
+            this.choiceBtn = !this.choiceBtn
+            this.go = !this.go
+          },
+
+          vendor(){
+            this.addText = true
+            this.choiceBtn = !this.choiceBtn
+          },
+
+          ok(){
+            this.$validator.validateAll().then(() => {
+           
+           if (!this.errors.any()) {
+             //go
+            var add = this.address
+          localStorage.setItem('delivery','vendor')
+          localStorage.setItem('address', add)
+          this.addText = !this.addText
+          this.go = !this.go
+           }
+          })
+
+          },
+
+          paid(){            
             //save to db. order TB
            var input = {'content':this.content, 'cusId':localStorage.getItem('userId')}
 
@@ -189,8 +236,13 @@ import paystack from 'vue-paystack';
             
            if(response.status == 'success'){
             //save to DB
+        //    if(localStorage.getItem('address') && localStorage.getItem('delivery')){
+              var address = localStorage.getItem('address')
+              var delivery = localStorage.getItem('delivery')
+          //  }
 
-             var input = {'total':this.total,'ref':response.reference, 'trans':response.trans,'cusId':localStorage.getItem('userId')}
+             var input = {'total':this.total,'ref':response.reference, 'trans':response.trans,
+             'cusId':localStorage.getItem('userId'), 'address':address, 'delivery':delivery}
             axios.post('/save-order',input).then(res=>{
                 console.log('order saved')  
             })
@@ -207,8 +259,10 @@ import paystack from 'vue-paystack';
                 console.log(error)    
                })
             
-          //clear cart count
+          //clear local sto
             localStorage.removeItem('cart')
+            localStorage.removeItem('address')
+            localStorage.removeItem('delivery')
 
             //redirect to success page
             this.$router.push({name: "success"});

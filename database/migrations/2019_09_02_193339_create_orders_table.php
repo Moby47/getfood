@@ -20,6 +20,8 @@ class CreateOrdersTable extends Migration
             $table->string('ref');
             $table->string('trans');
             $table->integer('cusId');
+            $table->string('address')->nullable();
+            $table->string('delivery');
             $table->timestamps();
         });
     }
