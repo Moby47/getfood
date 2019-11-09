@@ -124,6 +124,7 @@ class vendorcontroller extends Controller
                   $save->amt = $price;
                   $save->qty =$quantity;
                   $save->img = $filenametostore;
+                  $save->vendorAddress = $request->input('address');
 
                   $save->save();
                   

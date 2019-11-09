@@ -25,7 +25,7 @@
                         <div class="form-group">
                           <label for="exampleInputEmail1">Food Name</label>
                           <input type="text" class="form-control" name='food' id="exampleInputEmail1" 
-                          v-model='food' v-validate='"required|max:49|alpha"' placeholder="Eg: Beans">
+                          v-model='food' v-validate='"required|max:49"' placeholder="Eg: Beans">
 
                           <transition  name="fadeLeft">
                               <span class='text-danger shake' v-show="errors.has('food')">{{ errors.first('food') }}</span>
@@ -89,6 +89,16 @@
       </v-snackbar>
       </template>
   
+       <!--Overlay-->
+<template>
+  <div class="text-center">
+    <v-overlay :value="overlay">
+      <v-progress-circular indeterminate size="64"></v-progress-circular>
+    </v-overlay>
+  </div>
+  </template>
+  <!--Overlay-->
+
       </div>
 </template>
 
@@ -229,6 +239,7 @@ body {
     formdata.append('vendorId', localStorage.getItem('userId'));
     formdata.append('vendorName', localStorage.getItem('userName'));
     formdata.append('img', this.picture);
+    formdata.append('address', localStorage.getItem('vendorAddress'));
 
         axios.post('/new-food',formdata).then(res=>{
 			if(res.data == 1){

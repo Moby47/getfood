@@ -33,7 +33,7 @@ class customauthcontroller extends Controller
         }
 
         return ['userToken'=>$token, 'userId'=>$user->id, 'userName'=> $user->name,'userMail'=>$user->email,
-        'userStatus'=>$user->status]; //ok
+        'userStatus'=>$user->status, 'vendorAddress'=>$user->address]; //ok
 
     }
 

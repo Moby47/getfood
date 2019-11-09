@@ -65,7 +65,8 @@ data: function() {
                         this.snackbar = true;
                             }else{ 
                        this.text='Maximum limit reached, no more Favorites!'
-                       this.snackbar = true;    
+                       this.snackbar = true;   
+                       this.isFavorited = !this.isFavorited
                             }
                             NProgress.done();
                            

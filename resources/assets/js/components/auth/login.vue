@@ -128,6 +128,9 @@
 
                                     if(status == 1){
                                   //admin
+                                  //load add to store
+                                  localStorage.setItem('vendorAddress',res.data.vendorAddress);
+
                                   this.$router.push({name: "admindashboard"});
                                 }else if (status == 0){
                                   //user

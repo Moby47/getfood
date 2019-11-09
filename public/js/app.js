@@ -58851,6 +58851,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -58995,6 +59001,7 @@ var render = function() {
                               { staticClass: "shop_thumb" },
                               [
                                 _c("v-img", {
+                                  staticClass: "img_size",
                                   attrs: {
                                     src: "/storage/food/" + con.img,
                                     alt: con.title,
@@ -59013,6 +59020,30 @@ var render = function() {
                                 _c("favUpdate", {
                                   attrs: { con: con, stash: con.qty }
                                 })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "p",
+                              { staticClass: "info" },
+                              [
+                                _c("v-icon", [_vm._v("restaurant")]),
+                                _vm._v(
+                                  " food by " +
+                                    _vm._s(con.vendor_name) +
+                                    "\n             "
+                                ),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("v-icon", { staticClass: "icon-shift" }, [
+                                  _vm._v("my_location")
+                                ]),
+                                _vm._v(
+                                  " " +
+                                    _vm._s(con.vendorAddress) +
+                                    "\n           "
+                                )
                               ],
                               1
                             )
@@ -62000,6 +62031,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
                 if (status == 1) {
                   //admin
+                  //load add to store
+                  localStorage.setItem('vendorAddress', res.data.vendorAddress);
+
                   _this.$router.push({ name: "admindashboard" });
                 } else if (status == 0) {
                   //user
@@ -62592,6 +62626,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -62631,6 +62675,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           formdata.append('vendorId', localStorage.getItem('userId'));
           formdata.append('vendorName', localStorage.getItem('userName'));
           formdata.append('img', _this.picture);
+          formdata.append('address', localStorage.getItem('vendorAddress'));
 
           axios.post('/new-food', formdata).then(function (res) {
             if (res.data == 1) {
@@ -62725,8 +62770,8 @@ var render = function() {
                                 {
                                   name: "validate",
                                   rawName: "v-validate",
-                                  value: "required|max:49|alpha",
-                                  expression: '"required|max:49|alpha"'
+                                  value: "required|max:49",
+                                  expression: '"required|max:49"'
                                 }
                               ],
                               staticClass: "form-control",
@@ -62987,7 +63032,7 @@ var render = function() {
             }
           },
           [
-            _vm._v("\n    " + _vm._s(_vm.text) + "\n    "),
+            _vm._v("\n      " + _vm._s(_vm.text) + "\n      "),
             _c(
               "v-btn",
               {
@@ -62998,7 +63043,27 @@ var render = function() {
                   }
                 }
               },
-              [_vm._v("\n      Close\n    ")]
+              [_vm._v("\n        Close\n      ")]
+            )
+          ],
+          1
+        )
+      ],
+      _vm._v(" "),
+      [
+        _c(
+          "div",
+          { staticClass: "text-center" },
+          [
+            _c(
+              "v-overlay",
+              { attrs: { value: _vm.overlay } },
+              [
+                _c("v-progress-circular", {
+                  attrs: { indeterminate: "", size: "64" }
+                })
+              ],
+              1
             )
           ],
           1
@@ -64274,8 +64339,8 @@ var render = function() {
                       {
                         name: "validate",
                         rawName: "v-validate",
-                        value: "required|max:255",
-                        expression: '"required|max:255"'
+                        value: "required|max:30",
+                        expression: '"required|max:30"'
                       }
                     ],
                     staticClass: "form_input required",
@@ -67478,6 +67543,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -67716,17 +67790,14 @@ var render = function() {
                                 { staticClass: "shop_thumb" },
                                 [
                                   _c("v-img", {
+                                    staticClass: "img_size",
                                     attrs: {
                                       src: "/storage/food/" + con.img,
                                       alt: con.title,
                                       "lazy-src": "/images/black-spinner.gif",
                                       title: ""
                                     }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("i", [
-                                    _vm._v("food by " + _vm._s(con.vendor_name))
-                                  ])
+                                  })
                                 ],
                                 1
                               ),
@@ -67752,6 +67823,30 @@ var render = function() {
                                   }),
                                   _vm._v(" "),
                                   _c("favButton", { attrs: { id: con.id } })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "p",
+                                { staticClass: "info" },
+                                [
+                                  _c("v-icon", [_vm._v("restaurant")]),
+                                  _vm._v(
+                                    " food by " +
+                                      _vm._s(con.vendor_name) +
+                                      "\n            "
+                                  ),
+                                  _c("br"),
+                                  _vm._v(" "),
+                                  _c("v-icon", { staticClass: "icon-shift" }, [
+                                    _vm._v("my_location")
+                                  ]),
+                                  _vm._v(
+                                    " " +
+                                      _vm._s(con.vendorAddress) +
+                                      "\n          "
+                                  )
                                 ],
                                 1
                               )
@@ -106053,6 +106148,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     } else {
                         _this.text = 'Maximum limit reached, no more Favorites!';
                         _this.snackbar = true;
+                        _this.isFavorited = !_this.isFavorited;
                     }
                     NProgress.done();
                 }).catch(function (error) {

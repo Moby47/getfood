@@ -21,6 +21,8 @@ class CreateFavouritesTable extends Migration
             $table->string('amt');
             $table->integer('qty');
             $table->string('img');
+            $table->string('vendor_name');
+            $table->string('vendorAddress');
             $table->timestamps();
         });
     }

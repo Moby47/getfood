@@ -53,3 +53,21 @@ color:black !important;
     #pay{
         margin: 0 40px 20px 79px;
     }
+
+
+.info{
+    margin-top: 96px !important;
+    background-color: #ffb42e;
+    border-radius: 5px;
+    padding: 5px !important;
+    font-size: 13px;
+    color:white;
+}
+
+.icon-shift{
+    padding-top: 5px;
+}
+
+.img_size{
+    height:90px !important;
+}

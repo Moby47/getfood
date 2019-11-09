@@ -60,7 +60,8 @@
               :src="'/storage/food/'+con.img"
               :alt="con.title"
               :lazy-src="`/images/black-spinner.gif`"
-              title="" ></v-img>   <i>food by {{con.vendor_name}}</i>
+              title=""
+              class='img_size' ></v-img>  
           </div>
           <div class="shop_item_details">
           <h4>{{con.title}}</h4>
@@ -80,7 +81,15 @@
 
           
           </div>
+          
+          <p class="info">
+           <v-icon>restaurant</v-icon> food by {{con.vendor_name}}
+            <br>
+            <v-icon class='icon-shift'>my_location</v-icon> {{con.vendorAddress}}
+          </p>
+
           </li> 
+         
       </ul>
 
     <span v-if='!empty'>

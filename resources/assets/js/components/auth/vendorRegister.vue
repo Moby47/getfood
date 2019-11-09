@@ -21,7 +21,7 @@
            <input type="text" v-model='regEmail' v-validate='"required|email|max:100"' name="Email" value="" class="form_input required" placeholder="Email" />
            <p class='text-danger shake' v-show="errors.has('regForm.Email')">{{ errors.first('regForm.Email') }}</p>
 
-           <input type="text" v-model='regAddress' name="Address"  v-validate='"required|max:255"' value="" class="form_input required" placeholder="Address" />
+           <input type="text" v-model='regAddress' name="Address"  v-validate='"required|max:30"' value="" class="form_input required" placeholder="Address" />
            <p class='text-danger shake' v-show="errors.has('regForm.Address')">{{ errors.first('regForm.Address') }}</p>
 
            <input type="text" v-model='regPhone' name="Phone"  v-validate='"required|max:11"' value="" class="form_input required" placeholder="Phone" />

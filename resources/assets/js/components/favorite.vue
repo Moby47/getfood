@@ -33,7 +33,8 @@
               :src="'/storage/food/'+con.img"
               :alt="con.title"
               :lazy-src="`/images/black-spinner.gif`"
-              title="" ></v-img>
+              title=""
+              class='img_size'  ></v-img>
           </div>
           <div class="shop_item_details">
              
@@ -44,6 +45,11 @@
           </favUpdate>
            
           </div>
+          <p class="info">
+            <v-icon>restaurant</v-icon> food by {{con.vendor_name}}
+             <br>
+             <v-icon class='icon-shift'>my_location</v-icon> {{con.vendorAddress}}
+           </p>
           </li> 
       </ul>
         

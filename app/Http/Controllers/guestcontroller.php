@@ -14,7 +14,8 @@ class guestcontroller extends Controller
 {
     //method to get food list for customers to see and buy
     public function get_foods(){
-        $food = food::orderby('id','desc')->select('id','amt','qty','title','img','vendor_id','vendor_name')->paginate(3);
+        $food = food::orderby('id','desc')->select('id','amt','qty','title','img','vendor_id',
+        'vendor_name','vendorAddress')->paginate(3);
         return foodres::collection($food);
     }
 
@@ -26,7 +27,7 @@ public function addFavorite(Request $request){
 
       //check if user likes 3 already
       $count = favourite::where('cusId','=',$userId)->select('title')->count();
-      if($count == 39){
+      if($count == 3){
           //maxed out
           return 2;
       }
@@ -48,6 +49,8 @@ public function addFavorite(Request $request){
         $save->amt = $food->amt;
         $save->qty = $food->qty;
         $save->img = $food->img;
+        $save->vendor_name= $food->vendor_name;
+        $save->vendorAddress= $food->vendorAddress;
         $save->save();
         return 1;
     }
@@ -67,7 +70,8 @@ public function removeFavorite(Request $request){
 
 
 public function getFavorites($id){
-  $fav = favourite::where('cusId','=',$id)->select('id','foodId','title','amt','qty','img','cusId')->paginate(3);
+  $fav = favourite::orderby('id', 'desc')->where('cusId','=',$id)->select('id','foodId','title','amt','qty','img',
+  'cusId','vendor_name','vendorAddress')->paginate(3);
     return favres::collection($fav);
 }
 
