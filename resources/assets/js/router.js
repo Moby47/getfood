@@ -22,6 +22,7 @@ import share from './components/share.vue'
 import shop from './components/shop.vue'
 import success from './components/success.vue'
 import notfound from './components/notfound.vue'
+import vendor from './components/vendor.vue'
 
 export default new Router({
     mode: 'history',
@@ -62,6 +63,14 @@ export default new Router({
             path: '/favorite',
             name: 'favorite',
             component: favorite,
+             meta:{
+              //  auth: true
+            }
+        },
+        {
+            path: '/vendor',
+            name: 'vendor',
+            component: vendor,
              meta:{
               //  auth: true
             }

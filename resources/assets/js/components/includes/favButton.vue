@@ -64,7 +64,7 @@ data: function() {
                         this.text='Food was already added to Favorites!'
                         this.snackbar = true;
                             }else{ 
-                       this.text='Maximum limit reached, no more Favorites!'
+                       this.text='Maximum limit reached. no more Favorites!'
                        this.snackbar = true;   
                        this.isFavorited = !this.isFavorited
                             }

@@ -8,11 +8,12 @@
               </div>
             </header>
           
-            <main role="main" class="inner cover slideUp">
-              <h1 class="cover-heading text-uppercase">Reserve your food</h1>
-              <p class="lead orange mist">Reduce your waiting time, with our reliable and efficient restaurant reservation system.</p>
+            <main role="main" class="inner cover slideUp arrange">
+              <h1 class="cover-heading text-uppercase hello">Hello {{userName}}</h1>
+              <p class="lead orange mist">Reduce your waiting time, with our reliable and
+                 efficient restaurant ordering and reservation system.</p>
               <p class="lead">
-                <router-link to="/shop" class="btn btn-lg btn-secondary">Enter Kitchen</router-link>
+                <router-link to="/shop" class="btn btn-lg orange-btn btn-secondary">Enter Kitchen</router-link>
               </p>
             </main>
           
@@ -28,6 +29,11 @@
 </template>
 
 <style scoped>
+
+  .arrange{
+    margin-top:-150px !important;
+  }
+
  .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -155,7 +161,7 @@ body {
 
         data(){
             return {
-
+              userName:''
             }
         },
 
@@ -185,7 +191,9 @@ body {
         },
 
         mounted() {
-            console.log('Component mounted.')
+            if(localStorage.getItem('userName')){
+              this.userName = localStorage.getItem('userName') +'.'
+            }
         }
     }
 </script>

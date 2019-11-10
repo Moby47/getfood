@@ -20,7 +20,9 @@
                 <li class="nav-item">
                   <router-link class="nav-link" to="/shop">Enter Kitchen</router-link>
                 </li>
-               
+                <li class="nav-item">
+                    <router-link class="nav-link" to="/vendor">Vendors</router-link>
+                  </li>
                   <li class="nav-item" v-if='loggedOut == true'>
                     <router-link class="nav-link" to="/login">Login</router-link>
                   </li>

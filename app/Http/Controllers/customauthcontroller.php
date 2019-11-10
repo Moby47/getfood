@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 //mail6
 use Mail;
 use App\Mail\Verify;
+use App\Mail\Welcome;
 
 class customauthcontroller extends Controller
 {
@@ -68,6 +69,15 @@ class customauthcontroller extends Controller
                  catch(\Exception $e){
             return ['msg' => 0];
              }
+
+             //welcome email
+             try{
+                Mail::to($user->email)->send(new Welcome());  
+                  }
+                  catch(\Exception $e){
+             return ['msg' => 0];
+              }
+
        //response
        return ['msg' => 1];
         }

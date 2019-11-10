@@ -21,6 +21,9 @@
               <router-link class="nav-link" to="/shop">Enter Kitchen</router-link>
             </li>
             <li class="nav-item">
+                <router-link class="nav-link" to="/vendor">Vendors</router-link>
+              </li>
+            <li class="nav-item">
                 <router-link class="nav-link" to="/favorite">My Favorite</router-link>
               </li>
             <li class="nav-item">

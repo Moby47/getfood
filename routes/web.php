@@ -45,7 +45,8 @@ Route::get('/cartCount/{id}', 'cartcontroller@cartCount');
 Route::get('/checkout/{id}', 'cartcontroller@checkout');
 Route::get('/sumtotal/{id}', 'cartcontroller@sumtotal');
 Route::get('/get-fav/{id}', 'guestcontroller@getFavorites');
-//Route::get('/cart-count/{id}', 'cartcontroller@cartcount');
+Route::get('/vendor-food/{vendor}', 'guestcontroller@vendorFood');
+Route::get('/vendor-list', 'guestcontroller@vendorList');
 
 //vendor routes
 Route::get('/get-orders', 'vendorcontroller@get_orders');

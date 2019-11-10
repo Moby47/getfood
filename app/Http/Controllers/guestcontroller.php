@@ -25,9 +25,9 @@ public function addFavorite(Request $request){
     $userId = $request->input('userId');
     $foodId = $request->input('foodId');
 
-      //check if user likes 3 already
+      //check if user likes 6 already
       $count = favourite::where('cusId','=',$userId)->select('title')->count();
-      if($count == 3){
+      if($count == 6){
           //maxed out
           return 2;
       }
@@ -71,7 +71,7 @@ public function removeFavorite(Request $request){
 
 public function getFavorites($id){
   $fav = favourite::orderby('id', 'desc')->where('cusId','=',$id)->select('id','foodId','title','amt','qty','img',
-  'cusId','vendor_name','vendorAddress')->paginate(3);
+  'cusId','vendor_name','vendorAddress')->paginate(6);
     return favres::collection($fav);
 }
 
@@ -134,6 +134,29 @@ $foodId = $request->input('foodId');
 
 return 1;
 }
+
+
+
+
+
+public function vendorFood($vendor){
+  $food = food::orderby('id','desc')->where('vendor_name','=',$vendor)
+  ->select('id','amt','qty','title','img','vendor_id','vendor_name','vendorAddress')->paginate(2);
+
+  return foodres::collection($food);
+  }
+
+
+  public function vendorList(){
+    return $list = food::orderby('id','desc')
+    ->select('id','vendor_name','vendorAddress')->get()->toArray();
+    
+    return $fav = DB::table('foods')
+    ->select('vendor_name', DB::raw('count(*) as total'))
+    ->groupBy('vendor_name')->get();
+
+    }
+
 
 
 }

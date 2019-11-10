@@ -92,11 +92,16 @@
                                 :close="close"
                                 :embed="false"
                             >
-                            <a href="#"  id='pay' class="text-center button_full btyellow">EAT</a> 
+                            <a href="#"  id='pay' class="text-center button_full btyellow slideUp">EAT</a> 
                             </paystack>
                             
                         </template>
-                       
+                        
+            <!--reset back to select delivery meth-->
+            <a href="#" class="button_full btyellow slideUp" v-if='go == true'
+             @click.prevent='back()'>Delivery Method</a> 
+       
+            
        <a href="#" class="button_full btyellow slideUp" v-if='choiceBtn == false' @click.prevent='self()'>Pick-up By Self</a> 
             
        <div class="form-group" v-if='addText == true'>
@@ -215,6 +220,12 @@ import paystack from 'vue-paystack';
            }
           })
 
+          },
+
+          back(){
+            this.go = !this.go
+            //this.addText = !this.addText
+            this.choiceBtn = !this.choiceBtn
           },
 
           paid(){            

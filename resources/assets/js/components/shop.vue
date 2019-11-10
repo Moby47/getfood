@@ -83,7 +83,7 @@
           </div>
           
           <p class="info">
-           <v-icon>restaurant</v-icon> food by {{con.vendor_name}}
+           <v-icon>restaurant</v-icon> {{con.vendor_name}}
             <br>
             <v-icon class='icon-shift'>my_location</v-icon> {{con.vendorAddress}}
           </p>

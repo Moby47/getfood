@@ -12,7 +12,8 @@
             :src="'/storage/food/'+con.attributes.image"
             :alt="con.title"
             :lazy-src="`/images/black-spinner.gif`"
-            title="" ></v-img>
+            title="" 
+            class='img_size'></v-img>
             </a></div>
 
             <div class="item_qnty">
