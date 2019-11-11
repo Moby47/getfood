@@ -93,7 +93,7 @@ public function removeFromFav(Request $request){
 
 
   //add fav to cart 
-public function addToCart(Request $request){
+public function favAddToCart(Request $request){
 	//expected params, user id and food id and qty
 $userId = $request->input('userId'); //rand and local
 $foodId = $request->input('foodId');

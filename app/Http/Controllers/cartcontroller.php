@@ -34,7 +34,7 @@ if($food->qty < $qty){
     'name' => $food->title,
     'price' => $food->amt,
     'quantity' => $qty,
-    "attributes"=> ['image' => $food->img, 'total'=> $total],
+    "attributes"=> ['image' => $food->img, 'total'=> $total, 'vendor_id'=> $food->vendor_id],
 	
 ));
 
@@ -45,6 +45,19 @@ if($foodId == \Cart::get($foodId)->id){
       'value'=>$qty )
   ));
 }
+
+/*
+
+$OK = new temp;
+$ok->localId = $userId;
+$ok->vendorId = $food->vendor_id;
+$ok->foodId = $foodId;
+$ok->title = $food->title;
+$ok->amt = $food->amt;
+$ok->qty = $food->qty;
+$ok->save();
+
+*/
 
 	return 1;
 }

@@ -37,7 +37,7 @@ Route::Post('/remove-favorite', 'guestcontroller@removeFavorite');
 Route::Post('/remove-from-fav', 'guestcontroller@removeFromFav');
 
 Route::Post('/remove-fav-from-cart', 'guestcontroller@removeFromCart');
-Route::Post('/add-fav-to-cart', 'guestcontroller@addToCart');
+Route::Post('/add-fav-to-cart', 'guestcontroller@favAddToCart');
 
 Route::get('/cart-items/{id}', 'cartcontroller@cartItems');
 Route::get('/get-foods', 'guestcontroller@get_foods');
