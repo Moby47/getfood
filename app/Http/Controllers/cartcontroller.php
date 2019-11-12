@@ -46,18 +46,18 @@ if($foodId == \Cart::get($foodId)->id){
   ));
 }
 
-/*
+
 
 $OK = new temp;
-$ok->localId = $userId;
+$ok->tempId = $userId;
 $ok->vendorId = $food->vendor_id;
 $ok->foodId = $foodId;
-$ok->title = $food->title;
+//$ok->userId = $userId; nullable
+//$ok->delovery = $delovery; nuulable
+$ok->foodName = $food->title;
 $ok->amt = $food->amt;
 $ok->qty = $food->qty;
 $ok->save();
-
-*/
 
 	return 1;
 }
