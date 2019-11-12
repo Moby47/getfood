@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\food;
+use App\temp;
 
 //Api resource
 use App\Http\Resources\cartresource as cartres;
@@ -48,15 +49,16 @@ if($foodId == \Cart::get($foodId)->id){
 
 
 
-$OK = new temp;
+$ok = new temp;
+
 $ok->tempId = $userId;
 $ok->vendorId = $food->vendor_id;
 $ok->foodId = $foodId;
 //$ok->userId = $userId; nullable
-//$ok->delovery = $delovery; nuulable
+//$ok->delivery = $delivery; nuulable
 $ok->foodName = $food->title;
 $ok->amt = $food->amt;
-$ok->qty = $food->qty;
+$ok->qty = $qty;
 $ok->save();
 
 	return 1;

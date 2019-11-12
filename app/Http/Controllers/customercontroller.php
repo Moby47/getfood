@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\order;
+use App\temp;
 
 //resource
 use App\Http\Resources\orderresource as orderres;
@@ -55,7 +56,7 @@ class customercontroller extends Controller
 
       
     public  function saveorder(Request $request){
-      
+      /*
       $cusId = $request->input('cusId');
       $total = $request->input('total');
       $ref = $request->input('ref');
@@ -72,8 +73,53 @@ class customercontroller extends Controller
       $save->delivery = $request->input('delivery');
 
       $save->save();
+      */
+/*
+      $save = new order;
+      $save->delivery = $request->input('delivery');
+      $cusId = $request->input('cusId');
+      $save->address = $request->input('address');
+      $save->amt = $request->input('total');
+      $total = $request->input('total');
+      $save->ref = $request->input('ref');
+      $save->trans = $request->input('trans');
+      $save->save();
+*/
+//get temp data
+$tempId = $request->input('tempId');
+ $temp = temp::where('tempId','=',$tempId)->get();
+
+//get checkout data
+$cusId = $request->input('cusId');
+$total = $request->input('total');
+$ref = $request->input('ref');
+$trans = $request->input('trans');
+$add = $request->input('address');
+$deli = $request->input('delivery');
+
+//combine and save data to order table
+
+$content = [];
+foreach($temp as $t){
+  $content[]= [
+ 'foodId'=> $t->foodId,
+ 'vendorId'=> $t->vendorId,
+ 'cusId'=> $cusId,
+ 'qty'=> $t->qty,
+ 'amt'=> $t->amt,
+ 'title'=> $t->foodName,
+  'address' => $add,
+  'delivery'=> $deli,
+  'total'=> $total,
+  'ref'=> $ref,
+  'trans'=> $trans,
+  ];
+}
+order::insert($content);
+
 
       return 1;
+
      }
 
      

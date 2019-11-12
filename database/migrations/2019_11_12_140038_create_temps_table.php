@@ -23,6 +23,7 @@ class CreateTempsTable extends Migration
             $table->integer('qty');
             $table->string('amt');
             $table->string('foodName');
+            $table->string('address')->nullable();
             $table->string('delivery')->nullable();
 
             $table->timestamps();

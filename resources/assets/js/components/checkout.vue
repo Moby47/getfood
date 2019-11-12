@@ -253,7 +253,8 @@ import paystack from 'vue-paystack';
           //  }
 
              var input = {'total':this.total,'ref':response.reference, 'trans':response.trans,
-             'cusId':localStorage.getItem('userId'), 'address':address, 'delivery':delivery}
+             'cusId':localStorage.getItem('userId'), 'address':address, 'delivery':delivery,
+             'tempId':localStorage.getItem('tempUserCartID')}
             axios.post('/save-order',input).then(res=>{
                 console.log('order saved')  
             })
