@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\food;
 use App\favourite;
+use App\temp;
+use DB;
 
 //resource
 use App\Http\Resources\foodresource as foodres;
@@ -131,6 +133,12 @@ $userId = $request->input('userId'); //rand and local
 $foodId = $request->input('foodId');
 
 \Cart::session($userId)->remove($foodId);
+
+//clear my temp items
+$del = temp::where('tempId','=',$userId)->where('foodId','=',$foodId)
+->select('tempId','id','foodId')->get()->first();
+$kill = temp::findorfail($del->id);
+$kill->delete();
 
 return 1;
 }

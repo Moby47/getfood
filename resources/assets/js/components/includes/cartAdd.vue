@@ -99,7 +99,7 @@ data: function() {
                         })
                         .catch(error =>{
                   this.$toasted.show("Failed to add. Try again");
-                  this.isAdded = !this.isAdded
+                 // this.isAdded = !this.isAdded
                     this.overlay = !this.overlay        
                       })
             },

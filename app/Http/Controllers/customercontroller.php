@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\order;
 use App\temp;
+use DB;
 
 //resource
 use App\Http\Resources\orderresource as orderres;
@@ -46,7 +47,7 @@ class customercontroller extends Controller
     public  function orders($userId){
       
         $orders = order::orderby('id','desc')->where('cusId','=',$userId)
-        ->select('id','amt','ref','title','address','delivery','created_at')->paginate(3);
+        ->select('id','amt','qty','ref','title','address','delivery','created_at')->paginate(3);
       //  $orderT = order::where('cusId','=',$userId)->select('amt')->sum('amt');
 
       // return $obj = ['orders' => $orders, 'orderT' => $orderT];
@@ -56,38 +57,10 @@ class customercontroller extends Controller
 
       
     public  function saveorder(Request $request){
-      /*
-      $cusId = $request->input('cusId');
-      $total = $request->input('total');
-      $ref = $request->input('ref');
-      $trans = $request->input('trans');
-
-      $save = new order;
-
-      $save->title = 'Purchased food items';
-      $save->amt = $total;
-      $save->ref = $ref;
-      $save->trans = $trans;
-      $save->cusId = $cusId;
-      $save->address = $request->input('address');
-      $save->delivery = $request->input('delivery');
-
-      $save->save();
-      */
-/*
-      $save = new order;
-      $save->delivery = $request->input('delivery');
-      $cusId = $request->input('cusId');
-      $save->address = $request->input('address');
-      $save->amt = $request->input('total');
-      $total = $request->input('total');
-      $save->ref = $request->input('ref');
-      $save->trans = $request->input('trans');
-      $save->save();
-*/
+      
 //get temp data
 $tempId = $request->input('tempId');
- $temp = temp::where('tempId','=',$tempId)->get();
+ $temp = temp::where('tempId','=',$tempId)->select('tempId','id','foodId','vendorId','qty','amt','foodName')->get();
 
 //get checkout data
 $cusId = $request->input('cusId');
@@ -113,13 +86,17 @@ foreach($temp as $t){
   'total'=> $total,
   'ref'=> $ref,
   'trans'=> $trans,
+  'created_at'=> \Carbon\Carbon::now(),
+  'updated_at'=> \Carbon\Carbon::now()
   ];
 }
 order::insert($content);
 
-
-      return 1;
-
+/*//clear my temp items
+$ids = temp::where('tempId','=',$tempId)->select('id')->get()->toArray();
+DB::table('temps')->whereIn('id', $ids)->delete();
+*/
+return 1;
      }
 
      

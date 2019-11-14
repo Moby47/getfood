@@ -60551,6 +60551,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -60981,6 +60983,8 @@ var render = function() {
                                         _vm._v(" "),
                                         _c("td", [_vm._v(_vm._s(con.amt))]),
                                         _vm._v(" "),
+                                        _c("td", [_vm._v(_vm._s(con.qty))]),
+                                        _vm._v(" "),
                                         _c("td", [_vm._v(_vm._s(con.ref))]),
                                         _vm._v(" "),
                                         _c("td", [_vm._v(_vm._s(con.address))]),
@@ -61114,6 +61118,8 @@ var staticRenderFns = [
         _c("th", [_vm._v("Food")]),
         _vm._v(" "),
         _c("th", [_vm._v("Amount")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Quantity")]),
         _vm._v(" "),
         _c("th", [_vm._v("Reference")]),
         _vm._v(" "),
@@ -107359,7 +107365,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.overlay = !_this.overlay;
             }).catch(function (error) {
                 _this.$toasted.show("Failed to add. Try again");
-                _this.isAdded = !_this.isAdded;
+                // this.isAdded = !this.isAdded
                 _this.overlay = !_this.overlay;
             });
         },
@@ -108145,7 +108151,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this2.overlay = !_this2.overlay;
             }).catch(function (error) {
                 _this2.$toasted.show("Failed to add. Try again");
-                _this2.isAdded = !_this2.isAdded;
+                // this.isAdded = !this.isAdded
                 _this2.overlay = !_this2.overlay;
             });
         },

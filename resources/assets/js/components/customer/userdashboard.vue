@@ -59,6 +59,7 @@
                         <tr>
 												<th>Food</th>
                         <th>Amount</th>
+                        <th>Quantity</th>
                         <th>Reference</th>
                         <th>Address</th>
                         <th>Delivery</th>
@@ -68,6 +69,7 @@
 											<tr class='animated tdPlopIn' v-for='con in content' v-bind:key='con.id'>
 												<td>{{con.title}}</td>
                         <td>{{con.amt}}</td>
+                        <td>{{con.qty}}</td>
                         <td>{{con.ref}}</td>
                         <td>{{con.address}}</td>
                         <td>By {{con.delivery}}</td>
