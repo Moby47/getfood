@@ -92,10 +92,10 @@ foreach($temp as $t){
 }
 order::insert($content);
 
-/*//clear my temp items
+//clear my temp items
 $ids = temp::where('tempId','=',$tempId)->select('id')->get()->toArray();
 DB::table('temps')->whereIn('id', $ids)->delete();
-*/
+
 return 1;
      }
 

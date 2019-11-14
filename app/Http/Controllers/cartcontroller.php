@@ -177,10 +177,40 @@ $ok->save();
         //get total
         $total = \Cart::get($foodId)->getPriceSum();
   
+          //get updated qty from session
+      $qty = \Cart::get($foodId)->quantity; 
+      
         //update total
         \Cart::session($userId)->update($foodId,array(
              "attributes"=> ['image' => $food->img,'total'=> $total]
           ));
+
+           //check if exist
+$ok = temp::where('tempId','=',$userId)->where('foodId','=',$foodId)->select('id')->get()->first();
+
+if($ok){
+  //update
+  $ok->tempId = $userId;
+  $ok->vendorId = $food->vendor_id;
+  $ok->foodId = $food->id;
+  $ok->foodName = $food->title;
+  $ok->amt = $food->amt;
+  $ok->qty = $qty;
+  $ok->save();
+
+}else{
+  //save new
+  $ok = new temp;
+
+$ok->tempId = $userId;
+$ok->vendorId = $food->vendor_id;
+$ok->foodId = $food->id;
+$ok->foodName = $food->title;
+$ok->amt = $food->amt;
+$ok->qty = $qty;
+$ok->save();
+}
+
           //return latest quantity
           return array('qty'=>\Cart::get($foodId)->quantity, 'subtotal'=>\Cart::get($foodId)->attributes->total);
         }

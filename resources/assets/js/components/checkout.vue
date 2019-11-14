@@ -263,7 +263,7 @@ import paystack from 'vue-paystack';
                })
             
             //clear cart
-           /*   var input = {'userId':localStorage.getItem('tempUserCartID')}
+            var input = {'userId':localStorage.getItem('tempUserCartID')}
             axios.post('/clear-cart',input).then(res=>{
                 console.log('cart cleared')  
             })
@@ -275,7 +275,7 @@ import paystack from 'vue-paystack';
             localStorage.removeItem('cart')
             localStorage.removeItem('address')
             localStorage.removeItem('delivery')
-          */
+          
             //redirect to success page
             this.$router.push({name: "success"});
 
