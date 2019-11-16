@@ -24,7 +24,7 @@
                 <router-link class="nav-link" to="/vendor">Vendors</router-link>
               </li>
             <li class="nav-item">
-                <router-link class="nav-link" to="/favorite">My Favorite</router-link>
+                <router-link class="nav-link" to="/favorite">My Favorites</router-link>
               </li>
             <li class="nav-item">
               <router-link class="nav-link" to="/about">About Getfoods</router-link>

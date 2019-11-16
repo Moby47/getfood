@@ -9,21 +9,14 @@
     padding-left: 31px !important;
  }
 
- .orange-btn{
-    background-color:  #ffb42e !important;
-    color: white !important;
- }
-
- .hello{
-    border-color: #FFA500 !important;
- }
 
 .menu-over{
     z-index: 100 !important;
 }
 
 .mist{
-    background-color: rgba(255, 193, 7, 0.58);
+    background-color: rgba(35, 33, 29, 0.58);
+    margin: 10px;
     padding: 7px;
     border-radius: 7px;
     font-weight: 350 !important;

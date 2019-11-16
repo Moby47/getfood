@@ -11,33 +11,108 @@
                   <br>
                   <nav aria-label="breadcrumb ">
                           <ol class="breadcrumb">
-                            <li class="breadcrumb-item active" aria-current="page">Customer orders (Weekly)</li>
+                            <li class="breadcrumb-item active" aria-current="page">Customer Orders</li>
                           </ol>
                         </nav>
 
              <div class='bg-light'>
                 <main role="main" class="container">
   
-                    <div class="table-responsive">
-                      <table class="table table-striped table-sm">
-                        <tr>
-												<th>Customer</th>
-												<th>Amount</th>
-												<th>Date</th>
-											</tr>
+                  <form>
+                    <div class="mt-4 form-group">
+<input class="form-control" id="exampleInputEmail1" v-validate='"required"' placeholder='Enter reference number' name='Reference' v-model='ref'/> 
+<transition  name="fadeLeft">
+  <span class='text-danger shake' v-show="errors.has('Reference')">{{ errors.first('Reference') }}</span>
+   </transition>
+<br>
+<a href='#' @click.prevent='search()' class="button_full btyellow slideUp">Find</a> 
+               </div>
+                
+                  </form>
 
-											<tr>
-												<td>Gabb</td>
-												<td>400</td>
-												<td>2/12/2019</td>
+                  <!--search result-->
+                  <h6 class="border-bottom border-gray pb-2 mb-0" v-show='refCon'>Customer Order</h6>
+
+                  <div v-if='empty2' class='text-center alert alert-info'>
+                   No Transaction Found
+                   </div>
+
+                   <span v-if='!empty2' v-show='refCon'>
+
+                  <div class="table-responsive">
+                    <table class="table table-striped table-sm table-hover table-bordered">
+                    <thead class='thead-dark'>
+                      <tr>
+                      <th>Food</th>
+                      <th>Amount</th>
+                      <th>Quantity</th>
+                      <th>Reference</th> 
+                      <th>Address</th>
+                      <th>Delivery</th>
+                      <th>Date</th>
+                    </tr>
+                  </thead>
+                    <tr class='animated tdPlopIn' v-for='con in refContent' v-bind:key='con.id'>
+                      <td>{{con.title}}</td>
+                      <td>{{con.amt}}</td>
+                      <td>{{con.qty}}</td> 
+                      <td>{{con.ref}}</td>
+                      <td>{{con.address}}</td>
+                      <td>By {{con.delivery}}</td>
+                      <td>{{con.created_at}}</td>
+                    </tr>
+                  
+                    </table>
+                  </div>
+
+
+                  </span>
+
+
+                    <!--all orders-->
+                    <h6 class="border-bottom border-gray pb-2 mb-0">Customer Order(s)</h6>
+
+                    <div v-if='empty' class='text-center alert alert-info'>
+                     No Transaction(s) Found. 
+                     </div>
+
+                     <span v-if='!empty' >
+
+                    <div class="table-responsive">
+                      <table class="table table-striped table-sm table-hover table-bordered">
+                      <thead class='thead-dark'>
+                        <tr>
+												<th>Food</th>
+                        <th>Amount</th>
+                        <th>Quantity</th>
+                       <th>Reference</th> 
+                        <th>Address</th>
+                        <th>Delivery</th>
+												<th>Date</th>
+                      </tr>
+                    </thead>
+											<tr class='animated tdPlopIn' v-for='con in content' v-bind:key='con.id'>
+												<td>{{con.title}}</td>
+                        <td>{{con.amt}}</td>
+                       <td>{{con.qty}}</td> 
+                        <td>{{con.ref}}</td>
+                        <td>{{con.address}}</td>
+                        <td>By {{con.delivery}}</td>
+												<td>{{con.created_at}}</td>
 											</tr>
-											<tr>
-												<td>Tolani</td>
-												<td>200</td>
-												<td>2/12/2019</td>
-											</tr>
+										
                       </table>
                     </div>
+
+                    <div class="shop_pagination slideUp" >
+                      <a href="" class="prev_shop" @click.prevent="fetch(pagination.prev_page_url)" :disabled="!pagination.prev_page_url">PREV PAGE</a>
+                      <span class="shop_pagenr">  <span>{{pagination.current_page}} of {{pagination.last_page}}</span></span>
+                      <a href="" class="next_shop" @click.prevent="fetch(pagination.next_page_url)" :disabled="!pagination.next_page_url">NEXT PAGE</a>
+                      </div>
+
+                    </span>
+
+
                   </main>
               </div>
                   
@@ -157,37 +232,118 @@ body {
 
         data(){
             return {
+              content:[],
+              pagination: [],
+              overlay:false,
+              empty:false,
 
+              ref:'',
+              refContent:[],
+              empty2:false,
+              refCon: false,
             }
         },
 
         methods: {
-/*
+
+          search(){
+
             this.$validator.validateAll().then(() => {
            
            if (!this.errors.any()) {
-            //
-            }else{
-            //
-            }
-         
-                    //
-            })
-            .catch(err=>{
-                
-            }),
+
+            this.overlay = !this.overlay
+                var   page_url = '/order-ref/'+this.ref+'/'+ localStorage.getItem('userId');
       
-         setTimeout(func=>{
-             //this.errors.clear()
-            // this.$validator.reset()
-         },1) 
-        
-         }); //validator
-*/
+                fetch(page_url)
+                .then(res => res.json())
+                .then(res=>{
+                  this.refContent = res.data;
+                  this.overlay = false
+                  this.refCon = true
+                  //to determine if obj is empty 
+                          //console.log(res.data[0]);
+                          if(res.data[0] == undefined){
+                              this.empty2 = true;
+                          }else{
+                              this.empty2 = false;
+                          }
+                
+                })
+                .catch(error =>{
+                    //off loader
+                    this.overlay = !this.overlay
+                      
+                      setTimeout(func=>{
+                        console.log(error)
+                          this.search();
+                      },2000)
+                         
+                    })
+
+           }
+            })
+          },
+
+
+
+          fetch(page_url){
+
+var userId = localStorage.getItem('userId')
+
+if(page_url){
+              NProgress.start();
+              }else{
+                this.overlay=true
+              }
+            var   page_url = page_url || '/vendor-orders/'+userId;
+             
+            fetch(page_url)
+            .then(res => res.json())
+            .then(res=>{
+              this.content = res.data;
+             // console.log(this.content)
+              //to determine if obj is empty 
+                      //console.log(res.data[0]);
+                      if(res.data[0] == undefined){
+                          this.empty = true;
+                      }else{
+                          this.empty = false;
+                      }
+              //to determine if obj is empty
+              this.overlay = false
+              this.makePagination(res.meta, res.links);
+//this.wait = false;
+            
+              NProgress.done();
+            })
+            .catch(error =>{
+                //off loader
+              //  this.data_load = false;
+              //    this.wait = true;
+                  setTimeout(func=>{
+                      this.fetch();
+                  },2000)
+                  this.overlay = false
+                  NProgress.done();        
+                }) 
+          },
+
+          makePagination(meta, links){
+      var pagination = {
+                      current_page: meta.current_page,
+                      last_page: meta.last_page,
+                      next_page_url: links.next,
+                      prev_page_url: links.prev
+                       }
+        document.body.scrollTop = 0;
+       document.documentElement.scrollTop = 0;
+      this.pagination = pagination;
+          },
         },
 
         mounted() {
-            console.log('Component mounted.')
+          this.fetch()
         }
     }
 </script>

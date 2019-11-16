@@ -328,7 +328,23 @@ import paystack from 'vue-paystack';
                             this.getSumTotal();
                         },2000)     
                       })
-                },//
+                },
+
+                checkout(){
+                  if(localStorage.getItem('userToken')){
+                    //authed, ok!
+                    this.fetch()
+                  this.getSumTotal()
+                  }else{
+                    //auth needed
+                  //set variable to redirect to checkout page after guest auth
+                  localStorage.setItem('shopper','shopper')
+                  //send to login
+                   this.$router.push({name: "login"});
+                  }
+                  
+
+                }
 
         },
         watch : {
@@ -341,9 +357,7 @@ import paystack from 'vue-paystack';
             },
         },
         mounted() {
-           this.fetch()
-           this.getSumTotal()
-
+           this.checkout()
         }
     }
 </script>

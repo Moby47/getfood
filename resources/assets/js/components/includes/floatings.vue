@@ -18,7 +18,7 @@
 			</v-btn>
           <!--  floating left-->
             
-            <router-link to='/checkout'  v-if='toggle_cart == false'>	
+            <a @click.prevent='checkout()'  v-if='toggle_cart == false'>	
 			 <v-btn 
 			 fab 
 			 dark
@@ -31,7 +31,7 @@
 			   >
                {{count}} <v-icon dark > shopping_cart</v-icon> 
 			 </v-btn>
-            </router-link>
+            </a>
 
             </div>
         </template>        
@@ -72,6 +72,20 @@ import {eventBus} from "../../app.js";
 
            },
            methods:{
+
+            checkout(){
+                  if(localStorage.getItem('userToken')){
+                    //authed, proceed
+                 this.$router.push({name: "checkout"});
+                  }else{
+                    //auth needed
+                  //set variable to redirect to checkout page after guest auth
+                  localStorage.setItem('shopper','shopper')
+                  //send to login
+                   this.$router.push({name: "login"});
+                  }
+                  
+                },
 
             clear_cart(){
               this.$toasted.show("Clearing Cart...");

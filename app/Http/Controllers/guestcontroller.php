@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\food;
 use App\favourite;
 use App\temp;
+use App\user;
 use DB;
 
 //resource
@@ -17,7 +18,7 @@ class guestcontroller extends Controller
     //method to get food list for customers to see and buy
     public function get_foods(){
         $food = food::orderby('id','desc')->select('id','amt','qty','title','img','vendor_id',
-        'vendor_name','vendorAddress')->paginate(3);
+        'vendor_name','vendorAddress')->paginate(5);
         return foodres::collection($food);
     }
 
@@ -156,13 +157,13 @@ public function vendorFood($vendor){
 
 
   public function vendorList(){
-    return $list = food::orderby('id','desc')
-    ->select('id','vendor_name','vendorAddress')->get()->toArray();
-    
+    return $list = user::orderby('id','desc')->where('status','=',1)
+    ->select('id','name','address')->get()->toArray();
+    /*
     return $fav = DB::table('foods')
     ->select('vendor_name', DB::raw('count(*) as total'))
     ->groupBy('vendor_name')->get();
-
+*/
     }
 
 

@@ -17,6 +17,7 @@ Route::get('/forgot-password', 'customauthcontroller@password');
 
 //initial page load
 Route::get('/', function () {
+
     return view('welcome');
 });
 
@@ -53,6 +54,13 @@ Route::get('/get-orders', 'vendorcontroller@get_orders');
 Route::get('/total-cash', 'vendorcontroller@total_cash');
 Route::get('/reporting', 'vendorcontroller@reporting');
 Route::get('/favorites', 'vendorcontroller@favorites');
+
+Route::get('/weekly-ex-vendor/{userId}', 'vendorcontroller@weekly_ex_vendor');
+Route::get('/monthly-ex-vendor/{userId}', 'vendorcontroller@monthly_ex_vendor');
+Route::get('/total-ex-vendor/{userId}', 'vendorcontroller@total_ex_vendor');
+Route::get('/vendor-reporting/{userid}/{from}/{to}', 'vendorcontroller@vendor_reporting');
+Route::get('/vendor-orders/{userId}', 'vendorcontroller@vendor_orders');
+Route::get('/order-ref/{ref}/{userid}', 'vendorcontroller@order_ref');
 
 Route::Post('/delete-food', 'vendorcontroller@delete_food');
 Route::get('/create-food', 'vendorcontroller@create_food');

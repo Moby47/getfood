@@ -27,8 +27,8 @@
                             <div class="mt-4 form-group">
 
        <select class="form-control" id="exampleInputEmail1"  v-model='selected'> 
-        <option :value='ven.vendor_name' v-for='ven in vendor_list' v-bind:key='ven.id'>
-          {{ven.vendor_name.slice(0, 25)}} - {{ven.vendorAddress.slice(0, 15)}} 
+        <option :value='ven.name' v-for='ven in vendor_list' v-bind:key='ven.id'>
+          {{ven.name.slice(0, 25)}} - {{ven.address.slice(0, 25)}} 
         </option>
         </select>
                        </div>

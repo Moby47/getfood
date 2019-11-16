@@ -56869,7 +56869,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.arrange[data-v-c05e4f6a]{\n    margin-top:-150px !important;\n}\n.bd-placeholder-img[data-v-c05e4f6a] {\n        font-size: 1.125rem;\n        text-anchor: middle;\n        -webkit-user-select: none;\n        -moz-user-select: none;\n        -ms-user-select: none;\n        user-select: none;\n}\n@media (min-width: 768px) {\n.bd-placeholder-img-lg[data-v-c05e4f6a] {\n          font-size: 3.5rem;\n}\n}\n      /*\n * Globals\n */\n\n/* Links */\na[data-v-c05e4f6a],\na[data-v-c05e4f6a]:focus,\na[data-v-c05e4f6a]:hover {\n  color: #fff;\n}\n\n/* Custom default button */\n.btn-secondary[data-v-c05e4f6a],\n.btn-secondary[data-v-c05e4f6a]:hover,\n.btn-secondary[data-v-c05e4f6a]:focus {\n  color: #333;\n  text-shadow: none; /* Prevent inheritance from `body` */\n  background-color: #fff;\n  border: .05rem solid #fff;\n}\n\n\n/*\n * Base structure\n */\nhtml[data-v-c05e4f6a],\nbody[data-v-c05e4f6a] {\n  height: 100%;\n  background-color: #333;\n}\nbody[data-v-c05e4f6a] {\n  display: -ms-flexbox;\n  display: -webkit-box;\n  display: flex;\n  color: #fff;\n  text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);\n  -webkit-box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);\n          box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);\n}\n.cover-container[data-v-c05e4f6a] {\n  max-width: 42em;\n}\n\n\n/*\n * Header\n */\n.masthead[data-v-c05e4f6a] {\n  margin-bottom: 2rem;\n}\n.masthead-brand[data-v-c05e4f6a] {\n  margin-bottom: 0;\n}\n.nav-masthead .nav-link[data-v-c05e4f6a] {\n  padding: .25rem 0;\n  font-weight: 700;\n  color: rgba(255, 255, 255, .5);\n  background-color: transparent;\n  border-bottom: .25rem solid transparent;\n}\n.nav-masthead .nav-link[data-v-c05e4f6a]:hover,\n.nav-masthead .nav-link[data-v-c05e4f6a]:focus {\n  border-bottom-color: rgba(255, 255, 255, .25);\n}\n.nav-masthead .nav-link + .nav-link[data-v-c05e4f6a] {\n  margin-left: 1rem;\n}\n.nav-masthead .active[data-v-c05e4f6a] {\n  color: #fff;\n  border-bottom-color: #fff;\n}\n@media (min-width: 48em) {\n.masthead-brand[data-v-c05e4f6a] {\n    float: left;\n}\n.nav-masthead[data-v-c05e4f6a] {\n    float: right;\n}\n}\n\n\n/*\n * Cover\n */\n.cover[data-v-c05e4f6a] {\n  padding: 0 1.5rem;\n}\n.cover .btn-lg[data-v-c05e4f6a] {\n  padding: .75rem 1.25rem;\n  font-weight: 700;\n}\n\n\n/*\n * Footer\n */\n.mastfoot[data-v-c05e4f6a] {\n  color: rgba(255, 255, 255, .5);\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -56962,115 +56962,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -57080,30 +56971,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
 
-    methods: {
-        /*
-                    this.$validator.validateAll().then(() => {
-                   
-                   if (!this.errors.any()) {
-                    //
-                    }else{
-                    //
-                    }
-                 
-                            //
-                    })
-                    .catch(err=>{
-                        
-                    }),
-              
-                 setTimeout(func=>{
-                     //this.errors.clear()
-                    // this.$validator.reset()
-                 },1) 
-                
-                 }); //validator
-        */
-    },
+    methods: {},
 
     mounted: function mounted() {
         if (localStorage.getItem('userName')) {
@@ -57120,56 +56988,70 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container back" }, [
-    _c(
-      "div",
-      {
-        staticClass:
-          "cover-container d-flex w-100 h-100 p-3 mx-auto flex-column"
-      },
-      [
-        _c("header", { staticClass: "masthead mb-auto" }, [
-          _c("div", { staticClass: "inner" }, [_c("menubar")], 1)
-        ]),
-        _vm._v(" "),
+  return _c("div", {}, [
+    _c("div", { staticClass: "banner fadeIn" }, [
+      _c("div", { staticClass: "container " }, [
         _c(
-          "main",
-          {
-            staticClass: "inner cover slideUp arrange",
-            attrs: { role: "main" }
-          },
+          "div",
+          { staticClass: "banner-left" },
           [
-            _c("h1", { staticClass: "cover-heading text-uppercase hello" }, [
-              _vm._v("Hello " + _vm._s(_vm.userName))
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "lead orange mist" }, [
-              _vm._v(
-                "Reduce your waiting time, with our reliable and\n             efficient restaurant ordering and reservation system."
-              )
-            ]),
+            _c("menubar"),
             _vm._v(" "),
             _c(
-              "p",
-              { staticClass: "lead" },
+              "div",
+              { staticClass: "banner-info mist" },
               [
-                _c(
-                  "router-link",
-                  {
-                    staticClass: "btn btn-lg orange-btn btn-secondary",
-                    attrs: { to: "/shop" }
-                  },
-                  [_vm._v("Enter Kitchen")]
-                )
+                _c("h1", { staticClass: "text-uppercase" }, [
+                  _vm._v("HELLO " + _vm._s(_vm.userName))
+                ]),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v(
+                    "Reduce your waiting time, with our reliable and\n                efficient restaurant ordering / reservation system."
+                  )
+                ]),
+                _vm._v(" "),
+                _c("router-link", { attrs: { to: "/shop" } }, [
+                  _vm._v("ENTER KITCHEN")
+                ]),
+                _vm._v(" "),
+                _c("br"),
+                _c("br")
               ],
               1
             )
-          ]
+          ],
+          1
         ),
         _vm._v(" "),
-        _vm._m(0)
-      ]
-    )
+        _c("div", { staticClass: "clearfix" })
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "perfect text-center " }, [
+      _c("div", { staticClass: "container slideUp" }, [
+        _c("h3", [_vm._v("THE PERFECT CHOICE FOR YOUR COMPANY")]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "perfect-buttons" },
+          [
+            _c("router-link", { staticClass: "bor", attrs: { to: "/about" } }, [
+              _vm._v("ABOUT US")
+            ]),
+            _vm._v(" "),
+            _c(
+              "router-link",
+              { staticClass: "red", attrs: { to: "/vendor-register" } },
+              [_vm._v("GET STARTED")]
+            )
+          ],
+          1
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _vm._m(0)
   ])
 }
 var staticRenderFns = [
@@ -57177,18 +57059,13 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("footer", { staticClass: "mastfoot mt-auto" }, [
-      _c("div", { staticClass: "inner" }, [
-        _c("p", { staticClass: "text-black" }, [
-          _vm._v("Developed by "),
-          _c(
-            "a",
-            {
-              staticClass: "text-black",
-              attrs: { href: "https://henrymoby.tech/", target: "_blank" }
-            },
-            [_vm._v("HenryMoby.")]
-          )
+    return _c("div", { staticClass: "footer" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("p", [
+          _vm._v(" © 2019 GetFoods. All Rights Reserved |  "),
+          _c("a", { attrs: { href: "http://www.mobytech.tech" } }, [
+            _vm._v("Mobytech")
+          ])
         ])
       ])
     ])
@@ -58244,19 +58121,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         });
 
         //clear cart
-        /*   var input = {'userId':localStorage.getItem('tempUserCartID')}
-         axios.post('/clear-cart',input).then(res=>{
-             console.log('cart cleared')  
-         })
-         .catch(error =>{
-             console.log(error)    
-            })
-         
+        var input = { 'userId': localStorage.getItem('tempUserCartID') };
+        axios.post('/clear-cart', input).then(function (res) {
+          console.log('cart cleared');
+        }).catch(function (error) {
+          console.log(error);
+        });
+
         //clear local sto
-         localStorage.removeItem('cart')
-         localStorage.removeItem('address')
-         localStorage.removeItem('delivery')
-        */
+        localStorage.removeItem('cart');
+        localStorage.removeItem('address');
+        localStorage.removeItem('delivery');
+
         //redirect to success page
         this.$router.push({ name: "success" });
       } else {
@@ -58318,6 +58194,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           _this3.getSumTotal();
         }, 2000);
       });
+    },
+    checkout: function checkout() {
+      if (localStorage.getItem('userToken')) {
+        //authed, ok!
+        this.fetch();
+        this.getSumTotal();
+      } else {
+        //auth needed
+        //set variable to redirect to checkout page after guest auth
+        localStorage.setItem('shopper', 'shopper');
+        //send to login
+        this.$router.push({ name: "login" });
+      }
     }
   },
   watch: {
@@ -58330,8 +58219,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   mounted: function mounted() {
-    this.fetch();
-    this.getSumTotal();
+    this.checkout();
   }
 });
 
@@ -59851,40 +59739,177 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
-        return {};
+        return {
+            weeklyData: 'Loading...',
+            monthlyData: 'Loading...',
+            totalData: 'Loading...',
+            userName: '',
+
+            content: [],
+            pagination: [],
+            overlay: false,
+            to: '',
+            from: '',
+            content_details: false,
+            empty: false
+        };
     },
 
 
     methods: {
-        /*
-                    this.$validator.validateAll().then(() => {
-                   
-                   if (!this.errors.any()) {
-                    //
-                    }else{
-                    //
+        weekly: function weekly() {
+            var _this = this;
+
+            fetch('/weekly-ex-vendor/' + localStorage.getItem('userId')).then(function (res) {
+                return res.json();
+            }).then(function (res) {
+                _this.weeklyData = '<strike>N</strike>' + res;
+            }).catch(function (error) {
+                setTimeout(function (func) {
+                    _this.weekly();
+                }, 2000);
+            });
+        },
+        monthly: function monthly() {
+            var _this2 = this;
+
+            fetch('/monthly-ex-vendor/' + localStorage.getItem('userId')).then(function (res) {
+                return res.json();
+            }).then(function (res) {
+                _this2.monthlyData = '<strike>N</strike>' + res;
+            }).catch(function (error) {
+                setTimeout(function (func) {
+                    _this2.monthly();
+                }, 2000);
+            });
+        },
+        total: function total() {
+            var _this3 = this;
+
+            fetch('/total-ex-vendor/' + localStorage.getItem('userId')).then(function (res) {
+                return res.json();
+            }).then(function (res) {
+                _this3.totalData = '<strike>N</strike>' + res;
+            }).catch(function (error) {
+                setTimeout(function (func) {
+                    _this3.total();
+                }, 2000);
+            });
+        },
+        fetch: function (_fetch) {
+            function fetch(_x) {
+                return _fetch.apply(this, arguments);
+            }
+
+            fetch.toString = function () {
+                return _fetch.toString();
+            };
+
+            return fetch;
+        }(function (page_url) {
+            var _this4 = this;
+
+            this.$validator.validateAll().then(function () {
+
+                if (!_this4.errors.any()) {
+
+                    var userId = localStorage.getItem('userId');
+
+                    if (page_url) {
+                        NProgress.start();
+                    } else {
+                        _this4.overlay = true;
                     }
-                 
-                            //
-                    })
-                    .catch(err=>{
-                        
-                    }),
-              
-                 setTimeout(func=>{
-                     //this.errors.clear()
-                    // this.$validator.reset()
-                 },1) 
-                
-                 }); //validator
-        */
+                    var page_url = page_url || '/vendor-reporting/' + userId + '/' + _this4.from + '/' + _this4.to;
+
+                    fetch(page_url).then(function (res) {
+                        return res.json();
+                    }).then(function (res) {
+                        _this4.content = res.data;
+
+                        _this4.content_details = true;
+
+                        //to determine if obj is empty 
+                        //console.log(res.data[0]);
+                        if (res.data[0] == undefined) {
+                            _this4.empty = true;
+                        } else {
+                            _this4.empty = false;
+                        }
+                        //to determine if obj is empty
+                        _this4.overlay = false;
+                        _this4.makePagination(res.meta, res.links);
+                        //this.wait = false;
+
+                        NProgress.done();
+                    }).catch(function (error) {
+                        //off loader
+                        //  this.data_load = false;
+                        //    this.wait = true;
+                        setTimeout(function (func) {
+                            _this4.fetch();
+                        }, 2000);
+                        _this4.overlay = false;
+                        NProgress.done();
+                        console.log(error);
+                    });
+                }
+            });
+        }),
+        makePagination: function makePagination(meta, links) {
+            var pagination = {
+                current_page: meta.current_page,
+                last_page: meta.last_page,
+                next_page_url: links.next,
+                prev_page_url: links.prev
+            };
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+            this.pagination = pagination;
+        }
     },
 
     mounted: function mounted() {
-        console.log('Component mounted.');
+        this.userName = localStorage.getItem('userName');
+        this.weekly();
+        this.monthly();
+        this.total();
     }
 });
 
@@ -59914,7 +59939,18 @@ var render = function() {
               _c("div", { attrs: { id: "pages_maincontent" } }, [
                 _c("br"),
                 _vm._v(" "),
-                _vm._m(0),
+                _c("nav", { attrs: { "aria-label": "breadcrumb " } }, [
+                  _c("ol", { staticClass: "breadcrumb" }, [
+                    _c(
+                      "li",
+                      {
+                        staticClass: "breadcrumb-item active",
+                        attrs: { "aria-current": "page" }
+                      },
+                      [_vm._v("Welcome " + _vm._s(_vm.userName) + " (Vendor)")]
+                    )
+                  ])
+                ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "bg-light" }, [
                   _c(
@@ -59932,6 +59968,70 @@ var render = function() {
                             },
                             [_vm._v("Statistics")]
                           ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "media text-muted pt-3" }, [
+                            _c(
+                              "svg",
+                              {
+                                staticClass: "bd-placeholder-img mr-2 rounded",
+                                attrs: {
+                                  width: "32",
+                                  height: "32",
+                                  xmlns: "http://www.w3.org/2000/svg",
+                                  preserveAspectRatio: "xMidYMid slice",
+                                  focusable: "false",
+                                  role: "img",
+                                  "aria-label": "Placeholder: 32x32"
+                                }
+                              },
+                              [
+                                _c("title", [_vm._v("Placeholder")]),
+                                _c("rect", {
+                                  attrs: {
+                                    width: "100%",
+                                    height: "100%",
+                                    fill: "#ffa500"
+                                  }
+                                }),
+                                _c(
+                                  "text",
+                                  {
+                                    attrs: {
+                                      x: "50%",
+                                      y: "50%",
+                                      fill: "#ffa500",
+                                      dy: ".3em"
+                                    }
+                                  },
+                                  [_vm._v("32x32")]
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "p",
+                              {
+                                staticClass:
+                                  "media-body pb-3 mb-0 small lh-125 border-bottom border-gray"
+                              },
+                              [
+                                _c(
+                                  "strong",
+                                  { staticClass: "d-block text-gray-dark" },
+                                  [
+                                    _c("span", {
+                                      domProps: {
+                                        innerHTML: _vm._s(_vm.weeklyData)
+                                      }
+                                    })
+                                  ]
+                                ),
+                                _vm._v(
+                                  "\n                        Weekly Pay\n                      "
+                                )
+                              ]
+                            )
+                          ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "media text-muted pt-3" }, [
                             _c(
@@ -59972,7 +60072,29 @@ var render = function() {
                               ]
                             ),
                             _vm._v(" "),
-                            _vm._m(1)
+                            _c(
+                              "p",
+                              {
+                                staticClass:
+                                  "media-body pb-3 mb-0 small lh-125 border-bottom border-gray"
+                              },
+                              [
+                                _c(
+                                  "strong",
+                                  { staticClass: "d-block text-gray-dark" },
+                                  [
+                                    _c("span", {
+                                      domProps: {
+                                        innerHTML: _vm._s(_vm.monthlyData)
+                                      }
+                                    })
+                                  ]
+                                ),
+                                _vm._v(
+                                  "\n                        Monthly Pay\n                      "
+                                )
+                              ]
+                            )
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "media text-muted pt-3" }, [
@@ -59996,7 +60118,7 @@ var render = function() {
                                   attrs: {
                                     width: "100%",
                                     height: "100%",
-                                    fill: "#e83e8c"
+                                    fill: "#ffa500"
                                   }
                                 }),
                                 _c(
@@ -60005,7 +60127,7 @@ var render = function() {
                                     attrs: {
                                       x: "50%",
                                       y: "50%",
-                                      fill: "#e83e8c",
+                                      fill: "#ffa500",
                                       dy: ".3em"
                                     }
                                   },
@@ -60014,65 +60136,315 @@ var render = function() {
                               ]
                             ),
                             _vm._v(" "),
-                            _vm._m(2)
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "media text-muted pt-3" }, [
                             _c(
-                              "svg",
+                              "p",
                               {
-                                staticClass: "bd-placeholder-img mr-2 rounded",
-                                attrs: {
-                                  width: "32",
-                                  height: "32",
-                                  xmlns: "http://www.w3.org/2000/svg",
-                                  preserveAspectRatio: "xMidYMid slice",
-                                  focusable: "false",
-                                  role: "img",
-                                  "aria-label": "Placeholder: 32x32"
-                                }
+                                staticClass:
+                                  "media-body pb-3 mb-0 small lh-125 border-bottom border-gray"
                               },
                               [
-                                _c("title", [_vm._v("Placeholder")]),
-                                _c("rect", {
-                                  attrs: {
-                                    width: "100%",
-                                    height: "100%",
-                                    fill: "#6f42c1"
-                                  }
-                                }),
                                 _c(
-                                  "text",
-                                  {
-                                    attrs: {
-                                      x: "50%",
-                                      y: "50%",
-                                      fill: "#6f42c1",
-                                      dy: ".3em"
-                                    }
-                                  },
-                                  [_vm._v("32x32")]
+                                  "strong",
+                                  { staticClass: "d-block text-gray-dark" },
+                                  [
+                                    _c("span", {
+                                      domProps: {
+                                        innerHTML: _vm._s(_vm.totalData)
+                                      }
+                                    })
+                                  ]
+                                ),
+                                _vm._v(
+                                  "\n                        Total Pay\n                      "
                                 )
                               ]
-                            ),
-                            _vm._v(" "),
-                            _vm._m(3)
+                            )
                           ])
                         ]
                       ),
                       _vm._v(" "),
-                      _vm._m(4),
+                      _c(
+                        "h6",
+                        { staticClass: "border-bottom border-gray pb-2 mb-0" },
+                        [_vm._v("Filter Orders")]
+                      ),
                       _vm._v(" "),
-                      _vm._m(5),
-                      _vm._v(" "),
-                      _c("h4", [
-                        _vm._v("Total: "),
+                      _c("form", [
+                        _c("div", { staticClass: "mt-4 form-group" }, [
+                          _c(
+                            "label",
+                            { attrs: { for: "exampleInputEmail1" } },
+                            [_vm._v("From")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.from,
+                                expression: "from"
+                              },
+                              {
+                                name: "validate",
+                                rawName: "v-validate",
+                                value: "required",
+                                expression: '"required"'
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "date",
+                              id: "exampleInputEmail1",
+                              name: "From"
+                            },
+                            domProps: { value: _vm.from },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.from = $event.target.value
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "p",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: _vm.errors.has("From"),
+                                  expression: "errors.has('From')"
+                                }
+                              ],
+                              staticClass: "text-danger shake"
+                            },
+                            [_vm._v(_vm._s(_vm.errors.first("From")))]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group" }, [
+                          _c(
+                            "label",
+                            { attrs: { for: "exampleInputPassword1" } },
+                            [_vm._v("To")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.to,
+                                expression: "to"
+                              },
+                              {
+                                name: "validate",
+                                rawName: "v-validate",
+                                value: "required",
+                                expression: '"required"'
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "date",
+                              id: "exampleInputEmail1",
+                              name: "To"
+                            },
+                            domProps: { value: _vm.to },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.to = $event.target.value
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "p",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: _vm.errors.has("To"),
+                                  expression: "errors.has('To')"
+                                }
+                              ],
+                              staticClass: "text-danger shake"
+                            },
+                            [_vm._v(_vm._s(_vm.errors.first("To")))]
+                          )
+                        ]),
+                        _vm._v(" "),
                         _c(
-                          "b",
-                          [_c("strike", [_vm._v("N")]), _vm._v("600 ")],
-                          1
-                        )
-                      ])
+                          "a",
+                          {
+                            staticClass: "button_full btyellow slideUp",
+                            attrs: { href: "#" },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.fetch()
+                              }
+                            }
+                          },
+                          [_vm._v("OK")]
+                        ),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("br")
+                      ]),
+                      _vm._v(" "),
+                      _vm.empty
+                        ? _c(
+                            "div",
+                            { staticClass: "text-center alert alert-info" },
+                            [
+                              _vm._v(
+                                "\n                  You Have No Transaction Between "
+                              ),
+                              _c("span", { staticClass: "text-primary" }, [
+                                _vm._v(_vm._s(_vm.from))
+                              ]),
+                              _vm._v(" And "),
+                              _c("span", { staticClass: "text-primary" }, [
+                                _vm._v(_vm._s(_vm.to))
+                              ])
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      !_vm.empty
+                        ? _c(
+                            "span",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: _vm.content_details == true,
+                                  expression: "content_details == true"
+                                }
+                              ]
+                            },
+                            [
+                              _c(
+                                "h6",
+                                {
+                                  staticClass:
+                                    "border-bottom border-gray pb-2 mb-0"
+                                },
+                                [_vm._v("My Orders")]
+                              ),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "table-responsive" }, [
+                                _c(
+                                  "table",
+                                  {
+                                    staticClass:
+                                      "table table-striped table-sm table-hover table-bordered"
+                                  },
+                                  [
+                                    _vm._m(0),
+                                    _vm._v(" "),
+                                    _vm._l(_vm.content, function(con) {
+                                      return _c(
+                                        "tr",
+                                        {
+                                          key: con.id,
+                                          staticClass: "animated tdPlopIn"
+                                        },
+                                        [
+                                          _c("td", [_vm._v(_vm._s(con.title))]),
+                                          _vm._v(" "),
+                                          _c("td", [_vm._v(_vm._s(con.amt))]),
+                                          _vm._v(" "),
+                                          _c("td", [_vm._v(_vm._s(con.ref))]),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            _vm._v(_vm._s(con.address))
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            _vm._v("By " + _vm._s(con.delivery))
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            _vm._v(_vm._s(con.created_at))
+                                          ])
+                                        ]
+                                      )
+                                    })
+                                  ],
+                                  2
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "shop_pagination slideUp" },
+                                [
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass: "prev_shop",
+                                      attrs: {
+                                        href: "",
+                                        disabled: !_vm.pagination.prev_page_url
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          $event.preventDefault()
+                                          return _vm.fetch(
+                                            _vm.pagination.prev_page_url
+                                          )
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("PREV PAGE")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("span", { staticClass: "shop_pagenr" }, [
+                                    _c("span", [
+                                      _vm._v(
+                                        _vm._s(_vm.pagination.current_page) +
+                                          " of " +
+                                          _vm._s(_vm.pagination.last_page)
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass: "next_shop",
+                                      attrs: {
+                                        href: "",
+                                        disabled: !_vm.pagination.next_page_url
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          $event.preventDefault()
+                                          return _vm.fetch(
+                                            _vm.pagination.next_page_url
+                                          )
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("NEXT PAGE")]
+                                  )
+                                ]
+                              )
+                            ]
+                          )
+                        : _vm._e()
                     ]
                   )
                 ])
@@ -60080,9 +60452,29 @@ var render = function() {
             ])
           ]
         )
-      ])
+      ]),
+      _vm._v(" "),
+      [
+        _c(
+          "div",
+          { staticClass: "text-center" },
+          [
+            _c(
+              "v-overlay",
+              { attrs: { value: _vm.overlay } },
+              [
+                _c("v-progress-circular", {
+                  attrs: { indeterminate: "", size: "64" }
+                })
+              ],
+              1
+            )
+          ],
+          1
+        )
+      ]
     ],
-    1
+    2
   )
 }
 var staticRenderFns = [
@@ -60090,144 +60482,19 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("nav", { attrs: { "aria-label": "breadcrumb " } }, [
-      _c("ol", { staticClass: "breadcrumb" }, [
-        _c(
-          "li",
-          {
-            staticClass: "breadcrumb-item active",
-            attrs: { "aria-current": "page" }
-          },
-          [_vm._v("Welcome name")]
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "p",
-      {
-        staticClass:
-          "media-body pb-3 mb-0 small lh-125 border-bottom border-gray"
-      },
-      [
-        _c("strong", { staticClass: "d-block text-gray-dark" }, [
-          _vm._v("47,000")
-        ]),
-        _vm._v(
-          "\n                          Weekly Pay\n                        "
-        )
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "p",
-      {
-        staticClass:
-          "media-body pb-3 mb-0 small lh-125 border-bottom border-gray"
-      },
-      [
-        _c("strong", { staticClass: "d-block text-gray-dark" }, [
-          _vm._v("47,000")
-        ]),
-        _vm._v(
-          "\n                          Monthly Pay\n                        "
-        )
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "p",
-      {
-        staticClass:
-          "media-body pb-3 mb-0 small lh-125 border-bottom border-gray"
-      },
-      [
-        _c("strong", { staticClass: "d-block text-gray-dark" }, [
-          _vm._v("47,000")
-        ]),
-        _vm._v(
-          "\n                          Total Pay\n                        "
-        )
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("form", [
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "exampleInputEmail1" } }, [_vm._v("From")]),
+    return _c("thead", { staticClass: "thead-dark" }, [
+      _c("tr", [
+        _c("th", [_vm._v("Food")]),
         _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "date", id: "exampleInputEmail1" }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "exampleInputPassword1" } }, [
-          _vm._v("To")
-        ]),
+        _c("th", [_vm._v("Amount")]),
         _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "date", id: "exampleInputEmail1" }
-        })
-      ]),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-        [_vm._v("Submit")]
-      ),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c("br")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "table-responsive" }, [
-      _c("table", { staticClass: "table table-striped table-sm" }, [
-        _c("tr", [
-          _c("th", [_vm._v("Customer")]),
-          _vm._v(" "),
-          _c("th", [_vm._v("Amount")]),
-          _vm._v(" "),
-          _c("th", [_vm._v("Date")])
-        ]),
+        _c("th", [_vm._v("Reference")]),
         _vm._v(" "),
-        _c("tr", [
-          _c("td", [_vm._v("Gabb")]),
-          _vm._v(" "),
-          _c("td", [_vm._v("400")]),
-          _vm._v(" "),
-          _c("td", [_vm._v("2/12/2019")])
-        ]),
+        _c("th", [_vm._v("Address")]),
         _vm._v(" "),
-        _c("tr", [
-          _c("td", [_vm._v("Tolani")]),
-          _vm._v(" "),
-          _c("td", [_vm._v("200")]),
-          _vm._v(" "),
-          _c("td", [_vm._v("2/12/2019")])
-        ])
+        _c("th", [_vm._v("Delivery")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Date")])
       ])
     ])
   }
@@ -60984,8 +61251,6 @@ var render = function() {
                                         _vm._v(" "),
                                         _c("td", [_vm._v(_vm._s(con.amt))]),
                                         _vm._v(" "),
-                                        _c("td", [_vm._v(_vm._s(con.qty))]),
-                                        _vm._v(" "),
                                         _c("td", [_vm._v(_vm._s(con.ref))]),
                                         _vm._v(" "),
                                         _c("td", [_vm._v(_vm._s(con.address))]),
@@ -61121,8 +61386,6 @@ var staticRenderFns = [
         _c("th", [_vm._v("Amount")]),
         _vm._v(" "),
         _c("th", [_vm._v("Quantity")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Reference")]),
         _vm._v(" "),
         _c("th", [_vm._v("Address")]),
         _vm._v(" "),
@@ -63412,40 +63675,200 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
-        return {};
+        return {
+            content: [],
+            pagination: [],
+            overlay: false,
+            empty: false,
+
+            ref: '',
+            refContent: [],
+            empty2: false,
+            refCon: false
+        };
     },
 
 
     methods: {
-        /*
-                    this.$validator.validateAll().then(() => {
-                   
-                   if (!this.errors.any()) {
-                    //
-                    }else{
-                    //
-                    }
-                 
-                            //
-                    })
-                    .catch(err=>{
-                        
-                    }),
-              
-                 setTimeout(func=>{
-                     //this.errors.clear()
-                    // this.$validator.reset()
-                 },1) 
-                
-                 }); //validator
-        */
+        search: function search() {
+            var _this = this;
+
+            this.$validator.validateAll().then(function () {
+
+                if (!_this.errors.any()) {
+
+                    _this.overlay = !_this.overlay;
+                    var page_url = '/order-ref/' + _this.ref + '/' + localStorage.getItem('userId');
+
+                    fetch(page_url).then(function (res) {
+                        return res.json();
+                    }).then(function (res) {
+                        _this.refContent = res.data;
+                        _this.overlay = false;
+                        _this.refCon = true;
+                        //to determine if obj is empty 
+                        //console.log(res.data[0]);
+                        if (res.data[0] == undefined) {
+                            _this.empty2 = true;
+                        } else {
+                            _this.empty2 = false;
+                        }
+                    }).catch(function (error) {
+                        //off loader
+                        _this.overlay = !_this.overlay;
+
+                        setTimeout(function (func) {
+                            console.log(error);
+                            _this.search();
+                        }, 2000);
+                    });
+                }
+            });
+        },
+        fetch: function (_fetch) {
+            function fetch(_x) {
+                return _fetch.apply(this, arguments);
+            }
+
+            fetch.toString = function () {
+                return _fetch.toString();
+            };
+
+            return fetch;
+        }(function (page_url) {
+            var _this2 = this;
+
+            var userId = localStorage.getItem('userId');
+
+            if (page_url) {
+                NProgress.start();
+            } else {
+                this.overlay = true;
+            }
+            var page_url = page_url || '/vendor-orders/' + userId;
+
+            fetch(page_url).then(function (res) {
+                return res.json();
+            }).then(function (res) {
+                _this2.content = res.data;
+                // console.log(this.content)
+                //to determine if obj is empty 
+                //console.log(res.data[0]);
+                if (res.data[0] == undefined) {
+                    _this2.empty = true;
+                } else {
+                    _this2.empty = false;
+                }
+                //to determine if obj is empty
+                _this2.overlay = false;
+                _this2.makePagination(res.meta, res.links);
+                //this.wait = false;
+
+                NProgress.done();
+            }).catch(function (error) {
+                //off loader
+                //  this.data_load = false;
+                //    this.wait = true;
+                setTimeout(function (func) {
+                    _this2.fetch();
+                }, 2000);
+                _this2.overlay = false;
+                NProgress.done();
+            });
+        }),
+        makePagination: function makePagination(meta, links) {
+            var pagination = {
+                current_page: meta.current_page,
+                last_page: meta.last_page,
+                next_page_url: links.next,
+                prev_page_url: links.prev
+            };
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+            this.pagination = pagination;
+        }
     },
 
     mounted: function mounted() {
-        console.log('Component mounted.');
+        this.fetch();
     }
 });
 
@@ -63460,7 +63883,323 @@ var render = function() {
   return _c(
     "div",
     { staticClass: "container" },
-    [_c("vendormenubar"), _vm._v(" "), _vm._m(0)],
+    [
+      _c("vendormenubar"),
+      _vm._v(" "),
+      _c("div", { staticClass: "pages" }, [
+        _c(
+          "div",
+          {
+            staticClass: "page no-toolbar no-navbar",
+            attrs: { "data-page": "cart" }
+          },
+          [
+            _c("div", { staticClass: "page-content" }, [
+              _c("div", { attrs: { id: "pages_maincontent" } }, [
+                _c("br"),
+                _vm._v(" "),
+                _vm._m(0),
+                _vm._v(" "),
+                _c("div", { staticClass: "bg-light" }, [
+                  _c(
+                    "main",
+                    { staticClass: "container", attrs: { role: "main" } },
+                    [
+                      _c("form", [
+                        _c(
+                          "div",
+                          { staticClass: "mt-4 form-group" },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate",
+                                  value: "required",
+                                  expression: '"required"'
+                                },
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.ref,
+                                  expression: "ref"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                id: "exampleInputEmail1",
+                                placeholder: "Enter reference number",
+                                name: "Reference"
+                              },
+                              domProps: { value: _vm.ref },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.ref = $event.target.value
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("transition", { attrs: { name: "fadeLeft" } }, [
+                              _c(
+                                "span",
+                                {
+                                  directives: [
+                                    {
+                                      name: "show",
+                                      rawName: "v-show",
+                                      value: _vm.errors.has("Reference"),
+                                      expression: "errors.has('Reference')"
+                                    }
+                                  ],
+                                  staticClass: "text-danger shake"
+                                },
+                                [_vm._v(_vm._s(_vm.errors.first("Reference")))]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("br"),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "button_full btyellow slideUp",
+                                attrs: { href: "#" },
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    return _vm.search()
+                                  }
+                                }
+                              },
+                              [_vm._v("Find")]
+                            )
+                          ],
+                          1
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "h6",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.refCon,
+                              expression: "refCon"
+                            }
+                          ],
+                          staticClass: "border-bottom border-gray pb-2 mb-0"
+                        },
+                        [_vm._v("Customer Order")]
+                      ),
+                      _vm._v(" "),
+                      _vm.empty2
+                        ? _c(
+                            "div",
+                            { staticClass: "text-center alert alert-info" },
+                            [
+                              _vm._v(
+                                "\n                   No Transaction Found\n                   "
+                              )
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      !_vm.empty2
+                        ? _c(
+                            "span",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: _vm.refCon,
+                                  expression: "refCon"
+                                }
+                              ]
+                            },
+                            [
+                              _c("div", { staticClass: "table-responsive" }, [
+                                _c(
+                                  "table",
+                                  {
+                                    staticClass:
+                                      "table table-striped table-sm table-hover table-bordered"
+                                  },
+                                  [
+                                    _vm._m(1),
+                                    _vm._v(" "),
+                                    _vm._l(_vm.refContent, function(con) {
+                                      return _c(
+                                        "tr",
+                                        {
+                                          key: con.id,
+                                          staticClass: "animated tdPlopIn"
+                                        },
+                                        [
+                                          _c("td", [_vm._v(_vm._s(con.title))]),
+                                          _vm._v(" "),
+                                          _c("td", [_vm._v(_vm._s(con.amt))]),
+                                          _vm._v(" "),
+                                          _c("td", [_vm._v(_vm._s(con.qty))]),
+                                          _vm._v(" "),
+                                          _c("td", [_vm._v(_vm._s(con.ref))]),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            _vm._v(_vm._s(con.address))
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            _vm._v("By " + _vm._s(con.delivery))
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            _vm._v(_vm._s(con.created_at))
+                                          ])
+                                        ]
+                                      )
+                                    })
+                                  ],
+                                  2
+                                )
+                              ])
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c(
+                        "h6",
+                        { staticClass: "border-bottom border-gray pb-2 mb-0" },
+                        [_vm._v("Customer Order(s)")]
+                      ),
+                      _vm._v(" "),
+                      _vm.empty
+                        ? _c(
+                            "div",
+                            { staticClass: "text-center alert alert-info" },
+                            [
+                              _vm._v(
+                                "\n                     No Transaction(s) Found. \n                     "
+                              )
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      !_vm.empty
+                        ? _c("span", [
+                            _c("div", { staticClass: "table-responsive" }, [
+                              _c(
+                                "table",
+                                {
+                                  staticClass:
+                                    "table table-striped table-sm table-hover table-bordered"
+                                },
+                                [
+                                  _vm._m(2),
+                                  _vm._v(" "),
+                                  _vm._l(_vm.content, function(con) {
+                                    return _c(
+                                      "tr",
+                                      {
+                                        key: con.id,
+                                        staticClass: "animated tdPlopIn"
+                                      },
+                                      [
+                                        _c("td", [_vm._v(_vm._s(con.title))]),
+                                        _vm._v(" "),
+                                        _c("td", [_vm._v(_vm._s(con.amt))]),
+                                        _vm._v(" "),
+                                        _c("td", [_vm._v(_vm._s(con.qty))]),
+                                        _vm._v(" "),
+                                        _c("td", [_vm._v(_vm._s(con.ref))]),
+                                        _vm._v(" "),
+                                        _c("td", [_vm._v(_vm._s(con.address))]),
+                                        _vm._v(" "),
+                                        _c("td", [
+                                          _vm._v("By " + _vm._s(con.delivery))
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("td", [
+                                          _vm._v(_vm._s(con.created_at))
+                                        ])
+                                      ]
+                                    )
+                                  })
+                                ],
+                                2
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "shop_pagination slideUp" },
+                              [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "prev_shop",
+                                    attrs: {
+                                      href: "",
+                                      disabled: !_vm.pagination.prev_page_url
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        return _vm.fetch(
+                                          _vm.pagination.prev_page_url
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("PREV PAGE")]
+                                ),
+                                _vm._v(" "),
+                                _c("span", { staticClass: "shop_pagenr" }, [
+                                  _c("span", [
+                                    _vm._v(
+                                      _vm._s(_vm.pagination.current_page) +
+                                        " of " +
+                                        _vm._s(_vm.pagination.last_page)
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "next_shop",
+                                    attrs: {
+                                      href: "",
+                                      disabled: !_vm.pagination.next_page_url
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        return _vm.fetch(
+                                          _vm.pagination.next_page_url
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("NEXT PAGE")]
+                                )
+                              ]
+                            )
+                          ])
+                        : _vm._e()
+                    ]
+                  )
+                ])
+              ])
+            ])
+          ]
+        )
+      ])
+    ],
     1
   )
 }
@@ -63469,74 +64208,61 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "pages" }, [
-      _c(
-        "div",
-        {
-          staticClass: "page no-toolbar no-navbar",
-          attrs: { "data-page": "cart" }
-        },
-        [
-          _c("div", { staticClass: "page-content" }, [
-            _c("div", { attrs: { id: "pages_maincontent" } }, [
-              _c("br"),
-              _vm._v(" "),
-              _c("nav", { attrs: { "aria-label": "breadcrumb " } }, [
-                _c("ol", { staticClass: "breadcrumb" }, [
-                  _c(
-                    "li",
-                    {
-                      staticClass: "breadcrumb-item active",
-                      attrs: { "aria-current": "page" }
-                    },
-                    [_vm._v("Customer orders (Weekly)")]
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "bg-light" }, [
-                _c(
-                  "main",
-                  { staticClass: "container", attrs: { role: "main" } },
-                  [
-                    _c("div", { staticClass: "table-responsive" }, [
-                      _c(
-                        "table",
-                        { staticClass: "table table-striped table-sm" },
-                        [
-                          _c("tr", [
-                            _c("th", [_vm._v("Customer")]),
-                            _vm._v(" "),
-                            _c("th", [_vm._v("Amount")]),
-                            _vm._v(" "),
-                            _c("th", [_vm._v("Date")])
-                          ]),
-                          _vm._v(" "),
-                          _c("tr", [
-                            _c("td", [_vm._v("Gabb")]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v("400")]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v("2/12/2019")])
-                          ]),
-                          _vm._v(" "),
-                          _c("tr", [
-                            _c("td", [_vm._v("Tolani")]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v("200")]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v("2/12/2019")])
-                          ])
-                        ]
-                      )
-                    ])
-                  ]
-                )
-              ])
-            ])
-          ])
-        ]
-      )
+    return _c("nav", { attrs: { "aria-label": "breadcrumb " } }, [
+      _c("ol", { staticClass: "breadcrumb" }, [
+        _c(
+          "li",
+          {
+            staticClass: "breadcrumb-item active",
+            attrs: { "aria-current": "page" }
+          },
+          [_vm._v("Customer Orders")]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-dark" }, [
+      _c("tr", [
+        _c("th", [_vm._v("Food")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Amount")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Quantity")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Reference")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Address")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Delivery")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Date")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-dark" }, [
+      _c("tr", [
+        _c("th", [_vm._v("Food")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Amount")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Quantity")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Reference")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Address")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Delivery")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Date")])
+      ])
     ])
   }
 ]
@@ -68100,8 +68826,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -68147,8 +68871,19 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "pages" }, [
+  return _c(
+    "div",
+    { staticClass: "container" },
+    [_c("menubar"), _vm._v(" "), _vm._m(0)],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "pages" }, [
       _c(
         "div",
         {
@@ -68157,47 +68892,32 @@ var render = function() {
         },
         [
           _c("div", { staticClass: "page-content" }, [
-            _c(
-              "h2",
-              { staticClass: "page_title" },
-              [
-                _c(
-                  "router-link",
-                  { staticClass: "text-white", attrs: { to: "/" } },
-                  [_vm._v("GO HOME")]
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _vm._m(0)
-          ])
-        ]
-      )
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "pages_maincontent" } }, [
-      _c(
-        "div",
-        { staticClass: "page_single layout_fullwidth_padding bounceIn" },
-        [
-          _c("div", { staticClass: "success_message" }, [
-            _c("span", [_vm._v("Thank You!")]),
-            _vm._v(" "),
-            _c("img", {
-              attrs: { src: "/images/icons/black/food.png", alt: "", title: "" }
-            }),
-            _vm._v(" "),
-            _c("p", [
-              _vm._v("Your Order "),
-              _c("br"),
-              _vm._v("Has Been successfully completed.")
+            _c("div", { attrs: { id: "pages_maincontent" } }, [
+              _c(
+                "div",
+                {
+                  staticClass: "page_single layout_fullwidth_padding bounceIn"
+                },
+                [
+                  _c("div", { staticClass: "success_message" }, [
+                    _c("span", [_vm._v("Thank You!")]),
+                    _vm._v(" "),
+                    _c("img", {
+                      attrs: {
+                        src: "/images/icons/black/food.png",
+                        alt: "",
+                        title: ""
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("p", [
+                      _vm._v("Your Order "),
+                      _c("br"),
+                      _vm._v("Has Been successfully completed.")
+                    ])
+                  ])
+                ]
+              )
             ])
           ])
         ]
@@ -68930,16 +69650,13 @@ var render = function() {
                             _vm._l(_vm.vendor_list, function(ven) {
                               return _c(
                                 "option",
-                                {
-                                  key: ven.id,
-                                  domProps: { value: ven.vendor_name }
-                                },
+                                { key: ven.id, domProps: { value: ven.name } },
                                 [
                                   _vm._v(
                                     "\n         " +
-                                      _vm._s(ven.vendor_name.slice(0, 25)) +
+                                      _vm._s(ven.name.slice(0, 25)) +
                                       " - " +
-                                      _vm._s(ven.vendorAddress.slice(0, 15)) +
+                                      _vm._s(ven.address.slice(0, 25)) +
                                       " \n       "
                                   )
                                 ]
@@ -105972,7 +106689,7 @@ var render = function() {
                     _c(
                       "router-link",
                       { staticClass: "nav-link", attrs: { to: "/favorite" } },
-                      [_vm._v("My Favorite")]
+                      [_vm._v("My Favorites")]
                     )
                   ],
                   1
@@ -108539,6 +109256,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             },
 
             methods: {
+                        checkout: function checkout() {
+                                    if (localStorage.getItem('userToken')) {
+                                                //authed, proceed
+                                                this.$router.push({ name: "checkout" });
+                                    } else {
+                                                //auth needed
+                                                //set variable to redirect to checkout page after guest auth
+                                                localStorage.setItem('shopper', 'shopper');
+                                                //send to login
+                                                this.$router.push({ name: "login" });
+                                    }
+                        },
                         clear_cart: function clear_cart() {
                                     var _this2 = this;
 
@@ -108612,8 +109341,15 @@ var render = function() {
       _vm._v(" "),
       _vm.toggle_cart == false
         ? _c(
-            "router-link",
-            { attrs: { to: "/checkout" } },
+            "a",
+            {
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.checkout()
+                }
+              }
+            },
             [
               _c(
                 "v-btn",
@@ -108659,7 +109395,7 @@ if (false) {
 /* 151 */
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed: ModuleBuildError: Module build failed: Error: Node Sass does not yet support your current environment: Windows 64-bit with Unsupported runtime (72)\nFor more information on which environments are supported please see:\nhttps://github.com/sass/node-sass/releases/tag/v4.11.0\n    at module.exports (C:\\xampp\\htdocs\\getfoods\\node_modules\\node-sass\\lib\\binding.js:13:13)\n    at Object.<anonymous> (C:\\xampp\\htdocs\\getfoods\\node_modules\\node-sass\\lib\\index.js:14:35)\n    at Module._compile (internal/modules/cjs/loader.js:956:30)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:973:10)\n    at Module.load (internal/modules/cjs/loader.js:812:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:724:14)\n    at Module.require (internal/modules/cjs/loader.js:849:19)\n    at require (internal/modules/cjs/helpers.js:74:18)\n    at Object.<anonymous> (C:\\xampp\\htdocs\\getfoods\\node_modules\\sass-loader\\lib\\loader.js:3:14)\n    at Module._compile (internal/modules/cjs/loader.js:956:30)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:973:10)\n    at Module.load (internal/modules/cjs/loader.js:812:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:724:14)\n    at Module.require (internal/modules/cjs/loader.js:849:19)\n    at require (internal/modules/cjs/helpers.js:74:18)\n    at loadLoader (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\loadLoader.js:13:17)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:165:10)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:173:18\n    at loadLoader (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\loadLoader.js:36:3)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:165:10)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:173:18\n    at loadLoader (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\loadLoader.js:36:3)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:165:10)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:173:18\n    at loadLoader (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\loadLoader.js:36:3)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:169:2)\n    at runLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:362:2)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\NormalModule.js:195:19\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:364:11\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:170:18\n    at loadLoader (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\loadLoader.js:27:11)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:165:10)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:173:18\n    at loadLoader (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\loadLoader.js:36:3)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:165:10)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:173:18\n    at loadLoader (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\loadLoader.js:36:3)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:165:10)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:173:18\n    at loadLoader (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\loadLoader.js:36:3)\n    at iteratePitchingLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:169:2)\n    at runLoaders (C:\\xampp\\htdocs\\getfoods\\node_modules\\loader-runner\\lib\\LoaderRunner.js:362:2)\n    at NormalModule.doBuild (C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\NormalModule.js:182:3)\n    at NormalModule.build (C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\NormalModule.js:275:15)\n    at Compilation.buildModule (C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\Compilation.js:157:10)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\Compilation.js:460:10\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\NormalModuleFactory.js:243:5\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\NormalModuleFactory.js:94:13\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\tapable\\lib\\Tapable.js:268:11\n    at NormalModuleFactory.<anonymous> (C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\CompatibilityPlugin.js:52:5)\n    at NormalModuleFactory.applyPluginsAsyncWaterfall (C:\\xampp\\htdocs\\getfoods\\node_modules\\tapable\\lib\\Tapable.js:272:13)\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\NormalModuleFactory.js:69:10\n    at C:\\xampp\\htdocs\\getfoods\\node_modules\\webpack\\lib\\NormalModuleFactory.js:196:7\n    at processTicksAndRejections (internal/process/task_queues.js:75:11)");
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

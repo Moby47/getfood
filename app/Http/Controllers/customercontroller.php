@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\order;
 use App\temp;
+use App\food;
 use DB;
 
 //resource
@@ -69,7 +70,15 @@ $ref = $request->input('ref');
 $trans = $request->input('trans');
 $add = $request->input('address');
 $deli = $request->input('delivery');
-
+/*
+//update food qty - deduct food from table
+$red = food::findorfail($temp->foodId);
+$DBqty = $red->qty;
+$cusqty = $temp->qty;
+$sub = $DBqty - $cusqty;
+$red->qty = $sub;
+$red->save();
+*/
 //combine and save data to order table
 
 $content = [];
