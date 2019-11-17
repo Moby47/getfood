@@ -135,12 +135,9 @@
                                 }else if (status == 0){
                                   //user
                                   this.$router.push({name: "userdashboard"});
-                                }else{
-                                  /* For super admin page
-                                  -status = 47​
-                                  -verifi = 1​
-                                  -approve/decline vendor​
-                                  */
+                                }else if (status == 47){
+                                  /* For super admin page*/
+                                  this.$router.push({name: "superadmindashboard"});
                                 }
                                 }
 

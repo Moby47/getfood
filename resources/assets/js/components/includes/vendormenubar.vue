@@ -18,8 +18,14 @@
                   <router-link class="nav-link" to="/product">Add Food</router-link>
                 </li>
                 <li class="nav-item">
+                    <router-link class="nav-link" to="/manage-food">Manage Food</router-link>
+                  </li>
+                <li class="nav-item">
                         <router-link class="nav-link" to="/orders">Orders</router-link>
                       </li>
+                      <li class="nav-item">
+                          <router-link class="nav-link" to="/vendor-favorites">Customer Favorites</router-link>
+                        </li>
                 <li class="nav-item">
                         <router-link class="nav-link" to="/shop">Enter Kitchen</router-link>
                       </li>

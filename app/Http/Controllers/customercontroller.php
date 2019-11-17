@@ -92,7 +92,7 @@ foreach($temp as $t){
  'title'=> $t->foodName,
   'address' => $add,
   'delivery'=> $deli,
-  'total'=> $total,
+  'total'=> $t->amt * $t->qty,
   'ref'=> $ref,
   'trans'=> $trans,
   'created_at'=> \Carbon\Carbon::now(),

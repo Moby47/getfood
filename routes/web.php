@@ -60,10 +60,12 @@ Route::get('/monthly-ex-vendor/{userId}', 'vendorcontroller@monthly_ex_vendor');
 Route::get('/total-ex-vendor/{userId}', 'vendorcontroller@total_ex_vendor');
 Route::get('/vendor-reporting/{userid}/{from}/{to}', 'vendorcontroller@vendor_reporting');
 Route::get('/vendor-orders/{userId}', 'vendorcontroller@vendor_orders');
+Route::get('/vendor-food-list/{userId}', 'vendorcontroller@vendor_food');
+Route::get('/vendor-favorites/{userName}', 'vendorcontroller@vendor_favorites');
 Route::get('/order-ref/{ref}/{userid}', 'vendorcontroller@order_ref');
 
 Route::Post('/delete-food', 'vendorcontroller@delete_food');
-Route::get('/create-food', 'vendorcontroller@create_food');
+Route::post('/edit-food', 'vendorcontroller@edit_food');
 Route::Post('/new-food', 'vendorcontroller@new_food');
 
 

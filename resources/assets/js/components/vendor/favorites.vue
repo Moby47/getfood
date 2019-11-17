@@ -11,71 +11,16 @@
                   <br>
                   <nav aria-label="breadcrumb ">
                           <ol class="breadcrumb">
-                            <li class="breadcrumb-item active" aria-current="page">Customer Orders</li>
+                            <li class="breadcrumb-item active" aria-current="page">Customer Favorite(s)</li>
                           </ol>
                         </nav>
 
              <div class='bg-light'>
                 <main role="main" class="container">
   
-                  <form>
-                    <div class="mt-4 form-group">
-<input class="form-control" id="exampleInputEmail1" v-validate='"required"' placeholder='Enter reference number' name='Reference' v-model='ref'/> 
-<transition  name="fadeLeft">
-  <span class='text-danger shake' v-show="errors.has('Reference')">{{ errors.first('Reference') }}</span>
-   </transition>
-<br>
-<a href='#' @click.prevent='search()' class="button_full btyellow slideUp">Find</a> 
-               </div>
-                
-                  </form>
-
-                  <!--search result-->
-                  <h6 class="border-bottom border-gray pb-2 mb-0" v-show='refCon'>Customer Order</h6>
-
-                  <div v-if='empty2' class='text-center alert alert-info'>
-                   No Transaction Found
-                   </div>
-
-                   <span v-if='!empty2' v-show='refCon'>
-
-                  <div class="table-responsive">
-                    <table class="table table-striped table-sm table-hover table-bordered">
-                    <thead class='thead-dark'>
-                      <tr>
-                      <th>Food</th>
-                      <th>Amount</th>
-                      <th>Quantity</th>
-                      <th>Total</th>
-                      <th>Reference</th> 
-                      <th>Address</th>
-                      <th>Delivery</th>
-                      <th>Date</th>
-                    </tr>
-                  </thead>
-                    <tr class='animated tdPlopIn' v-for='con in refContent' v-bind:key='con.id'>
-                      <td>{{con.title}}</td>
-                      <td>{{con.amt}}</td>
-                      <td>{{con.qty}}</td> 
-                      <td>{{con.total}}</td> 
-                      <td>{{con.ref}}</td>
-                      <td>{{con.address}}</td>
-                      <td>By {{con.delivery}}</td>
-                      <td>{{con.created_at}}</td>
-                    </tr>
-                  
-                    </table>
-                  </div>
-
-
-                  </span>
-
-
-                    <!--all orders-->
-                    <h6 class="border-bottom border-gray pb-2 mb-0">Customer Order(s)</h6>
-
+                 
                     <div v-if='empty' class='text-center alert alert-info'>
-                     No Transaction(s) Found. 
+                     No Favorite(s) Found. 
                      </div>
 
                      <span v-if='!empty' >
@@ -84,31 +29,19 @@
                       <table class="table table-striped table-sm table-hover table-bordered">
                       <thead class='thead-dark'>
                         <tr>
-												<th>Food</th>
-                        <th>Amount</th>
-                        <th>Quantity</th>
-                        <th>Total</th>
-                       <th>Reference</th> 
-                        <th>Address</th>
-                        <th>Delivery</th>
-												<th>Date</th>
+                        <th>Food</th>
+                        <th>Like(s)</th>
                       </tr>
                     </thead>
-											<tr class='animated tdPlopIn' v-for='con in content' v-bind:key='con.id'>
-												<td>{{con.title}}</td>
-                        <td>{{con.amt}}</td>
-                       <td>{{con.qty}}</td> 
-                       <td>{{con.total}}</td> 
-                        <td>{{con.ref}}</td>
-                        <td>{{con.address}}</td>
-                        <td>By {{con.delivery}}</td>
-												<td>{{con.created_at}}</td>
-											</tr>
-										
+                          <tr class='animated tdPlopIn' v-for='con in content' v-bind:key='con.id'>
+                        <td>{{con.title}}</td>
+                        <td>{{con.total}}</td>                    
+                           </tr>
+                                        
                       </table>
                     </div>
 
-                    <div class="shop_pagination slideUp" >
+                    <div class="shop_pagination slideUp" v-show='content.length > 7'>
                       <a href="" class="prev_shop" @click.prevent="fetch(pagination.prev_page_url)" :disabled="!pagination.prev_page_url">PREV PAGE</a>
                       <span class="shop_pagenr">  <span>{{pagination.current_page}} of {{pagination.last_page}}</span></span>
                       <a href="" class="next_shop" @click.prevent="fetch(pagination.next_page_url)" :disabled="!pagination.next_page_url">NEXT PAGE</a>
@@ -130,7 +63,18 @@
     </div>
     
    
-  
+    
+ <!--Overlay-->
+<template>
+        <div class="text-center">
+          <v-overlay :value="overlay">
+            <v-progress-circular indeterminate size="64"></v-progress-circular>
+          </v-overlay>
+        </div>
+        </template>
+        <!--Overlay-->
+
+
       </div>
 </template>
 
@@ -240,73 +184,29 @@ body {
               pagination: [],
               overlay:false,
               empty:false,
-
-              ref:'',
-              refContent:[],
-              empty2:false,
-              refCon: false,
+            
             }
         },
 
         methods: {
 
-          search(){
 
-            this.$validator.validateAll().then(() => {
-           
-           if (!this.errors.any()) {
+  fetch(page_url){
 
-            this.overlay = !this.overlay
-                var   page_url = '/order-ref/'+this.ref+'/'+ localStorage.getItem('userId');
-      
-                fetch(page_url)
-                .then(res => res.json())
-                .then(res=>{
-                  this.refContent = res.data;
-                  this.overlay = false
-                  this.refCon = true
-                  //to determine if obj is empty 
-                          //console.log(res.data[0]);
-                          if(res.data[0] == undefined){
-                              this.empty2 = true;
-                          }else{
-                              this.empty2 = false;
-                          }
-                
-                })
-                .catch(error =>{
-                    //off loader
-                    this.overlay = !this.overlay
-                      
-                      setTimeout(func=>{
-                        console.log(error)
-                          this.search();
-                      },2000)
-                         
-                    })
-
-           }
-            })
-          },
-
-
-
-          fetch(page_url){
-
-var userId = localStorage.getItem('userId')
+var userName = localStorage.getItem('userName')
 
 if(page_url){
               NProgress.start();
               }else{
                 this.overlay=true
               }
-            var   page_url = page_url || '/vendor-orders/'+userId;
+            var   page_url = page_url || '/vendor-favorites/'+userName;
              
             fetch(page_url)
             .then(res => res.json())
             .then(res=>{
               this.content = res.data;
-             // console.log(this.content)
+             console.log(this.content)
               //to determine if obj is empty 
                       //console.log(res.data[0]);
                       if(res.data[0] == undefined){
@@ -316,15 +216,12 @@ if(page_url){
                       }
               //to determine if obj is empty
               this.overlay = false
-              this.makePagination(res.meta, res.links);
-//this.wait = false;
+             this.makePagination(res);
             
               NProgress.done();
             })
             .catch(error =>{
-                //off loader
-              //  this.data_load = false;
-              //    this.wait = true;
+               console.log(error)
                   setTimeout(func=>{
                       this.fetch();
                   },2000)
@@ -333,12 +230,12 @@ if(page_url){
                 }) 
           },
 
-          makePagination(meta, links){
+          makePagination(res){
       var pagination = {
-                      current_page: meta.current_page,
-                      last_page: meta.last_page,
-                      next_page_url: links.next,
-                      prev_page_url: links.prev
+                      current_page: res.current_page,
+                      last_page: res.last_page,
+                      next_page_url: res.next_page_url,
+                      prev_page_url: res.prev_page_url
                        }
         document.body.scrollTop = 0;
        document.documentElement.scrollTop = 0;

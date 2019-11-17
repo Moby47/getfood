@@ -1,6 +1,6 @@
 <template>
         <div class="container">
-            <usermenubar></usermenubar>
+            <menubar></menubar>
       <!--content here-->
       
       <div class="pages">
@@ -18,14 +18,14 @@
                                     <ol class="breadcrumb">
                           <li class="breadcrumb-item"><router-link to='/'>Home</router-link></li>
                                       <li class="breadcrumb-item"><router-link to='/shop'>Kitchen</router-link></li>
-                                      <li class="breadcrumb-item active" aria-current="page" >SELECT VENDOR</li>
+                                      <li class="breadcrumb-item active" aria-current="page" >VENDORS</li>
                                       
                                     </ol>
                                   </nav>
                         
                         <form>
                             <div class="mt-4 form-group">
-
+                              <label>Select a Vendor</label>
        <select class="form-control" id="exampleInputEmail1"  v-model='selected'> 
         <option :value='ven.name' v-for='ven in vendor_list' v-bind:key='ven.id'>
           {{ven.name.slice(0, 25)}} - {{ven.address.slice(0, 25)}} 

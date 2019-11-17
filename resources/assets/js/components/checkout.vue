@@ -105,7 +105,7 @@
        <a href="#" class="button_full btyellow slideUp" v-if='choiceBtn == false' @click.prevent='self()'>Pick-up By Self</a> 
             
        <div class="form-group" v-if='addText == true'>
-        <label for="exampleInputEmail1">Food Name</label>
+        <label for="exampleInputEmail1">Enter Your Delivery Address</label>
         <input type="text" class="form-control" name='address' id="exampleInputEmail1" 
         v-model='address' v-validate='"required"' placeholder="Eg: no 47 nehita, devine homes">
 
