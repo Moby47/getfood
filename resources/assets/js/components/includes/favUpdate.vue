@@ -103,7 +103,7 @@ methods: {
         axios.post('/remove-from-fav',input)
                 .then(res=>{
                     if(res.data == 1){
-                      sound.play();
+                     
                 this.text='Food removed from Favorites!'
                         this.snackbar = true;
                         

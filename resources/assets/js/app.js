@@ -40,6 +40,13 @@ import 'vuetify/dist/vuetify.min.css'
 
 Vue.use(Vuetify)
 
+import BootstrapVue from 'bootstrap-vue'
+
+Vue.use(BootstrapVue)
+
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+//import './custom.scss'
 
 /* ------------------------- Imports -------------------- */
 

@@ -11,7 +11,7 @@
             <v-img 
             :src="'/storage/food/'+con.attributes.image"
             :alt="con.title"
-            :lazy-src="`/images/black-spinner.gif`"
+            :lazy-src="`https://picsum.photos/id/11/100/60`"
             title="" 
             class='img_size'></v-img>
             </a></div>
@@ -82,7 +82,7 @@ methods: {
         axios.post('/remove-from-cart',input)
                 .then(res=>{
                     if(res.data == 1){
-                      sound.play();
+                     
                 this.text='Food removed from Table!'
                         this.snackbar = true;
                          //update cart count

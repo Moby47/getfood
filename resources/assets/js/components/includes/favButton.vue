@@ -56,7 +56,7 @@ data: function() {
                         .then(res=>{
                             this.snackbar = true;
                             if(res.data == 1){
-                                sound.play();
+                               
                         this.text='Food added to Favourites!'
                         this.snackbar = true;
                         //this.fetch();
@@ -89,7 +89,7 @@ data: function() {
                     axios.post('/add-favorite',input)
                         .then(res=>{
                             if(res.data == 1){
-                        sound.play();
+                      
                         this.text='Food Liked!'
                         this.snackbar = true;
                             }

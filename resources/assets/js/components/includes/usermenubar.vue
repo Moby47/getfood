@@ -105,7 +105,7 @@
                 console.log(error)    
                })
                    }
-                       sound.play();
+                      
                        this.isAuth();
                        this.loggedOut = true;
                         NProgress.done();

@@ -245,7 +245,6 @@ body {
 			if(res.data == 1){
         this.overlay=false
 
-				  sound.play();
                 this.text='Food  Successfully'
                         this.snackbar = true;
 

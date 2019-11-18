@@ -116,7 +116,7 @@
                                localStorage.setItem('userStatus',res.data.userStatus);
                                
                                var status = localStorage.getItem('userStatus')
-                                sound.play();
+                                
 
                                 //validate if quest is coming from cart page then gotocheckout not dashboard
                                 if(localStorage.getItem('shopper')){

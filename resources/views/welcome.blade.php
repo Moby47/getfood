@@ -74,10 +74,6 @@
 		//wow
 new WOW().init();
 
-//sounds
-//success
-var sound = new Audio();
-sound.src='/sound/sound.mp3';
 	</script>
 
 

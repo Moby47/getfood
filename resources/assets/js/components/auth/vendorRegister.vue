@@ -116,7 +116,7 @@
                             this.overlay = false
                   this.text = 'Registered! Please check your Email for verification.';
                    this.snackbar = true
-                            sound.play();
+                          
                         }else if(res.data.msg== 0){
                   this.text = 'Registered! But Verification failed. Please resend verification mail.';
                    this.snackbar = true

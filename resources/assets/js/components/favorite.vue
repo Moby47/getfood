@@ -32,7 +32,7 @@
               <v-img 
               :src="'/storage/food/'+con.img"
               :alt="con.title"
-              :lazy-src="`/images/black-spinner.gif`"
+              :lazy-src="`https://picsum.photos/id/11/100/60`"
               title=""
               class='img_size'  ></v-img>
           </div>
