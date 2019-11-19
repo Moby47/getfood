@@ -10,7 +10,10 @@
             <h1 class='text-uppercase'>HELLO {{userName}}</h1>
             <p>Reduce your waiting time, with our reliable and
                 efficient restaurant ordering / reservation system.</p>
-            <router-link to="/shop">ENTER KITCHEN</router-link>
+            
+            <div class="my-2">
+              <v-btn depressed @click.prevent='shop()'>ENTER KITCHEN</v-btn>
+            </div>
             <br><br>
         </div>
       </div>
@@ -19,18 +22,29 @@
   </div>
   <!-- //banner -->
   
-  
-  <!-- perfect -->
+  <template>
+      <v-card
+        class="mx-auto"
+        max-width="344"
+        outlined
+      >
+      
+        <!-- perfect -->
   <div class="perfect text-center ">
-    <div class="container slideUp">
-      <h3>THE PERFECT CHOICE FOR YOUR COMPANY</h3>
-        <div class="perfect-buttons">
-          <router-link to="/about" class="bor">ABOUT US</router-link>
-          <router-link to="/vendor-register" class="red">GET STARTED</router-link>
-        </div>
+      <div class="container slideUp">
+        <h3>THE PERFECT CHOICE FOR YOUR COMPANY</h3>
+          <div class="perfect-buttons">
+            <router-link to="/about" class="bor">ABOUT US</router-link>
+            <router-link to="/vendor-register" class="red">GET STARTED</router-link>
+          </div>
+      </div>
     </div>
-  </div>
-  <!-- //perfect -->
+    <!-- //perfect -->
+    
+      </v-card>
+    </template>
+
+
 
   <!-- footer -->
   <div class="footer">
@@ -58,7 +72,9 @@
         },
 
         methods: {
-
+          shop(){
+            this.$router.push({ name: "shop" })
+          }
         },
 
         mounted() {

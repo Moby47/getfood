@@ -28,10 +28,15 @@
               <div class="signup_bottom">
                   
                                     <p>Don't have an account?</p>
-                  <router-link to="/register">Sign Up</router-link>
-                <br><br>
+               
+                  <div class="my-2 text-center">
+                      <v-btn @click.prevent='register()'>Sign Up</v-btn>   
+                      </div>
 
-                  <p class=""><router-link to="/resend-email" >Resend Verification Email</router-link></p>
+                <div class="my-2 text-center">
+                    <v-btn @click.prevent='resendEmail()'>Resend Verification Email</v-btn>   
+                    </div>
+                  
               </div>
           </div>
           <div class="close_popup_button">
@@ -88,6 +93,12 @@
         },
 
         methods: {
+          register(){
+            this.$router.push({ name: "register" })
+          },
+          resendEmail(){
+            this.$router.push({ name: "resendemail" })
+          },
 
             login(){
                           //validate specific reg fields

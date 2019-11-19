@@ -9,13 +9,21 @@
             <div id="pages_maincontent">
              
              <br>
+             <template>
+                <v-card
+                  class="mx-auto"
+                  max-width="344"
+                 
+                >
                  <nav aria-label="breadcrumb ">
                          <ol class="breadcrumb">
                            <li class="breadcrumb-item"><router-link to='/shop'>Kitchen</router-link></li>
-                           <li class="breadcrumb-item active" aria-current="page">SELECTED FOOD ({{cartConCount}})</li>
+                           <li class="breadcrumb-item active" aria-current="page">Selected Food ({{cartConCount}})</li>
                          </ol>
                        </nav>
-                
+                </v-card>
+                </template>
+
       <div class="page_single layout_fullwidth_padding">	
         
            <div class="cartcontainer">   
@@ -37,10 +45,23 @@
 -->
    <!-- ********************************************** empty -->
   
- <div v-show='empty < 1' class='text-center alert alert-info'>
-  Your Table is Empty. <router-link to='/shop' class='text-center button_full btyellow'>Add Food</router-link>
+   <template>
+      <v-card
+        class="mx-auto"
+        max-width="344"
+        
+      >
+
+      <span v-show='empty < 1'>
+ <div  class='text-center alert alert-info'>
+  Your Table is Empty. 
  </div>
-           
+
+ <div class="my-2 text-center">
+    <v-btn @click.prevent='shop()'>Add Food</v-btn>   
+    </div>
+</span>
+
       <!--loading temp-->
 <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
              <div v-if='wait' class='text-center'>
@@ -54,6 +75,9 @@
                          </template>
                           </div>
                  </transition>
+                 
+                </v-card>
+              </template>
 
                 <div class="cart_item animated tdExpandInBounce" id="cartitem1" v-for='con in content' v-bind:key='con.id'>
                    
@@ -63,9 +87,10 @@
                     </cartUpdate>
                   
                 </div>
-              
-       <a @click.prevent='checkout()' v-show='cartConCount > 0' class="button_full btyellow slideUp">TAKE FOOD</a>           
-                
+                        
+       <div class="my-2 text-center" v-show='cartConCount > 0' >
+          <v-btn @click.prevent='checkout()'>TAKE FOOD</v-btn>   
+          </div>
    </div>
                 
                 
@@ -117,6 +142,10 @@ import {eventBus} from "../app.js";
         },
 
         methods: {
+          shop(){
+            this.$router.push({ name: "shop" })
+          },
+          
             fetch(){
                   
                   fetch('/cart-items'+'/'+ localStorage.getItem('tempUserCartID'))

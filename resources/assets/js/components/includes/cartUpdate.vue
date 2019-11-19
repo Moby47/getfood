@@ -2,7 +2,14 @@
 <template>
        
     <div :id='con.id'>
-            <div class="item_title"> {{con.name}} </div>
+
+        <template>
+                  <v-card
+                    class="mx-auto "
+                    max-width="344"
+                    outlined
+                  >
+            <div class="item_title text-capitalize"> {{con.name}} </div>
 
             <span v-if='deleted == false'>
             <div class="item_price"><strike>N</strike>{{con.attributes.total}} </div>
@@ -33,6 +40,9 @@
                                 <label>DELETED</label>
                             </div>
             </span>
+
+            </v-card>
+        </template>
 
             <template>
                 <v-snackbar

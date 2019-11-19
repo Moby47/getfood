@@ -4,7 +4,7 @@
                 <img src="images/icons/black/menu_close.png" alt="" title="" /></a>
 
                 <a href="#" v-else data-popup=".popup-social" class="open-popup shopfav pulse" @click.prevent='Favorite(id)'>
-                        <img src="images/icons/black/love.png" alt="" title="" /></a>
+                   <v-img src="images/icons/black/love.png" alt="" title=""></v-img></a>
 
                         <template>
                             <v-snackbar
