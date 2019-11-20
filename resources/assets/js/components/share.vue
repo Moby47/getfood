@@ -13,8 +13,13 @@
  <!-- Social Icons Popup -->
  <div class=" popup-social">
     <div class="content-block slideUp">
-
-    <!--  <p>Sharing is caring..</p> --><h4>SHARING IS CARING</h4>
+ <template>
+                  <v-card
+                    class="mx-auto elevation-23 "
+                    max-width="344"
+                   
+                  >
+    <!--  <p>Sharing is caring..</p> --><h4 class='p-3'>SHARING IS CARING</h4>
 
       <ul class="social_share wiggle">
           <li class='wiggle'><whats-app  :url="url" title="Get Food" scale="3" ></whats-app> <span>WHATSAPP</span></li>
@@ -26,7 +31,12 @@
         </ul>
 
       <div class="close_popup_button"><router-link to='/' class="close-popup">
-          <img src="images/icons/black/menu_close.png" alt="" title="" /></router-link></div>
+          <img src="images/icons/black/menu_close.png" alt="" title="" /></router-link>
+          </div>
+
+                  </v-card>
+ </template>
+
     </div>
     </div>
 

@@ -14,17 +14,32 @@
                  <div class='bg-light'>
                     <main role="main" class="container">
       
+       <template>
+                  <v-card
+                    class="mx-auto"
+                    max-width="344"
+                   
+                  >
                             <nav aria-label="breadcrumb ">
                                     <ol class="breadcrumb">
                           <li class="breadcrumb-item"><router-link to='/'>Home</router-link></li>
                                       <li class="breadcrumb-item"><router-link to='/shop'>Kitchen</router-link></li>
-                                      <li class="breadcrumb-item active" aria-current="page" >VENDORS</li>
+                                      <li class="breadcrumb-item active" aria-current="page" >Vendors</li>
                                       
                                     </ol>
                                   </nav>
-                        
+                        </v-card>
+       </template>
+
+
+
+              <v-card
+               class="mx-auto"
+                 max-width="344"
+                 max-height='90'
+               >
                         <form>
-                            <div class="mt-4 form-group">
+                            <div class="mt-4 form-group p-3">
                               <label>Select a Vendor</label>
        <select class="form-control" id="exampleInputEmail1"  v-model='selected'> 
         <option :value='ven.name' v-for='ven in vendor_list' v-bind:key='ven.id'>
@@ -36,7 +51,8 @@
                             <br>
                             <br>
                           </form>
-    
+              </v-card>
+
                   <!-- res here-->    
                   <div v-if='empty' class='text-center alert alert-info'>
                         Sorry. This Kitchen is Empty.
@@ -48,6 +64,13 @@
       <ul class="shop_items ">
               
           <li class='animated tdPlopIn' v-for='con in content' v-bind:key='con.id'>
+
+            <template>
+                  <v-card
+                    class="mx-auto elevation-23 p-3"
+                    max-width="344"
+                    outlined
+                  >
           <div class="shop_thumb">
               <v-img 
               :src="'/storage/food/'+con.img"
@@ -81,21 +104,39 @@
             <v-icon class='icon-shift'>my_location</v-icon> {{con.vendorAddress}}
           </p>
 
+</v-card>
+</template>
+
           </li> 
          
       </ul>
 
+
     <span v-if='!empty' v-show='selected'>
-          <div class="shop_pagination slideUp" >
+       <div class="shop_pagination slideUp" >
+              <template>
+                  <v-card
+                    class="mx-auto"
+                    max-width="344"
+                   
+                  >
           <a href="" class="prev_shop" @click.prevent="fetch(pagination.prev_page_url)" :disabled="!pagination.prev_page_url">PREV PAGE</a>
           <span class="shop_pagenr">  <span>{{pagination.current_page}} of {{pagination.last_page}}</span></span>
           <a href="" class="next_shop" @click.prevent="fetch(pagination.next_page_url)" :disabled="!pagination.next_page_url">NEXT PAGE</a>
+          </v-card>
+      </template>
+
+        </div>
+      
+          <div class="my-2 text-center">
+          <v-btn @click.prevent='cart()'>VIEW TABLE</v-btn>   
           </div>
-      
-      
-          <router-link to="/cart" class="button_full btyellow slideUp">VIEW TABLE</router-link>           
-        
+
    </span>
+
+    
+
+
 
       </div>
 
@@ -237,6 +278,9 @@
     
             methods: {
     
+    cart(){
+            this.$router.push({ name: "cart" })
+          },
                 fetch(page_url){
                   if(page_url){
                   NProgress.start();

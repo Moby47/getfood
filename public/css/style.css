@@ -1241,7 +1241,9 @@ margin:auto;
 }
 /*===============================================*/
 /* 9. SHOP LAYOUT */
-/*===============================================*/
+/*===============================================
+border-bottom:1px solid #e4e4e4;
+*/
 ul.shop_items{
 padding:0;
 width:100%;
@@ -1257,7 +1259,7 @@ display:block;
 width:100%;
 float:left;
 clear:both;
-border-bottom:1px solid #e4e4e4;
+
 position:relative;
 }
 ul.shop_items li .shop_thumb{
@@ -1494,13 +1496,15 @@ background-position:center center;
 background-repeat:no-repeat;
 }
 
-/* 9-2. SHOPPING CART - CECKOUT */
+/* 9-2. SHOPPING CART - CECKOUT 
+border-bottom:1px #3d3e50 solid;
+*/
 
 .cart_item{
 width:100%;
 float:left;
 clear:both;
-border-bottom:1px #3d3e50 solid;
+
 padding:10px 0;
 margin:0 0 10px 0;
 }

@@ -8,26 +8,57 @@
             <div id="pages_maincontent">
              
              <br>
+              <template>
+                  <v-card
+                    class="mx-auto"
+                    max-width="344"
+                   
+                  >
                  <nav aria-label="breadcrumb ">
                          <ol class="breadcrumb">
                            <li class="breadcrumb-item"><router-link to='/'>Home</router-link></li>
-                           <li class="breadcrumb-item active" aria-current="page">FAVORITE FOOD ({{fav_count}})</li>
+                           <li class="breadcrumb-item active" aria-current="page">Favorite Food(s) ({{fav_count}})</li>
                    
                          </ol>
                        </nav>
-        
+                  </v-card>
+              </template>
                          <!-- ********************************************** empty -->
                          
-                      <div v-if='empty' class='text-center alert alert-info'>
-                      You Have No Food Favorite. <router-link class='text-center button_full btyellow' to='/shop'>Add Now</router-link>
-                             </div>
-     
+                         <span v-if='empty'>
+    <template>
+  <div>
+    
+    <v-alert
+      color="#FFA500"
+      dark
+      icon="favorite"
+      border="left"
+      prominent
+    >
+      No Favorite Food Found. 
+    </v-alert>
+  </div>
+</template>
+
+
+      <div class="my-2 text-center">
+    <v-btn @click.prevent='shop()'>Add Food</v-btn>   
+    </div>
+                         </span>
 
       <div class="page_single layout_fullwidth_padding">
        
         <ul class="shop_items ">
               
           <li class='animated tdPlopIn' v-for='con in content' v-bind:key='con.id'>
+
+             <template>
+                  <v-card
+                    class="mx-auto elevation-23 p-3"
+                    max-width="344"
+                    outlined
+                  >
           <div class="shop_thumb">
               <v-img 
               :src="'/storage/food/'+con.img"
@@ -45,16 +76,20 @@
           </favUpdate>
            
           </div>
-          <p class="info">
+          <p class="info text-capitalize">
             <v-icon>restaurant</v-icon> {{con.vendor_name}}
              <br>
              <v-icon class='icon-shift'>my_location</v-icon> {{con.vendorAddress}}
            </p>
+                  </v-card>
+             </template>
           </li> 
       </ul>
         
       <span v-if='!empty'><!---->
-        <router-link to="/cart" class="button_full btyellow slideUp">VIEW TABLE</router-link>    
+         <div class="my-2 text-center">
+          <v-btn @click.prevent='cart()'>VIEW TABLE</v-btn>   
+          </div>
          </span>
         </div>
         
@@ -92,6 +127,12 @@
         },
 
         methods: {
+              shop(){
+            this.$router.push({ name: "shop" })
+          },
+          cart(){
+            this.$router.push({ name: "cart" })
+          },
           fetch(){
             this.overlay = !this.overlay
                 fetch('/get-fav/'+ localStorage.getItem('userId'))

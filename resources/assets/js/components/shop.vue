@@ -66,7 +66,7 @@
           <li class='animated tdPlopIn' v-for='con in content' v-bind:key='con.id'>
               <template>
                   <v-card
-                    class="mx-auto elevation-23"
+                    class="mx-auto elevation-23 p-3"
                     max-width="344"
                     outlined
                   >

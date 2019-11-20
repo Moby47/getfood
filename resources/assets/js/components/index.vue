@@ -1,6 +1,15 @@
 <template>
     <div class="">
 
+      <!--
+        https://vuetifyjs.com/en/components/treeview
+        https://vuetifyjs.com/en/components/timelines
+        https://vuetifyjs.com/en/components/selects
+        https://vuetifyjs.com/en/components/autocompletes
+https://vuetifyjs.com/en/components/bottom-navigation
+check alert in fav page
+        -->
+
       <!-- banner -->
 <div class="banner fadeIn">
     <div class="container ">

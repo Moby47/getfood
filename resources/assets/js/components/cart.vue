@@ -112,6 +112,7 @@
     </div>
   </template>
 
+
   <floatings
   :toggle_cart=toggle_cart
   v-show='cartConCount > 0'

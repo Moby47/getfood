@@ -11,18 +11,31 @@
             <div id="pages_maincontent">
              
              <br>
+              <template>
+                <v-card
+                  class="mx-auto"
+                  max-width="344"
+                 
+                >
                  <nav aria-label="breadcrumb ">
                          <ol class="breadcrumb">
                            <li class="breadcrumb-item"><router-link to='/cart'>Table</router-link></li>
-                           <li class="breadcrumb-item active" aria-current="page" >FOOD IS READY</li>
+                           <li class="breadcrumb-item active" aria-current="page" >Food Is Ready</li>
                            
                          </ol>
                        </nav>
-           
+                </v-card>
+              </template>
               
       <div class="page_single layout_fullwidth_padding">
               
              
+              <template>
+                <v-card
+                  class="mx-auto p-3"
+                  max-width="344"
+                 
+                >
               <h4 class="checkout_title">ORDER DETAILS</h4>
 
                 <!-- ********************************************** empty -->
@@ -69,7 +82,7 @@
                           <div class="order_item_price"><strike>N</strike>{{con.attributes.total}}</div>           
                       </div>
                       
-        
+               
                  
                  <span v-show='subtotal > 0' class=''>
                 <h4 class="checkout_title">TOTAL</h4>      
@@ -81,6 +94,9 @@
                      <div class="carttotal_left ">TOTAL</div> <div class="carttotal_right text-success"><strike>N</strike> {{total}}</div>
                             </div>
                         </div> 
+
+
+                        
                         <!--show only if cart::exist-->
                         <template v-if='go == true'>
                             <paystack
@@ -98,12 +114,17 @@
                         </template>
                         
             <!--reset back to select delivery meth-->
-            <a href="#" class="button_full btyellow slideUp" v-if='go == true'
-             @click.prevent='back()'>Delivery Method</a> 
-       
+            <h4 class="checkout_title text-capitalize">Choose a Delivery Method</h4>
             
-       <a href="#" class="button_full btyellow slideUp" v-if='choiceBtn == false' @click.prevent='self()'>Pick-up By Self</a> 
+       <div class="my-2 text-center">
+          <v-btn v-if='go == true' 
+             @click.prevent='back()'>Delivery Method</v-btn>   
+          </div>
             
+            <div class="my-2 text-center">
+       <v-btn v-if='choiceBtn == false' @click.prevent='self()'>Pick-up By Self</v-btn>   
+            </div>
+
        <div class="form-group" v-if='addText == true'>
         <label for="exampleInputEmail1">Enter Your Delivery Address</label>
         <input type="text" class="form-control" name='address' id="exampleInputEmail1" 
@@ -113,11 +134,19 @@
             <span class='text-danger shake' v-show="errors.has('address')">{{ errors.first('address') }}</span>
              </transition>
       </div>
-      <a href="#" v-if='addText == true' class="button_full btyellow slideUp" @click.prevent='ok()'>Ok</a> 
+      
+       <div class="my-2 text-center">
+       <v-btn v-if='addText == true' @click.prevent='ok()'>Ok</v-btn>   
+            </div>
 
-       <a href="#" class="button_full btyellow slideUp" v-if='choiceBtn == false' @click.prevent='vendor()'>Vendor delivery</a> 
+  <div class="my-2 text-center">
+       <v-btn v-if='choiceBtn == false' @click.prevent='vendor()'>Vendor delivery</v-btn>   
+            </div>
                        
                 </span>
+                
+                </v-card>
+               </template>
    
               </div>
        </div>

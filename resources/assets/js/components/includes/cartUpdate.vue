@@ -7,7 +7,7 @@
                   <v-card
                     class="mx-auto "
                     max-width="344"
-                    outlined
+                    
                   >
             <div class="item_title text-capitalize"> {{con.name}} </div>
 

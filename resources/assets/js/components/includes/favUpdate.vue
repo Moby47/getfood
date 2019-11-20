@@ -16,7 +16,7 @@
               
           
 
-      <h4>{{con.title}}</h4>
+      <h4 class='text-capitalize'>{{con.title}}</h4>
       <div class="shop_item_price"><strike>N</strike>{{con.amt}}</div>
         <div class="item_qnty_shop">
                 <form id="myformfav" method="POST" action="#">
@@ -26,11 +26,10 @@
                 </form>
             </div>
 
-           
 
-        <a  href="#" v-if="isAdded" id="addtocart" @click.prevent='removeFromCart(con)' >CLEAR</a>
+         <v-btn  href="#" v-if="isAdded" id="addtocart" @click.prevent='removeFromCart(con)' >CLEAR</v-btn>
 
-        <a   href="#" v-if="!isAdded" id="addtocart" @click.prevent='addToCart(con)' >RESERVE</a>
+        <v-btn   href="#" v-if="!isAdded" id="addtocart" @click.prevent='addToCart(con)' >RESERVE</v-btn>
         </span>
       </span>
 
