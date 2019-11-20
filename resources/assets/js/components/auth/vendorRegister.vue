@@ -11,6 +11,13 @@
           
             <!-- Register Popup -->
         <div class=" popup-signup">
+
+            <template>
+                <v-card
+                  class="mx-auto elevation-23 "
+                  max-width="344"
+                  outlined
+                >
             <div class="content-block slideUp">
                 <h4>REGISTER</h4> 
                 <div class="loginform">
@@ -35,14 +42,19 @@
                     
                 </div>
                 <div class="signup_bottom">
-                        <router-link to="/register">Back</router-link>
-                    <router-link to="/login">Login</router-link>
+                        <v-btn   @click.prevent='register()' outlined color="#FFA500">Back</v-btn>
+                    <v-btn @click.prevent='login()' outlined color="#FFA500">Login</v-btn>
                 </div>
                 <div class="close_popup_button">
                         <router-link to='/'  class="close-popup"><img src="images/icons/black/menu_close.png" 
                             alt="" title="" /></router-link>
                 </div>
             </div>
+
+            </v-card>
+            </template>
+
+            
         </div>
     
       
@@ -97,7 +109,12 @@
         },
 
         methods: {
-
+          login(){
+            this.$router.push({ name: "login" })
+          },
+          register(){
+            this.$router.push({ name: "register" })
+          },
             reg(){
                           //validate
             this.$validator.validateAll('regForm').then(() => {

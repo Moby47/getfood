@@ -1,5 +1,15 @@
 <template>
     <div class="container">
+
+         <!--
+        https://vuetifyjs.com/en/components/treeview
+        https://vuetifyjs.com/en/components/timelines
+        https://vuetifyjs.com/en/components/selects
+        https://vuetifyjs.com/en/components/autocompletes
+https://vuetifyjs.com/en/components/bottom-navigation
+home footer..more cards...tooltips
+        -->
+
         <menubar></menubar>
 <!--page content-->
 <div class="pages">
@@ -50,7 +60,7 @@
                    
                   >
 
-                <h4 class='slideUp p-3'>Objectives:</h4>
+                <h4 class='slideUp p-1'>Objectives:</h4>
                 <ul class="simple_list slideUp">
                 <li>Provide a reservation/ordering system for customers</li>
                 <li>Provide cost analysis / history on food expenditures for customers</li>
@@ -65,7 +75,7 @@
                 
                
  <div class="my-2 text-center">
-              <v-btn  @click.prevent='shop()'>ENTER KITCHEN</v-btn>
+              <v-btn  @click.prevent='shop()' outlined color="#FFA500">ENTER KITCHEN</v-btn>
             </div>
 
            </div>

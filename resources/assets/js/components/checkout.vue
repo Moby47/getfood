@@ -32,18 +32,22 @@
              
               <template>
                 <v-card
-                  class="mx-auto p-3"
+                  class="mx-auto p-1"
                   max-width="344"
                  
                 >
               <h4 class="checkout_title">ORDER DETAILS</h4>
 
                 <!-- ********************************************** empty -->
-                
-                    <div v-show='empty < 1' class='text-center alert alert-info'>
-                        Your Table is Empty. <router-link to='/shop' class='text-center button_full btyellow'>Add Food</router-link>
+                <span v-show='empty < 1'>
+                    <div  class='text-center alert alert-info'>
+               Your Table is Empty. 
                        </div>
-         
+
+                       <div class="my-2 text-center">
+                          <v-btn @click.prevent='shop()' outlined color="#FFA500">Add Food</v-btn>   
+                          </div>
+         </span>
                        <!--loading 
 <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
         <div v-if='data_load' class='text-center'>

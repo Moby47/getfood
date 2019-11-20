@@ -11,6 +11,13 @@
 
       <!-- Forgot Password Popup -->
     <div class=" popup-forgot">
+
+        <template>
+            <v-card
+              class="mx-auto elevation-23 "
+              max-width="344"
+              outlined
+            >
         <div class="content-block slideUp">
           
             <div class="loginform">
@@ -26,7 +33,7 @@
                 </div>
 
                 <div class="signup_bottom">
-                    <router-link to="/login">Back</router-link>
+                    <v-btn @click.prevent='login()' outlined color="#FFA500">Back</v-btn>
                 </div>
             </div>
             <div class="close_popup_button">
@@ -34,6 +41,10 @@
                         alt="" title="" /></router-link>
                       </div>
         </div>
+
+        </v-card>
+        </template>
+        
     </div>
 
   
@@ -84,6 +95,9 @@
         },
 
         methods: {
+          login(){
+            this.$router.push({ name: "login" })
+          },
             resendVeri(){
             this.$validator.validateAll('resendForm').then(() => {
              if (!this.errors.any()) {

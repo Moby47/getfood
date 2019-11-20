@@ -11,6 +11,14 @@
 
        <!-- Login Popup -->
     <div class=" popup-login">
+
+        <template>
+            <v-card
+              class="mx-auto elevation-23 "
+              max-width="344"
+              outlined
+            >
+
       <div class="content-block slideUp">
           <h4>LOGIN</h4> 
           <div class="loginform">
@@ -30,11 +38,11 @@
                                     <p>Don't have an account?</p>
                
                   <div class="my-2 text-center">
-                      <v-btn @click.prevent='register()'>Sign Up</v-btn>   
+                      <v-btn @click.prevent='register()' outlined color="#FFA500">Sign Up</v-btn>   
                       </div>
 
                 <div class="my-2 text-center">
-                    <v-btn @click.prevent='resendEmail()'>Resend Verification Email</v-btn>   
+                    <v-btn @click.prevent='resendEmail()' outlined color="#FFA500">Verification Email</v-btn>   
                     </div>
                   
               </div>
@@ -43,6 +51,10 @@
               <router-link to='/' class="close-popup"><img src="images/icons/black/menu_close.png" alt="" title="" /></router-link>
           </div>
       </div>
+
+      </v-card>
+      </template>
+      
   </div>
 
   

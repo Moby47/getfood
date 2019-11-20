@@ -53,12 +53,31 @@
       >
 
       <span v-show='empty < 1'>
- <div  class='text-center alert alert-info'>
-  Your Table is Empty. 
- </div>
+ 
+ <template>
+    <v-card
+      class="mx-auto"
+      max-width="344"
+    >
+<template>
+<div>
+<v-alert
+  color="#FFA500"
+  dark
+  icon="fastfood"
+  border="left"
+  prominent
+>
+Your Table is Empty. 
+</v-alert>
+</div>
+</template>
+
+</v-card>
+</template>
 
  <div class="my-2 text-center">
-    <v-btn @click.prevent='shop()'>Add Food</v-btn>   
+    <v-btn @click.prevent='shop()' outlined color="#FFA500">Add Food</v-btn>   
     </div>
 </span>
 

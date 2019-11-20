@@ -26,24 +26,32 @@
                          <!-- ********************************************** empty -->
                          
                          <span v-if='empty'>
-    <template>
-  <div>
-    
-    <v-alert
-      color="#FFA500"
-      dark
-      icon="favorite"
-      border="left"
-      prominent
-    >
-      No Favorite Food Found. 
-    </v-alert>
-  </div>
-</template>
+
+                            <template>
+                                <v-card
+                                  class="mx-auto"
+                                  max-width="344"
+                                >
+                            <template>
+                          <div>
+                            <v-alert
+                              color="#FFA500"
+                              dark
+                              icon="favorite"
+                              border="left"
+                              prominent
+                            >
+                              No Favorite Food Found. 
+                            </v-alert>
+                          </div>
+                        </template>
+
+                        </v-card>
+                        </template>
 
 
       <div class="my-2 text-center">
-    <v-btn @click.prevent='shop()'>Add Food</v-btn>   
+    <v-btn @click.prevent='shop()' outlined color="#FFA500">Add Food</v-btn>   
     </div>
                          </span>
 
@@ -55,7 +63,7 @@
 
              <template>
                   <v-card
-                    class="mx-auto elevation-23 p-3"
+                    class="mx-auto elevation-23 p-1"
                     max-width="344"
                     outlined
                   >
@@ -88,7 +96,7 @@
         
       <span v-if='!empty'><!---->
          <div class="my-2 text-center">
-          <v-btn @click.prevent='cart()'>VIEW TABLE</v-btn>   
+          <v-btn @click.prevent='cart()' outlined color="#FFA500">VIEW TABLE</v-btn>   
           </div>
          </span>
         </div>

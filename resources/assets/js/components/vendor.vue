@@ -11,7 +11,7 @@
                       <br>
                    
     
-                 <div class='bg-light'>
+                 <div class=''>
                     <main role="main" class="container">
       
        <template>
@@ -39,7 +39,7 @@
                  max-height='90'
                >
                         <form>
-                            <div class="mt-4 form-group p-3">
+                            <div class="mt-4 form-group p-1">
                               <label>Select a Vendor</label>
        <select class="form-control" id="exampleInputEmail1"  v-model='selected'> 
         <option :value='ven.name' v-for='ven in vendor_list' v-bind:key='ven.id'>
@@ -67,7 +67,7 @@
 
             <template>
                   <v-card
-                    class="mx-auto elevation-23 p-3"
+                    class="mx-auto elevation-23 p-1"
                     max-width="344"
                     outlined
                   >
@@ -129,7 +129,7 @@
         </div>
       
           <div class="my-2 text-center">
-          <v-btn @click.prevent='cart()'>VIEW TABLE</v-btn>   
+          <v-btn @click.prevent='cart()' outlined color="#FFA500">VIEW TABLE</v-btn>   
           </div>
 
    </span>

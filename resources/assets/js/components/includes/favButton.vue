@@ -1,9 +1,9 @@
 <template>
    <div> 
-    <a href="#" v-if="isFavorited" data-popup=".popup-social" class="open-popup shopfav" @click.prevent='unFavorite(id)'>
+    <a href="#" v-if="isFavorited" data-popup=".popup-social" class="mr-1 open-popup shopfav" @click.prevent='unFavorite(id)'>
                 <img src="images/icons/black/menu_close.png" alt="" title="" /></a>
 
-                <a href="#" v-else data-popup=".popup-social" class="open-popup shopfav pulse" @click.prevent='Favorite(id)'>
+                <a href="#" v-else data-popup=".popup-social" class="mr-1 open-popup shopfav pulse" @click.prevent='Favorite(id)'>
                    <v-img src="images/icons/black/love.png" alt="" title=""></v-img></a>
 
                         <template>

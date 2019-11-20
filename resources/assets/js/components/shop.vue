@@ -26,9 +26,30 @@
     </template>
                     <!-- ********************************************** empty -->
                          
-                      <div v-if='empty' class='text-center alert alert-info'>
-                         Sorry, The Kitchen is Empty.
-                              </div>
+                      <span v-if='empty' >
+                         
+                         <template>
+                            <v-card
+                              class="mx-auto"
+                              max-width="344"
+                            >
+                        <template>
+                      <div>
+                        <v-alert
+                          color="#FFA500"
+                          dark
+                          icon="fastfood"
+                          border="left"
+                          prominent
+                        >
+                        Sorry, The Kitchen is Empty.
+                        </v-alert>
+                      </div>
+                    </template>
+
+                    </v-card>
+                    </template>
+                              </span>
       
                                <!--loading -->
    <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
@@ -66,7 +87,7 @@
           <li class='animated tdPlopIn' v-for='con in content' v-bind:key='con.id'>
               <template>
                   <v-card
-                    class="mx-auto elevation-23 p-3"
+                    class="mx-auto elevation-23 p-1"
                     max-width="344"
                     outlined
                   >
@@ -127,7 +148,7 @@
         </div>
       
           <div class="my-2 text-center">
-          <v-btn @click.prevent='cart()'>VIEW TABLE</v-btn>   
+          <v-btn @click.prevent='cart()' outlined color="#FFA500">VIEW TABLE</v-btn>   
           </div>
 
    </span>

@@ -11,6 +11,13 @@
           
             <!-- Register Popup -->
         <div class=" popup-signup">
+
+            <template>
+                <v-card
+                  class="mx-auto elevation-23 "
+                  max-width="344"
+                  outlined
+                >
             <div class="content-block slideUp">
                 <h4>REGISTER</h4> 
                 <div class="loginform">
@@ -28,8 +35,8 @@
           
           </form>
           <div class="signup_bottom">
-            <p class=""><router-link to="/vendor-register" >Register as Vendor</router-link></p>
-            <router-link to="/login">Login</router-link>         
+            <p class=""><v-btn @click.prevent='vreg()' outlined color="#FFA500" >Register as Vendor</v-btn></p>
+            <v-btn @click.prevent='login()' outlined color="#FFA500">Login</v-btn>         
         </div>
                 </div>
               
@@ -38,6 +45,10 @@
                             alt="" title="" /></router-link>
                 </div>
             </div>
+
+            </v-card>
+            </template>
+            
         </div>
     
       
@@ -90,7 +101,12 @@
         },
 
         methods: {
-
+          login(){
+            this.$router.push({ name: "login" })
+          },
+          vreg(){
+            this.$router.push({ name: "vendorRegister" })
+          },
             reg(){
                           //validate
             this.$validator.validateAll('regForm').then(() => {
