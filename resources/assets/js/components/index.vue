@@ -36,10 +36,10 @@
 
 <!--1-->
               <v-img
-                height="250"
-                class='fadeIn'
-                src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
-                :lazy-src="`https://picsum.photos/id/11/100/60`"
+                max-width="344"
+                class='mx-auto fadeIn'
+                src="/images/home.svg"
+                :lazy-src="`/images/black-spinner.gif`"
               ></v-img>
           
               <v-card-title class='text-capitalize'>HELLO {{userName}}</v-card-title>
@@ -83,7 +83,7 @@
                       width="80"
                       height="200"
                       src="/images/start.svg"
-                      :lazy-src="`https://picsum.photos/id/11/100/60`"
+                      :lazy-src="`/images/black-spinner.gif`"
                     ></v-img>
                     </v-list-item>
                 

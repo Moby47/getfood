@@ -76,8 +76,8 @@ Your Table is Empty.
 </v-card>
 </template>
 
- <div class="my-2 text-center">
-    <v-btn @click.prevent='shop()' outlined color="#FFA500">Add Food</v-btn>   
+ <div class="my-2 text-center ">
+    <v-btn @click.prevent='shop()' class='mb-2' outlined color="#FFA500">Add Food</v-btn>   
     </div>
 </span>
 

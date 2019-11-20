@@ -18,7 +18,7 @@
             <v-img 
             :src="'/storage/food/'+con.attributes.image"
             :alt="con.title"
-            :lazy-src="`https://picsum.photos/id/11/100/60`"
+            :lazy-src="`/images/black-spinner.gif`"
             title="" 
             class='img_size'></v-img>
             </a></div>

@@ -112,7 +112,7 @@
                                 :close="close"
                                 :embed="false"
                             >
-                            <a href="#"  id='pay' class="text-center button_full btyellow slideUp">EAT</a> 
+                            <a href="#"  id='pay' class="text-center  button_full btyellow slideUp">EAT</a> 
                             </paystack>
                             
                         </template>
@@ -122,11 +122,11 @@
             
        <div class="my-2 text-center">
           <v-btn v-if='go == true' 
-             @click.prevent='back()'>Delivery Method</v-btn>   
+             @click.prevent='back()' outlined color="#FFA500">Delivery Method</v-btn>   
           </div>
             
             <div class="my-2 text-center">
-       <v-btn v-if='choiceBtn == false' @click.prevent='self()'>Pick-up By Self</v-btn>   
+       <v-btn v-if='choiceBtn == false' @click.prevent='self()' outlined color="#FFA500">Pick-up By Self</v-btn>   
             </div>
 
        <div class="form-group" v-if='addText == true'>
@@ -140,11 +140,11 @@
       </div>
       
        <div class="my-2 text-center">
-       <v-btn v-if='addText == true' @click.prevent='ok()'>Ok</v-btn>   
+       <v-btn v-if='addText == true' @click.prevent='ok()' outlined color="#FFA500">Ok</v-btn>   
             </div>
 
   <div class="my-2 text-center">
-       <v-btn v-if='choiceBtn == false' @click.prevent='vendor()'>Vendor delivery</v-btn>   
+       <v-btn v-if='choiceBtn == false' @click.prevent='vendor()' outlined color="#FFA500">Vendor delivery</v-btn>   
             </div>
                        
                 </span>
@@ -222,6 +222,9 @@ import paystack from 'vue-paystack';
 
         
         methods: {
+          shop(){
+            this.$router.push({ name: "shop" })
+          },
 
           self(){
             var del = localStorage.getItem('delivery')
