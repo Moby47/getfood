@@ -16,12 +16,16 @@ import filterorders from './components/customer/filterorders.vue'
 import login from './components/auth/login.vue'
 import product from './components/vendor/product.vue'
 import orders from './components/vendor/orders.vue'
+import manage from './components/vendor/manage.vue'
+import edit from './components/vendor/edit.vue'
+import favorites from './components/vendor/favorites.vue'
 import register from './components/auth/register.vue'
 import vendorRegister from './components/auth/vendorRegister.vue'
 import share from './components/share.vue'
 import shop from './components/shop.vue'
 import success from './components/success.vue'
 import notfound from './components/notfound.vue'
+import vendor from './components/vendor.vue'
 
 export default new Router({
     mode: 'history',
@@ -62,6 +66,14 @@ export default new Router({
             path: '/favorite',
             name: 'favorite',
             component: favorite,
+             meta:{
+              //  auth: true
+            }
+        },
+        {
+            path: '/vendor',
+            name: 'vendor',
+            component: vendor,
              meta:{
               //  auth: true
             }
@@ -116,9 +128,33 @@ export default new Router({
             }
         },
         {
+            path: '/vendor-favorites',
+            name: 'favorites',
+            component: favorites,
+             meta:{
+                vendor: true
+            }
+        },
+        {
             path: '/orders',
             name: 'orders',
             component: orders,
+             meta:{
+                vendor: true
+            }
+        },
+        {
+            path: '/edit',
+            name: 'edit',
+            component: edit,
+             meta:{
+                vendor: true
+            }
+        },
+        {
+            path: '/manage-food',
+            name: 'manage',
+            component: manage,
              meta:{
                 vendor: true
             }

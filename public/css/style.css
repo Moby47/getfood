@@ -277,9 +277,7 @@ padding:20px 0 0 0;
 /*===============================================*/
 /* 5. CUSTOM BUTTONS */
 /*===============================================*/	
-#pay{
-	margin: 0 100px 20px 60px;
-}
+
 
 a.button_full{
 width:100%; 
@@ -292,6 +290,7 @@ font-weight:700;
 background-color:#fff;
 color:#1d202d; 
 border:2px #FFA500 solid;
+
 }
 a.button_small{
 background-color:#FFA500; 
@@ -2546,6 +2545,7 @@ font-size:16px;
 }
 a.button_full{
 padding:10px 0;
+
 }
 .bottombarpages{
 height:60px;

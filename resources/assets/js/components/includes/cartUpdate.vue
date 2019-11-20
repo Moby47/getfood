@@ -2,7 +2,14 @@
 <template>
        
     <div :id='con.id'>
-            <div class="item_title"> {{con.name}} </div>
+
+        <template>
+                  <v-card
+                    class="mx-auto "
+                    max-width="344"
+                    outlined
+                  >
+            <div class="item_title text-capitalize"> {{con.name}} </div>
 
             <span v-if='deleted == false'>
             <div class="item_price"><strike>N</strike>{{con.attributes.total}} </div>
@@ -11,12 +18,13 @@
             <v-img 
             :src="'/storage/food/'+con.attributes.image"
             :alt="con.title"
-            :lazy-src="`/images/black-spinner.gif`"
-            title="" ></v-img>
+            :lazy-src="`https://picsum.photos/id/11/100/60`"
+            title="" 
+            class='img_size'></v-img>
             </a></div>
 
             <div class="item_qnty">
-                <form id="myform" method="POST" action="#">
+                <form id="myformup" method="POST" action="#">
                     <label>QUANTITY ({{con.quantity}})</label>
                     <input type="button" value="-" class="qntyminus" field="quantity" @click.prevent='decre(con)'
                      :disabled='qty==1'/>
@@ -32,6 +40,9 @@
                                 <label>DELETED</label>
                             </div>
             </span>
+
+            </v-card>
+        </template>
 
             <template>
                 <v-snackbar
@@ -53,6 +64,9 @@
   </template>
         
         <script>
+
+import {eventBus} from "../../app.js";
+
         export default {
 
 props: ['con'],
@@ -78,9 +92,13 @@ methods: {
         axios.post('/remove-from-cart',input)
                 .then(res=>{
                     if(res.data == 1){
-                      sound.play();
+                     
                 this.text='Food removed from Table!'
                         this.snackbar = true;
+                         //update cart count
+                         this.cartcount()
+                         //rerun method to recount cart content
+                         eventBus.$emit('rerun_count')
                     }
                     this.deleted = true;
                     NProgress.done();
@@ -91,6 +109,19 @@ methods: {
             NProgress.done();        
               })
     },
+
+    cartcount(){
+              //get user cart count from DB
+            fetch('/cartCount/'+ localStorage.getItem('tempUserCartID'))
+                .then(res => res.json())
+                .then(res=>{
+            var cart_count = res;
+            //save to local storage
+            localStorage.setItem('cart', cart_count )
+            //fetch the store and append
+           this.count = localStorage.getItem('cart')
+                })
+            },
 
     incre(con){
                 NProgress.start();

@@ -28,10 +28,15 @@
               <div class="signup_bottom">
                   
                                     <p>Don't have an account?</p>
-                  <router-link to="/register">SIGN UP</router-link>
-                <br><br>
+               
+                  <div class="my-2 text-center">
+                      <v-btn @click.prevent='register()'>Sign Up</v-btn>   
+                      </div>
 
-                  <p class=""><router-link to="/resend-email" >Resend Verification Email</router-link></p>
+                <div class="my-2 text-center">
+                    <v-btn @click.prevent='resendEmail()'>Resend Verification Email</v-btn>   
+                    </div>
+                  
               </div>
           </div>
           <div class="close_popup_button">
@@ -88,6 +93,12 @@
         },
 
         methods: {
+          register(){
+            this.$router.push({ name: "register" })
+          },
+          resendEmail(){
+            this.$router.push({ name: "resendemail" })
+          },
 
             login(){
                           //validate specific reg fields
@@ -116,20 +127,32 @@
                                localStorage.setItem('userStatus',res.data.userStatus);
                                
                                var status = localStorage.getItem('userStatus')
-                                sound.play();
-                                if(status == 1){
+                                
+
+                                //validate if quest is coming from cart page then gotocheckout not dashboard
+                                if(localStorage.getItem('shopper')){
+                                  localStorage.removeItem('shopper')
+                                  this.$router.push({name: "checkout"});
+                                  return;
+                                  
+                                }else{
+
+                                    if(status == 1){
                                   //admin
+                                  //load add to store
+                                  localStorage.setItem('vendorAddress',res.data.vendorAddress);
+
                                   this.$router.push({name: "admindashboard"});
                                 }else if (status == 0){
                                   //user
                                   this.$router.push({name: "userdashboard"});
-                                }else{
-                                  /* For super admin page
-                                  -status = 47​
-                                  -verifi = 1​
-                                  -approve/decline vendor​
-                                  */
+                                }else if (status == 47){
+                                  /* For super admin page*/
+                                  this.$router.push({name: "superadmindashboard"});
                                 }
+                                }
+
+                              
                           }
                     })
                     .catch(error =>{

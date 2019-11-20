@@ -26,7 +26,7 @@
                 </div>
 
                 <div class="signup_bottom">
-                    <router-link to="/login">BACK</router-link>
+                    <router-link to="/login">Back</router-link>
                 </div>
             </div>
             <div class="close_popup_button">

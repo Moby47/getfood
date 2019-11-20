@@ -18,18 +18,29 @@
                   <router-link class="nav-link" to="/product">Add Food</router-link>
                 </li>
                 <li class="nav-item">
+                    <router-link class="nav-link" to="/manage-food">Manage Food</router-link>
+                  </li>
+                <li class="nav-item">
                         <router-link class="nav-link" to="/orders">Orders</router-link>
                       </li>
+                      <li class="nav-item">
+                          <router-link class="nav-link" to="/vendor-favorites">Customer Favorites</router-link>
+                        </li>
                 <li class="nav-item">
                         <router-link class="nav-link" to="/shop">Enter Kitchen</router-link>
                       </li>
+                      <li class="nav-item">
+                          <router-link class="nav-link" to="/vendor">Vendors</router-link>
+                        </li>
                   <li class="nav-item" v-if='loggedOut == true'>
                     <router-link class="nav-link" to="/login">Login</router-link>
                   </li>
                   <li class="nav-item" v-if='loggedOut == false'>
                     <a class="nav-link" @click.prevent="logout()">Log Out</a>
                   </li>
-                 
+                  <li class="nav-item">
+                      <a href='tel:08053121695' class="nav-link" >Contact Developer</a>
+                    </li>
               </ul>
              
             </div>
@@ -90,7 +101,19 @@
                        localStorage.removeItem('userName');
                        localStorage.removeItem('userMail');
                        localStorage.removeItem('userStatus');
-                       sound.play();
+                       //clear tempcartid
+                       localStorage.removeItem('tempUserCartID');
+                       //clear cart
+                       if(localStorage.getItem('tempUserCartID')){
+                    var input = {'userId':localStorage.getItem('tempUserCartID')}
+            axios.post('/clear-cart',input).then(res=>{
+                console.log('cart cleared')  
+            })
+            .catch(error =>{
+                console.log(error)    
+               })
+                   }
+                    
                        this.isAuth();
                        this.loggedOut = true;
                         NProgress.done();

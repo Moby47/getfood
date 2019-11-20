@@ -2,6 +2,11 @@
     <div class=''>
     <nav class="navbar navbar-expand-lg navbar-light bg-light radius menu-over">
         <router-link class="navbar-brand" to="/">GetFoods</router-link>
+
+    <!--    <v-btn class="ma-2" text>
+             <router-link to='/checkout'> <v-icon color="orange darken-2">shopping_cart</v-icon></router-link>
+            </v-btn>
+-->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -16,10 +21,13 @@
               <router-link class="nav-link" to="/shop">Enter Kitchen</router-link>
             </li>
             <li class="nav-item">
-                <router-link class="nav-link" to="/favorite">My Favorite</router-link>
+                <router-link class="nav-link" to="/vendor">Vendors</router-link>
               </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/about">About the App</router-link>
+                <router-link class="nav-link" to="/favorite">My Favorites</router-link>
+              </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/about">About Getfoods</router-link>
             </li>
             <li class="nav-item">
                 <router-link class="nav-link" to="/share">Tell a Friend</router-link>
@@ -31,7 +39,7 @@
                 <a class="nav-link" @click.prevent="logout()">Log Out</a>
               </li>
               <li class="nav-item">
-                <a href='tel:08053121695'class="nav-link" to="">Contact Developer</a>
+                <a href='tel:08053121695' class="nav-link" >Contact Developer</a>
               </li>
           </ul>
          
@@ -93,7 +101,19 @@
                    localStorage.removeItem('userName');
                    localStorage.removeItem('userMail');
                    localStorage.removeItem('userStatus');
-                   sound.play();
+                      //clear tempcartid
+                       localStorage.removeItem('tempUserCartID');
+                   //clear cart
+                   if(localStorage.getItem('tempUserCartID')){
+                    var input = {'userId':localStorage.getItem('tempUserCartID')}
+            axios.post('/clear-cart',input).then(res=>{
+                console.log('cart cleared')  
+            })
+            .catch(error =>{
+                console.log(error)    
+               })
+                   }
+              
                    this.isAuth();
                    this.loggedOut = true;
                     NProgress.done();

@@ -9,13 +9,21 @@
             <div id="pages_maincontent">
              
              <br>
+             <template>
+                <v-card
+                  class="mx-auto"
+                  max-width="344"
+                 
+                >
                  <nav aria-label="breadcrumb ">
                          <ol class="breadcrumb">
-                           <li class="breadcrumb-item"><router-link to='/shop'>KITCHEN</router-link></li>
-                           <li class="breadcrumb-item active" aria-current="page">SELECTED FOOD ({{cartConCount}})</li>
+                           <li class="breadcrumb-item"><router-link to='/shop'>Kitchen</router-link></li>
+                           <li class="breadcrumb-item active" aria-current="page">Selected Food ({{cartConCount}})</li>
                          </ol>
                        </nav>
-                
+                </v-card>
+                </template>
+
       <div class="page_single layout_fullwidth_padding">	
         
            <div class="cartcontainer">   
@@ -36,21 +44,24 @@
  </transition>
 -->
    <!-- ********************************************** empty -->
-   <v-alert
-   color="blue-grey"
-      dark
-      dense
-      icon="mdi-school"
-      v-show='empty < 1'
- >
-   <v-row align="center">
-     <v-col class="grow">Your Table is empty.</v-col>
-     <v-col class="shrink">
-       <router-link to='/shop'><v-btn>GET FOOD</v-btn></router-link>
-     </v-col>
-   </v-row>
- </v-alert>
-           
+  
+   <template>
+      <v-card
+        class="mx-auto"
+        max-width="344"
+        
+      >
+
+      <span v-show='empty < 1'>
+ <div  class='text-center alert alert-info'>
+  Your Table is Empty. 
+ </div>
+
+ <div class="my-2 text-center">
+    <v-btn @click.prevent='shop()'>Add Food</v-btn>   
+    </div>
+</span>
+
       <!--loading temp-->
 <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
              <div v-if='wait' class='text-center'>
@@ -64,6 +75,9 @@
                          </template>
                           </div>
                  </transition>
+                 
+                </v-card>
+              </template>
 
                 <div class="cart_item animated tdExpandInBounce" id="cartitem1" v-for='con in content' v-bind:key='con.id'>
                    
@@ -73,9 +87,10 @@
                     </cartUpdate>
                   
                 </div>
-              
-       <router-link to="/checkout" v-show='cartConCount > 0' class="button_full btyellow slideUp">TAKE FOOD</router-link>           
-                
+                        
+       <div class="my-2 text-center" v-show='cartConCount > 0' >
+          <v-btn @click.prevent='checkout()'>TAKE FOOD</v-btn>   
+          </div>
    </div>
                 
                 
@@ -97,12 +112,21 @@
     </div>
   </template>
 
+  <floatings
+  :toggle_cart=toggle_cart
+  v-show='cartConCount > 0'
+  >
+  </floatings>
+
     </div>
 </template>
 
 
       
 <script>
+
+import {eventBus} from "../app.js";
+
     export default {
 
         data(){
@@ -112,18 +136,23 @@
                 wait:false,
                 data_load: true,
                 empty:47,
-                cartConCount:''
+                cartConCount:'',
+                toggle_cart:true
             }
         },
 
         methods: {
+          shop(){
+            this.$router.push({ name: "shop" })
+          },
+          
             fetch(){
                   
                   fetch('/cart-items'+'/'+ localStorage.getItem('tempUserCartID'))
                   .then(res => res.json())
                   .then(res=>{
                     this.content = res.data;
-                    console.log(this.content)
+                    //console.log(this.content)
                     this.wait = false;
                    this.empty = this.content.length;
                   })
@@ -155,11 +184,35 @@
 
                 },
 
+                checkout(){
+                  if(localStorage.getItem('userToken')){
+                    //authed, proceed
+                 this.$router.push({name: "checkout"});
+                  }else{
+                    //auth needed
+                  //set variable to redirect to checkout page after guest auth
+                  localStorage.setItem('shopper','shopper')
+                  //send to login
+                   this.$router.push({name: "login"});
+                  }
+                  
+
+                }
+
         },
+
+                      created(){
+
+              eventBus.$on('rerun_count', ()=>{
+                this.countCartCon()
+              })
+
+
+              },
         watch : {
               content(a,b){
                if(a){
-                //data content loaded, it is safe to display
+                //data content loaded, it is safe to toggle_cart
                 this.data_load = false;
                 this.data = true;
                }

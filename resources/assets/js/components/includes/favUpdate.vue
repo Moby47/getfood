@@ -19,7 +19,7 @@
       <h4>{{con.title}}</h4>
       <div class="shop_item_price"><strike>N</strike>{{con.amt}}</div>
         <div class="item_qnty_shop">
-                <form id="myform" method="POST" action="#">
+                <form id="myformfav" method="POST" action="#">
               <input :disabled='qty==1' type="button" value="-" class="qntyminusshop" field="quantity" @click.prevent='decre()'/>
                     <input type="text" name="quantity" :value="qty" class="qntyshop" />
                     <input type="button" value="+" class="qntyplusshop" field="quantity" @click.prevent='incre()'/>
@@ -69,6 +69,9 @@
   </template>
         
         <script>
+
+import {eventBus} from "../../app.js";
+
         export default {
 
 props: ['con','stash'],
@@ -90,13 +93,20 @@ methods: {
     removeFromFav(con) {
       //
         this.overlay = !this.overlay
+        if(!localStorage.getItem('tempUserCartID')){
+                    var tempUserCartID = Math.floor(Math.random()*1234567890);
+                     localStorage.setItem('tempUserCartID',tempUserCartID);
+                   //  console.log('created id')
+                }
         var input = {'favId':con.id, 'foodId':con.foodId, 'userId':localStorage.getItem('tempUserCartID')};
+       
         axios.post('/remove-from-fav',input)
                 .then(res=>{
                     if(res.data == 1){
-                      sound.play();
+                     
                 this.text='Food removed from Favorites!'
                         this.snackbar = true;
+                        
                     }
                     this.deleted = true;
                      this.overlay = !this.overlay
@@ -116,7 +126,7 @@ methods: {
                 if(!localStorage.getItem('tempUserCartID')){
                     var tempUserCartID = Math.floor(Math.random()*10000);
                      localStorage.setItem('tempUserCartID',tempUserCartID);
-                     console.log('created id')
+                  //   console.log('created id')
                 }
                 var input = {'foodId':con.foodId, 'userId':localStorage.getItem('tempUserCartID'),'qty':this.qty};
                 axios.post('/add-fav-to-cart',input)
@@ -124,13 +134,15 @@ methods: {
                             if(res.data == 1){
                         this.text='Food added to Table!'
                         this.snackbar = true;
+                        //update cart count
+                        this.cartcount()
                             }
                             this.overlay = !this.overlay
                            
                         })
                         .catch(error =>{
                   this.$toasted.show("Failed to add. Try again");
-                  this.isAdded = !this.isAdded
+                 // this.isAdded = !this.isAdded
                     this.overlay = !this.overlay        
                       })
             },
@@ -146,6 +158,8 @@ methods: {
                                 
                         this.text='Food removed from Table!'
                         this.snackbar = true;
+                        //update cart count
+                        this.cartcount()
                             }
                            this.overlay = !this.overlay
                            
@@ -154,6 +168,19 @@ methods: {
                   this.$toasted.show("Failed to remove. Try again");
                    this.overlay = !this.overlay        
                       })
+            },
+
+            cartcount(){
+              //get user cart count from DB
+            fetch('/cartCount/'+ localStorage.getItem('tempUserCartID'))
+                .then(res => res.json())
+                .then(res=>{
+            var cart_count = res;
+            //save to local storage
+            localStorage.setItem('cart', cart_count )
+            //fetch the store and append
+           this.count = localStorage.getItem('cart')
+                })
             },
 
             incre(){

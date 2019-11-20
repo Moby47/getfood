@@ -29,7 +29,7 @@
           </form>
           <div class="signup_bottom">
             <p class=""><router-link to="/vendor-register" >Register as Vendor</router-link></p>
-            <router-link to="/login">LOGIN</router-link>         
+            <router-link to="/login">Login</router-link>         
         </div>
                 </div>
               
@@ -108,7 +108,7 @@
                             this.overlay = false
                   this.text = 'Registered! Please check your Email for verification.';
                    this.snackbar = true
-                            sound.play();
+                         
                         }else if(res.data.msg== 0){
                   this.text = 'Registered! But Verification failed. Please resend verification mail.';
                    this.snackbar = true

@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 //mail6
 use Mail;
 use App\Mail\Verify;
+use App\Mail\Welcome;
 
 class customauthcontroller extends Controller
 {
@@ -33,7 +34,7 @@ class customauthcontroller extends Controller
         }
 
         return ['userToken'=>$token, 'userId'=>$user->id, 'userName'=> $user->name,'userMail'=>$user->email,
-        'userStatus'=>$user->status]; //ok
+        'userStatus'=>$user->status, 'vendorAddress'=>$user->address]; //ok
 
     }
 
@@ -68,6 +69,9 @@ class customauthcontroller extends Controller
                  catch(\Exception $e){
             return ['msg' => 0];
              }
+
+            
+
        //response
        return ['msg' => 1];
         }

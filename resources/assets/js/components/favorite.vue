@@ -12,13 +12,14 @@
                          <ol class="breadcrumb">
                            <li class="breadcrumb-item"><router-link to='/'>Home</router-link></li>
                            <li class="breadcrumb-item active" aria-current="page">FAVORITE FOOD ({{fav_count}})</li>
+                   
                          </ol>
                        </nav>
         
                          <!-- ********************************************** empty -->
                          
                       <div v-if='empty' class='text-center alert alert-info'>
-                      No Food Added as Favorite.
+                      You Have No Food Favorite. <router-link class='text-center button_full btyellow' to='/shop'>Add Now</router-link>
                              </div>
      
 
@@ -31,8 +32,9 @@
               <v-img 
               :src="'/storage/food/'+con.img"
               :alt="con.title"
-              :lazy-src="`/images/black-spinner.gif`"
-              title="" ></v-img>
+              :lazy-src="`https://picsum.photos/id/11/100/60`"
+              title=""
+              class='img_size'  ></v-img>
           </div>
           <div class="shop_item_details">
              
@@ -43,6 +45,11 @@
           </favUpdate>
            
           </div>
+          <p class="info">
+            <v-icon>restaurant</v-icon> {{con.vendor_name}}
+             <br>
+             <v-icon class='icon-shift'>my_location</v-icon> {{con.vendorAddress}}
+           </p>
           </li> 
       </ul>
         
@@ -91,7 +98,7 @@
                 .then(res => res.json())
                 .then(res=>{
                   this.content = res.data;
-                  console.log(this.content)
+                //  console.log(this.content)
                   //to determine if obj is empty 
                           if(res.data[0] == undefined){
                               this.empty = true;

@@ -3,16 +3,16 @@
 <div>
     <span v-if='stash > 0'>
         <div class="item_qnty_shop">
-                <form id="myform" method="POST" action="#">
+                <form id="myformad" method="POST" action="#">
               <input :disabled='qty==1' type="button" value="-" class="qntyminusshop" field="quantity" @click.prevent='decre()'/>
                     <input type="text" name="quantity" :value="qty" class="qntyshop" />
                     <input type="button" value="+" class="qntyplusshop" field="quantity" @click.prevent='incre()'/>
                 </form>
             </div>
 
-        <a  href="#" v-if="isAdded" id="addtocart" @click.prevent='removeFromCart(con)' >CLEAR</a>
+        <v-btn  href="#" v-if="isAdded" id="addtocart" @click.prevent='removeFromCart(con)' >CLEAR</v-btn>
 
-        <a   href="#" v-if="!isAdded" id="addtocart" @click.prevent='addToCart(con)' >RESERVE</a>
+        <v-btn   href="#" v-if="!isAdded" id="addtocart" @click.prevent='addToCart(con)' >RESERVE</v-btn>
         </span>
         <div v-if='stash < 1'>
             Out of stock
@@ -51,6 +51,9 @@
 </template>
 
 <script>
+
+import {eventBus} from "../../app.js";
+
     export default {
 
         props: ['con','stash'],
@@ -67,14 +70,15 @@ data: function() {
 },
 
         methods: {
+          
             addToCart(con) {
                 this.overlay = !this.overlay
                
 
                 if(!localStorage.getItem('tempUserCartID')){
-                    var tempUserCartID = Math.floor(Math.random()*10000);
+                    var tempUserCartID = Math.floor(Math.random()*1234567890);
                      localStorage.setItem('tempUserCartID',tempUserCartID);
-                     console.log('created id')
+                   //  console.log('created id')
                 }
                 var input = {'foodId':con.id, 'userId':localStorage.getItem('tempUserCartID'),'qty':this.qty};
                 axios.post('/add-to-cart',input)
@@ -82,8 +86,10 @@ data: function() {
                             if(res.data == 1){
                         this.text='Food added to Table!'
                         this.snackbar = true;
-                        
                         this.isAdded = !this.isAdded
+                        //get user cart count 
+                        eventBus.$emit('cart_status')
+
                             }else{
                               this.text='Only '+res.data+' remaining for this food'
                             this.snackbar = true;
@@ -93,7 +99,7 @@ data: function() {
                         })
                         .catch(error =>{
                   this.$toasted.show("Failed to add. Try again");
-                  this.isAdded = !this.isAdded
+                 // this.isAdded = !this.isAdded
                     this.overlay = !this.overlay        
                       })
             },
@@ -109,6 +115,9 @@ data: function() {
                                 
                         this.text='Food removed from Table!'
                         this.snackbar = true;
+                        //get user cart count
+                        eventBus.$emit('cart_status')
+
                             }
                            this.overlay = !this.overlay
                            
@@ -121,9 +130,11 @@ data: function() {
 
             incre(){
                 this.qty = this.qty + 1;
+                this.isAdded = false
             },
             decre(){
                 this.qty = this.qty - 1;
+                this.isAdded = false
             },
         }
     }

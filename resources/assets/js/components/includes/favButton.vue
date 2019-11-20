@@ -4,7 +4,7 @@
                 <img src="images/icons/black/menu_close.png" alt="" title="" /></a>
 
                 <a href="#" v-else data-popup=".popup-social" class="open-popup shopfav pulse" @click.prevent='Favorite(id)'>
-                        <img src="images/icons/black/love.png" alt="" title="" /></a>
+                   <v-img src="images/icons/black/love.png" alt="" title=""></v-img></a>
 
                         <template>
                             <v-snackbar
@@ -56,7 +56,7 @@ data: function() {
                         .then(res=>{
                             this.snackbar = true;
                             if(res.data == 1){
-                                sound.play();
+                               
                         this.text='Food added to Favourites!'
                         this.snackbar = true;
                         //this.fetch();
@@ -64,8 +64,9 @@ data: function() {
                         this.text='Food was already added to Favorites!'
                         this.snackbar = true;
                             }else{ 
-                       this.text='Maximum limit reached, no more Favorites!'
-                       this.snackbar = true;    
+                       this.text='Maximum limit reached. no more Favorites!'
+                       this.snackbar = true;   
+                       this.isFavorited = !this.isFavorited
                             }
                             NProgress.done();
                            
@@ -88,7 +89,7 @@ data: function() {
                     axios.post('/add-favorite',input)
                         .then(res=>{
                             if(res.data == 1){
-                        sound.play();
+                      
                         this.text='Food Liked!'
                         this.snackbar = true;
                             }

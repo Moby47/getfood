@@ -25,6 +25,8 @@ Vue.use(Toasted, {
 // you can also pass options, check options reference below
 //Vue.use(Toasted, Options)
 
+
+
 //animate.css
 require('vue2-animate/dist/vue2-animate.min.css')
 
@@ -38,6 +40,13 @@ import 'vuetify/dist/vuetify.min.css'
 
 Vue.use(Vuetify)
 
+import BootstrapVue from 'bootstrap-vue'
+
+Vue.use(BootstrapVue)
+
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+//import './custom.scss'
 
 /* ------------------------- Imports -------------------- */
 
@@ -132,13 +141,18 @@ router.beforeEach((to, from, next) => {
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+export const eventBus = new Vue();
+
 Vue.component('index', require('./components/index.vue'));
 Vue.component('menubar', require('./components/includes/menubar.vue'));
 Vue.component('vendormenubar', require('./components/includes/vendormenubar.vue'));
+Vue.component('usermenubar', require('./components/includes/usermenubar.vue'));
 Vue.component('favButton', require('./components/includes/favButton.vue'));
 Vue.component('cartAdd', require('./components/includes/cartAdd.vue'));
 Vue.component('cartUpdate', require('./components/includes/cartUpdate.vue'));
 Vue.component('favUpdate', require('./components/includes/favUpdate.vue'));
+Vue.component('floatings', require('./components/includes/floatings.vue'));
+
 
 const app = new Vue({
     el: '#app',

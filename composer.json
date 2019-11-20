@@ -9,6 +9,7 @@
         "darryldecode/cart": "~4.0",
         "fideloper/proxy": "~3.3",
         "guzzlehttp/guzzle": "^6.3",
+        "intervention/image": "^2.5",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
         "s-ichikawa/laravel-sendgrid-driver": "^2.1",

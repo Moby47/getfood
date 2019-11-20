@@ -13,8 +13,9 @@
              <br>
                  <nav aria-label="breadcrumb ">
                          <ol class="breadcrumb">
-                           <li class="breadcrumb-item"><router-link to='/cart'>TABLE</router-link></li>
+                           <li class="breadcrumb-item"><router-link to='/cart'>Table</router-link></li>
                            <li class="breadcrumb-item active" aria-current="page" >FOOD IS READY</li>
+                           
                          </ol>
                        </nav>
            
@@ -25,9 +26,11 @@
               <h4 class="checkout_title">ORDER DETAILS</h4>
 
                 <!-- ********************************************** empty -->
-                <span v-show='empty < 1' class='text-center'>
-          <div class='alert alert-info'>NO FOOD TO EAT. <router-link to='/shop'>get food</router-link></div>  
-         </span>
+                
+                    <div v-show='empty < 1' class='text-center alert alert-info'>
+                        Your Table is Empty. <router-link to='/shop' class='text-center button_full btyellow'>Add Food</router-link>
+                       </div>
+         
                        <!--loading 
 <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
         <div v-if='data_load' class='text-center'>
@@ -58,9 +61,9 @@
                                   </div>
                          </transition>
 
-
+ 
                       <div class="order_item animated tdExpandInBounce" v-for='con in content' v-bind:key='con.id'>
-                          <div class="order_item_thumb"><a href="shop-item.html" class="close-panel">
+                          <div class="order_item_thumb"><a href="#" class="close-panel">
                             </a></div>
                           <div class="order_item_title"><span>{{con.quantity}} X</span> {{con.name}}</div>
                           <div class="order_item_price"><strike>N</strike>{{con.attributes.total}}</div>           
@@ -79,7 +82,7 @@
                             </div>
                         </div> 
                         <!--show only if cart::exist-->
-                        <template>
+                        <template v-if='go == true'>
                             <paystack
                                 :amount="amount"
                                 :email="email"
@@ -89,9 +92,30 @@
                                 :close="close"
                                 :embed="false"
                             >
-                            <a href="#"  id='pay' class="text-center button_full btyellow">EAT</a> 
+                            <a href="#"  id='pay' class="text-center button_full btyellow slideUp">EAT</a> 
                             </paystack>
+                            
                         </template>
+                        
+            <!--reset back to select delivery meth-->
+            <a href="#" class="button_full btyellow slideUp" v-if='go == true'
+             @click.prevent='back()'>Delivery Method</a> 
+       
+            
+       <a href="#" class="button_full btyellow slideUp" v-if='choiceBtn == false' @click.prevent='self()'>Pick-up By Self</a> 
+            
+       <div class="form-group" v-if='addText == true'>
+        <label for="exampleInputEmail1">Enter Your Delivery Address</label>
+        <input type="text" class="form-control" name='address' id="exampleInputEmail1" 
+        v-model='address' v-validate='"required"' placeholder="Eg: no 47 nehita, devine homes">
+
+        <transition  name="fadeLeft">
+            <span class='text-danger shake' v-show="errors.has('address')">{{ errors.first('address') }}</span>
+             </transition>
+      </div>
+      <a href="#" v-if='addText == true' class="button_full btyellow slideUp" @click.prevent='ok()'>Ok</a> 
+
+       <a href="#" class="button_full btyellow slideUp" v-if='choiceBtn == false' @click.prevent='vendor()'>Vendor delivery</a> 
                        
                 </span>
    
@@ -112,6 +136,8 @@
     </div>
   </template>
 
+
+
     </div>
 </template>
 
@@ -130,15 +156,21 @@ import paystack from 'vue-paystack';
               overlay:false,
                 content:[],
                 wait:false,
+                go:false,
+                choiceBtn:false,
+                address:'',
+                addText:false,
                 data_load: true,
                 empty:47,
                 charges:'50.00',
                 subtotal:0, //total food + 50
                 total:0, //amount in naira
+                ref:'',
 
                 paystackkey: "pk_test_ad39cbe2a4a48182c6ef83a38736005bbec325f5",
                 email: localStorage.getItem('userMail'),
-                amount: 0, //total in aira * 100 = Kobo equivalent 
+                amount: 0, //total in naira * 100 = Kobo equivalent 
+                
             }
         },
 
@@ -149,7 +181,8 @@ import paystack from 'vue-paystack';
 
           for( let i=0; i < 10; i++ )
             text += possible.charAt(Math.floor(Math.random() * possible.length));
-            console.log('rand ref rand')
+
+          this.ref = text
           return text;
         }
         },
@@ -157,15 +190,92 @@ import paystack from 'vue-paystack';
         
         methods: {
 
+          self(){
+            var del = localStorage.getItem('delivery')
+            if(del){
+              localStorage.removeItem('delivery')
+            }
+            localStorage.setItem('delivery','self')
+            localStorage.setItem('address', 'N/A')
+
+            this.choiceBtn = !this.choiceBtn
+            this.go = !this.go
+          },
+
+          vendor(){
+            this.addText = true
+            this.choiceBtn = !this.choiceBtn
+          },
+
+          ok(){
+            this.$validator.validateAll().then(() => {
+           
+           if (!this.errors.any()) {
+             //go
+            var add = this.address
+          localStorage.setItem('delivery','vendor')
+          localStorage.setItem('address', add)
+          this.addText = !this.addText
+          this.go = !this.go
+           }
+          })
+
+          },
+
+          back(){
+            this.go = !this.go
+            //this.addText = !this.addText
+            this.choiceBtn = !this.choiceBtn
+          },
+
+          paid(){            
+            //save to db. order TB
+           var input = {'content':this.content, 'cusId':localStorage.getItem('userId')}
+
+            axios.post('/save-order',input).then(res=>{
+		
+              console.log(res.data)
+
+		      	})
+      
+            //clear cart
+
+          },
+
           callback: function(response){
-            console.log(response)
+           // console.log(response)
             
            if(response.status == 'success'){
             //save to DB
-            var reference = response.reference;
+        //    if(localStorage.getItem('address') && localStorage.getItem('delivery')){
+              var address = localStorage.getItem('address')
+              var delivery = localStorage.getItem('delivery')
+          //  }
+
+             var input = {'total':this.total,'ref':response.reference, 'trans':response.trans,
+             'cusId':localStorage.getItem('userId'), 'address':address, 'delivery':delivery,
+             'tempId':localStorage.getItem('tempUserCartID')}
+            axios.post('/save-order',input).then(res=>{
+                console.log('order saved')  
+            })
+            .catch(error =>{
+                console.log(error)    
+               })
             
             //clear cart
+            var input = {'userId':localStorage.getItem('tempUserCartID')}
+            axios.post('/clear-cart',input).then(res=>{
+                console.log('cart cleared')  
+            })
+            .catch(error =>{
+                console.log(error)    
+               })
             
+          //clear local sto
+            localStorage.removeItem('cart')
+            localStorage.removeItem('address')
+            localStorage.removeItem('delivery')
+          
             //redirect to success page
             this.$router.push({name: "success"});
 
@@ -184,6 +294,7 @@ import paystack from 'vue-paystack';
                   .then(res => res.json())
                   .then(res=>{
                     this.content = res.data;
+                  //  console.log(this.content)
                     this.wait = false;
                    this.empty = this.content.length;
                   })
@@ -203,7 +314,6 @@ import paystack from 'vue-paystack';
                   fetch('/sumtotal'+'/'+ localStorage.getItem('tempUserCartID'))
                   .then(res => res.json())
                   .then(res=>{
-                    console.log(res)
                     this.subtotal = res
                     var sum = this.subtotal + 50;
                     //amount in naira
@@ -218,7 +328,23 @@ import paystack from 'vue-paystack';
                             this.getSumTotal();
                         },2000)     
                       })
-                },//
+                },
+
+                checkout(){
+                  if(localStorage.getItem('userToken')){
+                    //authed, ok!
+                    this.fetch()
+                  this.getSumTotal()
+                  }else{
+                    //auth needed
+                  //set variable to redirect to checkout page after guest auth
+                  localStorage.setItem('shopper','shopper')
+                  //send to login
+                   this.$router.push({name: "login"});
+                  }
+                  
+
+                }
 
         },
         watch : {
@@ -231,9 +357,7 @@ import paystack from 'vue-paystack';
             },
         },
         mounted() {
-           this.fetch()
-           this.getSumTotal()
-
+           this.checkout()
         }
     }
 </script>

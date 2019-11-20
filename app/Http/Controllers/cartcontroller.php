@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\food;
+use App\temp;
+use DB;
 
 //Api resource
 use App\Http\Resources\cartresource as cartres;
@@ -34,7 +36,7 @@ if($food->qty < $qty){
     'name' => $food->title,
     'price' => $food->amt,
     'quantity' => $qty,
-    "attributes"=> ['image' => $food->img, 'total'=> $total],
+    "attributes"=> ['image' => $food->img, 'total'=> $total, 'vendor_id'=> $food->vendor_id],
 	
 ));
 
@@ -46,6 +48,34 @@ if($foodId == \Cart::get($foodId)->id){
   ));
 }
 
+//check if exist
+$ok = temp::where('tempId','=',$userId)->where('foodId','=',$foodId)->select('id')->get()->first();
+
+if($ok){
+  //update
+  $ok->tempId = $userId;
+  $ok->vendorId = $food->vendor_id;
+  $ok->foodId = $foodId;
+  $ok->foodName = $food->title;
+  $ok->amt = $food->amt;
+  $ok->qty = $qty;
+  $ok->save();
+
+}else{
+  //save new
+  $ok = new temp;
+
+$ok->tempId = $userId;
+$ok->vendorId = $food->vendor_id;
+$ok->foodId = $foodId;
+$ok->foodName = $food->title;
+$ok->amt = $food->amt;
+$ok->qty = $qty;
+$ok->save();
+}
+
+
+
 	return 1;
 }
 
@@ -55,9 +85,15 @@ public function removeFromCart(Request $request){
 // removing cart item for a specific user's cart
 //expected params, user id and food id
 $userId = $request->input('userId'); //rand and local
-$foodId = $request->input('foodId');
+ $foodId = $request->input('foodId');
 
 \Cart::session($userId)->remove($foodId);
+
+//clear my temp items
+$del = temp::where('tempId','=',$userId)->where('foodId','=',$foodId)
+->select('tempId','id','foodId')->get()->first();
+$kill = temp::findorfail($del->id);
+$kill->delete();
 
 return 1;
 }
@@ -75,6 +111,8 @@ public function cartItems($id){
     public function increaseQty(Request $request){
       $userId = $request->input('userId'); //rand and local
       $foodId = $request->input('foodId');
+      
+
       $food=food::findorfail($foodId);
      
 
@@ -85,11 +123,41 @@ public function cartItems($id){
 
       //get total
       $total = \Cart::get($foodId)->getPriceSum();
+     
+      //get updated qty from session
+      $qty = \Cart::get($foodId)->quantity; 
 
       //update total
       \Cart::session($userId)->update($foodId,array(
            "attributes"=> ['image' => $food->img,'total'=> $total]
         ));
+
+        //check if exist
+$ok = temp::where('tempId','=',$userId)->where('foodId','=',$foodId)->select('id')->get()->first();
+
+if($ok){
+  //update
+  $ok->tempId = $userId;
+  $ok->vendorId = $food->vendor_id;
+  $ok->foodId = $food->id;
+  $ok->foodName = $food->title;
+  $ok->amt = $food->amt;
+  $ok->qty = $qty;
+  $ok->save();
+
+}else{
+  //save new
+  $ok = new temp;
+
+$ok->tempId = $userId;
+$ok->vendorId = $food->vendor_id;
+$ok->foodId = $food->id;
+$ok->foodName = $food->title;
+$ok->amt = $food->amt;
+$ok->qty = $qty;
+$ok->save();
+}
+
         //return latest quantity
         return array('qty'=>\Cart::get($foodId)->quantity, 'subtotal'=>\Cart::get($foodId)->attributes->total);
       }
@@ -109,15 +177,45 @@ public function cartItems($id){
         //get total
         $total = \Cart::get($foodId)->getPriceSum();
   
+          //get updated qty from session
+      $qty = \Cart::get($foodId)->quantity; 
+      
         //update total
         \Cart::session($userId)->update($foodId,array(
              "attributes"=> ['image' => $food->img,'total'=> $total]
           ));
+
+           //check if exist
+$ok = temp::where('tempId','=',$userId)->where('foodId','=',$foodId)->select('id')->get()->first();
+
+if($ok){
+  //update
+  $ok->tempId = $userId;
+  $ok->vendorId = $food->vendor_id;
+  $ok->foodId = $food->id;
+  $ok->foodName = $food->title;
+  $ok->amt = $food->amt;
+  $ok->qty = $qty;
+  $ok->save();
+
+}else{
+  //save new
+  $ok = new temp;
+
+$ok->tempId = $userId;
+$ok->vendorId = $food->vendor_id;
+$ok->foodId = $food->id;
+$ok->foodName = $food->title;
+$ok->amt = $food->amt;
+$ok->qty = $qty;
+$ok->save();
+}
+
           //return latest quantity
           return array('qty'=>\Cart::get($foodId)->quantity, 'subtotal'=>\Cart::get($foodId)->attributes->total);
         }
 
-
+//receives tempuserID
         public function cartCount($id){
           $cart = \Cart::session($id)->getContent();
           return $cart->count();
@@ -134,6 +232,20 @@ public function cartItems($id){
             public function sumtotal($id){
               return \Cart::session($id)->getTotal();
               }
+
+
+              public function clearcart(Request $request){
+                \Cart::clear();
+                \Cart::session($request->input('userId'))->clear();
+
+                //clear my temp items
+            $ids = temp::where('tempId','=',$request->input('userId'))->select('id')->get()->toArray();
+            DB::table('temps')->whereIn('id', $ids)->delete();
+
+               return 1;
+                }
+              
+
 
 
 }

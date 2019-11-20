@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <menubar></menubar>
+        <usermenubar></usermenubar>
   <!--content here-->
   
   <div class="pages">
@@ -22,23 +22,23 @@
                     <div class="my-3 p-3 bg-white rounded shadow-sm">
                       <h6 class="border-bottom border-gray pb-2 mb-0">Statistics</h6>
                       <div class="media text-muted pt-3">
+                        <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#ffa500"/><text x="50%" y="50%" fill="#ffa500" dy=".3em">32x32</text></svg>
+                        <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                          <strong class="d-block text-gray-dark"> <span v-html='weeklyData'></span></strong>
+                          Weekly Purchase(s)
+                        </p>
+                      </div>
+                      <div class="media text-muted pt-3">
                         <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
                         <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                          <strong class="d-block text-gray-dark"> <strike><b>N</b></strike>{{weeklyData}}</strong>
-                          Weekly Pay
+                          <strong class="d-block text-gray-dark"><span v-html='monthlyData'></span></strong>
+                          Monthly Purchase(s)
                         </p>
                       </div>
                       <div class="media text-muted pt-3">
-                        <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#e83e8c"/><text x="50%" y="50%" fill="#e83e8c" dy=".3em">32x32</text></svg>
+                        <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#ffa500"/><text x="50%" y="50%" fill="#ffa500" dy=".3em">32x32</text></svg>
                         <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                          <strong class="d-block text-gray-dark"><strike><b>N</b></strike>{{monthlyData}}</strong>
-                          Monthly Pay
-                        </p>
-                      </div>
-                      <div class="media text-muted pt-3">
-                        <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#6f42c1"/><text x="50%" y="50%" fill="#6f42c1" dy=".3em">32x32</text></svg>
-                        <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                          <strong class="d-block text-gray-dark"><strike><b>N</b></strike>{{totalData}}</strong>
+                          <strong class="d-block text-gray-dark"><span v-html='totalData'></span></strong>
                           Total Pay
                         </p>
                       </div>
@@ -46,18 +46,33 @@
                     </div>
                     
                     <h6 class="border-bottom border-gray pb-2 mb-0">My Orders</h6>
+
+                    <div v-if='empty' class='text-center alert alert-info'>
+                     No Transaction(s) Found. <router-link to='/shop'>Order Now</router-link>
+                     </div>
+
+                     <span v-if='!empty' >
+
                     <div class="table-responsive">
-                      <table class="table table-striped table-sm">
+                      <table class="table table-striped table-sm table-hover table-bordered">
+                      <thead class='thead-dark'>
                         <tr>
 												<th>Food</th>
                         <th>Amount</th>
                         <th>Quantity</th>
+                      <!--  <th>Reference</th> -->
+                        <th>Address</th>
+                        <th>Delivery</th>
 												<th>Date</th>
-											</tr>
+                      </tr>
+                    </thead>
 											<tr class='animated tdPlopIn' v-for='con in content' v-bind:key='con.id'>
 												<td>{{con.title}}</td>
                         <td>{{con.amt}}</td>
-                        <td>{{con.qty}}</td>
+                      <!--  <td>{{con.qty}}</td> -->
+                        <td>{{con.ref}}</td>
+                        <td>{{con.address}}</td>
+                        <td>By {{con.delivery}}</td>
 												<td>{{con.created_at}}</td>
 											</tr>
 										
@@ -69,6 +84,8 @@
                       <span class="shop_pagenr">  <span>{{pagination.current_page}} of {{pagination.last_page}}</span></span>
                       <a href="" class="next_shop" @click.prevent="fetch(pagination.next_page_url)" :disabled="!pagination.next_page_url">NEXT PAGE</a>
                       </div>
+
+                    </span>
 
                    <!-- <h4>Total: <b><strike>N</strike>600 </b></h4> -->
                    <span><!---->
@@ -209,6 +226,7 @@ body {
               content:[],
               pagination: [],
               overlay:false,
+              empty:false,
             }
         },
 
@@ -219,7 +237,7 @@ body {
             fetch('/weekly-ex/'+ localStorage.getItem('userId'))
                 .then(res => res.json())
                 .then(res=>{
-                  this.weeklyData = res;
+                  this.weeklyData = '<strike>N</strike>'+res;
                 })
                 .catch(error =>{
                       setTimeout(func=>{
@@ -234,7 +252,7 @@ body {
             fetch('/monthly-ex/'+ localStorage.getItem('userId'))
                 .then(res => res.json())
                 .then(res=>{
-                  this.monthlyData = res;
+                  this.monthlyData = '<strike>N</strike>'+res;
                 })
                 .catch(error =>{
                       setTimeout(func=>{
@@ -248,7 +266,7 @@ body {
             fetch('/total-ex/'+ localStorage.getItem('userId'))
                 .then(res => res.json())
                 .then(res=>{
-                  this.totalData = res;
+                  this.totalData = '<strike>N</strike>'+res;
                 })
                 .catch(error =>{
                       setTimeout(func=>{
@@ -278,11 +296,11 @@ body {
                  // console.log(this.content)
                   //to determine if obj is empty 
                           //console.log(res.data[0]);
-                     /*     if(res.data[0] == undefined){
+                          if(res.data[0] == undefined){
                               this.empty = true;
                           }else{
                               this.empty = false;
-                          }*/
+                          }
                   //to determine if obj is empty
                   this.overlay = false
                   this.makePagination(res.meta, res.links);
@@ -320,11 +338,12 @@ body {
         mounted() {
             this.userName = localStorage.getItem('userName')
             //call functions
+            this.fetch()
+
             this.weekly()
             this.monthly()
             this.total()
 
-            this.fetch()
         }
     }
 </script>

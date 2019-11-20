@@ -1,15 +1,13 @@
 <template>
     <div class="container">
         
-     
+        <menubar></menubar>
 <!--content here-->
 
 <div class="pages">
     <div data-page="success" class="page no-toolbar no-navbar">
       <div class="page-content">
       
-            <h2 class="page_title"><router-link to='/' class='text-white'>GO HOME</router-link></h2>
-       
        <div id="pages_maincontent">
   
       <div class="page_single layout_fullwidth_padding bounceIn">

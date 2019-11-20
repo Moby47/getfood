@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\food;
 use App\favourite;
+use App\temp;
+use App\user;
+use DB;
 
 //resource
 use App\Http\Resources\foodresource as foodres;
@@ -14,7 +17,8 @@ class guestcontroller extends Controller
 {
     //method to get food list for customers to see and buy
     public function get_foods(){
-        $food = food::orderby('id','desc')->select('id','amt','qty','title','img','vendor_id','vendor_name')->paginate(3);
+        $food = food::orderby('id','desc')->select('id','amt','qty','title','img','vendor_id',
+        'vendor_name','vendorAddress')->paginate(5);
         return foodres::collection($food);
     }
 
@@ -24,9 +28,9 @@ public function addFavorite(Request $request){
     $userId = $request->input('userId');
     $foodId = $request->input('foodId');
 
-      //check if user likes 3 already
+      //check if user likes 6 already
       $count = favourite::where('cusId','=',$userId)->select('title')->count();
-      if($count == 39){
+      if($count == 6){
           //maxed out
           return 2;
       }
@@ -48,6 +52,8 @@ public function addFavorite(Request $request){
         $save->amt = $food->amt;
         $save->qty = $food->qty;
         $save->img = $food->img;
+        $save->vendor_name= $food->vendor_name;
+        $save->vendorAddress= $food->vendorAddress;
         $save->save();
         return 1;
     }
@@ -67,7 +73,8 @@ public function removeFavorite(Request $request){
 
 
 public function getFavorites($id){
-  $fav = favourite::where('cusId','=',$id)->select('id','foodId','title','amt','qty','img','cusId')->paginate(3);
+  $fav = favourite::orderby('id', 'desc')->where('cusId','=',$id)->select('id','foodId','title','amt','qty','img',
+  'cusId','vendor_name','vendorAddress')->paginate(6);
     return favres::collection($fav);
 }
 
@@ -89,7 +96,7 @@ public function removeFromFav(Request $request){
 
 
   //add fav to cart 
-public function addToCart(Request $request){
+public function favAddToCart(Request $request){
 	//expected params, user id and food id and qty
 $userId = $request->input('userId'); //rand and local
 $foodId = $request->input('foodId');
@@ -128,8 +135,37 @@ $foodId = $request->input('foodId');
 
 \Cart::session($userId)->remove($foodId);
 
+//clear my temp items
+$del = temp::where('tempId','=',$userId)->where('foodId','=',$foodId)
+->select('tempId','id','foodId')->get()->first();
+$kill = temp::findorfail($del->id);
+$kill->delete();
+
 return 1;
 }
+
+
+
+
+
+public function vendorFood($vendor){
+  $food = food::orderby('id','desc')->where('vendor_name','=',$vendor)
+  ->select('id','amt','qty','title','img','vendor_id','vendor_name','vendorAddress')->paginate(2);
+
+  return foodres::collection($food);
+  }
+
+
+  public function vendorList(){
+    return $list = user::orderby('id','desc')->where('status','=',1)
+    ->select('id','name','address')->get()->toArray();
+    /*
+    return $fav = DB::table('foods')
+    ->select('vendor_name', DB::raw('count(*) as total'))
+    ->groupBy('vendor_name')->get();
+*/
+    }
+
 
 
 }

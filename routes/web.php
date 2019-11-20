@@ -17,6 +17,7 @@ Route::get('/forgot-password', 'customauthcontroller@password');
 
 //initial page load
 Route::get('/', function () {
+
     return view('welcome');
 });
 
@@ -37,7 +38,7 @@ Route::Post('/remove-favorite', 'guestcontroller@removeFavorite');
 Route::Post('/remove-from-fav', 'guestcontroller@removeFromFav');
 
 Route::Post('/remove-fav-from-cart', 'guestcontroller@removeFromCart');
-Route::Post('/add-fav-to-cart', 'guestcontroller@addToCart');
+Route::Post('/add-fav-to-cart', 'guestcontroller@favAddToCart');
 
 Route::get('/cart-items/{id}', 'cartcontroller@cartItems');
 Route::get('/get-foods', 'guestcontroller@get_foods');
@@ -45,7 +46,8 @@ Route::get('/cartCount/{id}', 'cartcontroller@cartCount');
 Route::get('/checkout/{id}', 'cartcontroller@checkout');
 Route::get('/sumtotal/{id}', 'cartcontroller@sumtotal');
 Route::get('/get-fav/{id}', 'guestcontroller@getFavorites');
-
+Route::get('/vendor-food/{vendor}', 'guestcontroller@vendorFood');
+Route::get('/vendor-list', 'guestcontroller@vendorList');
 
 //vendor routes
 Route::get('/get-orders', 'vendorcontroller@get_orders');
@@ -53,21 +55,33 @@ Route::get('/total-cash', 'vendorcontroller@total_cash');
 Route::get('/reporting', 'vendorcontroller@reporting');
 Route::get('/favorites', 'vendorcontroller@favorites');
 
+Route::get('/weekly-ex-vendor/{userId}', 'vendorcontroller@weekly_ex_vendor');
+Route::get('/monthly-ex-vendor/{userId}', 'vendorcontroller@monthly_ex_vendor');
+Route::get('/total-ex-vendor/{userId}', 'vendorcontroller@total_ex_vendor');
+Route::get('/vendor-reporting/{userid}/{from}/{to}', 'vendorcontroller@vendor_reporting');
+Route::get('/vendor-orders/{userId}', 'vendorcontroller@vendor_orders');
+Route::get('/vendor-food-list/{userId}', 'vendorcontroller@vendor_food');
+Route::get('/vendor-favorites/{userName}', 'vendorcontroller@vendor_favorites');
+Route::get('/order-ref/{ref}/{userid}', 'vendorcontroller@order_ref');
+
 Route::Post('/delete-food', 'vendorcontroller@delete_food');
-Route::get('/create-food', 'vendorcontroller@create_food');
+Route::post('/edit-food', 'vendorcontroller@edit_food');
+Route::Post('/new-food', 'vendorcontroller@new_food');
 
 
 //customer routes
 //Route::get('/my-orders', 'customercontroller@my_orders');
-Route::post('/my-reporting', 'customercontroller@my_reporting');
+Route::get('/my-reporting/{userid}/{from}/{to}', 'customercontroller@my_reporting');
 ///{id}
 Route::get('/weekly-ex/{userId}', 'customercontroller@weekly_ex');
 Route::get('/monthly-ex/{userId}', 'customercontroller@monthly_ex');
 Route::get('/total-ex/{userId}', 'customercontroller@total_ex');
 Route::get('/orders/{userId}', 'customercontroller@orders');
 
-Route::get('/payment-page', 'paymentcontroller@paymentpage'); 
-Route::post('/pay', 'paymentcontroller@redirectToGateway')->name('pay'); 
+Route::post('/save-order', 'customercontroller@saveorder'); 
+Route::post('/clear-cart', 'cartcontroller@clearcart');
+//Route::get('/payment-page', 'paymentcontroller@paymentpage'); 
+//Route::post('/pay', 'paymentcontroller@redirectToGateway')->name('pay'); 
 
 //don't delete,fixes route bug
 Route::get('/{vue_capture?}', function () {

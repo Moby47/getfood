@@ -1,23 +1,33 @@
 <template>
   <div class="container">
+      
       <menubar></menubar>
+   
 <div class="pages">
   <div data-page="shop" class="page no-toolbar no-navbar">
     <div class="page-content">
      <div id="pages_maincontent">
       
       <br>
+      <template>
+          <v-card
+            class="mx-auto"
+            max-width="344"
+           
+          >
           <nav aria-label="breadcrumb ">
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item"><router-link to='/'>Home</router-link></li>
-                    <li class="breadcrumb-item active" aria-current="page">AVAILABLE FOOD ({{food_count}})</li>
+                    <li class="breadcrumb-item active" aria-current="page">Available Food ({{food_count}})</li>
+                   
                   </ol>
                 </nav>
-      
+      </v-card>
+    </template>
                     <!-- ********************************************** empty -->
                          
                       <div v-if='empty' class='text-center alert alert-info'>
-                         Sorry, the Kitchen is empty.
+                         Sorry, The Kitchen is Empty.
                               </div>
       
                                <!--loading -->
@@ -54,15 +64,22 @@
       <ul class="shop_items ">
               
           <li class='animated tdPlopIn' v-for='con in content' v-bind:key='con.id'>
+              <template>
+                  <v-card
+                    class="mx-auto elevation-23"
+                    max-width="344"
+                    outlined
+                  >
           <div class="shop_thumb">
               <v-img 
               :src="'/storage/food/'+con.img"
               :alt="con.title"
-              :lazy-src="`/images/black-spinner.gif`"
-              title="" ></v-img>   <i>food by {{con.vendor_name}}</i>
+              :lazy-src="`https://picsum.photos/id/11/100/60`"
+              title=""
+              class='img_size' ></v-img>  
           </div>
           <div class="shop_item_details">
-          <h4>{{con.title}}</h4>
+          <h4 class="text-capitalize">{{con.title}}</h4>
           <div class="shop_item_price"><strike>N</strike>{{con.amt}}</div>
             
              
@@ -79,20 +96,43 @@
 
           
           </div>
+          
+          <p class="info text-capitalize">
+           <v-icon>restaurant</v-icon> {{con.vendor_name}}
+            <br>
+            <v-icon class='icon-shift'>my_location</v-icon> {{con.vendorAddress}}
+          </p>
+
+          </v-card>
+          </template>
           </li> 
+         
       </ul>
 
+      
     <span v-if='!empty'>
           <div class="shop_pagination slideUp" >
+              <template>
+                  <v-card
+                    class="mx-auto"
+                    max-width="344"
+                   
+                  >
           <a href="" class="prev_shop" @click.prevent="fetch(pagination.prev_page_url)" :disabled="!pagination.prev_page_url">PREV PAGE</a>
           <span class="shop_pagenr">  <span>{{pagination.current_page}} of {{pagination.last_page}}</span></span>
-          <a href="shop.html" class="next_shop" @click.prevent="fetch(pagination.next_page_url)" :disabled="!pagination.next_page_url">NEXT PAGE</a>
+          <a href="" class="next_shop" @click.prevent="fetch(pagination.next_page_url)" :disabled="!pagination.next_page_url">NEXT PAGE</a>
+        </v-card>
+      </template>
+
+        </div>
+      
+          <div class="my-2 text-center">
+          <v-btn @click.prevent='cart()'>VIEW TABLE</v-btn>   
           </div>
-      
-      
-          <router-link to="/cart" class="button_full btyellow slideUp">VIEW TABLE</router-link>           
-        
+
    </span>
+
+   
 
       </div>
       
@@ -103,12 +143,19 @@
   </div>
 </div>
       
+<floatings
+:toggle_cart=toggle_cart
+>
+</floatings>
 
   </div>
 </template>
 
 
 <script>
+
+ 
+
   export default {
       data(){
           return {
@@ -118,12 +165,15 @@
               data_load: true,
               pagination: [],
               food_count:'',
-             
+              toggle_cart:false
           }
       },
   
       methods: {
-      
+       cart(){
+            this.$router.push({ name: "cart" })
+          },
+
   fetch(page_url){
                   if(page_url){
                   NProgress.start();
@@ -134,7 +184,7 @@
                 .then(res => res.json())
                 .then(res=>{
                   this.content = res.data;
-                  console.log(this.content)
+             //     console.log(this.content)
                   //to determine if obj is empty 
                           //console.log(res.data[0]);
                           if(res.data[0] == undefined){
@@ -172,6 +222,8 @@
            document.documentElement.scrollTop = 0;
           this.pagination = pagination;
               },
+
+            
       },
            //watch data load
            watch : {
@@ -186,6 +238,8 @@
       
       mounted() {
           this.fetch()
-      }
+      },
+     
+      
   }
 </script>

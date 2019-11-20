@@ -6,12 +6,12 @@
   <div class="pages">
       <div data-page="cart" class="page no-toolbar no-navbar">
         <div class="page-content">
-              <div id="pages_maincontent">
+              <div id="pages_maincontent"> 
                
                   <br>
                   <nav aria-label="breadcrumb ">
                           <ol class="breadcrumb">
-                            <li class="breadcrumb-item active" aria-current="page">Add to Food to Table</li>
+                            <li class="breadcrumb-item active" aria-current="page">Add Food To Table</li>
                           </ol>
                         </nav>
 
@@ -24,17 +24,38 @@
                     <form>
                         <div class="form-group">
                           <label for="exampleInputEmail1">Food Name</label>
-                          <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Eg: Beans">
+                          <input type="text" class="form-control" name='food' id="exampleInputEmail1" 
+                          v-model='food' v-validate='"required|max:49"' placeholder="Eg: Beans">
+
+                          <transition  name="fadeLeft">
+                              <span class='text-danger shake' v-show="errors.has('food')">{{ errors.first('food') }}</span>
+                               </transition>
                         </div>
                         <div class="form-group">
+                            <label for="exampleInputEmail1">Food Image</label>
+                            <input type="file" class="form-control" name='picture' id="exampleInputEmail1" 
+                            @change='ImageSelect' v-validate='"required|image"'>
+  
+                            <transition  name="fadeLeft">
+                                <span class='text-danger shake' v-show="errors.has('picture')">{{ errors.first('picture') }}</span>
+                                 </transition>
+                          </div>
+                        <div class="form-group">
                           <label for="exampleInputPassword1">Price</label>
-                          <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Eg: 500">
+                          <input type="text" class="form-control" v-model='price' name='price' v-validate='"required|max:9|numeric"' id="exampleInputEmail1" placeholder="Eg: 500">
+                          <transition  name="fadeLeft">
+                              <span class='text-danger shake' v-show="errors.has('price')">{{ errors.first('price') }}</span>
+                               </transition>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Available Quantity</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Eg: 47">
+                            <input type="text" class="form-control" v-model='quantity' name='quantity' v-validate='"required|max:2|numeric"' id="exampleInputEmail1" placeholder="Eg: 47">
+                            <transition  name="fadeLeft">
+                                <span class='text-danger shake' v-show="errors.has('quantity')">{{ errors.first('quantity') }}</span>
+                                 </transition>
                           </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+             <a href="#" class="button_full btyellow slideUp" @click.prevent='post()'>Post</a>    
+                  
                         <br>
                         <br>
                       </form>
@@ -52,8 +73,32 @@
       </div>
     </div>
     
-   
+    <template>
+        <v-snackbar
+      v-model="snackbar"
+      :timeout="timeout"
+      >
+      {{ text }}
+      <v-btn
+        color="blue"
+        text
+        @click='snackbar=!snackbar'
+      >
+        Close
+      </v-btn>
+      </v-snackbar>
+      </template>
   
+       <!--Overlay-->
+<template>
+  <div class="text-center">
+    <v-overlay :value="overlay">
+      <v-progress-circular indeterminate size="64"></v-progress-circular>
+    </v-overlay>
+  </div>
+  </template>
+  <!--Overlay-->
+
       </div>
 </template>
 
@@ -159,33 +204,79 @@ body {
 
         data(){
             return {
+              food:'',
+              price:'',
+              quantity:'',
+              overlay:false,
 
+              snackbar: false,
+            text: '',
+            timeout: 3000,
+
+            picture:'',
             }
         },
 
         methods: {
-/*
+
+          ImageSelect(event){
+          this.picture = event.target.files[0];
+        },
+
+          post(){
+
             this.$validator.validateAll().then(() => {
            
            if (!this.errors.any()) {
-            //
+            //run code
+            this.overlay=true
+
+            const formdata  = new FormData();
+    //append form data to formdata
+    formdata.append('food',  this.food);
+    formdata.append('price', this.price);
+    formdata.append('quantity', this.quantity);
+    formdata.append('vendorId', localStorage.getItem('userId'));
+    formdata.append('vendorName', localStorage.getItem('userName'));
+    formdata.append('img', this.picture);
+    formdata.append('address', localStorage.getItem('vendorAddress'));
+
+        axios.post('/new-food',formdata).then(res=>{
+			if(res.data == 1){
+        this.overlay=false
+
+                this.text='Food  Successfully'
+                        this.snackbar = true;
+
+				this.food = '';
+				this.quantity = '';
+				this.price = '';
+				
+				setTimeout(func=>{
+					this.errors.clear();
+				},5)
+				
+			}else{
+        this.overlay=false
+        this.text='Operatiion Failed. Try again'
+                        this.snackbar = true;
+			}
+				
+			})
+			.catch(err=>{
+        console.log(err)
+        this.overlay=false
+      })
+      
             }else{
-            //
+            //do nothing, v validate will work
             }
          
                     //
             })
-            .catch(err=>{
-                
-            }),
-      
-         setTimeout(func=>{
-             //this.errors.clear()
-            // this.$validator.reset()
-         },1) 
-        
-         }); //validator
-*/
+            
+
+          }
         },
 
         mounted() {
