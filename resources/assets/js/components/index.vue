@@ -13,12 +13,9 @@
        
         <template>
             <v-card
-              :loading="loading"
               class="mx-auto my-12"
               max-width="374"
             >
-
-
 
 <!--1-->
               <v-img
@@ -57,12 +54,7 @@
           
 
               <!--2-->
-              <template>
-                  <v-card
-                    class="mx-auto slideUp"
-                    max-width="344"
-                    outlined
-                  >
+           
                     <v-list-item three-line>
                      
                       <v-img
@@ -78,12 +70,48 @@
                       <v-btn  text outlined  color="#FFA500" class='mr-1 ' @click.prevent='login()'>Get Started</v-btn>
                       </span>
                     </v-card-actions>
-                  </v-card>
-                </template>
+                 
 
+ <v-divider class="mx-4"></v-divider>
 
 <!--more stuff-->
 
+    <v-img
+      src="/images/vendor.svg"
+       height="250"
+      :lazy-src="`/images/black-spinner.gif`"
+      dark
+    >
+     
+    </v-img>
+
+    <v-list two-line>
+
+      <v-list-item @click="">
+        <v-list-item-icon>
+          <v-icon color="indigo">mdi-email</v-icon>
+        </v-list-item-icon>
+
+        <v-list-item-content>
+          <v-list-item-title>Vendor Name</v-list-item-title>
+          <v-list-item-subtitle>Address</v-list-item-subtitle>
+        </v-list-item-content>
+        <v-list-item-content>
+          <v-list-item-title>Vendor Name</v-list-item-title>
+          <v-list-item-subtitle>Address</v-list-item-subtitle>
+        </v-list-item-content>
+        <v-list-item-content>
+          <v-list-item-title>Vendor Name</v-list-item-title>
+          <v-list-item-subtitle>Address</v-list-item-subtitle>
+        </v-list-item-content>
+        
+      </v-list-item>
+
+    
+
+    
+    </v-list>
+  
 
 <!--more stuff-->
 

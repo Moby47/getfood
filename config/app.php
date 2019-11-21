@@ -173,7 +173,7 @@ return [
         Unicodeveloper\Paystack\PaystackServiceProvider::class,
 
         //intervention img
-        'Intervention\Image\ImageServiceProvider',
+        //'Intervention\Image\ImageServiceProvider',
         /*
          * Package Service Providers...
          */
@@ -241,7 +241,7 @@ return [
          //cart package
          'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
          'Paystack' => Unicodeveloper\Paystack\Facades\Paystack::class,
-         'Image' => 'Intervention\Image\Facades\Image',
+     //    'Image' => 'Intervention\Image\Facades\Image',
     ],
 
 ];
