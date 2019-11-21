@@ -85,9 +85,9 @@ Your Table is Empty.
 <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
              <div v-if='wait' class='text-center'>
                <template>
-                 <b>A little delay, please wait.</b>
+                 <b>Reloding, Please Wait.</b>
                   <v-progress-circular 
-                 color="red"
+                 color="#f2901d"
                  indeterminate
                  >
                  </v-progress-circular>
@@ -108,7 +108,7 @@ Your Table is Empty.
                 </div>
                         
        <div class="my-2 text-center" v-show='cartConCount > 0' >
-          <v-btn @click.prevent='checkout()'>TAKE FOOD</v-btn>   
+          <v-btn @click.prevent='checkout()' outlined color="#FFA500">TAKE FOOD</v-btn>   
           </div>
    </div>
                 
@@ -137,6 +137,9 @@ Your Table is Empty.
   v-show='cartConCount > 0'
   >
   </floatings>
+
+
+
 
     </div>
 </template>

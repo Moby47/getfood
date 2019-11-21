@@ -55,7 +55,7 @@
    <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
   <div v-if='data_load' class='text-center'>
     <template>
-        <b>  Fetching Food</b>
+        <b> Fetching Food</b>
        <v-progress-circular 
        color="orange"
        indeterminate
@@ -68,9 +68,9 @@
 <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
                   <div v-if='wait' class='text-center'>
                     <template>
-                      <b>Kitchen delay, please wait.</b>
+                      <b>Reloading, Please Wait.</b>
                        <v-progress-circular 
-                      color="red"
+                      color="#f2901d"
                       indeterminate
                       >
                       </v-progress-circular>
@@ -84,7 +84,7 @@
       
       <ul class="shop_items ">
               
-          <li class='animated tdPlopIn' v-for='con in content' v-bind:key='con.id'>
+          <li class='animated tdFadeIn' v-for='con in content' v-bind:key='con.id'>
               <template>
                   <v-card
                     class="mx-auto elevation-23 p-1"

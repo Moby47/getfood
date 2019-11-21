@@ -33,7 +33,7 @@
                         <th>Like(s)</th>
                       </tr>
                     </thead>
-                          <tr class='animated tdPlopIn' v-for='con in content' v-bind:key='con.id'>
+                          <tr class='animated tdFadeIn' v-for='con in content' v-bind:key='con.id'>
                         <td>{{con.title}}</td>
                         <td>{{con.total}}</td>                    
                            </tr>

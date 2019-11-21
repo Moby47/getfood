@@ -55,11 +55,25 @@
     </div>
                          </span>
 
+                          <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
+                     <div v-if='wait' class='text-center'>
+                       <template>
+                         <p>Reloading Favorite Food(s).</p>
+                          <v-progress-circular 
+                         color="#f2901d"
+                         indeterminate
+                         >
+                         </v-progress-circular>
+                                 </template>
+                                  </div>
+                         </transition>
+
+
       <div class="page_single layout_fullwidth_padding">
        
         <ul class="shop_items ">
               
-          <li class='animated tdPlopIn' v-for='con in content' v-bind:key='con.id'>
+          <li class='animated tdFadeIn' v-for='con in content' v-bind:key='con.id'>
 
              <template>
                   <v-card
@@ -117,6 +131,11 @@
   </template>
   <!--Overlay-->
 
+
+
+<back></back>
+
+
     </div>
 </template>
 
@@ -131,6 +150,7 @@
               content:[],
               empty:false,
               fav_count:0,
+              wait:false
             }
         },
 
@@ -157,10 +177,12 @@
                   //to determine if obj is empty
                   this.fav_count = res.meta.total;
                   this.overlay = !this.overlay
+                  this.wait = false;
                 })
                 .catch(error =>{
                     //off loader
                     this.overlay = !this.overlay
+                    this.wait = true;
                       setTimeout(func=>{
                           this.fetch();
                       },2000)

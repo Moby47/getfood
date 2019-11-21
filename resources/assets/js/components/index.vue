@@ -18,20 +18,6 @@
               max-width="374"
             >
 
-<!--0-->
-            <template>
-                <v-card
-                  color="grey lighten-4"
-                  flat
-                  tile
-                >
-                  <v-toolbar dense>
-                    <v-btn icon>
-                      <v-icon>menu</v-icon>
-                    </v-btn>
-                  </v-toolbar>
-                </v-card>
-              </template>
 
 
 <!--1-->
@@ -42,7 +28,7 @@
                 :lazy-src="`/images/black-spinner.gif`"
               ></v-img>
           
-              <v-card-title class='text-capitalize'>HELLO {{userName}}</v-card-title>
+              <v-card-title class='text-capitalize'>Hello {{userName}}</v-card-title>
           
               <v-card-text class='slideUp'>
                 <v-row
@@ -96,7 +82,10 @@
                 </template>
 
 
+<!--more stuff-->
 
+
+<!--more stuff-->
 
                 <!--3-->
                 <template >
@@ -105,7 +94,7 @@
                         class="text-center"
                         cols="12"
                       >
-                        {{ new Date().getFullYear() }} — <strong>HenryMoby</strong>
+                        {{ new Date().getFullYear() }} — <strong>HenryMoby - <a href='tel:08053121695' >Contact Support </a> </strong>
                       </v-col>
                     </v-footer>
                   </template>
@@ -136,6 +125,12 @@
         loading: false,
         selection: 1,
         userName:'',
+
+       
+
+      //menu
+      loggedOut:null,
+        status:''
       }),
   
       methods: {
@@ -148,9 +143,56 @@
             this.$router.push({ name: "login" })
           },
           
+
+
+          //menu
+           //meth to check Auth
+                      isAuth(){
+                    if(localStorage.getItem('userToken')){
+                      this.loggedOut = false;
+                      this.status = localStorage.getItem('userStatus');
+                          return true;
+                    }else{
+                      this.loggedOut = true;
+                          return false;
+                    }
+                     },
+
+                     logout(){
+                        NProgress.start()
+                   localStorage.removeItem('userToken');
+                   localStorage.removeItem('userId');
+                   localStorage.removeItem('userName');
+                   localStorage.removeItem('userMail');
+                   localStorage.removeItem('userStatus');
+                      //clear tempcartid
+                       localStorage.removeItem('tempUserCartID');
+                   //clear cart
+                   if(localStorage.getItem('tempUserCartID')){
+                    var input = {'userId':localStorage.getItem('tempUserCartID')}
+            axios.post('/clear-cart',input).then(res=>{
+                console.log('cart cleared')  
+            })
+            .catch(error =>{
+                console.log(error)    
+               })
+                   }
+              
+                   this.isAuth();
+                   this.loggedOut = true;
+                    NProgress.done();
+                    this.$router.push({name: "index"});
+                    },
+                    //menu
+
       },
 
       mounted() {
+
+        //menu
+          this.isAuth()
+
+
             if(localStorage.getItem('userName')){
               this.userName = localStorage.getItem('userName') +'.'
             }

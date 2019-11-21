@@ -67,7 +67,7 @@
         },
 
         mounted() {
-            console.log('Component mounted.')
+            //need a way to prevent access unless a successful order was made!!!!
         }
     }
 </script>

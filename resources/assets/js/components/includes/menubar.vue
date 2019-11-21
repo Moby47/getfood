@@ -1,50 +1,98 @@
 <template>
     <div class=''>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light radius menu-over">
-        <router-link class="navbar-brand" to="/">GetFoods</router-link>
+ 
+ <v-card
+                    class="mx-auto"
+                    max-width="344"
+                  >
 
-    <!--    <v-btn class="ma-2" text>
-             <router-link to='/checkout'> <v-icon color="orange darken-2">shopping_cart</v-icon></router-link>
-            </v-btn>
--->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-              <li class="nav-item" v-if='loggedOut == false'>
-                  <router-link v-if='status == 0' class="nav-link" to='/userdashboard'>Dashboard</router-link>
-                  <router-link v-if='status == 1' class="nav-link" to='/admindashboard'>Dashboard</router-link>
-                </li>
-            <li class="nav-item">
-              <router-link class="nav-link" to="/shop">Enter Kitchen</router-link>
-            </li>
-            <li class="nav-item">
-                <router-link class="nav-link" to="/vendor">Vendors</router-link>
-              </li>
-            <li class="nav-item">
-                <router-link class="nav-link" to="/favorite">My Favorites</router-link>
-              </li>
-            <li class="nav-item">
-              <router-link class="nav-link" to="/about">About Getfoods</router-link>
-            </li>
-            <li class="nav-item">
-                <router-link class="nav-link" to="/share">Tell a Friend</router-link>
-              </li>
-              <li class="nav-item" v-if='loggedOut == true'>
-                <router-link class="nav-link" to="/login">Login</router-link>
-              </li>
-              <li class="nav-item" v-if='loggedOut == false'>
-                <a class="nav-link" @click.prevent="logout()">Log Out</a>
-              </li>
-              <li class="nav-item">
-                <a href='tel:08053121695' class="nav-link" >Contact Developer</a>
-              </li>
-          </ul>
-         
-        </div>
-      </nav>
+ <!--0-->
+            <template>
+                <v-card
+                  color="grey lighten-4"
+                  flat
+                  tile
+                >
+                  <v-toolbar dense>
+                    <v-btn icon  @click="sheet = !sheet">
+                      <v-icon>menu</v-icon>
+                    </v-btn>
+                  </v-toolbar>
+                </v-card>
+              </template>
+
+ <!--sheet / menu-->
+<template>
+  <div class="text-center">
+    <v-bottom-sheet v-model="sheet">
+      <v-sheet class="text-center" height="410px">
+       
+       
+          <v-list>
+
+<!--dashboard-->
+<span v-if='loggedOut == false'>
+    <v-list-item
+     @click="sheet = false"
+        >
+          <v-list-item-avatar>
+            <v-avatar size="32px" tile>
+              <v-icon>dashboard</v-icon>
+            </v-avatar>
+          </v-list-item-avatar>
+    <router-link to='/userdashboard' v-if='status == 0'>
+          <v-list-item-title>Dashboard</v-list-item-title>
+    </router-link>
+      <router-link to='/admindashboard' v-if='status == 1'>
+          <v-list-item-title>Dashboard</v-list-item-title>
+    </router-link>
+        </v-list-item>
+</span>
+
+<!--looped menu-->
+        <v-list-item
+          v-for="tile in tiles"
+          :key="tile.title"
+          @click="sheet = false"
+        >
+          <v-list-item-avatar>
+            <v-avatar size="32px" tile>
+              <v-icon>{{tile.img}}</v-icon>
+            </v-avatar>
+          </v-list-item-avatar>
+
+    <router-link :to='tile.link'>
+          <v-list-item-title>{{ tile.title }}</v-list-item-title>
+    </router-link>
+
+        </v-list-item>
+<!--looped menu-->
+
+<!--login/out-->
+    <v-list-item
+     @click="sheet = false"
+        >
+          <v-list-item-avatar>
+            <v-avatar size="32px" tile>
+              <v-icon>settings_power</v-icon>
+            </v-avatar>
+          </v-list-item-avatar>
+    <router-link to='/login' v-if='loggedOut == true'>
+          <v-list-item-title>Login</v-list-item-title>
+    </router-link>
+      <a href='#' @click.prevent="logout()" v-if='loggedOut == false'>
+          <v-list-item-title>Logout</v-list-item-title>
+    </a>
+        </v-list-item>
+
+      </v-list>
+
+
+      </v-sheet>
+    </v-bottom-sheet>
+  </div>
+</template>
+<!--sheet / menu-->
 
       <template>
         <v-snackbar
@@ -62,6 +110,9 @@
       </v-snackbar>
       </template>
 
+
+
+</v-card>
       </div>
      
 </template>
@@ -78,7 +129,15 @@
     snackbar: false,
         text: '',
         timeout: 6000,
-        status:''
+        status:'',
+          sheet: false,
+      tiles: [
+        { img: 'fastfood', title: 'Enter Kitchen', link:'/shop' },
+        { img: 'home', title: 'Vendors', link:'/vendor'},
+        { img: 'favorite', title: 'My Favorites', link:'/favorite'},
+        { img: 'perm_device_information', title: 'About Us', link:'/about'},
+        { img: 'share', title: 'Tell a Friend', link:'/share'},
+      ],
    }),
 
    methods:{

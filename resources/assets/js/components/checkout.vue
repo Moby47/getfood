@@ -68,9 +68,9 @@
         <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
                      <div v-if='wait' class='text-center'>
                        <template>
-                         <b>little delay, please wait.</b>
+                         <p>Reloading Food Info.</p>
                           <v-progress-circular 
-                         color="red"
+                         color="#f2901d"
                          indeterminate
                          >
                          </v-progress-circular>
@@ -87,6 +87,7 @@
                       </div>
                       
                
+              
                  
                  <span v-show='subtotal > 0' class=''>
                 <h4 class="checkout_title">TOTAL</h4>      
@@ -148,6 +149,19 @@
             </div>
                        
                 </span>
+
+                 <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
+                     <div v-if='TotalWait' class='text-center'>
+                       <template>
+                         <p>Reloading Payment Info.</p>
+                          <v-progress-circular 
+                         color="#f2901d"
+                         indeterminate
+                         >
+                         </v-progress-circular>
+                                 </template>
+                                  </div>
+                         </transition>
                 
                 </v-card>
                </template>
@@ -171,6 +185,7 @@
 
 
 
+
     </div>
 </template>
 
@@ -189,6 +204,7 @@ import paystack from 'vue-paystack';
               overlay:false,
                 content:[],
                 wait:false,
+                TotalWait:false,
                 go:false,
                 choiceBtn:false,
                 address:'',
@@ -357,10 +373,12 @@ import paystack from 'vue-paystack';
                     //amount to kobo N500
                     this.amount = sum * 100;
                     this.overlay = !this.overlay
+                     this.TotalWait = false;
                   })
                   .catch(error =>{
                     this.overlay = !this.overlay
                         setTimeout(func=>{
+                          this.TotalWait = true;
                             this.getSumTotal();
                         },2000)     
                       })

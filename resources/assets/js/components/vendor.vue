@@ -51,6 +51,20 @@
                             <br>
                             <br>
                           </form>
+
+                            <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
+                     <div v-if='wait' class='text-center'>
+                       <template>
+                         <p>Reloading Vendor List.</p>
+                          <v-progress-circular 
+                         color="#f2901d"
+                         indeterminate
+                         >
+                         </v-progress-circular>
+                                 </template>
+                                  </div>
+                         </transition>
+
               </v-card>
 
                   <!-- res here-->    
@@ -63,7 +77,7 @@
       
       <ul class="shop_items ">
               
-          <li class='animated tdPlopIn' v-for='con in content' v-bind:key='con.id'>
+          <li class='animated tdFadeIn' v-for='con in content' v-bind:key='con.id'>
 
             <template>
                   <v-card
@@ -160,6 +174,9 @@
       </div>
       </template>
       <!--Overlay-->
+
+      
+<back></back>
       
           </div>
     </template>
@@ -272,7 +289,8 @@
                   overlay:false,
                   empty:false,
                   food_count:'',
-                  vendor_list:[]
+                  vendor_list:[],
+                  wait:false
                 }
             },
     
@@ -294,6 +312,7 @@
                 .then(res=>{
                   this.content = res.data;
                   this.overlay = false
+                    
                   //to determine if obj is empty 
                           //console.log(res.data[0]);
                           if(res.data[0] == undefined){
@@ -310,7 +329,7 @@
                 .catch(error =>{
                     //off loader
                     this.overlay = !this.overlay
-                      
+                        
                       setTimeout(func=>{
                           this.fetch();
                       },2000)
@@ -340,12 +359,13 @@
                 .then(res => res.json())
                 .then(res=>{
                   this.vendor_list = res;
-                  console.log(this.vendor_list)
+                  this.wait = false;
                   this.overlay = !this.overlay
                 })
                 .catch(error =>{
                     //off loader
                     this.overlay = !this.overlay
+                    this.wait = true;
                       setTimeout(func=>{
                           this.vendors();
                       },2000)     

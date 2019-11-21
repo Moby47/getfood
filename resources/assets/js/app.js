@@ -152,6 +152,7 @@ Vue.component('cartAdd', require('./components/includes/cartAdd.vue'));
 Vue.component('cartUpdate', require('./components/includes/cartUpdate.vue'));
 Vue.component('favUpdate', require('./components/includes/favUpdate.vue'));
 Vue.component('floatings', require('./components/includes/floatings.vue'));
+Vue.component('back', require('./components/includes/back.vue'));
 
 
 const app = new Vue({

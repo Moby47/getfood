@@ -53,7 +53,7 @@
                       <th>Date</th>
                     </tr>
                   </thead>
-                    <tr class='animated tdPlopIn' v-for='con in refContent' v-bind:key='con.id'>
+                    <tr class='animated tdFadeIn' v-for='con in refContent' v-bind:key='con.id'>
                       <td>{{con.title}}</td>
                       <td>{{con.amt}}</td>
                       <td>{{con.qty}}</td> 
@@ -94,7 +94,7 @@
 												<th>Date</th>
                       </tr>
                     </thead>
-											<tr class='animated tdPlopIn' v-for='con in content' v-bind:key='con.id'>
+											<tr class='animated tdFadeIn' v-for='con in content' v-bind:key='con.id'>
 												<td>{{con.title}}</td>
                         <td>{{con.amt}}</td>
                        <td>{{con.qty}}</td> 
