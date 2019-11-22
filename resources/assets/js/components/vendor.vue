@@ -94,7 +94,7 @@
               class='img_size' ></v-img>  
           </div>
           <div class="shop_item_details">
-          <h4>{{con.title}}</h4>
+          <h4 class="text-capitalize">{{con.title}}</h4>
           <div class="shop_item_price"><strike>N</strike>{{con.amt}}</div>
             
              

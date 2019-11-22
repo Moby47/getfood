@@ -60,6 +60,7 @@ home footer..more cards...tooltips
                    
                   >
 
+  <span class='m-2'>
                 <h4 class='slideUp p-1'>Objectives:</h4>
                 <ul class="simple_list slideUp">
                 <li>Provide a reservation/ordering system for customers</li>
@@ -68,6 +69,8 @@ home footer..more cards...tooltips
                 <li>Provide an accurate record keeping for insights on best dishes, quantity and total income for food vendors</li>
                 <li>And more...</li>
                 </ul>
+
+  </span>
                   </v-card>
                     </template>
 

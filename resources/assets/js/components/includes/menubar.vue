@@ -132,8 +132,8 @@
         status:'',
           sheet: false,
       tiles: [
-        { img: 'fastfood', title: 'Enter Kitchen', link:'/shop' },
-        { img: 'home', title: 'Vendors', link:'/vendor'},
+        { img: 'restaurant', title: 'Enter Kitchen', link:'/shop' },
+        { img: 'fastfood', title: 'Vendors', link:'/vendor'},
         { img: 'favorite', title: 'My Favorites', link:'/favorite'},
         { img: 'perm_device_information', title: 'About Us', link:'/about'},
         { img: 'share', title: 'Tell a Friend', link:'/share'},

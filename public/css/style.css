@@ -1287,7 +1287,7 @@ padding:10px 0;
 margin:0 0 15px 0;
 }
 ul.shop_items li .shop_item_details h4{
-font-weight:900;
+font-weight:550;
 font-size:16px;
 padding:0;
 margin:0px;
@@ -1306,7 +1306,7 @@ margin:0px;
 }
 ul.shop_items li .shop_item_price{
 font-size:12px;
-font-weight:900;
+font-weight:550;
 padding:5px 0 10px 0;
 }
 ul.shop_items li a#addtocart{
@@ -1661,7 +1661,7 @@ padding:5px 0;
 float:right;
 color:#1b1b25;
 font-size:12px;
-font-weight:900;
+font-weight:550;
 letter-spacing:0.5px;
 }
 .checkout_select{
@@ -1698,8 +1698,8 @@ width:100%;
 float:left;
 clear:both;
 padding:5px 0;
-font-size:17px;
-font-weight:900;
+font-size:16px;
+font-weight:550;
 }
 .carttotal_left{
 width:60%;

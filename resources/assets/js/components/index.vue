@@ -86,30 +86,31 @@
     </v-img>
 
     <v-list two-line>
-
-      <v-list-item @click="">
+      <v-list-item @click.prevent='vendor()'>
         <v-list-item-icon>
-          <v-icon color="indigo">mdi-email</v-icon>
+          <v-icon color="indigo">restaurant</v-icon>
         </v-list-item-icon>
 
-        <v-list-item-content>
-          <v-list-item-title>Vendor Name</v-list-item-title>
-          <v-list-item-subtitle>Address</v-list-item-subtitle>
+        <v-list-item-content class='ml-2'>
+         <v-list-item-title>Vendor Name Sample</v-list-item-title>
+          <v-list-item-subtitle>Address Address Address Address Address</v-list-item-subtitle>
         </v-list-item-content>
-        <v-list-item-content>
-          <v-list-item-title>Vendor Name</v-list-item-title>
-          <v-list-item-subtitle>Address</v-list-item-subtitle>
-        </v-list-item-content>
-        <v-list-item-content>
-          <v-list-item-title>Vendor Name</v-list-item-title>
-          <v-list-item-subtitle>Address</v-list-item-subtitle>
-        </v-list-item-content>
-        
+  
       </v-list-item>
+    </v-list>
 
-    
+     <v-list two-line>
+      <v-list-item @click.prevent='vendor()'>
+        <v-list-item-icon>
+          <v-icon color="indigo">restaurant</v-icon>
+        </v-list-item-icon>
 
-    
+        <v-list-item-content class='ml-2'>
+          <v-list-item-title>Vendor Name Sample</v-list-item-title>
+          <v-list-item-subtitle>Address Address Address Address Address</v-list-item-subtitle>
+        </v-list-item-content>
+  
+      </v-list-item>
     </v-list>
   
 
@@ -122,7 +123,7 @@
                         class="text-center"
                         cols="12"
                       >
-                        {{ new Date().getFullYear() }} — <strong>HenryMoby - <a href='tel:08053121695' >Contact Support </a> </strong>
+                        {{ new Date().getFullYear() }} — HenryMoby - <a href='tel:08053121695' >Contact Support </a> 
                       </v-col>
                     </v-footer>
                   </template>
