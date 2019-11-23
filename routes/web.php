@@ -48,6 +48,8 @@ Route::get('/sumtotal/{id}', 'cartcontroller@sumtotal');
 Route::get('/get-fav/{id}', 'guestcontroller@getFavorites');
 Route::get('/vendor-food/{vendor}', 'guestcontroller@vendorFood');
 Route::get('/vendor-list', 'guestcontroller@vendorList');
+//vendor list for home
+Route::get('/vendor-list-home', 'guestcontroller@vendorListHome');
 
 //vendor routes
 Route::get('/get-orders', 'vendorcontroller@get_orders');

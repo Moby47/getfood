@@ -25,7 +25,7 @@
 <template>
   <div class="text-center">
     <v-bottom-sheet v-model="sheet">
-      <v-sheet class="text-center" height="410px">
+      <v-sheet class="text-center" height="440px">
        
        
           <v-list>
@@ -48,6 +48,8 @@
     </router-link>
         </v-list-item>
 </span>
+
+
 
 <!--looped menu-->
         <v-list-item

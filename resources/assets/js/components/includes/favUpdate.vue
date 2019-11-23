@@ -113,7 +113,7 @@ methods: {
                 })
                 .catch(error =>{
           this.$toasted.show("Failed to remove. Try again");
-             this.overlay = !this.overlay        
+             this.overlay = false        
               })
     },
 
@@ -142,7 +142,7 @@ methods: {
                         .catch(error =>{
                   this.$toasted.show("Failed to add. Try again");
                  // this.isAdded = !this.isAdded
-                    this.overlay = !this.overlay        
+                    this.overlay = false   
                       })
             },
 
@@ -165,7 +165,7 @@ methods: {
                         })
                         .catch(error =>{
                   this.$toasted.show("Failed to remove. Try again");
-                   this.overlay = !this.overlay        
+                   this.overlay = false       
                       })
             },
 

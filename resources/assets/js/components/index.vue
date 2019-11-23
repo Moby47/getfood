@@ -80,39 +80,33 @@
       src="/images/vendor.svg"
        height="250"
       :lazy-src="`/images/black-spinner.gif`"
-      dark
+     
     >
      
     </v-img>
 
-    <v-list two-line>
+
+    <v-list two-line v-for='ven in vendor_list' v-bind:key='ven.id'>
       <v-list-item @click.prevent='vendor()'>
         <v-list-item-icon>
-          <v-icon color="indigo">restaurant</v-icon>
+          <v-icon color="indigo">fastfood</v-icon>
         </v-list-item-icon>
 
+        <router-link :to='`/vendor/${ven.name}`'>
         <v-list-item-content class='ml-2'>
-         <v-list-item-title>Vendor Name Sample</v-list-item-title>
-          <v-list-item-subtitle>Address Address Address Address Address</v-list-item-subtitle>
+         <v-list-item-title>{{ven.name.slice(0, 34)}}</v-list-item-title>
+          <v-list-item-subtitle>{{ven.address.slice(0, 34)}}...</v-list-item-subtitle>
         </v-list-item-content>
-  
+      </router-link>
+
       </v-list-item>
     </v-list>
 
-     <v-list two-line>
-      <v-list-item @click.prevent='vendor()'>
-        <v-list-item-icon>
-          <v-icon color="indigo">restaurant</v-icon>
-        </v-list-item-icon>
-
-        <v-list-item-content class='ml-2'>
-          <v-list-item-title>Vendor Name Sample</v-list-item-title>
-          <v-list-item-subtitle>Address Address Address Address Address</v-list-item-subtitle>
-        </v-list-item-content>
-  
-      </v-list-item>
-    </v-list>
-  
+    <div class='text-center'>
+   <v-btn small text icon color='#FFA500' @click.prevent="vendors(pagination.prev_page_url)" :disabled="!pagination.prev_page_url"><v-icon>arrow_back</v-icon></v-btn> 
+   <span>{{pagination.current_page}} of {{pagination.last_page}}</span>
+   <v-btn small text icon color='#FFA500'  @click.prevent="vendors(pagination.next_page_url)" :disabled="!pagination.next_page_url"><v-icon>arrow_forward</v-icon></v-btn>
+  </div>
 
 <!--more stuff-->
 
@@ -155,7 +149,8 @@
         selection: 1,
         userName:'',
 
-       
+        vendor_list:[],
+        pagination: [],
 
       //menu
       loggedOut:null,
@@ -172,7 +167,40 @@
             this.$router.push({ name: "login" })
           },
           
+          vendors(page_url){
 
+            if(page_url){
+                  NProgress.start();
+                  }
+                var   page_url = page_url || '/vendor-list-home';
+
+                //fetch vendor list
+                fetch(page_url)
+                .then(res => res.json())
+                .then(res=>{
+                  this.vendor_list = res.data;
+                 
+                  this.makePagination(res);
+
+                  NProgress.done();    
+                })
+                .catch(error =>{
+                    //off loader
+                      setTimeout(func=>{
+                          this.vendors();
+                      },2000)     
+                    })
+              },
+
+              makePagination(res){
+      var pagination = {
+                      current_page: res.current_page,
+                      last_page: res.last_page,
+                      next_page_url: res.next_page_url,
+                      prev_page_url: res.prev_page_url
+                       }
+      this.pagination = pagination;
+          },
 
           //menu
            //meth to check Auth
@@ -225,6 +253,9 @@
             if(localStorage.getItem('userName')){
               this.userName = localStorage.getItem('userName') +'.'
             }
+
+            this.vendors();
+
           }
     }
   </script>

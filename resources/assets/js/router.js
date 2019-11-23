@@ -71,7 +71,7 @@ export default new Router({
             }
         },
         {
-            path: '/vendor',
+            path: '/vendor/:vendorName?',
             name: 'vendor',
             component: vendor,
              meta:{

@@ -150,7 +150,7 @@ return 1;
 
 public function vendorFood($vendor){
   $food = food::orderby('id','desc')->where('vendor_name','=',$vendor)
-  ->select('id','amt','qty','title','img','vendor_id','vendor_name','vendorAddress')->paginate(2);
+  ->select('id','amt','qty','title','img','vendor_id','vendor_name','vendorAddress')->paginate(5);
 
   return foodres::collection($food);
   }
@@ -165,6 +165,11 @@ public function vendorFood($vendor){
     ->groupBy('vendor_name')->get();
 */
     }
+
+    public function vendorListHome(){
+      return $list = user::orderby('id','desc')->where('status','=',1)
+      ->select('id','name','address')->paginate(5)->toArray();
+      }
 
 
 

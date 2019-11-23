@@ -181,7 +181,7 @@
                 })
                 .catch(error =>{
                     //off loader
-                    this.overlay = !this.overlay
+                    this.overlay = false
                     this.wait = true;
                       setTimeout(func=>{
                           this.fetch();

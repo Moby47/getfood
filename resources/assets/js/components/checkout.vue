@@ -376,7 +376,7 @@ import paystack from 'vue-paystack';
                      this.TotalWait = false;
                   })
                   .catch(error =>{
-                    this.overlay = !this.overlay
+                    this.overlay = false
                         setTimeout(func=>{
                           this.TotalWait = true;
                             this.getSumTotal();

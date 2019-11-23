@@ -47,7 +47,7 @@
         </option>
         </select>
                        </div>
-                <p class='text-center' v-if='selected'> ({{food_count}}) Result Found</p>           
+                <p class='text-center' v-if='selected' v-show='content.length > 0'> ({{food_count}}) Result Found</p>           
                             <br>
                             <br>
                           </form>
@@ -127,7 +127,7 @@
 
 
     <span v-if='!empty' v-show='selected'>
-       <div class="shop_pagination slideUp" >
+       <div class="shop_pagination slideUp" v-if='content.length > 0'>
               <template>
                   <v-card
                     class="mx-auto"
@@ -142,7 +142,7 @@
 
         </div>
       
-          <div class="my-2 text-center">
+          <div class="my-2 text-center" v-if='content.length > 0'>
           <v-btn @click.prevent='cart()' outlined color="#FFA500">VIEW TABLE</v-btn>   
           </div>
 
@@ -328,7 +328,7 @@
                 })
                 .catch(error =>{
                     //off loader
-                    this.overlay = !this.overlay
+                    this.overlay = false
                         
                       setTimeout(func=>{
                           this.fetch();
@@ -364,7 +364,7 @@
                 })
                 .catch(error =>{
                     //off loader
-                    this.overlay = !this.overlay
+                    this.overlay = false
                     this.wait = true;
                       setTimeout(func=>{
                           this.vendors();
@@ -385,6 +385,13 @@
           },
       },
             mounted() {
+              //get url param #vendorName
+      var param = this.$route.params.vendorName;
+
+      if (param){
+        this.selected = param
+        this.fetch()
+      }
              this.vendors()
             }
         }

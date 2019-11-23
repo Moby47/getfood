@@ -3,11 +3,8 @@
 
          <!--
         https://vuetifyjs.com/en/components/treeview
-        https://vuetifyjs.com/en/components/timelines
         https://vuetifyjs.com/en/components/selects
-        https://vuetifyjs.com/en/components/autocompletes
-https://vuetifyjs.com/en/components/bottom-navigation
-home footer..more cards...tooltips
+        tooltips
         -->
 
         <menubar></menubar>
@@ -60,9 +57,9 @@ home footer..more cards...tooltips
                    
                   >
 
-  <span class='m-2'>
+  <span>
                 <h4 class='slideUp p-1'>Objectives:</h4>
-                <ul class="simple_list slideUp">
+                <ul class="simple_list slideUp m-2">
                 <li>Provide a reservation/ordering system for customers</li>
                 <li>Provide cost analysis / history on food expenditures for customers</li>
                 <li>Ease service process for both customers and food vendors</li>

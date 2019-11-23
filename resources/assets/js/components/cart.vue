@@ -199,7 +199,7 @@ import {eventBus} from "../app.js";
                     this.overlay = !this.overlay
                       })
                   .catch(error =>{
-                    this.overlay = !this.overlay
+                    this.overlay = false
                         setTimeout(func=>{
                             this.countCartCon();
                         },2000)     

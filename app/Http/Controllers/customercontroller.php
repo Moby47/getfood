@@ -18,8 +18,9 @@ class customercontroller extends Controller
 
    //view reporting based on date range  for customer
    public function my_reporting($userid, $from, $to){
-    $rep =order::orderby('id','desc')->where('cusId','=',$userid)->select('id','amt','ref','title','address','delivery','created_at')
-    ->whereBetween('created_at',array($from,$to))->paginate(4);
+    $rep =order::orderby('id','desc')->where('cusId','=',$userid)
+    ->select('id','amt','qty','total','ref','title','address','delivery','created_at')
+    ->whereBetween('created_at',array($from,$to))->paginate(5);
 
     return orderres::collection($rep);
     }
@@ -48,7 +49,7 @@ class customercontroller extends Controller
     public  function orders($userId){
       
         $orders = order::orderby('id','desc')->where('cusId','=',$userId)
-        ->select('id','amt','qty','ref','title','address','delivery','created_at')->paginate(3);
+        ->select('id','amt','qty','total','ref','title','address','delivery','created_at')->paginate(5);
       //  $orderT = order::where('cusId','=',$userId)->select('amt')->sum('amt');
 
       // return $obj = ['orders' => $orders, 'orderT' => $orderT];
