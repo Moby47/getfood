@@ -79,7 +79,11 @@
                               <v-list-item two-line @click.prevent='check(con)'>
                                 <v-list-item-content>
                                   <v-list-item-title>{{con.title}}</v-list-item-title>
-                                  <v-list-item-subtitle>{{con.created_at}}</v-list-item-subtitle>
+                                  <v-list-item-subtitle>{{con.created_at}} 
+                                      <v-btn class="mx-2" fab dark x-small color="#FFA500">
+                                          <v-icon>more_vert</v-icon>
+                                        </v-btn>
+                                  </v-list-item-subtitle>
                                 </v-list-item-content>
                               </v-list-item>
                           

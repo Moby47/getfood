@@ -63,7 +63,7 @@ class vendorcontroller extends Controller
    public function vendor_reporting($userid, $from, $to){
     $rep =order::orderby('id','desc')->where('vendorId','=',$userid)
     ->select('id','amt','qty','total','ref','trans','title','address','delivery','created_at')
-    ->whereBetween('created_at',array($from,$to))->paginate(4);
+    ->whereBetween('created_at',array($from,$to))->paginate(5);
 
     return orderres::collection($rep);
     }

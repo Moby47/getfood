@@ -9,13 +9,26 @@
                   <div id="pages_maincontent">
                    
                       <br>
+                      <template>
+                          <v-card
+                            class="mx-auto"
+                            max-width="344"
+                          >
                       <nav aria-label="breadcrumb ">
                               <ol class="breadcrumb">
                                 <li class="breadcrumb-item active" aria-current="page">Manage Food</li>
                               </ol>
                             </nav>
-    
-                 <div class='bg-light'>
+    </v-card>
+    </template>
+
+                 <div class=''>
+
+                    <template>
+                        <v-card
+                          class="mx-auto"
+                          max-width="344"
+                        >
                     <main role="main" class="container">
       
                      
@@ -25,40 +38,38 @@
     
                          <span v-if='!empty' >
     
-                        <div class="table-responsive">
-                          <table class="table table-striped table-sm table-hover table-bordered">
-                          <thead class='thead-dark'>
-                            <tr>
-                            <th>Food</th>
-                            <th>Amount</th>
-                            <th>Quantity</th>
-                        <th>Edit</th> 
-                            <th>Delete</th>
-                            <th>Date</th>
-                          </tr>
-                        </thead>
-                              <tr class='animated tdFadeIn' v-for='con in content' v-bind:key='con.id'>
-                            <td>{{con.title}}</td>
-                            <td>{{con.amt}}</td>
-                           <td>{{con.qty}}</td>
-                            <td><button class='btn btn-primary' @click.prevent='edit(con)'><i class='fa fa-edit'></i></button></td>
-                            <td><button class='btn btn-danger' @click.prevent='del(con)'><i class='fa fa-trash'></i></button></td>
-                            <td>{{con.created_at}}</td>                    
-                               </tr>
+                       
+                              <p class='animated tdFadeIn' v-for='con in content' v-bind:key='con.id'>
+                                  <v-list-item two-line @click.prevent='check(con)'>
+                                      <v-list-item-content>
+                                        <v-list-item-title>{{con.title}}</v-list-item-title>
+                                        <v-list-item-subtitle>{{con.created_at}} 
+                                            <v-btn class="mx-2" fab dark x-small color="#FFA500">
+                                              <v-icon>more_vert</v-icon>
+                                            </v-btn>
+                                          </v-list-item-subtitle>
+                                        
                                             
-                          </table>
-                        </div>
+                                          
+                                      </v-list-item-content>
+                                    </v-list-item>
+                                 
+                              </p>
+                              
     
-                        <div class="shop_pagination slideUp" v-show='content.length > 5'>
-                          <a href="" class="prev_shop" @click.prevent="fetch(pagination.prev_page_url)" :disabled="!pagination.prev_page_url">PREV PAGE</a>
-                          <span class="shop_pagenr">  <span>{{pagination.current_page}} of {{pagination.last_page}}</span></span>
-                          <a href="" class="next_shop" @click.prevent="fetch(pagination.next_page_url)" :disabled="!pagination.next_page_url">NEXT PAGE</a>
-                          </div>
+                              <div class='text-center slideUp'>
+                                  <v-btn small text icon color='#FFA500' @click.prevent="fetch(pagination.prev_page_url)" :disabled="!pagination.prev_page_url"><v-icon>arrow_back</v-icon></v-btn> 
+                                  <span>{{pagination.current_page}} of {{pagination.last_page}}</span>
+                                  <v-btn small text icon color='#FFA500'  @click.prevent="fetch(pagination.next_page_url)" :disabled="!pagination.next_page_url"><v-icon>arrow_forward</v-icon></v-btn>
+                                     </div>
     
                         </span>
     
     
                       </main>
+                      </v-card>
+                      </template>
+
                   </div>
                       
            
@@ -98,104 +109,60 @@
                   </v-snackbar>
                   </template>
 
+
+                   <!--modal-->
+  <div>
+      <b-modal id="modal" scrollable :title="newContent.title" ok-only >
+       
+          <template>
+              <v-card
+                class="mx-auto"
+                max-width="500"
+                tile
+              >
+                <v-list-item>
+                  <v-list-item-content>
+                    <v-list-item-title>Quantity: {{newContent.qty}}</v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+                <v-list-item>
+                    <v-list-item-content>
+                      <v-list-item-title>Amount: {{newContent.amt}}</v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
+                          <v-list-item>
+                              <v-list-item-content>
+                                <v-list-item-title>Time of Order: {{newContent.created_at}}</v-list-item-title>
+                              </v-list-item-content>
+                            </v-list-item>
+                            <v-list-item>
+                                <v-list-item-content>
+                                  <v-list-item-title>
+                                      
+                                      <div class='text-center slideUp'>
+                                          <v-btn small text icon color='#007bff' @click.prevent='edit(newContent)' ><v-icon>edit</v-icon></v-btn> 
+                                        
+                                          <v-btn small text icon color='#ff0000'  @click.prevent='del(newContent)' ><v-icon>delete</v-icon></v-btn>
+                                             </div>
+
+                                    </v-list-item-title>
+                                </v-list-item-content>
+                              </v-list-item>
+  
+              
+              </v-card>
+            </template>
+
+      </b-modal>
+    </div>
+ <!--modal-->
+
+
           </div>
     </template>
     
     <style scoped>
-    .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-          }
     
-          @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-              font-size: 3.5rem;
-            }
-          }
-    
-    
-          /*-- Custom styles for this template -->*/
-    
-          html,
-    body {
-      overflow-x: hidden; /* Prevent scroll on narrow devices */
-    }
-    
-    body {
-      padding-top: 56px;
-    }
-    
-    @media (max-width: 991.98px) {
-      .offcanvas-collapse {
-        position: fixed;
-        top: 56px; /* Height of navbar */
-        bottom: 0;
-        left: 100%;
-        width: 100%;
-        padding-right: 1rem;
-        padding-left: 1rem;
-        overflow-y: auto;
-        visibility: hidden;
-        background-color: #343a40;
-        transition: visibility .3s ease-in-out, -webkit-transform .3s ease-in-out;
-        transition: transform .3s ease-in-out, visibility .3s ease-in-out;
-        transition: transform .3s ease-in-out, visibility .3s ease-in-out, -webkit-transform .3s ease-in-out;
-      }
-      .offcanvas-collapse.open {
-        visibility: visible;
-        -webkit-transform: translateX(-100%);
-        transform: translateX(-100%);
-      }
-    }
-    
-    .nav-scroller {
-      position: relative;
-      z-index: 2;
-      height: 2.75rem;
-      overflow-y: hidden;
-    }
-    
-    .nav-scroller .nav {
-      display: -ms-flexbox;
-      display: flex;
-      -ms-flex-wrap: nowrap;
-      flex-wrap: nowrap;
-      padding-bottom: 1rem;
-      margin-top: -1px;
-      overflow-x: auto;
-      color: rgba(255, 255, 255, .75);
-      text-align: center;
-      white-space: nowrap;
-      -webkit-overflow-scrolling: touch;
-    }
-    
-    .nav-underline .nav-link {
-      padding-top: .75rem;
-      padding-bottom: .75rem;
-      font-size: .875rem;
-      color: #6c757d;
-    }
-    
-    .nav-underline .nav-link:hover {
-      color: #007bff;
-    }
-    
-    .nav-underline .active {
-      font-weight: 500;
-      color: #343a40;
-    }
-    
-    .text-white-50 { color: rgba(255, 255, 255, .5); }
-    
-    .bg-purple { background-color: #6f42c1; }
-    
-    .lh-100 { line-height: 1; }
-    .lh-125 { line-height: 1.25; }
-    .lh-150 { line-height: 1.5; }
       </style>
     
     <script>
@@ -210,17 +177,26 @@
                   snackbar: false,
                     text: '',
                     timeout: 3000,
+
+                    newContent:[],
                 }
             },
     
             methods: {
+
+              check(con){
+           this.newContent = con
+           this.$bvModal.show('modal')
+         },
     
-    del(con){
+    del(newContent){
         var dialog = confirm('Food Will Be Deleted');
         if(dialog){
            //del
+           this.$bvModal.hide('modal')
+
            this.overlay = true
-            var input = {'id':con.id}
+            var input = {'id':newContent.id}
            axios.post('/delete-food', input).then(res=>{
 			if(res.data == 1){
          this.overlay=false
@@ -243,8 +219,9 @@
         }
     }, //del end
         
-    edit(con){
-        this.$router.push({name:'edit', params:{'con':con}});
+    edit(newContent){
+    
+        this.$router.push({name:'edit', params:{'con':newContent}});
     },
 
       fetch(page_url){

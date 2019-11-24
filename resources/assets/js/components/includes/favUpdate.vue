@@ -29,7 +29,7 @@
 
          <v-btn  href="#" v-if="isAdded" id="addtocart" @click.prevent='removeFromCart(con)' >CLEAR</v-btn>
 
-        <v-btn   href="#" v-if="!isAdded" id="addtocart" @click.prevent='addToCart(con)' >RESERVE</v-btn>
+        <v-btn   href="#" v-if="!isAdded" id="addtocart" @click.prevent='addToCart(con)' >SELECT</v-btn>
         </span>
       </span>
 
