@@ -80,9 +80,9 @@
                                 <v-list-item-content>
                                   <v-list-item-title>{{con.title}}</v-list-item-title>
                                   <v-list-item-subtitle>{{con.created_at}} 
-                                      <v-btn class="mx-2" fab dark x-small color="#FFA500">
-                                          <v-icon>more_vert</v-icon>
-                                        </v-btn>
+                                      <v-btn class="mx-2" fab x-small color="">
+                                              <v-icon>remove_red_eye</v-icon>
+                                            </v-btn>
                                   </v-list-item-subtitle>
                                 </v-list-item-content>
                               </v-list-item>

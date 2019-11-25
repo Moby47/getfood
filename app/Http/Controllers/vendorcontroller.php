@@ -45,7 +45,7 @@ class vendorcontroller extends Controller
 
         public  function order_ref($ref,$userid){
           $result = order::where('ref','=',$ref)->where('vendorId','=',$userid)
-          ->select('id','amt','qty','total','ref','title','address','delivery','created_at')->get();
+          ->select('id','amt','qty','total','ref','title','address','delivery','created_at')->get()->take(1);
           return orderres::collection($result);
           }
 
@@ -53,7 +53,7 @@ class vendorcontroller extends Controller
     
     public  function vendor_orders($userId){
       $orders = order::orderby('id','desc')->where('vendorId','=',$userId)
-      ->select('id','amt','qty','ref','total','title','address','delivery','created_at')->paginate(5);
+      ->select('id','amt','qty','ref','total','title','address','delivery','created_at')->paginate(7);
     //  $orderT = order::where('cusId','=',$userId)->select('amt')->sum('amt');
     // return $obj = ['orders' => $orders, 'orderT' => $orderT];
       return orderres::collection($orders);
