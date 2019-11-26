@@ -1,6 +1,7 @@
 <template>
     <div class="container">
-        <vendormenubar></vendormenubar>
+        
+         <vendormenubar></vendormenubar>
   <!--content here-->
   
   <div class="pages">
@@ -193,6 +194,7 @@
     </div>
  <!--modal-->
 
+<back></back>
 
       </div>
 </template>

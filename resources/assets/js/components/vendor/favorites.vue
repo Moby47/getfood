@@ -9,14 +9,25 @@
               <div id="pages_maincontent">
                
                   <br>
-                  
+                   <template>
+                      <v-card
+                        class="mx-auto"
+                        max-width="344"
+                      >
                   <nav aria-label="breadcrumb ">
                           <ol class="breadcrumb">
                             <li class="breadcrumb-item active" aria-current="page">Customer Favorite(s)</li>
                           </ol>
                         </nav>
+                      </v-card>
+                      </template>
 
              <div class=''>
+                <template>
+                      <v-card
+                        class="mx-auto"
+                        max-width="344"
+                      >
                 <main role="main" class="container">
   
                  
@@ -52,6 +63,9 @@
 
 
                   </main>
+                      </v-card>
+                </template>
+
               </div>
                   
        
@@ -75,6 +89,7 @@
         </template>
         <!--Overlay-->
 
+<back></back>
 
       </div>
 </template>
