@@ -67,7 +67,7 @@
                           <v-list-item two-line @click.prevent='check(con)'>
                               <v-list-item-content>
                                 <v-list-item-title>{{con.title}}</v-list-item-title>
-                                <v-list-item-subtitle>{{con.created_at}}</v-list-item-subtitle>
+                                <v-list-item-subtitle>{{moment(con.created_at).fromNow()}}</v-list-item-subtitle>
                               </v-list-item-content>
                             </v-list-item>
 
@@ -156,7 +156,7 @@
                           </v-list-item>
                           <v-list-item>
                               <v-list-item-content>
-                                <v-list-item-title>Time of Order: {{newContent.created_at}}</v-list-item-title>
+                                <v-list-item-title>Time of Order: {{moment(newContent.created_at).fromNow()}}</v-list-item-title>
                               </v-list-item-content>
                             </v-list-item>
             
@@ -272,11 +272,12 @@
       </style>
     
     <script>
-        export default {
-    
-            data(){
+                      var moment =require('moment');
+
+              export default {
+                data () {
                 return {
-                 
+                  moment:moment,
                   content:[],
                   pagination: [],
                   overlay:false,

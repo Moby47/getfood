@@ -72,7 +72,7 @@
                   </thead>
                     <tr class='animated tdFadeIn' v-for='con in refContent' v-bind:key='con.id'>
                       <td>{{con.title}}</td>
-                      <td>{{con.created_at}}</td>
+                      <td>{{moment(con.created_at).fromNow()}}</td>
                       <td @click.prevent='check(con)'><v-icon>remove_red_eye</v-icon></td>
                     </tr>
                   
@@ -103,7 +103,7 @@
                     </thead>
 											<tr class='animated tdFadeIn' v-for='con in content' v-bind:key='con.id'>
 											  <td>{{con.title}}</td>
-                      <td>{{con.created_at}}</td>
+                      <td>{{moment(con.created_at).fromNow()}}</td>
                       <td @click.prevent='check(con)'><v-icon>remove_red_eye</v-icon></td>
 											</tr>
 										
@@ -176,7 +176,7 @@
                           </v-list-item>
                           <v-list-item>
                               <v-list-item-content>
-                                <v-list-item-title>Time of Order: {{newContent.created_at}}</v-list-item-title>
+                                <v-list-item-title>Time of Order: {{moment(newContent.created_at).fromNow()}}</v-list-item-title>
                               </v-list-item-content>
                             </v-list-item>
             
@@ -210,10 +210,12 @@
   </style>
 
 <script>
-    export default {
+                 var moment =require('moment');
 
-        data(){
+          export default {
+            data () {
             return {
+              moment:moment,
               content:[],
               pagination: [],
               overlay:false,

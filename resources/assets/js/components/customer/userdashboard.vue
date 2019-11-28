@@ -79,7 +79,7 @@
                               <v-list-item two-line @click.prevent='check(con)'>
                                 <v-list-item-content>
                                   <v-list-item-title>{{con.title}}</v-list-item-title>
-                                  <v-list-item-subtitle>{{con.created_at}} 
+                                  <v-list-item-subtitle>{{moment(con.created_at).fromNow()}} 
                                       <v-btn class="mx-2" fab x-small color="">
                                               <v-icon>remove_red_eye</v-icon>
                                             </v-btn>
@@ -180,7 +180,7 @@
                           </v-list-item>
                           <v-list-item>
                               <v-list-item-content>
-                                <v-list-item-title>Time of Order: {{newContent.created_at}}</v-list-item-title>
+                                <v-list-item-title>Time of Order: {{moment(newContent.created_at).fromNow()}}</v-list-item-title>
                               </v-list-item-content>
                             </v-list-item>
             
@@ -296,10 +296,12 @@ body {
   </style>
 
 <script>
-    export default {
+                 var moment =require('moment');
 
-        data(){
-            return {
+            export default {
+              data () {
+              return {
+                moment:moment,
               userName:'',
               weeklyData:'Loading...',
               monthlyData:'Loading...',
