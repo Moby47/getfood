@@ -173,7 +173,7 @@ return [
         Unicodeveloper\Paystack\PaystackServiceProvider::class,
 
         //intervention img
-        'Intervention\Image\ImageServiceProvider',
+         'Intervention\Image\ImageServiceProvider',
         /*
          * Package Service Providers...
          */

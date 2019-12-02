@@ -8,7 +8,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 use Illuminate\Support\Str;
 
-//mail6
+//mail
 use Mail;
 use App\Mail\Verify;
 use App\Mail\Welcome;
@@ -64,8 +64,13 @@ class customauthcontroller extends Controller
            session(['verifytoken' => $verifytoken]);
            //email to user
            try{
-               Mail::to($user->email)->send(new Verify());  
-                 }
+            Mail::to($user->email)->send(new Verify());  
+         // welcome email
+            $when = now()->addMinutes(10);
+                Mail::to($user->email)
+                ->later($when, new Welcome());
+                 
+              }
                  catch(\Exception $e){
             return ['msg' => 0];
              }
@@ -96,8 +101,13 @@ class customauthcontroller extends Controller
        session(['verifytoken' => $verifytoken]);
        //email to user
        try{
-           Mail::to($user->email)->send(new Verify());  
-             }
+        Mail::to($user->email)->send(new Verify());  
+     // welcome email
+        $when = now()->addMinutes(10);
+            Mail::to($user->email)
+            ->later($when, new Welcome());
+             
+          }
              catch(\Exception $e){
         return ['msg' => 0];
          }

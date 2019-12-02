@@ -8,6 +8,10 @@ use App\temp;
 use App\food;
 use DB;
 
+//mail
+use Mail;
+use App\Mail\CusOrders;
+
 //resource
 use App\Http\Resources\orderresource as orderres;
 
@@ -105,6 +109,25 @@ order::insert($content);
 //clear my temp items
 $ids = temp::where('tempId','=',$tempId)->select('id')->get()->toArray();
 DB::table('temps')->whereIn('id', $ids)->delete();
+
+//email to customer to check his orders
+try{
+  Mail::to($request->input('userMail'))->send(new CusOrders());  
+  
+  //email vendors involved
+
+  $when = now()->addMinutes(10);
+
+  Mail::to($user->email)
+  ->later($when, new CusOrders());
+
+    }
+       catch(\Exception $e){
+  return 0;
+   }
+
+
+
 
 return 1;
      }
