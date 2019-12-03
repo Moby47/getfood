@@ -32,7 +32,7 @@ class CusOrders extends Mailable
          //$verifytoken = session('verifytoken');
  
         return $this->from('henryonyemaobi@gmail.com','GETFOODS')
-         ->subject('Your Order On GETFOODS')
+         ->subject('Your order on GETFOODS')
          ->markdown('email.CusOrdersMarkdown');
         // ->with('verifytoken',$verifytoken);
     }

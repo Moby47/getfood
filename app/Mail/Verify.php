@@ -32,7 +32,7 @@ class Verify extends Mailable
          $verifytoken = session('verifytoken');
  
         return $this->from('henryonyemaobi@gmail.com','GETFOODS')
-         ->subject('Account Verification On GETFOODS')
+         ->subject('Account verification on GETFOODS')
          ->markdown('email.verifyMarkdown')
          ->with('verifytoken',$verifytoken);
     }
