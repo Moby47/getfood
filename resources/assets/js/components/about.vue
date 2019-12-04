@@ -7,7 +7,6 @@
         tooltips
         -->
 
-        <menubar></menubar>
 <!--page content-->
 <div class="pages">
     <div data-page="about" class="page no-toolbar no-navbar">
@@ -15,6 +14,7 @@
       
        <div id="pages_maincontent">
         
+        <menubar></menubar>
         <br>
          <template>
                   <v-card

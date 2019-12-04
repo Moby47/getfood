@@ -1,13 +1,14 @@
 <template>
   <div class="container">
       
-      <menubar></menubar>
+     
    
 <div class="pages">
   <div data-page="shop" class="page no-toolbar no-navbar">
     <div class="page-content">
      <div id="pages_maincontent">
       
+       <menubar></menubar>
       <br>
       <template>
           <v-card
@@ -132,7 +133,7 @@
 
       
     <span v-if='!empty'>
-          <div class="shop_pagination slideUp" >
+          <div class="shop_pagination slideUp" v-if='content.length > 0'>
               <template>
                   <v-card
                     class="mx-auto"
@@ -147,7 +148,7 @@
 
         </div>
       
-          <div class="my-2 text-center">
+          <div class="my-2 text-center" >
           <v-btn @click.prevent='cart()' outlined color="#FFA500">VIEW TABLE</v-btn>   
           </div>
 

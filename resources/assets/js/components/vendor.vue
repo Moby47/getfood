@@ -1,6 +1,6 @@
 <template>
         <div class="container">
-            <menubar></menubar>
+           
       <!--content here-->
       
       <div class="pages">
@@ -8,6 +8,7 @@
             <div class="page-content">
                   <div id="pages_maincontent">
                    
+                    <menubar></menubar>
                       <br>
                    
     
@@ -52,6 +53,7 @@
                             <br>
                           </form>
 
+
                             <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
                      <div v-if='wait' class='text-center'>
                        <template>
@@ -65,12 +67,30 @@
                                   </div>
                          </transition>
 
+                         <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
+                     <div  class='text-center'>
+                       <template>
+                         <p>{{errMessage}}</p>
+                                 </template>
+                                  </div>
+                         </transition>
+
               </v-card>
 
+
                   <!-- res here-->    
+                   <template>
+                  <v-card
+                    class="mx-auto"
+                    max-width="344"
+                   
+                  >
                   <div v-if='empty' class='text-center alert alert-info'>
                         Sorry. This Kitchen is Empty.
                              </div>   
+
+                  </v-card>
+                   </template>
 
  <div class="page_single layout_fullwidth_padding">
       
@@ -290,7 +310,8 @@
                   empty:false,
                   food_count:'',
                   vendor_list:[],
-                  wait:false
+                  wait:false,
+                  errMessage:''
                 }
             },
     
@@ -312,6 +333,8 @@
                 .then(res=>{
                   this.content = res.data;
                   this.overlay = false
+
+                  this.errMessage =''
                     
                   //to determine if obj is empty 
                           //console.log(res.data[0]);
@@ -329,7 +352,7 @@
                 .catch(error =>{
                     //off loader
                     this.overlay = false
-                        
+                        this.errMessage ='An error occured. Relaoding food list...'
                       setTimeout(func=>{
                           this.fetch();
                       },2000)

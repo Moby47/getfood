@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <menubar></menubar>
+       
 <!--page content-->
 <div class="pages">
     <div data-page="about" class="page no-toolbar no-navbar">
@@ -8,9 +8,9 @@
       
        <div id="pages_maincontent">
         
+        <menubar></menubar>
         <br>
-         
-       
+
         <template>
             <v-card
               class="mx-auto my-12"
@@ -20,8 +20,9 @@
 <!--1-->
               <v-img
                 max-width="344"
+                height="250"
                 class='mx-auto fadeIn'
-                src="/images/home.svg"
+                src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
                 :lazy-src="`/images/black-spinner.gif`"
               ></v-img>
           
@@ -58,8 +59,8 @@
                     <v-list-item three-line>
                      
                       <v-img
-                      width="80"
-                      height="200"
+                     max-width="344"
+                height="250"
                       src="/images/start.svg"
                       :lazy-src="`/images/black-spinner.gif`"
                     ></v-img>
@@ -76,14 +77,26 @@
 
 <!--more stuff-->
 
-    <v-img
-      src="/images/vendor.svg"
-       height="250"
-      :lazy-src="`/images/black-spinner.gif`"
-     
-    >
-     
-    </v-img>
+  
+
+    <!--3-->
+           
+                    <v-list-item three-line>
+                      <v-img
+                  src="/images/home.svg"
+                    max-width="344"
+                  :lazy-src="`/images/black-spinner.gif`"
+                
+                >
+                
+                </v-img>
+                    </v-list-item>
+                
+                    <v-card-actions>
+                      <span class='text-center'>
+                      <v-btn  text outlined  color="#FFA500" class='mr-1 ' @click.prevent='vendor()'>All Vendors</v-btn>
+                      </span>
+                    </v-card-actions>
 
 
     <v-list two-line v-for='ven in vendor_list' v-bind:key='ven.id'>
@@ -102,7 +115,7 @@
       </v-list-item>
     </v-list>
 
-    <div class='text-center'>
+    <div class='text-center' v-if='vendor_list.length > 0'>
    <v-btn small text icon color='#FFA500' @click.prevent="vendors(pagination.prev_page_url)" :disabled="!pagination.prev_page_url"><v-icon>arrow_back</v-icon></v-btn> 
    <span>{{pagination.current_page}} of {{pagination.last_page}}</span>
    <v-btn small text icon color='#FFA500'  @click.prevent="vendors(pagination.next_page_url)" :disabled="!pagination.next_page_url"><v-icon>arrow_forward</v-icon></v-btn>
@@ -165,6 +178,10 @@
 
           login(){
             this.$router.push({ name: "login" })
+          },
+
+           vendor(){
+            this.$router.push({ name: "vendor" })
           },
           
           vendors(page_url){

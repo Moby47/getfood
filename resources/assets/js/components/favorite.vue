@@ -1,12 +1,13 @@
 <template>
     <div class="container">
-        <menubar></menubar>
+        
 <div class="pages">
     <div data-page="shop" class="page no-toolbar no-navbar">
       <div class="page-content">
       
             <div id="pages_maincontent">
              
+             <menubar></menubar>
              <br>
               <template>
                   <v-card
