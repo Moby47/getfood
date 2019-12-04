@@ -186,7 +186,7 @@
               wait:false,
               data_load: true,
               pagination: [],
-              food_count:'',
+              food_count:0,
               toggle_cart:false
           }
       },

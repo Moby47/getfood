@@ -22,16 +22,17 @@ class guestcontroller extends Controller
 {
     //method to get food list for customers to see and buy
     public function get_foods(){
-
+      
+   //works!!
                                                                   //testing the email to multi vendor
                                                                   //get ven id array
                                                                   $arr = temp::where('tempId','=',873212274)->select('vendorId')->pluck('vendorId');
                                                                   //get ven email by the array od id
                                                                     $admins = user::where('status','=',1)->whereIn('id', $arr)->select('email')->get();
                                                                   //loop through emails and send a mail to ven
-                                                                  return 477;
+                                                                //  return 477;
                                                                   foreach($admins as $admin){
-                                                                    Mail::to($admin->email)->send(new CusOrders());
+                                                                  //  Mail::to($admin->email)->send(new CusOrders());
                                                                   }
 
         $food = food::orderby('id','desc')->select('id','amt','qty','title','img','vendor_id',
