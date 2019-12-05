@@ -311,12 +311,9 @@ import paystack from 'vue-paystack';
 
             axios.post('/save-order',input).then(res=>{
                 console.log('order saved')  
-            })
-            .catch(error =>{
-                console.log(error)    
-               })
-            
-            //clear cart
+    // ! finish save-order processing before clearing 
+
+                //clear cart
             var input = {'userId':localStorage.getItem('tempUserCartID')}
             axios.post('/clear-cart',input).then(res=>{
                 console.log('cart cleared')  
@@ -330,6 +327,13 @@ import paystack from 'vue-paystack';
             localStorage.removeItem('address')
             localStorage.removeItem('delivery')
           
+            
+
+            })
+            .catch(error =>{
+                console.log(error)    
+               })
+            
             //redirect to success page
             this.$router.push({name: "success"});
 

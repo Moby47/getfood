@@ -166,6 +166,8 @@
                    localStorage.removeItem('userStatus');
                       //clear tempcartid
                        localStorage.removeItem('tempUserCartID');
+                        //clear cart count
+                        localStorage.removeItem('cart');
                    //clear cart
                    if(localStorage.getItem('tempUserCartID')){
                     var input = {'userId':localStorage.getItem('tempUserCartID')}

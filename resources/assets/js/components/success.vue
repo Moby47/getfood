@@ -26,6 +26,8 @@
   </div>
   
   <!--content here-->
+
+  <back></back> 
   
     </div>
 </template>

@@ -6,11 +6,13 @@ use Illuminate\Http\Request;
 use App\order;
 use App\temp;
 use App\food;
+use App\User;
 use DB;
 
 //mail
 use Mail;
 use App\Mail\CusOrders;
+use App\Mail\VenOrders;
 
 //resource
 use App\Http\Resources\orderresource as orderres;
@@ -106,27 +108,31 @@ foreach($temp as $t){
 }
 order::insert($content);
 
-//clear my temp items
-$ids = temp::where('tempId','=',$tempId)->select('id')->get()->toArray();
-DB::table('temps')->whereIn('id', $ids)->delete();
 
-//email to customer to check his orders
+
+//email  to check  orders
 try{
   Mail::to($request->input('userMail'))->send(new CusOrders());  
   
-  //email vendors involved
+session(['customerMail' => $request->input('userMail')]);
 
-  $when = now()->addMinutes(10);
-
-  Mail::to($user->email)
-  ->later($when, new CusOrders());
+  //get ven id array
+    $arr = temp::where('tempId','=',$tempId)->select('vendorId')->pluck('vendorId');
+     //get ven email by the array of id
+     $admins = user::where('status','=',1)->whereIn('id', $arr)->select('email')->get();
+       //loop through emails and send a mail to ven
+       foreach($admins as $admin){
+         Mail::to($admin->email)->send(new VenOrders());
+         }
 
     }
        catch(\Exception $e){
-  return 0;
+  return 'backend error occured';
    }
 
-
+//clear my temp items
+$ids = temp::where('tempId','=',$tempId)->select('id')->get()->toArray();
+DB::table('temps')->whereIn('id', $ids)->delete();
 
 
 return 1;

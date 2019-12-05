@@ -1,9 +1,9 @@
 @component('mail::message')
  
 
+<p>Hello,</p>
 
-
-<p>New Order</p>
+<p>You made an order.</p>
 
 <a href="http://localhost:8000/userdashboard">
     View Now
