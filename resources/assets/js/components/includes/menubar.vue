@@ -46,6 +46,9 @@
       <router-link to='/admindashboard' v-if='status == 1'>
           <v-list-item-title>Dashboard</v-list-item-title>
     </router-link>
+    <router-link to='/super-admin-dashboard' v-if='status == 47'>
+      <v-list-item-title>Dashboard</v-list-item-title>
+</router-link>
         </v-list-item>
 </span>
 

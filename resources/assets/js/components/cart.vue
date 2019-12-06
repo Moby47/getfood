@@ -18,6 +18,7 @@
                 >
                  <nav aria-label="breadcrumb ">
                          <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><router-link to='/'>Home</router-link></li>
                            <li class="breadcrumb-item"><router-link to='/shop'>Kitchen</router-link></li>
                            <li class="breadcrumb-item active" aria-current="page">Selected Food ({{cartConCount}})</li>
                          </ol>
@@ -109,7 +110,7 @@ Your Table is Empty.
                 </div>
                         
        <div class="my-2 text-center" v-show='cartConCount > 0' >
-          <v-btn @click.prevent='checkout()' outlined color="#FFA500">TAKE FOOD</v-btn>   
+          <v-btn @click.prevent='checkout()' outlined color="#FFA500">CONTINUE</v-btn>   
           </div>
    </div>
                 

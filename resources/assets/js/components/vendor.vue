@@ -13,7 +13,7 @@
                    
     
                  <div class=''>
-                    <main role="main" class="container">
+                    <main role="main" class="">
       
        <template>
                   <v-card
@@ -95,55 +95,52 @@
  <div class="page_single layout_fullwidth_padding">
       
       
-      <ul class="shop_items ">
+    <ul class="shop_items ">
               
-          <li class='animated tdFadeIn' v-for='con in content' v-bind:key='con.id'>
-
+        <li class='animated tdPlopIn' v-for='con in content' v-bind:key='con.id'>
             <template>
-                  <v-card
-                    class="mx-auto elevation-23 p-1"
-                    max-width="344"
-                    outlined
-                  >
-          <div class="shop_thumb">
-              <v-img 
-              :src="'/storage/food/'+con.img"
-              :alt="con.title"
-              :lazy-src="`/images/black-spinner.gif`"
-              title=""
-              class='img_size' ></v-img>  
-          </div>
-          <div class="shop_item_details">
-          <h4 class="text-capitalize">{{con.title}}</h4>
-          <div class="shop_item_price"><strike>N</strike>{{con.amt}}</div>
-            
-             
-          <cartAdd
-          :con=con
-          :stash=con.qty
-          >
-          </cartAdd>
+                <v-card
+                  class="mx-auto elevation-23 p-1"
+                  max-width="344"
+                  outlined
+                >
+        <div class="shop_thumb">
+            <v-img 
+            :src="'/storage/food/'+con.img"
+            :alt="con.title"
+            :lazy-src="`/images/black-spinner.gif`"
+            title=""
+            class='img_size' ></v-img>
+        </div>
+        <div class="shop_item_details">
+            <h4 class="text-capitalize">{{con.title}}</h4>
+            <div class="shop_item_price"><strike>N</strike>{{con.amt}}</div>
+
+        <cartAdd
+        :con=con
+        :stash=con.qty
+        >
+        </cartAdd>
+      
+        <favButton
+        :id=con.id
+        >
+        </favButton>
+
         
-          <favButton
-          :id=con.id
-          >
-          </favButton>
+        </div>
 
-          
-          </div>
-          
-          <p class="info">
-           <v-icon>restaurant</v-icon> {{con.vendor_name}}
-            <br>
-            <v-icon class='icon-shift'>my_location</v-icon> {{con.vendorAddress}}
-          </p>
+        <p class="info text-capitalize">
+            <v-icon>restaurant</v-icon> {{con.vendor_name}}
+             <br>
+             <v-icon class='icon-shift'>my_location</v-icon> {{con.vendorAddress}}
+           </p>
 
-</v-card>
-</template>
+        </v-card>
+        </template>
 
-          </li> 
-         
-      </ul>
+        </li> 
+    </ul>
 
 
     <span v-if='!empty' v-show='selected'>

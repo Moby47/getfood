@@ -91,7 +91,7 @@ data: function() {
                         eventBus.$emit('cart_status')
 
                             }else{
-                              this.text='Only '+res.data+' remaining for this food'
+                              this.text='Only '+res.data+' is currently remaining for this food'
                             this.snackbar = true;
                             }
                             this.overlay = !this.overlay

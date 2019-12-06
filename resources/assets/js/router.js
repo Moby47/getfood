@@ -27,6 +27,8 @@ import success from './components/success.vue'
 import notfound from './components/notfound.vue'
 import vendor from './components/vendor.vue'
 
+import superadmindash from './components/admin/superadmindash.vue'
+
 export default new Router({
     mode: 'history',
     routes: [
@@ -195,6 +197,14 @@ export default new Router({
             path: '/success',
             name: 'success',
             component: success,
+             meta:{
+              //  auth: true
+            }
+        },
+        {
+            path: '/super-admin-dashboard',
+            name: 'superadmindash',
+            component: superadmindash,
              meta:{
               //  auth: true
             }

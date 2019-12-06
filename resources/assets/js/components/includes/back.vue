@@ -26,7 +26,8 @@
 			 dark
 			 color="#fbc25b"
 			 small
-			 relative
+                relative
+                outlined
 			 bottom
 			 right
 			 fixed

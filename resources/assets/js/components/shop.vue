@@ -85,7 +85,7 @@
       
       <ul class="shop_items ">
               
-          <li class='animated tdFadeIn' v-for='con in content' v-bind:key='con.id'>
+          <li class='animated tdPlopIn' v-for='con in content' v-bind:key='con.id'>
               <template>
                   <v-card
                     class="mx-auto elevation-23 p-1"
@@ -98,13 +98,12 @@
               :alt="con.title"
               :lazy-src="`/images/black-spinner.gif`"
               title=""
-              class='img_size' ></v-img>  
+              class='img_size' ></v-img>
           </div>
           <div class="shop_item_details">
-          <h4 class="text-capitalize">{{con.title}}</h4>
-          <div class="shop_item_price"><strike>N</strike>{{con.amt}}</div>
-            
-             
+              <h4 class="text-capitalize">{{con.title}}</h4>
+              <div class="shop_item_price"><strike>N</strike>{{con.amt}}</div>
+
           <cartAdd
           :con=con
           :stash=con.qty
@@ -118,20 +117,19 @@
 
           
           </div>
-          
+
           <p class="info text-capitalize">
-           <v-icon>restaurant</v-icon> {{con.vendor_name}}
-            <br>
-            <v-icon class='icon-shift'>my_location</v-icon> {{con.vendorAddress}}
-          </p>
+              <v-icon>restaurant</v-icon> {{con.vendor_name}}
+               <br>
+               <v-icon class='icon-shift'>my_location</v-icon> {{con.vendorAddress}}
+             </p>
 
           </v-card>
           </template>
+
           </li> 
-         
       </ul>
 
-      
     <span v-if='!empty'>
           <div class="shop_pagination slideUp" v-if='content.length > 0'>
               <template>
@@ -149,7 +147,7 @@
         </div>
       
           <div class="my-2 text-center" >
-          <v-btn @click.prevent='cart()' outlined color="#FFA500">VIEW TABLE</v-btn>   
+          <v-btn @click.prevent='cart()' outlined color="#FFA500">CONTINUE</v-btn>   
           </div>
 
    </span>
@@ -176,7 +174,6 @@
 
 <script>
 
- 
 
   export default {
       data(){

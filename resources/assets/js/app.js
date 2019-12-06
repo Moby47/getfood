@@ -113,8 +113,10 @@ router.beforeEach((to, from, next) => {
         //continue
         if(localStorage.getItem('userStatus') == 1){
         next({path: '/admindashboard'})
-        }else{
+        }else if(localStorage.getItem('userStatus') == 0){
             next({path: '/userdashboard'})  
+        }else if(localStorage.getItem('userStatus') == 47){
+            next({path: '/admin-dash'})
         }
     }else{
         //redirect

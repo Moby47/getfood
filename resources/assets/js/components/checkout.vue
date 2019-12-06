@@ -20,7 +20,8 @@
                 >
                  <nav aria-label="breadcrumb ">
                          <ol class="breadcrumb">
-                           <li class="breadcrumb-item"><router-link to='/cart'>Table</router-link></li>
+                            <li class="breadcrumb-item"><router-link to='/shop'>Kitchen</router-link></li>
+                           <li class="breadcrumb-item"><router-link to='/cart'>Cart</router-link></li>
                            <li class="breadcrumb-item active" aria-current="page" >Food Is Ready</li>
                            
                          </ol>
@@ -186,6 +187,7 @@
 
 
 
+  <back></back>
 
     </div>
 </template>
