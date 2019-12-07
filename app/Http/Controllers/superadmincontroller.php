@@ -30,4 +30,17 @@ class superadmincontroller extends Controller
         //where  status = 1 and verification = 0, paginate by 5, and return
        
     }
+
+    public function approve_vendor(){
+        //query user model and change vendor verification to 1 (0 is unverified, 1 is verified, 2 is rejected)
+        //return 1 as a success response, eg: last line is return 1;
+       
+    }
+
+    public function decline_vendor(){
+       //query user model and change vendor verification to 2 //meaning rejected (0 is unverified, 1 is verified, 2 is rejected)
+        //return 1 as a success response, eg: last line is return 1;
+    }
+
+
 }

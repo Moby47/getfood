@@ -91,6 +91,8 @@ Route::get('/customer-count', 'superadmincontroller@customer_count');
 Route::get('/vendor-count', 'superadmincontroller@vendor_count');
 Route::get('/all-vendors', 'superadmincontroller@all_vendors');
 Route::get('/vendor-search/{vendorname}', 'superadmincontroller@vendor_search');
+Route::post('/approve-vendor', 'superadmincontroller@approve_vendor');
+Route::post('/decline-vendor', 'superadmincontroller@decline_vendor');
 
 
 //don't delete,fixes route bug

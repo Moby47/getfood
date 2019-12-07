@@ -235,7 +235,68 @@
                this.newContent = con
                this.$bvModal.show('modal')
              },
+
+             approve(newContent){
+        var dialog = confirm('Approve '+ newContent.name +' ?');
+        if(dialog){
+           //approve
+           this.$bvModal.hide('modal')
+
+           this.overlay = true
+            var input = {'id':newContent.id}
+           axios.post('/approve-vendor', input).then(res=>{
+			if(res.data == 1){
+         this.overlay=false
+            this.text='Vendor Approved'
+              this.snackbar = true;
+                this.fetch()
+			}else{
+        this.overlay=false
+        this.text='Operatiion Failed. Try again'
+           this.snackbar = true;
+			}
+				
+			})
+			.catch(err=>{
+        console.log(err)
+        this.overlay=false
+      })
+        }else{
+           //exit
+        }
+    }, // end
+
     
+    decline(newContent){
+        var dialog = confirm('Reject '+ newContent.name +' ?');
+        if(dialog){
+           //decline
+           this.$bvModal.hide('modal')
+
+           this.overlay = true
+            var input = {'id':newContent.id}
+           axios.post('/decline-vendor', input).then(res=>{
+			if(res.data == 1){
+         this.overlay=false
+            this.text='Vendor Approved'
+              this.snackbar = true;
+                this.fetch()
+			}else{
+        this.overlay=false
+        this.text='Operatiion Failed. Try again'
+           this.snackbar = true;
+			}
+				
+			})
+			.catch(err=>{
+        console.log(err)
+        this.overlay=false
+      })
+        }else{
+           //exit
+        }
+    }, // end
+
               search(){
     
                 this.$validator.validateAll().then(() => {
