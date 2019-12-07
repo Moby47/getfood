@@ -32,7 +32,10 @@ class superadmincontroller extends Controller
         //please query the user model and return 
         //where  status = 1 and verification = 0, paginate by 5, meaning a vendor who is not verified
 
-        $users = User::where('status', 1)->andwhere('')
+        $unverified_vendors = User::where('status', 1)->andwhere('verification', 0)->paginate(5);
+
+        return $unverified_vendors;
+
     }
 
     public function vendor_search($vendorname){
