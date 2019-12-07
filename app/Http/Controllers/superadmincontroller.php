@@ -66,6 +66,10 @@ class superadmincontroller extends Controller
 
     public function due_vendors(){
       // writing this one.
+
+      /*code to show the exact money a vendor should be paid after 7days (1wk)
+      we pay them weekly, paystack pays us daily*/
+        
          $sevenDaysAgo = \carbon\carbon::now()->subDays(7);
          $now = \carbon\carbon::now();
 
