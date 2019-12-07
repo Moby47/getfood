@@ -22,8 +22,9 @@ class superadmincontroller extends Controller
         //please query the user model and return the number of vendors as an integer, eg: 7
         //where status = 1, meaning a vendor
 
-        $users = User::where('status', 1)->count();
-        return $users;
+        $vendors = User::where('status', 1)->count();
+
+        return $vendors;
 
     }
 
