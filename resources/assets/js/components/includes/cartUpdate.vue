@@ -24,7 +24,7 @@
             </a></div>
 
             <div class="item_qnty">
-                <form id="myformup" method="POST" action="#">
+                <form id="myformupX" method="POST" action="#">
                     <label>QUANTITY ({{con.quantity}})</label>
                     <input type="button" value="-" class="qntyminus" field="quantity" @click.prevent='decre(con)'
                      :disabled='qty==1'/>

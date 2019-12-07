@@ -55,6 +55,7 @@ if($ok){
   //update
   $ok->tempId = $userId;
   $ok->vendorId = $food->vendor_id;
+  $ok->vendorName = $food->vendor_name;
   $ok->foodId = $foodId;
   $ok->foodName = $food->title;
   $ok->amt = $food->amt;
@@ -67,6 +68,7 @@ if($ok){
 
 $ok->tempId = $userId;
 $ok->vendorId = $food->vendor_id;
+$ok->vendorName = $food->vendor_name;
 $ok->foodId = $foodId;
 $ok->foodName = $food->title;
 $ok->amt = $food->amt;
@@ -139,6 +141,7 @@ if($ok){
   //update
   $ok->tempId = $userId;
   $ok->vendorId = $food->vendor_id;
+  $ok->vendorName = $food->vendor_name;
   $ok->foodId = $food->id;
   $ok->foodName = $food->title;
   $ok->amt = $food->amt;
@@ -192,6 +195,7 @@ if($ok){
   //update
   $ok->tempId = $userId;
   $ok->vendorId = $food->vendor_id;
+  $ok->vendorName = $food->vendor_name;
   $ok->foodId = $food->id;
   $ok->foodName = $food->title;
   $ok->amt = $food->amt;
@@ -204,6 +208,7 @@ if($ok){
 
 $ok->tempId = $userId;
 $ok->vendorId = $food->vendor_id;
+$ok->vendorName = $food->vendor_name;
 $ok->foodId = $food->id;
 $ok->foodName = $food->title;
 $ok->amt = $food->amt;

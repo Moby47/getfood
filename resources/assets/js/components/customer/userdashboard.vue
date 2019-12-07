@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <usermenubar></usermenubar>
+        
   <!--content here-->
   
   
@@ -9,6 +9,8 @@
         <div class="page-content">
               <div id="pages_maincontent">
                
+                  <usermenubar></usermenubar>
+
                   <br>
                   <template>
                     <v-card

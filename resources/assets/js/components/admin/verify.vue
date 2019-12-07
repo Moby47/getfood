@@ -38,13 +38,13 @@
                              name='Name' 
                              v-model='ref'
                               v-validate='"required"'
-                              label="Enter Vendor Name "
+                              label="Find Vendor By Name "
                               required
                             ></v-text-field>
     <transition  name="fadeLeft">
       <span class='text-danger shake' v-show="errors.has('Name')">{{ errors.first('Name') }}</span>
        </transition>
-    <br>
+    
      <div class="my-2 text-center slideUp">
                     <v-btn @click.prevent='search()' outlined color="#FFA500">FIND</v-btn>   
                     </div> 
@@ -198,7 +198,22 @@
           </template>
           <!--Overlay-->
     
-    
+          <template>
+                <v-snackbar
+              v-model="snackbar"
+              :timeout="timeout"
+              >
+              {{ text }}
+              <v-btn
+                color="#FFA500"
+                text
+                @click='snackbar=!snackbar'
+              >
+                Close
+              </v-btn>
+              </v-snackbar>
+              </template>
+
     <back></back>
     
           </div>
@@ -220,6 +235,10 @@
                   overlay:false,
                   empty:false,
     
+                  snackbar: false,
+                    text: '',
+                    timeout: 6000,
+
                   ref:'',
                   refContent:[],
                   empty2:false,
@@ -245,11 +264,13 @@
            this.overlay = true
             var input = {'id':newContent.id}
            axios.post('/approve-vendor', input).then(res=>{
-			if(res.data == 1){
+             
+			if(res.data === 1){
          this.overlay=false
             this.text='Vendor Approved'
               this.snackbar = true;
                 this.fetch()
+                this.refCon = false
 			}else{
         this.overlay=false
         this.text='Operatiion Failed. Try again'
@@ -276,11 +297,12 @@
            this.overlay = true
             var input = {'id':newContent.id}
            axios.post('/decline-vendor', input).then(res=>{
-			if(res.data == 1){
+			if(res.data === 1){
          this.overlay=false
-            this.text='Vendor Approved'
+            this.text='Vendor Rejected'
               this.snackbar = true;
                 this.fetch()
+                this.refCon = false
 			}else{
         this.overlay=false
         this.text='Operatiion Failed. Try again'
@@ -318,6 +340,8 @@
                                   this.empty2 = true;
                               }else{
                                   this.empty2 = false;
+                                  this.text='We found something.'
+                                  this.snackbar = true;
                               }
                     
                     })
@@ -325,11 +349,8 @@
                         //off loader
                         this.overlay = !this.overlay
                           
-                          setTimeout(func=>{
                             console.log(error)
-                              this.search();
-                          },2000)
-                             
+                              
                         })
     
                }
@@ -394,6 +415,7 @@
     
             mounted() {
               this.fetch()
+            
             }
         }
     </script>

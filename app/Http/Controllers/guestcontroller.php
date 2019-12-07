@@ -179,11 +179,11 @@ public function vendorFood($vendor){
 */
     }
 
-    public function vendorListHome(){
+   /* public function vendorListHome(){
       return $list = user::orderby('id','desc')->where('status','=',1)
       ->select('id','name','address')->paginate(5)->toArray();
       }
-
+*/
 
 
 }

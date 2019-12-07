@@ -49,7 +49,7 @@ Route::get('/get-fav/{id}', 'guestcontroller@getFavorites');
 Route::get('/vendor-food/{vendor}', 'guestcontroller@vendorFood');
 Route::get('/vendor-list', 'guestcontroller@vendorList');
 //vendor list for home
-Route::get('/vendor-list-home', 'guestcontroller@vendorListHome');
+//Route::get('/vendor-list-home', 'guestcontroller@vendorListHome');
 
 //vendor routes
 Route::get('/get-orders', 'vendorcontroller@get_orders');
@@ -93,6 +93,7 @@ Route::get('/all-vendors', 'superadmincontroller@all_vendors');
 Route::get('/vendor-search/{vendorname}', 'superadmincontroller@vendor_search');
 Route::post('/approve-vendor', 'superadmincontroller@approve_vendor');
 Route::post('/decline-vendor', 'superadmincontroller@decline_vendor');
+Route::get('/due-vendors', 'superadmincontroller@due_vendors');
 
 
 //don't delete,fixes route bug

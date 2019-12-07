@@ -4,43 +4,77 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\order;
+use App\User;
+
+
+//resource
+use App\Http\Resources\userresource as userres;
+
 class superadmincontroller extends Controller
 {
     
     public function customer_count(){
-        //please query the user model and return the number of customers as an integer, eg: 7
-        //where  status = 0, meaning a customer
+        
+        $customers = User::where('status', 0)->where('verification','=',1)->count(); //should be verified too
+        return $customers;
 
     }
 
     public function vendor_count(){
-        //please query the user model and return the number of vendors as an integer, eg: 7
-        //where status = 1, meaning a vendor
-
+       
+        $vendors = User::where('status', 1)->where('verification','=',1)->count();
+        return $vendors;
     }
 
     public function all_vendors(){
-        //please query the user model and return 
-        //where  status = 1 and verification = 0, paginate by 5, meaning a vendor who is not verified
+        
+        //no need for andwhere, you can use multiple just 'where'
+        $unverified_vendors = User::where('status', 1)->where('verification', 0)->paginate(5); 
+        //return as collection resource for API use
+        return userres::collection($unverified_vendors);
     }
 
     public function vendor_search($vendorname){
-        //please query the user model and return the vendor 
-        // where name == $vendorname
-        //where  status = 1 and verification = 0, paginate by 5, and return
+        
+        //anwhere() kept failing, using just where()
+        //for search, use 'LIKE' so that searching for 'chi', can fetch 'chiazor'
+        $vendor = User::where('status', 1)->where('name','LIKE','%'.$vendorname.'%')
+        ->where('verification', 0)->paginate(5);
+       //return as collection resource for API use
+       return userres::collection($vendor);
        
     }
 
-    public function approve_vendor(){
-        //query user model and change vendor verification to 1 (0 is unverified, 1 is verified, 2 is rejected)
-        //return 1 as a success response, eg: last line is return 1;
+    public function approve_vendor(Request $request){
+        //get the id sent as a post 
+        $vendorId = $request->input('id');
+
+        $user = User::where('id', $vendorId)->update(array('verification' => 1));
+            return 1;
        
     }
 
-    public function decline_vendor(){
-       //query user model and change vendor verification to 2 //meaning rejected (0 is unverified, 1 is verified, 2 is rejected)
-        //return 1 as a success response, eg: last line is return 1;
+    public function decline_vendor(Request $request){
+       //get the id sent as a post 
+       $vendorId = $request->input('id');
+
+       $user = User::where('id', $vendorId)->update(array('verification' => 2));
+           return 1;
+
     }
+
+    public function due_vendors(){
+      // writing this one.
+         $sevenDaysAgo = \carbon\carbon::now()->subDays(7);
+         $now = \carbon\carbon::now();
+
+      return   $rec= \DB::table('orders')
+          ->select('vendorName', \DB::raw('sum(total) as total'))
+          ->whereBetween('created_at',array($sevenDaysAgo,$now))
+          ->groupBy('vendorName')->paginate(8);
+         
+     }
 
 
 }

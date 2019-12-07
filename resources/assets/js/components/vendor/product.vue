@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <vendormenubar></vendormenubar>
+       
   <!--content here-->
   
   <div class="pages">
@@ -8,6 +8,8 @@
         <div class="page-content">
               <div id="pages_maincontent"> 
                
+                  <vendormenubar></vendormenubar>
+                    
                   <br>
                   <template>
                       <v-card

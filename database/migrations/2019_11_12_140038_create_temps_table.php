@@ -18,6 +18,7 @@ class CreateTempsTable extends Migration
 
             $table->integer('foodId');
             $table->integer('vendorId');
+            $table->string('vendorName');
             $table->integer('userId')->nullable();
             $table->string('tempId');
             $table->integer('qty');

@@ -68,7 +68,7 @@ class customercontroller extends Controller
       
 //get temp data
 $tempId = $request->input('tempId');
- $temp = temp::where('tempId','=',$tempId)->select('tempId','id','foodId','vendorId','qty','amt','foodName')->get();
+ $temp = temp::where('tempId','=',$tempId)->select('tempId','id','foodId','vendorName','vendorId','qty','amt','foodName')->get();
 
 //get checkout data
 $cusId = $request->input('cusId');
@@ -93,6 +93,7 @@ foreach($temp as $t){
   $content[]= [
  'foodId'=> $t->foodId,
  'vendorId'=> $t->vendorId,
+ 'vendorName'=> $t->vendorName,
  'cusId'=> $cusId,
  'qty'=> $t->qty,
  'amt'=> $t->amt,

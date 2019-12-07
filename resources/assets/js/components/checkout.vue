@@ -219,7 +219,7 @@ import paystack from 'vue-paystack';
                 total:0, //amount in naira
                 ref:'',
 
-                paystackkey: "pk_test_ad39cbe2a4a48182c6ef83a38736005bbec325f5",
+                paystackkey: "pk_test_ad39cbe2a4a48182c6ef83a38736005bbec325f5", //process.env.MIX_PAYSTACK_PUBLIC_KEY
                 email: localStorage.getItem('userMail'),
                 amount: 0, //total in naira * 100 = Kobo equivalent 
                 

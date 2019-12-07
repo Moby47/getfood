@@ -46,7 +46,7 @@
                   @click.prevent="shop()"
                   outlined color="#FFA500"
                 >
-                  Enter Kitchen
+                  Get Food
                 </v-btn>
               </v-card-actions>
 
@@ -59,7 +59,7 @@
                     <v-list-item three-line>
                      
                       <v-img
-                     max-width="344"
+                     
                 height="250"
                       src="/images/start.svg"
                       :lazy-src="`/images/black-spinner.gif`"
@@ -84,7 +84,7 @@
                     <v-list-item three-line>
                       <v-img
                   src="/images/home.svg"
-                    max-width="344"
+                    
                   :lazy-src="`/images/black-spinner.gif`"
                 
                 >
@@ -94,54 +94,13 @@
                 
                     <v-card-actions>
                       <span class='text-center'>
-                      <v-btn  text outlined  color="#FFA500" class='mr-1 ' @click.prevent='vendor()'>All Vendors</v-btn>
+                      <v-btn  text outlined  color="#FFA500" class='mr-1 ' @click.prevent='vendor()'>Go To a Vendor</v-btn>
                       </span>
                     </v-card-actions>
-
+<!--
 <v-divider class="mx-4"></v-divider>
 
-  <v-card-title class='text-capitalize'>Latest Vendors</v-card-title>
-<template>
-  <v-card
-    class="mx-auto"
-    max-width="434"
-    tile
-     v-for='ven in vendor_list' v-bind:key='ven.id'
-  >
-   
-   <router-link :to='`/vendor/${ven.name}`'>
-      <v-row
-        align="end"
-        class="fill-height text-center"
-      >
-        <v-col
-          align-self="start"
-          class="pa-0"
-          cols="12"
-        >
-          <v-avatar
-            class="profile ml-2 pl-2"
-            color="grey"
-            size="50"
-            tile
-          >
-            <v-img src="/images/vendor.svg" class=''></v-img>
-          </v-avatar>
-          <v-list-item>
-          <v-list-item-content>
-              <v-list-item-title class="title">{{ven.name.slice(0, 45)}}</v-list-item-title>
-              <v-list-item-subtitle>{{ven.address.slice(0, 45)}}...</v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
-        </v-col>
-      
-      </v-row>
-   </router-link>
-    
-  </v-card>
-</template>
-
-<!--
+ 
     <v-list two-line v-for='ven in vendor_list' v-bind:key='ven.id'>
       <v-list-item @click.prevent='vendor()'>
         <v-list-item-icon>
@@ -150,19 +109,20 @@
 
         
         <v-list-item-content class='ml-2'>
-         <v-list-item-title></v-list-item-title>
-          <v-list-item-subtitle></v-list-item-subtitle>
+         <v-list-item-title>{{ven.name.slice(0, 45)}}</v-list-item-title>
+          <v-list-item-subtitle>{{ven.address.slice(0, 45)}}...</v-list-item-subtitle>
         </v-list-item-content>
       </router-link>
 
       </v-list-item>
     </v-list>
--->
+ >
     <div class='text-center' v-if='vendor_list.length > 0'>
    <v-btn small text icon color='#FFA500' @click.prevent="vendors(pagination.prev_page_url)" :disabled="!pagination.prev_page_url"><v-icon>arrow_back</v-icon></v-btn> 
    <span>{{pagination.current_page}} of {{pagination.last_page}}</span>
    <v-btn small text icon color='#FFA500'  @click.prevent="vendors(pagination.next_page_url)" :disabled="!pagination.next_page_url"><v-icon>arrow_forward</v-icon></v-btn>
   </div>
+-->
 
 <!--more stuff-->
 
@@ -316,7 +276,7 @@
               this.userName = localStorage.getItem('userName') +'.'
             }
 
-            this.vendors();
+         //   this.vendors();
 
           }
     }
