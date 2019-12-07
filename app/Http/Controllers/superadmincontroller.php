@@ -42,6 +42,10 @@ class superadmincontroller extends Controller
         //please query the user model and return the vendor 
         // where name == $vendorname
         //where  status = 1 and verification = 0, paginate by 5, and return
+
+        $vendor = User::where('status', 1)->andwhere('name', $vendorname)->andwhere('verification', 0)->paginate(5);
+
+        return $vendor;
        
     }
 
