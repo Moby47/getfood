@@ -49,12 +49,20 @@ class superadmincontroller extends Controller
        
     }
 
-    public function approve_vendor(){
+    public function approve_vendor($vendorId){
         //query user model and change vendor verification to 1 (0 is unverified, 1 is verified, 2 is rejected)
         //return 1 as a success response, eg: last line is return 1;
+
+        $user = User::where('id', $vendorId)->update(array('verification' => 1));
+
+        if ($user) {
+            return 1;
+        }
+        
        
     }
 
+    
     public function decline_vendor(){
        //query user model and change vendor verification to 2 //meaning rejected (0 is unverified, 1 is verified, 2 is rejected)
         //return 1 as a success response, eg: last line is return 1;
