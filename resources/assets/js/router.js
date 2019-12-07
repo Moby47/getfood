@@ -28,6 +28,8 @@ import notfound from './components/notfound.vue'
 import vendor from './components/vendor.vue'
 
 import superadmindash from './components/admin/superadmindash.vue'
+import payment from './components/admin/payment.vue'
+import verify from './components/admin/verify.vue'
 
 export default new Router({
     mode: 'history',
@@ -205,6 +207,22 @@ export default new Router({
             path: '/super-admin-dashboard',
             name: 'superadmindash',
             component: superadmindash,
+             meta:{
+              //  auth: true
+            }
+        },
+        {
+            path: '/vendor-payment',
+            name: 'payment',
+            component: payment,
+             meta:{
+              //  auth: true
+            }
+        },
+        {
+            path: '/verify-vendor',
+            name: 'verify',
+            component: verify,
              meta:{
               //  auth: true
             }

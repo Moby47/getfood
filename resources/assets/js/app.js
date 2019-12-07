@@ -149,6 +149,7 @@ Vue.component('index', require('./components/index.vue'));
 Vue.component('menubar', require('./components/includes/menubar.vue'));
 Vue.component('vendormenubar', require('./components/includes/vendormenubar.vue'));
 Vue.component('usermenubar', require('./components/includes/usermenubar.vue'));
+Vue.component('superadminmenubar', require('./components/includes/superadminmenubar.vue'));
 Vue.component('favButton', require('./components/includes/favButton.vue'));
 Vue.component('cartAdd', require('./components/includes/cartAdd.vue'));
 Vue.component('cartUpdate', require('./components/includes/cartUpdate.vue'));

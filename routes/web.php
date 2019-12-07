@@ -85,6 +85,14 @@ Route::post('/clear-cart', 'cartcontroller@clearcart');
 //Route::get('/payment-page', 'paymentcontroller@paymentpage'); 
 //Route::post('/pay', 'paymentcontroller@redirectToGateway')->name('pay'); 
 
+
+//Super admin routes
+Route::get('/customer-count', 'superadmincontroller@customer_count');
+Route::get('/vendor-count', 'superadmincontroller@vendor_count');
+Route::get('/all-vendors', 'superadmincontroller@all_vendors');
+Route::get('/vendor-search/{vendorname}', 'superadmincontroller@vendor_search');
+
+
 //don't delete,fixes route bug
 Route::get('/{vue_capture?}', function () {
     return view('welcome');
