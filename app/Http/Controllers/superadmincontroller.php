@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 class superadmincontroller extends Controller
@@ -11,17 +12,26 @@ class superadmincontroller extends Controller
         //please query the user model and return the number of customers as an integer, eg: 7
         //where  status = 0, meaning a customer
 
+       $customers = User::where('status', 0)->count();
+
+       return $customers;
+
     }
 
     public function vendor_count(){
         //please query the user model and return the number of vendors as an integer, eg: 7
         //where status = 1, meaning a vendor
 
+        $users = User::where('status', 1)->count();
+        return $users;
+
     }
 
     public function all_vendors(){
         //please query the user model and return 
         //where  status = 1 and verification = 0, paginate by 5, meaning a vendor who is not verified
+
+        $users = User::where('status', 1)->andwhere('')
     }
 
     public function vendor_search($vendorname){
