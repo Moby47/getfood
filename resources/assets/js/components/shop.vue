@@ -94,7 +94,7 @@
                           border="left"
                           prominent
                         >
-                        Sorry. The Kitchen is Empty.
+                       All Kitchens are Currently Empty.
                         </v-alert>
                       </div>
                     </template>
@@ -385,7 +385,12 @@
                 .then(res => res.json())
                 .then(res=>{
                   this.vendor_list = res;
-                  this.awaitingList = ''
+                  if(res[0] == undefined){
+                    this.awaitingList = 'No Vendor Available..'
+                          }else{
+                            this.awaitingList = ''
+                          }
+                  
                 })
                 .catch(error =>{
                     //off loader text

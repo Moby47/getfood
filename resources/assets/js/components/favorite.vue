@@ -42,7 +42,7 @@
                               border="left"
                               prominent
                             >
-                              No Favorite Food Found. 
+                             You Have No Favorite Food Yet. 
                             </v-alert>
                           </div>
                         </template>

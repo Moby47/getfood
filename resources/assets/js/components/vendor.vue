@@ -292,6 +292,10 @@
                 .then(res => res.json())
                 .then(res=>{
                   this.vendor_list = res;
+                  
+                  if(res[0] == undefined){
+                    this.$toasted.show('No Vendor Available..')
+                          }
                   this.wait = false;
                   this.overlay = !this.overlay
                 })
