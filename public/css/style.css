@@ -2267,10 +2267,7 @@ div.cs-skin-overlay {
 	-webkit-backface-visibility: hidden;
 	backface-visibility: hidden;
 }
-.cs-skin-overlay > span::after,
-.cs-skin-overlay.cs-active > span::after {
 
-}
 .cs-skin-overlay .cs-selected span::after {
 	content: '';
 }
@@ -2296,7 +2293,7 @@ div.cs-skin-overlay {
 	transition: transform 0.4s, opacity 0.4s, visibility 0s 0.4s;
 	-webkit-transition-timing-function: cubic-bezier(0.7,0,0.3,1);
 	transition-timing-function: cubic-bezier(0.7,0,0.3,1);
-	-webkit-appearance: none;`
+	-webkit-appearance: none;
 }
 .cs-skin-overlay.cs-active .cs-options {
 	opacity: 1;
@@ -2513,12 +2510,7 @@ height:60px;
 max-width:30%;
 padding:22px 0 0 0;
 }
-.slider-caption h2{
 
-} 
-.slider-caption span.subtitle{
-
-}
 blockquote{
 font-size:14px;
 line-height:20px;
@@ -2584,9 +2576,7 @@ line-height:40px;
 max-width:50%;
 padding:12px 0 0 0;
 }
-.homenavbar h1{
 
-}
 /* HEADER RIGHT */	
 .navbar_right{
 width:55px;
@@ -2599,18 +2589,7 @@ padding:10px 0 0 0;
 #pages_maincontent{
 top: 15px; 
 }
-.slider-caption{
 
-}
-.slider-caption h2{
-
-} 
-.slider-caption span.subtitle{
-
-} 
-.slider-caption p{
-
-}
 /* PANEL RIGHT AND LEFT */
 .panel {
 width: 85%;
@@ -2649,9 +2628,7 @@ body.with-panel-right-cover .panel-right {
   -webkit-transform: translate3d(-85%, 0, 0);
   transform: translate3d(-85%, 0, 0);
 }
-h2.page_title{
-	
-}
+
 
 .shift{
 	margin-top: 44px;

@@ -164,7 +164,7 @@
                                   this.$router.push({name: "userdashboard"});
                                 }else if (status == 47){
                                   /* For super admin page*/
-                                  this.$router.push({name: "admindash"});
+                                  this.$router.push({name: "superadmindash"});
                                 }
                                 }
 

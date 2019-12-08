@@ -19,7 +19,7 @@
                         >
                       <nav aria-label="breadcrumb ">
                               <ol class="breadcrumb">
-                                <li class="breadcrumb-item active" aria-current="page">Welcome <b>{{userName}} (Super Admin)</b></li>
+                                <li class="breadcrumb-item active" aria-current="page">Welcome <b>{{userName}} </b></li>
                               </ol>
                             </nav>
     </v-card>

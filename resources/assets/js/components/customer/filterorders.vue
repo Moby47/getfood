@@ -68,7 +68,11 @@
                           <v-list-item two-line @click.prevent='check(con)'>
                               <v-list-item-content>
                                 <v-list-item-title>{{con.title}}</v-list-item-title>
-                                <v-list-item-subtitle>{{moment(con.created_at).fromNow()}}</v-list-item-subtitle>
+                                <v-list-item-subtitle>{{moment(con.created_at).fromNow()}}
+                                    <v-btn class="mx-2" fab x-small color="">
+                                        <v-icon>remove_red_eye</v-icon>
+                                      </v-btn>
+                                </v-list-item-subtitle>
                               </v-list-item-content>
                             </v-list-item>
 
@@ -76,7 +80,7 @@
 										
                     
                  
-              <div class='text-center slideUp'>
+              <div class='text-center slideUp' v-show='content.length > 5'>
            <v-btn small text icon color='#FFA500' @click.prevent="fetch(pagination.prev_page_url)" :disabled="!pagination.prev_page_url"><v-icon>arrow_back</v-icon></v-btn> 
            <span>{{pagination.current_page}} of {{pagination.last_page}}</span>
            <v-btn small text icon color='#FFA500'  @click.prevent="fetch(pagination.next_page_url)" :disabled="!pagination.next_page_url"><v-icon>arrow_forward</v-icon></v-btn>

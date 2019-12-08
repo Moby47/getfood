@@ -131,7 +131,7 @@
       </ul>
 
     <span v-if='!empty'>
-          <div class="shop_pagination slideUp" v-if='content.length > 0'>
+          <div class="shop_pagination slideUp" v-if='content.length > 5'>
               <template>
                   <v-card
                     class="mx-auto"
@@ -147,7 +147,7 @@
         </div>
       
           <div class="my-2 text-center" >
-          <v-btn @click.prevent='cart()' outlined color="#FFA500">CONTINUE</v-btn>   
+          <v-btn @click.prevent='cart()' outlined color="#FFA500">GOTO TABLE</v-btn>   
           </div>
 
    </span>

@@ -18,7 +18,7 @@
                       >
                   <nav aria-label="breadcrumb ">
                           <ol class="breadcrumb">
-                            <li class="breadcrumb-item active" aria-current="page">Welcome {{userName}} (Vendor)</li>
+                            <li class="breadcrumb-item active" aria-current="page">Welcome {{userName}}</li>
                           </ol>
                         </nav>
 </v-card>

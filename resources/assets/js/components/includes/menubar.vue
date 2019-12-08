@@ -126,6 +126,8 @@
 
 <script>
 
+import {eventBus} from "../../app.js";
+
  export default {
   
 //share icons
@@ -137,7 +139,7 @@
         status:'',
           sheet: false,
       tiles: [
-        { img: 'restaurant', title: 'Enter Kitchen', link:'/shop' },
+        { img: 'restaurant', title: 'Get Food', link:'/shop' },
         { img: 'fastfood', title: 'Vendors', link:'/vendor'},
         { img: 'favorite', title: 'My Favorites', link:'/favorite'},
         { img: 'perm_device_information', title: 'About Us', link:'/about'},
@@ -165,6 +167,10 @@
                    localStorage.removeItem('userName');
                    localStorage.removeItem('userMail');
                    localStorage.removeItem('userStatus');
+
+                   //clear username from index
+                   eventBus.$emit('clearUsername')
+
                       //clear tempcartid
                        localStorage.removeItem('tempUserCartID');
                        //clear cart count

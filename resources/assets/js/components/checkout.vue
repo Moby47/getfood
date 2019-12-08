@@ -121,7 +121,7 @@
                         </template>
                         
             <!--reset back to select delivery meth-->
-            <h4 class="checkout_title text-capitalize">Choose a Delivery Method</h4>
+            <h4 class="checkout_title ">CHOOSE A DELIVERY METHOD</h4>
             
        <div class="my-2 text-center">
           <v-btn v-if='go == true' 
@@ -214,12 +214,12 @@ import paystack from 'vue-paystack';
                 addText:false,
                 data_load: true,
                 empty:47,
-                charges:'50.00',
+                charges:'00.00',
                 subtotal:0, //total food + 50
                 total:0, //amount in naira
                 ref:'',
 
-                paystackkey: "pk_test_ad39cbe2a4a48182c6ef83a38736005bbec325f5", //process.env.MIX_PAYSTACK_PUBLIC_KEY
+                paystackkey: process.env.MIX_PAYSTACK_PUBLIC_KEY, //process.env.MIX_PAYSTACK_PUBLIC_KEY
                 email: localStorage.getItem('userMail'),
                 amount: 0, //total in naira * 100 = Kobo equivalent 
                 
@@ -420,6 +420,7 @@ import paystack from 'vue-paystack';
         },
         mounted() {
            this.checkout()
+           
         }
     }
 </script>

@@ -54,7 +54,7 @@
                         <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#ffa500"/><text x="50%" y="50%" fill="#ffa500" dy=".3em">32x32</text></svg>
                         <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
                           <strong class="d-block text-gray-dark"><span v-html='totalData'></span></strong>
-                          Total Pay
+                          Total Expenditure
                         </p>
                       </div>
                      
@@ -97,7 +97,7 @@
 
 
                     
-                    <div class='text-center slideUp'>
+                    <div class='text-center slideUp' v-show='content.length > 5'>
                         <v-btn small text icon color='#FFA500' @click.prevent="fetch(pagination.prev_page_url)" :disabled="!pagination.prev_page_url"><v-icon>arrow_back</v-icon></v-btn> 
                         <span>{{pagination.current_page}} of {{pagination.last_page}}</span>
                         <v-btn small text icon color='#FFA500'  @click.prevent="fetch(pagination.next_page_url)" :disabled="!pagination.next_page_url"><v-icon>arrow_forward</v-icon></v-btn>

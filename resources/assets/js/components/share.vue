@@ -19,12 +19,14 @@
     <!--  <p>Sharing is caring..</p> --><h4 class='p-1'></h4>
 
       <ul class="social_share wiggle">
-          <li class='wiggle'><whats-app  :url="url" title="Get Food" scale="3" ></whats-app> <span>WHATSAPP</span></li>
-          <li class='wiggle'> <email  :url="url" subject="Get Food" scale="3"></email> <span>EMAIL</span> </li>
-          <li class='wiggle'> <facebook  :url="url" scale="3"></facebook> <span>FACEBOOK</span> </li>
-          <li class='wiggle'>  <twitter  :url="url" title="Get Food" scale="3"></twitter> <span>TWITTER</span> </li>
-          <li class='wiggle'> <linkedin  :url="url" scale="3"></linkedin> <span>LINKEDIN</span> </li>
-          <li class='wiggle'> <telegram  :url="url" scale="3"></telegram> <span>TELEGRAM</span> </li>
+          <li class='wiggle'><whats-app  :url="url" title="Get Food" scale="3" ></whats-app> </li>
+          <li class='wiggle'> <email  :url="url" subject="Get Food" scale="3"></email>  </li>
+          <li class='wiggle'> <facebook  :url="url" scale="3"></facebook> </li>
+          <li class='wiggle'>  <twitter  :url="url" title="Get Food" scale="3"></twitter>  </li>
+          <li class='wiggle'> <linkedin  :url="url" scale="3"></linkedin>  </li>
+          <li class='wiggle'> <telegram  :url="url" scale="3"></telegram>  </li>
+          <li class='wiggle'> <pinterest  :url="url" scale="3"></pinterest>  </li>
+          <li class='wiggle'> <reddit  :url="url" scale="3"></reddit>  </li>
         </ul>
 
       <div class="close_popup_button"><router-link to='/' class="close-popup">

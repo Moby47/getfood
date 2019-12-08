@@ -94,7 +94,7 @@
                 
                     <v-card-actions>
                       <span class='text-center'>
-                      <v-btn  text outlined  color="#FFA500" class='mr-1 ' @click.prevent='vendor()'>Go To a Vendor</v-btn>
+                      <v-btn  text outlined  color="#FFA500" class='mr-1 ' @click.prevent='vendor()'>Find Vendor</v-btn>
                       </span>
                     </v-card-actions>
 <!--
@@ -159,20 +159,34 @@
 
 
 <script>
+
+import {eventBus} from "../app.js";
+
     export default {
       data: () => ({
         loading: false,
         selection: 1,
         userName:'',
 
-        vendor_list:[],
-        pagination: [],
+      //  vendor_list:[],
+      //  pagination: [],
 
       //menu
-      loggedOut:null,
-        status:''
+     // loggedOut:null,
+     //   status:''
       }),
   
+          created(){
+
+    eventBus.$on('clearUsername', ()=>{
+
+    //clear user name after logout clicked from menubar component
+      console.log('logged out')
+      this.userName = ''
+    })
+
+
+    },
       methods: {
 
         shop(){
@@ -186,7 +200,9 @@
            vendor(){
             this.$router.push({ name: "vendor" })
           },
-          
+
+         
+    /*      
           vendors(page_url){
 
             if(page_url){
@@ -235,42 +251,16 @@
                     }
                      },
 
-                     logout(){
-                        NProgress.start()
-                   localStorage.removeItem('userToken');
-                   localStorage.removeItem('userId');
-                   localStorage.removeItem('userName');
-                   localStorage.removeItem('userMail');
-                   localStorage.removeItem('userStatus');
-                      //clear tempcartid
-                       localStorage.removeItem('tempUserCartID');
-                        //clear cart count
-                        localStorage.removeItem('cart');
-                   //clear cart
-                   if(localStorage.getItem('tempUserCartID')){
-                    var input = {'userId':localStorage.getItem('tempUserCartID')}
-            axios.post('/clear-cart',input).then(res=>{
-                console.log('cart cleared')  
-            })
-            .catch(error =>{
-                console.log(error)    
-               })
-                   }
-              
-                   this.isAuth();
-                   this.loggedOut = true;
-                    NProgress.done();
-                    this.$router.push({name: "index"});
-                    },
-                    //menu
+           */         
 
       },
 
       mounted() {
 
         //menu
-          this.isAuth()
+         // this.isAuth()
 
+         
 
             if(localStorage.getItem('userName')){
               this.userName = localStorage.getItem('userName') +'.'

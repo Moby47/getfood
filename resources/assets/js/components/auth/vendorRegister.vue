@@ -41,10 +41,11 @@
                     </form>
                     
                 </div>
-                <div class="signup_bottom">
+               <!-- <div class="signup_bottom">
                         <v-btn   @click.prevent='register()' outlined color="#FFA500">Back</v-btn>
                     <v-btn @click.prevent='login()' outlined color="#FFA500">Login</v-btn>
                 </div>
+                -->
                 <div class="close_popup_button">
                         <router-link to='/'  class="close-popup"><img src="images/icons/black/menu_close.png" 
                             alt="" title="" /></router-link>

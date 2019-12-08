@@ -33,7 +33,7 @@
                     <main role="main" class="container">
       
                       <form>
-                        <div class="mt-4 form-group">
+                        <div class="mt-4 mb-5 form-group">
                             <v-text-field
                              name='Name' 
                              v-model='ref'
@@ -54,7 +54,7 @@
                       </form>
     
                       <!--search result-->
-                      <h6 class="border-bottom border-gray pb-2 mb-0" v-show='refCon'>Registered Vendor(s)</h6>
+                      <h6 class="border-bottom border-gray pb-2 mb-0" v-show='refCon'>New Vendor(s)</h6>
     
                       <div v-if='empty2' class='text-center alert alert-info'>
                        No Result Found
@@ -85,7 +85,7 @@
     
     
                         <!--all orders-->
-                        <h6 class="border-bottom border-gray pb-2 mb-0">Registered Vendor(s)</h6>
+                        <h6 class="border-bottom border-gray pb-2 mb-0">New Vendor(s)</h6>
     
                         <div v-if='empty' class='text-center alert alert-info'>
                          No New Vendor Found. 
@@ -111,7 +111,7 @@
                           </table>
                         </div>
     
-                         <div class='text-center slideUp'>
+                         <div class='text-center slideUp' v-show='content.length > 5'>
                                       <v-btn small text icon color='#FFA500' @click.prevent="fetch(pagination.prev_page_url)" :disabled="!pagination.prev_page_url"><v-icon>arrow_back</v-icon></v-btn> 
                                       <span>{{pagination.current_page}} of {{pagination.last_page}}</span>
                                       <v-btn small text icon color='#FFA500'  @click.prevent="fetch(pagination.next_page_url)" :disabled="!pagination.next_page_url"><v-icon>arrow_forward</v-icon></v-btn>

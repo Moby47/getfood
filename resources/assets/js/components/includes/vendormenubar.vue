@@ -139,7 +139,7 @@
         { img: 'edit', title: 'Manage Food', link:'/manage-food'},
         { img: 'shopping_cart', title: 'Orders', link:'/orders'},
         { img: 'favorite', title: 'Customer Favorite', link:'/vendor-favorites'},
-        { img: 'restaurant', title: 'Enter Kitchen', link:'/shop' },
+        { img: 'restaurant', title: 'Get Food', link:'/shop' },
         { img: 'fastfood', title: 'Vendors', link:'/vendor'},
       ],
    }),

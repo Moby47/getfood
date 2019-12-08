@@ -110,7 +110,7 @@ Your Table is Empty.
                 </div>
                         
        <div class="my-2 text-center" v-show='cartConCount > 0' >
-          <v-btn @click.prevent='checkout()' outlined color="#FFA500">CONTINUE</v-btn>   
+          <v-btn @click.prevent='checkout()' outlined color="#FFA500">CHECKOUT</v-btn>   
           </div>
    </div>
                 

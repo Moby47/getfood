@@ -9,47 +9,35 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
-<link href="/images/apple-touch-startup-image-320x460.png" media="(device-width: 320px)" rel="apple-touch-startup-image">
-<link href="/images/apple-touch-startup-image-640x920.png" media="(device-width: 320px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
-      
+
 <title>GetFoods</title>
 
     <!-- CSRF Token -->
 <meta name="csrf-token" content="{{ csrf_token() }}">   
 
-<!--home design
-<link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/cover/">
---dash design--
-<link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/offcanvas/">
--->
+ <!--fav icon -->
+ <link rel="icon" href="{{ asset('images/icons/black/food.png') }}">
+
 <!--vuetify material icons-->
 <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
-<!--<link href="/css/app.css" rel="stylesheet" />-->
 
 <!--nprogress-css-->
 <link href="https://unpkg.com/nprogress@0.2.0/nprogress.css" rel="stylesheet" />
+
 <link href="/css/custom.css" rel="stylesheet" />
+
 <link rel="stylesheet" href="/css/style.css">
-<!--
-<link rel="stylesheet" href="/css/landing.css">
--->
+
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800" rel="stylesheet"> 
+
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
- <!--fav icon -->
- <link rel="icon" href="{{ asset('images/icons/black/food.png') }}">
- 
+
  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">  
 
  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/shakrmedia/tuesday@v1.1.0/build/tuesday.min.css" />
 
  <link rel="stylesheet" href="/css/wicked.min.css">
 
- 
-        <!-- Styles -->
-        <style>
-          
-        </style>
     </head>
 
     
@@ -67,14 +55,6 @@
                     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
          <script src="https://unpkg.com/nprogress@0.2.0/nprogress.js"></script>
         <script src="{{asset('/js/app.js')}}"></script>
-
-        <script src="/js/wow.min.js"></script>
-
-	<script>
-		//wow
-new WOW().init();
-
-	</script>
 
 
     </body>

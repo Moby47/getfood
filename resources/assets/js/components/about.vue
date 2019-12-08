@@ -75,7 +75,7 @@
                 
                
  <div class="my-2 text-center">
-              <v-btn  @click.prevent='shop()' outlined color="#FFA500">ENTER KITCHEN</v-btn>
+              <v-btn  @click.prevent='shop()' outlined color="#FFA500">GET FOOD</v-btn>
             </div>
 
            </div>

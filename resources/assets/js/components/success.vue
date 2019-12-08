@@ -10,11 +10,11 @@
       
        <div id="pages_maincontent">
   
-      <div class="page_single layout_fullwidth_padding bounceIn">
+      <div class="page_single layout_fullwidth_padding bounceIn mt-5">
               <div class="success_message">
               <span>Thank You!</span>
-              <img src="/images/icons/black/food.png" alt="" title="" />
-              <p>Your Order <br />Has Been successfully completed.</p>            
+              <img src="/images/icons/black/rocket.png" alt="" title="" />
+              <p>Your Order <br />Has Been successfully completed.</p>   
               </div>
         </div>
         
@@ -39,7 +39,7 @@
 
         data(){
             return {
-
+             
             }
         },
 

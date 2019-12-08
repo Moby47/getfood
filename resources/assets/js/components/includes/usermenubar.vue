@@ -151,7 +151,7 @@
         status:'',
           sheet: false,
       tiles: [
-        { img: 'restaurant', title: 'Enter Kitchen', link:'/shop' },
+        { img: 'restaurant', title: 'Get Food', link:'/shop' },
         { img: 'favorite', title: 'My Favorites', link:'/favorite'},
         { img: 'perm_device_information', title: 'About Us', link:'/about'},
         { img: 'share', title: 'Tell a Friend', link:'/share'},

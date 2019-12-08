@@ -29,32 +29,36 @@
                                       
                                     </ol>
                                   </nav>
+                                  
                         </v-card>
        </template>
 
+       <template>
+          <v-card
+            class="mx-auto"
+            max-width="344"
+          >
+       <form>
+          <div class="mt-4 form-group p-1">
+            <label>Select a Vendor</label>
+<select class="form-control" id="exampleInputEmail1"  v-model='selected'> 
+<option :value='ven.name' v-for='ven in vendor_list' v-bind:key='ven.id'>
+{{ven.name.slice(0, 25)}} - {{ven.address.slice(0, 25)}} 
+</option>
+</select>
+     </div>
+<p class='text-center' v-if='selected' v-show='content.length > 0'> ({{food_count}}) Result Found</p>           
+          
+        </form>
+</v-card>
+       </template>
 
-
-              <v-card
-               class="mx-auto"
-                 max-width="344"
-                 max-height='90'
-               >
-                        <form>
-                            <div class="mt-4 form-group p-1">
-                              <label>Select a Vendor</label>
-       <select class="form-control" id="exampleInputEmail1"  v-model='selected'> 
-        <option :value='ven.name' v-for='ven in vendor_list' v-bind:key='ven.id'>
-          {{ven.name.slice(0, 25)}} - {{ven.address.slice(0, 25)}} 
-        </option>
-        </select>
-                       </div>
-                <p class='text-center' v-if='selected' v-show='content.length > 0'> ({{food_count}}) Result Found</p>           
-                            <br>
-                            <br>
-                          </form>
-
-
-                            <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
+       <template>
+          <v-card
+            class="mx-auto"
+            max-width="344"
+          >
+     <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
                      <div v-if='wait' class='text-center'>
                        <template>
                          <p>Reloading Vendor List.</p>
@@ -76,7 +80,7 @@
                          </transition>
 
               </v-card>
-
+</template>
 
                   <!-- res here-->    
                    <template>
@@ -144,7 +148,7 @@
 
 
     <span v-if='!empty' v-show='selected'>
-       <div class="shop_pagination slideUp" v-if='content.length > 0'>
+       <div class="shop_pagination slideUp" v-if='content.length > 5'>
               <template>
                   <v-card
                     class="mx-auto"
@@ -160,7 +164,7 @@
         </div>
       
           <div class="my-2 text-center" v-if='content.length > 0'>
-          <v-btn @click.prevent='cart()' outlined color="#FFA500">VIEW TABLE</v-btn>   
+          <v-btn @click.prevent='cart()' outlined color="#FFA500">GOTO TABLE</v-btn>   
           </div>
 
    </span>

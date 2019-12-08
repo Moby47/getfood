@@ -165,15 +165,10 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         //for cart package
         Darryldecode\Cart\CartServiceProvider::class,
-
         //mail
         Sichikawa\LaravelSendgridDriver\SendgridTransportServiceProvider::class,
-
-        //paystack
-        Unicodeveloper\Paystack\PaystackServiceProvider::class,
-
         //intervention img
-     //    'Intervention\Image\ImageServiceProvider',
+       'Intervention\Image\ImageServiceProvider',
         /*
          * Package Service Providers...
          */
@@ -240,8 +235,7 @@ return [
         'JWTFactory' => 'Tymon\JWTAuth\Facades\JWTFactory',
          //cart package
          'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
-         'Paystack' => Unicodeveloper\Paystack\Facades\Paystack::class,
-       //  'Image' => 'Intervention\Image\Facades\Image',
+          'Image' => 'Intervention\Image\Facades\Image',
     ],
 
 ];
