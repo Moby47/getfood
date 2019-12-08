@@ -257,10 +257,7 @@
       <div v-if='awaitingList' class='text-center alert alert-info'>
           <template>
               <b> {{awaitingList}} </b>
-             <v-progress-circular 
-             color="orange"
-             indeterminate
-             ></v-progress-circular>
+           
                     </template>
                      </div>
 

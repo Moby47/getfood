@@ -133,7 +133,7 @@
                       class="text-center"
                       cols="12"
                     >
-                    <router-link to='/' >Terms and Use </router-link>  -
+                    <router-link to='/' >Terms and Conditions </router-link>  -
                     <router-link to='/' >Privacy Policy </router-link> 
 
                     </v-col>
