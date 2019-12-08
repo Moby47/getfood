@@ -61,7 +61,7 @@
      <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
                      <div v-if='wait' class='text-center'>
                        <template>
-                         <p>Reloading Vendor List.</p>
+                         <p>Loading Vendor List. Please wait..</p>
                           <v-progress-circular 
                          color="#f2901d"
                          indeterminate
@@ -228,7 +228,9 @@
     cart(){
             this.$router.push({ name: "cart" })
           },
-                fetch(page_url){
+             
+          
+          fetch(page_url){
                   if(page_url){
                   NProgress.start();
                   }else{
@@ -316,13 +318,14 @@
           },
       },
             mounted() {
+              /*
               //get url param #vendorName
       var param = this.$route.params.vendorName;
 
       if (param){
         this.selected = param
         this.fetch()
-      }
+      }*/
              this.vendors()
             }
         }

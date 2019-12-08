@@ -1,7 +1,56 @@
 <template>
   <div class="container">
-      
      
+        <template>
+          <div>
+            <!--floating right-->
+            <v-btn 
+            fab 
+            dark
+            color="#fbc25b"
+            small
+            relative
+            top
+            right
+            fixed
+            @click.prevent='modal()'
+            id='sortBtn'
+              >
+            <v-icon dark>sort</v-icon>
+            </v-btn>
+             <!--tooltip-->
+             <b-tooltip :show.sync="show2" target="sortBtn" placement="bottom">
+                Filter by<strong> Vendor</strong>
+               </b-tooltip>
+                <!--  floating right-->
+                  </div>
+
+
+
+                  <div>
+                      <!--floating left-->
+                      <v-btn 
+                      fab 
+                      dark
+                      color="#fbc25b"
+                      small
+                      relative
+                      bottom
+                      left
+                      fixed
+                      @click.prevent='fetch()'
+                      id='refreshbBtn'
+                        >
+                      <v-icon dark>refresh</v-icon>
+                      </v-btn>
+                      <!--tooltip-->
+                      <b-tooltip :show.sync="show" target="refreshbBtn" placement="top">
+                         Refresh <strong>Food List</strong>
+                        </b-tooltip>
+
+                          <!--  floating left-->
+                            </div>
+              </template>    
    
 <div class="pages">
   <div data-page="shop" class="page no-toolbar no-navbar">
@@ -19,10 +68,12 @@
           <nav aria-label="breadcrumb ">
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item"><router-link to='/'>Home</router-link></li>
-                    <li class="breadcrumb-item active" aria-current="page">Available Food ({{food_count}})</li>
-                   
+                    <li class="breadcrumb-item active" aria-current="page">Available Food ({{food_count}}) </li>
+                    
                   </ol>
                 </nav>
+
+                
       </v-card>
     </template>
                     <!-- ********************************************** empty -->
@@ -43,7 +94,7 @@
                           border="left"
                           prominent
                         >
-                        Sorry, The Kitchen is Empty.
+                        Sorry. The Kitchen is Empty.
                         </v-alert>
                       </div>
                     </template>
@@ -56,11 +107,7 @@
    <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
   <div v-if='data_load' class='text-center'>
     <template>
-        <b> Fetching Food</b>
-       <v-progress-circular 
-       color="orange"
-       indeterminate
-       ></v-progress-circular>
+        <b> Fetching Food. Please Wait..</b>
               </template>
                </div>
       </transition>
@@ -69,12 +116,7 @@
 <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
                   <div v-if='wait' class='text-center'>
                     <template>
-                      <b>Reloading, Please Wait.</b>
-                       <v-progress-circular 
-                      color="#f2901d"
-                      indeterminate
-                      >
-                      </v-progress-circular>
+                      <b>Reloading. please Wait..</b>
                               </template>
                                </div>
                       </transition>
@@ -131,21 +173,39 @@
       </ul>
 
     <span v-if='!empty'>
-          <div class="shop_pagination slideUp" v-if='content.length > 5'>
+
+      <!-- all food pagination-->
+          <div class="shop_pagination slideUp" v-if='currentContent'>
               <template>
                   <v-card
                     class="mx-auto"
                     max-width="344"
-                   
+                    v-if='content.length > 5'
                   >
           <a href="" class="prev_shop" @click.prevent="fetch(pagination.prev_page_url)" :disabled="!pagination.prev_page_url">PREV PAGE</a>
           <span class="shop_pagenr">  <span>{{pagination.current_page}} of {{pagination.last_page}}</span></span>
           <a href="" class="next_shop" @click.prevent="fetch(pagination.next_page_url)" :disabled="!pagination.next_page_url">NEXT PAGE</a>
         </v-card>
       </template>
-
         </div>
-      
+      <!-- all food pagination-->
+
+       <!-- sorted food pagination-->
+       <div class="shop_pagination slideUp" v-if='!currentContent'>
+          <template>
+              <v-card
+                class="mx-auto"
+                max-width="344"
+                v-if='content.length > 5'
+              >
+      <a href="" class="prev_shop" @click.prevent="sorted(pagination.prev_page_url)" :disabled="!pagination.prev_page_url">PREV PAGE</a>
+      <span class="shop_pagenr">  <span>{{pagination.current_page}} of {{pagination.last_page}}</span></span>
+      <a href="" class="next_shop" @click.prevent="sorted(pagination.next_page_url)" :disabled="!pagination.next_page_url">NEXT PAGE</a>
+    </v-card>
+  </template>
+    </div>
+  <!-- sorted food pagination-->
+
           <div class="my-2 text-center" >
           <v-btn @click.prevent='cart()' outlined color="#FFA500">GOTO TABLE</v-btn>   
           </div>
@@ -163,6 +223,59 @@
   </div>
 </div>
       
+   <!--Overlay-->
+   <template>
+      <div class="text-center">
+        <v-overlay :value="overlay">
+          <v-progress-circular indeterminate size="64"></v-progress-circular>
+        </v-overlay>
+      </div>
+      </template>
+      <!--Overlay-->
+
+
+ <!--modal-->
+ <div>
+    <b-modal id="modal" scrollable title="" hide-footer >
+     
+        <template>
+            <v-card
+              class="mx-auto"
+              max-width="500"
+              tile
+            >
+             
+            <form>
+                <div class="mt-4 form-group p-1">
+                  <label>Select a Vendor</label>
+      <select class="form-control" id="exampleInputEmail1"  v-model='selected'> 
+      <option :value='ven.name' v-for='ven in vendor_list' v-bind:key='ven.id'>
+      {{ven.name.slice(0, 25)}} - {{ven.address.slice(0, 25)}} 
+      </option>
+      </select>
+
+      <div v-if='awaitingList' class='text-center alert alert-info'>
+          <template>
+              <b> {{awaitingList}} </b>
+             <v-progress-circular 
+             color="orange"
+             indeterminate
+             ></v-progress-circular>
+                    </template>
+                     </div>
+
+        
+           </div>      
+              </form>
+
+            </v-card>
+          </template>
+
+    </b-modal>
+  </div>
+<!--modal-->
+
+
 <floatings
 :toggle_cart=toggle_cart
 >
@@ -184,11 +297,28 @@
               data_load: true,
               pagination: [],
               food_count:0,
-              toggle_cart:false
+              toggle_cart:false,
+
+              currentContent:true,
+
+              //vendor
+              selected:'',
+              vendor_list:[],
+              awaitingList:'',
+              overlay:false,
+              
+              show:false,
+              show2:null,
           }
       },
   
       methods: {
+
+        modal(){
+          this.$bvModal.show('modal')
+          this.show2 = true
+         },
+
        cart(){
             this.$router.push({ name: "cart" })
           },
@@ -196,6 +326,9 @@
   fetch(page_url){
                   if(page_url){
                   NProgress.start();
+                  }else{
+                    this.overlay = !this.overlay
+                    this.show = !this.show
                   }
                 var   page_url = page_url || '/get-foods';
       
@@ -203,6 +336,7 @@
                 .then(res => res.json())
                 .then(res=>{
                   this.content = res.data;
+                  this.overlay = !this.overlay
              //     console.log(this.content)
                   //to determine if obj is empty 
                           //console.log(res.data[0]);
@@ -210,6 +344,7 @@
                               this.empty = true;
                           }else{
                               this.empty = false;
+                              this.currentContent = true
                           }
                   //to determine if obj is empty
                   this.makePagination(res.meta, res.links);
@@ -219,6 +354,7 @@
                 })
                 .catch(error =>{
                     //off loader
+                    this.overlay = !this.overlay
                     this.data_load = false;
                       this.wait = true;
                       setTimeout(func=>{
@@ -242,8 +378,63 @@
           this.pagination = pagination;
               },
 
+              vendors(){
+                //fetch vendor list
+                this.awaitingList = 'Loading Vendor List. Please wait..'
+                fetch('/vendor-list')
+                .then(res => res.json())
+                .then(res=>{
+                  this.vendor_list = res;
+                  this.awaitingList = ''
+                })
+                .catch(error =>{
+                    //off loader text
+                    console.log(error)
+                      setTimeout(func=>{
+                          this.vendors();
+                      },2000)     
+                    })
+                },
             
-      },
+
+                sorted(page_url){
+                  
+                  if(page_url){
+                  NProgress.start();
+                  }else{
+                    this.awaitingList ="Cheking "+this.selected+"'s Kitchen. Please wait"
+                  }
+                  var   page_url = page_url || '/vendor-food/'+this.selected;
+      
+                fetch(page_url)
+                .then(res => res.json())
+                .then(res=>{
+                 
+                   //to determine if obj is empty 
+                          //console.log(res.data[0]);
+                          if(res.data[0] == undefined){
+                            this.$toasted.show(this.selected +"'s Kitchen is Empty")
+                          }else{
+                            this.content = res.data;
+                            this.currentContent = false
+                            this.$bvModal.hide('modal')
+                            this.food_count = res.meta.total;
+                          }
+                  //to determine if obj is empty
+                  this.awaitingList = ''
+                  this.makePagination(res.meta, res.links);
+                  NProgress.done();
+                })
+                .catch(error =>{
+                    //off loader
+                    alert('An Error Occured, Please Try Again..')
+                    console.log(error)
+                      NProgress.done();        
+                    })
+              },
+
+      }, //meth end
+
            //watch data load
            watch : {
             content(a,b){
@@ -253,10 +444,19 @@
               this.data = true;
              }
           },
+
+          //watch and load when a vendor is selected
+          selected(a,b){
+             if(a){
+              console.log('selected vendor')
+              this.sorted()
+             }
+          },
       },
       
       mounted() {
           this.fetch()
+          this.vendors()
       },
      
       

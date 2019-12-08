@@ -38,6 +38,8 @@
             <p class=""><v-btn @click.prevent='vreg()' outlined color="#FFA500" >Register as Vendor</v-btn></p>
             <v-btn @click.prevent='login()' outlined color="#FFA500">Login</v-btn>         
         </div>
+
+       
                 </div>
               
                 <div class="close_popup_button">

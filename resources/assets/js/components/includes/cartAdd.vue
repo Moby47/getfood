@@ -85,6 +85,7 @@ data: function() {
                         .then(res=>{
                             if(res.data == 1){
                         this.text='Food added to Table!'
+                       
                         this.snackbar = true;
                         this.isAdded = !this.isAdded
                         //get user cart count 

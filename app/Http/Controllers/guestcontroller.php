@@ -23,13 +23,6 @@ class guestcontroller extends Controller
     //method to get food list for customers to see and buy
     public function get_foods(){
 
-      /*testing multi update //please ignore
- $temp = temp::where('tempId','=',343097208)
-  ->select('tempId','id','foodId','vendorId','qty','amt','foodName')->get();
-  $itemTypes = [9, 5];
-
-*/
-
         $food = food::orderby('id','desc')->select('id','amt','qty','title','img','vendor_id',
         'vendor_name','vendorAddress')->paginate(5);
         return foodres::collection($food);
