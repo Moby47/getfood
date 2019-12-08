@@ -62,11 +62,6 @@
                      <div v-if='wait' class='text-center'>
                        <template>
                          <p>Loading Vendor List. Please wait..</p>
-                          <v-progress-circular 
-                         color="#f2901d"
-                         indeterminate
-                         >
-                         </v-progress-circular>
                                  </template>
                                   </div>
                          </transition>

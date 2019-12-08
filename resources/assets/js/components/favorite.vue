@@ -59,12 +59,8 @@
                           <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
                      <div v-if='wait' class='text-center'>
                        <template>
-                         <p>Reloading Favorite Food(s).</p>
-                          <v-progress-circular 
-                         color="#f2901d"
-                         indeterminate
-                         >
-                         </v-progress-circular>
+                         <p>Reloading Your Favorite Food(s)..</p>
+                          
                                  </template>
                                   </div>
                          </transition>
