@@ -70,12 +70,12 @@
         <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
                      <div v-if='wait' class='text-center'>
                        <template>
-                         <p>Reloading Food Info.</p>
-                          <v-progress-circular 
+                         <p>Reloading Food Info. Please Wait..</p>
+                        <!--  <v-progress-circular 
                          color="#f2901d"
                          indeterminate
                          >
-                         </v-progress-circular>
+                         </v-progress-circular> -->
                                  </template>
                                   </div>
                          </transition>
@@ -155,12 +155,12 @@
                  <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
                      <div v-if='TotalWait' class='text-center'>
                        <template>
-                         <p>Reloading Payment Info.</p>
-                          <v-progress-circular 
+                         <p>Reloading Payment Info. Please Wait..</p>
+                           <!--  <v-progress-circular 
                          color="#f2901d"
                          indeterminate
                          >
-                         </v-progress-circular>
+                         </v-progress-circular> -->
                                  </template>
                                   </div>
                          </transition>

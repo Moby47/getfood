@@ -116,7 +116,7 @@
 <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
                   <div v-if='wait' class='text-center'>
                     <template>
-                      <b>Reloading. please Wait..</b>
+                      <b>Reloading Food List. please Wait..</b>
                               </template>
                                </div>
                       </transition>

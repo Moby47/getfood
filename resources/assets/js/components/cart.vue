@@ -87,12 +87,8 @@ Your Table is Empty.
 <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
              <div v-if='wait' class='text-center'>
                <template>
-                 <b>Reloding, Please Wait.</b>
-                  <v-progress-circular 
-                 color="#f2901d"
-                 indeterminate
-                 >
-                 </v-progress-circular>
+                 <b>Reloading Food(s). Please Wait..</b>
+                 
                          </template>
                           </div>
                  </transition>

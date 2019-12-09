@@ -24,9 +24,9 @@
 <!--nprogress-css-->
 <link href="https://unpkg.com/nprogress@0.2.0/nprogress.css" rel="stylesheet" />
 
-<link href="/css/custom.css" rel="stylesheet" />
+<link href="/css/custom.min.css" rel="stylesheet" />
 
-<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/style.min.css">
 
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800" rel="stylesheet"> 
 
@@ -58,6 +58,21 @@
 
         <script src="{{asset('/js/app.js')}}"></script>
 
-
+<!-- register service worker -->
+<script type="text/javascript">
+    // Initialize the service worker
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/serviceworker.js', {
+            scope: '.' 
+        }).then(function (registration) {
+            // Registration was successful
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        }, function (err) {
+            // registration failed 
+            console.log('ServiceWorker registration failed: ', err);
+        });
+    }
+</script>
+ <!-- register service worker-->
     </body>
 </html>
