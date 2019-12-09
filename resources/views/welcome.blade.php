@@ -10,6 +10,17 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
+        <!-- Web Application Manifest -->
+        <link rel="manifest" href="/manifest.json">
+
+  <!-- Fix - for safari / ios -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="GetFood">
+
+  <meta name="msapplication-TileColor" content="#fff">
+  <meta name="theme-color" content="#ffb42e">
+
 <title>GetFoods</title>
 
     <!-- CSRF Token -->

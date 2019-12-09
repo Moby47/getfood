@@ -14,15 +14,15 @@ var filesToCache = [
     'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',
     'https://cdn.jsdelivr.net/gh/shakrmedia/tuesday@v1.1.0/build/tuesday.min.css',
 
-    /*
-    '/images/icons/icon-48x48.png',
-    '/images/icons/icon-96x96.png',
-    '/images/icons/icon-144x144.png',
-    '/images/icons/icon-192x192.png',
-    '/images/icons/icon-256x256.png',
-    '/images/icons/icon-384x384.png',
-    '/images/icons/icon-512x512.png',
-    */
+    
+    '/images/app-icons/app-icon-48x48.png',
+    '/images/app-icons/app-icon-96x96.png',
+    '/images/app-icons/app-icon-144x144.png',
+    '/images/app-icons/app-icon-192x192.png',
+    '/images/app-icons/app-icon-256x256.png',
+    '/images/app-icons/app-icon-384x384.png',
+    '/images/app-icons/app-icon-512x512.png',
+    
 
     '/bullet.png',
     '/confused.gif',

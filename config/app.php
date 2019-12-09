@@ -168,7 +168,7 @@ return [
         //mail
         Sichikawa\LaravelSendgridDriver\SendgridTransportServiceProvider::class,
         //intervention img
-     //  'Intervention\Image\ImageServiceProvider',
+       'Intervention\Image\ImageServiceProvider',
         /*
          * Package Service Providers...
          */
@@ -235,7 +235,7 @@ return [
         'JWTFactory' => 'Tymon\JWTAuth\Facades\JWTFactory',
          //cart package
          'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
-     //     'Image' => 'Intervention\Image\Facades\Image',
+         'Image' => 'Intervention\Image\Facades\Image',
     ],
 
 ];
