@@ -75,6 +75,9 @@ self.addEventListener("fetch", event => {
     event.respondWith(
         caches.match(event.request)
             .then(response => {
+                //put dynamic data
+                
+                //return to App
                 return response || fetch(event.request);
             })
             .catch(() => {
