@@ -334,7 +334,10 @@
                 .then(res=>{
                   this.content = res.data;
                   this.overlay = !this.overlay
-             //     console.log(this.content)
+                // console.log(this.content)
+
+                 
+
                   //to determine if obj is empty 
                           //console.log(res.data[0]);
                           if(res.data[0] == undefined){
@@ -459,6 +462,62 @@
       mounted() {
           this.fetch()
           this.vendors()
+
+           //put dynamic data
+           
+var dbPromise = idb.open('posts-store', 1, function (db) {
+    if (!db.objectStoreNames.contains('posts')) {
+      db.createObjectStore('posts', {keyPath: 'id'});
+    }
+  });
+  //write
+            var   page_url = '/get-foods';
+      
+                fetch(page_url)
+                .then(res => res.json())
+                .then(res=>{
+                  var data = res.data
+                 console.log(data)
+                 
+                for(var key in data){
+                   console.log(key)
+                    dbPromise
+                .then(function(db) {
+                  var tx = db.transaction('posts', 'readwrite');
+                  var store = tx.objectStore('posts');
+                  store.put(data[key]);
+                  return tx.complete;
+                });
+                }
+  //read
+  
+                })
+    
+
+      /*        
+  if (event.request.url.indexOf(url) > -1) {
+    event.respondWith(fetch(event.request)
+      .then(function (res) {
+         console.log(res)
+        var clonedRes = res.clone();
+        clonedRes.json()
+          .then(function(data) {
+            for (var key in data) {
+              dbPromise
+                .then(function(db) {
+                  var tx = db.transaction('posts', 'readwrite');
+                  var store = tx.objectStore('posts');
+                  store.put(data[key]);
+                  return tx.complete;
+                });
+            }
+          });
+        return res;
+      })
+    );
+  }
+  */
+                 //put dynamic data
       },
      
       
