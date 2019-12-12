@@ -1,3 +1,5 @@
+importScripts('/js/idb.js');
+
 var staticCacheName = "pwa-GF" + new Date().getTime();
 var filesToCache = [
     '/',
@@ -41,9 +43,16 @@ var filesToCache = [
     'https://code.jquery.com/jquery-3.3.1.slim.min.js',
     'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js',
     'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js',
+    '/js/idb.js',
     '/js/app.js',
     
 ];
+
+var dbPromise = idb.open('posts-store', 1, function (db) {
+    if (!db.objectStoreNames.contains('posts')) {
+      db.createObjectStore('posts', {keyPath: 'id'});
+    }
+  });
 
 // Cache on install
 self.addEventListener("install", event => {
@@ -72,11 +81,13 @@ self.addEventListener('activate', event => {
 
 // Serve from Cache
 self.addEventListener("fetch", event => {
+
     event.respondWith(
         caches.match(event.request)
             .then(response => {
-                //put dynamic data
-                
+
+               
+
                 //return to App
                 return response || fetch(event.request);
             })
@@ -84,5 +95,7 @@ self.addEventListener("fetch", event => {
                 return caches.match('/');
               //  return caches.match('offline');
             })
-    )
+            
+       )//respondWith
+       
 });
