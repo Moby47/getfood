@@ -68,8 +68,8 @@
           <nav aria-label="breadcrumb ">
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item"><router-link to='/'>Home</router-link></li>
-                    <li class="breadcrumb-item active" aria-current="page">Available Food ({{food_count}}) </li>
-                    
+                    <li  class="breadcrumb-item active" aria-current="page">Available Food ({{food_count}}) </li>
+                   <v-btn @click='test()'>test</v-btn> 
                   </ol>
                 </nav>
 
@@ -332,10 +332,14 @@
                 fetch(page_url)
                 .then(res => res.json())
                 .then(res=>{
-                  this.content = res.data;
+                  var data = this.content = res.data;
                   this.overlay = !this.overlay
                 // console.log(this.content)
-
+                
+           
+                  this.clearAndWriteData('foods',data)
+                 
+                 
                  
 
                   //to determine if obj is empty 
@@ -438,6 +442,170 @@
                     })
               },
 
+              //indexed DB methods
+
+
+
+              readAllData(table){ //param = name of store/table
+                console.log('connecting to db')
+                var dbPromise = idb.open('getFoodsDB', 1, function (db) {
+              if (!db.objectStoreNames.contains(table)) {
+                db.createObjectStore(table, {keyPath: 'id'});
+              }
+            });
+              console.log('db ready for reading..')
+             //read
+            function readAllData(table){
+            return dbPromise.then(function(db){
+              var tx = db.transaction(table, 'readonly');
+              var store = tx.objectStore(table);
+              return store.getAll();
+            })
+            .catch(error =>{
+                    console.log(error)    
+                    })
+          }
+          //call fetch indexeddb
+          readAllData(table)
+          .then(function(data){
+            //gives a promise to use data
+            console.log('fetched from inDB:',data)
+          })
+          .catch(error =>{
+                    console.log(error)    
+                    })
+              }, //end readAllData
+
+
+
+            clearAndWriteData(table,data){
+              console.log('connecting to db')
+                var dbPromise = idb.open('getFoodsDB', 1, function (db) {
+              if (!db.objectStoreNames.contains(table)) {
+                db.createObjectStore(table, {keyPath: 'id'});
+              }
+            });
+              console.log('db ready to be cleared..')
+              console.log('data to save:',data)
+          //clear data func
+          function clearAllData(table){
+              return dbPromise
+              .then(function(db){
+                  var tx = db.transaction(table, 'readwrite');
+                  var store = tx.objectStore(table);
+                  store.clear();
+                  return tx.complete
+                })
+                .catch(error =>{
+                    console.log(error)    
+                    })
+              }
+              //call clear
+              clearAllData(table)
+              .then(function(){
+                //gives a promise 
+                console.log('cleared')
+
+                for(var key in data){
+              console.log('data keys:',key)
+                dbPromise
+            .then(function(db) {
+              var tx = db.transaction(table, 'readwrite');
+              var store = tx.objectStore(table);
+              for(var i in data){
+              store.put(data[i]);
+              }
+              console.log('saved to indexdb')
+              return tx.complete;
+            })
+            .catch(error =>{
+                    console.log(error)    
+                    })
+            }
+              })
+              .catch(error =>{
+                    console.log(error)    
+                    })
+            }, //end of clear and write data
+
+
+              test(){
+                console.log(1)
+                var dbPromise = idb.open('getFoodsDB', 1, function (db) {
+              if (!db.objectStoreNames.contains('sync-posts')) {
+                db.createObjectStore('sync-posts', {keyPath: 'id'});
+                console.log('created store sync-post')
+              }else{
+                console.log('containts sync-post')
+              }
+              });
+              console.log(2)
+              /*
+              if ('serviceWorker' in navigator && 'SyncManager' in window) {
+    navigator.serviceWorker.ready
+      .then(function(sw) {
+        var post = {
+          id: new Date().toISOString(),
+          title: 'title',
+          location: 'location'
+        };
+
+       
+
+        function syncData(table, post){
+
+       
+              /*
+          console.log('data to save:',post)
+            for(var key in post){
+              console.log('post keys:',key)
+                dbPromise
+            .then(function(db) {
+              console.log('transacting...')
+              var tx = db.transaction(table, 'readwrite');
+              console.log('creating obj store...')
+              var store = tx.objectStore(table);
+              console.log('putting...')
+              for(var i in post){
+                console.log('post index',post[i])
+              store.put(post);
+              }
+              console.log('saved to indexdb')
+              return tx.complete;
+            })
+            .catch(error =>{
+                    console.log(error)    
+                    })
+            }*
+        }
+       // syncData('foods',post)
+        //prep for sync
+        
+     //     .then(function() {
+      //      return sw.sync.register('sync-new-posts');
+       //   })
+      //    .then(function() {
+      //      console.log('Saved for syncing!')
+      //    })
+      //    .catch(function(err) {
+       //     console.log(err);
+      //    });
+      });
+  } else {
+    //send data to back end as usual
+  this.sendData();
+  }
+  */       
+   }, //end test
+
+   sendData(){
+     console.log('send to backend as usual (network). sw or sync not supported by browser')
+    //send data to back end as usual
+   },
+               //indexed DB methods
+
+
+
       }, //meth end
 
            //watch data load
@@ -462,62 +630,7 @@
       mounted() {
           this.fetch()
           this.vendors()
-
-           //put dynamic data
-           
-var dbPromise = idb.open('posts-store', 1, function (db) {
-    if (!db.objectStoreNames.contains('posts')) {
-      db.createObjectStore('posts', {keyPath: 'id'});
-    }
-  });
-  //write
-            var   page_url = '/get-foods';
       
-                fetch(page_url)
-                .then(res => res.json())
-                .then(res=>{
-                  var data = res.data
-                 console.log(data)
-                 
-                for(var key in data){
-                   console.log(key)
-                    dbPromise
-                .then(function(db) {
-                  var tx = db.transaction('posts', 'readwrite');
-                  var store = tx.objectStore('posts');
-                  store.put(data[key]);
-                  return tx.complete;
-                });
-                }
-  //read
-  
-                })
-    
-
-      /*        
-  if (event.request.url.indexOf(url) > -1) {
-    event.respondWith(fetch(event.request)
-      .then(function (res) {
-         console.log(res)
-        var clonedRes = res.clone();
-        clonedRes.json()
-          .then(function(data) {
-            for (var key in data) {
-              dbPromise
-                .then(function(db) {
-                  var tx = db.transaction('posts', 'readwrite');
-                  var store = tx.objectStore('posts');
-                  store.put(data[key]);
-                  return tx.complete;
-                });
-            }
-          });
-        return res;
-      })
-    );
-  }
-  */
-                 //put dynamic data
       },
      
       

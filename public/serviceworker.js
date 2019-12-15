@@ -48,10 +48,13 @@ var filesToCache = [
     
 ];
 
-var dbPromise = idb.open('posts-store', 1, function (db) {
-    if (!db.objectStoreNames.contains('posts')) {
-      db.createObjectStore('posts', {keyPath: 'id'});
+var dbPromise = idb.open('getFoodsDB', 1, function (db) {
+    if (!db.objectStoreNames.contains('foods')) {
+      db.createObjectStore('foods', {keyPath: 'id'});
     }
+    if (!db.objectStoreNames.contains('sync-posts')) {
+        db.createObjectStore('sync-posts', {keyPath: 'id'});
+      }
   });
 
 // Cache on install
@@ -85,9 +88,6 @@ self.addEventListener("fetch", event => {
     event.respondWith(
         caches.match(event.request)
             .then(response => {
-
-               
-
                 //return to App
                 return response || fetch(event.request);
             })
@@ -95,7 +95,9 @@ self.addEventListener("fetch", event => {
                 return caches.match('/');
               //  return caches.match('offline');
             })
-            
        )//respondWith
        
 });
+
+
+
