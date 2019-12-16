@@ -444,7 +444,7 @@
 
               readAllData(table){ //param = name of store/table
                 console.log('connecting to db')
-                var dbPromise = idb.open('getFoodsDB', 1, function (db) {
+                var dbPromise = idb.open('getFoodsDB', 14, function (db) {
               if (!db.objectStoreNames.contains(table)) {
                 db.createObjectStore(table, {keyPath: 'id'});
               }
@@ -479,7 +479,7 @@
 
             clearAndWriteData(table,data){
               console.log('connecting to db')
-                var dbPromise = idb.open('getFoodsDB', 1, function (db) {
+                var dbPromise = idb.open('getFoodsDB', 14, function (db) {
               if (!db.objectStoreNames.contains(table)) {
                 db.createObjectStore(table, {keyPath: 'id'});
               }
@@ -532,7 +532,7 @@
 
 
               postSync(){
-                var dbPromise = idb.open('getFoodsDB', 1, function (db) {
+                var dbPromise = idb.open('getFoodsDB', 14, function (db) {
               if (!db.objectStoreNames.contains('sync-posts')) {
                 db.createObjectStore('sync-posts', {keyPath: 'id'});
                 console.log('created store sync-post')
@@ -550,37 +550,34 @@
 
         function saveData(table, post){
 
-          console.log('data to save:',post)
-                dbPromise
-            .then(function(db) {
-              console.log('transacting...')
-              var tx = db.transaction(table, 'readwrite');
-              console.log('creating obj store...')
-              var store = tx.objectStore(table);
-              console.log('putting...')
-              for(var i in post){
-              store.put(post);
-              }
-              console.log('saved to indexdb')
-              return tx.complete;
-            })
-            .catch(error =>{
-                    console.log(error)    
-                    })
-        }
-        saveData('sync-posts',post).then(function() {
+   return   dbPromise
+  .then(function(db) {
+    var tx = db.transaction(table, 'readwrite');
+    var store = tx.objectStore(table);
+    for(var i in post){
+    store.put(post);
+    }
+    return tx.complete;
+  })
+  .catch(error =>{
+          console.log(error)    
+          })
+}
+
+saveData('sync-posts',post)  
+
+          .then(function() {
             return sw.sync.register('sync-new-posts');
           })
           .then(function() {
-            console.log('Saved for syncing!')
+            console.log('sync reged');
           })
           .catch(function(err) {
             console.log(err);
           });
       });
   } else {
-    //send data to back end as usual
-  this.sendData();
+    sendData();
   }
          
    }, //end postSync

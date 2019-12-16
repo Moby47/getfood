@@ -48,7 +48,7 @@ var filesToCache = [
     
 ];
 
-var dbPromise = idb.open('getFoodsDB', 1, function (db) {
+var dbPromise = idb.open('getFoodsDB', 14, function (db) {
     if (!db.objectStoreNames.contains('foods')) {
       db.createObjectStore('foods', {keyPath: 'id'});
     }
