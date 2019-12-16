@@ -69,7 +69,7 @@
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item"><router-link to='/'>Home</router-link></li>
                     <li  class="breadcrumb-item active" aria-current="page">Available Food ({{food_count}}) </li>
-                   <v-btn @click='test()'>test</v-btn> 
+                   <v-btn @click='postSync()'>postSync</v-btn> 
                   </ol>
                 </nav>
 
@@ -336,12 +336,6 @@
                   this.overlay = !this.overlay
                 // console.log(this.content)
                 
-           
-                  this.clearAndWriteData('foods',data)
-                 
-                 
-                 
-
                   //to determine if obj is empty 
                           //console.log(res.data[0]);
                           if(res.data[0] == undefined){
@@ -442,8 +436,10 @@
                     })
               },
 
-              //indexed DB methods
 
+
+
+              //*****************************************************indexed DB methods
 
 
               readAllData(table){ //param = name of store/table
@@ -475,6 +471,9 @@
                     console.log(error)    
                     })
               }, //end readAllData
+
+
+
 
 
 
@@ -529,18 +528,17 @@
             }, //end of clear and write data
 
 
-              test(){
-                console.log(1)
+
+
+
+              postSync(){
                 var dbPromise = idb.open('getFoodsDB', 1, function (db) {
               if (!db.objectStoreNames.contains('sync-posts')) {
                 db.createObjectStore('sync-posts', {keyPath: 'id'});
                 console.log('created store sync-post')
-              }else{
-                console.log('containts sync-post')
               }
               });
-              console.log(2)
-              /*
+              
               if ('serviceWorker' in navigator && 'SyncManager' in window) {
     navigator.serviceWorker.ready
       .then(function(sw) {
@@ -550,15 +548,9 @@
           location: 'location'
         };
 
-       
+        function saveData(table, post){
 
-        function syncData(table, post){
-
-       
-              /*
           console.log('data to save:',post)
-            for(var key in post){
-              console.log('post keys:',key)
                 dbPromise
             .then(function(db) {
               console.log('transacting...')
@@ -567,7 +559,6 @@
               var store = tx.objectStore(table);
               console.log('putting...')
               for(var i in post){
-                console.log('post index',post[i])
               store.put(post);
               }
               console.log('saved to indexdb')
@@ -576,30 +567,26 @@
             .catch(error =>{
                     console.log(error)    
                     })
-            }*
         }
-       // syncData('foods',post)
-        //prep for sync
-        
-     //     .then(function() {
-      //      return sw.sync.register('sync-new-posts');
-       //   })
-      //    .then(function() {
-      //      console.log('Saved for syncing!')
-      //    })
-      //    .catch(function(err) {
-       //     console.log(err);
-      //    });
+        saveData('sync-posts',post).then(function() {
+            return sw.sync.register('sync-new-posts');
+          })
+          .then(function() {
+            console.log('Saved for syncing!')
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
       });
   } else {
     //send data to back end as usual
   this.sendData();
   }
-  */       
-   }, //end test
+         
+   }, //end postSync
 
    sendData(){
-     console.log('send to backend as usual (network). sw or sync not supported by browser')
+     alert('send to backend as usual (network). sw or sync not supported by browser')
     //send data to back end as usual
    },
                //indexed DB methods
@@ -630,7 +617,7 @@
       mounted() {
           this.fetch()
           this.vendors()
-      
+      //this.clearAndWriteData('foods',data)
       },
      
       

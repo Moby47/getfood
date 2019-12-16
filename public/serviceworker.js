@@ -101,3 +101,41 @@ self.addEventListener("fetch", event => {
 
 
 
+
+self.addEventListener('sync', function(event) {
+    console.log('[Service Worker] Background syncing', event);
+    if (event.tag === 'sync-new-posts') {
+      console.log('[Service Worker] Syncing new Posts');
+    /*  event.waitUntil(
+        readAllData('sync-posts')
+          .then(function(data) {
+            for (var dt of data) {
+              fetch('https://pwagram-99adf.firebaseio.com/posts.json', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                  id: dt.id,
+                  title: dt.title,
+                  location: dt.location,
+                  image: 'https://firebasestorage.googleapis.com/v0/b/pwagram-99adf.appspot.com/o/sf-boat.jpg?alt=media&token=19f4770c-fc8c-4882-92f1-62000ff06f16'
+                })
+              })
+                .then(function(res) {
+                  console.log('Sent data', res);
+                  if (res.ok) {
+                    deleteItemFromData('sync-posts', dt.id); // Isn't working correctly!
+                  }
+                })
+                .catch(function(err) {
+                  console.log('Error while sending data', err);
+                });
+            }
+  
+          })
+      );*/
+    }
+  });
+  
