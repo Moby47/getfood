@@ -21,6 +21,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 //Auth routes
 Route::get('/forgot-password', 'customauthcontroller@password');
 Route::Post('/login-user', 'customauthcontroller@login');
@@ -102,4 +103,5 @@ Route::get('/{vue_capture?}', function () {
   })->where('vue_capture', '[\/\w\.-]*');
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+Route::POST('/test-sync', 'guestcontroller@test');

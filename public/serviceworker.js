@@ -101,16 +101,31 @@ self.addEventListener("fetch", event => {
 
 
 
+  //read
+  function readAllData(table){
+    return dbPromise.then(function(db){
+      var tx = db.transaction(table, 'readonly');
+      var store = tx.objectStore(table);
+      return store.getAll();
+    })
+    .catch(error =>{
+            console.log(error)    
+            })
+  }
 
 self.addEventListener('sync', function(event) {
     console.log('[Service Worker] Background syncing', event);
     if (event.tag === 'sync-new-posts') {
       console.log('[Service Worker] Syncing new Posts');
-    /*  event.waitUntil(
+      //fetch post strored for sync
+      //post it (send to db)
+      //delete awaiting sync //clear db if res ==ok
+      event.waitUntil(
         readAllData('sync-posts')
           .then(function(data) {
+            console.log('read Sync Posts');
             for (var dt of data) {
-              fetch('https://pwagram-99adf.firebaseio.com/posts.json', {
+              fetch('/test-sync', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
@@ -119,14 +134,14 @@ self.addEventListener('sync', function(event) {
                 body: JSON.stringify({
                   id: dt.id,
                   title: dt.title,
-                  location: dt.location,
-                  image: 'https://firebasestorage.googleapis.com/v0/b/pwagram-99adf.appspot.com/o/sf-boat.jpg?alt=media&token=19f4770c-fc8c-4882-92f1-62000ff06f16'
-                })
+                  location: dt.location, })
               })
                 .then(function(res) {
+                  console.log('Sync Posted');
                   console.log('Sent data', res);
                   if (res.ok) {
-                    deleteItemFromData('sync-posts', dt.id); // Isn't working correctly!
+                    console.log('Sync Posts deleted');
+                   // deleteItemFromData('sync-posts', dt.id); // Isn't working correctly!
                   }
                 })
                 .catch(function(err) {
@@ -135,7 +150,7 @@ self.addEventListener('sync', function(event) {
             }
   
           })
-      );*/
+      );
     }
   });
   

@@ -178,5 +178,7 @@ public function vendorFood($vendor){
       }
 */
 
-
+public function test(Request $request){
+  return $request;
+  }
 }
