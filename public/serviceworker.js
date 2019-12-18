@@ -126,6 +126,8 @@ self.addEventListener('sync', function(event) {
             console.log('read Sync Posts');
             for (var dt of data) {
               fetch('/test-sync', {
+                
+
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
@@ -134,7 +136,8 @@ self.addEventListener('sync', function(event) {
                 body: JSON.stringify({
                   id: dt.id,
                   title: dt.title,
-                  location: dt.location, })
+                  location: dt.location, 
+            })
               })
                 .then(function(res) {
                   console.log('Sync Posted');
