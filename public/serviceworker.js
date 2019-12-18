@@ -101,6 +101,9 @@ self.addEventListener("fetch", event => {
 
 
 
+
+// ****************** lISTEN FOR NETWORK AND [POST] *****
+
   //read
   function readAllData(table){
     return dbPromise.then(function(db){
@@ -125,6 +128,7 @@ self.addEventListener('sync', function(event) {
           .then(function(data) {
             console.log('read Sync Posts');
             for (var dt of data) {
+              // fetch('https://testdb-5a8d4.firebaseio.com/posts.json', {
               fetch('/test-sync', {
                 method: 'POST',
                 headers: {
@@ -132,9 +136,9 @@ self.addEventListener('sync', function(event) {
                   'Accept': 'application/json'
                 },
                 body: JSON.stringify({
-                  id: dt.id,
-                  title: dt.title,
-                  location: dt.location, })
+                  age: dt.id,
+                  id: dt.title,
+                  name: dt.location, })
               })
                 .then(function(res) {
                   console.log('Sync Posted');
@@ -154,3 +158,5 @@ self.addEventListener('sync', function(event) {
     }
   });
   
+
+  // ****************** lISTEN FOR NETWORK AND [POST] *****

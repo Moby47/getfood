@@ -12,6 +12,7 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        //
+        //allow url, no csrf token needed
+        'http://localhost:8000/test-sync',
     ];
 }

@@ -586,7 +586,7 @@ saveData('sync-posts',post)
      alert('send to backend as usual (network). sw or sync not supported by browser')
     //send data to back end as usual
    },
-               //indexed DB methods
+               // ************************indexed DB methods
 
 
 
