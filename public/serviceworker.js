@@ -26,13 +26,13 @@ var filesToCache = [
     '/images/app-icons/app-icon-512x512.png',
     
 
-    '/bullet.png',
-    '/confused.gif',
-    '/black-spinner.gif',
-    '/home.svg',
-    '/start.svg',
-    '/vendor.svg',
-    '/loader.gif',
+    '/images/bullet.png',
+    '/images/confused.gif',
+    '/images/black-spinner.gif',
+    '/images/home.svg',
+    '/images/start.svg',
+    '/images/vendor.svg',
+    '/images/loader.gif',
     '/images/icons/black/food.png',
     '/images/icons/black/love.png',
     '/images/icons/black/rocket.png',
@@ -101,6 +101,9 @@ self.addEventListener("fetch", event => {
 
 
 
+
+// ****************** lISTEN FOR NETWORK AND [POST] *****
+
   //read
   function readAllData(table){
     return dbPromise.then(function(db){
@@ -125,6 +128,7 @@ self.addEventListener('sync', function(event) {
           .then(function(data) {
             console.log('read Sync Posts');
             for (var dt of data) {
+              // fetch('https://testdb-5a8d4.firebaseio.com/posts.json', {
               fetch('/test-sync', {
                 
 
@@ -134,10 +138,9 @@ self.addEventListener('sync', function(event) {
                   'Accept': 'application/json'
                 },
                 body: JSON.stringify({
-                  id: dt.id,
-                  title: dt.title,
-                  location: dt.location, 
-            })
+                  age: dt.id,
+                  id: dt.title,
+                  name: dt.location, })
               })
                 .then(function(res) {
                   console.log('Sync Posted');
@@ -157,3 +160,5 @@ self.addEventListener('sync', function(event) {
     }
   });
   
+
+  // ****************** lISTEN FOR NETWORK AND [POST] *****

@@ -69,7 +69,7 @@
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item"><router-link to='/'>Home</router-link></li>
                     <li  class="breadcrumb-item active" aria-current="page">Available Food ({{food_count}}) </li>
-                   <v-btn @click='postSync()'>postSync</v-btn> 
+                  
                   </ol>
                 </nav>
 
@@ -350,15 +350,23 @@
                   this.food_count = res.meta.total;
                   NProgress.done();
                 })
+                .then(res=>{
+                  console.log('in here')
+                //  console.log(this.content)
+                  setTimeout(func=>{
+                    this.clearAndWriteData('foods',this.content)
+                      },7000)
+                })
                 .catch(error =>{
+                  console.log(error)
                     //off loader
-                    this.overlay = !this.overlay
+                    this.overlay = false
                     this.data_load = false;
                       this.wait = true;
-                      setTimeout(func=>{
-                          this.fetch();
-                      },2000)
-                      NProgress.done();        
+                      NProgress.done();   
+                      console.log(22222222222222222)
+                      //offline data
+                      this.readAllData('foods')
                     })
                     
                
@@ -463,9 +471,12 @@
           }
           //call fetch indexeddb
           readAllData(table)
-          .then(function(data){
+          .then(res=>{
             //gives a promise to use data
-            console.log('fetched from inDB:',data)
+            console.log('called read')
+            console.log('read data',res)
+            this.content = res
+            console.log('fetched from inDB:',this.content)
           })
           .catch(error =>{
                     console.log(error)    
@@ -586,7 +597,7 @@ saveData('sync-posts',post)
      alert('send to backend as usual (network). sw or sync not supported by browser')
     //send data to back end as usual
    },
-               //indexed DB methods
+               // ************************indexed DB methods
 
 
 
