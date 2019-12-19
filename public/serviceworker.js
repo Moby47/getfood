@@ -52,8 +52,8 @@ var dbPromise = idb.open('getFoodsDB', 14, function (db) {
     if (!db.objectStoreNames.contains('foods')) {
       db.createObjectStore('foods', {keyPath: 'id'});
     }
-    if (!db.objectStoreNames.contains('sync-posts')) {
-        db.createObjectStore('sync-posts', {keyPath: 'id'});
+    if (!db.objectStoreNames.contains('sync-fav')) {
+        db.createObjectStore('sync-fav', {keyPath: 'id'});
       }
   });
 

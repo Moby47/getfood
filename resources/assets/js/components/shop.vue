@@ -155,6 +155,7 @@
         
           <favButton
           :id=con.id
+          :online=online
           >
           </favButton>
 
@@ -309,6 +310,8 @@
               
               show:false,
               show2:null,
+
+              online:null
           }
       },
   
@@ -629,7 +632,17 @@ saveData('sync-posts',post)
       mounted() {
           this.fetch()
           this.vendors()
-      //this.clearAndWriteData('foods',data)
+          var online = navigator.onLine; 
+            if(online){
+                //online
+                console.log('on')
+                this.online = true;
+            }else{
+                //offline
+                console.log('off')
+                this.online = false;
+                
+            }
       },
      
       

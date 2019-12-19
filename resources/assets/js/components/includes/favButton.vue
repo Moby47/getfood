@@ -1,10 +1,19 @@
 <template>
    <div> 
-    <a href="#" v-if="isFavorited" data-popup=".popup-social" class="mr-1 open-popup shopfav" @click.prevent='unFavorite(id)'>
-                <img src="images/icons/black/menu_close.png" alt="" title="" /></a>
-
-                <a href="#" v-else data-popup=".popup-social" class="mr-1 open-popup shopfav pulse" @click.prevent='Favorite(id)'>
-                   <v-img src="images/icons/black/love.png" alt="" title=""></v-img></a>
+       <span v-if='online'>
+            <a href="#" v-if="isFavorited" data-popup=".popup-social" class="mr-1 open-popup shopfav" @click.prevent='unFavorite(id)'>
+                    <img src="/images/icons/black/menu_close.png" alt="" title="" /></a>
+    
+                    <a href="#" v-else data-popup=".popup-social" class="mr-1 open-popup shopfav pulse" @click.prevent='Favorite(id)'>
+                       <v-img src="/images/icons/black/love.png" alt="" title=""></v-img></a>
+       </span>
+    <span v-else>
+            <a href="#" v-if="isFavorited" data-popup=".popup-social" class="mr-1 open-popup shopfav" @click.prevent='unFavoriteSync(id)'>
+                    <img src="/images/icons/black/menu_close.png" alt="" title="" /></a>
+    
+                    <a href="#" v-else data-popup=".popup-social" class="mr-1 open-popup shopfav pulse" @click.prevent='FavoriteSync(id)'>
+                       <v-img src="/images/icons/black/love.png" alt="" title=""></v-img></a>
+    </span>
 
                         <template>
                             <v-snackbar
@@ -27,7 +36,7 @@
 <script>
     export default {
 
-        props: ['id'],
+        props: ['id','online'],
 //
 data: function() {
     return {
@@ -41,7 +50,7 @@ data: function() {
         methods: {
             Favorite(id) {
                 this.isFavorited = true
-                    //this.$toasted.clear();  var online = navigator.onLine; 
+                    //this.$toasted.clear();  
                    // this.loading = true;
                    var check = localStorage.getItem('userId');
                     if(check){
@@ -125,6 +134,141 @@ data: function() {
                       })
             },
 
+
+            
+            FavoriteSync(id) {
+                console.log('saving fav for later')
+                this.isFavorited = true
+                    
+                   var check = localStorage.getItem('userId');
+                    if(check){
+                        console.log('old user')
+                        NProgress.start()
+                        //Id exists, send both User and Post Id to DB
+                        var userId = check;
+                        var foodId = id;
+        
+        
+                        var dbPromise = idb.open('getFoodsDB', 14, function (db) {
+              if (!db.objectStoreNames.contains('sync-fav')) {
+                db.createObjectStore('sync-fav', {keyPath: 'id'});
+                console.log('created store sync-post')
+              }
+              });
+              
+              if ('serviceWorker' in navigator && 'SyncManager' in window) {
+    navigator.serviceWorker.ready
+      .then(function(sw) {
+        
+        var input = {id: new Date().toISOString(),'userId':userId, 'foodId':foodId};
+        console.log(input)
+        function saveData(table, input){
+            console.log(table,input)
+   return   dbPromise
+  .then(function(db) {
+    var tx = db.transaction(table, 'readwrite');
+    var store = tx.objectStore(table);
+    for(var i in input){
+    store.put(input);
+    }
+    return tx.complete;
+  })
+  .catch(error =>{
+          console.log(error)    
+          })
+}
+console.log('call SD func')
+saveData('sync-fav',input)  
+
+          .then(function() {
+            return sw.sync.register('sync-fav-tag');
+          })
+          .then(function() {
+            console.log('sync saved');
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
+      });
+  } else {
+    alert('Ofline Mode: Not supported');
+  }
+  NProgress.done();    
+
+
+
+
+                    }else{
+
+
+
+
+                        NProgress.start();
+                        
+        
+                    console.log('new user')
+                        NProgress.start()
+                        
+                       //create id for user  
+                    var userId = Math.floor(Math.random()*1000);
+                    //store locally
+                    localStorage.setItem('userId',userId);
+                    var foodId = id;
+        
+        
+                        var dbPromise = idb.open('getFoodsDB', 14, function (db) {
+              if (!db.objectStoreNames.contains('sync-fav')) {
+                db.createObjectStore('sync-fav', {keyPath: 'id'});
+                console.log('created store sync-post')
+              }
+              });
+              
+              if ('serviceWorker' in navigator && 'SyncManager' in window) {
+    navigator.serviceWorker.ready
+      .then(function(sw) {
+        
+        var input = {id: new Date().toISOString(),'userId':userId, 'foodId':foodId};
+        console.log(input)
+        function saveData(table, input){
+            console.log(table,input)
+   return   dbPromise
+  .then(function(db) {
+    var tx = db.transaction(table, 'readwrite');
+    var store = tx.objectStore(table);
+    for(var i in input){
+    store.put(input);
+    }
+    return tx.complete;
+  })
+  .catch(error =>{
+          console.log(error)    
+          })
+}
+console.log('call SD func')
+saveData('sync-fav',input)  
+
+          .then(function() {
+            return sw.sync.register('sync-fav-tag');
+          })
+          .then(function() {
+            console.log('sync saved');
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
+      });
+  } else {
+    alert('Ofline Mode: Not supported');
+  }
+  NProgress.done();    
+
+                    }
+            },
+
+        },
+
+        mounted(){
+            
         }
     }
 </script>
