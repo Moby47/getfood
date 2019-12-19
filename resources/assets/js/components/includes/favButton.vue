@@ -41,7 +41,7 @@ data: function() {
         methods: {
             Favorite(id) {
                 this.isFavorited = true
-                    //this.$toasted.clear();
+                    //this.$toasted.clear();  var online = navigator.onLine; 
                    // this.loading = true;
                    var check = localStorage.getItem('userId');
                     if(check){

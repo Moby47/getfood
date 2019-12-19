@@ -5,6 +5,7 @@
           <div>
             <!--floating right-->
             <v-btn 
+            :disabled='offline'
             fab 
             dark
             color="#fbc25b"
@@ -103,7 +104,7 @@
                     </template>
                               </span>
       
-                               <!--loading -->
+                               <!--loading 
    <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
   <div v-if='data_load' class='text-center'>
     <template>
@@ -111,8 +112,8 @@
               </template>
                </div>
       </transition>
-                                    
-           <!--loading temp-->
+                            -->        
+           <!--loading temp
 <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
                   <div v-if='wait' class='text-center'>
                     <template>
@@ -120,7 +121,7 @@
                               </template>
                                </div>
                       </transition>
-           
+         -->  
 
     <div class="page_single layout_fullwidth_padding">
       
@@ -174,13 +175,13 @@
 
     <span v-if='!empty'>
 
-      <!-- all food pagination-->
+      <!-- all food pagination ****************************************** v-if='content.length > 5' not 1-->
           <div class="shop_pagination slideUp" v-if='currentContent'>
               <template>
                   <v-card
                     class="mx-auto"
                     max-width="344"
-                    v-if='content.length > 5'
+                    v-if='food_count > 5'
                   >
           <a href="" class="prev_shop" @click.prevent="fetch(pagination.prev_page_url)" :disabled="!pagination.prev_page_url">PREV PAGE</a>
           <span class="shop_pagenr">  <span>{{pagination.current_page}} of {{pagination.last_page}}</span></span>
@@ -196,7 +197,7 @@
               <v-card
                 class="mx-auto"
                 max-width="344"
-                v-if='content.length > 5'
+                v-if='food_count > 5'
               >
       <a href="" class="prev_shop" @click.prevent="sorted(pagination.prev_page_url)" :disabled="!pagination.prev_page_url">PREV PAGE</a>
       <span class="shop_pagenr">  <span>{{pagination.current_page}} of {{pagination.last_page}}</span></span>
@@ -228,6 +229,8 @@
       <div class="text-center">
         <v-overlay :value="overlay">
           <v-progress-circular indeterminate size="64"></v-progress-circular>
+          <br>
+          Getting Food...
         </v-overlay>
       </div>
       </template>
@@ -290,12 +293,12 @@
           return {
               content:[],
               empty:false,
-              wait:false,
-              data_load: true,
+            //  wait:false,
+             // data_load: true,
               pagination: [],
-              food_count:0,
+              food_count:'0',
               toggle_cart:false,
-
+              offline:false,
               currentContent:true,
 
               //vendor
@@ -333,7 +336,7 @@
                 .then(res => res.json())
                 .then(res=>{
                   var data = this.content = res.data;
-                  this.overlay = !this.overlay
+                  this.overlay = false
                 // console.log(this.content)
                 
                   //to determine if obj is empty 
@@ -346,13 +349,11 @@
                           }
                   //to determine if obj is empty
                   this.makePagination(res.meta, res.links);
-                  this.wait = false;
+                 // this.wait = false;
                   this.food_count = res.meta.total;
                   NProgress.done();
                 })
                 .then(res=>{
-                  console.log('in here')
-                //  console.log(this.content)
                   setTimeout(func=>{
                     this.clearAndWriteData('foods',this.content)
                       },7000)
@@ -361,12 +362,15 @@
                   console.log(error)
                     //off loader
                     this.overlay = false
-                    this.data_load = false;
-                      this.wait = true;
+                   // this.data_load = false;
+                     // this.wait = true;
                       NProgress.done();   
-                      console.log(22222222222222222)
+                      
                       //offline data
                       this.readAllData('foods')
+                      this.food_count = '-'
+                      this.$toasted.show("Offline Mode");
+                      this.offline = true
                     })
                     
                
@@ -608,7 +612,7 @@ saveData('sync-posts',post)
             content(a,b){
              if(a){
               //data content loaded, it is safe to display
-              this.data_load = false;
+            //  this.data_load = false;
               this.data = true;
              }
           },

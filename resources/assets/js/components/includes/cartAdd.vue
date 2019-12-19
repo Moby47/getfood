@@ -3,7 +3,7 @@
 <div>
     <span v-if='stash > 0'>
         <div class="item_qnty_shop">
-                <form id="myformad" method="POST" action="#">
+                <form  method="POST" action="#">
               <input :disabled='qty==1' type="button" value="-" class="qntyminusshop" field="quantity" @click.prevent='decre()'/>
                     <input type="text" name="quantity" :value="qty" class="qntyshop" />
                     <input type="button" value="+" class="qntyplusshop" field="quantity" @click.prevent='incre()'/>
