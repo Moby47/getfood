@@ -55,6 +55,9 @@ var dbPromise = idb.open('getFoodsDB', 14, function (db) {
     if (!db.objectStoreNames.contains('sync-fav')) {
         db.createObjectStore('sync-fav', {keyPath: 'id'});
       }
+      if (!db.objectStoreNames.contains('sync-unfav')) {
+        db.createObjectStore('sync-unfav', {keyPath: 'id'});
+      }
   });
 
 // Cache on install

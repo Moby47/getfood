@@ -38,8 +38,8 @@
 
         props: ['id','online'],
 //
-data: function() {
-    return {
+data(){
+          return {
         snackbar: false,
         text: '',
         timeout: 3000,
@@ -135,7 +135,67 @@ data: function() {
             },
 
 
-            
+
+
+unFavoriteSync(id){
+
+    this.isFavorited = false
+                NProgress.start();
+
+               var userId =  localStorage.getItem('userId',userId);
+                var foodId = id;
+
+    var dbPromise = idb.open('getFoodsDB', 14, function (db) {
+              if (!db.objectStoreNames.contains('sync-unfav')) {
+                db.createObjectStore('sync-unfav', {keyPath: 'id'});
+                console.log('created store sync-post')
+              }
+              });
+              
+              if ('serviceWorker' in navigator && 'SyncManager' in window) {
+    navigator.serviceWorker.ready
+      .then(function(sw) {
+        
+        var input = {id: new Date().toISOString(),'userId':userId, 'foodId':foodId};
+        console.log(input)
+
+        function saveData(table, input){
+            console.log(table,input)
+   return   dbPromise
+  .then(function(db) {
+    var tx = db.transaction(table, 'readwrite');
+    var store = tx.objectStore(table);
+    for(var i in input){
+    store.put(input);
+    }
+    return tx.complete;
+  })
+  .catch(error =>{
+          console.log(error)    
+          })
+}
+console.log('call SD func')
+saveData('sync-unfav',input)  
+
+          .then(function() {
+            return sw.sync.register('sync-unfav-tag');
+          })
+          .then(res=> {
+            console.log('sync saved');
+            alert('This food will be removed from favorites...')
+            NProgress.done(); 
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
+      });
+  } else {
+    alert('Ofline Mode: Not supported');
+  }
+    
+},
+
+
             FavoriteSync(id) {
                 console.log('saving fav for later')
                 this.isFavorited = true
@@ -180,11 +240,12 @@ data: function() {
 console.log('call SD func')
 saveData('sync-fav',input)  
 
-          .then(function() {
+          .then(res=> {
             return sw.sync.register('sync-fav-tag');
           })
-          .then(function() {
+          .then(res=> {
             console.log('sync saved');
+            alert('This food will be added to favorites...')
           })
           .catch(function(err) {
             console.log(err);
@@ -250,8 +311,9 @@ saveData('sync-fav',input)
           .then(function() {
             return sw.sync.register('sync-fav-tag');
           })
-          .then(function() {
+          .then(res=> {
             console.log('sync saved');
+            alert('This food will be added to favorites...')
           })
           .catch(function(err) {
             console.log(err);
