@@ -32,6 +32,7 @@ var filesToCache = [
     '/images/home.svg',
     '/images/start.svg',
     '/images/vendor.svg',
+    '/images/wifi.svg',
     '/images/loader.gif',
     '/images/icons/black/food.png',
     '/images/icons/black/love.png',
@@ -321,4 +322,63 @@ self.addEventListener('sync', function(event) {
 });
 
 
-// ****************** lISTEN FOR NETWORK AND [POST UNFAV] *****
+// ****************** lISTEN FOR NETWORK AND [POST TOCART] *****
+
+
+
+// ****************** lISTEN FOR NETWORK AND [POST REMOVE FROM CART] *****
+
+ 
+self.addEventListener('sync', function(event) {
+  console.log('[Service Worker] Background syncing', event);
+  if (event.tag === 'sync-removeFromCart-tag') {
+    console.log('[Service Worker] Syncing......');
+    //fetch post stored for sync
+    //post it (send to db)
+    //delete awaiting sync //clear db if res ==ok
+    event.waitUntil(
+      readAllData('sync-removeFromCart')
+        .then(function(data) {
+          console.log('read sync-removeFromCart');
+          for (var dt of data) {
+            // fetch('https://testdb-5a8d4.firebaseio.com/posts.json', {
+            fetch('/remove-from-cart', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              },
+              body: JSON.stringify({
+                userId: dt.userId,
+                foodId: dt.foodId,
+             })
+            })
+              .then(function(res) {
+                console.log('Sent data', res);
+                if (res.ok) {
+                  console.log('Sync data deleted');
+
+                       //call clear
+              clearAllData('sync-removeFromCart')
+              .then(function(){
+                //gives a promise 
+                console.log('cleared')
+              })
+              .catch(error =>{
+                    console.log(error)    
+                    })
+
+                }
+              })
+              .catch(function(err) {
+                console.log('Error while sending data', err);
+              });
+          }
+
+        })
+    );
+  }
+});
+
+
+// ****************** lISTEN FOR NETWORK AND [POST REMOVE FROM CART] *****

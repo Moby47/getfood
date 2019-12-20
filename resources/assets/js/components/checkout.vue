@@ -42,7 +42,7 @@
 
                 <!-- ********************************************** empty -->
                 <span v-show='empty < 1'>
-                    <div  class='text-center alert alert-info'>
+                    <div  class='text-center alert alert-primary'>
                Your Table is Empty. 
                        </div>
 
@@ -69,14 +69,24 @@
               <!--loading temp-->
         <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
                      <div v-if='wait' class='text-center'>
-                       <template>
-                         <p>Reloading Food Info. Please Wait..</p>
-                        <!--  <v-progress-circular 
-                         color="#f2901d"
-                         indeterminate
-                         >
-                         </v-progress-circular> -->
-                                 </template>
+                       <template> <br>
+                 <span class='alert alert-primary'>Internet Connection is needed</span>
+                 <br><br> 
+                   <v-list-item three-line>
+                      <v-img
+                height="350"
+                  src="/images/wifi.svg"
+                  :lazy-src="`/images/black-spinner.gif`"
+                >
+                </v-img>
+                    </v-list-item>
+                        <br> <br>
+                 <div class="my-2 text-center"  >
+                  
+          <v-btn @click.prevent='refresh()' outlined color="#FFA500">RELOAD</v-btn>   
+          
+          </div> <br> <br>
+                         </template>
                                   </div>
                          </transition>
 
@@ -152,18 +162,18 @@
                        
                 </span>
 
-                 <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
+                <!--  <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
                      <div v-if='TotalWait' class='text-center'>
                        <template>
                          <p>Reloading Payment Info. Please Wait..</p>
-                           <!--  <v-progress-circular 
+                            <v-progress-circular 
                          color="#f2901d"
                          indeterminate
                          >
-                         </v-progress-circular> -->
+                         </v-progress-circular> 
                                  </template>
                                   </div>
-                         </transition>
+                         </transition>-->
                 
                 </v-card>
                </template>
@@ -349,6 +359,11 @@ import paystack from 'vue-paystack';
             console.log("Payment closed")
           },
 
+        refresh(){
+          this.fetch()
+          this.getSumTotal()
+        },
+        
             fetch(){
                   fetch('/checkout'+'/'+ localStorage.getItem('tempUserCartID'))
                   .then(res => res.json())
@@ -364,7 +379,7 @@ import paystack from 'vue-paystack';
                         this.wait = true;
                         setTimeout(func=>{
                             this.fetch();
-                        },2000)     
+                        },3000)     
                       })
 
                 },//
@@ -388,7 +403,7 @@ import paystack from 'vue-paystack';
                         setTimeout(func=>{
                           this.TotalWait = true;
                             this.getSumTotal();
-                        },2000)     
+                        },3000)     
                       })
                 },
 

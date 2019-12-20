@@ -84,7 +84,7 @@
                     max-width="344"
                    
                   >
-                  <div v-if='empty' class='text-center alert alert-info'>
+                  <div v-if='empty' class='text-center alert alert-primary'>
                         Sorry. This Kitchen is Empty.
                              </div>   
 

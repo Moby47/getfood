@@ -136,7 +136,10 @@ data: function() {
               });
 
                 var input = {id: new Date().toISOString(),'foodId':con.id, 'userId':localStorage.getItem('tempUserCartID'),'qty':this.qty};
-                
+
+                   this.text = 'Food queued for addition to table...'
+          this.snackbar = true
+
     navigator.serviceWorker.ready
       .then(function(sw) {
         
@@ -167,7 +170,7 @@ saveData('sync-addToCart',input)
           })
           .then(res=> {
             console.log('sync saved');
-            alert('This food will be added to cart when internet connection is detected...')
+           // alert('This food will be added to cart when internet connection is detected...')
           })
           .catch(function(err) {
             console.log(err);
@@ -212,6 +215,9 @@ this.overlay = false
               });
 
 
+ this.text = 'Food queued for removal from table...'
+          this.snackbar = true
+
     navigator.serviceWorker.ready
       .then(function(sw) {
         
@@ -241,7 +247,7 @@ saveData('sync-removeFromCart',input)
           })
           .then(res=> {
             console.log('sync saved');
-            alert('This food will be removed from the cart when internet connection is detected...')
+            //alert('This food will be removed from the cart when internet connection is detected...')
           })
           .catch(function(err) {
             console.log(err);

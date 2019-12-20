@@ -153,13 +153,18 @@ unFavoriteSync(id){
               });
               
               if ('serviceWorker' in navigator && 'SyncManager' in window) {
+
+                this.text = 'Food queued for removal from favorites...'
+          this.snackbar = true
+
     navigator.serviceWorker.ready
       .then(function(sw) {
         
         var input = {id: new Date().toISOString(),'userId':userId, 'foodId':foodId};
-        console.log(input)
+        console.log(input) 
 
         function saveData(table, input){
+          
             console.log(table,input)
    return   dbPromise
   .then(function(db) {
@@ -182,12 +187,12 @@ saveData('sync-unfav',input)
           })
           .then(res=> {
             console.log('sync saved');
-            alert('This food will be removed from favorites when internet connection is detected...')
             NProgress.done(); 
           })
           .catch(function(err) {
             console.log(err);
           });
+          
       });
   } else {
     alert('Ofline Mode: Not supported');
@@ -217,6 +222,9 @@ saveData('sync-unfav',input)
               });
               
               if ('serviceWorker' in navigator && 'SyncManager' in window) {
+                     this.text = 'Food queued for addition to favorites...'
+          this.snackbar = true
+
     navigator.serviceWorker.ready
       .then(function(sw) {
         
@@ -246,7 +254,7 @@ saveData('sync-fav',input)
           })
           .then(res=> {
             console.log('sync saved');
-            alert('This food will be added to favorites when internet connection is detected...')
+          //  alert('This food will be added to favorites when internet connection is detected...')
           })
           .catch(function(err) {
             console.log(err);
@@ -286,6 +294,10 @@ saveData('sync-fav',input)
               });
               
               if ('serviceWorker' in navigator && 'SyncManager' in window) {
+
+                   this.text = 'Food queued for addition to favorites...'
+          this.snackbar = true
+
     navigator.serviceWorker.ready
       .then(function(sw) {
         
@@ -314,7 +326,7 @@ saveData('sync-fav',input)
           })
           .then(res=> {
             console.log('sync saved');
-            alert('This food will be added to favorites when internet connection is detected...')
+          //  alert('This food will be added to favorites when internet connection is detected...')
           })
           .catch(function(err) {
             console.log(err);

@@ -184,7 +184,7 @@
                   <v-card
                     class="mx-auto"
                     max-width="344"
-                    v-if='food_count > 5'
+                    v-if='food_count > 10'
                   >
           <a href="" class="prev_shop" @click.prevent="fetch(pagination.prev_page_url)" :disabled="!pagination.prev_page_url">PREV PAGE</a>
           <span class="shop_pagenr">  <span>{{pagination.current_page}} of {{pagination.last_page}}</span></span>
@@ -200,7 +200,7 @@
               <v-card
                 class="mx-auto"
                 max-width="344"
-                v-if='food_count > 5'
+                v-if='food_count > 10'
               >
       <a href="" class="prev_shop" @click.prevent="sorted(pagination.prev_page_url)" :disabled="!pagination.prev_page_url">PREV PAGE</a>
       <span class="shop_pagenr">  <span>{{pagination.current_page}} of {{pagination.last_page}}</span></span>
@@ -260,7 +260,7 @@
       </option>
       </select>
 
-      <div v-if='awaitingList' class='text-center alert alert-info'>
+      <div v-if='awaitingList' class='text-center alert alert-primary'>
           <template>
               <b> {{awaitingList}} </b>
            

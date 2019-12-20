@@ -86,9 +86,23 @@ Your Table is Empty.
       <!--loading temp-->
 <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
              <div v-if='wait' class='text-center'>
-               <template>
-                 <b>Reloading Food(s). Please Wait..</b>
-                 
+               <template> <br>
+                 <span class='alert alert-primary'>Internet Connection is needed to proceed</span>
+                 <br><br> 
+                   <v-list-item three-line>
+                      <v-img
+                height="350"
+                  src="/images/wifi.svg"
+                  :lazy-src="`/images/black-spinner.gif`"
+                >
+                </v-img>
+                    </v-list-item>
+                        <br> <br>
+                 <div class="my-2 text-center"  >
+                  
+          <v-btn @click.prevent='refresh()' outlined color="#FFA500">RELOAD</v-btn>   
+          
+          </div> <br> <br>
                          </template>
                           </div>
                  </transition>
@@ -125,6 +139,8 @@ Your Table is Empty.
     <div class="text-center">
       <v-overlay :value="overlay">
         <v-progress-circular indeterminate size="64"></v-progress-circular>
+        <br>
+        Loading Table...
       </v-overlay>
     </div>
   </template>
@@ -163,6 +179,14 @@ import {eventBus} from "../app.js";
         },
 
         methods: {
+
+          refresh(){
+
+            this.fetch()
+            this.countCartCon()
+
+          },
+
           shop(){
             this.$router.push({ name: "shop" })
           },
@@ -181,9 +205,8 @@ import {eventBus} from "../app.js";
                       //off loader
                       this.data_load = false;
                         this.wait = true;
-                        setTimeout(func=>{
-                            this.fetch();
-                        },2000)     
+                            this.$toasted.show("No Internet connection found...");
+                           
                       })
 
                 },
@@ -198,9 +221,7 @@ import {eventBus} from "../app.js";
                       })
                   .catch(error =>{
                     this.overlay = false
-                        setTimeout(func=>{
-                            this.countCartCon();
-                        },2000)     
+                         
                       })
 
                 },
@@ -242,8 +263,22 @@ import {eventBus} from "../app.js";
         },
 
         mounted() {
-            this.fetch()
-            this.countCartCon()
+
+            var online = navigator.onLine; 
+            if(online){
+                // online
+                console.log('not online')
+                 this.fetch()
+             this.countCartCon()
+
+            }else{
+              this.$toasted.show("Offline mode...");
+                 this.data_load = false;
+                        this.wait = true;
+                        this.cartConCount ='-'
+                return;
+            }
+           
         }
     }
 </script>

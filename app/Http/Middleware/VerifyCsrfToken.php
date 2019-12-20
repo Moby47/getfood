@@ -16,6 +16,7 @@ class VerifyCsrfToken extends Middleware
         'http://localhost:8000/add-favorite',
         'http://localhost:8000/remove-favorite',
         'http://localhost:8000/add-to-cart',
+        'http://localhost:8000/remove-from-cart',
         
     ];
 }
