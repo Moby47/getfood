@@ -58,14 +58,14 @@
             class="mx-auto"
             max-width="344"
           >
-     <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
+    <!-- <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
                      <div v-if='wait' class='text-center'>
                        <template>
                          <p>Loading Vendor List. Please wait..</p>
                                  </template>
                                   </div>
                          </transition>
-
+-->
                          <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
                      <div  class='text-center'>
                        <template>
@@ -214,7 +214,8 @@
                   food_count:'',
                   vendor_list:[],
                   wait:false,
-                  errMessage:''
+                  errMessage:'',
+                  online:null
                 }
             },
     
@@ -294,24 +295,123 @@
                   this.wait = false;
                   this.overlay = !this.overlay
                 })
+                 .then(res=>{
+                  setTimeout(func=>{
+                    this.clearAndWriteData('vendor-list',this.vendor_list)
+                      },5000)
+                })
                 .catch(error =>{
                     //off loader
                     this.overlay = false
                     this.wait = true;
-                      setTimeout(func=>{
-                          this.vendors();
-                      },2000)     
+                      //offline data
+                      this.readAllVendorList('vendor-list')     
+                    })
+              },
+
+
+                clearAndWriteData(table,data){
+              console.log('connecting to db')
+                var dbPromise = idb.open('getFoodsDB', 14, function (db) {
+              if (!db.objectStoreNames.contains(table)) {
+                db.createObjectStore(table, {keyPath: 'id'});
+              }
+            });
+              console.log('db ready to be cleared..')
+              console.log('data to save:',data)
+          //clear data func
+          function clearAllData(table){
+              return dbPromise
+              .then(function(db){
+                  var tx = db.transaction(table, 'readwrite');
+                  var store = tx.objectStore(table);
+                  store.clear();
+                  return tx.complete
+                })
+                .catch(error =>{
+                    console.log(error)    
                     })
               }
+              //call clear
+              clearAllData(table)
+              .then(function(){
+                //gives a promise 
+                console.log('cleared')
 
+                for(var key in data){
+              console.log('data keys:',key)
+                dbPromise
+            .then(function(db) {
+              var tx = db.transaction(table, 'readwrite');
+              var store = tx.objectStore(table);
+              for(var i in data){
+              store.put(data[i]);
+              }
+              console.log('saved to indexdb')
+              return tx.complete;
+            })
+            .catch(error =>{
+                    console.log(error)    
+                    })
+            }
+              })
+              .catch(error =>{
+                    console.log(error)    
+                    })
+            }, //end of clear and write data
+
+
+readAllVendorList(table){
+   console.log('connecting to db')
+                var dbPromise = idb.open('getFoodsDB', 14, function (db) {
+              if (!db.objectStoreNames.contains(table)) {
+                db.createObjectStore(table, {keyPath: 'id'});
+              }
+            });
+              console.log('db ready for reading..')
+             //read
+            function readAllData(table){
+            return dbPromise.then(function(db){
+              var tx = db.transaction(table, 'readonly');
+              var store = tx.objectStore(table);
+              return store.getAll();
+            })
+            .catch(error =>{
+                    console.log(error)    
+                    })
+          }
+          //call fetch indexeddb
+          readAllData(table)
+          .then(res=>{
+            //gives a promise to use data
+            console.log('called read')
+            console.log('read data from ven',res)
+            this.vendor_list = res
+            this.awaitingList = 'Offline mode'
+            console.log('fetched from inDB venlist:',this.vendor_list)
+          })
+          .catch(error =>{
+                    console.log(error)    
+                    })
+},
            
-            },
+            }, //method end
+
+
 
 
             watch : {
             selected(a,b){
              if(a){
               console.log('selected vendor')
+                  var online = navigator.onLine; 
+            if(!online){
+                //not online
+                console.log('not online')
+                this.$toasted.show("This feature is not available in offline mode...");
+                this.wait = false
+                return;
+            }
               this.fetch()
              }
           },
@@ -325,7 +425,21 @@
         this.selected = param
         this.fetch()
       }*/
-             this.vendors()
+      this.vendors()
+       var online = navigator.onLine; 
+            if(online){
+                //online
+                console.log('on')
+                this.online = true;
+               // this.vendors()
+            }else{
+                //offline
+                console.log('off')
+                 this.$toasted.show("Offline mode");
+                this.online = false;
+                this.readAllVendorList('vendor-list')    
+            }
+             
             }
         }
     </script>

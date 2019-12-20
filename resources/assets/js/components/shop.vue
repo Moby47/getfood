@@ -585,64 +585,6 @@ readAllVendorList(table){
             }, //end of clear and write data
 
 
-
-
-
-              postSync(){
-                var dbPromise = idb.open('getFoodsDB', 14, function (db) {
-              if (!db.objectStoreNames.contains('sync-posts')) {
-                db.createObjectStore('sync-posts', {keyPath: 'id'});
-                console.log('created store sync-post')
-              }
-              });
-              
-              if ('serviceWorker' in navigator && 'SyncManager' in window) {
-    navigator.serviceWorker.ready
-      .then(function(sw) {
-        var post = {
-          id: new Date().toISOString(),
-          title: 'title',
-          location: 'location'
-        };
-
-        function saveData(table, post){
-
-   return   dbPromise
-  .then(function(db) {
-    var tx = db.transaction(table, 'readwrite');
-    var store = tx.objectStore(table);
-    for(var i in post){
-    store.put(post);
-    }
-    return tx.complete;
-  })
-  .catch(error =>{
-          console.log(error)    
-          })
-}
-
-saveData('sync-posts',post)  
-
-          .then(function() {
-            return sw.sync.register('sync-new-posts');
-          })
-          .then(function() {
-            console.log('sync reged');
-          })
-          .catch(function(err) {
-            console.log(err);
-          });
-      });
-  } else {
-    sendData();
-  }
-         
-   }, //end postSync
-
-   sendData(){
-     alert('send to backend as usual (network). sw or sync not supported by browser')
-    //send data to back end as usual
-   },
                // ************************indexed DB methods
 
 
