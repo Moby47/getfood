@@ -58,6 +58,15 @@ var dbPromise = idb.open('getFoodsDB', 14, function (db) {
       if (!db.objectStoreNames.contains('sync-unfav')) {
         db.createObjectStore('sync-unfav', {keyPath: 'id'});
       }
+      if (!db.objectStoreNames.contains('vendor-list')) {
+        db.createObjectStore('vendor-list', {keyPath: 'id'});
+      }
+      if (!db.objectStoreNames.contains('sync-addToCart')) {
+        db.createObjectStore('sync-addToCart', {keyPath: 'id'});
+      }
+      if (!db.objectStoreNames.contains('sync-removeFromCart')) {
+        db.createObjectStore('sync-removeFromCart', {keyPath: 'id'});
+      }
   });
 
 // Cache on install
@@ -105,52 +114,78 @@ self.addEventListener("fetch", event => {
 
 
 
-// ****************** lISTEN FOR NETWORK AND [POST] *****
+//read
+function readAllData(table){
+  return dbPromise.then(function(db){
+    var tx = db.transaction(table, 'readonly');
+    var store = tx.objectStore(table);
+    return store.getAll();
+  })
+  .catch(error =>{
+          console.log(error)    
+          })
+}
 
-  //read
-  function readAllData(table){
-    return dbPromise.then(function(db){
-      var tx = db.transaction(table, 'readonly');
+
+//clear data func
+function clearAllData(table){
+  return dbPromise
+  .then(function(db){
+      var tx = db.transaction(table, 'readwrite');
       var store = tx.objectStore(table);
-      return store.getAll();
+      store.clear();
+      return tx.complete
     })
     .catch(error =>{
-            console.log(error)    
-            })
+        console.log(error)    
+        })
   }
+
+
+// ****************** lISTEN FOR NETWORK AND [POST FAV] *****
+
+  
+
+
 
 self.addEventListener('sync', function(event) {
     console.log('[Service Worker] Background syncing', event);
-    if (event.tag === 'sync-new-posts') {
-      console.log('[Service Worker] Syncing new Posts');
-      //fetch post strored for sync
+    if (event.tag === 'sync-fav-tag') {
+      console.log('[Service Worker] Syncing......');
+      //fetch post stored for sync
       //post it (send to db)
       //delete awaiting sync //clear db if res ==ok
       event.waitUntil(
-        readAllData('sync-posts')
+        readAllData('sync-fav')
           .then(function(data) {
-            console.log('read Sync Posts');
+            console.log('read sync-fav');
             for (var dt of data) {
               // fetch('https://testdb-5a8d4.firebaseio.com/posts.json', {
-              fetch('/test-sync', {
-                
-
+              fetch('/add-favorite', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
                   'Accept': 'application/json'
                 },
                 body: JSON.stringify({
-                  age: dt.id,
-                  id: dt.title,
-                  name: dt.location, })
+                  userId: dt.userId,
+                  foodId: dt.foodId, })
               })
                 .then(function(res) {
-                  console.log('Sync Posted');
                   console.log('Sent data', res);
                   if (res.ok) {
-                    console.log('Sync Posts deleted');
-                   // deleteItemFromData('sync-posts', dt.id); // Isn't working correctly!
+                    console.log('Sync data deleted');
+
+                     //call clear
+                clearAllData('sync-fav')
+                .then(function(){
+                  //gives a promise 
+                  console.log('cleared')
+                })
+                .catch(error =>{
+                      console.log(error)    
+                      })
+
                   }
                 })
                 .catch(function(err) {
@@ -164,4 +199,126 @@ self.addEventListener('sync', function(event) {
   });
   
 
-  // ****************** lISTEN FOR NETWORK AND [POST] *****
+  // ****************** lISTEN FOR NETWORK AND [POST FAV] *****
+
+
+
+  
+// ****************** lISTEN FOR NETWORK AND [POST UNFAV] *****
+
+ 
+self.addEventListener('sync', function(event) {
+    console.log('[Service Worker] Background syncing', event);
+    if (event.tag === 'sync-unfav-tag') {
+      console.log('[Service Worker] Syncing......');
+      //fetch post stored for sync
+      //post it (send to db)
+      //delete awaiting sync //clear db if res ==ok
+      event.waitUntil(
+        readAllData('sync-unfav')
+          .then(function(data) {
+            console.log('read sync-unfav');
+            for (var dt of data) {
+              // fetch('https://testdb-5a8d4.firebaseio.com/posts.json', {
+              fetch('/remove-favorite', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                  userId: dt.userId,
+                  foodId: dt.foodId, })
+              })
+                .then(function(res) {
+                  console.log('Sent data', res);
+                  if (res.ok) {
+                    console.log('Sync data deleted');
+
+                         //call clear
+                clearAllData('sync-unfav')
+                .then(function(){
+                  //gives a promise 
+                  console.log('cleared')
+                })
+                .catch(error =>{
+                      console.log(error)    
+                      })
+
+                  }
+                })
+                .catch(function(err) {
+                  console.log('Error while sending data', err);
+                });
+            }
+  
+          })
+      );
+    }
+  });
+  
+
+  // ****************** lISTEN FOR NETWORK AND [POST UNFAV] *****
+
+
+
+
+
+
+  // ****************** lISTEN FOR NETWORK AND [POST TOCART] *****
+
+ 
+self.addEventListener('sync', function(event) {
+  console.log('[Service Worker] Background syncing', event);
+  if (event.tag === 'sync-addToCart-tag') {
+    console.log('[Service Worker] Syncing......');
+    //fetch post stored for sync
+    //post it (send to db)
+    //delete awaiting sync //clear db if res ==ok
+    event.waitUntil(
+      readAllData('sync-addToCart')
+        .then(function(data) {
+          console.log('read sync-addToCart');
+          for (var dt of data) {
+            // fetch('https://testdb-5a8d4.firebaseio.com/posts.json', {
+            fetch('/add-to-cart', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              },
+              body: JSON.stringify({
+                userId: dt.userId,
+                foodId: dt.foodId,
+                qty:dt.qty,
+             })
+            })
+              .then(function(res) {
+                console.log('Sent data', res);
+                if (res.ok) {
+                  console.log('Sync data deleted');
+
+                       //call clear
+              clearAllData('sync-addToCart')
+              .then(function(){
+                //gives a promise 
+                console.log('cleared')
+              })
+              .catch(error =>{
+                    console.log(error)    
+                    })
+
+                }
+              })
+              .catch(function(err) {
+                console.log('Error while sending data', err);
+              });
+          }
+
+        })
+    );
+  }
+});
+
+
+// ****************** lISTEN FOR NETWORK AND [POST UNFAV] *****

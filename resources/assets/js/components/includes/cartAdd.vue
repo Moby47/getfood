@@ -10,9 +10,17 @@
                 </form>
             </div>
 
+<span v-if='online'>
         <v-btn  href="#" v-if="isAdded" id="addtocart" @click.prevent='removeFromCart(con)' >CLEAR</v-btn>
 
         <v-btn   href="#" v-if="!isAdded" id="addtocart" @click.prevent='addToCart(con)' >SELECT</v-btn>
+</span>
+<span v-else>
+   <v-btn  href="#" v-if="isAdded" id="addtocart" @click.prevent='removeFromCartSync(con)' >CLEAR</v-btn>
+
+        <v-btn   href="#" v-if="!isAdded" id="addtocart" @click.prevent='addToCartSync(con)' >SELECT</v-btn>
+</span>
+
         </span>
         <div v-if='stash < 1'>
             Out of stock
@@ -56,7 +64,7 @@ import {eventBus} from "../../app.js";
 
     export default {
 
-        props: ['con','stash'],
+        props: ['con','stash','online'],
 //
 data: function() {
     return {
@@ -104,6 +112,152 @@ data: function() {
                     this.overlay = false     
                       })
             },
+
+
+   addToCartSync(con) {
+                this.overlay = !this.overlay
+               this.isAdded = !this.isAdded
+
+               
+              
+              if ('serviceWorker' in navigator && 'SyncManager' in window) {
+
+                 if(!localStorage.getItem('tempUserCartID')){
+                    var tempUserCartID = Math.floor(Math.random()*1234567890);
+                     localStorage.setItem('tempUserCartID',tempUserCartID);
+                   //  console.log('created id')
+                }
+
+ var dbPromise = idb.open('getFoodsDB', 14, function (db) {
+              if (!db.objectStoreNames.contains('sync-addToCart')) {
+                db.createObjectStore('sync-addToCart', {keyPath: 'id'});
+                console.log('created store sync-post')
+              }
+              });
+
+                var input = {id: new Date().toISOString(),'foodId':con.id, 'userId':localStorage.getItem('tempUserCartID'),'qty':this.qty};
+                
+    navigator.serviceWorker.ready
+      .then(function(sw) {
+        
+        console.log(input)
+        
+                function saveData(table, input){
+                    console.log(table,input)
+          return   dbPromise
+          .then(function(db) {
+            var tx = db.transaction(table, 'readwrite');
+            var store = tx.objectStore(table);
+            for(var i in input){
+            store.put(input);
+            }
+
+            
+            return tx.complete;
+          })
+          .catch(error =>{
+            this.overlay = false
+                  console.log(error)    
+                  })
+        }
+
+saveData('sync-addToCart',input)  
+          .then(res=> {
+            return sw.sync.register('sync-addToCart-tag');
+          })
+          .then(res=> {
+            console.log('sync saved');
+            alert('This food will be added to cart when internet connection is detected...')
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
+
+      });
+  } else {
+     this.overlay = false 
+    alert('Ofline Mode: Not supported');
+  }
+this.overlay = false 
+            },
+
+
+
+
+
+
+
+
+
+             removeFromCartSync(con) {
+                this.overlay = !this.overlay
+                this.isAdded = !this.isAdded
+               
+              
+              if ('serviceWorker' in navigator && 'SyncManager' in window) {
+
+                 var input = {id: new Date().toISOString(),'foodId':con.id, 'userId':localStorage.getItem('tempUserCartID')};
+
+                if(!localStorage.getItem('tempUserCartID')){
+                    var tempUserCartID = Math.floor(Math.random()*1234567890);
+                     localStorage.setItem('tempUserCartID',tempUserCartID);
+                   //  console.log('created id')
+                }
+
+ var dbPromise = idb.open('getFoodsDB', 14, function (db) {
+              if (!db.objectStoreNames.contains('sync-removeFromCart')) {
+                db.createObjectStore('sync-removeFromCart', {keyPath: 'id'});
+                console.log('created store sync-post')
+              }
+              });
+
+
+    navigator.serviceWorker.ready
+      .then(function(sw) {
+        
+        console.log(input)
+        
+                function saveData(table, input){
+                    console.log(table,input)
+          return   dbPromise
+          .then(function(db) {
+            var tx = db.transaction(table, 'readwrite');
+            var store = tx.objectStore(table);
+            for(var i in input){
+            store.put(input);
+            }
+
+            return tx.complete;
+          })
+          .catch(error =>{
+            this.overlay = false
+                  console.log(error)    
+                  })
+        }
+
+saveData('sync-removeFromCart',input)  
+          .then(res=> {
+            return sw.sync.register('sync-removeFromCart-tag');
+          })
+          .then(res=> {
+            console.log('sync saved');
+            alert('This food will be removed from the cart when internet connection is detected...')
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
+
+      });
+  } else {
+     this.overlay = false 
+    alert('Ofline Mode: Not supported');
+  }
+this.overlay = false 
+            },
+
+
+
+
 
             removeFromCart(con) {
                

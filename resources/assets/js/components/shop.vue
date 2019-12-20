@@ -3,9 +3,10 @@
      
         <template>
           <div>
-            <!--floating right-->
+            <!--floating right :disabled='offline'-->
             <v-btn 
-            :disabled='offline'
+            
+           
             fab 
             dark
             color="#fbc25b"
@@ -150,6 +151,7 @@
           <cartAdd
           :con=con
           :stash=con.qty
+           :online=online
           >
           </cartAdd>
         
@@ -279,6 +281,7 @@
 
 <floatings
 :toggle_cart=toggle_cart
+:online=online
 >
 </floatings>
 
@@ -405,12 +408,16 @@
                           }
                   
                 })
+                 .then(res=>{
+                  setTimeout(func=>{
+                    this.clearAndWriteData('vendor-list',this.vendor_list)
+                      },9000)
+                })
                 .catch(error =>{
                     //off loader text
                     console.log(error)
-                      setTimeout(func=>{
-                          this.vendors();
-                      },2000)     
+                       //offline data
+                      this.readAllVendorList('vendor-list')   
                     })
                 },
             
@@ -492,7 +499,39 @@
 
 
 
-
+readAllVendorList(table){
+   console.log('connecting to db')
+                var dbPromise = idb.open('getFoodsDB', 14, function (db) {
+              if (!db.objectStoreNames.contains(table)) {
+                db.createObjectStore(table, {keyPath: 'id'});
+              }
+            });
+              console.log('db ready for reading..')
+             //read
+            function readAllData(table){
+            return dbPromise.then(function(db){
+              var tx = db.transaction(table, 'readonly');
+              var store = tx.objectStore(table);
+              return store.getAll();
+            })
+            .catch(error =>{
+                    console.log(error)    
+                    })
+          }
+          //call fetch indexeddb
+          readAllData(table)
+          .then(res=>{
+            //gives a promise to use data
+            console.log('called read')
+            console.log('read data from ven',res)
+            this.vendor_list = res
+            this.awaitingList = 'Offline mode'
+            console.log('fetched from inDB venlist:',this.vendor_list)
+          })
+          .catch(error =>{
+                    console.log(error)    
+                    })
+},
 
 
             clearAndWriteData(table,data){
@@ -623,7 +662,17 @@ saveData('sync-posts',post)
           //watch and load when a vendor is selected
           selected(a,b){
              if(a){
+
               console.log('selected vendor')
+               var online = navigator.onLine; 
+            if(!online){
+                //not online
+                console.log('not online')
+                this.$toasted.show("This feature is not available in offline mode...");
+                this.awaitingList = 'Offline mode'
+                return;
+            }
+
               this.sorted()
              }
           },
@@ -641,7 +690,8 @@ saveData('sync-posts',post)
                 //offline
                 console.log('off')
                 this.online = false;
-                
+               // this.readAllVendorList('vendor-list')
+               // this.readAllData('foods')
             }
       },
      

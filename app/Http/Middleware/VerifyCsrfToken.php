@@ -13,6 +13,9 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         //allow url, no csrf token needed
-        'http://localhost:8000/test-sync',
+        'http://localhost:8000/add-favorite',
+        'http://localhost:8000/remove-favorite',
+        'http://localhost:8000/add-to-cart',
+        
     ];
 }

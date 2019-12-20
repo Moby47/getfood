@@ -182,7 +182,7 @@ saveData('sync-unfav',input)
           })
           .then(res=> {
             console.log('sync saved');
-            alert('This food will be removed from favorites...')
+            alert('This food will be removed from favorites when internet connection is detected...')
             NProgress.done(); 
           })
           .catch(function(err) {
@@ -222,6 +222,7 @@ saveData('sync-unfav',input)
         
         var input = {id: new Date().toISOString(),'userId':userId, 'foodId':foodId};
         console.log(input)
+        
         function saveData(table, input){
             console.log(table,input)
    return   dbPromise
@@ -245,7 +246,7 @@ saveData('sync-fav',input)
           })
           .then(res=> {
             console.log('sync saved');
-            alert('This food will be added to favorites...')
+            alert('This food will be added to favorites when internet connection is detected...')
           })
           .catch(function(err) {
             console.log(err);
@@ -313,7 +314,7 @@ saveData('sync-fav',input)
           })
           .then(res=> {
             console.log('sync saved');
-            alert('This food will be added to favorites...')
+            alert('This food will be added to favorites when internet connection is detected...')
           })
           .catch(function(err) {
             console.log(err);

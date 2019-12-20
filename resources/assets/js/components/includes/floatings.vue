@@ -18,8 +18,9 @@
 			</v-btn>
           <!--  floating left-->
             
-            <a @click.prevent='checkout()'  v-if='toggle_cart == false'>	
+            <a @click.prevent='checkout()'  v-if='toggle_cart == false' >	
 			 <v-btn 
+:disabled='!online'
 			 fab 
 			 dark
 			 color="#fbc25b"
@@ -46,7 +47,7 @@ import {eventBus} from "../../app.js";
 
             export default {
 
-                props: ['toggle_cart'],
+                props: ['toggle_cart','online'],
 
                data: () => ({
 					count:'',				
