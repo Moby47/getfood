@@ -15,8 +15,14 @@ class VerifyCsrfToken extends Middleware
         //allow url, no csrf token needed
         'http://localhost:8000/add-favorite',
         'http://localhost:8000/remove-favorite',
+
         'http://localhost:8000/add-to-cart',
         'http://localhost:8000/remove-from-cart',
+
+        'http://localhost:8000/add-fav-to-cart',
+        'http://localhost:8000/remove-fav-from-cart',
+
+        'http://localhost:8000/remove-from-fav',
         
     ];
 }

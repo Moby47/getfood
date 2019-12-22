@@ -11,9 +11,14 @@
 
     <span v-if='deleted == false'>
       <span v-if='stash > 0'>
+          <span v-if='online'>
           <a href="#" class="item_delete" id="cartitem1" @click.prevent='removeFromFav(con)'>
               <img src="/images/icons/black/trash.png" alt="" title="" /></a>         
-              
+              </span>
+              <span v-else>
+                  <a href="#" class="item_delete" id="cartitem1" @click.prevent='removeFromFavSync(con)'>
+                      <img src="/images/icons/black/trash.png" alt="" title="" /></a>  
+              </span>
           
 
       <h4 class='text-capitalize'>{{con.title}}</h4>
@@ -26,10 +31,17 @@
                 </form>
             </div>
 
-
+<span v-if='online'>
          <v-btn  href="#" v-if="isAdded" id="addtocart" @click.prevent='removeFromCart(con)' >CLEAR</v-btn>
 
         <v-btn   href="#" v-if="!isAdded" id="addtocart" @click.prevent='addToCart(con)' >SELECT</v-btn>
+      </span>
+<span v-else>
+    <v-btn  href="#" v-if="isAdded" id="addtocart" @click.prevent='removeFromCartSync(con)'>CLEAR</v-btn>
+
+     <v-btn   href="#" v-if="!isAdded" id="addtocart" @click.prevent='addToCartSync(con)'>SELECT</v-btn>
+</span>
+
         </span>
       </span>
 
@@ -58,6 +70,8 @@
         <div class="text-center">
           <v-overlay :value="overlay">
             <v-progress-circular indeterminate size="64"></v-progress-circular>
+            <br>
+            {{loading_text}}
           </v-overlay>
         </div>
       </template>
@@ -73,17 +87,18 @@ import {eventBus} from "../../app.js";
 
         export default {
 
-props: ['con','stash'],
+props: ['con','stash','online'], 
 //
 data: function() {
 return {
     overlay:false,
     snackbar: false,
         text: '',
-        timeout: 3000,
+        timeout: 5000,
         isAdded: false,
         qty:1,
 deleted:false,
+loading_text:''
 }
 },
 
@@ -92,6 +107,8 @@ methods: {
     removeFromFav(con) {
       //
         this.overlay = !this.overlay
+        this.loading_text = 'Removing Food From Favorites..'
+
         if(!localStorage.getItem('tempUserCartID')){
                     var tempUserCartID = Math.floor(Math.random()*1234567890);
                      localStorage.setItem('tempUserCartID',tempUserCartID);
@@ -120,6 +137,7 @@ methods: {
     addToCart(con) {
      
                 this.overlay = !this.overlay
+                this.loading_text = 'Adding Food to Table..' 
                 this.isAdded = !this.isAdded
 
                 if(!localStorage.getItem('tempUserCartID')){
@@ -127,7 +145,7 @@ methods: {
                      localStorage.setItem('tempUserCartID',tempUserCartID);
                   //   console.log('created id')
                 }
-                var input = {'foodId':con.foodId, 'userId':localStorage.getItem('tempUserCartID'),'qty':this.qty};
+        var input = {'foodId':con.foodId, 'userId':localStorage.getItem('tempUserCartID'),'qty':this.qty};
                 axios.post('/add-fav-to-cart',input)
                         .then(res=>{
                             if(res.data == 1){
@@ -149,6 +167,8 @@ methods: {
             removeFromCart(con) {
                
                 this.overlay = !this.overlay
+                this.loading_text = 'Removing Food From Table..' 
+
                 this.isAdded = !this.isAdded
                 var input = {'foodId':con.foodId, 'userId':localStorage.getItem('tempUserCartID')};
                 axios.post('/remove-fav-from-cart',input)
@@ -189,7 +209,242 @@ methods: {
                 this.qty = this.qty - 1;
             },
  
-},
+    
+
+
+
+
+
+
+
+
+
+
+            addToCartSync(con) {
+                this.overlay = !this.overlay
+                this.loading_text = 'Adding Food to Table..' 
+               this.isAdded = !this.isAdded
+
+              if ('serviceWorker' in navigator && 'SyncManager' in window) {
+
+                 if(!localStorage.getItem('tempUserCartID')){
+                    var tempUserCartID = Math.floor(Math.random()*1234567890);
+                     localStorage.setItem('tempUserCartID',tempUserCartID);
+                   //  console.log('created id')
+                }
+
+ var dbPromise = idb.open('getFoodsDB', 14, function (db) {
+              if (!db.objectStoreNames.contains('sync-addToCart')) {
+                db.createObjectStore('sync-addToCart', {keyPath: 'id'});
+                console.log('created store sync-post')
+              }
+              });
+
+var input = {id: new Date().toISOString(),'foodId':con.foodId,
+ 'userId':localStorage.getItem('tempUserCartID'),'qty':this.qty};
+
+//console.log('verify for id',con)
+
+                   this.text = 'Food queued for addition to table...'
+          this.snackbar = true
+
+    navigator.serviceWorker.ready
+      .then(function(sw) {
+        
+        console.log(input)
+        
+                function saveData(table, input){
+                    console.log(table,input)
+          return   dbPromise
+          .then(function(db) {
+            var tx = db.transaction(table, 'readwrite');
+            var store = tx.objectStore(table);
+            for(var i in input){
+            store.put(input);
+            }
+
+            
+            return tx.complete;
+          })
+          .catch(error =>{
+            this.overlay = false
+                  console.log(error)    
+                  })
+        }
+
+saveData('sync-addToCart',input)  
+          .then(res=> {
+            return sw.sync.register('sync-addToCartFromFav-tag');
+          })
+          .then(res=> {
+            console.log('sync saved');
+           // alert('This food will be added to cart when internet connection is detected...')
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
+
+      });
+  } else {
+     this.overlay = false 
+    alert('Ofline Mode: Not supported');
+  }
+this.overlay = false 
+            },
+
+
+
+            removeFromCartSync(con) {
+                this.overlay = !this.overlay
+                this.loading_text = 'Removing Food From Table..' 
+               this.isAdded = !this.isAdded
+
+              if ('serviceWorker' in navigator && 'SyncManager' in window) {
+
+                 if(!localStorage.getItem('tempUserCartID')){
+                    var tempUserCartID = Math.floor(Math.random()*1234567890);
+                     localStorage.setItem('tempUserCartID',tempUserCartID);
+                   //  console.log('created id')
+                }
+
+ var dbPromise = idb.open('getFoodsDB', 14, function (db) {
+              if (!db.objectStoreNames.contains('sync-removeFromCart')) {
+                db.createObjectStore('sync-removeFromCart', {keyPath: 'id'});
+                console.log('created store sync-post')
+              }
+              });
+
+              var input = {id: new Date().toISOString(),'foodId':con.foodId, 'userId':localStorage.getItem('tempUserCartID')};
+
+                   this.text = 'Food queued for removal from table...'
+          this.snackbar = true
+
+    navigator.serviceWorker.ready
+      .then(function(sw) {
+        
+        console.log(input)
+        
+                function saveData(table, input){
+                    console.log(table,input)
+          return   dbPromise
+          .then(function(db) {
+            var tx = db.transaction(table, 'readwrite');
+            var store = tx.objectStore(table);
+            for(var i in input){
+            store.put(input);
+            }
+
+            
+            return tx.complete;
+          })
+          .catch(error =>{
+            this.overlay = false
+                  console.log(error)    
+                  })
+        }
+
+saveData('sync-removeFromCart',input)  
+          .then(res=> {
+            return sw.sync.register('sync-removeFromCartFromFav-tag');
+          })
+          .then(res=> {
+            console.log('sync saved');
+           // alert('This food will be added to cart when internet connection is detected...')
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
+
+      });
+  } else {
+     this.overlay = false 
+    alert('Ofline Mode: Not supported');
+  }
+this.overlay = false 
+            },
+
+
+
+
+
+            removeFromFavSync(con) {
+                this.overlay = !this.overlay
+                this.loading_text = 'Removing Food From Favorites..'
+               this.isAdded = !this.isAdded
+
+              if ('serviceWorker' in navigator && 'SyncManager' in window) {
+
+                 if(!localStorage.getItem('tempUserCartID')){
+                    var tempUserCartID = Math.floor(Math.random()*1234567890);
+                     localStorage.setItem('tempUserCartID',tempUserCartID);
+                   //  console.log('created id')
+                }
+
+ var dbPromise = idb.open('getFoodsDB', 14, function (db) {
+              if (!db.objectStoreNames.contains('sync-deleteFav')) {
+                db.createObjectStore('sync-deleteFav', {keyPath: 'id'});
+                console.log('created store sync-post')
+              }
+              });
+
+     var input = {id: new Date().toISOString(),'favId':con.id, 
+     'foodId':con.foodId, 'userId':localStorage.getItem('tempUserCartID')};
+
+
+          this.text = 'Food queued for deletion...'
+          this.snackbar = true
+
+    navigator.serviceWorker.ready
+      .then(function(sw) {
+        
+        console.log(input)
+        
+                function saveData(table, input){
+                    console.log(table,input)
+          return   dbPromise
+          .then(function(db) {
+            var tx = db.transaction(table, 'readwrite');
+            var store = tx.objectStore(table);
+            for(var i in input){
+            store.put(input);
+            }
+
+            
+            return tx.complete;
+          })
+          .catch(error =>{
+            this.overlay = false
+                  console.log(error)    
+                  })
+        }
+
+saveData('sync-deleteFav',input)  
+          .then(res=> {
+            return sw.sync.register('sync-deleteFav-tag');
+          })
+          .then(res=> {
+            console.log('sync saved');
+           // alert('This food will be added to cart when internet connection is detected...')
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
+
+      });
+  } else {
+     this.overlay = false 
+    alert('Ofline Mode: Not supported');
+  }
+this.overlay = false 
+            },
+
+
+
+},//total meth end
+
+mounted(){
+
+}
 
 }
         </script>

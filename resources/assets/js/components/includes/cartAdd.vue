@@ -49,6 +49,8 @@
         <div class="text-center">
           <v-overlay :value="overlay">
             <v-progress-circular indeterminate size="64"></v-progress-circular>
+            <br>
+            Adding Food to Table...
           </v-overlay>
         </div>
       </template>
@@ -71,7 +73,7 @@ data: function() {
         overlay:false,
         snackbar: false,
         text: '',
-        timeout: 3000,
+        timeout: 5000,
         isAdded: false,
         qty:1,
     }

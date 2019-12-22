@@ -68,6 +68,12 @@ var dbPromise = idb.open('getFoodsDB', 14, function (db) {
       if (!db.objectStoreNames.contains('sync-removeFromCart')) {
         db.createObjectStore('sync-removeFromCart', {keyPath: 'id'});
       }
+      if (!db.objectStoreNames.contains('my-favs')) {
+        db.createObjectStore('my-favs', {keyPath: 'id'});
+      }
+      if (!db.objectStoreNames.contains('sync-deleteFav')) {
+        db.createObjectStore('sync-deleteFav', {keyPath: 'id'});
+      }
   });
 
 // Cache on install
@@ -382,3 +388,188 @@ self.addEventListener('sync', function(event) {
 
 
 // ****************** lISTEN FOR NETWORK AND [POST REMOVE FROM CART] *****
+
+
+
+
+  // ****************** lISTEN FOR NETWORK AND [POST TOCARTFROMFAV] *****
+
+ 
+  self.addEventListener('sync', function(event) {
+   // console.log('[Service Worker] Background syncing', event);
+    if (event.tag === 'sync-addToCartFromFav-tag') {
+    //  console.log('[Service Worker] Syncing......');
+      //fetch post stored for sync
+      //post it (send to db)
+      //delete awaiting sync //clear db if res ==ok
+      event.waitUntil(
+        readAllData('sync-addToCart')
+          .then(function(data) {
+          
+         //   console.log('verify for id from SW',data)
+
+            for (var dt of data) {
+              // fetch('https://testdb-5a8d4.firebaseio.com/posts.json', {
+              fetch('/add-fav-to-cart', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                  userId: dt.userId,
+                  foodId: dt.foodId,
+                  qty:dt.qty,
+               })
+              })
+                .then(function(res) {
+                  console.log('Sent data', res);
+                  if (res.ok) {
+                    console.log('Sync data deleted');
+  
+                         //call clear
+                clearAllData('sync-addToCart')
+                .then(function(){
+                  //gives a promise 
+                  console.log('cleared')
+                })
+                .catch(error =>{
+                      console.log(error)    
+                      })
+  
+                  }
+                })
+                .catch(function(err) {
+                  console.log('Error while sending data', err);
+                });
+            }
+  
+          })
+      );
+    }
+  });
+  
+  
+  // ****************** lISTEN FOR NETWORK AND [POST TOCARTFROMFAV] *****
+
+
+
+
+  // ****************** lISTEN FOR NETWORK AND [POST REMOVE FROM CART FROM FAV] *****
+
+ 
+self.addEventListener('sync', function(event) {
+  console.log('[Service Worker] Background syncing', event);
+  if (event.tag === 'sync-removeFromCartFromFav-tag') {
+    console.log('[Service Worker] Syncing......');
+    //fetch post stored for sync
+    //post it (send to db)
+    //delete awaiting sync //clear db if res ==ok
+    event.waitUntil(
+      readAllData('sync-removeFromCart')
+        .then(function(data) {
+          console.log('read sync-removeFromCart');
+          for (var dt of data) {
+            // fetch('https://testdb-5a8d4.firebaseio.com/posts.json', {
+            fetch('/remove-fav-from-cart', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              },
+              body: JSON.stringify({
+                userId: dt.userId,
+                foodId: dt.foodId,
+             })
+            })
+              .then(function(res) {
+                console.log('Sent data', res);
+                if (res.ok) {
+                  console.log('Sync data deleted');
+
+                       //call clear
+              clearAllData('sync-removeFromCart')
+              .then(function(){
+                //gives a promise 
+                console.log('cleared')
+              })
+              .catch(error =>{
+                    console.log(error)    
+                    })
+
+                }
+              })
+              .catch(function(err) {
+                console.log('Error while sending data', err);
+              });
+          }
+
+        })
+    );
+  }
+});
+
+
+// ****************** lISTEN FOR NETWORK AND [POST REMOVE FROM CART FROM FAV] *****
+
+
+
+
+
+
+  // ****************** lISTEN FOR NETWORK AND [POST REMOVE FAV] *****
+
+ 
+  self.addEventListener('sync', function(event) {
+    console.log('[Service Worker] Background syncing', event);
+    if (event.tag === 'sync-deleteFav-tag') {
+      console.log('[Service Worker] Syncing......');
+      //fetch post stored for sync
+      //post it (send to db)
+      //delete awaiting sync //clear db if res ==ok
+      event.waitUntil(
+        readAllData('sync-deleteFav')
+          .then(function(data) {
+            console.log('read sync-deleteFav');
+            for (var dt of data) {
+              fetch('/remove-from-fav', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                  favId: dt.favId,
+                  userId: dt.userId,
+                  foodId: dt.foodId,
+               })
+              })
+                .then(function(res) {
+                  console.log('Sent data', res);
+                  if (res.ok) {
+                    console.log('Sync data deleted');
+  
+                         //call clear
+                clearAllData('sync-deleteFav')
+                .then(function(){
+                  //gives a promise 
+                  console.log('cleared')
+                })
+                .catch(error =>{
+                      console.log(error)    
+                      })
+  
+                  }
+                })
+                .catch(function(err) {
+                  console.log('Error while sending data', err);
+                });
+            }
+  
+          })
+      );
+    }
+  });
+  
+  
+  // ****************** lISTEN FOR NETWORK AND [POST REMOVE  FAV] *****

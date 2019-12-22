@@ -20,9 +20,10 @@
                 >
                  <nav aria-label="breadcrumb ">
                          <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><router-link to='/'>Home</router-link></li>
                             <li class="breadcrumb-item"><router-link to='/shop'>Kitchen</router-link></li>
-                           <li class="breadcrumb-item"><router-link to='/cart'>Cart</router-link></li>
-                           <li class="breadcrumb-item active" aria-current="page" >Food Is Ready</li>
+                           <li class="breadcrumb-item"><router-link to='/cart'>Table</router-link></li>
+                           <li class="breadcrumb-item active" aria-current="page" >Eat</li>
                            
                          </ol>
                        </nav>
@@ -74,7 +75,7 @@
                  <br><br> 
                    <v-list-item three-line>
                       <v-img
-                height="350"
+                height="300"
                   src="/images/wifi.svg"
                   :lazy-src="`/images/black-spinner.gif`"
                 >
@@ -191,6 +192,8 @@
     <div class="text-center">
       <v-overlay :value="overlay">
         <v-progress-circular indeterminate size="64"></v-progress-circular>
+        <br>
+    Loading Food Details...
       </v-overlay>
     </div>
   </template>
@@ -224,7 +227,7 @@ import paystack from 'vue-paystack';
                 addText:false,
                 data_load: true,
                 empty:47,
-                charges:'00.00',
+                charges:'0.00',
                 subtotal:0, //total food + 50
                 total:0, //amount in naira
                 ref:'',
@@ -377,9 +380,7 @@ import paystack from 'vue-paystack';
                       //off loader
                       this.data_load = false;
                         this.wait = true;
-                        setTimeout(func=>{
-                            this.fetch();
-                        },3000)     
+                           
                       })
 
                 },//
@@ -400,10 +401,7 @@ import paystack from 'vue-paystack';
                   })
                   .catch(error =>{
                     this.overlay = false
-                        setTimeout(func=>{
-                          this.TotalWait = true;
-                            this.getSumTotal();
-                        },3000)     
+                         
                       })
                 },
 

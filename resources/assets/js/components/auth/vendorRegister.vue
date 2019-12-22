@@ -83,6 +83,8 @@
         <div class="text-center">
           <v-overlay :value="overlay">
             <v-progress-circular indeterminate size="64"></v-progress-circular>
+            <br>
+            Creating {{regName}}'s Account...
           </v-overlay>
         </div>
       </template>

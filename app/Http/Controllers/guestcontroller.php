@@ -103,6 +103,71 @@ public function removeFromFav(Request $request){
 
   //add fav to cart 
 public function favAddToCart(Request $request){
+
+  //expected params, user id and food id
+$userId = $request->input('userId'); //rand and local
+$foodId = $request->input('foodId');
+
+$food=food::findorfail($foodId);
+
+//required params to add to cart for a specific user
+$qty = $request->input('qty');
+$total = $qty * $food->amt;
+
+//check remaining qty
+if($food->qty < $qty){
+  return $food->qty;
+}
+
+\Cart::session($userId)->add(array(
+    'id' => $food->id,
+    'name' => $food->title,
+    'price' => $food->amt,
+    'quantity' => $qty,
+    "attributes"=> ['image' => $food->img, 'total'=> $total, 'vendor_id'=> $food->vendor_id],
+	
+));
+
+if($foodId == \Cart::get($foodId)->id){
+  \Cart::session($userId)->update($foodId,array(
+    'quantity'=> array(
+      'relative'=>false,
+      'value'=>$qty )
+  ));
+}
+
+//check if exist
+$ok = temp::where('tempId','=',$userId)->where('foodId','=',$foodId)->select('id')->get()->first();
+
+if($ok){
+  //update
+  $ok->tempId = $userId;
+  $ok->vendorId = $food->vendor_id;
+  $ok->vendorName = $food->vendor_name;
+  $ok->foodId = $foodId;
+  $ok->foodName = $food->title;
+  $ok->amt = $food->amt;
+  $ok->qty = $qty;
+  $ok->save();
+
+}else{
+  //save new
+  $ok = new temp;
+
+$ok->tempId = $userId;
+$ok->vendorId = $food->vendor_id;
+$ok->vendorName = $food->vendor_name;
+$ok->foodId = $foodId;
+$ok->foodName = $food->title;
+$ok->amt = $food->amt;
+$ok->qty = $qty;
+$ok->save();
+}
+
+
+
+	return 1;
+ /* return $request;
 	//expected params, user id and food id and qty
 $userId = $request->input('userId'); //rand and local
 $foodId = $request->input('foodId');
@@ -128,7 +193,8 @@ if($foodId == \Cart::get($foodId)->id){
   ));
 }
 
-	return 1;
+  return 1;
+  */
 }
 
 

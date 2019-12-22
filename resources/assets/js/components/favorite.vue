@@ -56,7 +56,7 @@
     </div>
                          </span>
 
-                          <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
+                 <!--         <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
                      <div v-if='wait' class='text-center'>
                        <template>
                          <p>Reloading Your Favorite Food(s)..</p>
@@ -64,7 +64,7 @@
                                  </template>
                                   </div>
                          </transition>
-
+-->
 
       <div class="page_single layout_fullwidth_padding">
        
@@ -91,6 +91,7 @@
               <favUpdate
               :con=con
               :stash=con.qty
+              :online=online
               >
               </favUpdate>
                
@@ -127,6 +128,8 @@
     <div class="text-center">
       <v-overlay :value="overlay">
         <v-progress-circular indeterminate size="64"></v-progress-circular>
+        <br>
+        Loading Your Favorites..
       </v-overlay>
     </div>
   </template>
@@ -150,8 +153,9 @@
               overlay:false,
               content:[],
               empty:false,
-              fav_count:0,
-              wait:false
+              fav_count:'',
+              wait:false,
+              online:null
             }
         },
 
@@ -180,22 +184,126 @@
                   this.overlay = !this.overlay
                   this.wait = false;
                 })
+                .then(res=>{
+                  setTimeout(func=>{
+                    this.clearAndWriteData('my-favs',this.content)
+                      },6000)
+                })
                 .catch(error =>{
                     //off loader
                     this.overlay = false
                     this.wait = true;
-                      setTimeout(func=>{
-                          this.fetch();
-                      },2000)
+                     //offline data
+                     this.fav_count = '-'
+                     this.readAllVendorList('my-favs')
                               
                     })
                     
                
               },
-        },
+
+              clearAndWriteData(table,data){
+              console.log('connecting to db')
+                var dbPromise = idb.open('getFoodsDB', 14, function (db) {
+              if (!db.objectStoreNames.contains(table)) {
+                db.createObjectStore(table, {keyPath: 'id'});
+              }
+            });
+              console.log('db ready to be cleared..')
+              console.log('data to save:',data)
+          //clear data func
+          function clearAllData(table){
+              return dbPromise
+              .then(function(db){
+                  var tx = db.transaction(table, 'readwrite');
+                  var store = tx.objectStore(table);
+                  store.clear();
+                  return tx.complete
+                })
+                .catch(error =>{
+                    console.log(error)    
+                    })
+              }
+              //call clear
+              clearAllData(table)
+              .then(function(){
+                //gives a promise 
+                console.log('cleared')
+
+                for(var key in data){
+              console.log('data keys:',key)
+                dbPromise
+            .then(function(db) {
+              var tx = db.transaction(table, 'readwrite');
+              var store = tx.objectStore(table);
+              for(var i in data){
+              store.put(data[i]);
+              }
+              console.log('saved to indexdb')
+              return tx.complete;
+            })
+            .catch(error =>{
+                    console.log(error)    
+                    })
+            }
+              })
+              .catch(error =>{
+                    console.log(error)    
+                    })
+            }, //end of clear and write data
+
+
+readAllVendorList(table){
+   console.log('connecting to db')
+                var dbPromise = idb.open('getFoodsDB', 14, function (db) {
+              if (!db.objectStoreNames.contains(table)) {
+                db.createObjectStore(table, {keyPath: 'id'});
+              }
+            });
+              console.log('db ready for reading..')
+             //read
+            function readAllData(table){
+            return dbPromise.then(function(db){
+              var tx = db.transaction(table, 'readonly');
+              var store = tx.objectStore(table);
+              return store.getAll();
+            })
+            .catch(error =>{
+                    console.log(error)    
+                    })
+          }
+          //call fetch indexeddb
+          readAllData(table)
+          .then(res=>{
+            //gives a promise to use data
+            console.log('called read')
+            console.log('read data from ven',res)
+            this.content = res
+            this.awaitingList = 'Offline mode'
+            console.log('fetched from inDB venlist:',this.content)
+          })
+          .catch(error =>{
+                    console.log(error)    
+                    })
+},
+
+        },//meth end
 
         mounted() {
             this.fetch()
+
+            var online = navigator.onLine; 
+            if(online){
+                //online
+                console.log('on')
+                this.online = true;
+            }else{
+                //offline
+                console.log('off')
+                this.online = false;
+               // this.readAllVendorList('vendor-list')
+               // this.readAllData('foods')
+            }
         }
     }
 </script>

@@ -87,11 +87,11 @@ Your Table is Empty.
 <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
              <div v-if='wait' class='text-center'>
                <template> <br>
-                 <span class='alert alert-primary'>Internet Connection is needed to proceed</span>
+                 <span class='alert alert-primary'>Internet Connection is needed</span>
                  <br><br> 
                    <v-list-item three-line>
                       <v-img
-                height="350"
+                height="300"
                   src="/images/wifi.svg"
                   :lazy-src="`/images/black-spinner.gif`"
                 >
