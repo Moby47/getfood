@@ -44,7 +44,7 @@
             </v-avatar>
           </v-list-item-avatar>
     
-      <router-link to='/admindashboard' v-if='status == 1'>
+      <router-link to='/vendordashboard' v-if='status == 1'>
           <v-list-item-title>Dashboard</v-list-item-title>
     </router-link>
         </v-list-item>
@@ -135,11 +135,11 @@
         status:'',
           sheet: false,
       tiles: [
-        { img: 'add_shopping_cart', title: 'Add Food', link:'/product' },
+        { img: 'add_shopping_cart', title: 'Add Food', link:'/add-food' },
         { img: 'edit', title: 'Manage Food', link:'/manage-food'},
         { img: 'shopping_cart', title: 'Orders', link:'/orders'},
         { img: 'favorite', title: 'Customer Favorite', link:'/vendor-favorites'},
-        { img: 'restaurant', title: 'Get Food', link:'/shop' },
+        { img: 'restaurant', title: 'Get Food', link:'/kitchen' },
         { img: 'fastfood', title: 'Vendors', link:'/vendor'},
       ],
    }),

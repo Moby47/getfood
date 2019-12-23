@@ -160,7 +160,7 @@
                                   //load add to store
                                   localStorage.setItem('vendorAddress',res.data.vendorAddress);
 
-                                  this.$router.push({name: "admindashboard"});
+                                  this.$router.push({name: "vendordashboard"});
                                 }else if (status == 0){
                                   //user
                                   this.$router.push({name: "userdashboard"});
@@ -175,6 +175,7 @@
                     })
                     .catch(error =>{
                       this.overlay = false
+                      console.log(error)
                     })
                   }else{ //if error
                     //error is auto shown, dont worry

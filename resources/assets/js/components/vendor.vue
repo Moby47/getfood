@@ -24,7 +24,7 @@
                             <nav aria-label="breadcrumb ">
                                     <ol class="breadcrumb">
                           <li class="breadcrumb-item"><router-link to='/'>Home</router-link></li>
-                                      <li class="breadcrumb-item"><router-link to='/shop'>Kitchen</router-link></li>
+                                      <li class="breadcrumb-item"><router-link to='/kitchen'>Kitchen</router-link></li>
                                       <li class="breadcrumb-item active" aria-current="page" >Vendors</li>
                                       
                                     </ol>
@@ -224,7 +224,7 @@
             methods: {
     
     cart(){
-            this.$router.push({ name: "cart" })
+            this.$router.push({ name: "table" })
           },
              
           
@@ -363,14 +363,14 @@
             }, //end of clear and write data
 
 
-readAllVendorList(table){
-   console.log('connecting to db')
+
+
+    readAllVendorList(table){
                 var dbPromise = idb.open('getFoodsDB', 14, function (db) {
               if (!db.objectStoreNames.contains(table)) {
                 db.createObjectStore(table, {keyPath: 'id'});
               }
             });
-              console.log('db ready for reading..')
              //read
             function readAllData(table){
             return dbPromise.then(function(db){
@@ -386,8 +386,6 @@ readAllVendorList(table){
           readAllData(table)
           .then(res=>{
             //gives a promise to use data
-            console.log('called read')
-            console.log('read data from ven',res)
             this.vendor_list = res
             this.awaitingList = 'Offline mode'
             console.log('fetched from inDB venlist:',this.vendor_list)

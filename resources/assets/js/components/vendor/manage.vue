@@ -59,7 +59,7 @@
                               </p>
                               
     
-                              <div class='text-center slideUp'>
+                              <div class='text-center slideUp'  v-if='content.length > 7'>
                                   <v-btn small text icon color='#FFA500' @click.prevent="fetch(pagination.prev_page_url)" :disabled="!pagination.prev_page_url"><v-icon>arrow_back</v-icon></v-btn> 
                                   <span>{{pagination.current_page}} of {{pagination.last_page}}</span>
                                   <v-btn small text icon color='#FFA500'  @click.prevent="fetch(pagination.next_page_url)" :disabled="!pagination.next_page_url"><v-icon>arrow_forward</v-icon></v-btn>
@@ -90,6 +90,8 @@
             <div class="text-center">
               <v-overlay :value="overlay">
                 <v-progress-circular indeterminate size="64"></v-progress-circular>
+                <br>
+                Getting food...
               </v-overlay>
             </div>
             </template>
@@ -144,8 +146,15 @@
                                       <div class='text-center slideUp'>
                                           <v-btn small text icon color='#007bff' @click.prevent='edit(newContent)' ><v-icon>edit</v-icon></v-btn> 
                                         
+                                          <span v-if='online'>
                                           <v-btn small text icon color='#ff0000'  @click.prevent='del(newContent)' ><v-icon>delete</v-icon></v-btn>
-                                             </div>
+                                        </span>
+
+                                        <span v-else>
+                                            <v-btn small text icon color='#ff0000'  @click.prevent='delSync(newContent)' ><v-icon>delete</v-icon></v-btn> 
+                                        </span>
+
+                                        </div>
 
                                     </v-list-item-title>
                                 </v-list-item-content>
@@ -184,6 +193,7 @@
                     timeout: 3000,
 
                     newContent:[],
+                    online:null
                 }
             },
     
@@ -259,13 +269,16 @@
                 
                   NProgress.done();
                 })
+                .then(res=>{
+                  setTimeout(func=>{
+                    this.clearAndWriteData('posted-foods',this.content) 
+                      },7000)
+                })
                 .catch(error =>{
                     //off loader
                   //  this.data_load = false;
                   //    this.wait = true;
-                      setTimeout(func=>{
-                          this.fetch();
-                      },2000)
+                  this.readAllFromDB('posted-foods')
                       this.overlay = false
                       NProgress.done();        
                     }) 
@@ -282,10 +295,177 @@
            document.documentElement.scrollTop = 0;
           this.pagination = pagination;
               },
-            },
+
+
+              clearAndWriteData(table,data){
+                var dbPromise = idb.open('getFoodsDB', 14, function (db) {
+              if (!db.objectStoreNames.contains(table)) {
+                db.createObjectStore(table, {keyPath: 'id'});
+              }
+            });
+              console.log('data to save:',data)
+          //clear data func
+          function clearAllData(table){
+              return dbPromise
+              .then(function(db){
+                  var tx = db.transaction(table, 'readwrite');
+                  var store = tx.objectStore(table);
+                  store.clear();
+                  return tx.complete
+                })
+                .catch(error =>{
+                    console.log(error)    
+                    })
+              }
+              //call clear
+              clearAllData(table)
+              .then(function(){
+                //gives a promise 
+                for(var key in data){
+                dbPromise
+            .then(function(db) {
+              var tx = db.transaction(table, 'readwrite');
+              var store = tx.objectStore(table);
+              for(var i in data){
+              store.put(data[i]);
+              }
+              console.log('saved to indexdb')
+              return tx.complete;
+            })
+            .catch(error =>{
+                    console.log(error)    
+                    })
+            }
+              })
+              .catch(error =>{
+                    console.log(error)    
+                    })
+            }, //end of clear and write data
+
+
+
+            readAllFromDB(table){
+   
+   var dbPromise = idb.open('getFoodsDB', 14, function (db) {
+ if (!db.objectStoreNames.contains(table)) {
+   db.createObjectStore(table, {keyPath: 'id'});
+ }
+});
+ 
+//read
+function readAllData(table){
+return dbPromise.then(function(db){
+ var tx = db.transaction(table, 'readonly');
+ var store = tx.objectStore(table);
+ return store.getAll();
+})
+.catch(error =>{
+       console.log(error)    
+       })
+}
+//call fetch indexeddb
+readAllData(table)
+.then(res=>{
+//gives a promise to use data
+this.content = res
+if(res[0] == undefined){
+                 this.empty = true;
+             }else{
+                 this.empty = false;
+             }
+             
+this.awaitingList = 'Offline mode'
+console.log('fetched from inDB :',this.content)
+})
+.catch(error =>{
+       console.log(error)    
+       })
+},
+
+
+delSync(newContent){
+  var dialog = confirm('Mark food for deletion?');
+        if(dialog){
+           //del
+           this.$bvModal.hide('modal')
+
+           this.overlay = true
+
+            if ('serviceWorker' in navigator && 'SyncManager' in window) {
+
+var dbPromise = idb.open('getFoodsDB', 14, function (db) {
+             if (!db.objectStoreNames.contains('sync-deleteFood')) {
+               db.createObjectStore('sync-deleteFood', {keyPath: 'id'});
+               console.log('created store sync-post')
+             }
+             });
+
+             var input = {'id':newContent.id}
+
+         this.text = 'Food queued for deletion from kitchen...'
+         this.snackbar = true
+
+
+   navigator.serviceWorker.ready
+     .then(function(sw) {
+       
+       console.log(input)
+       
+         function saveData(table, input){
+       
+         return   dbPromise
+         .then(function(db) {
+           var tx = db.transaction(table, 'readwrite');
+           var store = tx.objectStore(table);
+           for(var i in input){
+           store.put(input);
+           }
+           return tx.complete;
+         })
+         .catch(error =>{
+           this.overlay = false
+                 console.log(error)    
+                 })
+       }
+
+saveData('sync-deleteFood',input)  
+         .then(res=> {
+           return sw.sync.register('sync-deleteFood-tag');
+         })
+         .then(res=> {
+           console.log('sync saved');
+         })
+         .catch(function(err) {
+           console.log(err);
+         });
+
+     });
+ } else {
+    this.overlay = false 
+   alert('Ofline Mode: Not supported');
+ }
+this.overlay = false 
+
+        }else{
+           //exit
+        }
+},
+
+            },//all meth end
     
             mounted() {
               this.fetch()
+              if(online){
+                //online
+                console.log('on')
+                this.online = true;
+            }else{
+                //offline
+                console.log('off')
+                this.online = false;
+              //  this.readAllFromDB('foods')
+            }
+
             }
         }
     </script>

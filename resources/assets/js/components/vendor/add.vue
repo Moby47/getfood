@@ -89,10 +89,14 @@
                                  </transition>
                           </div>
             
-             <div class="my-2 text-center slideUp">
+             <div class="my-2 text-center slideUp" v-if='online'>
                 <v-btn @click.prevent='post()' outlined color="#FFA500">ADD</v-btn>   
                 </div> 
                   
+                <div class="my-2 text-center slideUp" v-else>
+                    <v-btn @click.prevent='postSync()' outlined color="#FFA500">ADD</v-btn>   
+                    </div> 
+
                         <br>
                         <br>
                       </form>
@@ -163,6 +167,7 @@
             timeout: 3000,
 
             picture:'',
+            online:null
             }
         },
 
@@ -225,11 +230,110 @@
             })
             
 
-          }
+          },
+
+
+
+          
+          postSync(){
+           
+            this.$validator.validateAll().then(() => {
+           
+           if (!this.errors.any()) {
+            //run code
+            this.overlay=true
+
+         
+              if ('serviceWorker' in navigator && 'SyncManager' in window) {
+
+ var dbPromise = idb.open('getFoodsDB', 14, function (db) {
+              if (!db.objectStoreNames.contains('sync-addFood')) {
+                db.createObjectStore('sync-addFood', {keyPath: 'id'});
+                console.log('created store sync-post')
+              }
+              });
+
+
+    var input = {id:  new Date().toISOString(),'food': this.food,'price': this.price,
+    'vendorId': localStorage.getItem('userId'),'vendorName': localStorage.getItem('userName'),
+    'img':'noimage.jpg','address': localStorage.getItem('vendorAddress'),'quantity': this.quantity}
+
+          this.text = 'Food queued for addition to kitchen...'
+          this.snackbar = true
+
+          setTimeout(func=>{
+            this.food = '';
+				this.quantity = '';
+				this.price = '';
+				
+				setTimeout(func=>{
+					this.errors.clear();
+        },5)
+        },2000)
+
+
+    navigator.serviceWorker.ready
+      .then(function(sw) {
+        
+        console.log(input)
+        
+          function saveData(table, input){
+           console.log(table,input)
+
+        
+          return   dbPromise
+          .then(function(db) {
+            var tx = db.transaction(table, 'readwrite');
+            var store = tx.objectStore(table);
+            for(var i in input){
+            store.put(input);
+            }
+            return tx.complete;
+          })
+          .catch(error =>{
+            this.overlay = false
+                  console.log(error)    
+                  })
+        }
+
+saveData('sync-addFood',input)  
+          .then(res=> {
+            return sw.sync.register('sync-addFood-tag');
+          })
+          .then(res=> {
+            console.log('sync saved');
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
+
+      });
+  } else {
+     this.overlay = false 
+    alert('Ofline Mode: Not supported');
+  }
+this.overlay = false 
+
+          } //validation
+          })
+          
+          }, //meth end
+
+
+
         },
 
         mounted() {
-            console.log('Component mounted.')
+          var online = navigator.onLine; 
+            if(online){
+                //online
+                console.log('on')
+                this.online = true;
+            }else{
+                //offline
+                console.log('off')
+                this.online = false;
+            }
         }
     }
 </script>

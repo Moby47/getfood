@@ -6,15 +6,15 @@ Vue.use(Router)
 
 import index from './components/index.vue'
 import about from './components/about.vue'
-import cart from './components/cart.vue'
+import table from './components/table.vue'
 import checkout from './components/checkout.vue'
 import favorite from './components/favorite.vue'
 import resendEmail from './components/auth/resendEmail.vue'
-import admindashboard from './components/vendor/admindashboard.vue'
+import vendordashboard from './components/vendor/vendordashboard.vue'
 import userdashboard from './components/customer/userdashboard.vue'
 import filterorders from './components/customer/filterorders.vue'
 import login from './components/auth/login.vue'
-import product from './components/vendor/product.vue'
+import add from './components/vendor/add.vue'
 import orders from './components/vendor/orders.vue'
 import manage from './components/vendor/manage.vue'
 import edit from './components/vendor/edit.vue'
@@ -22,7 +22,7 @@ import favorites from './components/vendor/favorites.vue'
 import register from './components/auth/register.vue'
 import vendorRegister from './components/auth/vendorRegister.vue'
 import share from './components/share.vue'
-import shop from './components/shop.vue'
+import kitchen from './components/kitchen.vue'
 import success from './components/success.vue'
 import notfound from './components/notfound.vue'
 import vendor from './components/vendor.vue'
@@ -51,9 +51,9 @@ export default new Router({
             }
         },
         {
-            path: '/cart',
-            name: 'cart',
-            component: cart,
+            path: '/table',
+            name: 'table',
+            component: table,
              meta:{
               //  auth: true
             }
@@ -107,9 +107,9 @@ export default new Router({
             }
         },
         {
-            path: '/admindashboard',
-            name: 'admindashboard',
-            component: admindashboard,
+            path: '/vendordashboard',
+            name: 'vendordashboard',
+            component: vendordashboard,
              meta:{
                 vendor: true
             }
@@ -124,9 +124,9 @@ export default new Router({
         },
      
         {
-            path: '/product',
-            name: 'product',
-            component: product,
+            path: '/add-food',
+            name: 'add',
+            component: add,
              meta:{
                 vendor: true
             }
@@ -188,9 +188,9 @@ export default new Router({
             }
         },
         {
-            path: '/shop',
-            name: 'shop',
-            component: shop,
+            path: '/kitchen',
+            name: 'kitchen',
+            component: kitchen,
              meta:{
               //  auth: true
             }

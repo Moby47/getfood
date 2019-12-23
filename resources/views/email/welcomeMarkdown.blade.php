@@ -3,7 +3,6 @@
 
 
 
-<p>Welcome!</p>
 
 <ul class="">
                 <li>Provide a reservation/ordering system for customers</li>

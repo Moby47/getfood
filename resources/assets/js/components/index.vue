@@ -200,7 +200,7 @@ import {eventBus} from "../app.js";
       methods: {
 
         shop(){
-            this.$router.push({ name: "shop" })
+            this.$router.push({ name: "kitchen" })
           },
 
           login(){

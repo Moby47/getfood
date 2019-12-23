@@ -326,7 +326,7 @@
          },
 
        cart(){
-            this.$router.push({ name: "cart" })
+            this.$router.push({ name: "table" })
           },
 
   fetch(page_url){
@@ -406,7 +406,6 @@
                           }else{
                             this.awaitingList = ''
                           }
-                  
                 })
                  .then(res=>{
                   setTimeout(func=>{
@@ -465,13 +464,13 @@
 
 
               readAllData(table){ //param = name of store/table
-                console.log('connecting to db')
+                
                 var dbPromise = idb.open('getFoodsDB', 14, function (db) {
               if (!db.objectStoreNames.contains(table)) {
                 db.createObjectStore(table, {keyPath: 'id'});
               }
             });
-              console.log('db ready for reading..')
+              
              //read
             function readAllData(table){
             return dbPromise.then(function(db){
@@ -487,8 +486,6 @@
           readAllData(table)
           .then(res=>{
             //gives a promise to use data
-            console.log('called read')
-            console.log('read data',res)
             this.content = res
             console.log('fetched from inDB:',this.content)
           })
@@ -500,13 +497,13 @@
 
 
 readAllVendorList(table){
-   console.log('connecting to db')
+   
                 var dbPromise = idb.open('getFoodsDB', 14, function (db) {
               if (!db.objectStoreNames.contains(table)) {
                 db.createObjectStore(table, {keyPath: 'id'});
               }
             });
-              console.log('db ready for reading..')
+              
              //read
             function readAllData(table){
             return dbPromise.then(function(db){
@@ -522,9 +519,13 @@ readAllVendorList(table){
           readAllData(table)
           .then(res=>{
             //gives a promise to use data
-            console.log('called read')
-            console.log('read data from ven',res)
             this.vendor_list = res
+            if(res[0] == undefined){
+                              this.empty = true;
+                          }else{
+                              this.empty = false;
+                          }
+                          
             this.awaitingList = 'Offline mode'
             console.log('fetched from inDB venlist:',this.vendor_list)
           })
@@ -535,13 +536,11 @@ readAllVendorList(table){
 
 
             clearAndWriteData(table,data){
-              console.log('connecting to db')
                 var dbPromise = idb.open('getFoodsDB', 14, function (db) {
               if (!db.objectStoreNames.contains(table)) {
                 db.createObjectStore(table, {keyPath: 'id'});
               }
             });
-              console.log('db ready to be cleared..')
               console.log('data to save:',data)
           //clear data func
           function clearAllData(table){
@@ -560,10 +559,7 @@ readAllVendorList(table){
               clearAllData(table)
               .then(function(){
                 //gives a promise 
-                console.log('cleared')
-
                 for(var key in data){
-              console.log('data keys:',key)
                 dbPromise
             .then(function(db) {
               var tx = db.transaction(table, 'readwrite');
@@ -632,8 +628,8 @@ readAllVendorList(table){
                 //offline
                 console.log('off')
                 this.online = false;
-               // this.readAllVendorList('vendor-list')
-               // this.readAllData('foods')
+                this.readAllVendorList('vendor-list')
+                this.readAllData('foods')
             }
       },
      

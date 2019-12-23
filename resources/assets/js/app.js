@@ -99,7 +99,7 @@ router.beforeEach((to, from, next) => {
         if(localStorage.getItem('userStatus') == 1){
             next()
         }else{
-            next({path: '/admindashboard'})
+            next({path: '/vendordashboard'})
         }        
     }else{
         //redirect
@@ -112,7 +112,7 @@ router.beforeEach((to, from, next) => {
     if(localStorage.getItem('userToken')){
         //continue
         if(localStorage.getItem('userStatus') == 1){
-        next({path: '/admindashboard'})
+        next({path: '/vendordashboard'})
         }else if(localStorage.getItem('userStatus') == 0){
             next({path: '/userdashboard'})  
         }else if(localStorage.getItem('userStatus') == 47){

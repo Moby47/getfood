@@ -23,6 +23,10 @@ class VerifyCsrfToken extends Middleware
         'http://localhost:8000/remove-fav-from-cart',
 
         'http://localhost:8000/remove-from-fav',
+
+        'http://localhost:8000/new-food',
+        'http://localhost:8000/delete-food',
+        'http://localhost:8000/edit-food',
         
     ];
 }

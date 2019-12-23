@@ -153,6 +153,9 @@ methods: {
                         this.snackbar = true;
                         //update cart count
                         this.cartcount()
+                            }else{
+                              this.text='Only '+res.data+' is currently remaining for this food'
+                            this.snackbar = true;
                             }
                             this.overlay = !this.overlay
                            

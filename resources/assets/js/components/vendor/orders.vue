@@ -46,9 +46,13 @@
   <span class='text-danger shake' v-show="errors.has('Reference')">{{ errors.first('Reference') }}</span>
    </transition>
 <br>
- <div class="my-2 text-center slideUp">
+ <div class="my-2 text-center slideUp" v-if='online'>
                 <v-btn @click.prevent='search()' outlined color="#FFA500">FIND</v-btn>   
                 </div> 
+
+                <div class="my-2 text-center slideUp" v-else>
+                    <v-btn @click.prevent='offline()' outlined color="#FFA500">FIND</v-btn>   
+                    </div> 
 
                </div>
                 
@@ -112,7 +116,7 @@
                       </table>
                     </div>
 
-                     <div class='text-center slideUp'>
+                     <div class='text-center slideUp' v-if='content.length > 7'>
                                   <v-btn small text icon color='#FFA500' @click.prevent="fetch(pagination.prev_page_url)" :disabled="!pagination.prev_page_url"><v-icon>arrow_back</v-icon></v-btn> 
                                   <span>{{pagination.current_page}} of {{pagination.last_page}}</span>
                                   <v-btn small text icon color='#FFA500'  @click.prevent="fetch(pagination.next_page_url)" :disabled="!pagination.next_page_url"><v-icon>arrow_forward</v-icon></v-btn>
@@ -196,6 +200,8 @@
       <div class="text-center">
         <v-overlay :value="overlay">
           <v-progress-circular indeterminate size="64"></v-progress-circular>
+          <br>
+          Setting up...
         </v-overlay>
       </div>
       </template>
@@ -229,6 +235,7 @@
               refCon: false,
 
                newContent:[],
+               online:null
             }
         },
 
@@ -237,6 +244,10 @@
            check(con){
            this.newContent = con
            this.$bvModal.show('modal')
+         },
+
+         offline(){
+          this.$toasted.show("This feature is not available in offline mode...");
          },
 
           search(){
@@ -316,7 +327,7 @@ if(page_url){
               //    this.wait = true;
                   setTimeout(func=>{
                       this.fetch();
-                  },2000)
+                  },5000)
                   this.overlay = false
                   NProgress.done();        
                 }) 
@@ -336,7 +347,20 @@ if(page_url){
         },
 
         mounted() {
-          this.fetch()
+          
+
+          var online = navigator.onLine; 
+            if(online){
+                //online
+                console.log('on')
+                this.online = true;
+                this.fetch()
+            }else{
+                //offline
+                console.log('off')
+                this.online = false;
+            }
+
         }
     }
 </script>

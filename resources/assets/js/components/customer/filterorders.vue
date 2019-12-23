@@ -37,9 +37,13 @@
                               <p class='text-danger shake' v-show="errors.has('To')">{{ errors.first('To') }}</p>
                             </div>
                             
-                            <div class="my-2 text-center">
+                            <div class="my-2 text-center" v-if='online'>
                                 <v-btn @click.prevent='fetch()' outlined color="#FFA500">FIND</v-btn>   
                                 </div> 
+                                <div class="my-2 text-center" v-else>
+                                    <v-btn @click.prevent='offline()' outlined color="#FFA500">FIND</v-btn>   
+                                    </div> 
+
                             <br>
                             <br>
                           </form>
@@ -199,6 +203,7 @@
                   empty:false,
 
                   newContent:[],
+                  online:null
                 }
             },
     
@@ -209,6 +214,10 @@
            this.$bvModal.show('modal')
          },
     
+         offline(){
+          this.$toasted.show("This feature is not available in offline mode...");
+         },
+
      fetch(page_url){
 
          this.$validator.validateAll().then(() => {
@@ -283,7 +292,17 @@
             },
     
             mounted() {
-             //  this.fetch()
+              var online = navigator.onLine; 
+            if(online){
+                //online
+                console.log('on')
+                this.online = true;
+            }else{
+                //offline
+                console.log('off')
+                this.online = false;
+                this.$toasted.show("Offline mode...");
+            }
             }
         }
     </script>

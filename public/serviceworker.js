@@ -74,6 +74,21 @@ var dbPromise = idb.open('getFoodsDB', 14, function (db) {
       if (!db.objectStoreNames.contains('sync-deleteFav')) {
         db.createObjectStore('sync-deleteFav', {keyPath: 'id'});
       }
+      if (!db.objectStoreNames.contains('sync-addFood')) {
+        db.createObjectStore('sync-addFood', {keyPath: 'id'});
+      }
+      if (!db.objectStoreNames.contains('posted-foods')) {
+        db.createObjectStore('posted-foods', {keyPath: 'id'});
+      }
+      if (!db.objectStoreNames.contains('sync-deleteFood')) {
+        db.createObjectStore('sync-deleteFood', {keyPath: 'id'});
+      }
+      if (!db.objectStoreNames.contains('sync-updateFood')) {
+        db.createObjectStore('sync-updateFood', {keyPath: 'id'});
+      }
+      if (!db.objectStoreNames.contains('food-likeList')) {
+        db.createObjectStore('food-likeList', {keyPath: 'title'});
+      }
   });
 
 // Cache on install
@@ -158,16 +173,12 @@ function clearAllData(table){
 self.addEventListener('sync', function(event) {
     console.log('[Service Worker] Background syncing', event);
     if (event.tag === 'sync-fav-tag') {
-      console.log('[Service Worker] Syncing......');
-      //fetch post stored for sync
-      //post it (send to db)
-      //delete awaiting sync //clear db if res ==ok
+      
       event.waitUntil(
         readAllData('sync-fav')
           .then(function(data) {
-            console.log('read sync-fav');
             for (var dt of data) {
-              // fetch('https://testdb-5a8d4.firebaseio.com/posts.json', {
+              
               fetch('/add-favorite', {
                 method: 'POST',
                 headers: {
@@ -179,15 +190,14 @@ self.addEventListener('sync', function(event) {
                   foodId: dt.foodId, })
               })
                 .then(function(res) {
-                  console.log('Sent data', res);
+                  
                   if (res.ok) {
-                    console.log('Sync data deleted');
+                    console.log('Background Sync Completed');
 
                      //call clear
                 clearAllData('sync-fav')
                 .then(function(){
                   //gives a promise 
-                  console.log('cleared')
                 })
                 .catch(error =>{
                       console.log(error)    
@@ -217,16 +227,12 @@ self.addEventListener('sync', function(event) {
 self.addEventListener('sync', function(event) {
     console.log('[Service Worker] Background syncing', event);
     if (event.tag === 'sync-unfav-tag') {
-      console.log('[Service Worker] Syncing......');
-      //fetch post stored for sync
-      //post it (send to db)
-      //delete awaiting sync //clear db if res ==ok
       event.waitUntil(
         readAllData('sync-unfav')
           .then(function(data) {
-            console.log('read sync-unfav');
+            
             for (var dt of data) {
-              // fetch('https://testdb-5a8d4.firebaseio.com/posts.json', {
+              
               fetch('/remove-favorite', {
                 method: 'POST',
                 headers: {
@@ -238,15 +244,15 @@ self.addEventListener('sync', function(event) {
                   foodId: dt.foodId, })
               })
                 .then(function(res) {
-                  console.log('Sent data', res);
+                  
                   if (res.ok) {
-                    console.log('Sync data deleted');
+                    console.log('Background Sync Completed');
 
                          //call clear
                 clearAllData('sync-unfav')
                 .then(function(){
                   //gives a promise 
-                  console.log('cleared')
+                  
                 })
                 .catch(error =>{
                       console.log(error)    
@@ -278,7 +284,7 @@ self.addEventListener('sync', function(event) {
 self.addEventListener('sync', function(event) {
   console.log('[Service Worker] Background syncing', event);
   if (event.tag === 'sync-addToCart-tag') {
-    console.log('[Service Worker] Syncing......');
+    
     //fetch post stored for sync
     //post it (send to db)
     //delete awaiting sync //clear db if res ==ok
@@ -287,7 +293,7 @@ self.addEventListener('sync', function(event) {
         .then(function(data) {
           console.log('read sync-addToCart');
           for (var dt of data) {
-            // fetch('https://testdb-5a8d4.firebaseio.com/posts.json', {
+            
             fetch('/add-to-cart', {
               method: 'POST',
               headers: {
@@ -301,18 +307,18 @@ self.addEventListener('sync', function(event) {
              })
             })
               .then(function(res) {
-                console.log('Sent data', res);
+                
                 if (res.ok) {
-                  console.log('Sync data deleted');
+                  console.log('Background Sync Completed');
 
                        //call clear
               clearAllData('sync-addToCart')
               .then(function(){
                 //gives a promise 
-                console.log('cleared')
+                
               })
               .catch(error =>{
-                    console.log(error)    
+                    console.log('Error while clearing data',error)    
                     })
 
                 }
@@ -338,16 +344,12 @@ self.addEventListener('sync', function(event) {
 self.addEventListener('sync', function(event) {
   console.log('[Service Worker] Background syncing', event);
   if (event.tag === 'sync-removeFromCart-tag') {
-    console.log('[Service Worker] Syncing......');
-    //fetch post stored for sync
-    //post it (send to db)
-    //delete awaiting sync //clear db if res ==ok
     event.waitUntil(
       readAllData('sync-removeFromCart')
         .then(function(data) {
           console.log('read sync-removeFromCart');
           for (var dt of data) {
-            // fetch('https://testdb-5a8d4.firebaseio.com/posts.json', {
+            
             fetch('/remove-from-cart', {
               method: 'POST',
               headers: {
@@ -360,15 +362,15 @@ self.addEventListener('sync', function(event) {
              })
             })
               .then(function(res) {
-                console.log('Sent data', res);
+                
                 if (res.ok) {
-                  console.log('Sync data deleted');
+                  console.log('Background Sync Completed');
 
                        //call clear
               clearAllData('sync-removeFromCart')
               .then(function(){
                 //gives a promise 
-                console.log('cleared')
+                
               })
               .catch(error =>{
                     console.log(error)    
@@ -398,10 +400,6 @@ self.addEventListener('sync', function(event) {
   self.addEventListener('sync', function(event) {
    // console.log('[Service Worker] Background syncing', event);
     if (event.tag === 'sync-addToCartFromFav-tag') {
-    //  console.log('[Service Worker] Syncing......');
-      //fetch post stored for sync
-      //post it (send to db)
-      //delete awaiting sync //clear db if res ==ok
       event.waitUntil(
         readAllData('sync-addToCart')
           .then(function(data) {
@@ -409,7 +407,7 @@ self.addEventListener('sync', function(event) {
          //   console.log('verify for id from SW',data)
 
             for (var dt of data) {
-              // fetch('https://testdb-5a8d4.firebaseio.com/posts.json', {
+              
               fetch('/add-fav-to-cart', {
                 method: 'POST',
                 headers: {
@@ -423,15 +421,15 @@ self.addEventListener('sync', function(event) {
                })
               })
                 .then(function(res) {
-                  console.log('Sent data', res);
+                  
                   if (res.ok) {
-                    console.log('Sync data deleted');
+                    console.log('Background Sync Completed');
   
                          //call clear
                 clearAllData('sync-addToCart')
                 .then(function(){
                   //gives a promise 
-                  console.log('cleared')
+                  
                 })
                 .catch(error =>{
                       console.log(error)    
@@ -461,7 +459,7 @@ self.addEventListener('sync', function(event) {
 self.addEventListener('sync', function(event) {
   console.log('[Service Worker] Background syncing', event);
   if (event.tag === 'sync-removeFromCartFromFav-tag') {
-    console.log('[Service Worker] Syncing......');
+    
     //fetch post stored for sync
     //post it (send to db)
     //delete awaiting sync //clear db if res ==ok
@@ -470,7 +468,7 @@ self.addEventListener('sync', function(event) {
         .then(function(data) {
           console.log('read sync-removeFromCart');
           for (var dt of data) {
-            // fetch('https://testdb-5a8d4.firebaseio.com/posts.json', {
+            
             fetch('/remove-fav-from-cart', {
               method: 'POST',
               headers: {
@@ -483,15 +481,15 @@ self.addEventListener('sync', function(event) {
              })
             })
               .then(function(res) {
-                console.log('Sent data', res);
+                
                 if (res.ok) {
-                  console.log('Sync data deleted');
+                  console.log('Background Sync Completed');
 
                        //call clear
               clearAllData('sync-removeFromCart')
               .then(function(){
                 //gives a promise 
-                console.log('cleared')
+                
               })
               .catch(error =>{
                     console.log(error)    
@@ -523,10 +521,7 @@ self.addEventListener('sync', function(event) {
   self.addEventListener('sync', function(event) {
     console.log('[Service Worker] Background syncing', event);
     if (event.tag === 'sync-deleteFav-tag') {
-      console.log('[Service Worker] Syncing......');
-      //fetch post stored for sync
-      //post it (send to db)
-      //delete awaiting sync //clear db if res ==ok
+      
       event.waitUntil(
         readAllData('sync-deleteFav')
           .then(function(data) {
@@ -545,15 +540,15 @@ self.addEventListener('sync', function(event) {
                })
               })
                 .then(function(res) {
-                  console.log('Sent data', res);
+                  
                   if (res.ok) {
-                    console.log('Sync data deleted');
+                    console.log('Background Sync Completed');
   
                          //call clear
                 clearAllData('sync-deleteFav')
                 .then(function(){
                   //gives a promise 
-                  console.log('cleared')
+                  
                 })
                 .catch(error =>{
                       console.log(error)    
@@ -573,3 +568,185 @@ self.addEventListener('sync', function(event) {
   
   
   // ****************** lISTEN FOR NETWORK AND [POST REMOVE  FAV] *****
+
+
+
+
+  
+  // ****************** lISTEN FOR NETWORK AND [POST ADD FOOD] *****
+
+ 
+  self.addEventListener('sync', function(event) {
+    console.log('[Service Worker] Background syncing', event);
+    if (event.tag === 'sync-addFood-tag') {
+      
+      event.waitUntil(
+        readAllData('sync-addFood')
+          .then(function(data) {
+            console.log('read sync-addFood');
+            for (var dt of data) {
+              fetch('/new-food', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                  food: dt.food,
+                  price: dt.price,
+                  vendorId: dt.vendorId,
+                  vendorName: dt.vendorName,
+                  address: dt.address,
+                  img: dt.img,
+                  quantity: dt.quantity,
+               })
+              })
+                .then(function(res) {
+                  
+                  if (res.ok) {
+                    console.log('Background Sync Completed');
+  
+                         //call clear
+                clearAllData('sync-addFood')
+                .then(function(){
+                  //gives a promise 
+                  
+                })
+                .catch(error =>{
+                      console.log(error)    
+                      })
+  
+                  }
+                })
+                .catch(function(err) {
+                  console.log('Error while sending data', err);
+                });
+            }
+  
+          })
+      );
+    }
+  });
+  
+  
+  // ****************** lISTEN FOR NETWORK AND [POST ADD FOOD] *****
+
+
+   
+  // ****************** lISTEN FOR NETWORK AND [DELETE FOOD] *****
+
+ 
+  self.addEventListener('sync', function(event) {
+    console.log('[Service Worker] Background syncing', event);
+    if (event.tag === 'sync-deleteFood-tag') {
+      
+      event.waitUntil(
+        readAllData('sync-deleteFood')
+          .then(function(data) {
+            console.log('read sync-deleteFood');
+            for (var dt of data) {
+              fetch('/delete-food', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                  id: dt.id,
+               })
+              })
+                .then(function(res) {
+                  
+                  if (res.ok) {
+                    console.log('Background Sync Completed');
+  
+                         //call clear
+                clearAllData('sync-deleteFood')
+                .then(function(){
+                  //gives a promise 
+                  
+                })
+                .catch(error =>{
+                      console.log(error)    
+                      })
+  
+                  }
+                })
+                .catch(function(err) {
+                  console.log('Error while sending data', err);
+                });
+            }
+  
+          })
+      );
+    }
+  });
+  
+  
+  // ****************** lISTEN FOR NETWORK AND [DELETE FOOD] *****
+
+
+
+
+
+  
+  
+  // ****************** lISTEN FOR NETWORK AND [POST UPDATE FOOD] *****
+
+ 
+  self.addEventListener('sync', function(event) {
+    console.log('[Service Worker] Background syncing');
+    if (event.tag === 'sync-updateFood-tag') {
+      
+      event.waitUntil(
+        readAllData('sync-updateFood')
+          .then(function(data) {
+            console.log('data',data);
+            for (var dt of data) {
+              fetch('/edit-food', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                  id: dt.id,
+                  food: dt.food,
+                  price: dt.price,
+                  vendorId: dt.vendorId,
+                  vendorName: dt.vendorName,
+                  address: dt.address,
+                  img: dt.img,
+                  quantity: dt.quantity,
+               })
+              })
+                .then(function(res) {
+                  
+                  if (res.ok) {
+                    console.log('Background Sync Completed');
+  
+                         //call clear
+                clearAllData('sync-updateFood')
+                .then(function(){
+                  //gives a promise 
+                  
+                })
+                .catch(error =>{
+                      console.log(error)    
+                      })
+  
+                  }
+                })
+                .catch(function(err) {
+                  console.log('Error while sending data', err);
+                });
+            }
+  
+          })
+      );
+    }
+  });
+  
+  
+  // ****************** lISTEN FOR NETWORK AND [POST ADD FOOD] *****
+

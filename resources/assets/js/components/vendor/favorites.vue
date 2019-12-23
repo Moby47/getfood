@@ -85,6 +85,8 @@
         <div class="text-center">
           <v-overlay :value="overlay">
             <v-progress-circular indeterminate size="64"></v-progress-circular>
+            <br>
+            Setting up...
           </v-overlay>
         </div>
         </template>
@@ -144,11 +146,14 @@ if(page_url){
             
               NProgress.done();
             })
+            .then(res=>{
+                  setTimeout(func=>{
+                    this.clearAndWriteData('food-likeList',this.content) 
+                      },7000)
+                })
             .catch(error =>{
                console.log(error)
-                  setTimeout(func=>{
-                      this.fetch();
-                  },2000)
+               this.readAllFromDB('food-likeList')
                   this.overlay = false
                   NProgress.done();        
                 }) 
@@ -165,10 +170,110 @@ if(page_url){
        document.documentElement.scrollTop = 0;
       this.pagination = pagination;
           },
+
+
+
+          clearAndWriteData(table,data){
+                var dbPromise = idb.open('getFoodsDB', 14, function (db) {
+              if (!db.objectStoreNames.contains(table)) {
+                db.createObjectStore(table, {keyPath: 'title'});
+              }
+            });
+              console.log('data to save:',data)
+          //clear data func
+          function clearAllData(table){
+              return dbPromise
+              .then(function(db){
+                  var tx = db.transaction(table, 'readwrite');
+                  var store = tx.objectStore(table);
+                  store.clear();
+                  return tx.complete
+                })
+                .catch(error =>{
+                    console.log(error)    
+                    })
+              }
+              //call clear
+              clearAllData(table)
+              .then(function(){
+                //gives a promise 
+                for(var key in data){
+                dbPromise
+            .then(function(db) {
+              var tx = db.transaction(table, 'readwrite');
+              var store = tx.objectStore(table);
+              for(var i in data){
+              store.put(data[i]);
+              }
+              console.log('saved to indexdb')
+              return tx.complete;
+            })
+            .catch(error =>{
+                    console.log(error)    
+                    })
+            }
+              })
+              .catch(error =>{
+                    console.log(error)    
+                    })
+            }, //end of clear and write data
+
+
+
+            readAllFromDB(table){
+   
+   var dbPromise = idb.open('getFoodsDB', 14, function (db) {
+ if (!db.objectStoreNames.contains(table)) {
+   db.createObjectStore(table, {keyPath: 'id'});
+ }
+});
+ 
+//read
+function readAllData(table){
+return dbPromise.then(function(db){
+ var tx = db.transaction(table, 'readonly');
+ var store = tx.objectStore(table);
+ return store.getAll();
+})
+.catch(error =>{
+       console.log(error)    
+       })
+}
+//call fetch indexeddb
+readAllData(table)
+.then(res=>{
+//gives a promise to use data
+this.content = res
+if(res[0] == undefined){
+                 this.empty = true;
+             }else{
+                 this.empty = false;
+             }
+             
+this.awaitingList = 'Offline mode'
+console.log('fetched from inDB :',this.content)
+})
+.catch(error =>{
+       console.log(error)    
+       })
+},
+
         },
 
         mounted() {
-          this.fetch()
-        }
+              this.fetch()
+
+              if(online){
+                //online
+                console.log('on')
+                this.online = true;
+            }else{
+                //offline
+                console.log('off')
+                this.online = false;
+              //  this.readAllFromDB('foods')
+            }
+
+            }
     }
 </script>

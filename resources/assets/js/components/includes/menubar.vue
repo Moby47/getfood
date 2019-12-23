@@ -43,7 +43,7 @@
     <router-link to='/userdashboard' v-if='status == 0'>
           <v-list-item-title>Dashboard</v-list-item-title>
     </router-link>
-      <router-link to='/admindashboard' v-if='status == 1'>
+      <router-link to='/vendordashboard' v-if='status == 1'>
           <v-list-item-title>Dashboard</v-list-item-title>
     </router-link>
     <router-link to='/super-admin-dashboard' v-if='status == 47'>
@@ -139,7 +139,7 @@ import {eventBus} from "../../app.js";
         status:'',
           sheet: false,
       tiles: [
-        { img: 'restaurant', title: 'Get Food', link:'/shop' },
+        { img: 'restaurant', title: 'Get Food', link:'/kitchen' },
         { img: 'fastfood', title: 'Vendors', link:'/vendor'},
         { img: 'favorite', title: 'My Favorites', link:'/favorite'},
         { img: 'perm_device_information', title: 'About Us', link:'/about'},

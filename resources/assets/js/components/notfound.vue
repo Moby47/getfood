@@ -14,7 +14,7 @@
             <div class="success_message">
             <span>No Food Here</span>
             <img src="/images/confused.gif" alt="" title="" />
-            <p>Please Try <br /> <router-link to='/shop' class=''>HERE</router-link></p>            
+            <p>Please Try <br /> <router-link to='/kitchen' class=''>HERE</router-link></p>            
             </div>
       </div>
       

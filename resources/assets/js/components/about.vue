@@ -113,7 +113,7 @@ data: function() {
 
 methods:{
     shop(){
-            this.$router.push({ name: "shop" })
+            this.$router.push({ name: "kitchen" })
           }
 }
 

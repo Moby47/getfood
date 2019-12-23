@@ -99,7 +99,7 @@ import {eventBus} from "../../app.js";
                       localStorage.removeItem('cart')
 
           //redirect to food page
-          this.$router.push({name: "shop"});
+          this.$router.push({name: "kitchen"});
             })
             .catch(error =>{
                 console.log(error)    
