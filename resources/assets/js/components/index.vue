@@ -66,6 +66,15 @@
                     ></v-img>
                     </v-list-item>
                 
+                    <v-card-text class='slideUp'>
+                        <v-row
+                          align="center"
+                          class="mx-0"
+                        >
+                        </v-row>
+                        <div>Take advantage of the platform to make life easier.</div>
+                      </v-card-text>
+
                     <v-card-actions>
                       <span class='text-center'>
                       <v-btn  text outlined  color="#FFA500" class='mr-1 ' @click.prevent='login()'>Get Started</v-btn>
@@ -92,6 +101,15 @@
                 </v-img>
                     </v-list-item>
                 
+                    <v-card-text class='slideUp'>
+                        <v-row
+                          align="center"
+                          class="mx-0"
+                        >
+                        </v-row>
+                        <div>Get food from your best food vendors with ease.</div>
+                      </v-card-text>
+
                     <v-card-actions>
                       <span class='text-center'>
                       <v-btn  text outlined  color="#FFA500" class='mr-1 ' @click.prevent='vendor()'>Find Vendor</v-btn>
@@ -270,7 +288,8 @@ import {eventBus} from "../app.js";
         //menu
          // this.isAuth()
 
-
+//Push.create('Hello World!')
+        
 
             if(localStorage.getItem('userName')){
               this.userName = localStorage.getItem('userName') +'.'

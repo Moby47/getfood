@@ -222,6 +222,7 @@
               empty:false,
 
               newContent:[],
+              online:null
             }
         },
 
@@ -316,9 +317,11 @@
                     //off loader
                   //  this.data_load = false;
                   //    this.wait = true;
+                     if(this.online == true){
                       setTimeout(func=>{
                           this.fetch();
                       },2000)
+                     }
                       this.overlay = false
                       NProgress.done();        
                     }) 
@@ -352,8 +355,10 @@
             if(online){
                 //online
                 console.log('on')
+                this.online =  true
             }else{
                 //offline
+                this.online = false
                 console.log('off')
                 this.$toasted.show("Offline mode...");
             }

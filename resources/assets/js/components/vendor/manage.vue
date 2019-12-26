@@ -393,6 +393,9 @@ delSync(newContent){
 
             if ('serviceWorker' in navigator && 'SyncManager' in window) {
 
+                //notify after syncing => title,body,tag
+  this.displayConfirmNotification('Backgroud task created','Food will be removed from kitchen', 'remove-from-kitchen')
+
 var dbPromise = idb.open('getFoodsDB', 14, function (db) {
              if (!db.objectStoreNames.contains('sync-deleteFood')) {
                db.createObjectStore('sync-deleteFood', {keyPath: 'id'});
@@ -450,6 +453,24 @@ this.overlay = false
            //exit
         }
 },
+
+
+displayConfirmNotification(title, body, tag) {
+      var options = {
+        body: body,
+        icon: '/images/app-icons/app-icon-96x96.png',
+       image: '/images/noimage.jpg',
+        dir: 'ltr',
+        lang: 'en-US', // BCP 47,
+        vibrate: [100, 50, 200],
+        badge: '/images/app-icons/app-icon-96x96.png',
+        timeout: 6000,
+        tag: tag,
+        renotify: true,
+      };
+      Push.create(title, options);
+
+  },
 
             },//all meth end
     

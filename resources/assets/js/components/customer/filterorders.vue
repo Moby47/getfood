@@ -116,6 +116,8 @@
       <div class="text-center">
         <v-overlay :value="overlay">
           <v-progress-circular indeterminate size="64"></v-progress-circular>
+          <br>
+          Searching...
         </v-overlay>
       </div>
       </template>

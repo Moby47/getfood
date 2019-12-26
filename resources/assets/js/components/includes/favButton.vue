@@ -154,6 +154,9 @@ unFavoriteSync(id){
               
               if ('serviceWorker' in navigator && 'SyncManager' in window) {
 
+                  //notify after syncing => title,body,tag
+                  this.displayConfirmNotification('Backgroud task created','The selected food will be removed from favorites', 'remove-from-fav')
+
                 this.text = 'Food queued for removal from favorites...'
           this.snackbar = true
 
@@ -222,6 +225,10 @@ saveData('sync-unfav',input)
               });
               
               if ('serviceWorker' in navigator && 'SyncManager' in window) {
+
+                  //notify after syncing => title,body,tag
+  this.displayConfirmNotification('Backgroud task created','The selected food will be added to favorites', 'add-to-fav')
+
                      this.text = 'Food queued for addition to favorites...'
           this.snackbar = true
 
@@ -295,6 +302,8 @@ saveData('sync-fav',input)
               
               if ('serviceWorker' in navigator && 'SyncManager' in window) {
 
+                  //notify after syncing => title,body,tag
+                  this.displayConfirmNotification('Backgroud task created','The selected food will be added to favorites', 'add-to-fav')
                    this.text = 'Food queued for addition to favorites...'
           this.snackbar = true
 
@@ -338,7 +347,41 @@ saveData('sync-fav',input)
   NProgress.done();    
 
                     }
+
+
+                    
             },
+
+
+displayConfirmNotification(title, body, tag) {
+    console.log('in notification function')
+//if ('serviceWorker' in navigator) {
+   //   console.log('SW in Nav')
+      var options = {
+        body: body,
+        icon: '/images/app-icons/app-icon-96x96.png',
+       image: '/images/noimage.jpg',
+        dir: 'ltr',
+        lang: 'en-US', // BCP 47,
+        vibrate: [100, 50, 200],
+        badge: '/images/app-icons/app-icon-96x96.png',
+        timeout: 6000,
+        tag: tag,
+        renotify: true,
+      /*  actions: [
+          { action: 'confirm', title: 'Okay', icon: '/src/images/icons/app-icon-96x96.png' },
+          { action: 'cancel', title: 'Cancel', icon: '/src/images/icons/app-icon-96x96.png' }
+        ]*/
+      };
+      Push.create(title, options);
+//navigator.serviceWorker.ready
+//.then(function(swreg) {
+//swreg.showNotification('Backgroud task created', options);
+   //     });
+    //}else{
+    //  console.log('No sw supp')
+   // }
+  },
 
         },
 

@@ -124,6 +124,10 @@ data: function() {
               
               if ('serviceWorker' in navigator && 'SyncManager' in window) {
 
+                
+            //notify after syncing => title,body,tag
+  this.displayConfirmNotification('Backgroud task created','Your food will be added to the table', 'add-to-cart')
+
                  if(!localStorage.getItem('tempUserCartID')){
                     var tempUserCartID = Math.floor(Math.random()*1234567890);
                      localStorage.setItem('tempUserCartID',tempUserCartID);
@@ -137,15 +141,15 @@ data: function() {
               }
               });
 
-                var input = {id: new Date().toISOString(),'foodId':con.id, 'userId':localStorage.getItem('tempUserCartID'),'qty':this.qty};
+                var input = {id: new Date().toISOString(),'foodId':con.id, 
+                'userId':localStorage.getItem('tempUserCartID'),'qty':this.qty};
 
                    this.text = 'Food queued for addition to table...'
           this.snackbar = true
 
+
     navigator.serviceWorker.ready
       .then(function(sw) {
-        
-        console.log(input)
         
                 function saveData(table, input){
                     console.log(table,input)
@@ -172,7 +176,7 @@ saveData('sync-addToCart',input)
           })
           .then(res=> {
             console.log('sync saved');
-           // alert('This food will be added to cart when internet connection is detected...')
+
           })
           .catch(function(err) {
             console.log(err);
@@ -181,7 +185,7 @@ saveData('sync-addToCart',input)
       });
   } else {
      this.overlay = false 
-    alert('Ofline Mode: Not supported');
+    alert('Your browser does not support this feature in offline mode');
   }
 this.overlay = false 
             },
@@ -200,6 +204,10 @@ this.overlay = false
                
               
               if ('serviceWorker' in navigator && 'SyncManager' in window) {
+
+               //notify after syncing => title,body,tag
+  this.displayConfirmNotification('Backgroud task created','Your food will be removed from table', 'remove-from-cart')
+
 
                  var input = {id: new Date().toISOString(),'foodId':con.id, 'userId':localStorage.getItem('tempUserCartID')};
 
@@ -299,6 +307,28 @@ this.overlay = false
                 this.qty = this.qty - 1;
                 this.isAdded = false
             },
+
+
+
+displayConfirmNotification(title, body, tag) {
+      var options = {
+        body: body,
+        icon: '/images/app-icons/app-icon-96x96.png',
+       image: '/images/noimage.jpg',
+        dir: 'ltr',
+        lang: 'en-US', // BCP 47,
+        vibrate: [100, 50, 200],
+        badge: '/images/app-icons/app-icon-96x96.png',
+        timeout: 6000,
+        tag: tag,
+        renotify: true,
+      };
+      Push.create(title, options);
+
+  },
+
+
+
         }
     }
 </script>

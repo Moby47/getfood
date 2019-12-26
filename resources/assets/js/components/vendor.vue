@@ -193,6 +193,17 @@
       </template>
       <!--Overlay-->
 
+        <!--Overlay-->
+        <template>
+            <div class="text-center">
+              <v-overlay :value="overlay2">
+                <v-progress-circular indeterminate size="64"></v-progress-circular>
+                <br>
+          Checking kitchen...
+              </v-overlay>
+            </div>
+            </template>
+            <!--Overlay-->
       
 <back></back>
       
@@ -212,6 +223,7 @@
                   content:[],
                   pagination: [],
                   overlay:false,
+                  overlay2:false,
                   empty:false,
                   food_count:'',
                   vendor_list:[],
@@ -232,7 +244,7 @@
                   if(page_url){
                   NProgress.start();
                   }else{
-                      this.overlay = !this.overlay
+                      this.overlay2 = !this.overlay2
                   }
                 var   page_url = page_url || '/vendor-food/'+this.selected;
       
@@ -240,7 +252,7 @@
                 .then(res => res.json())
                 .then(res=>{
                   this.content = res.data;
-                  this.overlay = false
+                  this.overlay2 = false
 
                   this.errMessage =''
                     
@@ -259,7 +271,7 @@
                 })
                 .catch(error =>{
                     //off loader
-                    this.overlay = false
+                    this.overlay2 = false
                         this.errMessage ='An error occured. Relaoding food list...'
                       setTimeout(func=>{
                           this.fetch();

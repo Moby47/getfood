@@ -20,7 +20,7 @@ Vue.use(VeeValidate);
 // register the plugin on vue
 import Toasted from 'vue-toasted';
 Vue.use(Toasted, {
-    duration: 5000
+    duration: 7000
 })
 // you can also pass options, check options reference below
 //Vue.use(Toasted, Options)

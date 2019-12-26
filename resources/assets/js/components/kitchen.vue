@@ -413,6 +413,7 @@
                       },9000)
                 })
                 .catch(error =>{
+                  this.awaitingList = '' 
                     //off loader text
                     console.log(error)
                        //offline data
@@ -584,6 +585,17 @@ readAllVendorList(table){
                // ************************indexed DB methods
 
 
+      /*         askForNotificationPermission() {
+  Notification.requestPermission(function(result) {
+    console.log('User Choice', result);
+    if (result !== 'granted') {
+      console.log('No notification permission granted!');
+    } else {
+      console.log('notification permission granted!');
+    }
+  });
+},
+*/
 
       }, //meth end
 
@@ -617,6 +629,10 @@ readAllVendorList(table){
       },
       
       mounted() {
+
+         // ask for notification
+         //this.askForNotificationPermission()
+
           this.fetch()
           this.vendors()
           var online = navigator.onLine; 

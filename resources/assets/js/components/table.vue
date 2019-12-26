@@ -88,15 +88,7 @@ Your Table is Empty.
              <div v-if='wait' class='text-center'>
                <template> <br>
                  <span class='alert alert-primary'>Internet Connection is needed</span>
-                 <br><br> 
-                   <v-list-item three-line>
-                      <v-img
-                height="300"
-                  src="/images/wifi.svg"
-                  :lazy-src="`/images/black-spinner.gif`"
-                >
-                </v-img>
-                    </v-list-item>
+                
                         <br> <br>
                  <div class="my-2 text-center"  >
                   

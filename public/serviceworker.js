@@ -1,5 +1,6 @@
 importScripts('/js/idb.js');
 
+
 var staticCacheName = "pwa-GF" + new Date().getTime();
 var filesToCache = [
     '/',
@@ -164,6 +165,7 @@ function clearAllData(table){
   }
 
 
+  
 // ****************** lISTEN FOR NETWORK AND [POST FAV] *****
 
   

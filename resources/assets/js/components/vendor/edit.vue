@@ -228,6 +228,9 @@
         
              if ('serviceWorker' in navigator && 'SyncManager' in window) {
 
+                //notify after syncing => title,body,tag
+  this.displayConfirmNotification('Backgroud task created','Your food will be updated', 'add-to-kitchen')
+
 var dbPromise = idb.open('getFoodsDB', 14, function (db) {
              if (!db.objectStoreNames.contains('sync-updateFood')) {
                db.createObjectStore('sync-updateFood', {keyPath: 'id'});
@@ -301,6 +304,22 @@ this.overlay = false
          }, //meth end
 
 
+         displayConfirmNotification(title, body, tag) {
+      var options = {
+        body: body,
+        icon: '/images/app-icons/app-icon-96x96.png',
+       image: '/images/noimage.jpg',
+        dir: 'ltr',
+        lang: 'en-US', // BCP 47,
+        vibrate: [100, 50, 200],
+        badge: '/images/app-icons/app-icon-96x96.png',
+        timeout: 6000,
+        tag: tag,
+        renotify: true,
+      };
+      Push.create(title, options);
+
+  },
             },
     
             mounted() {

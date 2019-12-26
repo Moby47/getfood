@@ -230,6 +230,9 @@ methods: {
 
               if ('serviceWorker' in navigator && 'SyncManager' in window) {
 
+                   //notify after syncing => title,body,tag
+  this.displayConfirmNotification('Backgroud task created','Your food will be added to the table', 'add-to-cart')
+
                  if(!localStorage.getItem('tempUserCartID')){
                     var tempUserCartID = Math.floor(Math.random()*1234567890);
                      localStorage.setItem('tempUserCartID',tempUserCartID);
@@ -304,6 +307,10 @@ this.overlay = false
 
               if ('serviceWorker' in navigator && 'SyncManager' in window) {
 
+                   //notify after syncing => title,body,tag
+  this.displayConfirmNotification('Backgroud task created','Your food will be removed from the table', 'remove-from-cart')
+
+
                  if(!localStorage.getItem('tempUserCartID')){
                     var tempUserCartID = Math.floor(Math.random()*1234567890);
                      localStorage.setItem('tempUserCartID',tempUserCartID);
@@ -377,6 +384,10 @@ this.overlay = false
 
               if ('serviceWorker' in navigator && 'SyncManager' in window) {
 
+                 //notify after syncing => title,body,tag
+     this.displayConfirmNotification('Backgroud task created','The selected food will be deleted from favorites', 'del-from-fav')
+
+
                  if(!localStorage.getItem('tempUserCartID')){
                     var tempUserCartID = Math.floor(Math.random()*1234567890);
                      localStorage.setItem('tempUserCartID',tempUserCartID);
@@ -441,7 +452,22 @@ saveData('sync-deleteFav',input)
 this.overlay = false 
             },
 
+            displayConfirmNotification(title, body, tag) {
+      var options = {
+        body: body,
+        icon: '/images/app-icons/app-icon-96x96.png',
+       image: '/images/noimage.jpg',
+        dir: 'ltr',
+        lang: 'en-US', // BCP 47,
+        vibrate: [100, 50, 200],
+        badge: '/images/app-icons/app-icon-96x96.png',
+        timeout: 6000,
+        tag: tag,
+        renotify: true,
+      };
+      Push.create(title, options);
 
+  },
 
 },//total meth end
 
