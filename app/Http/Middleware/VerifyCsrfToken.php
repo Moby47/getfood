@@ -28,5 +28,8 @@ class VerifyCsrfToken extends Middleware
         'http://localhost:8000/delete-food',
         'http://localhost:8000/edit-food',
         
+        'http://localhost:8000/player-id',
+
+       // 'http://localhost:8000/push-to-vendors',
     ];
 }

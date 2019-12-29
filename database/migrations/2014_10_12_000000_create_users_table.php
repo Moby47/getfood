@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('verifytoken')->nullable();
             $table->boolean('verification')->default(0);
             $table->boolean('status')->default(0);
+            $table->string('playerId')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

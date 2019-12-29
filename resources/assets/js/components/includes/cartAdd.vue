@@ -123,10 +123,8 @@ data: function() {
                
               
               if ('serviceWorker' in navigator && 'SyncManager' in window) {
-
-                
             //notify after syncing => title,body,tag
-  this.displayConfirmNotification('Backgroud task created','Your food will be added to the table', 'add-to-cart')
+  //this.displayConfirmNotification('Backgroud task created','Your food will be added to the table', 'add-to-cart')
 
                  if(!localStorage.getItem('tempUserCartID')){
                     var tempUserCartID = Math.floor(Math.random()*1234567890);
@@ -144,7 +142,7 @@ data: function() {
                 var input = {id: new Date().toISOString(),'foodId':con.id, 
                 'userId':localStorage.getItem('tempUserCartID'),'qty':this.qty};
 
-                   this.text = 'Food queued for addition to table...'
+           this.text = 'Food queued for addition to table...'
           this.snackbar = true
 
 
@@ -206,7 +204,7 @@ this.overlay = false
               if ('serviceWorker' in navigator && 'SyncManager' in window) {
 
                //notify after syncing => title,body,tag
-  this.displayConfirmNotification('Backgroud task created','Your food will be removed from table', 'remove-from-cart')
+  //this.displayConfirmNotification('Backgroud task created','Your food will be removed from table', 'remove-from-cart')
 
 
                  var input = {id: new Date().toISOString(),'foodId':con.id, 'userId':localStorage.getItem('tempUserCartID')};
@@ -308,7 +306,7 @@ this.overlay = false
                 this.isAdded = false
             },
 
-
+/*
 
 displayConfirmNotification(title, body, tag) {
       var options = {
@@ -326,7 +324,7 @@ displayConfirmNotification(title, body, tag) {
       Push.create(title, options);
 
   },
-
+*/
 
 
         }

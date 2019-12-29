@@ -229,7 +229,7 @@
              if ('serviceWorker' in navigator && 'SyncManager' in window) {
 
                 //notify after syncing => title,body,tag
-  this.displayConfirmNotification('Backgroud task created','Your food will be updated', 'add-to-kitchen')
+  //this.displayConfirmNotification('Backgroud task created','Your food will be updated', 'add-to-kitchen')
 
 var dbPromise = idb.open('getFoodsDB', 14, function (db) {
              if (!db.objectStoreNames.contains('sync-updateFood')) {
@@ -303,7 +303,7 @@ this.overlay = false
          
          }, //meth end
 
-
+/*
          displayConfirmNotification(title, body, tag) {
       var options = {
         body: body,
@@ -320,7 +320,7 @@ this.overlay = false
       Push.create(title, options);
 
   },
-            },
+*/      },
     
             mounted() {
                 var con = {'con':this.$route.params.con}

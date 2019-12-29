@@ -244,7 +244,46 @@ public function vendorFood($vendor){
       }
 */
 
-public function test(Request $request){
-  return $request;
+public function playerId(Request $request){
+
+    $playerId = $request->input('peter');
+    $userId = $request->input('parker');
+
+    if(!$userId){
+      return 'no parker';
+    }
+    if(!$playerId){
+      return 'no peter';
+    }
+    $user = user::findorfail($userId);
+
+    $user->playerId = $playerId;
+    $user->save();
+
+    return 1;
+
   }
+
+/*
+  public function getPlayerId($id){
+return $id;
+    $playerId = $request->input('peter');
+    $userId = $request->input('parker');
+
+    if(!$userId){
+      return 'no parker';
+    }
+    if(!$playerId){
+      return 'no peter';
+    }
+    $user = user::findorfail($userId);
+
+    $user->playerId = $playerId;
+    $user->save();
+
+    return 1;
+
+  }
+*/
+
 }

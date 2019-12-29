@@ -46,7 +46,8 @@ var filesToCache = [
     'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js',
     'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js',
     '/js/idb.js',
-    '/js/app.js',
+    //'/js/app.js', //don't cache this
+    //'https://cdn.onesignal.com/sdks/OneSignalSDK.js'
     
 ];
 
@@ -89,6 +90,9 @@ var dbPromise = idb.open('getFoodsDB', 14, function (db) {
       }
       if (!db.objectStoreNames.contains('food-likeList')) {
         db.createObjectStore('food-likeList', {keyPath: 'title'});
+      }
+      if (!db.objectStoreNames.contains('peter-parker')) {
+        db.createObjectStore('peter-parker', {keyPath: 'id'});
       }
   });
 
@@ -165,6 +169,42 @@ function clearAllData(table){
   }
 
 
+  //function to push to user
+  function pushToUser(title,body,url,tag){
+
+    readAllData('peter-parker')
+          .then(function(data) {
+              // console.log('peter-parker',data[0].pp);
+              var pId = data[0].pp;
+               
+              if(pId){
+  //push programatically 
+  fetch('https://onesignal.com/api/v1/notifications', {
+   method: 'POST',
+   headers: {
+     'Authorization': 'Basic MWU1ZjQ5YzUtNmM0OS00MzVlLWE5ZGQtMDg2ZjYzMDcwZjE1',
+     'Content-Type': 'application/json',
+     'Accept': 'application/json'
+   },
+   body: JSON.stringify({
+     'app_id':'da6349ad-e18f-471b-8d57-30444a9d158f',
+     'contents': {'en': body},
+     'headings': {'en': title},
+     'url': url,
+     'include_player_ids': [pId],
+     'web_push_topic':tag
+   })
+ })
+   .then(res=> {
+       console.log('push ok');
+   }) 
+   .catch(error =>{
+         console.log(error)    
+         })
+              }  
+          })
+  
+  }
   
 // ****************** lISTEN FOR NETWORK AND [POST FAV] *****
 
@@ -211,6 +251,10 @@ self.addEventListener('sync', function(event) {
                   console.log('Error while sending data', err);
                 });
             }
+
+             //read pId and push on completion #func takes title,body,url,tag
+  pushToUser('Background task completed','The selected food will be added to favorites','http://localhost:8000/favorite','add-to-fav') 
+
   
           })
       );
@@ -266,6 +310,10 @@ self.addEventListener('sync', function(event) {
                   console.log('Error while sending data', err);
                 });
             }
+
+              //read pId and push on completion #func takes title,body,url,tag
+  pushToUser('Background task completed','The selected food will be removed from favorites','http://localhost:8000/favorite','remove-from-fav') 
+
   
           })
       );
@@ -328,7 +376,10 @@ self.addEventListener('sync', function(event) {
               .catch(function(err) {
                 console.log('Error while sending data', err);
               });
-          }
+          } //end foreach
+
+          //read pId and push on completion #func takes title,body,url,tag
+  pushToUser('Background task completed','The selected food has been added to the table','http://localhost:8000/table','add-to-cart') 
 
         })
     );
@@ -384,6 +435,10 @@ self.addEventListener('sync', function(event) {
                 console.log('Error while sending data', err);
               });
           }
+
+           //read pId and push on completion #func takes title,body,url
+pushToUser('Background task completed','The selected food has been removed from the table','http://localhost:8000/table','remove-from-cart') 
+
 
         })
     );
@@ -443,6 +498,9 @@ self.addEventListener('sync', function(event) {
                   console.log('Error while sending data', err);
                 });
             }
+             //read pId and push on completion #func takes title,body,url,tag
+  pushToUser('Background task completed','The selected food has been added to the table','http://localhost:8000/table','add-to-cart') 
+
   
           })
       );
@@ -503,6 +561,8 @@ self.addEventListener('sync', function(event) {
                 console.log('Error while sending data', err);
               });
           }
+  //read pId and push on completion #func takes title,body,url
+  pushToUser('Background task completed','The selected food has been removed from the table','http://localhost:8000/table','remove-from-cart') 
 
         })
     );
@@ -563,6 +623,9 @@ self.addEventListener('sync', function(event) {
                 });
             }
   
+            //read pId and push on completion #func takes title,body,url
+  pushToUser('Background task completed','The selected food has been deleted from favorites','http://localhost:8000/favorite','del-from-fav') 
+
           })
       );
     }
@@ -624,6 +687,9 @@ self.addEventListener('sync', function(event) {
                   console.log('Error while sending data', err);
                 });
             }
+             //read pId and push on completion #func takes title,body,url
+  pushToUser('Background task completed','Your food will been added to kitchen','http://localhost:8000/manage-food','add-to-kitchen') 
+
   
           })
       );
@@ -678,7 +744,9 @@ self.addEventListener('sync', function(event) {
                   console.log('Error while sending data', err);
                 });
             }
-  
+  //read pId and push on completion #func takes title,body,url
+  pushToUser('Background task completed','The selected food has been removed kitchen','http://localhost:8000/manage-food','remove-from-kitchen') 
+
           })
       );
     }
@@ -743,12 +811,14 @@ self.addEventListener('sync', function(event) {
                   console.log('Error while sending data', err);
                 });
             }
-  
+    //read pId and push on completion #func takes title,body,url
+    pushToUser('Background task completed','The edited food has updated successfully','http://localhost:8000/manage-food','add-to-kitchen') 
+
           })
       );
     }
   });
   
   
-  // ****************** lISTEN FOR NETWORK AND [POST ADD FOOD] *****
+  // ****************** lISTEN FOR NETWORK AND [POST update FOOD] *****
 

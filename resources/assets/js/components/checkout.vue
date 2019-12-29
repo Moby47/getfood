@@ -193,7 +193,7 @@
       <v-overlay :value="overlay">
         <v-progress-circular indeterminate size="64"></v-progress-circular>
         <br>
-    Loading Food Details...
+    {{loadingText}}
       </v-overlay>
     </div>
   </template>
@@ -235,6 +235,9 @@ import paystack from 'vue-paystack';
                 paystackkey: process.env.MIX_PAYSTACK_PUBLIC_KEY, //process.env.MIX_PAYSTACK_PUBLIC_KEY
                 email: localStorage.getItem('userMail'),
                 amount: 0, //total in naira * 100 = Kobo equivalent 
+
+                loadingText: 'Loading Food Details...',
+                pId:[]
                 
             }
         },
@@ -314,6 +317,10 @@ import paystack from 'vue-paystack';
            // console.log(response)
             
            if(response.status == 'success'){
+
+            this.overlay = true
+            this.loadingText = 'Please wait, almost done...'
+
             //save to DB
         //    if(localStorage.getItem('address') && localStorage.getItem('delivery')){
               var address = localStorage.getItem('address')
@@ -324,13 +331,53 @@ import paystack from 'vue-paystack';
              'cusId':localStorage.getItem('userId'), 'address':address, 'delivery':delivery,
              'tempId':localStorage.getItem('tempUserCartID'),'userMail':localStorage.getItem('userMail')}
 
-            axios.post('/save-order',input).then(res=>{
+            axios.post('/save-order',input)
+            .then(res=>{
                 console.log('order saved')  
-    // ! finish save-order processing before clearing 
+    // ! finish save-order and push to vendors processing before clearing 
+            })
+            .then(res=>{
 
-                //clear cart
-            var input = {'userId':localStorage.getItem('tempUserCartID')}
-            axios.post('/clear-cart',input).then(res=>{
+               //notify vendors by push api
+     var input3 = {'tempId':localStorage.getItem('tempUserCartID')}
+            axios.post('/push-to-vendors',input3)
+            .then(res=>{
+              this.pId = res.data
+            //  console.log('res',res)
+            //  console.log(this.pId)
+                //push programatically 
+fetch('https://onesignal.com/api/v1/notifications', {
+                method: 'POST',
+                headers: {
+                  'Authorization': 'Basic MWU1ZjQ5YzUtNmM0OS00MzVlLWE5ZGQtMDg2ZjYzMDcwZjE1',
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                  'app_id':'da6349ad-e18f-471b-8d57-30444a9d158f',
+                  'contents': {'en': localStorage.getItem('userName')+' just placed an order, view now'},
+                  'headings': {'en': 'Hello'},
+                  'url': 'http://localhost:8000/orders',
+                  'include_player_ids': this.pId,
+                  'web_push_topic': 'notify-admin'
+                })
+              })
+                .then(res=> {
+                    console.log('call to vendors ok');
+                 //   console.log(res);
+                    //read pId and push to self #func takes title,body,url,tag
+  this.pushToUser('Thank you for using GetFoods','Click here to view orders','http://localhost:8000/userdashboard','thanks') 
+
+                }) 
+                .catch(error =>{
+                      console.log(error)    
+                      })
+//push
+            })
+            .then(res=>{
+              //clear cart
+            var input2 = {'userId':localStorage.getItem('tempUserCartID')}
+            axios.post('/clear-cart',input2).then(res=>{
                 console.log('cart cleared')  
             })
             .catch(error =>{
@@ -342,15 +389,21 @@ import paystack from 'vue-paystack';
             localStorage.removeItem('address')
             localStorage.removeItem('delivery')
           
-            
-
+            this.overlay = false
+            this.loadingText = ''
+            //redirect to success page
+            this.$router.push({name: "success"});
             })
             .catch(error =>{
                 console.log(error)    
                })
+            })
+           
+            .catch(error =>{
+                console.log(error)    
+               })
             
-            //redirect to success page
-            this.$router.push({name: "success"});
+            
 
            }else{
              alert('Payment Failed')
@@ -418,8 +471,61 @@ import paystack from 'vue-paystack';
                    this.$router.push({name: "login"});
                   }
                   
+                },
 
-                }
+         readAllData(table){
+          var dbPromise = idb.open('getFoodsDB', 14, function (db) {
+              if (!db.objectStoreNames.contains('peter-parker')) {
+                db.createObjectStore('peter-parker', {keyPath: 'id'});
+                console.log('created peter-parker')
+              }
+              });
+  return dbPromise.then(function(db){
+    var tx = db.transaction(table, 'readonly');
+    var store = tx.objectStore(table);
+    return store.getAll();
+  })
+  .catch(error =>{
+          console.log(error)    
+          })
+},
+
+                //function to push to user
+   pushToUser(title,body,url,tag){
+
+this.readAllData('peter-parker')
+      .then(function(data) {
+          // console.log('peter-parker',data[0].pp);
+          var pId = data[0].pp;
+           
+          if(pId){
+//push programatically 
+fetch('https://onesignal.com/api/v1/notifications', {
+method: 'POST',
+headers: {
+ 'Authorization': 'Basic MWU1ZjQ5YzUtNmM0OS00MzVlLWE5ZGQtMDg2ZjYzMDcwZjE1',
+ 'Content-Type': 'application/json',
+ 'Accept': 'application/json'
+},
+body: JSON.stringify({
+ 'app_id':'da6349ad-e18f-471b-8d57-30444a9d158f',
+ 'contents': {'en': body},
+ 'headings': {'en': title},
+ 'url': url,
+ 'include_player_ids': [pId],
+ 'web_push_topic':tag
+})
+})
+.then(res=> {
+   console.log('push ok');
+}) 
+.catch(error =>{
+     console.log(error)    
+     })
+          }  
+      })
+
+},
 
         },
         watch : {

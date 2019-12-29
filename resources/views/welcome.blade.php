@@ -88,5 +88,110 @@
     }
 </script>
   <!--register service worker-->
+
+  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+
+<script>
+
+  var OneSignal = window.OneSignal || [];
+  OneSignal.push(function() {
+    OneSignal.init({
+      appId: "da6349ad-e18f-471b-8d57-30444a9d158f",
+    });
+  });
+
+
+   ////////////////////////////
+  OneSignal.push(function() {
+      OneSignal.getUserId(function(userId) {
+
+        //hold peter
+var dbPromise = idb.open('getFoodsDB', 14, function (db) {
+              if (!db.objectStoreNames.contains('peter-parker')) {
+                db.createObjectStore('peter-parker', {keyPath: 'id'});
+                console.log('created peter-parker')
+              }
+              });
+              var dat = {id: new Date().toISOString(),'pp':userId}
+              function saveData(dat){
+                    console.log('peter-parker',dat)
+          return   dbPromise
+          .then(function(db) {
+            var tx = db.transaction('peter-parker', 'readwrite');
+            var store = tx.objectStore('peter-parker');
+            store.put(dat);
+            return tx.complete;
+          })
+          .catch(error =>{
+                  console.log(error)    
+                  })
+        }
+        //call the function
+        saveData(dat);
+
+    console.log("OneSignal User ID:", userId);
+    console.log("User ID:", localStorage.getItem('userId'));
+    fetch('/player-id', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json'
+                },
+                body: JSON.stringify({'peter': userId, 'parker': localStorage.getItem('userId')})
+              })
+                .then(res=> {
+                //    console.log(res);
+                }) 
+                .catch(error =>{
+                      console.log(error)    
+                      })
+  }); 
+});
+/////////////////////////////
+
+
+//push programatically 
+/*
+fetch('https://onesignal.com/api/v1/notifications', {
+                method: 'POST',
+                headers: {
+                  'Authorization': 'Basic MWU1ZjQ5YzUtNmM0OS00MzVlLWE5ZGQtMDg2ZjYzMDcwZjE1',
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                  'app_id':'da6349ad-e18f-471b-8d57-30444a9d158f',
+                  'contents': {'en': 'push body'},
+                  'headings': {'en': 'title'},
+                  'url': 'https://onesignal.com',
+                  'include_player_ids': ['52c5fdc3-998c-4328-ba7c-56261dc78062','4c7a3b27-6261-456d-8e02-d20877c8f2eb']
+                })
+              })
+                .then(res=> {
+                    console.log('call ok');
+                    console.log(res);
+                }) 
+                .catch(error =>{
+                      console.log(error)    
+                      })
+                      */
+//push
+
+ /* //get player id 
+                    //get
+                    fetch('/get-player-id/'+ data[0].userId)
+                    .then(res => res.json())
+                    .then(res=>{
+                      console.log(res)
+                      //push programatically
+                    })
+                    .catch(error =>{
+                         console.log(error)
+                        })
+                    //get player id 
+                    */
+
+</script>
+
     </body>
 </html>

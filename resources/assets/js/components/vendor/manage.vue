@@ -394,7 +394,7 @@ delSync(newContent){
             if ('serviceWorker' in navigator && 'SyncManager' in window) {
 
                 //notify after syncing => title,body,tag
-  this.displayConfirmNotification('Backgroud task created','Food will be removed from kitchen', 'remove-from-kitchen')
+  //this.displayConfirmNotification('Backgroud task created','Food will be removed from kitchen', 'remove-from-kitchen')
 
 var dbPromise = idb.open('getFoodsDB', 14, function (db) {
              if (!db.objectStoreNames.contains('sync-deleteFood')) {
@@ -454,7 +454,7 @@ this.overlay = false
         }
 },
 
-
+/*
 displayConfirmNotification(title, body, tag) {
       var options = {
         body: body,
@@ -471,7 +471,7 @@ displayConfirmNotification(title, body, tag) {
       Push.create(title, options);
 
   },
-
+*/
             },//all meth end
     
             mounted() {

@@ -308,7 +308,7 @@ this.overlay = false
               if ('serviceWorker' in navigator && 'SyncManager' in window) {
 
                    //notify after syncing => title,body,tag
-  this.displayConfirmNotification('Backgroud task created','Your food will be removed from the table', 'remove-from-cart')
+  //this.displayConfirmNotification('Backgroud task created','Your food will be removed from the table', 'remove-from-cart')
 
 
                  if(!localStorage.getItem('tempUserCartID')){
@@ -385,7 +385,7 @@ this.overlay = false
               if ('serviceWorker' in navigator && 'SyncManager' in window) {
 
                  //notify after syncing => title,body,tag
-     this.displayConfirmNotification('Backgroud task created','The selected food will be deleted from favorites', 'del-from-fav')
+    // this.displayConfirmNotification('Backgroud task created','The selected food will be deleted from favorites', 'del-from-fav')
 
 
                  if(!localStorage.getItem('tempUserCartID')){
@@ -451,7 +451,7 @@ saveData('sync-deleteFav',input)
   }
 this.overlay = false 
             },
-
+/*
             displayConfirmNotification(title, body, tag) {
       var options = {
         body: body,
@@ -468,7 +468,7 @@ this.overlay = false
       Push.create(title, options);
 
   },
-
+*/
 },//total meth end
 
 mounted(){

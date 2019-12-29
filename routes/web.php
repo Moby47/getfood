@@ -22,6 +22,7 @@ Route::get('/', function () {
 });
 
 
+
 //Auth routes
 Route::get('/forgot-password', 'customauthcontroller@password');
 Route::Post('/login-user', 'customauthcontroller@login');
@@ -49,6 +50,10 @@ Route::get('/sumtotal/{id}', 'cartcontroller@sumtotal');
 Route::get('/get-fav/{id}', 'guestcontroller@getFavorites');
 Route::get('/vendor-food/{vendor}', 'guestcontroller@vendorFood');
 Route::get('/vendor-list', 'guestcontroller@vendorList');
+
+Route::post('/player-id','guestcontroller@playerId');
+Route::get('/get-player-id/{id}','guestcontroller@getPlayerId');
+
 //vendor list for home
 //Route::get('/vendor-list-home', 'guestcontroller@vendorListHome');
 
@@ -83,6 +88,8 @@ Route::get('/orders/{userId}', 'customercontroller@orders');
 
 Route::post('/save-order', 'customercontroller@saveorder'); 
 Route::post('/clear-cart', 'cartcontroller@clearcart');
+Route::post('/push-to-vendors', 'customercontroller@pushToVendors'); 
+
 //Route::get('/payment-page', 'paymentcontroller@paymentpage'); 
 //Route::post('/pay', 'paymentcontroller@redirectToGateway')->name('pay'); 
 
