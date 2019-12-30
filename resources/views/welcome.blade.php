@@ -105,8 +105,9 @@
   OneSignal.push(function() {
       OneSignal.getUserId(function(userId) {
 
-        //hold peter
-var dbPromise = idb.open('getFoodsDB', 14, function (db) {
+if(userId){
+ //hold peter
+ var dbPromise = idb.open('getFoodsDB', 14, function (db) {
               if (!db.objectStoreNames.contains('peter-parker')) {
                 db.createObjectStore('peter-parker', {keyPath: 'id'});
                 console.log('created peter-parker')
@@ -145,51 +146,13 @@ var dbPromise = idb.open('getFoodsDB', 14, function (db) {
                 .catch(error =>{
                       console.log(error)    
                       })
+}else{
+    console.log('not subscribed')
+}
+       
   }); 
 });
 /////////////////////////////
-
-
-//push programatically 
-/*
-fetch('https://onesignal.com/api/v1/notifications', {
-                method: 'POST',
-                headers: {
-                  'Authorization': 'Basic MWU1ZjQ5YzUtNmM0OS00MzVlLWE5ZGQtMDg2ZjYzMDcwZjE1',
-                  'Content-Type': 'application/json',
-                  'Accept': 'application/json'
-                },
-                body: JSON.stringify({
-                  'app_id':'da6349ad-e18f-471b-8d57-30444a9d158f',
-                  'contents': {'en': 'push body'},
-                  'headings': {'en': 'title'},
-                  'url': 'https://onesignal.com',
-                  'include_player_ids': ['52c5fdc3-998c-4328-ba7c-56261dc78062','4c7a3b27-6261-456d-8e02-d20877c8f2eb']
-                })
-              })
-                .then(res=> {
-                    console.log('call ok');
-                    console.log(res);
-                }) 
-                .catch(error =>{
-                      console.log(error)    
-                      })
-                      */
-//push
-
- /* //get player id 
-                    //get
-                    fetch('/get-player-id/'+ data[0].userId)
-                    .then(res => res.json())
-                    .then(res=>{
-                      console.log(res)
-                      //push programatically
-                    })
-                    .catch(error =>{
-                         console.log(error)
-                        })
-                    //get player id 
-                    */
 
 </script>
 
