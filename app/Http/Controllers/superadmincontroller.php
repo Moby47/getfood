@@ -51,6 +51,60 @@ class superadmincontroller extends Controller
         $vendorId = $request->input('id');
 
         $user = User::where('id', $vendorId)->update(array('verification' => 1));
+
+        //get Pid and push
+        $vendorPId = user::where('status','=',1)->where('id', $vendorId)->pluck('playerId')->toArray();
+        $vendorName = user::where('status','=',1)->where('id', $vendorId)->first()->name;
+
+       if($vendorPId){
+           
+            function sendMessage($vendorPId,$vendorName){
+                $content = array(
+              "en" => 'Your account on GetFoods was approved! Login now'
+                    );
+                    $headings = array(
+                        "en" => 'Hello '.$vendorName
+                              );
+                
+                $fields = array(
+                    'app_id' => "da6349ad-e18f-471b-8d57-30444a9d158f",
+                    'include_player_ids' => $vendorPId,
+                    'data' => array("foo" => "bar"),
+                    'url' => 'http://localhost:8000/login',
+                    'contents' => $content,
+                    'headings' => $headings
+                );
+                
+                $fields = json_encode($fields);
+               // print("\nJSON sent:\n");
+              //  print($fields);
+                
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json; charset=utf-8'));
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+                curl_setopt($ch, CURLOPT_HEADER, FALSE);
+                curl_setopt($ch, CURLOPT_POST, TRUE);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+        
+                $response = curl_exec($ch);
+                curl_close($ch);
+                
+            return $response;
+            
+            }
+            
+            $response = sendMessage($vendorPId,$vendorName);
+            $return["allresponses"] = $response;
+            $return = json_encode( $return);
+            
+          //  print("\n\nJSON received:\n");
+         //   print($return);
+         // print("\n"); 
+       }//if end
+           
+          
             return 1;
        
     }
@@ -60,6 +114,59 @@ class superadmincontroller extends Controller
        $vendorId = $request->input('id');
 
        $user = User::where('id', $vendorId)->update(array('verification' => 2));
+
+        //get Pid and push
+        $vendorPId = user::where('status','=',1)->where('id', $vendorId)->pluck('playerId')->toArray();
+        $vendorName = user::where('status','=',1)->where('id', $vendorId)->first()->name;
+
+       if($vendorPId){
+           
+            function sendMessage($vendorPId,$vendorName){
+                $content = array(
+              "en" => 'Your account on GetFoods was declined! Please contact us'
+                    );
+                    $headings = array(
+                        "en" => 'Hello '.$vendorName
+                              );
+                
+                $fields = array(
+                    'app_id' => "da6349ad-e18f-471b-8d57-30444a9d158f",
+                    'include_player_ids' => $vendorPId,
+                    'data' => array("foo" => "bar"),
+                    'url' => 'http://localhost:8000',
+                    'contents' => $content,
+                    'headings' => $headings
+                );
+                
+                $fields = json_encode($fields);
+               // print("\nJSON sent:\n");
+              //  print($fields);
+                
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json; charset=utf-8'));
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+                curl_setopt($ch, CURLOPT_HEADER, FALSE);
+                curl_setopt($ch, CURLOPT_POST, TRUE);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+        
+                $response = curl_exec($ch);
+                curl_close($ch);
+                
+            return $response;
+            
+            }
+            
+            $response = sendMessage($vendorPId,$vendorName);
+            $return["allresponses"] = $response;
+            $return = json_encode( $return);
+            
+          //  print("\n\nJSON received:\n");
+         //   print($return);
+         // print("\n"); 
+       }//if end
+           
            return 1;
 
     }

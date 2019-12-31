@@ -31,5 +31,6 @@ class VerifyCsrfToken extends Middleware
         'http://localhost:8000/player-id',
 
        // 'http://localhost:8000/push-to-vendors',
+      // 'http://localhost:8000/decline-vendor',
     ];
 }

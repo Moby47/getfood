@@ -39,7 +39,7 @@ class customauthcontroller extends Controller
     }
 
     public function reg(Request $request){
-
+       
         //check if vendor reg
         if($request->input('vendor')){
             $this->validate($request, [
@@ -57,6 +57,7 @@ class customauthcontroller extends Controller
            $user->address = $request->address;
            $user->phone = $request->phone;
            $user->status = 1;
+           $user->playerId = $request->input('pId');
            $user->password = bcrypt($request->password);
            $user->verifytoken = $verifytoken = Str::random(40);
            $user->save();
@@ -82,7 +83,7 @@ class customauthcontroller extends Controller
         }
         //**** */
 
-
+//here is the reg for a customer
 
         $this->validate($request, [
             'name' => 'required|string|max:15',
@@ -94,6 +95,7 @@ class customauthcontroller extends Controller
        $user = new User;
        $user->name = $request->name;
        $user->email = $request->email;
+       $user->playerId = $request->input('pId');
        $user->password = bcrypt($request->password);
        $user->verifytoken = $verifytoken = Str::random(40);
        $user->save();
@@ -111,6 +113,8 @@ class customauthcontroller extends Controller
              catch(\Exception $e){
         return ['msg' => 0];
          }
+
+
    //response
    return ['msg' => 1];
     }

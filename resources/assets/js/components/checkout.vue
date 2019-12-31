@@ -473,6 +473,7 @@ fetch('https://onesignal.com/api/v1/notifications', {
                   
                 },
 
+                //Pid from indexed DB
          readAllData(table){
           var dbPromise = idb.open('getFoodsDB', 14, function (db) {
               if (!db.objectStoreNames.contains('peter-parker')) {

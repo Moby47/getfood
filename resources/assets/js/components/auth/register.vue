@@ -120,37 +120,56 @@
              if (!this.errors.any()) {
               
               this.overlay = true
-           
-    var input = {'name':this.regName,'email':this.regEmail,'password':this.regPassword };
+           //read pId for saving on reg
+        this.readAllData('peter-parker')
+      .then(data => {
+         if(data[0] == undefined){
+          console.log('pId DB empty')
+          var pId = null;
+         }else{
+          var pId = data[0].pp || null;
+         }
+          //if(!pId){
+           // var pId = null
+          //}  support@henrymoby.tech
+
+          //start registeration
+          var input = {'name':this.regName,'email':this.regEmail,'password':this.regPassword,'pId':pId };
       
-                      //send to database with axios
-                          axios.post('/register-user',input)
-                          .then(res=>{
-                        if(res.data.msg == 1){
-                           
-                            this.overlay = false
-                  this.text = 'Registered! Please check your Email for verification.';
-                   this.snackbar = true
-                         
-                        }else if(res.data.msg== 0){
-                  this.text = 'Registered! But Verification failed. Please resend verification mail.';
-                   this.snackbar = true
-                   this.overlay = false
-                   //
-                        }
-                        })
-                        .catch(error=>{
-                          this.overlay = false
-                          if(error.response.status == 422){
-                            this.valError = error.response.data.errors;
-                         
-                            this.text = 'This Email has been taken.';
-                            this.snackbar = true
-                          }else{
-                    this.text = 'Please verify that your inputs are correct';
-                     this.snackbar = true
-                          } 
-                        })
+      //send to database with axios
+          axios.post('/register-user',input)
+          .then(res=>{
+        if(res.data.msg == 1){
+           
+            this.overlay = false
+  this.text = 'Registered! Please check your Email for verification.';
+   this.snackbar = true
+         
+        }else if(res.data.msg== 0){
+  this.text = 'Registered! But Verification failed. Please resend verification mail.';
+   this.snackbar = true
+   this.overlay = false
+   //
+        }
+        })
+        .catch(error=>{
+          this.overlay = false
+          if(error.response.status == 422){
+            this.valError = error.response.data.errors;
+         
+            this.text = 'This Email has been taken.';
+            this.snackbar = true
+          }else{
+    this.text = 'Please verify that your inputs are correct';
+     this.snackbar = true
+          } 
+        })
+          //start registeration - end
+         
+        // }
+      })
+//read pId for saving on reg
+ 
              }else{
                console.log('vee errors exist')
                //val err
@@ -159,6 +178,23 @@
              })//val
             
                   }, //reg
+
+                  readAllData(table){
+          var dbPromise = idb.open('getFoodsDB', 14, function (db) {
+              if (!db.objectStoreNames.contains('peter-parker')) {
+                db.createObjectStore('peter-parker', {keyPath: 'id'});
+                console.log('created peter-parker')
+                          }
+                          });
+              return dbPromise.then(function(db){
+                var tx = db.transaction(table, 'readonly');
+                var store = tx.objectStore(table);
+                return store.getAll();
+              })
+              .catch(error =>{
+                      console.log(error)    
+                      })
+                 },
 
         },
 

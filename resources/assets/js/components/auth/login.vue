@@ -42,7 +42,7 @@
                       </div>
 
                 <div class="my-2 text-center">
-                    <v-btn @click.prevent='resendEmail()' outlined color="#FFA500">Verification Email</v-btn>   
+                    <v-btn @click.prevent='resendEmail()' outlined color="#FFA500">Resend Verification</v-btn>   
                     </div>
                   
               </div>
@@ -138,15 +138,46 @@
                             this.snackbar = true
                             this.overlay = false
                           }else{
+                            //start login 
                                localStorage.setItem('userToken',res.data.userToken);
                                localStorage.setItem('userId',res.data.userId);
                                localStorage.setItem('userName',res.data.userName);
                                localStorage.setItem('userMail',res.data.userMail);
                                localStorage.setItem('userStatus',res.data.userStatus);
                                
+        //read and save Pid
+        this.readAllData('peter-parker')
+      .then(function(data) {
+         if(data[0] == undefined){
+          console.log('pId DB empty')
+         }else{
+          var pId = data[0].pp;
+          if(pId){
+      //save Pid
+      fetch('/player-id', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json'
+                },
+                body: JSON.stringify({'peter': pId, 'parker': localStorage.getItem('userId')})
+              })
+                .then(res=> {
+                    console.log('pId is a go');
+                }) 
+                .catch(error =>{
+                      console.log(error)    
+                      })
+          }else{
+            console.log('no pId')
+          }  
+         
+         }
+      })
+//read and save Pid
+
                                var status = localStorage.getItem('userStatus')
                                 
-
                                 //validate if quest is coming from cart page then gotocheckout not dashboard
                                 if(localStorage.getItem('shopper')){
                                   localStorage.removeItem('shopper')
@@ -184,6 +215,22 @@
               
                    }, //login
 
+                   readAllData(table){
+          var dbPromise = idb.open('getFoodsDB', 14, function (db) {
+              if (!db.objectStoreNames.contains('peter-parker')) {
+                db.createObjectStore('peter-parker', {keyPath: 'id'});
+                console.log('created peter-parker')
+                          }
+                          });
+              return dbPromise.then(function(db){
+                var tx = db.transaction(table, 'readonly');
+                var store = tx.objectStore(table);
+                return store.getAll();
+              })
+              .catch(error =>{
+                      console.log(error)    
+                      })
+                 },
                 
         },
 
