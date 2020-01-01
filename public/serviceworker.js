@@ -213,11 +213,12 @@ function clearAllData(table){
           })
   
   }
+
+
+
+
   
 // ****************** lISTEN FOR NETWORK AND [POST FAV] *****
-
-  
-
 
 
 self.addEventListener('sync', function(event) {
@@ -239,10 +240,13 @@ self.addEventListener('sync', function(event) {
                   userId: dt.userId,
                   foodId: dt.foodId, })
               })
-                .then(function(res) {
+                .then(res=> {
                   
                   if (res.ok) {
                     console.log('Background Sync Completed');
+
+             //read pId and push on completion #func takes title,body,url,tag
+             pushToUser('Background task completed','The selected food has been added to favorites','http://localhost:8000/favorite','add-to-fav') 
 
                      //call clear
                 clearAllData('sync-fav')
@@ -259,9 +263,6 @@ self.addEventListener('sync', function(event) {
                   console.log('Error while sending data', err);
                 });
             }
-
-             //read pId and push on completion #func takes title,body,url,tag
-  pushToUser('Background task completed','The selected food will be added to favorites','http://localhost:8000/favorite','add-to-fav') 
 
   
           })
@@ -302,6 +303,9 @@ self.addEventListener('sync', function(event) {
                   if (res.ok) {
                     console.log('Background Sync Completed');
 
+                        //read pId and push on completion #func takes title,body,url,tag
+  pushToUser('Background task completed','The selected food has been removed from favorites','http://localhost:8000/favorite','remove-from-fav') 
+
                          //call clear
                 clearAllData('sync-unfav')
                 .then(function(){
@@ -319,9 +323,7 @@ self.addEventListener('sync', function(event) {
                 });
             }
 
-              //read pId and push on completion #func takes title,body,url,tag
-  pushToUser('Background task completed','The selected food will be removed from favorites','http://localhost:8000/favorite','remove-from-fav') 
-
+          
   
           })
       );
@@ -369,6 +371,10 @@ self.addEventListener('sync', function(event) {
                 if (res.ok) {
                   console.log('Background Sync Completed');
 
+                  
+          //read pId and push on completion #func takes title,body,url,tag
+  pushToUser('Background task completed','The selected food has been added to the table','http://localhost:8000/table','add-to-cart') 
+
                        //call clear
               clearAllData('sync-addToCart')
               .then(function(){
@@ -385,9 +391,6 @@ self.addEventListener('sync', function(event) {
                 console.log('Error while sending data', err);
               });
           } //end foreach
-
-          //read pId and push on completion #func takes title,body,url,tag
-  pushToUser('Background task completed','The selected food has been added to the table','http://localhost:8000/table','add-to-cart') 
 
         })
     );
@@ -427,6 +430,9 @@ self.addEventListener('sync', function(event) {
                 if (res.ok) {
                   console.log('Background Sync Completed');
 
+                   //read pId and push on completion #func takes title,body,url
+pushToUser('Background task completed','The selected food has been removed from the table','http://localhost:8000/table','remove-from-cart') 
+
                        //call clear
               clearAllData('sync-removeFromCart')
               .then(function(){
@@ -444,9 +450,7 @@ self.addEventListener('sync', function(event) {
               });
           }
 
-           //read pId and push on completion #func takes title,body,url
-pushToUser('Background task completed','The selected food has been removed from the table','http://localhost:8000/table','remove-from-cart') 
-
+          
 
         })
     );
@@ -490,6 +494,9 @@ pushToUser('Background task completed','The selected food has been removed from 
                   if (res.ok) {
                     console.log('Background Sync Completed');
   
+                       //read pId and push on completion #func takes title,body,url,tag
+  pushToUser('Background task completed','The selected food has been added to the table','http://localhost:8000/table','add-to-cart') 
+
                          //call clear
                 clearAllData('sync-addToCart')
                 .then(function(){
@@ -506,9 +513,7 @@ pushToUser('Background task completed','The selected food has been removed from 
                   console.log('Error while sending data', err);
                 });
             }
-             //read pId and push on completion #func takes title,body,url,tag
-  pushToUser('Background task completed','The selected food has been added to the table','http://localhost:8000/table','add-to-cart') 
-
+          
   
           })
       );
@@ -553,6 +558,9 @@ self.addEventListener('sync', function(event) {
                 if (res.ok) {
                   console.log('Background Sync Completed');
 
+                  //read pId and push on completion #func takes title,body,url
+  pushToUser('Background task completed','The selected food has been removed from the table','http://localhost:8000/table','remove-from-cart') 
+
                        //call clear
               clearAllData('sync-removeFromCart')
               .then(function(){
@@ -569,9 +577,7 @@ self.addEventListener('sync', function(event) {
                 console.log('Error while sending data', err);
               });
           }
-  //read pId and push on completion #func takes title,body,url
-  pushToUser('Background task completed','The selected food has been removed from the table','http://localhost:8000/table','remove-from-cart') 
-
+  
         })
     );
   }
@@ -614,6 +620,9 @@ self.addEventListener('sync', function(event) {
                   if (res.ok) {
                     console.log('Background Sync Completed');
   
+                       //read pId and push on completion #func takes title,body,url
+  pushToUser('Background task completed','The selected food has been deleted from favorites','http://localhost:8000/favorite','del-from-fav') 
+
                          //call clear
                 clearAllData('sync-deleteFav')
                 .then(function(){
@@ -631,9 +640,7 @@ self.addEventListener('sync', function(event) {
                 });
             }
   
-            //read pId and push on completion #func takes title,body,url
-  pushToUser('Background task completed','The selected food has been deleted from favorites','http://localhost:8000/favorite','del-from-fav') 
-
+         
           })
       );
     }
@@ -679,6 +686,9 @@ self.addEventListener('sync', function(event) {
                   if (res.ok) {
                     console.log('Background Sync Completed');
   
+                      //read pId and push on completion #func takes title,body,url
+  pushToUser('Background task completed','Your food has been added to kitchen','http://localhost:8000/manage-food','add-to-kitchen') 
+
                          //call clear
                 clearAllData('sync-addFood')
                 .then(function(){
@@ -695,9 +705,7 @@ self.addEventListener('sync', function(event) {
                   console.log('Error while sending data', err);
                 });
             }
-             //read pId and push on completion #func takes title,body,url
-  pushToUser('Background task completed','Your food will been added to kitchen','http://localhost:8000/manage-food','add-to-kitchen') 
-
+           
   
           })
       );
@@ -736,6 +744,9 @@ self.addEventListener('sync', function(event) {
                   if (res.ok) {
                     console.log('Background Sync Completed');
   
+                    //read pId and push on completion #func takes title,body,url
+  pushToUser('Background task completed','The selected food has been removed kitchen','http://localhost:8000/manage-food','remove-from-kitchen') 
+
                          //call clear
                 clearAllData('sync-deleteFood')
                 .then(function(){
@@ -752,9 +763,7 @@ self.addEventListener('sync', function(event) {
                   console.log('Error while sending data', err);
                 });
             }
-  //read pId and push on completion #func takes title,body,url
-  pushToUser('Background task completed','The selected food has been removed kitchen','http://localhost:8000/manage-food','remove-from-kitchen') 
-
+  
           })
       );
     }
@@ -802,7 +811,10 @@ self.addEventListener('sync', function(event) {
                   
                   if (res.ok) {
                     console.log('Background Sync Completed');
-  
+                    
+ //read pId and push on completion #func takes title,body,url
+ pushToUser('Background task completed','The edited food has updated successfully','http://localhost:8000/manage-food','add-to-kitchen') 
+
                          //call clear
                 clearAllData('sync-updateFood')
                 .then(function(){
@@ -819,9 +831,7 @@ self.addEventListener('sync', function(event) {
                   console.log('Error while sending data', err);
                 });
             }
-    //read pId and push on completion #func takes title,body,url
-    pushToUser('Background task completed','The edited food has updated successfully','http://localhost:8000/manage-food','add-to-kitchen') 
-
+   
           })
       );
     }

@@ -366,7 +366,7 @@ import paystack from 'vue-paystack';
 fetch('https://onesignal.com/api/v1/notifications', {
                 method: 'POST',
                 headers: {
-                  'Authorization': 'Basic MWU1ZjQ5YzUtNmM0OS00MzVlLWE5ZGQtMDg2ZjYzMDcwZjE1',
+                  'Authorization': 'Basic '+process.env.MIX_ONESIGNAL_API_KEY,
                   'Content-Type': 'application/json',
                   'Accept': 'application/json'
                 },
@@ -539,7 +539,7 @@ this.readAllData('peter-parker')
 fetch('https://onesignal.com/api/v1/notifications', {
 method: 'POST',
 headers: {
- 'Authorization': 'Basic MWU1ZjQ5YzUtNmM0OS00MzVlLWE5ZGQtMDg2ZjYzMDcwZjE1',
+  'Authorization': 'Basic '+process.env.MIX_ONESIGNAL_API_KEY,
  'Content-Type': 'application/json',
  'Accept': 'application/json'
 },

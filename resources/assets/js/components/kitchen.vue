@@ -633,13 +633,13 @@ readAllVendorList(table){
          // ask for notification
          //this.askForNotificationPermission()
 
-          this.fetch()
-          this.vendors()
           var online = navigator.onLine; 
             if(online){
                 //online
                 console.log('on')
                 this.online = true;
+                this.fetch()
+              this.vendors()
             }else{
                 //offline
                 console.log('off')
