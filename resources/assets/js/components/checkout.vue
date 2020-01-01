@@ -154,7 +154,8 @@
       </div>
       
        <div class="my-2 text-center">
-       <v-btn v-if='addText == true' @click.prevent='ok()' outlined color="#FFA500">Ok</v-btn>   
+       <v-btn v-if='addText == true' @click.prevent='ok()' outlined color="#FFA500">Ok</v-btn> 
+       <v-btn v-if='addText == true' @click.prevent='reset()' outlined color="#FFA500">Reset</v-btn>   
             </div>
 
   <div class="my-2 text-center">
@@ -278,6 +279,12 @@ import paystack from 'vue-paystack';
             this.choiceBtn = !this.choiceBtn
           },
 
+          reset(){
+            this.addText = false
+            this.choiceBtn = false
+            this.addText = false
+          },
+
           ok(){
             this.$validator.validateAll().then(() => {
            
@@ -343,7 +350,8 @@ import paystack from 'vue-paystack';
             axios.post('/push-to-vendors',input3)
             .then(res=>{
               this.pId = res.data
-            //  console.log('res',res)
+              if(this.pId){
+                  console.log('push to vens')
             //  console.log(this.pId)
                 //push programatically 
 fetch('https://onesignal.com/api/v1/notifications', {
@@ -376,6 +384,7 @@ fetch('https://onesignal.com/api/v1/notifications', {
                       console.log(error)    
                       })
 //push
+              }
             })
             .then(res=>{
               //clear cart
@@ -499,10 +508,10 @@ fetch('https://onesignal.com/api/v1/notifications', {
 
 this.readAllData('peter-parker')
       .then(function(data) {
-         console.log('peter-parker',data[0]);
-         console.log('peter-parker data',data);
+
+      //   console.log('peter-parker',data[0]);
           if(data[0] == undefined){
-            var pId = null;
+            var pId = '';
           }else{
             var pId = data[0].pp;
           }
@@ -529,7 +538,7 @@ body: JSON.stringify({
 })
 })
 .then(res=> {
-   console.log('push ok');
+   console.log('push to cus, ok');
 }) 
 .catch(error =>{
      console.log(error)    
