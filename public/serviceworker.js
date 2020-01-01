@@ -196,7 +196,7 @@ function clearAllData(table){
      'url': url,
      'include_player_ids': [pId],
      'web_push_topic':tag,
-   //  'chrome_web_image':'http://localhost:8000/images/app-icons/app-icon-512x512.png',//512 or >
+     'chrome_web_image':'http://localhost:8000/images/push-images/completed.png',//512 or >
     'chrome_web_badge':'http://localhost:8000/images/app-icons/app-icon-96x96.png',// 72 or >
   //   'chrome_web_icon':'http://localhost:8000/images/app-icons/app-icon-192x192.png' //192 or >
    })
