@@ -148,6 +148,7 @@
         //read and save Pid
         this.readAllData('peter-parker')
       .then(function(data) {
+        
          if(data[0] == undefined){
           console.log('pId DB empty')
          }else{

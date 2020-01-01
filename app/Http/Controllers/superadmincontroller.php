@@ -40,7 +40,7 @@ class superadmincontroller extends Controller
         //anwhere() kept failing, using just where()
         //for search, use 'LIKE' so that searching for 'chi', can fetch 'chiazor'
         $vendor = User::where('status', 1)->where('name','LIKE','%'.$vendorname.'%')
-        ->where('verification', 0)->paginate(5);
+        ->where('verification', 0)->get();
        //return as collection resource for API use
        return userres::collection($vendor);
        

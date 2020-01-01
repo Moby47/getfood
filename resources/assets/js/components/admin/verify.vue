@@ -73,7 +73,7 @@
                       </thead>
                         <tr class='animated tdFadeIn' v-for='con in refContent' v-bind:key='con.id'>
                           <td>{{con.name}}</td>
-                          <td>{{moment(con.created_at).fromNow()}}</td>
+                          <td>{{con.created_at}}</td>
                           <td @click.prevent='check(con)'><v-icon>remove_red_eye</v-icon></td>
                         </tr>
                       
@@ -162,7 +162,7 @@
                         </v-list-item>
                               <v-list-item>
                                   <v-list-item-content>
-                                    <v-list-item-title>Sign-up Time: {{moment(newContent.created_at).fromNow()}}</v-list-item-title>
+                                    <v-list-item-title>Sign-up Time: {{newContent.created_at}}</v-list-item-title>
                                   </v-list-item-content>
                                 </v-list-item>
                                 <v-list-item>
@@ -193,6 +193,8 @@
           <div class="text-center">
             <v-overlay :value="overlay">
               <v-progress-circular indeterminate size="64"></v-progress-circular>
+              <br>
+              {{loading_text}}
             </v-overlay>
           </div>
           </template>
@@ -245,6 +247,7 @@
                   refCon: false,
     
                    newContent:[],
+                   loading_text:''
                 }
             },
     
@@ -262,6 +265,7 @@
            this.$bvModal.hide('modal')
 
            this.overlay = true
+           this.loading_text = 'Approving '+newContent.name+"'s account"
             var input = {'id':newContent.id}
            axios.post('/approve-vendor', input).then(res=>{
              
@@ -295,6 +299,7 @@
            this.$bvModal.hide('modal')
 
            this.overlay = true
+           this.loading_text = 'Declining '+newContent.name+"'s account"
             var input = {'id':newContent.id}
            axios.post('/decline-vendor', input).then(res=>{
 			if(res.data === 1){
@@ -326,6 +331,7 @@
                if (!this.errors.any()) {
     
                 this.overlay = !this.overlay
+                this.loading_text = 'Searching...'
                     var   page_url = '/vendor-search/'+this.ref;
            
                     fetch(page_url)
@@ -366,6 +372,8 @@
                   NProgress.start();
                   }else{
                     this.overlay=true
+                this.loading_text = 'Setting up...'
+
                   }
                 var   page_url = page_url || '/all-vendors';
                  
