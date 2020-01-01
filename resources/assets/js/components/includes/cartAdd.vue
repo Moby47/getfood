@@ -50,7 +50,7 @@
           <v-overlay :value="overlay">
             <v-progress-circular indeterminate size="64"></v-progress-circular>
             <br>
-            Adding Food to Table...
+            {{loading_text}}
           </v-overlay>
         </div>
       </template>
@@ -76,6 +76,7 @@ data: function() {
         timeout: 5000,
         isAdded: false,
         qty:1,
+        loading_text:''
     }
 },
 
@@ -83,7 +84,7 @@ data: function() {
           
             addToCart(con) {
                 this.overlay = !this.overlay
-               
+               this.loading_text = 'Adding Food to Table...'
 
                 if(!localStorage.getItem('tempUserCartID')){
                     var tempUserCartID = Math.floor(Math.random()*1234567890);
@@ -93,7 +94,7 @@ data: function() {
                 var input = {'foodId':con.id, 'userId':localStorage.getItem('tempUserCartID'),'qty':this.qty};
                 axios.post('/add-to-cart',input)
                         .then(res=>{
-                            if(res.data == 1){
+                            if(res.data == '200 ok'){
                         this.text='Food added to Table!'
                        
                         this.snackbar = true;
@@ -119,7 +120,7 @@ data: function() {
    addToCartSync(con) {
                 this.overlay = !this.overlay
                this.isAdded = !this.isAdded
-
+               this.loading_text = 'Adding Food to Table...'
                
               
               if ('serviceWorker' in navigator && 'SyncManager' in window) {
@@ -199,7 +200,7 @@ this.overlay = false
              removeFromCartSync(con) {
                 this.overlay = !this.overlay
                 this.isAdded = !this.isAdded
-               
+                this.loading_text = 'Removing Food from Table...'
               
               if ('serviceWorker' in navigator && 'SyncManager' in window) {
 
@@ -277,6 +278,8 @@ this.overlay = false
                
                 this.overlay = !this.overlay
                 this.isAdded = !this.isAdded
+                this.loading_text = 'Removing Food from Table...'
+                
                 var input = {'foodId':con.id, 'userId':localStorage.getItem('tempUserCartID')};
                 axios.post('/remove-from-cart',input)
                         .then(res=>{

@@ -78,7 +78,7 @@ $ok->save();
 
 
 
-	return 1;
+	return '200 ok';
 }
 
 

@@ -118,11 +118,13 @@
         <cartAdd
         :con=con
         :stash=con.qty
+        :online=online
         >
         </cartAdd>
       
         <favButton
         :id=con.id
+        :online=online
         >
         </favButton>
 
@@ -143,7 +145,7 @@
 
 
     <span v-if='!empty' v-show='selected'>
-       <div class="shop_pagination slideUp" v-if='content.length > 5'>
+       <div class="shop_pagination slideUp" v-if='food_count > 5'>
               <template>
                   <v-card
                     class="mx-auto"
@@ -199,7 +201,7 @@
               <v-overlay :value="overlay2">
                 <v-progress-circular indeterminate size="64"></v-progress-circular>
                 <br>
-          Checking kitchen...
+          Checking {{selected}}'s kitchen...
               </v-overlay>
             </div>
             </template>
