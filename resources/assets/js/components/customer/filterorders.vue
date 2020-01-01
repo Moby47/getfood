@@ -1,6 +1,6 @@
 <template>
         <div class="container">
-            <usermenubar></usermenubar>
+           
       <!--content here-->
       
       <div class="pages">

@@ -135,7 +135,7 @@
     <v-overlay :value="overlay">
       <v-progress-circular indeterminate size="64"></v-progress-circular>
       <br>
-      Almost done...
+    Preparing your dashboard...
     </v-overlay>
   </div>
   </template>

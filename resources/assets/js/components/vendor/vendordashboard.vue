@@ -154,6 +154,11 @@
                 max-width="500"
                 tile
               >
+              <v-list-item>
+                  <v-list-item-content>
+                    <v-list-item-title>Customer's Name: {{newContent.cusName}}</v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
                 <v-list-item>
                   <v-list-item-content>
                     <v-list-item-title>Quantity: {{newContent.qty}}</v-list-item-title>

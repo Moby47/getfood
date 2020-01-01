@@ -65,7 +65,7 @@ class customercontroller extends Controller
 
       
     public  function saveorder(Request $request){
-      
+     
 //get temp data
 $tempId = $request->input('tempId');
  $temp = temp::where('tempId','=',$tempId)->select('tempId','id','foodId','vendorName','vendorId','qty','amt','foodName')->get();
@@ -77,6 +77,7 @@ $ref = $request->input('ref');
 $trans = $request->input('trans');
 $add = $request->input('address');
 $deli = $request->input('delivery');
+$cusName = $request->input('userName');
 /*
 //update food qty - deduct food from table
 $red = food::findorfail($temp->foodId);
@@ -95,6 +96,7 @@ foreach($temp as $t){
  'foodId'=> $t->foodId,
  'vendorId'=> $t->vendorId,
  'vendorName'=> $t->vendorName,
+ 'cusName'=> $cusName,
  'cusId'=> $cusId,
  'qty'=> $t->qty,
  'amt'=> $t->amt,
@@ -132,15 +134,17 @@ try{
   return 'backend error occured';
    }
 
-//clear my temp items  !!!!!!!!!!!!!!!!!!!!! I COOMENTED THIS OOUT, TEST TO BE SURE IT BROKE NOTHING
-//$ids = temp::where('tempId','=',$tempId)->select('id')->get()->toArray();
-//DB::table('temps')->whereIn('id', $ids)->delete();
-
 
 return 1;
      }
 
-     
+
+     public function cleartempData(Request $request){
+//clear my temp items  
+$ids = temp::where('tempId','=',$request->input('userId'))->select('id')->get()->toArray();
+DB::table('temps')->whereIn('id', $ids)->delete();
+return 1;
+     }
 
 
  public function pushToVendors(Request $request){

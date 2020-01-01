@@ -336,7 +336,8 @@ import paystack from 'vue-paystack';
 
              var input = {'total':this.total,'ref':response.reference, 'trans':response.trans,
              'cusId':localStorage.getItem('userId'), 'address':address, 'delivery':delivery,
-             'tempId':localStorage.getItem('tempUserCartID'),'userMail':localStorage.getItem('userMail')}
+             'tempId':localStorage.getItem('tempUserCartID'),'userMail':localStorage.getItem('userMail'),
+             'userName':localStorage.getItem('userName')}
 
             axios.post('/save-order',input)
             .then(res=>{
@@ -349,7 +350,15 @@ import paystack from 'vue-paystack';
      var input3 = {'tempId':localStorage.getItem('tempUserCartID')}
             axios.post('/push-to-vendors',input3)
             .then(res=>{
-              this.pId = res.data
+              
+
+              if(res.data[0] == undefined){
+                this.pId = '';
+                console.log('pId for ven is empty')
+              }else{
+                this.pId = res.data
+              }
+
               if(this.pId){
                   console.log('push to vens')
             //  console.log(this.pId)
@@ -370,11 +379,11 @@ fetch('https://onesignal.com/api/v1/notifications', {
                   'web_push_topic': 'notify-admin',
            'chrome_web_image':'http://localhost:8000/images/push-images/order.png',//512 or >
     'chrome_web_badge':'http://localhost:8000/images/app-icons/app-icon-96x96.png',// 72 or >
-     'chrome_web_icon':'http://localhost:8000/images/app-icons/app-icon-192x192.png' //192 or >
+    // 'chrome_web_icon':'http://localhost:8000/images/app-icons/app-icon-192x192.png' //192 or >
                 })
               })
                 .then(res=> {
-                    console.log('call to vendors ok');
+                    console.log('push to vendors ok');
                  //   console.log(res);
                    //read pId and push to self #func takes title,body,url,tag
   this.pushToUser('Hello '+localStorage.getItem('userName'),'Click here to view your orders','http://localhost:8000/userdashboard','thanks') 
@@ -391,6 +400,15 @@ fetch('https://onesignal.com/api/v1/notifications', {
             var input2 = {'userId':localStorage.getItem('tempUserCartID')}
             axios.post('/clear-cart',input2).then(res=>{
                 console.log('cart cleared')  
+            })
+            .catch(error =>{
+                console.log(error)    
+               })
+
+                //clear temp data
+            var input3 = {'userId':localStorage.getItem('tempUserCartID')}
+            axios.post('/clear-temp',input3).then(res=>{
+                console.log('temp DB cleared')  
             })
             .catch(error =>{
                 console.log(error)    
@@ -534,7 +552,7 @@ body: JSON.stringify({
  'web_push_topic':tag,
    'chrome_web_image':'http://localhost:8000/images/push-images/success.png',//512 or >
  'chrome_web_badge':'http://localhost:8000/images/app-icons/app-icon-96x96.png',// 72 or >
-     'chrome_web_icon':'http://localhost:8000/images/app-icons/app-icon-192x192.png' //192 or >
+  //   'chrome_web_icon':'http://localhost:8000/images/app-icons/app-icon-192x192.png' //192 or >
 })
 })
 .then(res=> {
@@ -543,7 +561,9 @@ body: JSON.stringify({
 .catch(error =>{
      console.log(error)    
      })
-          }  
+          } else{
+            consol.log('no pId found')
+          } 
       })
 
 },

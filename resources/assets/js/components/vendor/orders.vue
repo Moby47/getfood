@@ -71,14 +71,16 @@
                     <table class="table table-striped table-sm table-hover table-bordered">
                     <thead class='thead-dark'>
                       <tr>
+                          <th>Customer</th>
                       <th>Food</th>
                       <th>Time</th>
                       <th>Action</th>
                     </tr>
                   </thead>
                     <tr class='animated tdFadeIn' v-for='con in refContent' v-bind:key='con.id'>
+                        <td>{{con.cusName}}</td>
                       <td>{{con.title}}</td>
-                      <td>{{moment(con.created_at).fromNow()}}</td>
+                      <td>{{con.created_at}}</td>
                       <td @click.prevent='check(con)'><v-icon>remove_red_eye</v-icon></td>
                     </tr>
                   
@@ -102,14 +104,16 @@
                       <table class="table table-striped table-sm table-hover table-bordered">
                       <thead class='thead-dark'>
                          <tr>
+                           <th>Customer</th>
                       <th>Food</th>
                       <th>Time</th>
                       <th>Action</th>
                     </tr>
                     </thead>
 											<tr class='animated tdFadeIn' v-for='con in content' v-bind:key='con.id'>
+                          <td>{{con.cusName}}</td>
 											  <td>{{con.title}}</td>
-                      <td>{{moment(con.created_at).fromNow()}}</td>
+                      <td>{{con.created_at}}</td>
                       <td @click.prevent='check(con)'><v-icon>remove_red_eye</v-icon></td>
 											</tr>
 										
@@ -150,6 +154,11 @@
                 max-width="500"
                 tile
               >
+              <v-list-item>
+                  <v-list-item-content>
+                    <v-list-item-title>Customer's Name: {{newContent.cusName}}</v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
                 <v-list-item>
                   <v-list-item-content>
                     <v-list-item-title>Quantity: {{newContent.qty}}</v-list-item-title>
@@ -182,7 +191,7 @@
                           </v-list-item>
                           <v-list-item>
                               <v-list-item-content>
-                                <v-list-item-title>Time of Order: {{moment(newContent.created_at).fromNow()}}</v-list-item-title>
+                                <v-list-item-title>Time of Order: {{newContent.created_at}}</v-list-item-title>
                               </v-list-item-content>
                             </v-list-item>
             
@@ -201,7 +210,7 @@
         <v-overlay :value="overlay">
           <v-progress-circular indeterminate size="64"></v-progress-circular>
           <br>
-          Setting up...
+          {{loading_text}}
         </v-overlay>
       </div>
       </template>
@@ -218,12 +227,12 @@
   </style>
 
 <script>
-                 var moment =require('moment');
+             //    var moment =require('moment');
 
           export default {
             data () {
             return {
-              moment:moment,
+           //   moment:moment,
               content:[],
               pagination: [],
               overlay:false,
@@ -235,7 +244,8 @@
               refCon: false,
 
                newContent:[],
-               online:null
+               online:null,
+               loading_text:'Setting up...'
             }
         },
 
@@ -255,7 +265,7 @@
             this.$validator.validateAll().then(() => {
            
            if (!this.errors.any()) {
-
+            this.loading_text = 'searching...'
             this.overlay = !this.overlay
                 var   page_url = '/order-ref/'+this.ref+'/'+ localStorage.getItem('userId');
         console.log(page_url)

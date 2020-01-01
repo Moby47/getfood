@@ -476,6 +476,7 @@ displayConfirmNotification(title, body, tag) {
     
             mounted() {
               this.fetch()
+              var online = navigator.onLine; 
               if(online){
                 //online
                 console.log('on')

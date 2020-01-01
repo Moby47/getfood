@@ -90,8 +90,7 @@ Route::get('/orders/{userId}', 'customercontroller@orders');
 Route::post('/save-order', 'customercontroller@saveorder'); 
 Route::post('/clear-cart', 'cartcontroller@clearcart');
 Route::post('/push-to-vendors', 'customercontroller@pushToVendors'); 
-
-//Route::get('/payment-page', 'paymentcontroller@paymentpage'); 
+Route::post('/clear-temp', 'customercontroller@clearTempData'); 
 //Route::post('/pay', 'paymentcontroller@redirectToGateway')->name('pay'); 
 
 

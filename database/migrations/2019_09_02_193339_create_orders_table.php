@@ -19,6 +19,7 @@ class CreateOrdersTable extends Migration
             $table->integer('vendorId');
             $table->string('vendorName');
             $table->integer('cusId');
+            $table->string('cusName');
             $table->integer('qty');
             $table->string('title');
             $table->string('amt');

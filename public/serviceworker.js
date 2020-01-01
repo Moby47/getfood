@@ -174,7 +174,11 @@ function clearAllData(table){
     readAllData('peter-parker')
           .then(function(data) {
               // console.log('peter-parker',data[0].pp);
-              var pId = data[0].pp;
+              if(data[0] == undefined){
+                var pId = '';
+              }else{
+                var pId = data[0].pp;
+              }
                
               if(pId){
   //push programatically 
@@ -194,7 +198,7 @@ function clearAllData(table){
      'web_push_topic':tag,
    //  'chrome_web_image':'http://localhost:8000/images/app-icons/app-icon-512x512.png',//512 or >
     'chrome_web_badge':'http://localhost:8000/images/app-icons/app-icon-96x96.png',// 72 or >
-     'chrome_web_icon':'http://localhost:8000/images/app-icons/app-icon-192x192.png' //192 or >
+  //   'chrome_web_icon':'http://localhost:8000/images/app-icons/app-icon-192x192.png' //192 or >
    })
  })
    .then(res=> {
@@ -203,7 +207,9 @@ function clearAllData(table){
    .catch(error =>{
          console.log(error)    
          })
-              }  
+              } else{
+                console.log('no pId to push to')
+              } 
           })
   
   }
