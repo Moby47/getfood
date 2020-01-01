@@ -24,7 +24,7 @@
       <h4 class='text-capitalize'>{{con.title}}</h4>
       <div class="shop_item_price"><strike>N</strike>{{con.amt}}</div>
         <div class="item_qnty_shop">
-                <form id="myformfav" method="POST" action="#">
+                <form  method="POST" action="#">
               <input :disabled='qty==1' type="button" value="-" class="qntyminusshop" field="quantity" @click.prevent='decre()'/>
                     <input type="text" name="quantity" :value="qty" class="qntyshop" />
                     <input type="button" value="+" class="qntyplusshop" field="quantity" @click.prevent='incre()'/>
@@ -148,7 +148,7 @@ methods: {
         var input = {'foodId':con.foodId, 'userId':localStorage.getItem('tempUserCartID'),'qty':this.qty};
                 axios.post('/add-fav-to-cart',input)
                         .then(res=>{
-                            if(res.data == 1){
+                            if(res.data == '200 ok'){
                         this.text='Food added to Table!'
                         this.snackbar = true;
                         //update cart count
