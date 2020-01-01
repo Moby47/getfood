@@ -28,6 +28,12 @@ class guestcontroller extends Controller
         return foodres::collection($food);
     }
 
+    public function offline_foods(){
+
+      $food = food::orderby('id','desc')->select('id','amt','qty','title','img','vendor_id',
+      'vendor_name','vendorAddress')->paginate(20);
+      return foodres::collection($food);
+  }
    
     
 public function addFavorite(Request $request){

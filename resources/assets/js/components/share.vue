@@ -1,7 +1,8 @@
 <template>
     <div class="container">
         
-     
+      <menubar></menubar>
+
     <div class="statusbar-overlay"></div>
 
     <div class="panel-overlay"></div>
@@ -29,9 +30,7 @@
           <li class='wiggle'> <reddit  :url="url" scale="3"></reddit>  </li>
         </ul>
 
-      <div class="close_popup_button"><router-link to='/' class="close-popup">
-          <img src="images/icons/black/menu_close.png" alt="" title="" /></router-link>
-          </div>
+     
 
    <!--
 

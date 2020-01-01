@@ -149,7 +149,7 @@ if(page_url){
             .then(res=>{
                   setTimeout(func=>{
                     this.clearAndWriteData('food-likeList',this.content) 
-                      },7000)
+                      },4000)
                 })
             .catch(error =>{
                console.log(error)
@@ -271,7 +271,7 @@ console.log('fetched from inDB :',this.content)
                 //offline
                 console.log('off')
                 this.online = false;
-              //  this.readAllFromDB('foods')
+                this.readAllFromDB('food-likeList')
             }
 
             }

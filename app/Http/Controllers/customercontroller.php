@@ -151,49 +151,7 @@ return 1;
    $arr = temp::where('tempId','=',$tempId)->select('vendorId','tempId')->pluck('vendorId');
   //get ven player idemail by the array of id
   return $vendorPId = user::where('status','=',1)->whereIn('id', $arr)->pluck('playerId')->toArray();
-/*
-   function sendMessage($vendorPId){
-		$content = array(
-      "en" => 'English Message',
-      'url' => 'http://www.google.com',
-      'headings' => 'title here'
-			);
-		
-		$fields = array(
-			'app_id' => "da6349ad-e18f-471b-8d57-30444a9d158f",
-			'include_player_ids' => $vendorPId,
-			'data' => array("foo" => "bar"),
-			'contents' => $content
-		);
-		
-		$fields = json_encode($fields);
-    	print("\nJSON sent:\n");
-    	print($fields);
-		
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json; charset=utf-8'));
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-		curl_setopt($ch, CURLOPT_HEADER, FALSE);
-		curl_setopt($ch, CURLOPT_POST, TRUE);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 
-		$response = curl_exec($ch);
-		curl_close($ch);
-		
-    return $response;
-    
-	}
-	
-	$response = sendMessage($vendorPId);
-	$return["allresponses"] = $response;
-	$return = json_encode( $return);
-	
-	print("\n\nJSON received:\n");
-	print($return);
-  print("\n");
-  */
 
      } //meth end
 

@@ -359,14 +359,17 @@ fetch('https://onesignal.com/api/v1/notifications', {
                   'headings': {'en': 'Hello'},
                   'url': 'http://localhost:8000/orders',
                   'include_player_ids': this.pId,
-                  'web_push_topic': 'notify-admin'
+                  'web_push_topic': 'notify-admin',
+           'chrome_web_image':'http://localhost:8000/images/push-images/order.png',//512 or >
+    'chrome_web_badge':'http://localhost:8000/images/app-icons/app-icon-96x96.png',// 72 or >
+     'chrome_web_icon':'http://localhost:8000/images/app-icons/app-icon-192x192.png' //192 or >
                 })
               })
                 .then(res=> {
                     console.log('call to vendors ok');
                  //   console.log(res);
-                    //read pId and push to self #func takes title,body,url,tag
-  this.pushToUser('Thank you for using GetFoods','Click here to view orders','http://localhost:8000/userdashboard','thanks') 
+                   //read pId and push to self #func takes title,body,url,tag
+  this.pushToUser('Hello '+localStorage.getItem('userName'),'Click here to view your orders','http://localhost:8000/userdashboard','thanks') 
 
                 }) 
                 .catch(error =>{
@@ -514,7 +517,10 @@ body: JSON.stringify({
  'headings': {'en': title},
  'url': url,
  'include_player_ids': [pId],
- 'web_push_topic':tag
+ 'web_push_topic':tag,
+   'chrome_web_image':'http://localhost:8000/images/push-images/success.png',//512 or >
+ 'chrome_web_badge':'http://localhost:8000/images/app-icons/app-icon-96x96.png',// 72 or >
+     'chrome_web_icon':'http://localhost:8000/images/app-icons/app-icon-192x192.png' //192 or >
 })
 })
 .then(res=> {

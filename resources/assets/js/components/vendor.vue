@@ -312,7 +312,7 @@
                  .then(res=>{
                   setTimeout(func=>{
                     this.clearAndWriteData('vendor-list',this.vendor_list)
-                      },5000)
+                      },4000)
                 })
                 .catch(error =>{
                     //off loader

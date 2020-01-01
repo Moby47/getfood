@@ -187,7 +187,7 @@
                 .then(res=>{
                   setTimeout(func=>{
                     this.clearAndWriteData('my-favs',this.content)
-                      },6000)
+                      },4000)
                 })
                 .catch(error =>{
                     //off loader

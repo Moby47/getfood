@@ -72,7 +72,9 @@ class superadmincontroller extends Controller
                     'data' => array("foo" => "bar"),
                     'url' => 'http://localhost:8000/login',
                     'contents' => $content,
-                    'headings' => $headings
+                    'headings' => $headings,
+                    'chrome_web_image' => 'http://localhost:8000/images/push-images/approve.png',//512 or >
+                   
                 );
                 
                 $fields = json_encode($fields);
@@ -135,7 +137,8 @@ class superadmincontroller extends Controller
                     'data' => array("foo" => "bar"),
                     'url' => 'http://localhost:8000',
                     'contents' => $content,
-                    'headings' => $headings
+                    'headings' => $headings,
+                    'chrome_web_image' => 'http://localhost:8000/images/push-images/decline.png',//512 or >
                 );
                 
                 $fields = json_encode($fields);

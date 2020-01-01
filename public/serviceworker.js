@@ -47,7 +47,6 @@ var filesToCache = [
     'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js',
     '/js/idb.js',
     //'/js/app.js', //don't cache this
-    //'https://cdn.onesignal.com/sdks/OneSignalSDK.js'
     
 ];
 
@@ -192,7 +191,10 @@ function clearAllData(table){
      'headings': {'en': title},
      'url': url,
      'include_player_ids': [pId],
-     'web_push_topic':tag
+     'web_push_topic':tag,
+   //  'chrome_web_image':'http://localhost:8000/images/app-icons/app-icon-512x512.png',//512 or >
+    'chrome_web_badge':'http://localhost:8000/images/app-icons/app-icon-96x96.png',// 72 or >
+     'chrome_web_icon':'http://localhost:8000/images/app-icons/app-icon-192x192.png' //192 or >
    })
  })
    .then(res=> {
@@ -822,3 +824,72 @@ self.addEventListener('sync', function(event) {
   
   // ****************** lISTEN FOR NETWORK AND [POST update FOOD] *****
 
+
+
+
+  // ****************** FUNCTION TO ADD IMPORTANT DYNAMIC CONTENTS TO INDEXED DB IN THE BACKGROUD ********
+  function dbSync(table,url,apiRes = 0){
+
+    console.log('connecting to db')
+      var dbPromise = idb.open('getFoodsDB', 14, function (db) {
+    if (!db.objectStoreNames.contains(table)) {
+      db.createObjectStore(table, {keyPath: 'id'});
+    }
+  });
+
+    //fetch data
+    fetch(url)
+    .then(res => res.json())
+    .then(res=>{
+
+      //check if res is API
+      if(apiRes == 0){
+        var data = res;
+      }else{
+        var data = res.data;
+      }
+      
+      console.log('fetched data',data)
+
+       //call clear then save
+    clearAllData(table)
+    .then(function(){
+      //gives a promise for saving
+      console.log('table cleared')
+
+      for(var key in data){
+    console.log('data keys to save:',key)
+      dbPromise
+  .then(function(db) {
+    var tx = db.transaction(table, 'readwrite');
+    var store = tx.objectStore(table);
+    for(var i in data){
+    store.put(data[i]);
+    }
+    console.log('saved to indexdb')
+    return tx.complete;
+  })
+  .catch(error =>{
+          console.log(error)    
+          })
+  }
+    })
+    .catch(error =>{
+          console.log(error)    
+          })
+    })
+     .then(res=>{
+      console.log('fetched ok! from '+url)  
+    })
+    .catch(error =>{
+        console.log(error)    
+        })
+
+  } //end of clear and write data
+  // ****************** FUNCTION TO ADD IMPORTANT DYNAMIC CONTENTS TO INDEXED DB IN THE BACKGROUD ********
+
+
+// function calls for indexed DB
+  dbSync('vendor-list','/vendor-list')
+  dbSync('foods','/offline-foods','1')
+  
