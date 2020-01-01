@@ -144,8 +144,8 @@
             </div>
 
        <div class="form-group" v-if='addText == true'>
-        <label for="exampleInputEmail1">Enter Your Delivery Address</label>
-        <input type="text" class="form-control" name='address' id="exampleInputEmail1" 
+        <label for="">Enter Your Delivery Address</label>
+        <input type="text" class="form-control" name='address' 
         v-model='address' v-validate='"required"' placeholder="Eg: no 47 nehita, devine homes">
 
         <transition  name="fadeLeft">
@@ -499,8 +499,13 @@ fetch('https://onesignal.com/api/v1/notifications', {
 
 this.readAllData('peter-parker')
       .then(function(data) {
-          // console.log('peter-parker',data[0].pp);
-          var pId = data[0].pp;
+         console.log('peter-parker',data[0]);
+         console.log('peter-parker data',data);
+          if(data[0] == undefined){
+            var pId = null;
+          }else{
+            var pId = data[0].pp;
+          }
            
           if(pId){
 //push programatically 

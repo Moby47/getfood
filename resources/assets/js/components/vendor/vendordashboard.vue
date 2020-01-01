@@ -63,13 +63,13 @@
 
                     <form>
                       <div class="mt-4 form-group">
-                        <label for="exampleInputEmail1">From</label>
-                        <input type="date" class="form-control" id="exampleInputEmail1" name='From' v-model='from' v-validate='"required"'>
+                        <label for="">From</label>
+                        <input type="date" class="form-control"  name='From' v-model='from' v-validate='"required"'>
                         <p class='text-danger shake' v-show="errors.has('From')">{{ errors.first('From') }}</p>
                       </div>
                       <div class="form-group">
                         <label for="exampleInputPassword1">To</label>
-                        <input type="date" class="form-control" id="exampleInputEmail1" name='To' v-model='to' v-validate='"required"'>
+                        <input type="date" class="form-control"  name='To' v-model='to' v-validate='"required"'>
                         <p class='text-danger shake' v-show="errors.has('To')">{{ errors.first('To') }}</p>
                       </div>
                     

@@ -97,8 +97,44 @@
   OneSignal.push(function() {
     OneSignal.init({
       appId: "da6349ad-e18f-471b-8d57-30444a9d158f",
+      persistNotification: false, // Automatically dismiss the notification after ~20 seconds in non-mobile Chrome
+      promptOptions: {
+    /* These prompt options values configure both the HTTP prompt and the HTTP popup. */
+    /* actionMessage limited to 90 characters */
+    actionMessage: "Click OK for a better experience",
+    /* acceptButtonText limited to 15 characters */
+    acceptButtonText: "OK",
+    /* cancelButtonText limited to 15 characters */
+    cancelButtonText: "MISS OUT"
+    },
+    welcomeNotification: {
+      "title": "GetFoods",
+      "message": "Thanks for subscribing!",
+      // "url": "" /* Leave commented for the notification to not open a window on Chrome and Firefox (on Safari, it opens to your webpage) */
+    }
     });
+    /* In milliseconds, time to wait before prompting user. This time is relative to right after the user presses <ENTER> on the address bar and navigates to your page */
+     var notificationPromptDelay = 15000;
+    /* Use navigation timing to find out when the page actually loaded instead of using setTimeout() only which can be delayed by script execution */
+    var navigationStart = window.performance.timing.navigationStart;
+    /* Get current time */
+    var timeNow = Date.now();
+    /* Prompt the user if enough time has elapsed */
+    setTimeout(promptAndSubscribeUser, Math.max(notificationPromptDelay - (timeNow - navigationStart), 0));
+  
   });
+
+//function to prompt
+function promptAndSubscribeUser() {
+    window.OneSignal.isPushNotificationsEnabled(function(isEnabled) {
+      if (!isEnabled) {
+        window.OneSignal.showSlidedownPrompt();
+      }else{
+        console.log('enabled notification already')
+      }
+    });
+  }
+  //function to prompt
 
 
    ////////////////////////////

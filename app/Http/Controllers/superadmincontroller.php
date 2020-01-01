@@ -73,7 +73,7 @@ class superadmincontroller extends Controller
                     'url' => 'http://localhost:8000/login',
                     'contents' => $content,
                     'headings' => $headings,
-                    'chrome_web_image' => 'http://localhost:8000/images/push-images/approve.png',//512 or >
+                   // 'chrome_web_image' => 'http://localhost:8000/images/push-images/approve.png',//512 or >
                    
                 );
                 

@@ -54,8 +54,8 @@
                                </transition>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Food Image</label>
-                            <input type="file" class="form-control" name='picture' id="exampleInputEmail1" 
+                            <label for="">Food Image</label>
+                            <input type="file" class="form-control" name='picture' 
                             @change='ImageSelect' v-validate='"required|image"'>
   
                             <transition  name="fadeLeft">
@@ -139,6 +139,8 @@
   <div class="text-center">
     <v-overlay :value="overlay">
       <v-progress-circular indeterminate size="64"></v-progress-circular>
+      <br>
+      Adding {{food}} to kitchen
     </v-overlay>
   </div>
   </template>
