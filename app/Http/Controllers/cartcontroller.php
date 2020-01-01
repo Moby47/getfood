@@ -115,8 +115,15 @@ public function cartItems($id){
       $foodId = $request->input('foodId');
       
 
-      $food=food::findorfail($foodId);
-     
+    $food=food::findorfail($foodId);
+
+  //  $qty = 1;
+   // $totalQty = $food->qty + $qty;
+
+//check remaining qty
+//if($food->qty < $qty){
+ // return $food->qty;
+//}
 
       //increament quantity (update)
       \Cart::session($userId)->update($foodId,array(

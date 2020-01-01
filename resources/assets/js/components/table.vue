@@ -132,7 +132,7 @@ Your Table is Empty.
       <v-overlay :value="overlay">
         <v-progress-circular indeterminate size="64"></v-progress-circular>
         <br>
-        Loading Table...
+        {{loading_text}}
       </v-overlay>
     </div>
   </template>
@@ -166,7 +166,8 @@ import {eventBus} from "../app.js";
                 data_load: true,
                 empty:47,
                 cartConCount:'',
-                toggle_cart:true
+                toggle_cart:true,
+                loading_text:'Loading Table...'
             }
         },
 
@@ -204,6 +205,7 @@ import {eventBus} from "../app.js";
                 },
 
                 countCartCon(){
+                  this.loading_text = 'Please wait...'
                   this.overlay = !this.overlay
                   fetch('/cartCount/'+localStorage.getItem('tempUserCartID'))
                   .then(res => res.json())
@@ -259,7 +261,7 @@ import {eventBus} from "../app.js";
             var online = navigator.onLine; 
             if(online){
                 // online
-                console.log('not online')
+                console.log('online')
                  this.fetch()
              this.countCartCon()
 
