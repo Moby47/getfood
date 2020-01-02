@@ -102,6 +102,61 @@ Your Table is Empty.
                 </v-card>
               </template>
 
+<!-- proposed ------------------------------------>
+              <ul class="shop_items ">
+              
+          <li class='animated tdPlopIn' v-for='con in content' v-bind:key='con.id'>
+              <template>
+                  <v-card
+                    class="mx-auto elevation-23 p-1"
+                    max-width="344"
+                    outlined
+                  >
+          <div class="shop_thumb">
+              <v-img 
+              :src="'/images/home.png'"
+              :alt="'lllll'"
+              :lazy-src="`/images/black-spinner.gif`"
+              title=""
+              class='img_size' ></v-img>
+          </div>
+          <div class="shop_item_details">
+              <h4 class="text-capitalize">title</h4>
+              <div class="shop_item_price"><strike>N</strike>2000</div>
+
+
+          <cartAdd
+          :con=con
+          :stash=con.qty
+           :online=online
+          >
+          </cartAdd>
+        
+          <favButton
+          :id=con.id
+          :online=online
+          >
+          </favButton>
+
+          
+          </div>
+
+          <p class="info text-capitalize">
+              <v-icon>restaurant</v-icon> ven name
+               <br>
+               <v-icon class='icon-shift'>my_location</v-icon> ven add
+             </p>
+
+          </v-card>
+          </template>
+
+          </li> 
+      </ul>
+      
+<!-- proposed ------------------------------------>
+
+
+
                 <div class="cart_item animated tdExpandInBounce" id="cartitem1" v-for='con in content' v-bind:key='con.id'>
                    
                     <cartUpdate
