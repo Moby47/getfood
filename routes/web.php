@@ -32,8 +32,8 @@ Route::Post('/resend-veri', 'customauthcontroller@resend');
 
 //guest routes
 Route::Post('/add-to-cart', 'cartcontroller@addToCart');
-Route::Post('/increase-qty', 'cartcontroller@increaseQty');
-Route::Post('/decrease-qty', 'cartcontroller@decreaseQty');
+//Route::Post('/increase-qty', 'cartcontroller@increaseQty');
+//Route::Post('/decrease-qty', 'cartcontroller@decreaseQty');
 Route::Post('/remove-from-cart', 'cartcontroller@removeFromCart');
 Route::Post('/add-favorite', 'guestcontroller@addFavorite');
 Route::Post('/remove-favorite', 'guestcontroller@removeFavorite');

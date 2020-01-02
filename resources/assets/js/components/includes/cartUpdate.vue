@@ -1,64 +1,93 @@
 
 <template>
        
-    <div :id='con.id'>
+    <div>
 
         <template>
-                  <v-card
-                    class="mx-auto "
-                    max-width="344"
-                    
-                  >
-            <div class="item_title text-capitalize"> {{con.name}} </div>
-
-            <span v-if='deleted == false'>
-            <div class="item_price"><strike>N</strike>{{con.attributes.total}} </div>
-            <div class="item_price" v-show='showSub'> Subtotal: <strike>N</strike>{{subtotal}} </div>
-            <div class="item_thumb"><a href="#" class="close-panel">
+                
+            <template>
+                <v-card
+                  class="mx-auto elevation-23 p-1"
+                  max-width="344"
+                  outlined
+                >
+        <div class="shop_thumb">
             <v-img 
             :src="'/storage/food/'+con.attributes.image"
             :alt="con.title"
             :lazy-src="`/images/black-spinner.gif`"
-            title="" 
-            class='img_size'></v-img>
-            </a></div>
+            title="con.name"
+            class='img_size' ></v-img>
+        </div>
+        <div class="shop_item_details">
+            <h4 class="text-capitalize">{{con.name}} ({{con.quantity}})</h4> 
+   <div class="shop_item_price"><strike>N</strike>{{con.attributes.total}} 
+    <span v-show='showSub'>-  Subtotal: <strike>N</strike>{{subtotal}} </span></div>
+           
+            <template>
+                <div>
+                    <span>
+                        <div class="item_qnty_shop">
+      <form  method="POST" action="#">
+ <input :disabled='qty==1 || qty==0' type="button" value="-" class="qntyminusshop" field="quantity" @click.prevent='decre()'/>
+          <input type="text" name="quantity" :value="qty" class="qntyshop" />
+ <input type="button" value="+" class="qntyplusshop" field="quantity" @click.prevent='incre()'/>
+       </form>
+          </div>
+                <span>
+    <v-btn   href="#"  id="addtocart" @click.prevent='update(con)' >UPDATE</v-btn>
+                </span>
+                        </span>
+                </div>                     
+                </template>
+                
 
-            <div class="item_qnty">
-                <form method="POST" action="#">
-                    <label>QUANTITY ({{con.quantity}})</label>
-                    <input type="button" value="-" class="qntyminus" field="quantity" @click.prevent='decre(con)'
-                     :disabled='qty==1'/>
-                    <input type="text" name="quantity" :value="qty" class="qnty" /> 
-                    <input type="button" value="+" class="qntyplus" field="quantity" @click.prevent='incre(con)'/>
-                </form>
-            </div>
-            <a href="#" class="item_delete" id="cartitem1" @click.prevent='removeFromCart(con.id)'>
-                <img src="/images/icons/black/trash.png" alt="" title="" /></a>         
-                </span> 
-            <span v-if='deleted == true'>
-                    <div class="item_qnty">
-                                <label>DELETED</label>
-                            </div>
-            </span>
+                <template>
+                    <div> 
+                        <span>
+  <a href="#" data-popup=".popup-social" class="mr-1 open-popup shopfav pulse" @click.prevent='removeFromCart(con.id)'>
+        <v-img src="/images/icons/black/trash.png" alt="" title=""></v-img></a>
 
-            </v-card>
+                        </span>
+                      
+                       </div>                  
+                 </template>
+
+        
+        </div>
+
+     
+        </v-card>
         </template>
 
-            <template>
-                <v-snackbar
-              v-model="snackbar"
-              :timeout="timeout"
-              >
-              {{ text }}
-              <v-btn
-                color="blue"
-                text
-                @click='snackbar=!snackbar'
-              >
-                Close
-              </v-btn>
-              </v-snackbar>
-              </template>
+        </template>
+
+            <!--content here-->
+  <template>
+      <div class="text-center">
+        <v-overlay :value="overlay">
+          <v-progress-circular indeterminate size="64"></v-progress-circular>
+          <br>
+          {{loading_text}}
+        </v-overlay>
+      </div>
+    </template>
+  
+    <template>
+        <v-snackbar
+      v-model="snackbar"
+      :timeout="timeout"
+      >
+      {{ text }}
+      <v-btn
+        color="blue"
+        text
+        @click='snackbar=!snackbar'
+      >
+        Close
+      </v-btn>
+      </v-snackbar>
+      </template>
     </div>
                                 
   </template>
@@ -76,93 +105,95 @@ return {
     snackbar: false,
         text: '',
         timeout: 3000,
-qty:'',
-deleted:false,
-subtotal:'',
-showSub:false,
+        qty:0,
+        overlay:false,
+        loading_text:'Loading Table...',
+        subtotal:'',
+         showSub:false,
 }
 },
 
 methods: {
 
-    removeFromCart(id) {
-       
-        NProgress.start();
-        var input = {'foodId':id, 'userId':localStorage.getItem('tempUserCartID')};
-        axios.post('/remove-from-cart',input)
-                .then(res=>{
-                    if(res.data == 1){
-                     
-                this.text='Food removed from Table!'
-                        this.snackbar = true;
-                         //update cart count
-                         this.cartcount()
-                         //rerun method to recount cart content
-                         eventBus.$emit('rerun_count')
-                    }
-                    this.deleted = true;
-                    NProgress.done();
-                   
-                })
-                .catch(error =>{
-          this.$toasted.show("Failed to remove. Try again");
-            NProgress.done();        
-              })
-    },
+  update(con){
+        console.log(con)
+        this.overlay = !this.overlay
+               this.loading_text = 'Updating Food...'
 
-    cartcount(){
+                if(!localStorage.getItem('tempUserCartID')){
+                    var tempUserCartID = Math.floor(Math.random()*1234567890);
+                     localStorage.setItem('tempUserCartID',tempUserCartID);
+                   //  console.log('created id')
+                }
+                var input = {'foodId':con.id, 'userId':localStorage.getItem('tempUserCartID'),'qty':this.qty};
+                axios.post('/add-to-cart',input)
+                        .then(res=>{
+                            if(res.data.ok == '200 ok'){
+                        this.text='Food updated!'
+                        this.subtotal = res.data.subtotal
+                       this.showSub = true
+                        this.snackbar = true;
+                      
+
+                            }else{
+                              this.text='Only '+res.data+' is currently remaining for this food'
+                            this.snackbar = true;
+                            }
+                            this.overlay = !this.overlay
+                           
+                        })
+                        .catch(error =>{
+                  this.$toasted.show("Failed to update food. please refresh and try again");
+                 // this.isAdded = !this.isAdded
+                    this.overlay = false     
+                      })
+          },
+
+          incre(){
+                this.qty = this.qty + 1;
+               // this.isAdded = false
+            },
+            decre(){
+                this.qty = this.qty - 1;
+             //   this.isAdded = false
+            },
+
+          removeFromCart(id) {
+       console.log(id)
+       NProgress.start();
+       var input = {'foodId':id, 'userId':localStorage.getItem('tempUserCartID')};
+       axios.post('/remove-from-cart',input)
+               .then(res=>{
+                   if(res.data == 1){
+                    
+               this.text='Food removed from Table!'
+                       this.snackbar = true;
+                        //update cart count
+                        this.cartcount()
+
+                      //  to re-fetch
+                      eventBus.$emit('refetch')
+                     
+                   }
+                //   this.deleted = true;
+                   NProgress.done();
+               })
+               .catch(error =>{
+         this.$toasted.show("Failed to remove. Try again");
+           NProgress.done();        
+             })
+   },
+
+   cartcount(){
               //get user cart count from DB
             fetch('/cartCount/'+ localStorage.getItem('tempUserCartID'))
                 .then(res => res.json())
                 .then(res=>{
-            var cart_count = res;
-            //save to local storage
-            localStorage.setItem('cart', cart_count )
-            //fetch the store and append
-           this.count = localStorage.getItem('cart')
+            this.cartConCount = res;
+            console.log(this.cartConCount)
+         
                 })
             },
-
-    incre(con){
-                NProgress.start();
-
-                var input = {'foodId':con.id, 'userId':localStorage.getItem('tempUserCartID')};
-                axios.post('/increase-qty',input)
-                        .then(res=>{
-                         //  console.log(res.data)
-                            this.qty = res.data.qty
-                            this.subtotal = res.data.subtotal
-                            this.showSub = true
-                        this.text='Table Updated!'
-                        this.snackbar = true;
-                            NProgress.done();
-                        })
-                        .catch(error =>{
-                  this.$toasted.show("Failed to update. Try again");
-                    NProgress.done();        
-                      })
-    },
-
-    decre(con){
-        NProgress.start();
-
-var input = {'foodId':con.id, 'userId':localStorage.getItem('tempUserCartID')};
-axios.post('/decrease-qty',input)
-        .then(res=>{
-         //  console.log(res.data)
-            this.qty = res.data.qty
-            this.subtotal = res.data.subtotal
-            this.showSub = true
-        this.text='Table Updated!'
-         this.snackbar = true;
-            NProgress.done();
-        })
-        .catch(error =>{
-  this.$toasted.show("Failed to update. Try again");
-    NProgress.done();        
-      })
-    },
- 
 },
 
 }

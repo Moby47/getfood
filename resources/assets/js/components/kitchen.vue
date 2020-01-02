@@ -646,6 +646,7 @@ readAllVendorList(table){
                 this.online = false;
                 this.readAllVendorList('vendor-list')
                 this.readAllData('foods')
+                      this.food_count = '-'
             }
       },
      

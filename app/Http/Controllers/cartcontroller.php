@@ -77,8 +77,9 @@ $ok->save();
 }
 
 
-
-	return '200 ok';
+//return latest quantity
+return array('ok'=>'200 ok','qty'=>\Cart::get($foodId)->quantity, 'subtotal'=>\Cart::get($foodId)->attributes->total);
+	
 }
 
 
@@ -109,7 +110,7 @@ public function cartItems($id){
     }
 
 
-
+/*
     public function increaseQty(Request $request){
       $userId = $request->input('userId'); //rand and local
       $foodId = $request->input('foodId');
@@ -171,9 +172,9 @@ $ok->save();
         //return latest quantity
         return array('qty'=>\Cart::get($foodId)->quantity, 'subtotal'=>\Cart::get($foodId)->attributes->total);
       }
+*/
 
-
-
+/*
       public function decreaseQty(Request $request){
         $userId = $request->input('userId'); //rand and local
         $foodId = $request->input('foodId');
@@ -226,7 +227,7 @@ $ok->save();
           //return latest quantity
           return array('qty'=>\Cart::get($foodId)->quantity, 'subtotal'=>\Cart::get($foodId)->attributes->total);
         }
-
+*/
 //receives tempuserID
         public function cartCount($id){
           $cart = \Cart::session($id)->getContent();

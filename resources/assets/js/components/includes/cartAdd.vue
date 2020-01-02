@@ -83,6 +83,8 @@ data: function() {
         methods: {
           
             addToCart(con) {
+              console.log(con)
+        //return ;
                 this.overlay = !this.overlay
                this.loading_text = 'Adding Food to Table...'
 
@@ -94,7 +96,7 @@ data: function() {
                 var input = {'foodId':con.id, 'userId':localStorage.getItem('tempUserCartID'),'qty':this.qty};
                 axios.post('/add-to-cart',input)
                         .then(res=>{
-                            if(res.data == '200 ok'){
+                            if(res.data.ok == '200 ok'){
                         this.text='Food added to Table!'
                        
                         this.snackbar = true;

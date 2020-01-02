@@ -106,50 +106,12 @@ Your Table is Empty.
               <ul class="shop_items ">
               
           <li class='animated tdPlopIn' v-for='con in content' v-bind:key='con.id'>
-              <template>
-                  <v-card
-                    class="mx-auto elevation-23 p-1"
-                    max-width="344"
-                    outlined
-                  >
-          <div class="shop_thumb">
-              <v-img 
-              :src="'/images/home.png'"
-              :alt="'lllll'"
-              :lazy-src="`/images/black-spinner.gif`"
-              title=""
-              class='img_size' ></v-img>
-          </div>
-          <div class="shop_item_details">
-              <h4 class="text-capitalize">title</h4>
-              <div class="shop_item_price"><strike>N</strike>2000</div>
 
-
-          <cartAdd
-          :con=con
-          :stash=con.qty
-           :online=online
-          >
-          </cartAdd>
-        
-          <favButton
-          :id=con.id
-          :online=online
-          >
-          </favButton>
-
-          
-          </div>
-
-          <p class="info text-capitalize">
-              <v-icon>restaurant</v-icon> ven name
-               <br>
-               <v-icon class='icon-shift'>my_location</v-icon> ven add
-             </p>
-
-          </v-card>
-          </template>
-
+              <cartUpdate
+              :con=con>
+  
+              </cartUpdate>
+              
           </li> 
       </ul>
       
@@ -157,7 +119,7 @@ Your Table is Empty.
 
 
 
-                <div class="cart_item animated tdExpandInBounce" id="cartitem1" v-for='con in content' v-bind:key='con.id'>
+          <!--      <div class="cart_item animated tdExpandInBounce" id="cartitem1" v-for='con in content' v-bind:key='con.id'>
                    
                     <cartUpdate
                     :con=con
@@ -165,7 +127,7 @@ Your Table is Empty.
                     </cartUpdate>
                   
                 </div>
-                        
+            -->            
        <div class="my-2 text-center" v-show='cartConCount > 0' >
           <v-btn @click.prevent='checkout()' outlined color="#FFA500">CHECKOUT</v-btn>   
           </div>
@@ -192,6 +154,21 @@ Your Table is Empty.
     </div>
   </template>
 
+  <template>
+      <v-snackbar
+    v-model="snackbar"
+    :timeout="timeout"
+    >
+    {{ text }}
+    <v-btn
+      color="blue"
+      text
+      @click='snackbar=!snackbar'
+    >
+      Close
+    </v-btn>
+    </v-snackbar>
+    </template>
 
   <floatings
   :toggle_cart=toggle_cart
@@ -222,11 +199,61 @@ import {eventBus} from "../app.js";
                 empty:47,
                 cartConCount:'',
                 toggle_cart:true,
-                loading_text:'Loading Table...'
+                loading_text:'Loading Table...',
+                online:null,
+                snackbar: false,
+                text: '',
+                timeout: 3000,
+
+                qty:0,
+                subtotal:'',
+                showSub:false,
             }
         },
 
         methods: {
+
+
+         
+          removeFromCart(id) {
+       console.log(id)
+       NProgress.start();
+       var input = {'foodId':id, 'userId':localStorage.getItem('tempUserCartID')};
+       axios.post('/remove-from-cart',input)
+               .then(res=>{
+                   if(res.data == 1){
+                    
+               this.text='Food removed from Table!'
+                       this.snackbar = true;
+                        //update cart count
+                        this.cartcount()
+                        this.fetch()
+                        //rerun method to recount cart content
+                       // eventBus.$emit('rerun_count')
+                   }
+                //   this.deleted = true;
+                   NProgress.done();
+               })
+               .catch(error =>{
+         this.$toasted.show("Failed to remove. Try again");
+           NProgress.done();        
+             })
+   },
+
+   cartcount(){
+              //get user cart count from DB
+            fetch('/cartCount/'+ localStorage.getItem('tempUserCartID'))
+                .then(res => res.json())
+                .then(res=>{
+            this.cartConCount = res;
+            console.log(this.cartConCount)
+            
+            //save to local storage
+           // localStorage.setItem('cart', cart_count )
+            //fetch the store and append
+          // this.count = localStorage.getItem('cart')
+                })
+            },
 
           refresh(){
 
@@ -246,6 +273,8 @@ import {eventBus} from "../app.js";
                   .then(res=>{
                     this.content = res.data;
                     //console.log(this.content)
+                   // this.qty = res.data.quantity
+                  //  console.log(this.qty)
                     this.wait = false;
                    this.empty = this.content.length;
                   })
@@ -260,7 +289,7 @@ import {eventBus} from "../app.js";
                 },
 
                 countCartCon(){
-                  this.loading_text = 'Please wait...'
+                  this.loading_text = 'Setting table...'
                   this.overlay = !this.overlay
                   fetch('/cartCount/'+localStorage.getItem('tempUserCartID'))
                   .then(res => res.json())
@@ -294,8 +323,8 @@ import {eventBus} from "../app.js";
 
                       created(){
 
-              eventBus.$on('rerun_count', ()=>{
-                this.countCartCon()
+              eventBus.$on('refetch', ()=>{
+                this.fetch()
               })
 
 
@@ -312,12 +341,13 @@ import {eventBus} from "../app.js";
         },
 
         mounted() {
-
+         
+             //for testing purpose
             var online = navigator.onLine; 
             if(online){
                 // online
                 console.log('online')
-                 this.fetch()
+                this.fetch()
              this.countCartCon()
 
             }else{
