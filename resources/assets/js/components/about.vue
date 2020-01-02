@@ -42,8 +42,8 @@
                    
                   >
                 <blockquote class='slideUp'>
-                  In order for restaurant owners to keep organized, maximize table turnover, and reduce waiting time for customers, 
-                  GetFoods maintains a reliable and efficient food reservation/ordering system.
+                  In order for restaurant owners to keep an organized system, maximize table turnover, and reduce waiting time for customers, 
+                  GetFoods was built to maintain a reliable and efficient food reservation and ordering system.
                    <span><router-link to='/'>GETFOODS.COM</router-link></span>
                 </blockquote>  
   
@@ -60,10 +60,10 @@
   <span>
                 <h4 class='slideUp p-1'>Objectives:</h4>
                 <ul class="simple_list slideUp m-2">
-                <li>Provide a reservation/ordering system for customers</li>
+                <li>Provide a reservation and ordering system for customers</li>
                 <li>Provide cost analysis / history on food expenditures for customers</li>
                 <li>Ease service process for both customers and food vendors</li>
-                <li>Provide an accurate record keeping for insights on best dishes, quantity and total income for food vendors</li>
+                <li>Provide accurate record keeping for insights on best dishes, quantity and total income for food vendors</li>
                 <li>And more...</li>
                 </ul>
 

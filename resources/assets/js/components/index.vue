@@ -22,7 +22,7 @@
                 max-width="344"
                 height="250"
                 class='mx-auto fadeIn'
-                src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+                 src="/images/home.png"
                 :lazy-src="`/images/black-spinner.gif`"
               ></v-img>
           
@@ -61,7 +61,7 @@
                       <v-img
                      
                 height="250"
-                      src="/images/start.svg"
+                      src="/images/start.png"
                       :lazy-src="`/images/black-spinner.gif`"
                     ></v-img>
                     </v-list-item>
@@ -92,7 +92,7 @@
            
                     <v-list-item three-line>
                       <v-img
-                  src="/images/home.svg"
+                  src="/images/vendor.png"
                     
                   :lazy-src="`/images/black-spinner.gif`"
                 
