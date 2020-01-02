@@ -1,9 +1,6 @@
 <template>
     <div class="container">
         
-        <div class="statusbar-overlay"></div>
-
-        <div class="panel-overlay"></div>
     
     
         <div class="views">
@@ -18,17 +15,22 @@
                   max-width="344"
                   outlined
                 >
+
+                
+<menubar>
+     </menubar>
+
             <div class="content-block slideUp">
                 <h4>REGISTER</h4> 
                 <div class="loginform">
                     <form id="RegisterForm" method="post" data-vv-scope='regForm'>
-       <input type="text" v-model='regName' name="Name"  v-validate='"required|max:15"' value="" class="form_input required" placeholder="Name" />
+       <input type="text" v-model='regName' name="Name"  v-validate='"required|max:15"' value="" class="form_input required" placeholder="Enter Name" />
            <p class='text-danger shake' v-show="errors.has('regForm.Name')">{{ errors.first('regForm.Name') }}</p>
         
-           <input type="text" v-model='regEmail' v-validate='"required|email|max:100"' name="Email" value="" class="form_input required" placeholder="Email" />
+           <input type="text" v-model='regEmail' v-validate='"required|email|max:100"' name="Email" value="" class="form_input required" placeholder="Enter Email" />
            <p class='text-danger shake' v-show="errors.has('regForm.Email')">{{ errors.first('regForm.Email') }}</p>
 
-           <input type="password" v-model='regPassword' v-validate='"required|min:6"' name="Password" value="" class="form_input required" placeholder="Password" />
+           <input type="password" v-model='regPassword' v-validate='"required|min:6"' name="Password" value="" class="form_input required" placeholder="Enter Password" />
            <p class='text-danger shake' v-show="errors.has('regForm.Password')">{{ errors.first('regForm.Password') }}</p>
 
            <input type="submit" @click.prevent='reg()' name="submit" class="form_submit" id="submit" value="SIGN UP" />
@@ -42,10 +44,7 @@
        
                 </div>
               
-                <div class="close_popup_button">
-                        <router-link to='/'  class="close-popup"><img src="images/icons/black/menu_close.png" 
-                            alt="" title="" /></router-link>
-                </div>
+             
             </div>
 
             </v-card>

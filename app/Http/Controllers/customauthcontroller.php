@@ -145,6 +145,7 @@ class customauthcontroller extends Controller
 
 
    public function resend(Request $request){
+       
        $this->validate($request, [
            'email' => 'required|string|email|max:100',
        ]);
@@ -160,6 +161,7 @@ class customauthcontroller extends Controller
            //return verified 1
            return 1;
        }
+       
        session(['verifytoken' => $verifytok]);
            //email to user
            try{

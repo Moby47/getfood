@@ -1,13 +1,9 @@
 <template>
     <div class="container">
         
-     
-    <div class="statusbar-overlay"></div>
-
-    <div class="panel-overlay"></div>
-
 
     <div class="views">
+
 
        <!-- Login Popup -->
     <div class=" popup-login">
@@ -19,14 +15,19 @@
               outlined
             >
 
+<menubar>
+     </menubar>
+
+
+
       <div class="content-block slideUp">
           <h4>LOGIN</h4> 
           <div class="loginform">
               <form id="LoginForm" method="post" data-vv-scope='loginForm'>
-                  <input type="text" name="Email" v-model='logEmail' v-validate='"required|email|max:100"' class="form_input required" placeholder="Email" />
+                  <input type="text" name="Email" v-model='logEmail' v-validate='"required|email|max:100"' class="form_input required" placeholder="Enter Email" />
                   <p class='text-danger shake' v-show="errors.has('loginForm.Email')">{{ errors.first('loginForm.Email') }}</p>
 
-                  <input type="password" v-model='logPassword' name="Password" v-validate='"required|min:6"' class="form_input required" placeholder="password" />
+                  <input type="password" v-model='logPassword' name="Password" v-validate='"required|min:6"' class="form_input required" placeholder="Enter Password" />
                   <p class='text-danger shake' v-show="errors.has('loginForm.Password')">{{ errors.first('loginForm.Password') }}</p>
                  
                   <div class="forgot_pass"><a href="/forgot-password" >Forgot Password?</a></div>
@@ -47,9 +48,7 @@
                   
               </div>
           </div>
-          <div class="close_popup_button">
-              <router-link to='/' class="close-popup"><img src="images/icons/black/menu_close.png" alt="" title="" /></router-link>
-          </div>
+          
       </div>
 
       </v-card>
@@ -105,7 +104,7 @@
           logPassword: '',
           snackbar: false,
         text: '',
-        timeout: 6000,
+        timeout: 10000,
         overlay:false,
             }
         },

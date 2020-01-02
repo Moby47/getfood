@@ -13,7 +13,7 @@
 //laravel auth routes
 //Auth::routes();
 
-Route::get('/forgot-password', 'customauthcontroller@password');
+//Route::get('/forgot-password', 'customauthcontroller@password');
 
 //initial page load
 Route::get('/', function () {

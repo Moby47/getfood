@@ -2,10 +2,6 @@
     <div class="container">
         
      
-    <div class="statusbar-overlay"></div>
-
-    <div class="panel-overlay"></div>
-
 
     <div class="views">
 
@@ -18,28 +14,30 @@
               max-width="344"
               outlined
             >
+
+            
+<menubar>
+     </menubar>
+
         <div class="content-block slideUp">
           
             <div class="loginform">
                 <form id="ForgotForm" method="post" data-vv-scope='resendForm'>
                     <input type="text" name="Email" value="" v-validate='"required|email"'
-                    class="form_input required" placeholder="email" v-model='resendEmail'/>
+                    class="form_input required" placeholder="Enter Email" v-model='resendEmail'/>
                     <p class='text-danger shake' v-show="errors.has('resendForm.Email')">{{ errors.first('resendForm.Email') }}</p>
 
-                    <input type="submit" name="submit"  @click.prevent='resendVeri()' class="form_submit" id="submit" value="RESEND EMAIL" />
+                    <input type="submit" name="submit"  @click.prevent='resendVeri()' class="form_submit" id="submit" value="RESEND" />
                 </form>
                 <div class="signup_bottom">
-                    <p>Check your email and activate your account.</p>
+                   <!-- <p>Check your email and activate your account.</p> -->
                 </div>
 
                 <div class="signup_bottom">
                     <v-btn @click.prevent='login()' outlined color="#FFA500">Back</v-btn>
                 </div>
             </div>
-            <div class="close_popup_button">
-                    <router-link to='/'  class="close-popup"><img src="images/icons/black/menu_close.png" 
-                        alt="" title="" /></router-link>
-                      </div>
+         
         </div>
 
         </v-card>
@@ -73,6 +71,8 @@
 <div class="text-center">
   <v-overlay :value="overlay">
     <v-progress-circular indeterminate size="64"></v-progress-circular>
+    <br>
+    Resending Verification email...
   </v-overlay>
 </div>
 </template>
@@ -92,7 +92,7 @@
                 resendEmail: '',
           snackbar: false,
         text: '',
-        timeout: 6000,
+        timeout: 10000,
         overlay:false,
             }
         },
@@ -122,7 +122,7 @@
 
                 }else if (res.data == 2){
                   //error sending mail
-                  this.text = 'An error occured resending mail. Please try again'
+                  this.text = 'An error occured resending mail. Please refresh and try again'
                             this.snackbar = true
                             this.overlay = false
                 }else if (res.data == 3){

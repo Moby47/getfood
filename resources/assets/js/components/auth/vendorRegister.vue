@@ -1,9 +1,7 @@
 <template>
     <div class="container">
         
-        <div class="statusbar-overlay"></div>
-
-        <div class="panel-overlay"></div>
+       
     
     
         <div class="views">
@@ -18,23 +16,28 @@
                   max-width="344"
                   outlined
                 >
+
+                
+<menubar>
+     </menubar>
+
             <div class="content-block slideUp">
                 <h4>REGISTER</h4> 
                 <div class="loginform">
                     <form id="RegisterForm" method="post" data-vv-scope='regForm'>
-       <input type="text" v-model='regName' name="Name"  v-validate='"required|max:15"' value="" class="form_input required" placeholder="Vendor Name" />
+       <input type="text" v-model='regName' name="Name"  v-validate='"required|max:15"' value="" class="form_input required" placeholder="Enter Vendor Name" />
            <p class='text-danger shake' v-show="errors.has('regForm.Name')">{{ errors.first('regForm.Name') }}</p>
         
-           <input type="text" v-model='regEmail' v-validate='"required|email|max:100"' name="Email" value="" class="form_input required" placeholder="Email" />
+           <input type="text" v-model='regEmail' v-validate='"required|email|max:100"' name="Email" value="" class="form_input required" placeholder="Enter Email" />
            <p class='text-danger shake' v-show="errors.has('regForm.Email')">{{ errors.first('regForm.Email') }}</p>
 
-           <input type="text" v-model='regAddress' name="Address"  v-validate='"required|max:30"' value="" class="form_input required" placeholder="Address" />
+           <input type="text" v-model='regAddress' name="Address"  v-validate='"required|max:30"' value="" class="form_input required" placeholder="Enter Address" />
            <p class='text-danger shake' v-show="errors.has('regForm.Address')">{{ errors.first('regForm.Address') }}</p>
 
-           <input type="text" v-model='regPhone' name="Phone"  v-validate='"required|max:11"' value="" class="form_input required" placeholder="Phone" />
+           <input type="text" v-model='regPhone' name="Phone"  v-validate='"required|max:11"' value="" class="form_input required" placeholder="Enter Phone Number" />
            <p class='text-danger shake' v-show="errors.has('regForm.Phone')">{{ errors.first('regForm.Phone') }}</p>
            
-           <input type="password" v-model='regPassword' v-validate='"required|min:6"' name="Password" value="" class="form_input required" placeholder="Password" />
+           <input type="password" v-model='regPassword' v-validate='"required|min:6"' name="Password" value="" class="form_input required" placeholder="Enter Password" />
            <p class='text-danger shake' v-show="errors.has('regForm.Password')">{{ errors.first('regForm.Password') }}</p>
 
            <input type="submit" @click.prevent='reg()' name="submit" class="form_submit" id="submit" value="SIGN UP" />
@@ -46,10 +49,10 @@
                     <v-btn @click.prevent='login()' outlined color="#FFA500">Login</v-btn>
                 </div>
                 -->
-                <div class="close_popup_button">
+               <!-- <div class="close_popup_button">
                         <router-link to='/'  class="close-popup"><img src="images/icons/black/menu_close.png" 
                             alt="" title="" /></router-link>
-                </div>
+                </div>-->
             </div>
 
             </v-card>
