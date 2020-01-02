@@ -150,8 +150,12 @@ if(userId){
               }
               });
               var dat = {id: new Date().toISOString(),'pp':userId}
+
+
+              //save data func
               function saveData(dat){
                     console.log('peter-parker',dat)
+                    console.log('saving peter')
           return   dbPromise
           .then(function(db) {
             var tx = db.transaction('peter-parker', 'readwrite');
@@ -163,8 +167,35 @@ if(userId){
                   console.log(error)    
                   })
         }
-        //call the function
-        saveData(dat);
+
+
+        //clear data func
+function clearAllData(table){
+  return dbPromise
+  .then(function(db){
+      var tx = db.transaction(table, 'readwrite');
+      var store = tx.objectStore(table);
+      store.clear();
+      return tx.complete
+    })
+    .catch(error =>{
+        console.log(error)    
+        })
+  }
+
+           //call clear
+           clearAllData('peter-parker')
+                .then(res=>{
+                  console.log('cleared peter')
+
+                  //if cleared,then call the save function
+                  saveData(dat);
+                })
+                .catch(error =>{
+                      console.log(error)    
+                      })
+
+        
 
     console.log("OneSignal User ID:", userId);
     console.log("User ID:", localStorage.getItem('userId'));
