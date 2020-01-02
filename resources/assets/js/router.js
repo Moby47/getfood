@@ -26,6 +26,8 @@ import kitchen from './components/kitchen.vue'
 import success from './components/success.vue'
 import notfound from './components/notfound.vue'
 import vendor from './components/vendor.vue'
+import privacy from './components/privacy.vue'
+import terms from './components/terms.vue'
 
 import superadmindash from './components/admin/superadmindash.vue'
 import payment from './components/admin/payment.vue'
@@ -223,6 +225,22 @@ export default new Router({
             path: '/verify-vendor',
             name: 'verify',
             component: verify,
+             meta:{
+              //  auth: true
+            }
+        },
+        {
+            path: '/privacy',
+            name: 'privacy',
+            component: privacy,
+             meta:{
+              //  auth: true
+            }
+        },
+        {
+            path: '/terms-and-condition',
+            name: 'terms',
+            component: terms,
              meta:{
               //  auth: true
             }
