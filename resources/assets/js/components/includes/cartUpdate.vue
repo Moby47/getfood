@@ -45,7 +45,7 @@
                 <template>
                     <div> 
                         <span>
-  <a href="#" data-popup=".popup-social" class="mr-1 open-popup shopfav pulse" @click.prevent='removeFromCart(con.id)'>
+  <a href="#" data-popup=".popup-social" class="mr-1 open-popup shopfav pulse" @click.prevent='removeFromCart(con)'>
         <v-img src="/images/icons/black/trash.png" alt="" title=""></v-img></a>
 
                         </span>
@@ -161,10 +161,13 @@ methods: {
              //   this.isAdded = false
             },
 
-          removeFromCart(id) {
-       console.log(id)
-       NProgress.start();
-       var input = {'foodId':id, 'userId':localStorage.getItem('tempUserCartID')};
+          removeFromCart(con) {
+        console.log(con.id)
+            var dialog =  confirm('You are about to delete '+con.name+' from table');
+
+            if(dialog){
+ NProgress.start();
+       var input = {'foodId':con.id, 'userId':localStorage.getItem('tempUserCartID')};
        axios.post('/remove-from-cart',input)
                .then(res=>{
                    if(res.data == 1){
@@ -185,6 +188,9 @@ methods: {
          this.$toasted.show("Failed to remove. Try again");
            NProgress.done();        
              })
+            }
+       
+      
    },
 
    cartcount(){

@@ -89,7 +89,12 @@ import {eventBus} from "../../app.js";
                 },
 
             clear_cart(){
-              this.$toasted.show("Clearing Cart...");
+
+              var dialog =  confirm('You are about to clear the table...');
+
+            if(dialog){
+               NProgress.start();
+      this.$toasted.show("Clearing Cart...");
                //clear cart
                var input = {'userId':localStorage.getItem('tempUserCartID')}
             axios.post('/clear-cart',input).then(res=>{
@@ -98,14 +103,16 @@ import {eventBus} from "../../app.js";
                  //clear cart count
                       localStorage.removeItem('cart')
 
+            NProgress.done();
           //redirect to food page
           this.$router.push({name: "kitchen"});
             })
             .catch(error =>{
+              NProgress.done();
                 console.log(error)    
                })
-            
-         
+            }
+             
             },
 
 
