@@ -4,7 +4,7 @@
 
 
 About<br>
-<b>GetFood is an intended enterprise meal reservation application (SAAS).</b>
+<b>GetFood is an intended enterprise meal reservation application (SAAS).</b><br>
 In order for restaurant owners to keep an organized system, maximize table turnover, and reduce waiting time for customers, GetFoods was built to maintain a reliable and efficient food reservation and ordering system.
 
 Objectives
@@ -31,16 +31,33 @@ The Application will be built with VS code as an IDE. A Progressive web app (PWA
 5.	Laravel
 6.	MySQL
  
-PWA Support
-1. Add to mobile homescreen, using manifest.json file
-2. Offline support with serviceworker.js
-3. Dynamic content (API) support using indexed DB (iDb.js)
-4. Push web and mobile notifications, using Onesignal.
 
+ 
+ PWA Support
+  <ul>
+ <li>1. Add to mobile homescreen, using manifest.json file</li> 
+ <li>2. Offline support with serviceworker.js</li>
+ <li>3. Dynamic content (API) support using indexed DB (iDb.js)</li> 
+ <li>4. Push web and mobile notifications, using Onesignal.</li>
+ </ul>
+
+
+
+ <ol>
+ <li></li> 
+ <li></li>
+ <li></li> 
+ <li></li>
+ </ol>
+
+<br>
 
 APIs
-1. Onesignal
-2. Paystack
+ <u>
+ <li>1. Onesignal</li> 
+ <li>2. Paystack</li>
+ </ul>
+
 
 Packages
 
