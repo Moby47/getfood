@@ -79,7 +79,7 @@ Vue
   <li> "vue2-animate": "^2.1.0",</li>
  </ul>
  
-    <hr>    
+       
 Cost
 Hosting – 4,800 Per Yr.
 Domain name – 3,900 (getfoods.com) Per yr.
