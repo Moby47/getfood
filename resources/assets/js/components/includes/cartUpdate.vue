@@ -6,10 +6,10 @@
         <template>
                 
             <template>
+              <span class='pt-4'>
                 <v-card
-                  class="mx-auto elevation-23 p-1"
+                  class="mx-auto elevation-23"
                   max-width="344"
-                  outlined
                 >
         <div class="shop_thumb">
             <v-img 
@@ -20,7 +20,7 @@
             class='img_size' ></v-img>
         </div>
         <div class="shop_item_details">
-            <h4 class="text-capitalize">{{con.name}} ({{con.quantity}})</h4> 
+            <h4 class="text-capitalize">{{con.name}} ({{con.quantity}}<span v-show='qtyCount'>=>{{qtyCount}}</span>)</h4> 
    <div class="shop_item_price"><strike>N</strike>{{con.attributes.total}} 
     <span v-show='showSub'> => <strike>N</strike>{{subtotal}} </span></div>
            
@@ -58,6 +58,7 @@
 
      
         </v-card>
+              </span>
         </template>
 
         </template>
@@ -110,6 +111,7 @@ return {
         loading_text:'Loading Table...',
         subtotal:'',
          showSub:false,
+         qtyCount:''
 }
 },
 
@@ -133,7 +135,8 @@ methods: {
                         this.subtotal = res.data.subtotal
                        this.showSub = true
                         this.snackbar = true;
-                      
+                      //  update new qty
+                     this.qtyCount = res.data.qty
 
                             }else{
                               this.text='Only '+res.data+' is currently remaining for this food'
