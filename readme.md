@@ -68,9 +68,7 @@ APIs
 
 <hr>
 Vue
-
-       
-       <ul>
+ <ul>
  <li>"bootstrap-vue": "^2.1.0",</li>
   <li>"moment": "^2.24.0",</li>
   <li> "vee-validate": "^2.1.5",</li>
