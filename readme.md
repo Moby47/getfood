@@ -3,7 +3,8 @@
 <p align="center"><img src="https://mdn.mozillademos.org/files/16742/pwa.png"></p>
 
 
-About<br>
+<h3>GetFoods</h3>
+
 <b>GetFood is an intended enterprise meal reservation application (SAAS).</b><br>
 In order for restaurant owners to keep an organized system, maximize table turnover, and reduce waiting time for customers, GetFoods was built to maintain a reliable and efficient food reservation and ordering system.
 
