@@ -22,7 +22,7 @@
         <div class="shop_item_details">
             <h4 class="text-capitalize">{{con.name}} ({{con.quantity}})</h4> 
    <div class="shop_item_price"><strike>N</strike>{{con.attributes.total}} 
-    <span v-show='showSub'>-  Subtotal: <strike>N</strike>{{subtotal}} </span></div>
+    <span v-show='showSub'> => <strike>N</strike>{{subtotal}} </span></div>
            
             <template>
                 <div>

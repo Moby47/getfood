@@ -19,8 +19,6 @@
 
 <!--1-->
               <v-img
-                max-width="344"
-                height="250"
                 class='mx-auto fadeIn'
                  src="/images/home.png"
                 :lazy-src="`/images/black-spinner.gif`"
@@ -59,9 +57,7 @@
                     <v-list-item three-line>
                      
                       <v-img
-                     
-                height="250"
-                      src="/images/start.png"
+                      src="/images/dashboard.png"
                       :lazy-src="`/images/black-spinner.gif`"
                     ></v-img>
                     </v-list-item>
@@ -77,7 +73,7 @@
 
                     <v-card-actions>
                       <span class='text-center'>
-                      <v-btn  text outlined  color="#FFA500" class='mr-1 ' @click.prevent='login()'>Get Started</v-btn>
+                      <v-btn  text outlined  color="#FFA500" class='mr-1 ' @click.prevent='login()'>My Dashboard</v-btn>
                       </span>
                     </v-card-actions>
                  
@@ -112,7 +108,7 @@
 
                     <v-card-actions>
                       <span class='text-center'>
-                      <v-btn  text outlined  color="#FFA500" class='mr-1 ' @click.prevent='vendor()'>Find Vendor</v-btn>
+                      <v-btn  text outlined  color="#FFA500" class='mr-1 ' @click.prevent='vendor()'>Food Vendors</v-btn>
                       </span>
                     </v-card-actions>
 <!--
