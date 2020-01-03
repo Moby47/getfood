@@ -61,7 +61,7 @@ Laravel
 <br>
 <hr>
 APIs
- <u>
+ <ul>
  <li>1. Onesignal</li> 
  <li>2. Paystack</li>
  </ul>
@@ -76,7 +76,8 @@ Vue
   <li> "vee-validate": "^2.1.5",</li>
   <li> "vue-paystack": "^2.0.2",</li>
   <li> "vue-router": "^3.0.2",</li>
-  <li>"vue-socialmedia-share": "^1.0.1",</li> <li>  "vue-toasted": "^1.1.26",</li>
+  <li>"vue-socialmedia-share": "^1.0.1",</li>
+  <li>  "vue-toasted": "^1.1.26",</li>
   <li> "vue2-animate": "^2.1.0",</li>
  </ul>
  
