@@ -42,12 +42,15 @@ The Application will be built with VS code as an IDE. A Progressive web app (PWA
  </ul>
 
 
+Packages
 
+Laravel
  <ol>
- <li></li> 
- <li></li>
- <li></li> 
- <li></li>
+ <li>s-ichikawa/laravel-sendgrid-driver</li> 
+ <li>tymon/jwt-auth</li>
+ <li>intervention/image</li> 
+ <li>guzzlehttp/guzzle</li>
+ <li>darryldecode/cart</li>
  </ol>
 
 <br>
@@ -58,15 +61,6 @@ APIs
  <li>2. Paystack</li>
  </ul>
 
-
-Packages
-
-Laravel
-s-ichikawa/laravel-sendgrid-driver
-tymon/jwt-auth
-intervention/image
-guzzlehttp/guzzle
-darryldecode/cart
 
 Vue
 "bootstrap-vue": "^2.1.0",
@@ -101,13 +95,18 @@ User levels:
 
 Database
 Tables:
-3.	Favorites
-4.	Foods
-5.	Orders
-6. temps
-7. Users
+ <ol>
+ <li>Favorites</li> 
+ <li>Foods</li>
+ <li>Orders</li> 
+ <li>temps</li>
+ <li> Users</li>
+ </ol>
 
 
+
+<br>
+<hr>
 
 Steps to setup the local env.
 
