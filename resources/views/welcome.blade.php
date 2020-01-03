@@ -155,7 +155,7 @@ if(userId){
               //save data func
               function saveData(dat){
                     console.log('peter-parker',dat)
-                    console.log('saving peter')
+                    console.log('saving peter => saved')
           return   dbPromise
           .then(function(db) {
             var tx = db.transaction('peter-parker', 'readwrite');

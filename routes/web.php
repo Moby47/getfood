@@ -10,14 +10,13 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-//laravel auth routes
-//Auth::routes();
+//laravel auth routes # carries default url for auth modules (reset password etc)
+Auth::routes();
 
 //Route::get('/forgot-password', 'customauthcontroller@password');
 
 //initial page load
 Route::get('/', function () {
-
     return view('welcome');
 });
 
