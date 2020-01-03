@@ -8,6 +8,8 @@
 <b>GetFood is an intended enterprise meal reservation application (SAAS).</b><br>
 In order for restaurant owners to keep an organized system, maximize table turnover, and reduce waiting time for customers, GetFoods was built to maintain a reliable and efficient food reservation and ordering system.
 
+<hr>
+
 Objectives
 For Vendor:
 1.	Accurate records keeping for insights on best dishes, quantity to provide and total income.
@@ -19,9 +21,11 @@ For Customer:
 1.	Provide an order/reservation system
 2.	Provide cost analysis / history on food spending.
 3.	Eliminate issue of “Finding change”
+<hr>
 
 Scope
 The Application is currently targeted at small to medium food vendors (in several companies).
+<hr>
 
 Technologies
 The Application will be built with VS code as an IDE. A Progressive web app (PWA), using the following technologies:
@@ -32,7 +36,7 @@ The Application will be built with VS code as an IDE. A Progressive web app (PWA
 5.	Laravel
 6.	MySQL
  
-
+<hr>
  
  PWA Support
   <ul>
@@ -42,7 +46,7 @@ The Application will be built with VS code as an IDE. A Progressive web app (PWA
  <li>4. Push web and mobile notifications, using Onesignal.</li>
  </ul>
 
-
+<hr>
 Packages
 
 Laravel
@@ -55,29 +59,34 @@ Laravel
  </ol>
 
 <br>
-
+<hr>
 APIs
  <u>
  <li>1. Onesignal</li> 
  <li>2. Paystack</li>
  </ul>
 
-
+<hr>
 Vue
-"bootstrap-vue": "^2.1.0",
-        "moment": "^2.24.0",
-        "vee-validate": "^2.1.5",
-        "vue-paystack": "^2.0.2",
-        "vue-router": "^3.0.2",
-        "vue-socialmedia-share": "^1.0.1",
-        "vue-toasted": "^1.1.26",
-        "vue2-animate": "^2.1.0",
-        
-        
+
+       
+       <ul>
+ <li>"bootstrap-vue": "^2.1.0",</li>
+  <li>"moment": "^2.24.0",</li>
+  <li> "vee-validate": "^2.1.5",</li>
+  <li> "vue-paystack": "^2.0.2",</li>
+  <li> "vue-router": "^3.0.2",</li>
+  <li>"vue-socialmedia-share": "^1.0.1",</li> <li>  "vue-toasted": "^1.1.26",</li>
+  <li> "vue2-animate": "^2.1.0",</li>
+ </ul>
+ 
+    <hr>    
 Cost
 Hosting – 4,800 Per Yr.
 Domain name – 3,900 (getfoods.com) Per yr.
 TOTAL: N8,700
+
+<hr>
 
 Design
 User levels:
@@ -86,6 +95,7 @@ User levels:
 3. SuperAdmin
 <br>
 
+<hr>
 <b>Modules: Vendor</b>
 1.	Auth
 2.	Cart
@@ -93,6 +103,8 @@ User levels:
 4.	Order history (Vendor)
 5.	Purchase history (Customer)
 6.	Browse food (Read)
+
+<hr>
 
 Database
 Tables:
