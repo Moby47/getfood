@@ -1,15 +1,11 @@
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
-
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+<p align="center"><img src="https://vuejs.org/images/logo.png"></p>
+<p align="center"><img src="https://mdn.mozillademos.org/files/16742/pwa.png"></p>
 
 
 About<br>
-GetFood is a growing enterprise meal reservation application (SAAS).
+<b>GetFood is an intended enterprise meal reservation application (SAAS).</b>
+In order for restaurant owners to keep an organized system, maximize table turnover, and reduce waiting time for customers, GetFoods was built to maintain a reliable and efficient food reservation and ordering system.
 
 Objectives
 For Vendor:
@@ -24,7 +20,7 @@ For Customer:
 3.	Eliminate issue of “Finding change”
 
 Scope
-The Application is currently targeted at Tek-expert food service, with a view of growth to other vendors in several companies and features.
+The Application is currently targeted at small to medium food vendors (in several companies).
 
 Technologies
 The Application will be built with VS code as an IDE. A Progressive web app (PWA), using the following technologies:
@@ -35,23 +31,50 @@ The Application will be built with VS code as an IDE. A Progressive web app (PWA
 5.	Laravel
 6.	MySQL
  
+PWA Support
+1. Add to mobile homescreen, using manifest.json file
+2. Offline support with serviceworker.js
+3. Dynamic content (API) support using indexed DB (iDb.js)
+4. Push web and mobile notifications, using Onesignal.
 
 
+APIs
+1. Onesignal
+2. Paystack
 
+Packages
 
+Laravel
+s-ichikawa/laravel-sendgrid-driver
+tymon/jwt-auth
+intervention/image
+guzzlehttp/guzzle
+darryldecode/cart
+
+Vue
+"bootstrap-vue": "^2.1.0",
+        "moment": "^2.24.0",
+        "vee-validate": "^2.1.5",
+        "vue-paystack": "^2.0.2",
+        "vue-router": "^3.0.2",
+        "vue-socialmedia-share": "^1.0.1",
+        "vue-toasted": "^1.1.26",
+        "vue2-animate": "^2.1.0",
+        
+        
 Cost
 Hosting – 4,800 Per Yr.
-Domain name – 3,900 (getfoodsng.com) Per yr.
-SSL certificate – 2,500  2Yrs.
-TOTAL: N11,200
+Domain name – 3,900 (getfoods.com) Per yr.
+TOTAL: N8,700
 
 Design
 User levels:
 1.	Vendor
 2.	Customer
+3. SuperAdmin
 <br>
 
-<b>Modules:</b>
+<b>Modules: Vendor</b>
 1.	Auth
 2.	Cart
 3.	Create product
@@ -61,12 +84,11 @@ User levels:
 
 Database
 Tables:
-1.	Customer
-2.	Vendor
-3.	Favorite
-4.	Product
+3.	Favorites
+4.	Foods
 5.	Orders
-*Go to access file
+6. temps
+7. Users
 
 
 
