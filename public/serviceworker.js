@@ -31,7 +31,7 @@ var filesToCache = [
     '/images/confused.gif',
     '/images/black-spinner.gif',
     '/images/home.png',
-    '/images/start.png',
+    '/images/dashboard.png',
     '/images/vendor.png',
     '/images/loader.gif',
     '/images/icons/black/food.png',

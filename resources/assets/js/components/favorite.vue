@@ -52,7 +52,7 @@
 
 
       <div class="my-2 text-center">
-    <v-btn @click.prevent='shop()' outlined color="#FFA500">Add Food</v-btn>   
+    <v-btn @click.prevent='shop()' outlined color="#FFA500">FIND Food</v-btn>   
     </div>
                          </span>
 
@@ -249,7 +249,7 @@
 
 
 readAllFavs(table){
-   
+   this.overlay =! this.overlay
                 var dbPromise = idb.open('getFoodsDB', 14, function (db) {
               if (!db.objectStoreNames.contains(table)) {
                 db.createObjectStore(table, {keyPath: 'id'});
@@ -277,7 +277,7 @@ readAllFavs(table){
                           }else{
                               this.empty = false;
                           }
-
+              this.overlay =! this.overlay
             this.awaitingList = 'Offline mode'
             console.log('fetched from inDB fav:',this.content)
           })
@@ -289,17 +289,20 @@ readAllFavs(table){
         },//meth end
 
         mounted() {
-            this.fetch()
-
+           
             var online = navigator.onLine; 
             if(online){
                 //online
                 console.log('on')
                 this.online = true;
+                this.fetch()
+
             }else{
                 //offline
                 console.log('off')
                 this.online = false;
+                this.fav_count = '-'
+                this.$toasted.show("Offline mode...");
                 this.readAllFavs('my-favs')
             }
         }

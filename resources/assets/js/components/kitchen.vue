@@ -465,7 +465,7 @@
 
 
               readAllData(table){ //param = name of store/table
-                
+                this.overlay = !this.overlay
                 var dbPromise = idb.open('getFoodsDB', 14, function (db) {
               if (!db.objectStoreNames.contains(table)) {
                 db.createObjectStore(table, {keyPath: 'id'});
@@ -488,6 +488,7 @@
           .then(res=>{
             //gives a promise to use data
             this.content = res
+            this.overlay = !this.overlay
             console.log('fetched from inDB:',this.content)
           })
           .catch(error =>{
@@ -618,7 +619,7 @@ readAllVendorList(table){
             if(!online){
                 //not online
                 console.log('not online')
-                this.$toasted.show("This feature is not available in offline mode...");
+                this.$toasted.show("This feature is currently unsupported in offline mode...");
                 this.awaitingList = 'Offline mode'
                 return;
             }

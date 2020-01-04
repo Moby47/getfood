@@ -245,7 +245,7 @@
          },
 
          offline(){
-          this.$toasted.show("This feature is not available in offline mode...");
+          this.$toasted.show("This feature is currently unsupported in offline mode...");
          },
          
           weekly(){

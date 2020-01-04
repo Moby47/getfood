@@ -48,6 +48,10 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 //import './custom.scss'
 
+//metatag
+import Meta from 'vue-meta'
+Vue.use(Meta)
+
 /* ------------------------- Imports -------------------- */
 
 

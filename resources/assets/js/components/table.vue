@@ -226,7 +226,7 @@ import {eventBus} from "../app.js";
                this.text='Food removed from Table!'
                        this.snackbar = true;
                         //update cart count
-                        this.cartcount()
+                       // this.cartcount()
                         this.fetch()
                         //rerun method to recount cart content
                        // eventBus.$emit('rerun_count')
@@ -258,7 +258,6 @@ import {eventBus} from "../app.js";
           refresh(){
 
             this.fetch()
-            this.countCartCon()
 
           },
 
@@ -267,35 +266,42 @@ import {eventBus} from "../app.js";
           },
           
             fetch(){
+              
+              this.loading_text = 'Setting table...'
                   
+              this.overlay = !this.overlay  
                   fetch('/cart-items'+'/'+ localStorage.getItem('tempUserCartID'))
                   .then(res => res.json())
                   .then(res=>{
                     this.content = res.data;
+                    if(this.content){
+                      this.countCartCon()
+                    }
                     //console.log(this.content)
                    // this.qty = res.data.quantity
                   //  console.log(this.qty)
+                  this.overlay = !this.overlay
                     this.wait = false;
                    this.empty = this.content.length;
                   })
                   .catch(error =>{
                       //off loader
+                      this.overlay = !this.overlay
                       this.data_load = false;
                         this.wait = true;
-                            this.$toasted.show("No Internet connection found...");
+                            this.$toasted.show("No connection found...");
                            
                       })
 
                 },
 
                 countCartCon(){
-                  this.loading_text = 'Setting table...'
-                  this.overlay = !this.overlay
+                  
                   fetch('/cartCount/'+localStorage.getItem('tempUserCartID'))
                   .then(res => res.json())
                   .then(res=>{
                     this.cartConCount = res;
-                    this.overlay = !this.overlay
+                    
                       })
                   .catch(error =>{
                     this.overlay = false
@@ -348,7 +354,6 @@ import {eventBus} from "../app.js";
                 // online
                 console.log('online')
                 this.fetch()
-             this.countCartCon()
 
             }else{
               this.$toasted.show("Offline mode...");

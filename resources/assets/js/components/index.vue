@@ -169,6 +169,20 @@
 import {eventBus} from "../app.js";
 
     export default {
+
+         //meta
+    metaInfo: {
+      title: 'Welcome to GetFoods',
+         meta: [{
+           'name': 'description',
+        'content': 'Online food reservation and ordering system',
+      }],
+      noscript: [
+      { innerHTML: 'JavaScript is required.' }
+    ]
+    },
+    //meta
+
       data: () => ({
         loading: false,
         selection: 1,

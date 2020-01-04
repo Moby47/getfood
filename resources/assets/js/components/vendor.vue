@@ -69,7 +69,7 @@
                          <transition name='anime' enter-active-class='animated fadeIn' :duration='200' leave-active-class='animated fadeOut'>
                      <div  class='text-center'>
                        <template>
-                         <p>{{errMessage}}</p>
+                         <span>{{errMessage}}</span>
                                  </template>
                                   </div>
                          </transition>
@@ -422,7 +422,7 @@
             if(!online){
                 //not online
                 console.log('not online')
-                this.$toasted.show("This feature is not available in offline mode...");
+                this.$toasted.show("This feature is currently unsupported in offline mode...");
                 this.wait = false
                 return;
             }
@@ -449,7 +449,7 @@
             }else{
                 //offline
                 console.log('off')
-                 this.$toasted.show("Offline mode");
+                 this.$toasted.show("Offline mode...");
                 this.online = false;
                 this.readAllVendorList('vendor-list')    
             }

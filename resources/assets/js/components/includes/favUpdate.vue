@@ -231,7 +231,7 @@ methods: {
               if ('serviceWorker' in navigator && 'SyncManager' in window) {
 
                    //notify after syncing => title,body,tag
-  this.displayConfirmNotification('Backgroud task created','Your food will be added to the table', 'add-to-cart')
+  //this.displayConfirmNotification('Backgroud task created','Your food will be added to the table', 'add-to-cart')
 
                  if(!localStorage.getItem('tempUserCartID')){
                     var tempUserCartID = Math.floor(Math.random()*1234567890);
