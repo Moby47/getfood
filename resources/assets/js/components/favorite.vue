@@ -80,9 +80,17 @@
                       >
               <div class="shop_thumb">
                   <v-img 
+                  v-if='online'
                   :src="'/storage/food/'+con.img"
                   :alt="con.title"
                   :lazy-src="`/images/black-spinner.gif`"
+                  title=""
+                  class='img_size' ></v-img>
+                  <v-img 
+                  v-else
+                  :src="`/images/food.png`"
+                  :alt="con.title"
+                  :lazy-src="`/images/food.png`"
                   title=""
                   class='img_size' ></v-img>
               </div>
@@ -147,6 +155,21 @@
       
 <script>
     export default {
+
+         //meta
+   metaInfo: {
+       charset: 'utf-8' ,
+       name: 'viewport', content: 'width=device-width, initial-scale=1',
+      title: 'My favorite foods on GetFoods',
+         meta: [{
+           'name': 'description',
+        'content': 'Online food reservation and ordering platform to maintain a reliable and efficient system',
+      }],
+      noscript: [
+      { innerHTML: 'JavaScript is required.' }
+    ]
+    },
+    //meta
 
         data(){
             return {

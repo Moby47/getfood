@@ -33,6 +33,7 @@ var filesToCache = [
     '/images/home.png',
     '/images/dashboard.png',
     '/images/vendor.png',
+    '/images/food.png',
     '/images/loader.gif',
     '/images/icons/black/food.png',
     '/images/icons/black/love.png',

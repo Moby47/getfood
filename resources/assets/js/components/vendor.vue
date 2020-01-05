@@ -218,7 +218,20 @@
     
     <script>
         export default {
-    
+       //meta
+   metaInfo: {
+       charset: 'utf-8' ,
+       name: 'viewport', content: 'width=device-width, initial-scale=1',
+      title: ' GetFoods - Vendor food listings',
+         meta: [{
+           'name': 'description',
+        'content': 'Online food reservation and ordering platform to maintain a reliable and efficient system',
+      }],
+      noscript: [
+      { innerHTML: 'JavaScript is required.' }
+    ]
+    },
+    //meta
             data(){
                 return {
                  selected:'',

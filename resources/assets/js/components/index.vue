@@ -22,6 +22,7 @@
                 class='mx-auto fadeIn'
                  src="/images/home.png"
                 :lazy-src="`/images/black-spinner.gif`"
+                alt='Getfoods - online food ordering and reservation system'
               ></v-img>
           
               <v-card-title class='text-capitalize'>Hello {{userName}}</v-card-title>
@@ -59,6 +60,7 @@
                       <v-img
                       src="/images/dashboard.png"
                       :lazy-src="`/images/black-spinner.gif`"
+                      alt='Getfoods - online food ordering and reservation system'
                     ></v-img>
                     </v-list-item>
                 
@@ -89,7 +91,7 @@
                     <v-list-item three-line>
                       <v-img
                   src="/images/vendor.png"
-                    
+                  alt='Getfoods - online food ordering and reservation system'
                   :lazy-src="`/images/black-spinner.gif`"
                 
                 >

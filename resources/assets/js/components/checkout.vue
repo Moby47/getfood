@@ -74,12 +74,12 @@
                  <span class='alert alert-primary'>Internet Connection is needed</span>
                  <br><br> 
                    <v-list-item three-line>
-                      <v-img
+                <!--      <v-img
                 height="300"
                   src="/images/wifi.svg"
                   :lazy-src="`/images/black-spinner.gif`"
                 >
-                </v-img>
+                </v-img>-->
                     </v-list-item>
                         <br> <br>
                  <div class="my-2 text-center"  >
@@ -213,6 +213,21 @@
 import paystack from 'vue-paystack';
 
     export default {
+
+      //meta
+   metaInfo: {
+       charset: 'utf-8' ,
+       name: 'viewport', content: 'width=device-width, initial-scale=1',
+      title: ' GetFoods - Checkout',
+         meta: [{
+           'name': 'description',
+        'content': 'Online food reservation and ordering platform to maintain a reliable and efficient system',
+      }],
+      noscript: [
+      { innerHTML: 'JavaScript is required.' }
+    ]
+    },
+    //meta
       components: {
         paystack
     },

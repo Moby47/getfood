@@ -138,9 +138,17 @@
                   >
           <div class="shop_thumb">
               <v-img 
+              v-if='online'
               :src="'/storage/food/'+con.img"
               :alt="con.title"
               :lazy-src="`/images/black-spinner.gif`"
+              title=""
+              class='img_size' ></v-img>
+              <v-img 
+              v-else
+              :src="`/images/food.png`"
+              :alt="con.title"
+              :lazy-src="`/images/food.png`"
               title=""
               class='img_size' ></v-img>
           </div>
@@ -293,6 +301,21 @@
 
 
   export default {
+
+       //meta
+   metaInfo: {
+       charset: 'utf-8' ,
+       name: 'viewport', content: 'width=device-width, initial-scale=1',
+      title: ' GetFoods - Kitchen listings',
+         meta: [{
+           'name': 'description',
+        'content': 'Online food reservation and ordering platform to maintain a reliable and efficient system',
+      }],
+      noscript: [
+      { innerHTML: 'JavaScript is required.' }
+    ]
+    },
+    //meta
       data(){
           return {
               content:[],
@@ -648,6 +671,7 @@ readAllVendorList(table){
                 this.readAllVendorList('vendor-list')
                 this.readAllData('foods')
                       this.food_count = '-'
+                      this.$toasted.show("Offline mode...");
             }
       },
      
