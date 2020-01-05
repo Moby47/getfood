@@ -360,9 +360,9 @@
                   NProgress.done();
                 })
                 .then(res=>{
-                  setTimeout(func=>{
+                /*  setTimeout(func=>{
                     this.clearAndWriteData('foods',this.content)
-                      },8000)
+                      },8000)*/
                 })
                 .catch(error =>{
                   console.log(error)
@@ -408,9 +408,9 @@
                           }
                 })
                  .then(res=>{
-                  setTimeout(func=>{
+                 /* setTimeout(func=>{
                     this.clearAndWriteData('vendor-list',this.vendor_list)
-                      },9000)
+                      },9000)*/
                 })
                 .catch(error =>{
                   this.awaitingList = '' 
