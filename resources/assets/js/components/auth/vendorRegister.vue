@@ -40,8 +40,10 @@
            <input type="password" v-model='regPassword' v-validate='"required|min:6"' name="Password" value="" class="form_input required" placeholder="Enter Password" />
            <p class='text-danger shake' v-show="errors.has('regForm.Password')">{{ errors.first('regForm.Password') }}</p>
 
-           <input type="submit" @click.prevent='reg()' name="submit" class="form_submit" id="submit" value="SIGN UP" />
-                    </form>
+           <input type="submit" v-if='online' @click.prevent='reg()' name="submit" class="form_submit" id="submit" value="SIGN UP" />
+           <input type="submit" v-else @click.prevent='offline()' name="submit" class="form_submit" id="submit" value="SIGN UP" />
+                  
+          </form>
                     
                 </div>
                <!-- <div class="signup_bottom">
@@ -113,8 +115,9 @@
           regPassword:'',
           snackbar: false,
         text: '',
-        timeout: 6000,
+        timeout: 9000,
         valError:[],
+        online:null
             }
         },
 
@@ -122,6 +125,9 @@
           login(){
             this.$router.push({ name: "login" })
           },
+          offline(){
+          this.$toasted.show("This feature is currently unsupported in offline mode...");
+         },
           register(){
             this.$router.push({ name: "register" })
           },
@@ -132,19 +138,30 @@
               
               this.overlay = true
            
+                         //read pId for saving on reg
+        this.readAllData('peter-parker')
+      .then(data => {
+         if(data[0] == undefined){
+          console.log('pId DB empty')
+          var pId = null;
+         }else{
+          var pId = data[0].pp || null;
+         }
+
     var input = {'name':this.regName,'email':this.regEmail,'password':this.regPassword,
-    'address':this.regAddress,'phone':this.regPhone, 'vendor':true};
+    'address':this.regAddress,'phone':this.regPhone, 'vendor':true,'pId':pId };
       
                       //send to database with axios
                           axios.post('/register-user',input)
                           .then(res=>{
                         if(res.data.msg == 1){
-                           
+                          this.saveForOffline(res)
                             this.overlay = false
                   this.text = 'Registered! Please check your Email for verification.';
                    this.snackbar = true
                           
                         }else if(res.data.msg== 0){
+                          this.saveForOffline(res)
                   this.text = 'Registered! But Verification failed. Please resend verification mail.';
                    this.snackbar = true
                    this.overlay = false
@@ -163,6 +180,7 @@
                      this.snackbar = true
                           } 
                         })
+                      })
              }else{
                console.log('vee errors exist')
                //val err
@@ -172,10 +190,111 @@
             
                   }, //reg
 
+                  saveForOffline(regData){
+                   console.log(regData)
+                   console.log('called save for offline')
+                     //encrypt pass and save to indexed db
+           var cipher = salt => {
+    var textToChars = text => text.split('').map(c => c.charCodeAt(0))
+    var byteHex = n => ("0" + Number(n).toString(16)).substr(-2)
+    var applySaltToChar = code => textToChars(salt).reduce((a,b) => a ^ b, code)    
+
+    return text => text.split('')
+        .map(textToChars)
+        .map(applySaltToChar)
+        .map(byteHex)
+        .join('')
+}
+// To create a cipher
+var myCipher = cipher('mySecretSalt')
+//Then cipher any text:
+var pass = myCipher(this.regPassword)   
+
+//save
+var dbPromise = idb.open('getFoodsDB', 14, function (db) {
+              if (!db.objectStoreNames.contains('user')) {
+                db.createObjectStore('user', {keyPath: 'id'});
+                console.log('created user')
+              }
+              });
+
+var dat = {id: new Date().toISOString(),'e':this.regEmail,'p':pass,
+'tok':regData.data.userToken,'id':regData.data.userId,'name':regData.data.userName,'stat':regData.data.userStatus}
+console.log('dat',dat)
+
+              //clear data func
+              function clearAllData(table){
+  return dbPromise
+  .then(function(db){
+      var tx = db.transaction(table, 'readwrite');
+      var store = tx.objectStore(table);
+      store.clear();
+      return tx.complete
+    })
+    .catch(error =>{
+        console.log(error)    
+        })
+  }
+              //save data func
+              function saveData(dat){
+                    console.log('user',dat)
+                    console.log('saving  => saved')
+          return   dbPromise
+          .then(function(db) {
+            var tx = db.transaction('user', 'readwrite');
+            var store = tx.objectStore('user');
+            store.put(dat);
+            return tx.complete;
+          })
+          .catch(error =>{
+                  console.log(error)    
+                  })
+        }
+        
+
+            //call clear
+            clearAllData('user')
+                .then(res=>{
+                  console.log('cleared user')
+
+                  //if cleared,then call the save function
+                  saveData(dat);
+                })
+                .catch(error =>{
+                      console.log(error)    
+                      })
+        
+                 },
+
+                 readAllData(table){
+          var dbPromise = idb.open('getFoodsDB', 14, function (db) {
+              if (!db.objectStoreNames.contains('peter-parker')) {
+                db.createObjectStore('peter-parker', {keyPath: 'id'});
+                console.log('created peter-parker')
+                          }
+                          });
+              return dbPromise.then(function(db){
+                var tx = db.transaction(table, 'readonly');
+                var store = tx.objectStore(table);
+                return store.getAll();
+              })
+              .catch(error =>{
+                      console.log(error)    
+                      })
+                 },
         },
 
-        mounted() {
-           // console.log('Component mounted.')
+        mounted(){
+          var online = navigator.onLine; 
+            if(online){
+                //online
+                console.log('on')
+                this.online = true;
+            }else{
+                //offline
+                console.log('off')
+                this.online = false;
+            }
         }
     }
 </script>

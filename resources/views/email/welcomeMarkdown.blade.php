@@ -23,7 +23,7 @@
 </a> 
 
 
-<a href="http://localhost:8000/login">
+<a href="http://localhost:8000/user-login">
    Vendor? Click Here
 </a> 
 

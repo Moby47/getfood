@@ -362,7 +362,7 @@
                 .then(res=>{
                   setTimeout(func=>{
                     this.clearAndWriteData('foods',this.content)
-                      },7000)
+                      },8000)
                 })
                 .catch(error =>{
                   console.log(error)

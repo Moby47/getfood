@@ -70,7 +70,7 @@ class superadmincontroller extends Controller
                     'app_id' => "da6349ad-e18f-471b-8d57-30444a9d158f",
                     'include_player_ids' => $vendorPId,
                     'data' => array("foo" => "bar"),
-                    'url' => 'http://localhost:8000/login',
+                    'url' => 'http://localhost:8000/user-login',
                     'contents' => $content,
                     'headings' => $headings,
                    'chrome_web_image' => 'http://localhost:8000/images/push-images/approve.png',//512 or >

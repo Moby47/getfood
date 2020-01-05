@@ -172,6 +172,8 @@ import {eventBus} from "../app.js";
 
          //meta
     metaInfo: {
+       charset: 'utf-8' ,
+       name: 'viewport', content: 'width=device-width, initial-scale=1',
       title: 'Welcome to GetFoods',
          meta: [{
            'name': 'description',
@@ -279,10 +281,6 @@ import {eventBus} from "../app.js";
 
         //menu
          // this.isAuth()
-
-//Push.create('Hello World!')
-        
-
             if(localStorage.getItem('userName')){
               this.userName = localStorage.getItem('userName') +'.'
             }

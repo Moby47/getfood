@@ -80,7 +80,7 @@
               <v-icon>settings_power</v-icon>
             </v-avatar>
           </v-list-item-avatar>
-    <router-link to='/login' v-if='loggedOut == true'>
+    <router-link to='/user-login' v-if='loggedOut == true'>
           <v-list-item-title>Login</v-list-item-title>
     </router-link>
       <a href='#' @click.prevent="logout()" v-if='loggedOut == false'>

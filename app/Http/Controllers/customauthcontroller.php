@@ -62,6 +62,11 @@ class customauthcontroller extends Controller
            $user->verifytoken = $verifytoken = Str::random(40);
            $user->save();
            
+           $cre = $request->only('email','password');
+           if(!$token=JWTAuth::attempt($cre)){
+            return ['result'=>'no token']; //invalid cre
+        }
+
            session(['verifytoken' => $verifytoken]);
            //email to user
            try{
@@ -73,13 +78,15 @@ class customauthcontroller extends Controller
                  
               }
                  catch(\Exception $e){
-            return ['msg' => 0];
+            return ['msg' => 0,'userToken'=>$token, 'userId'=>$user->id, 'userName'=> $user->name,'userMail'=>$user->email,
+            'userStatus'=>$user->status, 'vendorAddress'=>$user->address];
              }
 
             
 
        //response
-       return ['msg' => 1];
+       return ['msg' => 1,'userToken'=>$token, 'userId'=>$user->id, 'userName'=> $user->name,'userMail'=>$user->email,
+       'userStatus'=>$user->status, 'vendorAddress'=>$user->address];
         }
         //**** */
 
@@ -100,6 +107,12 @@ class customauthcontroller extends Controller
        $user->verifytoken = $verifytoken = Str::random(40);
        $user->save();
        
+
+       $cre = $request->only('email','password');
+       if(!$token=JWTAuth::attempt($cre)){
+        return ['result'=>'no token']; //invalid cre
+    }
+
        session(['verifytoken' => $verifytoken]);
        //email to user
        try{
@@ -111,12 +124,14 @@ class customauthcontroller extends Controller
              
           }
              catch(\Exception $e){
-        return ['msg' => 0];
+        return ['msg' => 0,'userToken'=>$token, 'userId'=>$user->id, 'userName'=> $user->name,'userMail'=>$user->email,
+        'userStatus'=> 0, 'vendorAddress'=> null];
          }
 
 
    //response
-   return ['msg' => 1];
+   return ['msg' => 1,'userToken'=>$token, 'userId'=>$user->id, 'userName'=> $user->name,'userMail'=>$user->email,
+   'userStatus'=> 0, 'vendorAddress'=> null];
     }
 
 
@@ -133,14 +148,14 @@ class customauthcontroller extends Controller
         $user =User::where('verifytoken','=',$crypt)->select('verifytoken','id')->first();
         //if user not found
         if(!isset($user)){
-            return '<a href="http://test.henrymoby.tech/login">Verification token expired. Click here to resend</a>';
+            return '<a href="http://test.henrymoby.tech/user-login">Verification token expired. Click here to resend</a>';
         }
         $id = $user->id;
         $act = User::findorfail($id);
         $act->verification = 1;
         $act->verifytoken = Null;
         $act->save();
-        return redirect('http://test.henrymoby.tech/login');
+        return redirect('http://test.henrymoby.tech/user-login');
    }
 
 

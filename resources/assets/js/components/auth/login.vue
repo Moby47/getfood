@@ -31,8 +31,10 @@
                   <p class='text-danger shake' v-show="errors.has('loginForm.Password')">{{ errors.first('loginForm.Password') }}</p>
                  
                   <div class="forgot_pass"><a href="/forgot-password" >Forgot Password?</a></div>
-                  <input type="submit" name="submit" class="form_submit" id="submit" @click.prevent='login()' value="SIGN IN" />
-              </form>
+                  <input type="submit" v-if='online' name="submit" class="form_submit"  @click.prevent='login()' value="SIGN IN" />
+                  <input type="submit" v-else name="submit" class="form_submit"  @click.prevent='loginOffline()' value="SIGN IN" />
+            
+                </form>
               
               <div class="signup_bottom">
                   
@@ -106,6 +108,7 @@
         text: '',
         timeout: 10000,
         overlay:false,
+        online:null
             }
         },
 
@@ -144,6 +147,9 @@
                                localStorage.setItem('userMail',res.data.userMail);
                                localStorage.setItem('userStatus',res.data.userStatus);
                                
+                               //save for offline
+                               this.clearSaveForOffline()
+
         //read and save Pid
         this.readAllData('peter-parker')
       .then(function(data) {
@@ -215,6 +221,9 @@
               
                    }, //login
 
+
+
+
                    readAllData(table){
           var dbPromise = idb.open('getFoodsDB', 14, function (db) {
               if (!db.objectStoreNames.contains('peter-parker')) {
@@ -232,10 +241,172 @@
                       })
                  },
                 
-        },
+
+                 clearSaveForOffline(){
+                   console.log('called save for offline')
+                     //encrypt pass and save to indexed db
+           var cipher = salt => {
+    var textToChars = text => text.split('').map(c => c.charCodeAt(0))
+    var byteHex = n => ("0" + Number(n).toString(16)).substr(-2)
+    var applySaltToChar = code => textToChars(salt).reduce((a,b) => a ^ b, code)    
+
+    return text => text.split('')
+        .map(textToChars)
+        .map(applySaltToChar)
+        .map(byteHex)
+        .join('')
+}
+// To create a cipher
+var myCipher = cipher('mySecretSalt')
+//Then cipher any text:
+var pass = myCipher(this.logPassword)   
+
+//save
+var dbPromise = idb.open('getFoodsDB', 14, function (db) {
+              if (!db.objectStoreNames.contains('user')) {
+                db.createObjectStore('user', {keyPath: 'id'});
+                console.log('created user')
+              }
+              });
+
+                  //clear data func
+function clearAllData(table){
+  return dbPromise
+  .then(function(db){
+      var tx = db.transaction(table, 'readwrite');
+      var store = tx.objectStore(table);
+      store.clear();
+      return tx.complete
+    })
+    .catch(error =>{
+        console.log(error)    
+        })
+  }
+
+  var dat = {id: new Date().toISOString(),'e':this.logEmail,'p':pass,
+  'tok':localStorage.getItem('userToken'),'id':localStorage.getItem('userId'),'name':localStorage.getItem('userName'),
+  'stat':localStorage.getItem('userStatus')}
+
+//save data func
+function saveData(dat){
+      console.log('user',dat)
+      console.log('saving  => saved')
+return   dbPromise
+.then(function(db) {
+var tx = db.transaction('user', 'readwrite');
+var store = tx.objectStore('user');
+store.put(dat);
+return tx.complete;
+})
+.catch(error =>{
+    console.log(error)    
+    })
+}
+
+           //call clear
+           clearAllData('user')
+                .then(res=>{
+                  console.log('cleared user')
+
+                  //if cleared,then call the save function
+                  saveData(dat);
+                })
+                .catch(error =>{
+                      console.log(error)    
+                      })
+                 },
+
+
+                 loginOffline(){
+                          //validate specific form
+        this.$validator.validateAll('loginForm').then(() => {
+             if (!this.errors.any()) {
+              this.overlay = true
+
+                    var input = {'email':this.logEmail, 'password':this.logPassword};
+                   
+                       //read offline user
+        this.readAllData('user')
+      .then(data=> {
+        
+         if(data[0] == undefined){
+          console.log('user DB empty')
+          this.$toasted.show("You need to login at least once to use this feature offline...");
+          this.overlay = false 
+         }else{
+          //check auth
+          //decryt pass
+          var decipher = salt => {
+    var textToChars = text => text.split('').map(c => c.charCodeAt(0))
+    var saltChars = textToChars(salt)
+    var applySaltToChar = code => textToChars(salt).reduce((a,b) => a ^ b, code)
+    return encoded => encoded.match(/.{1,2}/g)
+        .map(hex => parseInt(hex, 16))
+        .map(applySaltToChar)
+        .map(charCode => String.fromCharCode(charCode))
+        .join('')
+}
+//To decipher, you need to create a decipher and use it:
+var myDecipher = decipher('mySecretSalt')
+var pass = myDecipher(data[0].p)    // --> 'the secret string'
+
+if(this.logEmail == data[0].e && this.logPassword == pass){
+  console.log('login ok')
+   //start login 
+                              localStorage.setItem('userToken',data[0].tok);
+                               localStorage.setItem('userId',data[0].id);
+                               localStorage.setItem('userName',data[0].name);
+                               localStorage.setItem('userMail',data[0].e);
+                               localStorage.setItem('userStatus',data[0].stat);
+                               var status = localStorage.getItem('userStatus')
+                                    if(status == 1){
+                                  //ven
+                                  this.$router.push({name: "vendordashboard"});
+                                }else if (status == 0){
+                                  //user
+                                  this.$router.push({name: "userdashboard"});
+                                }else if (status == 47){
+                                  /* For super admin page*/
+                                  this.$router.push({name: "superadmindash"});
+                                }
+                                
+}else{
+  this.$toasted.show("No user found. Please try again with internet connection...");
+}
+this.overlay = false
+         }
+      })
+//read offline user
+       
+
+                  }else{ //if error
+                    //error is auto shown, dont worry
+                  } //if error
+                })//val
+              
+                   }, //login
+
+        },//meth end
+
+
+        
 
         created() {
           //this.Auth()
+        },
+
+        mounted(){
+          var online = navigator.onLine; 
+            if(online){
+                //online
+                console.log('on')
+                this.online = true;
+            }else{
+                //offline
+                console.log('off')
+                this.online = false;
+            }
         }
+
     }
 </script>

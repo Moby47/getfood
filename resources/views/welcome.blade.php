@@ -69,7 +69,8 @@
          <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.12/push.min.js" integrity="sha256-TzCZHC7V5wLIgeSjxMcAuOnxj4vQ3ta5XRdAQTC8cu8=" crossorigin="anonymous"></script>
          
          <script src="{{asset('/js/idb.js')}}"></script>
-
+         <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+        
         <script src="{{asset('/js/app.js')}}"></script>
 
 <!-- register service worker -->
@@ -89,7 +90,8 @@
 </script>
   <!--register service worker-->
 
-  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+ 
+  
 
 <script>
 

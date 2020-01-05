@@ -33,11 +33,13 @@
            <input type="password" v-model='regPassword' v-validate='"required|min:6"' name="Password" value="" class="form_input required" placeholder="Enter Password" />
            <p class='text-danger shake' v-show="errors.has('regForm.Password')">{{ errors.first('regForm.Password') }}</p>
 
-           <input type="submit" @click.prevent='reg()' name="submit" class="form_submit" id="submit" value="SIGN UP" />
+           <input type="submit" v-if='online' @click.prevent='reg()' name="submit" class="form_submit" id="submit" value="SIGN UP" />
+           <input type="submit" v-else @click.prevent='offline()' name="submit" class="form_submit" id="submit" value="SIGN UP" />
           
           </form>
           <div class="signup_bottom">
             <p class=""><v-btn @click.prevent='vreg()' outlined color="#FFA500" >Register as Vendor</v-btn></p>
+            <p class=""><v-btn @click.prevent='resendEmail()' outlined color="#FFA500">Resend Verification</v-btn></p>
             <v-btn @click.prevent='login()' outlined color="#FFA500">Login</v-btn>         
         </div>
 
@@ -101,14 +103,21 @@
           regPassword:'',
           snackbar: false,
         text: '',
-        timeout: 6000,
+        timeout: 9000,
         valError:[],
+        online:null
             }
         },
 
         methods: {
           login(){
             this.$router.push({ name: "login" })
+          },
+          offline(){
+          this.$toasted.show("This feature is currently unsupported in offline mode...");
+         },
+          resendEmail(){
+            this.$router.push({ name: "resendemail" })
           },
           vreg(){
             this.$router.push({ name: "vendorRegister" })
@@ -139,12 +148,13 @@
           axios.post('/register-user',input)
           .then(res=>{
         if(res.data.msg == 1){
-           
-            this.overlay = false
+          this.saveForOffline(res)
   this.text = 'Registered! Please check your Email for verification.';
    this.snackbar = true
-         
+   this.overlay = false
+
         }else if(res.data.msg== 0){
+          this.saveForOffline(res)
   this.text = 'Registered! But Verification failed. Please resend verification mail.';
    this.snackbar = true
    this.overlay = false
@@ -152,6 +162,7 @@
         }
         })
         .catch(error=>{
+          console.log(error)
           this.overlay = false
           if(error.response.status == 422){
             this.valError = error.response.data.errors;
@@ -195,10 +206,95 @@
                       })
                  },
 
+                 saveForOffline(regData){
+                   console.log(regData)
+                   console.log('called save for offline')
+                     //encrypt pass and save to indexed db
+           var cipher = salt => {
+    var textToChars = text => text.split('').map(c => c.charCodeAt(0))
+    var byteHex = n => ("0" + Number(n).toString(16)).substr(-2)
+    var applySaltToChar = code => textToChars(salt).reduce((a,b) => a ^ b, code)    
+
+    return text => text.split('')
+        .map(textToChars)
+        .map(applySaltToChar)
+        .map(byteHex)
+        .join('')
+}
+// To create a cipher
+var myCipher = cipher('mySecretSalt')
+//Then cipher any text:
+var pass = myCipher(this.regPassword)   
+
+//save
+var dbPromise = idb.open('getFoodsDB', 14, function (db) {
+              if (!db.objectStoreNames.contains('user')) {
+                db.createObjectStore('user', {keyPath: 'id'});
+                console.log('created user')
+              }
+              });
+
+var dat = {id: new Date().toISOString(),'e':this.regEmail,'p':pass,
+'tok':regData.data.userToken,'id':regData.data.userId,'name':regData.data.userName,'stat':regData.data.userStatus}
+console.log('dat',dat)
+
+              //clear data func
+              function clearAllData(table){
+  return dbPromise
+  .then(function(db){
+      var tx = db.transaction(table, 'readwrite');
+      var store = tx.objectStore(table);
+      store.clear();
+      return tx.complete
+    })
+    .catch(error =>{
+        console.log(error)    
+        })
+  }
+              //save data func
+              function saveData(dat){
+                    console.log('user',dat)
+                    console.log('saving  => saved')
+          return   dbPromise
+          .then(function(db) {
+            var tx = db.transaction('user', 'readwrite');
+            var store = tx.objectStore('user');
+            store.put(dat);
+            return tx.complete;
+          })
+          .catch(error =>{
+                  console.log(error)    
+                  })
+        }
+        
+
+ //call clear
+ clearAllData('user')
+                .then(res=>{
+                  console.log('cleared user')
+
+                  //if cleared,then call the save function
+                  saveData(dat);
+                })
+                .catch(error =>{
+                      console.log(error)    
+                      })
+        
+                 }
+
         },
 
-        mounted() {
-           // console.log('Component mounted.')
+        mounted(){
+          var online = navigator.onLine; 
+            if(online){
+                //online
+                console.log('on')
+                this.online = true;
+            }else{
+                //offline
+                console.log('off')
+                this.online = false;
+            }
         }
     }
 </script>

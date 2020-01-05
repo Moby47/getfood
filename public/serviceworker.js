@@ -92,6 +92,9 @@ var dbPromise = idb.open('getFoodsDB', 14, function (db) {
       if (!db.objectStoreNames.contains('peter-parker')) {
         db.createObjectStore('peter-parker', {keyPath: 'id'});
       }
+      if (!db.objectStoreNames.contains('user')) {
+        db.createObjectStore('user', {keyPath: 'id'});
+      }
   });
 
 // Cache on install
