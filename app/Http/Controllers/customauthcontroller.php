@@ -74,11 +74,11 @@ class customauthcontroller extends Controller
            //email to user
            try{
             Mail::to($user->email)->send(new Verify());  
-         // welcome email
+         /* welcome email
             $when = now()->addMinutes(10);
                 Mail::to($user->email)
                 ->later($when, new Welcome());
-                 
+             */    
               }
                  catch(\Exception $e){
             return ['msg' => 0,'userToken'=>$token, 'userId'=>$user->id, 'userName'=> $user->name,'userMail'=>$user->email,
@@ -151,14 +151,14 @@ class customauthcontroller extends Controller
         $user =User::where('verifytoken','=',$crypt)->select('verifytoken','id')->first();
         //if user not found
         if(!isset($user)){
-            return '<a href="http://test.henrymoby.tech/user-login">Verification token expired. Click here to resend</a>';
+            return '<a href="http://localhost:8000/user-login">Verification token expired. Click here to resend</a>';
         }
         $id = $user->id;
         $act = User::findorfail($id);
         $act->verification = 1;
         $act->verifytoken = Null;
         $act->save();
-        return redirect('http://test.henrymoby.tech/user-login');
+        return redirect('http://http://localhost:8000/user-login');
    }
 
 
