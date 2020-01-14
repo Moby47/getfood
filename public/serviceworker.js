@@ -9,6 +9,7 @@ var filesToCache = [
     '/css/style.min.css',
     '/css/custom.min.css',
     '/css/wicked.min.css',
+    '/css/reset.min.css',
 
     'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons',
     'https://unpkg.com/nprogress@0.2.0/nprogress.css',

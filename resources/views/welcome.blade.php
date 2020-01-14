@@ -49,7 +49,7 @@
 
  <link rel="stylesheet" href="/css/wicked.min.css">
 
- <link rel="stylesheet" href="/css/custom.css">
+ <link rel="stylesheet" href="/css/custom.min.css">
 
     </head>
 
