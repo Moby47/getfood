@@ -70,11 +70,11 @@ class superadmincontroller extends Controller
                     'app_id' => "da6349ad-e18f-471b-8d57-30444a9d158f",
                     'include_player_ids' => $vendorPId,
                     'data' => array("foo" => "bar"),
-                    'url' => 'http://localhost:8000/user-login',
+                    'url' => 'https://testing.henrymoby.tech/user-login',
                     'contents' => $content,
                     'headings' => $headings,
-                   'chrome_web_image' => 'http://localhost:8000/images/push-images/approve.png',//512 or >
-                   'chrome_web_badge' => 'http://localhost:8000/images/app-icons/app-icon-96x96.png'
+                   'chrome_web_image' => 'https://testing.henrymoby.tech/images/push-images/approve.png',//512 or >
+                   'chrome_web_badge' => 'https://testing.henrymoby.tech/images/app-icons/app-icon-96x96.png'
                 );
                 
                 $fields = json_encode($fields);
@@ -135,11 +135,11 @@ class superadmincontroller extends Controller
                     'app_id' => "da6349ad-e18f-471b-8d57-30444a9d158f",
                     'include_player_ids' => $vendorPId,
                     'data' => array("foo" => "bar"),
-                    'url' => 'http://localhost:8000',
+                    'url' => 'https://testing.henrymoby.tech/',
                     'contents' => $content,
                     'headings' => $headings,
-                    'chrome_web_image' => 'http://localhost:8000/images/push-images/decline.png',//512 or >
-                    'chrome_web_badge' => 'http://localhost:8000/images/app-icons/app-icon-96x96.png'
+                    'chrome_web_image' => 'https://testing.henrymoby.tech/images/push-images/decline.png',//512 or >
+                    'chrome_web_badge' => 'https://testing.henrymoby.tech/images/app-icons/app-icon-96x96.png'
                 );
                 
                 $fields = json_encode($fields);

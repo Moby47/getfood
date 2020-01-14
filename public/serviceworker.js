@@ -200,9 +200,9 @@ function clearAllData(table){
      'url': url,
      'include_player_ids': [pId],
      'web_push_topic':tag,
-     'chrome_web_image':'http://localhost:8000/images/push-images/completed.png',//512 or >
-    'chrome_web_badge':'http://localhost:8000/images/app-icons/app-icon-96x96.png',// 72 or >
-  //   'chrome_web_icon':'http://localhost:8000/images/app-icons/app-icon-192x192.png' //192 or >
+     'chrome_web_image':'https://testing.henrymoby.tech/images/push-images/completed.png',//512 or >
+    'chrome_web_badge':'https://testing.henrymoby.tech/images/app-icons/app-icon-96x96.png',// 72 or >
+  //   'chrome_web_icon':'https://testing.henrymoby.tech/images/app-icons/app-icon-192x192.png' //192 or >
    })
  })
    .then(res=> {
@@ -250,7 +250,7 @@ self.addEventListener('sync', function(event) {
                     console.log('Background Sync Completed');
 
              //read pId and push on completion #func takes title,body,url,tag
-             pushToUser('Background task completed','The selected food has been added to favorites','http://localhost:8000/favorite','add-to-fav') 
+             pushToUser('Background task completed','The selected food has been added to favorites','https://testing.henrymoby.tech/favorite','add-to-fav') 
 
                      //call clear
                 clearAllData('sync-fav')
@@ -308,7 +308,7 @@ self.addEventListener('sync', function(event) {
                     console.log('Background Sync Completed');
 
                         //read pId and push on completion #func takes title,body,url,tag
-  pushToUser('Background task completed','The selected food has been removed from favorites','http://localhost:8000/favorite','remove-from-fav') 
+  pushToUser('Background task completed','The selected food has been removed from favorites','https://testing.henrymoby.tech/favorite','remove-from-fav') 
 
                          //call clear
                 clearAllData('sync-unfav')
@@ -377,7 +377,7 @@ self.addEventListener('sync', function(event) {
 
                   
           //read pId and push on completion #func takes title,body,url,tag
-  pushToUser('Background task completed','The selected food has been added to the table','http://localhost:8000/table','add-to-cart') 
+  pushToUser('Background task completed','The selected food has been added to the table','https://testing.henrymoby.tech/table','add-to-cart') 
 
                        //call clear
               clearAllData('sync-addToCart')
@@ -435,7 +435,7 @@ self.addEventListener('sync', function(event) {
                   console.log('Background Sync Completed');
 
                    //read pId and push on completion #func takes title,body,url
-pushToUser('Background task completed','The selected food has been removed from the table','http://localhost:8000/table','remove-from-cart') 
+pushToUser('Background task completed','The selected food has been removed from the table','https://testing.henrymoby.tech/table','remove-from-cart') 
 
                        //call clear
               clearAllData('sync-removeFromCart')
@@ -499,7 +499,7 @@ pushToUser('Background task completed','The selected food has been removed from 
                     console.log('Background Sync Completed');
   
                        //read pId and push on completion #func takes title,body,url,tag
-  pushToUser('Background task completed','The selected food has been added to the table','http://localhost:8000/table','add-to-cart') 
+  pushToUser('Background task completed','The selected food has been added to the table','https://testing.henrymoby.tech/table','add-to-cart') 
 
                          //call clear
                 clearAllData('sync-addToCart')
@@ -563,7 +563,7 @@ self.addEventListener('sync', function(event) {
                   console.log('Background Sync Completed');
 
                   //read pId and push on completion #func takes title,body,url
-  pushToUser('Background task completed','The selected food has been removed from the table','http://localhost:8000/table','remove-from-cart') 
+  pushToUser('Background task completed','The selected food has been removed from the table','https://testing.henrymoby.tech/table','remove-from-cart') 
 
                        //call clear
               clearAllData('sync-removeFromCart')
@@ -625,7 +625,7 @@ self.addEventListener('sync', function(event) {
                     console.log('Background Sync Completed');
   
                        //read pId and push on completion #func takes title,body,url
-  pushToUser('Background task completed','The selected food has been deleted from favorites','http://localhost:8000/favorite','del-from-fav') 
+  pushToUser('Background task completed','The selected food has been deleted from favorites','https://testing.henrymoby.tech/favorite','del-from-fav') 
 
                          //call clear
                 clearAllData('sync-deleteFav')
@@ -691,7 +691,7 @@ self.addEventListener('sync', function(event) {
                     console.log('Background Sync Completed');
   
                       //read pId and push on completion #func takes title,body,url
-  pushToUser('Background task completed','Your food has been added to kitchen','http://localhost:8000/manage-food','add-to-kitchen') 
+  pushToUser('Background task completed','Your food has been added to kitchen','https://testing.henrymoby.tech/manage-food','add-to-kitchen') 
 
                          //call clear
                 clearAllData('sync-addFood')
@@ -749,7 +749,7 @@ self.addEventListener('sync', function(event) {
                     console.log('Background Sync Completed');
   
                     //read pId and push on completion #func takes title,body,url
-  pushToUser('Background task completed','The selected food has been removed kitchen','http://localhost:8000/manage-food','remove-from-kitchen') 
+  pushToUser('Background task completed','The selected food has been removed kitchen','https://testing.henrymoby.tech/manage-food','remove-from-kitchen') 
 
                          //call clear
                 clearAllData('sync-deleteFood')
@@ -817,7 +817,7 @@ self.addEventListener('sync', function(event) {
                     console.log('Background Sync Completed');
                     
  //read pId and push on completion #func takes title,body,url
- pushToUser('Background task completed','The edited food has updated successfully','http://localhost:8000/manage-food','add-to-kitchen') 
+ pushToUser('Background task completed','The edited food has updated successfully','https://testing.henrymoby.tech/manage-food','add-to-kitchen') 
 
                          //call clear
                 clearAllData('sync-updateFood')

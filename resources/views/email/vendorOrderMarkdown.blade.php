@@ -5,7 +5,7 @@
 
 <p>You have a new order.</p>
 
-<a href="http://localhost:8000/orders">
+<a href="https://testing.henrymoby.tech/orders">
     View Now
 </a> 
 

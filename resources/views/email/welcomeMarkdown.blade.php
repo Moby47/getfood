@@ -18,16 +18,16 @@
 
      
 
-     <a href="http://localhost:8000/verify/{{$verifytoken}}">
+     <a href="https://testing.henrymoby.tech/verify/{{$verifytoken}}">
     Account Noy Verified? Click Here
 </a> 
 
 
-<a href="http://localhost:8000/user-login">
+<a href="https://testing.henrymoby.tech/user-login">
    Vendor? Click Here
 </a> 
 
-<a href="http://localhost:8000">
+<a href="https://testing.henrymoby.tech/">
     Customer? Click Here
 </a> 
 

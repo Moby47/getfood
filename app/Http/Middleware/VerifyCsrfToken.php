@@ -13,24 +13,24 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         //allow url, no csrf token needed
-        'http://localhost:8000/add-favorite',
-        'http://localhost:8000/remove-favorite',
+        'https://testing.henrymoby.tech/add-favorite',
+        'https://testing.henrymoby.tech/remove-favorite',
 
-        'http://localhost:8000/add-to-cart',
-        'http://localhost:8000/remove-from-cart',
+        'https://testing.henrymoby.tech/add-to-cart',
+        'https://testing.henrymoby.tech/remove-from-cart',
 
-        'http://localhost:8000/add-fav-to-cart',
-        'http://localhost:8000/remove-fav-from-cart',
+        'https://testing.henrymoby.tech/add-fav-to-cart',
+        'https://testing.henrymoby.tech/remove-fav-from-cart',
 
-        'http://localhost:8000/remove-from-fav',
+        'https://testing.henrymoby.tech/remove-from-fav',
 
-        'http://localhost:8000/new-food',
-        'http://localhost:8000/delete-food',
-        'http://localhost:8000/edit-food',
+        'https://testing.henrymoby.tech/new-food',
+        'https://testing.henrymoby.tech/delete-food',
+        'https://testing.henrymoby.tech/edit-food',
         
-        'http://localhost:8000/player-id',
+        'https://testing.henrymoby.tech/player-id',
 
-        'http://localhost:8000/login-user',
-       'http://localhost:8000/save-order',
+        'https://testing.henrymoby.tech/login-user',
+       'https://testing.henrymoby.tech/save-order',
     ];
 }
