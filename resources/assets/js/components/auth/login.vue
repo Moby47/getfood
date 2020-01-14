@@ -1,14 +1,17 @@
 <template>
-    <div class="container">
-        
-
-    <div class="views">
-
-
-       <!-- Login Popup -->
-    <div class=" popup-login">
-
-        <template>
+        <div class="container">
+           
+      <!--content here-->
+      
+      <div class="pages">
+          <div data-page="cart" class="page no-toolbar no-navbar">
+            <div class="page-content">
+                  <div id="pages_maincontent">
+                   
+                    <main role="main" class="">
+      
+    
+  <template>
             <v-card
               class="mx-auto elevation-23 "
               max-width="344"
@@ -55,13 +58,9 @@
 
       </v-card>
       </template>
-      
-  </div>
 
-  
-    </div>
 
-    <template>
+<template>
         <v-snackbar
       v-model="snackbar"
       :timeout="timeout"
@@ -93,10 +92,26 @@
 
 <back></back>
 
+                      </main>
+              </div>
+              
+              
+            </div>
+          </div>
+        </div>
+        
+        
+      
 
-    </div>
-</template>
+          </div>
+    </template>
+    
+    <style scoped>
+    
+      </style>
+    
 
+    
 <script>
     export default {
 

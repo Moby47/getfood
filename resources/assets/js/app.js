@@ -38,7 +38,7 @@ import router from './router'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 
-Vue.use(Vuetify)
+//Vue.use(Vuetify)
 
 import BootstrapVue from 'bootstrap-vue'
 
@@ -163,7 +163,11 @@ Vue.component('back', require('./components/includes/back.vue'));
 Vue.component('foot', require('./components/includes/foot.vue'));
 Vue.component('confirmBtn', require('./components/includes/confirmBtn.vue'));
 
+const vuetifyOptions = { }
+Vue.use(Vuetify)
+
 const app = new Vue({
     el: '#app',
-    router
+    router,
+    vuetify: new Vuetify(vuetifyOptions)
 });
