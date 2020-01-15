@@ -33,9 +33,7 @@
                    <!-- <p>Check your email and activate your account.</p> -->
                 </div>
 
-                <div class="signup_bottom">
-                    <v-btn @click.prevent='login()' outlined color="#FFA500">Back</v-btn>
-                </div>
+              
             </div>
          
         </div>

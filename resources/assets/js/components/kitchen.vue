@@ -436,7 +436,7 @@
                       //offline data
                       this.readAllData('foods')
                       this.food_count = '-'
-                      this.$toasted.show("Offline Mode");
+                      this.$toasted.show("Kitchen Offline");
                       this.offline = true
                     })
                     
@@ -590,7 +590,7 @@ readAllVendorList(table){
                               this.empty = false;
                           }
                           
-            this.awaitingList = 'Offline mode'
+            this.awaitingList = ''
             console.log('fetched from inDB venlist:',this.vendor_list)
           })
           .catch(error =>{

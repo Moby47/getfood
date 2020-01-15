@@ -1,6 +1,6 @@
 {
-    "name": "Get Foods",
-    "short_name": "Get Foods",
+    "name": "GetFoods",
+    "short_name": "GetFoods",
     "icons": [
       {
         "src": "/images/app-icons/app-icon-48x48.png",

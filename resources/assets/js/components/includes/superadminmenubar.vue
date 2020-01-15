@@ -25,7 +25,7 @@
      <!--sheet / menu-->
     <template>
       <div class="text-center">
-        <v-bottom-sheet v-model="sheet">
+        <v-bottom-sheet v-model="sheet" data-app>
           <v-sheet class="text-center" height="465px">
            
            
