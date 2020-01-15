@@ -22,80 +22,193 @@
                 </v-card>
               </template>
 
- <!--sheet / menu-->
+
+
 <template>
-  <div class="text-center">
-    <v-bottom-sheet v-model="sheet" data-app>
-      <v-sheet class="text-center" height="465px">
-       
-       
-          <v-list>
 
-    
+    <v-navigation-drawer
 
-<!--dashboard-->
-<span v-if='loggedOut == false'>
-    <v-list-item
-     @click="sheet = false"
-        >
-          <v-list-item-avatar>
-            <v-avatar size="32px" tile>
-              <v-icon>dashboard</v-icon>
-            </v-avatar>
-          </v-list-item-avatar>
-    
-      <router-link to='/vendordashboard' v-if='status == 1'>
-          <v-list-item-title>Dashboard</v-list-item-title>
-    </router-link>
-        </v-list-item>
-</span>
+      v-model="sheet"
+
+      app
+
+      right
+
+    >
+
+      <v-list dense>
+
+        <v-list-item link @click.prevent='home()'>
+
+          <v-list-item-action>
+
+            <v-icon>home</v-icon>
+
+          </v-list-item-action>
 
 
 
-<!--looped menu-->
-        <v-list-item
-          v-for="tile in tiles"
-          :key="tile.title"
-          @click="sheet = false"
-        >
-          <v-list-item-avatar>
-            <v-avatar size="32px" tile>
-              <v-icon>{{tile.img}}</v-icon>
-            </v-avatar>
-          </v-list-item-avatar>
+          <v-list-item-content>
 
-    <router-link :to='tile.link'>
-          <v-list-item-title>{{ tile.title }}</v-list-item-title>
-    </router-link>
+            <v-list-item-title >Home</v-list-item-title>
+
+          </v-list-item-content>
 
         </v-list-item>
-<!--looped menu-->
 
-<!--login/out-->
-    <v-list-item
-     @click="sheet = false"
-        >
-          <v-list-item-avatar>
-            <v-avatar size="32px" tile>
-              <v-icon>settings_power</v-icon>
-            </v-avatar>
-          </v-list-item-avatar>
-    <router-link to='/user-signin' v-if='loggedOut == true'>
-          <v-list-item-title>Login</v-list-item-title>
-    </router-link>
-      <a href='#' @click.prevent="logout()" v-if='loggedOut == false'>
-          <v-list-item-title>Logout</v-list-item-title>
-    </a>
+
+
+ <v-list-item link @click.prevent='login()'>
+
+          <v-list-item-action>
+
+            <v-icon>dashboard</v-icon>
+
+          </v-list-item-action>
+
+
+
+          <v-list-item-content>
+
+            <v-list-item-title >Dashboard</v-list-item-title>
+
+          </v-list-item-content>
+
+        </v-list-item>
+
+
+  <v-list-item link @click.prevent='add()'>
+
+          <v-list-item-action>
+
+            <v-icon>add_shopping_cart</v-icon>
+
+          </v-list-item-action>
+
+
+
+          <v-list-item-content>
+
+            <v-list-item-title >Add Food</v-list-item-title>
+
+          </v-list-item-content>
+
+        </v-list-item>
+
+
+
+         <v-list-item link @click.prevent='manage()'>
+
+          <v-list-item-action>
+
+            <v-icon>edit</v-icon>
+
+          </v-list-item-action>
+
+
+
+          <v-list-item-content>
+
+            <v-list-item-title >Manage Food</v-list-item-title>
+
+          </v-list-item-content>
+
+        </v-list-item>
+
+        
+         <v-list-item link @click.prevent='orders()'>
+
+          <v-list-item-action>
+
+            <v-icon>shopping_cart</v-icon>
+
+          </v-list-item-action>
+
+
+
+          <v-list-item-content>
+
+            <v-list-item-title >Customer Orders</v-list-item-title>
+
+          </v-list-item-content>
+
+        </v-list-item>
+
+
+
+   <v-list-item link @click.prevent='vendorFav()'>
+
+          <v-list-item-action>
+
+            <v-icon>favorite</v-icon>
+
+          </v-list-item-action>
+
+
+
+          <v-list-item-content>
+
+            <v-list-item-title >Customer Favorites</v-list-item-title>
+
+          </v-list-item-content>
+
+
+
+        </v-list-item>
+
+       
+
+
+        <v-list-item link @click.prevent='kitchen()'>
+
+          <v-list-item-action>
+
+            <v-icon>restaurant</v-icon>
+
+          </v-list-item-action>
+
+
+
+          <v-list-item-content>
+
+            <v-list-item-title >Enter Kitchen</v-list-item-title>
+
+          </v-list-item-content>
+
+        </v-list-item>
+
+
+
+
+
+
+      
+
+
+         <v-list-item link @click.prevent='logout()'>
+
+          <v-list-item-action>
+
+            <v-icon>settings_power</v-icon>
+
+          </v-list-item-action>
+
+
+
+          <v-list-item-content>
+
+            <v-list-item-title >Logout</v-list-item-title>
+
+          </v-list-item-content>
+
         </v-list-item>
 
       </v-list>
 
+    </v-navigation-drawer>
 
-      </v-sheet>
-    </v-bottom-sheet>
-  </div>
 </template>
-<!--sheet / menu-->
+
 
       <template>
         <v-snackbar
@@ -134,17 +247,34 @@
         timeout: 6000,
         status:'',
           sheet: false,
-      tiles: [
-        { img: 'add_shopping_cart', title: 'Add Food', link:'/add-food' },
-        { img: 'edit', title: 'Manage Food', link:'/manage-food'},
-        { img: 'shopping_cart', title: 'Orders', link:'/orders'},
-        { img: 'favorite', title: 'Customer Favorite', link:'/vendor-favorites'},
-        { img: 'restaurant', title: 'Get Food', link:'/kitchen' },
-        { img: 'fastfood', title: 'Vendors', link:'/vendor'},
-      ],
    }),
 
    methods:{
+      home(){
+ this.$router.push({name: "index"});
+     },
+
+     kitchen(){
+ this.$router.push({name: "kitchen"});
+     },
+      login(){
+ this.$router.push({name: "login"});
+     },
+      add(){
+ this.$router.push({name: "add"});
+     },
+     
+     vendorFav(){
+ this.$router.push({name: "favorites"});
+     },
+     
+     manage(){
+ this.$router.push({name: "edit"});
+     },
+     
+     orders(){
+ this.$router.push({name: "orders"});
+     },
           //meth to check Auth
                       isAuth(){
                     if(localStorage.getItem('userToken')){

@@ -21,83 +21,163 @@
                 </v-card>
               </template>
 
- <!--sheet / menu-->
 <template>
-  <div class="text-center">
-    <v-bottom-sheet v-model="sheet" data-app>
-      <v-sheet class="text-center" height="440px">
-       
-       
-          <v-list>
 
-<!--dashboard-->
-<span v-if='loggedOut == false'>
-    <v-list-item
-     @click="sheet = false"
-        >
-          <v-list-item-avatar>
-            <v-avatar size="32px" tile>
-              <v-icon>dashboard</v-icon>
-            </v-avatar>
-          </v-list-item-avatar>
-    <router-link to='/userdashboard' v-if='status == 0'>
-          <v-list-item-title>Dashboard</v-list-item-title>
-    </router-link>
-      <router-link to='/vendordashboard' v-if='status == 1'>
-          <v-list-item-title>Dashboard</v-list-item-title>
-    </router-link>
-    <router-link to='/super-admin-dashboard' v-if='status == 47'>
-      <v-list-item-title>Dashboard</v-list-item-title>
-</router-link>
-        </v-list-item>
-</span>
+    <v-navigation-drawer
+
+      v-model="sheet"
+
+      app
+
+      right
+
+    >
+
+      <v-list dense>
+
+        <v-list-item link @click.prevent='home()'>
+
+          <v-list-item-action>
+
+            <v-icon>home</v-icon>
+
+          </v-list-item-action>
 
 
 
-<!--looped menu-->
-        <v-list-item
-          v-for="tile in tiles"
-          :key="tile.title"
-          @click="sheet = false"
-        >
-          <v-list-item-avatar>
-            <v-avatar size="32px" tile>
-              <v-icon>{{tile.img}}</v-icon>
-            </v-avatar>
-          </v-list-item-avatar>
+          <v-list-item-content>
 
-    <router-link :to='tile.link'>
-          <v-list-item-title>{{ tile.title }}</v-list-item-title>
-    </router-link>
+            <v-list-item-title >Home</v-list-item-title>
+
+          </v-list-item-content>
 
         </v-list-item>
-<!--looped menu-->
 
-<!--login/out-->
-    <v-list-item
-     @click="sheet = false"
-        >
-          <v-list-item-avatar>
-            <v-avatar size="32px" tile>
-              <v-icon>settings_power</v-icon>
-            </v-avatar>
-          </v-list-item-avatar>
-    <router-link to='/user-signin' v-if='loggedOut == true'>
-          <v-list-item-title>Login</v-list-item-title>
-    </router-link>
-      <a href='#' @click.prevent="logout()" v-if='loggedOut == false'>
-          <v-list-item-title>Logout</v-list-item-title>
-    </a>
+
+
+        <v-list-item link @click.prevent='kitchen()'>
+
+          <v-list-item-action>
+
+            <v-icon>restaurant</v-icon>
+
+          </v-list-item-action>
+
+
+
+          <v-list-item-content>
+
+            <v-list-item-title >Enter Kitchen</v-list-item-title>
+
+          </v-list-item-content>
+
+        </v-list-item>
+
+
+
+         <v-list-item link @click.prevent='vendors()'>
+
+          <v-list-item-action>
+
+            <v-icon>fastfood</v-icon>
+
+          </v-list-item-action>
+
+
+
+          <v-list-item-content>
+
+            <v-list-item-title >Find Vendors</v-list-item-title>
+
+          </v-list-item-content>
+
+        </v-list-item>
+
+         <v-list-item link @click.prevent='fav()'>
+
+          <v-list-item-action>
+
+            <v-icon>favorite</v-icon>
+
+          </v-list-item-action>
+
+
+
+          <v-list-item-content>
+
+            <v-list-item-title >My favorites</v-list-item-title>
+
+          </v-list-item-content>
+
+
+
+        </v-list-item>
+
+         <v-list-item link @click.prevent='about()'>
+
+          <v-list-item-action>
+
+            <v-icon>perm_device_information</v-icon>
+
+          </v-list-item-action>
+
+
+
+          <v-list-item-content>
+
+            <v-list-item-title >About</v-list-item-title>
+
+          </v-list-item-content>
+
+        </v-list-item>
+
+
+
+         <v-list-item link @click.prevent='share()'>
+
+          <v-list-item-action>
+
+            <v-icon>share</v-icon>
+
+          </v-list-item-action>
+
+
+
+          <v-list-item-content>
+
+            <v-list-item-title >Tell a Friend</v-list-item-title>
+
+          </v-list-item-content>
+
+        </v-list-item>
+
+
+         <v-list-item link @click.prevent='login()'>
+
+          <v-list-item-action>
+
+            <v-icon>dashboard</v-icon>
+
+          </v-list-item-action>
+
+
+
+          <v-list-item-content>
+
+            <v-list-item-title >Dashboard</v-list-item-title>
+
+          </v-list-item-content>
+
         </v-list-item>
 
       </v-list>
 
+    </v-navigation-drawer>
 
-      </v-sheet>
-    </v-bottom-sheet>
-  </div>
+
+
+
 </template>
-<!--sheet / menu-->
 
       <template>
         <v-snackbar
@@ -138,17 +218,38 @@ import {eventBus} from "../../app.js";
         timeout: 6000,
         status:'',
           sheet: false,
-      tiles: [
-        { img: 'restaurant', title: 'Get Food', link:'/kitchen' },
-        { img: 'fastfood', title: 'Vendors', link:'/vendor'},
-        { img: 'favorite', title: 'My Favorites', link:'/favorite'},
-        { img: 'perm_device_information', title: 'About Us', link:'/about'},
-        { img: 'share', title: 'Tell a Friend', link:'/share'},
-      ],
    }),
 
    methods:{
-          //meth to check Auth
+
+     home(){
+ this.$router.push({name: "index"});
+     },
+
+     kitchen(){
+ this.$router.push({name: "kitchen"});
+     },
+        
+     vendors(){
+ this.$router.push({name: "vendor"});
+     },
+     
+     fav(){
+ this.$router.push({name: "favorite"});
+     },
+     
+     about(){
+ this.$router.push({name: "about"});
+     },
+     
+     share(){
+ this.$router.push({name: "share"});
+     },
+
+     login(){
+ this.$router.push({name: "login"});
+     },
+       //meth to check Auth
                       isAuth(){
                     if(localStorage.getItem('userToken')){
                       this.loggedOut = false;

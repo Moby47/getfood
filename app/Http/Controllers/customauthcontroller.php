@@ -121,10 +121,10 @@ class customauthcontroller extends Controller
        try{
         Mail::to($user->email)->send(new Verify());  
      // welcome email
-        $when = now()->addMinutes(10);
+      /*  $when = now()->addMinutes(10);
             Mail::to($user->email)
             ->later($when, new Welcome());
-             
+           */  
           }
              catch(\Exception $e){
         return ['msg' => 0,'userToken'=>$token, 'userId'=>$user->id, 'userName'=> $user->name,'userMail'=>$user->email,
