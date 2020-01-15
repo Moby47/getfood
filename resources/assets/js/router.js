@@ -117,7 +117,7 @@ export default new Router({
             }
         },
         {
-            path: '/user-login',
+            path: '/user-signin',
             name: 'login',
             component: login,
              meta:{

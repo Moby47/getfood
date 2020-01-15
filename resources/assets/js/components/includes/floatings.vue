@@ -17,8 +17,8 @@
 			  >
 			<v-icon dark>remove_shopping_cart</v-icon>
 			</v-btn>
-      <!--tooltip-->
-           <b-tooltip show target="clearBtn">Clear table</b-tooltip>
+      <!--tooltip
+           <b-tooltip show target="clearBtn">Clear table</b-tooltip>-->
           <!--  floating left-->
             
             <a @click.prevent='checkout()'  v-if='toggle_cart == false' >	

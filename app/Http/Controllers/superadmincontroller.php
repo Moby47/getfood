@@ -70,7 +70,7 @@ class superadmincontroller extends Controller
                     'app_id' => "da6349ad-e18f-471b-8d57-30444a9d158f",
                     'include_player_ids' => $vendorPId,
                     'data' => array("foo" => "bar"),
-                    'url' => 'https://testing.henrymoby.tech/user-login',
+                    'url' => 'https://testing.henrymoby.tech/user-signin',
                     'contents' => $content,
                     'headings' => $headings,
                    'chrome_web_image' => 'https://testing.henrymoby.tech/images/push-images/approve.png',//512 or >

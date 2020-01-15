@@ -16,14 +16,13 @@
             right
             fixed
             @click.prevent='modal()'
-            id='sortBtn'
               >
             <v-icon dark>sort</v-icon>
             </v-btn>
-             <!--tooltip-->
+             <!--tooltip
              <b-tooltip :show.sync="show2" target="sortBtn" placement="bottom">
                 Filter by<strong> Vendor</strong>
-               </b-tooltip>
+               </b-tooltip>-->
                 <!--  floating right-->
                   </div>
 
@@ -45,10 +44,10 @@
                         >
                       <v-icon dark>refresh</v-icon>
                       </v-btn>
-                      <!--tooltip-->
+                      <!--tooltip
                       <b-tooltip :show.sync="show" target="refreshbBtn" placement="top">
                          Refresh <strong>Food List</strong>
-                        </b-tooltip>
+                        </b-tooltip>-->
 
                           <!--  floating left-->
                             </div>

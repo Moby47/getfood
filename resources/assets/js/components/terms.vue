@@ -1,11 +1,7 @@
 <template>
     <div class="container">
 
-         <!--
-        https://vuetifyjs.com/en/components/treeview
-        https://vuetifyjs.com/en/components/selects
-        tooltips
-        -->
+        
 
 <!--page content-->
 <div class="pages">

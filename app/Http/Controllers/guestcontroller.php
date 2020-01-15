@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\food;
 use App\favourite;
 use App\temp;
-use App\user;
+use App\User;
 use DB;
 
 //mail
@@ -235,7 +235,7 @@ public function vendorFood($vendor){
 
 
   public function vendorList(){
-    return $list = user::orderby('id','desc')->where('status','=',1)
+    return $list = User::orderby('id','desc')->where('status','=',1)
     ->select('id','name','address')->get()->toArray();
     /*
     return $fav = DB::table('foods')
