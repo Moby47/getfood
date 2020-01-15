@@ -132,10 +132,46 @@
         </div>
 
         <p class="info text-capitalize">
-            <v-icon>restaurant</v-icon> {{con.vendor_name}}
-             <br>
-             <v-icon class='icon-shift'>my_location</v-icon> {{con.vendorAddress}}
-           </p>
+             <template>
+  <div class="">
+    <v-chip
+      class="ma-2 mb-1 white"
+      small
+      outlined
+    >
+      <v-icon left >local_shipping</v-icon>
+      <span v-if='con.delivery == 1'>Yes</span> <span v-else>No</span>
+    </v-chip>
+  </div>
+</template>
+            <template>
+  <div class="">
+    <v-chip
+      class="ma-2 mb-1 white"
+      small
+      outlined
+    >
+      <v-icon left>local_dining</v-icon>
+     {{con.vendor_name}}
+    </v-chip>
+  </div>
+</template>
+              <template>
+  <div class="">
+    <v-chip
+      class="ma-2 mb-1 white"
+      small
+      outlined
+    >
+      <v-icon left>beenhere</v-icon>
+     {{con.vendorAddress}}
+    </v-chip>
+  </div>
+</template>
+            
+
+             </p>
+
 
         </v-card>
         </template>

@@ -170,6 +170,24 @@
 
         </v-list-item>
 
+         <v-list-item link @click.prevent='logout()' v-show='isAuth()'>
+
+          <v-list-item-action>
+
+            <v-icon>settings_power</v-icon>
+
+          </v-list-item-action>
+
+
+
+          <v-list-item-content>
+
+            <v-list-item-title >Logout</v-list-item-title>
+
+          </v-list-item-content>
+
+        </v-list-item>
+
       </v-list>
 
     </v-navigation-drawer>
@@ -289,6 +307,7 @@ import {eventBus} from "../../app.js";
               
                    this.isAuth();
                    this.loggedOut = true;
+                   this.sheet = false
                     NProgress.done();
                     this.$router.push({name: "index"});
                     },

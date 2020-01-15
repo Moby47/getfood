@@ -243,7 +243,7 @@ import paystack from 'vue-paystack';
                 addText:false,
                 data_load: true,
                 empty:47,
-                charges:'0.00',
+                charges:'00.00',
                 subtotal:0, //total food + 50
                 total:0, //amount in naira
                 ref:'',
@@ -489,7 +489,7 @@ fetch('https://onesignal.com/api/v1/notifications', {
                   .then(res => res.json())
                   .then(res=>{
                     this.subtotal = res
-                    var sum = this.subtotal + 50;
+                    var sum = this.subtotal;// + 50;
                     //amount in naira
                     this.total = sum;
                     //amount to kobo N500

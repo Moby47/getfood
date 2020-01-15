@@ -110,7 +110,7 @@
               pagination: [],
               overlay:false,
               empty:false,
-            
+             online:null
             }
         },
 
@@ -262,7 +262,7 @@ console.log('fetched from inDB :',this.content)
 
         mounted() {
               this.fetch()
-
+         var online = navigator.onLine;
               if(online){
                 //online
                 console.log('on')

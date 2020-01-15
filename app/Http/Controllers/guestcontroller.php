@@ -64,6 +64,7 @@ public function addFavorite(Request $request){
         $save->amt = $food->amt;
         $save->qty = $food->qty;
         $save->img = $food->img;
+        $save->delivery = $food->delivery;
         $save->vendor_name= $food->vendor_name;
         $save->vendorAddress= $food->vendorAddress;
         $save->save();
@@ -228,7 +229,7 @@ return 1;
 
 public function vendorFood($vendor){
   $food = food::orderby('id','desc')->where('vendor_name','=',$vendor)
-  ->select('id','amt','qty','title','img','vendor_id','vendor_name','vendorAddress')->paginate(5);
+  ->select('id','amt','qty','title','img','vendor_id','vendor_name','vendorAddress','delivery')->paginate(5);
 
   return foodres::collection($food);
   }

@@ -136,7 +136,7 @@
                   </v-list-item>
                           <v-list-item>
                               <v-list-item-content>
-                                <v-list-item-title>Time of Order: {{moment(newContent.created_at).fromNow()}}</v-list-item-title>
+                                <v-list-item-title>Time Created: {{moment(newContent.created_at).fromNow()}}</v-list-item-title>
                               </v-list-item-content>
                             </v-list-item>
                             <v-list-item>
@@ -205,7 +205,7 @@
          },
     
     del(newContent){
-        var dialog = confirm('Food Will Be Deleted');
+        var dialog = confirm('Food will we deleted');
         if(dialog){
            //del
            this.$bvModal.hide('modal')

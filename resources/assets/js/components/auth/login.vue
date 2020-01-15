@@ -151,7 +151,7 @@
                             this.snackbar = true
                             this.overlay = false
                           }else if(result == 2){
-                            this.text = 'Login failed. Invalid credentials';
+                            this.text = 'Login failed. Invalid credentials. Refresh and try again';
                             this.snackbar = true
                             this.overlay = false
                           }else{

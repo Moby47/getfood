@@ -97,12 +97,12 @@ import {eventBus} from "../../app.js";
 
             if(dialog){
                NProgress.start();
-      this.$toasted.show("Clearing Cart...");
+      this.$toasted.show("Clearing Table...");
                //clear cart
                var input = {'userId':localStorage.getItem('tempUserCartID')}
             axios.post('/clear-cart',input).then(res=>{
                 console.log('cart cleared')
-                this.$toasted.show("Cart Cleared!");  
+                this.$toasted.show("Table Cleared!");  
                  //clear cart count
                       localStorage.removeItem('cart')
 
