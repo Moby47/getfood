@@ -73,7 +73,7 @@ class customauthcontroller extends Controller
            session(['verifytoken' => $verifytoken]);
            //email to user
            try{
-            Mail::to($user->email)->send(new Verify());  
+           //Will be reged by super admin  Mail::to($user->email)->send(new Verify());  
          // welcome email
             $when = now()->addMinutes(10);
                 Mail::to($user->email)
