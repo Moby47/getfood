@@ -30,7 +30,8 @@
                         <div class="item_qnty_shop">
       <form  method="POST" action="#">
  <input :disabled='qty==1 || qty==0' type="button" value="-" class="qntyminusshop" field="quantity" @click.prevent='decre()'/>
-          <input type="text" name="quantity" :value="qty" class="qntyshop" />
+          <input type="text" name="quantity" :value="qty" class="qntyshop" v-show='qty'/>
+          <input type="text"  class="qntyshop" v-show='!qty'/>
  <input type="button" value="+" class="qntyplusshop" field="quantity" @click.prevent='incre()'/>
        </form>
           </div>
