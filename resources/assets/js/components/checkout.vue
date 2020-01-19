@@ -243,7 +243,7 @@ import paystack from 'vue-paystack';
                 addText:false,
                 data_load: true,
                 empty:47,
-                charges:'00.00',
+                charges:'0.00',
                 subtotal:0, //total food + 50
                 total:0, //amount in naira
                 ref:'',
