@@ -20,6 +20,7 @@ import manage from './components/vendor/manage.vue'
 import edit from './components/vendor/edit.vue'
 import favorites from './components/vendor/favorites.vue'
 import register from './components/auth/register.vue'
+import registered from './components/auth/registered.vue'
 import vendorRegister from './components/auth/vendorRegister.vue'
 import share from './components/share.vue'
 import kitchen from './components/kitchen.vue'
@@ -171,6 +172,14 @@ export default new Router({
             component: register,
              meta:{
                 authPage: true
+            }
+        },
+        {
+            path: '/registered',
+            name: 'registered',
+            component: registered,
+             meta:{
+               // authPage: true
             }
         },
         {

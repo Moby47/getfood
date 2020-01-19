@@ -168,7 +168,7 @@
           this.$toasted.show("Registered! Please check your Email for verification.");
  //set local var to toggle resend verfication button
  localStorage.setItem('resendVeri','resendVeri');
-    this.$router.push({name: "login"});
+    this.$router.push({name: "registered"});
   
 
         }else if(res.data.msg== 0){
@@ -177,7 +177,7 @@
           this.$toasted.show("Registered! But Verification failed. Please resend verification mail.");
    //set local var to toggle resend verfication button
  localStorage.setItem('resendVeri','resendVeri');
-    this.$router.push({name: "login"});
+    this.$router.push({name: "registered"});
    
    //
         }
