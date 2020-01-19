@@ -40,9 +40,9 @@
           
           </form>
           <div class="signup_bottom">
-            <p class=""><v-btn @click.prevent='vreg()' outlined color="#FFA500" >Register as Vendor</v-btn></p>
-            <p class="" v-show='reged'><v-btn @click.prevent='resendEmail()' outlined color="#FFA500">Resend Verification</v-btn></p>
-            <v-btn @click.prevent='login()' outlined color="#FFA500">Login</v-btn>         
+            <p class=""><v-btn @click.prevent='vreg()' small class='white' color="#FFA500" >Register as Vendor</v-btn></p>
+            <p class="" v-show='reged'><v-btn @click.prevent='resendEmail()' small class='white' color="#FFA500">Resend Verification</v-btn></p>
+            <v-btn @click.prevent='login()' small class='white' color="#FFA500">Login</v-btn>         
         </div>
 
        
