@@ -171,7 +171,7 @@
 
           <v-list-item-content>
 
-            <v-list-item-title >Tell a Friend</v-list-item-title>
+            <v-list-item-title >share</v-list-item-title>
 
           </v-list-item-content>
 

@@ -17,17 +17,18 @@
 
                    
              
-    <!--  <p>Sharing is caring..</p> --><h4 class='p-1'></h4>
-
-      <ul class="social_share wiggle">
-          <li class='wiggle'><whats-app  :url="url" title="Get Food" scale="3" ></whats-app> </li>
-          <li class='wiggle'> <email  :url="url" subject="Get Food" scale="3"></email>  </li>
-          <li class='wiggle'> <facebook  :url="url" scale="3"></facebook> </li>
-          <li class='wiggle'>  <twitter  :url="url" title="Get Food" scale="3"></twitter>  </li>
-          <li class='wiggle'> <linkedin  :url="url" scale="3"></linkedin>  </li>
-          <li class='wiggle'> <telegram  :url="url" scale="3"></telegram>  </li>
-          <li class='wiggle'> <pinterest  :url="url" scale="3"></pinterest>  </li>
-          <li class='wiggle'> <reddit  :url="url" scale="3"></reddit>  </li>
+     <p class='text-center'>Sharing is caring. Tell a friend about GetFoods.</p>
+   
+      <ul class="social_share">
+          <li><whats-app  :url="url" title="Get Food" scale="3" ></whats-app> </li>
+          <li> <email  :url="url" subject="Get Food" scale="3"></email>  </li>
+          <li> <facebook  :url="url" scale="3"></facebook> </li>
+          <li>  <twitter  :url="url" title="Get Food" scale="3"></twitter>  </li>
+          <li> <linkedin  :url="url" scale="3"></linkedin>  </li>
+          <li> <telegram  :url="url" scale="3"></telegram>  </li>
+          <li> <google  :url="url" scale="3"></google>  </li>
+          <li> <pinterest  :url="url" scale="3"></pinterest>  </li>
+          <li> <reddit  :url="url" scale="3"></reddit>  </li>
         </ul>
 
      
@@ -65,6 +66,7 @@
   Telegram,
   WhatsApp,
   Email,
+  Google
 } from "vue-socialmedia-share";
 //share icons
         export default {
@@ -93,6 +95,7 @@
     Telegram,
     WhatsApp,
     Email,
+    Google
   },
   //share icons
           data: () => ({
