@@ -109,7 +109,7 @@ return {
         timeout: 3000,
         qty:0,
         overlay:false,
-        loading_text:'Loading Table...',
+        loading_text:'Loading Cart...',
         subtotal:'',
          showSub:false,
          qtyCount:''
@@ -164,7 +164,7 @@ methods: {
 
           removeFromCart(con) {
         console.log(con.id)
-            var dialog =  confirm('You are about to delete '+con.name+' from table');
+            var dialog =  confirm('You are about to delete '+con.name+' from cart');
 
             if(dialog){
  NProgress.start();
@@ -173,7 +173,7 @@ methods: {
                .then(res=>{
                    if(res.data == 1){
                     
-               this.text='Food removed from Table!'
+               this.text='Food removed from cart!'
                        this.snackbar = true;
                         //update cart count
                         this.cartcount()

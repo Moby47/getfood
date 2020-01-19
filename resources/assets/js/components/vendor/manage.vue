@@ -405,7 +405,7 @@ var dbPromise = idb.open('getFoodsDB', 14, function (db) {
 
              var input = {'id':newContent.id}
 
-         this.text = 'Food queued for deletion from kitchen...'
+         this.text = 'Food queued for deletion from Food Menu...'
          this.snackbar = true
 
 

@@ -18,7 +18,7 @@
                       >
                   <nav aria-label="breadcrumb ">
                           <ol class="breadcrumb">
-                            <li class="breadcrumb-item active" aria-current="page">Add Food To Table</li>
+                            <li class="breadcrumb-item active" aria-current="page">Add Food To Cart</li>
                           </ol>
                         </nav>
 
@@ -156,7 +156,7 @@
     <v-overlay :value="overlay">
       <v-progress-circular indeterminate size="64"></v-progress-circular>
       <br>
-      Adding {{food}} to kitchen
+      Adding {{food}} to Food Menu
     </v-overlay>
   </div>
   </template>
@@ -283,7 +283,7 @@
     'vendorId': localStorage.getItem('userId'),'vendorName': localStorage.getItem('userName'),
     'img':'noimage.jpg','address': localStorage.getItem('vendorAddress'),'quantity': this.quantity}
 
-          this.text = 'Food queued for addition to kitchen...'
+          this.text = 'Food queued for addition to Food Menu...'
           this.snackbar = true
 
           setTimeout(func=>{

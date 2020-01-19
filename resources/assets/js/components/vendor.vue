@@ -85,7 +85,7 @@
                    
                   >
                   <div v-if='empty' class='text-center alert alert-primary'>
-                        Sorry. This Kitchen is Empty.
+                        Sorry. This Food Menu is Empty.
                              </div>   
 
                   </v-card>
@@ -239,7 +239,7 @@
               <v-overlay :value="overlay2">
                 <v-progress-circular indeterminate size="64"></v-progress-circular>
                 <br>
-          Checking {{selected}}'s kitchen...
+          Checking {{selected}}'s Food Menu...
               </v-overlay>
             </div>
             </template>

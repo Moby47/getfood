@@ -70,7 +70,7 @@
   border="left"
   prominent
 >
-Your Table is Empty. 
+Your Cart is Empty. 
 </v-alert>
 </div>
 </template>
@@ -193,7 +193,7 @@ import {eventBus} from "../app.js";
    metaInfo: {
        charset: 'utf-8' ,
        name: 'viewport', content: 'width=device-width, initial-scale=1',
-      title: ' GetFoods - My food table',
+      title: ' GetFoods - My food cart',
          meta: [{
            'name': 'description',
         'content': 'Online food reservation and ordering platform to maintain a reliable and efficient system',
@@ -212,7 +212,7 @@ import {eventBus} from "../app.js";
                 empty:47,
                 cartConCount:'',
                 toggle_cart:true,
-                loading_text:'Loading Table...',
+                loading_text:'Loading Cart...',
                 online:null,
                 snackbar: false,
                 text: '',
@@ -236,7 +236,7 @@ import {eventBus} from "../app.js";
                .then(res=>{
                    if(res.data == 1){
                     
-               this.text='Food removed from Table!'
+               this.text='Food removed from Cart!'
                        this.snackbar = true;
                         //update cart count
                        // this.cartcount()
@@ -280,7 +280,7 @@ import {eventBus} from "../app.js";
           
             fetch(){
               
-              this.loading_text = 'Setting table...'
+              this.loading_text = 'Setting cart...'
                   
               this.overlay = !this.overlay  
                   fetch('/cart-items'+'/'+ localStorage.getItem('tempUserCartID'))

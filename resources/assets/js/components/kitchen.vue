@@ -95,7 +95,7 @@
                           border="left"
                           prominent
                         >
-                       All Kitchens are Currently Empty.
+                       All Food Menus are Currently Empty.
                         </v-alert>
                       </div>
                     </template>
@@ -341,7 +341,7 @@
    metaInfo: {
        charset: 'utf-8' ,
        name: 'viewport', content: 'width=device-width, initial-scale=1',
-      title: ' GetFoods - Kitchen listings',
+      title: ' GetFoods - food menu listings',
          meta: [{
            'name': 'description',
         'content': 'Online food reservation and ordering platform to maintain a reliable and efficient system',
@@ -433,7 +433,7 @@
                       //offline data
                       this.readAllData('foods')
                       this.food_count = '-'
-                      this.$toasted.show("Kitchen Offline");
+                      this.$toasted.show("Food Menu is Offline");
                       this.offline = true
                     })
                     
@@ -486,7 +486,7 @@
                   if(page_url){
                   NProgress.start();
                   }else{
-                    this.awaitingList ="Cheking "+this.selected+"'s Kitchen. Please wait"
+                    this.awaitingList ="Cheking "+this.selected+"'s Food Menu. Please wait"
                   }
                   var   page_url = page_url || '/vendor-food/'+this.selected;
       
@@ -497,7 +497,7 @@
                    //to determine if obj is empty 
                           //console.log(res.data[0]);
                           if(res.data[0] == undefined){
-                            this.$toasted.show(this.selected +"'s Kitchen is Empty")
+                            this.$toasted.show(this.selected +"'s Food Menu is Empty")
                           }else{
                             this.content = res.data;
                             this.currentContent = false

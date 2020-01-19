@@ -377,7 +377,7 @@ self.addEventListener('sync', function(event) {
 
                   
           //read pId and push on completion #func takes title,body,url,tag
-  pushToUser('Background task completed','The selected food has been added to the table','https://testing.henrymoby.tech/table','add-to-cart') 
+  pushToUser('Background task completed','The selected food has been added to the cart','https://testing.henrymoby.tech/table','add-to-cart') 
 
                        //call clear
               clearAllData('sync-addToCart')
@@ -435,7 +435,7 @@ self.addEventListener('sync', function(event) {
                   console.log('Background Sync Completed');
 
                    //read pId and push on completion #func takes title,body,url
-pushToUser('Background task completed','The selected food has been removed from the table','https://testing.henrymoby.tech/table','remove-from-cart') 
+pushToUser('Background task completed','The selected food has been removed from the cart','https://testing.henrymoby.tech/table','remove-from-cart') 
 
                        //call clear
               clearAllData('sync-removeFromCart')
@@ -499,7 +499,7 @@ pushToUser('Background task completed','The selected food has been removed from 
                     console.log('Background Sync Completed');
   
                        //read pId and push on completion #func takes title,body,url,tag
-  pushToUser('Background task completed','The selected food has been added to the table','https://testing.henrymoby.tech/table','add-to-cart') 
+  pushToUser('Background task completed','The selected food has been added to the cart','https://testing.henrymoby.tech/table','add-to-cart') 
 
                          //call clear
                 clearAllData('sync-addToCart')
@@ -563,7 +563,7 @@ self.addEventListener('sync', function(event) {
                   console.log('Background Sync Completed');
 
                   //read pId and push on completion #func takes title,body,url
-  pushToUser('Background task completed','The selected food has been removed from the table','https://testing.henrymoby.tech/table','remove-from-cart') 
+  pushToUser('Background task completed','The selected food has been removed from the cart','https://testing.henrymoby.tech/table','remove-from-cart') 
 
                        //call clear
               clearAllData('sync-removeFromCart')
@@ -691,7 +691,7 @@ self.addEventListener('sync', function(event) {
                     console.log('Background Sync Completed');
   
                       //read pId and push on completion #func takes title,body,url
-  pushToUser('Background task completed','Your food has been added to kitchen','https://testing.henrymoby.tech/manage-food','add-to-kitchen') 
+  pushToUser('Background task completed','Your food has been added to food menu','https://testing.henrymoby.tech/manage-food','add-to-kitchen') 
 
                          //call clear
                 clearAllData('sync-addFood')
@@ -749,7 +749,7 @@ self.addEventListener('sync', function(event) {
                     console.log('Background Sync Completed');
   
                     //read pId and push on completion #func takes title,body,url
-  pushToUser('Background task completed','The selected food has been removed kitchen','https://testing.henrymoby.tech/manage-food','remove-from-kitchen') 
+  pushToUser('Background task completed','The selected food has been removed cart','https://testing.henrymoby.tech/manage-food','remove-from-kitchen') 
 
                          //call clear
                 clearAllData('sync-deleteFood')
