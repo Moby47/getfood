@@ -41,7 +41,7 @@
           </form>
           <div class="signup_bottom">
             <p class=""><v-btn @click.prevent='vreg()' outlined color="#FFA500" >Register as Vendor</v-btn></p>
-            <p class=""><v-btn @click.prevent='resendEmail()' outlined color="#FFA500">Resend Verification</v-btn></p>
+            <p class="" v-show='reged'><v-btn @click.prevent='resendEmail()' outlined color="#FFA500">Resend Verification</v-btn></p>
             <v-btn @click.prevent='login()' outlined color="#FFA500">Login</v-btn>         
         </div>
 
@@ -119,7 +119,8 @@
         text: '',
         timeout: 9000,
         valError:[],
-        online:null
+        online:null,
+        reged:false
             }
         },
 
@@ -165,8 +166,8 @@
           this.saveForOffline(res)
           this.overlay = false
           this.$toasted.show("Registered! Please check your Email for verification.");
- // this.text = 'Registered! Please check your Email for verification.';
-   //this.snackbar = true
+ //set local var to toggle resend verfication button
+ localStorage.setItem('resendVeri','resendVeri');
     this.$router.push({name: "login"});
   
 
@@ -174,8 +175,8 @@
           this.saveForOffline(res)
           this.overlay = false
           this.$toasted.show("Registered! But Verification failed. Please resend verification mail.");
-  //this.text = 'Registered! But Verification failed. Please resend verification mail.';
-  // this.snackbar = true
+   //set local var to toggle resend verfication button
+ localStorage.setItem('resendVeri','resendVeri');
     this.$router.push({name: "login"});
    
    //
@@ -305,6 +306,11 @@ console.log('dat',dat)
         },
 
         mounted(){
+
+          //check if reged, to determine resend veri btn visibility
+          if(localStorage.getItem('resendVeri')){
+            this.reged = true
+          }
           var online = navigator.onLine; 
             if(online){
                 //online

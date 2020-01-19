@@ -47,7 +47,7 @@
                       <v-btn @click.prevent='register()' outlined color="#FFA500">Sign Up</v-btn>   
                       </div>
 
-                <div class="my-2 text-center">
+                <div class="my-2 text-center"  v-show='reged'>
                     <v-btn @click.prevent='resendEmail()' outlined color="#FFA500">Resend Verification</v-btn>   
                     </div>
                   
@@ -123,7 +123,8 @@
         text: '',
         timeout: 10000,
         overlay:false,
-        online:null
+        online:null,
+        reged: false
             }
         },
 
@@ -208,7 +209,9 @@
                                   return;
                                   
                                 }else{
-
+                                   //clear verification local var
+                                   localStorage.removeItem('resendVeri')
+                                   
                                     if(status == 1){
                                   //admin
                                   //load add to store
@@ -414,6 +417,12 @@ this.overlay = false
         },
 
         mounted(){
+
+           //check if reged, to determine resend veri btn visibility
+           if(localStorage.getItem('resendVeri')){
+            this.reged = true
+          }
+
           var online = navigator.onLine; 
             if(online){
                 //online

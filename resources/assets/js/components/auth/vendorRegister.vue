@@ -34,7 +34,7 @@
            <input type="text" v-model='regAddress' name="Address"  v-validate='"required|max:30"' value="" class="form_input required" placeholder="Enter Address" />
            <p class='text-danger shake' v-show="errors.has('regForm.Address')">{{ errors.first('regForm.Address') }}</p>
 
-           <input type="text" v-model='regPhone' name="Phone"  v-validate='"required|max:11"' value="" class="form_input required" placeholder="Enter Phone Number" />
+           <input type="text" v-model='regPhone' name="Phone"  v-validate='"required|max:11|min:11"' value="" class="form_input required" placeholder="Enter Phone Number" />
            <p class='text-danger shake' v-show="errors.has('regForm.Phone')">{{ errors.first('regForm.Phone') }}</p>
            
            <input type="password" v-model='regPassword' v-validate='"required|min:6"' name="Password" value="" class="form_input required" placeholder="Enter Password" />
@@ -176,12 +176,13 @@
                         if(res.data.msg == 1){
                           this.saveForOffline(res)
                             this.overlay = false
-                             this.$toasted.show("Registered! Please check your Email for verification.");
+                             this.$toasted.show("Registered! Your Account will be verified soon.");
+                              
                               this.$router.push({name: "login"});
-                //  this.text = 'Registered! Please check your Email for verification.';
-                 //  this.snackbar = true
+               
                           
-                        }else if(res.data.msg== 0){
+                        }
+                        /*else if(res.data.msg== 0){
                           this.saveForOffline(res)
                           this.overlay = false
                           this.$toasted.show("Registered! But Verification failed. Please resend verification mail.");
@@ -190,7 +191,7 @@
                  //  this.snackbar = true
                    
                    //
-                        }
+                        }*/
                         })
                         .catch(error=>{
                           this.overlay = false

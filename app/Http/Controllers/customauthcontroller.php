@@ -70,7 +70,7 @@ class customauthcontroller extends Controller
             return ['result'=>'no token']; //invalid cre
         }
 
-           session(['verifytoken' => $verifytoken]);
+         /*  session(['verifytoken' => $verifytoken]);
            //email to user
            try{
            //Will be reged by super admin  Mail::to($user->email)->send(new Verify());  
@@ -85,7 +85,7 @@ class customauthcontroller extends Controller
             'userStatus'=>$user->status, 'vendorAddress'=>$user->address,'deliverySupport'=>$user->delivery];
              }
 
-            
+          */  
 
        //response
        return ['msg' => 1,'userToken'=>$token, 'userId'=>$user->id, 'userName'=> $user->name,'userMail'=>$user->email,
