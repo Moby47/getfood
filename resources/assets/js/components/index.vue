@@ -8,15 +8,15 @@
       
        <div id="pages_maincontent">
         
-        <menubar></menubar>
-        <br>
+      
 
         <template>
             <v-card
               class="mx-auto my-12"
               max-width="374"
             >
-
+            <menubar></menubar>
+            <br>
 <!--1-->
               <v-img
                 class='mx-auto fadeIn'
