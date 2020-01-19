@@ -35,8 +35,8 @@
               
                 </v-row>
           
-                <div>Reduce your waiting time, with our reliable and
-                    efficient restaurant ordering / reservation system.</div>
+                <div>GETFOODS makes it easier for you to order your favorite meals from your favorite vendors,
+                  in time.</div>
               </v-card-text>
           
               <v-card-actions>
@@ -70,7 +70,7 @@
                           class="mx-0"
                         >
                         </v-row>
-                        <div>Take advantage of the platform to make life easier.</div>
+                        <div>Take advantage of the GetFoods to make life easier. It is fast, safe and reliable.</div>
                       </v-card-text>
 
                     <v-card-actions>
