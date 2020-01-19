@@ -153,7 +153,7 @@
           </div>
           <div class="shop_item_details">
               <h4 class="text-capitalize">
-                {{con.unit}} <span v-show='con.unit'>of</span> {{con.title}}
+                {{con.unit}} <span v-show='con.unit'>of</span> {{con.title}} ({{con.qty}})
               </h4>
               <div class="shop_item_price"><strike>N</strike>{{con.amt}}</div>
 
