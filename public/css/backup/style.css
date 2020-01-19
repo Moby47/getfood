@@ -82,18 +82,15 @@ p{
 	line-height:20px;
 }
 blockquote{
-	background:#FFA500;
 	padding:20px;
 	margin:0 0 20px 0;
 	font-size:18px;
 	line-height:25px;
-	font-weight:300;
-	color:#fff;
+	font-weight:400;
 	border-bottom:5px #FFA500 solid;
 }
 blockquote span{
 	display:block;
-	color:#fff;
 	font-weight:700;
 	font-size:18px;
 	text-transform:uppercase;

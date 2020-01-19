@@ -37,7 +37,7 @@
                     max-width="344"
                    
                   >
-                <blockquote class='slideUp'>
+                <blockquote class='slideUp p-3 m-3'>
                   In order for restaurant owners to keep an organized system, maximize table turnover, and reduce waiting time for customers, 
                   GetFoods was built to maintain a reliable and efficient food reservation and ordering system.
                    <span><router-link to='/'>GETFOODS.COM</router-link></span>
@@ -54,8 +54,8 @@
                   >
 
   <span>
-                <h4 class='slideUp p-1'>Objectives:</h4>
-                <ul class="simple_list slideUp m-2">
+                <h4 class='slideUp p-3'>Objectives:</h4>
+                <ul class="simple_list slideUp m-2 p-3">
                 <li>Provide a reservation and ordering system for customers</li>
                 <li>Provide cost analysis / history on food expenditures for customers</li>
                 <li>Ease service process for both customers and food vendors</li>
