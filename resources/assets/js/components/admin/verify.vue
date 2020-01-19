@@ -157,7 +157,7 @@
                       </v-list-item>
                       <v-list-item>
                           <v-list-item-content>
-                            <v-list-item-title>Phone: {{newContent.phone}}</v-list-item-title>
+                            <v-list-item-title>Phone:  <a :href="`tel:`+newContent.phone"> {{newContent.phone}}</a></v-list-item-title>
                           </v-list-item-content>
                         </v-list-item>
                               <v-list-item>
