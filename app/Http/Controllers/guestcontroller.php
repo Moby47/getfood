@@ -236,7 +236,7 @@ public function vendorFood($vendor){
 
 
   public function vendorList(){
-    return $list = User::orderby('id','desc')->where('status','=',1)
+    return $list = User::orderby('id','desc')->where('status','=',1)->where('verification','=',1)
     ->select('id','name','address')->get()->toArray();
     /*
     return $fav = DB::table('foods')
