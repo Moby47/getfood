@@ -38,15 +38,19 @@
                    
                   >
                 <blockquote class='slideUp p-3 m-3'>
-                  In order for restaurant owners to keep an organized system, maximize table turnover, and reduce waiting time for customers, 
-                  GetFoods was built to maintain a reliable and efficient food reservation and ordering system.
-                   <span><router-link to='/'>GETFOODS.COM</router-link></span>
+                    <a href='https://www.getfoods.ng'>GETFOODS.ND</a> simplifies the process of food reservation and ordering for customers and restaurants. 
+                    It’s all about convenience and ease.
+                    <br><br>
+                    We offer our customers detailed meal order history including information on periodic expenses,
+                    while vendors benefit from beautifully presented customer information.
+                    <br><br>
+                    GETFOODS seeks to redefine great consumer experience one order at a time.
                 </blockquote>  
   
                   </v-card>
                 </template>
                 
-                    <template>
+<!--<template>
                   <v-card
                     class="mx-auto"
                     max-width="344"
@@ -56,16 +60,15 @@
   <span>
                 <h4 class='slideUp p-3'>Objectives:</h4>
                 <ul class="simple_list slideUp m-2 p-3">
-                <li>Provide a reservation and ordering system for customers</li>
-                <li>Provide cost analysis / history on food expenditures for customers</li>
+                <li>To provide a reservation and ordering system for customers</li>
+                <li>To provide cost analysis / history on food expenditures for customers</li>
                 <li>Ease service process for both customers and food vendors</li>
                 <li>Provide accurate record keeping for insights on best dishes, quantity and total income for food vendors</li>
-                <li>And more...</li>
-                </ul>
+               </ul>
 
   </span>
                   </v-card>
-                    </template>
+                    </template> -->
 
                     
                 
