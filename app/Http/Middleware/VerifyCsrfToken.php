@@ -31,6 +31,7 @@ class VerifyCsrfToken extends Middleware
         'https://testing.henrymoby.tech/player-id',
 
         'https://testing.henrymoby.tech/login-user',
-       'https://testing.henrymoby.tech/save-order',
+        'https://testing.henrymoby.tech/register-user',
+        'https://testing.henrymoby.tech/save-order',
     ];
 }
