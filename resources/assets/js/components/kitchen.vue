@@ -5,8 +5,7 @@
           <div>
             <!--floating right :disabled='offline'-->
             <v-btn 
-            
-           
+          
             fab 
             dark
             color="#fbc25b"
@@ -296,7 +295,14 @@
              
             <form>
                 <div class="mt-4 form-group p-1">
-                  <label>Select a Vendor</label>
+                    <v-chip
+                    class="m-2"
+                    color="orange"
+                    text-color="white"
+                  >
+                  Select a vendor to filter food menu
+                    <v-icon right>fastfood</v-icon>
+                  </v-chip>
       <select class="form-control"   v-model='selected'> 
       <option :value='ven.name' v-for='ven in vendor_list' v-bind:key='ven.id'>
       {{ven.name.slice(0, 25)}} - {{ven.address.slice(0, 25)}} 
