@@ -1,6 +1,6 @@
  <template >
  
-                    <v-footer padless class='mt-5'>
+                    <v-footer padless class='mt-3 footer-texts'>
                       <v-col
                       class="text-center"
                       cols="12"
