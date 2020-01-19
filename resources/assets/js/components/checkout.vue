@@ -21,9 +21,9 @@
                  <nav aria-label="breadcrumb ">
                          <ol class="breadcrumb">
                             <li class="breadcrumb-item"><router-link to='/'>Home</router-link></li>
-                            <li class="breadcrumb-item"><router-link to='/kitchen'>Kitchen</router-link></li>
-                           <li class="breadcrumb-item"><router-link to='/table'>Table</router-link></li>
-                           <li class="breadcrumb-item active" aria-current="page" >Eat</li>
+                            <li class="breadcrumb-item"><router-link to='/kitchen'>Food Menu</router-link></li>
+                           <li class="breadcrumb-item"><router-link to='/table'>Cart</router-link></li>
+                           <li class="breadcrumb-item active" aria-current="page" >Checkout</li>
                            
                          </ol>
                        </nav>
@@ -44,7 +44,7 @@
                 <!-- ********************************************** empty -->
                 <span v-show='empty < 1'>
                     <div  class='text-center alert alert-primary'>
-               Your Table is Empty. 
+               Your Cart is Empty. 
                        </div>
 
                        <div class="my-2 text-center">
@@ -126,7 +126,7 @@
                                 :close="close"
                                 :embed="false"
                             >
-                            <a href="#"  id='pay' class="text-center  button_full btyellow slideUp">EAT</a> 
+                            <a href="#"  id='pay' class="text-center  button_full btyellow slideUp">Checkout</a> 
                             </paystack>
                             
                         </template>

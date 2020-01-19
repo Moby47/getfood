@@ -19,7 +19,7 @@
                  <nav aria-label="breadcrumb ">
                          <ol class="breadcrumb">
                             <li class="breadcrumb-item"><router-link to='/'>Home</router-link></li>
-                           <li class="breadcrumb-item"><router-link to='/kitchen'>Kitchen</router-link></li>
+                           <li class="breadcrumb-item"><router-link to='/kitchen'>Food Menu</router-link></li>
                            <li class="breadcrumb-item active" aria-current="page">Selected Food ({{cartConCount}})</li>
                          </ol>
                        </nav>

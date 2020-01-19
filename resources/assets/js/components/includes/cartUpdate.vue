@@ -36,7 +36,7 @@
        </form>
           </div>
                 <span>
-    <v-btn   href="#"  id="addtocart" @click.prevent='update(con)' >UPDATE</v-btn>
+    <v-btn   href="#"  id="addtocart" @click.prevent='update(con)' >Update Item</v-btn>
                 </span>
                         </span>
                 </div>                     

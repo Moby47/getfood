@@ -24,7 +24,7 @@
                             <nav aria-label="breadcrumb ">
                                     <ol class="breadcrumb">
                           <li class="breadcrumb-item"><router-link to='/'>Home</router-link></li>
-                                      <li class="breadcrumb-item"><router-link to='/kitchen'>Kitchen</router-link></li>
+                                      <li class="breadcrumb-item"><router-link to='/kitchen'>Food Menu</router-link></li>
                                       <li class="breadcrumb-item active" aria-current="page" >Vendors</li>
                                       
                                     </ol>
@@ -199,7 +199,7 @@
         </div>
       
           <div class="my-2 text-center" v-if='content.length > 0'>
-          <v-btn @click.prevent='cart()' outlined color="#FFA500">GOTO TABLE</v-btn>   
+          <v-btn @click.prevent='cart()' outlined color="#FFA500">GOTO CART</v-btn>   
           </div>
 
    </span>

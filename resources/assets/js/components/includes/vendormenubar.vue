@@ -171,7 +171,7 @@
 
           <v-list-item-content>
 
-            <v-list-item-title >Enter Kitchen</v-list-item-title>
+            <v-list-item-title >Get Food</v-list-item-title>
 
           </v-list-item-content>
 

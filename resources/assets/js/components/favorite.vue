@@ -154,7 +154,7 @@
         
       <span v-if='!empty'><!---->
          <div class="my-2 text-center">
-          <v-btn @click.prevent='cart()' outlined color="#FFA500">GOTO TABLE</v-btn>   
+          <v-btn @click.prevent='cart()' outlined color="#FFA500">GOTO CART</v-btn>   
           </div>
          </span>
         </div>

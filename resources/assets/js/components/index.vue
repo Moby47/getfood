@@ -75,7 +75,7 @@
 
                     <v-card-actions>
                       <span class='text-center'>
-                      <v-btn    color="#FFA500" class='mr-1 white' @click.prevent='login()'>Get Started</v-btn>
+                      <v-btn    color="#FFA500" class='mr-1 white' @click.prevent='login()'>Login</v-btn>
                       </span>
                     </v-card-actions>
                  

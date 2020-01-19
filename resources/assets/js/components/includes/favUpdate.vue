@@ -32,14 +32,14 @@
             </div>
 
 <span v-if='online'>
-         <v-btn  href="#" v-if="isAdded" id="addtocart" @click.prevent='removeFromCart(con)' >CLEAR</v-btn>
+         <v-btn  href="#" v-if="isAdded" id="addtocart" @click.prevent='removeFromCart(con)' >Remove</v-btn>
 
-        <v-btn   href="#" v-if="!isAdded" id="addtocart" @click.prevent='addToCart(con)' >SELECT</v-btn>
+        <v-btn   href="#" v-if="!isAdded" id="addtocart" @click.prevent='addToCart(con)' >Add to cart</v-btn>
       </span>
 <span v-else>
-    <v-btn  href="#" v-if="isAdded" id="addtocart" @click.prevent='removeFromCartSync(con)'>CLEAR</v-btn>
+    <v-btn  href="#" v-if="isAdded" id="addtocart" @click.prevent='removeFromCartSync(con)'>Remove</v-btn>
 
-     <v-btn   href="#" v-if="!isAdded" id="addtocart" @click.prevent='addToCartSync(con)'>SELECT</v-btn>
+     <v-btn   href="#" v-if="!isAdded" id="addtocart" @click.prevent='addToCartSync(con)'>Add to cart</v-btn>
 </span>
 
         </span>
@@ -137,7 +137,7 @@ methods: {
     addToCart(con) {
      
                 this.overlay = !this.overlay
-                this.loading_text = 'Adding Food to Table..' 
+                this.loading_text = 'Adding Food to Cart..' 
                 this.isAdded = !this.isAdded
 
                 if(!localStorage.getItem('tempUserCartID')){
@@ -149,7 +149,7 @@ methods: {
                 axios.post('/add-fav-to-cart',input)
                         .then(res=>{
                             if(res.data == '200 ok'){
-                        this.text='Food added to Table!'
+                        this.text='Food added to Cart!'
                         this.snackbar = true;
                         //update cart count
                         this.cartcount()
@@ -170,7 +170,7 @@ methods: {
             removeFromCart(con) {
                
                 this.overlay = !this.overlay
-                this.loading_text = 'Removing Food From Table..' 
+                this.loading_text = 'Removing Food From Cart..' 
 
                 this.isAdded = !this.isAdded
                 var input = {'foodId':con.foodId, 'userId':localStorage.getItem('tempUserCartID')};
@@ -178,7 +178,7 @@ methods: {
                         .then(res=>{
                             if(res.data == 1){
                                 
-                        this.text='Food removed from Table!'
+                        this.text='Food removed from Cart!'
                         this.snackbar = true;
                         //update cart count
                         this.cartcount()
@@ -225,7 +225,7 @@ methods: {
 
             addToCartSync(con) {
                 this.overlay = !this.overlay
-                this.loading_text = 'Adding Food to Table..' 
+                this.loading_text = 'Adding Food to Cart..' 
                this.isAdded = !this.isAdded
 
               if ('serviceWorker' in navigator && 'SyncManager' in window) {
@@ -251,7 +251,7 @@ var input = {id: new Date().toISOString(),'foodId':con.foodId,
 
 //console.log('verify for id',con)
 
-                   this.text = 'Food queued for addition to table...'
+                   this.text = 'Food queued for addition to cart...'
           this.snackbar = true
 
     navigator.serviceWorker.ready
@@ -302,7 +302,7 @@ this.overlay = false
 
             removeFromCartSync(con) {
                 this.overlay = !this.overlay
-                this.loading_text = 'Removing Food From Table..' 
+                this.loading_text = 'Removing Food From Cart..' 
                this.isAdded = !this.isAdded
 
               if ('serviceWorker' in navigator && 'SyncManager' in window) {
@@ -326,7 +326,7 @@ this.overlay = false
 
               var input = {id: new Date().toISOString(),'foodId':con.foodId, 'userId':localStorage.getItem('tempUserCartID')};
 
-                   this.text = 'Food queued for removal from table...'
+                   this.text = 'Food queued for removal from cart...'
           this.snackbar = true
 
     navigator.serviceWorker.ready

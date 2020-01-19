@@ -67,7 +67,7 @@
 
           <v-list-item-content>
 
-            <v-list-item-title >Enter Kitchen</v-list-item-title>
+            <v-list-item-title >Get Food</v-list-item-title>
 
           </v-list-item-content>
 
@@ -152,11 +152,11 @@
         </v-list-item>
 
 
-         <v-list-item link @click.prevent='login()'>
+         <v-list-item link @click.prevent='login()' v-show='loggedOut'>
 
           <v-list-item-action>
 
-            <v-icon>dashboard</v-icon>
+            <v-icon>settings_power</v-icon>
 
           </v-list-item-action>
 
@@ -164,11 +164,12 @@
 
           <v-list-item-content>
 
-            <v-list-item-title >Dashboard</v-list-item-title>
+            <v-list-item-title >Login</v-list-item-title>
 
           </v-list-item-content>
 
         </v-list-item>
+
 
          <v-list-item link @click.prevent='logout()' v-show='isAuth()'>
 
