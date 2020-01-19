@@ -11,7 +11,7 @@
             color="#fbc25b"
             small
             relative
-            top
+            bottom
             right
             fixed
             @click.prevent='modal()'

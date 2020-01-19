@@ -29,7 +29,7 @@
 			 color="#fbc25b"
 			 small
 			 relative
-			 bottom
+			 top
 			 right
 			 fixed
 			   >
