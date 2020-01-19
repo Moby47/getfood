@@ -88,6 +88,22 @@
                                 <span class='text-danger shake' v-show="errors.has('quantity')">{{ errors.first('quantity') }}</span>
                                  </transition>
                           </div>
+
+                          <div class="form-group">
+
+                              <label class='text-center'>Select Unit</label>
+            <select class="form-control" v-model='selected'  name='Unit'> 
+                <option value=''> --None-- </option>
+      <option value='Plate'> Plate </option>
+       <option  value='Portion'> Portion </option>
+       <option  value='Pack'> Pack </option>
+       <option  value='Bottle'> Bottle </option>
+       <option  value='Basket'> Basket </option>
+          </select>
+                            <transition  name="fadeLeft">
+                                <span class='text-danger shake' v-show="errors.has('Unit')">{{ errors.first('Unit') }}</span>
+                                 </transition>
+                          </div>
             
              <div class="my-2 text-center slideUp" v-if='online'>
                 <v-btn @click.prevent='post()' outlined color="#FFA500">ADD</v-btn>   
@@ -169,7 +185,8 @@
             timeout: 3000,
 
             picture:'',
-            online:null
+            online:null,
+            selected:''
             }
         },
 
@@ -196,6 +213,7 @@
     formdata.append('phone', localStorage.getItem('phone'));
     formdata.append('vendorName', localStorage.getItem('userName'));
     formdata.append('img', this.picture);
+    formdata.append('unit', this.selected);
     formdata.append('address', localStorage.getItem('vendorAddress'));
     formdata.append('deliverySupport', localStorage.getItem('deliverySupport'));
 

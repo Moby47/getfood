@@ -21,6 +21,7 @@ class CreateFoodsTable extends Migration
             $table->string('phone');
             $table->string('title');
             $table->string('amt');
+            $table->string('unit')->nullable();
             $table->integer('qty');
             $table->integer('delivery')->nullable();
             $table->string('img');

@@ -96,6 +96,7 @@ class vendorcontroller extends Controller
                     $vendorId = $request->input('vendorId');
                     $vendorName = $request->input('vendorName');
                     $phone = $request->input('phone');
+                    $unit = $request->input('unit');
                     $deliverySupport = $request->input('deliverySupport');
                     //.................compression algorithm...............//
     
@@ -142,6 +143,7 @@ class vendorcontroller extends Controller
                   $save->title = $food;
                   $save->amt = $price;
                   $save->qty =$quantity;
+                  $save->unit =$unit;
                  $save->delivery =$deliverySupport;
                   $save->img = $filenametostore;
                   $save->vendorAddress = $request->input('address');
@@ -162,6 +164,7 @@ class vendorcontroller extends Controller
                   $price = $request->input('price');
                   $quantity = $request->input('quantity');
                   $id = $request->input('id');
+                  $unit = $request->input('unit');
 
                   //.................compression algorithm...............//
   
@@ -205,6 +208,7 @@ class vendorcontroller extends Controller
                 $save->title = $food;
                 $save->amt = $price;
                 $save->qty =$quantity;
+                $save->unit =$unit;
                 $save->img = $filenametostore;
 
                 $save->save();

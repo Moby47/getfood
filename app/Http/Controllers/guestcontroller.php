@@ -23,14 +23,14 @@ class guestcontroller extends Controller
     //method to get food list for customers to see and buy
     public function get_foods(){
 
-        $food = food::orderby('id','desc')->select('id','amt','qty','title','img','vendor_id',
+        $food = food::orderby('id','desc')->select('id','amt','qty','unit','title','img','vendor_id',
         'vendor_name','vendorAddress','delivery')->paginate(10);
         return foodres::collection($food);
     }
 
     public function offline_foods(){
 
-      $food = food::orderby('id','desc')->select('id','amt','qty','title','img','vendor_id',
+      $food = food::orderby('id','desc')->select('id','amt','qty','unit','title','img','vendor_id',
       'vendor_name','vendorAddress')->paginate(20);
       return foodres::collection($food);
   }
@@ -229,7 +229,7 @@ return 1;
 
 public function vendorFood($vendor){
   $food = food::orderby('id','desc')->where('vendor_name','=',$vendor)
-  ->select('id','amt','qty','title','img','vendor_id','vendor_name','vendorAddress','delivery')->paginate(5);
+  ->select('id','amt','qty','title','img','unit','vendor_id','vendor_name','vendorAddress','delivery')->paginate(5);
 
   return foodres::collection($food);
   }
