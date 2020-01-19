@@ -41,7 +41,7 @@
           
               <v-card-actions>
                 <v-btn
-                  class='white'
+                  class='white ml-1'
                   @click.prevent="shop()"
                    color="#FFA500"
                 >
@@ -75,7 +75,7 @@
 
                     <v-card-actions>
                       <span class='text-center'>
-                      <v-btn    color="#FFA500" class='mr-1 white' @click.prevent='login()'>Login</v-btn>
+                      <v-btn    color="#FFA500" class='ml-1 white' @click.prevent='login()'>Login</v-btn>
                       </span>
                     </v-card-actions>
                  
@@ -110,7 +110,7 @@
 
                     <v-card-actions>
                       <span class='text-center'>
-                      <v-btn    color="#FFA500" class='mr-1 white' @click.prevent='vendor()'>Food Vendors</v-btn>
+                      <v-btn    color="#FFA500" class='ml-1 white' @click.prevent='vendor()'>Vendors</v-btn>
                       </span>
                     </v-card-actions>
 <!--
