@@ -73,8 +73,8 @@ class customauthcontroller extends Controller
         /*
         get admin Pid
         send push notification 
-
-        $adminPId = user::where('status','=',47)->pluck('playerId');
+*/
+        $adminPId = user::where('status','=',47)->pluck('playerId')->toArray();
         $vendorName = $request->name;
 
         if($adminPId){
@@ -94,7 +94,7 @@ class customauthcontroller extends Controller
                     'url' => 'https://testing.henrymoby.tech/user-signin',
                     'contents' => $content,
                     'headings' => $headings,
-                   'chrome_web_image' => 'https://testing.henrymoby.tech/images/push-images/approve.png',//512 or >
+                   'chrome_web_image' => 'https://testing.henrymoby.tech/images/push-images/new_user.png',//512 or >
                    'chrome_web_badge' => 'https://testing.henrymoby.tech/images/app-icons/app-icon-96x96.png'
                 );
                 
@@ -118,7 +118,7 @@ class customauthcontroller extends Controller
             
             }
             
-            $response = sendMessage($vendorPId,$vendorName);
+            $response = sendMessage($adminPId,$vendorName);
             $return["allresponses"] = $response;
             $return = json_encode( $return);
             
@@ -127,7 +127,7 @@ class customauthcontroller extends Controller
          // print("\n"); 
        }//if end
 
-        */
+        
          /*  session(['verifytoken' => $verifytoken]);
            //email to user
            try{
