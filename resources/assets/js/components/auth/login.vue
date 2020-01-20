@@ -155,6 +155,10 @@
                             this.text = 'Login failed. Invalid credentials. Refresh and try again';
                             this.snackbar = true
                             this.overlay = false
+                          }else if(result == 3){
+                            this.text = 'Account declined. Please contact support';
+                            this.snackbar = true
+                            this.overlay = false
                           }else{
                             //start login 
                                localStorage.setItem('userToken',res.data.userToken);

@@ -33,6 +33,11 @@ class customauthcontroller extends Controller
             return ['result'=>'1']; //not verified
         }
 
+        if($user->verification == 2){
+            //acct declined
+            return ['result'=>'3']; //acct declined
+        }
+
         return ['userToken'=>$token, 'userId'=>$user->id, 'userName'=> $user->name,'userMail'=>$user->email,
         'userStatus'=>$user->status, 'vendorAddress'=>$user->address,'deliverySupport'=>$user->delivery,
     'phone'=>$user->phone]; //ok
