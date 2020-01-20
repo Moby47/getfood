@@ -33,5 +33,13 @@ class VerifyCsrfToken extends Middleware
         'https://testing.henrymoby.tech/login-user',
         'https://testing.henrymoby.tech/register-user',
         'https://testing.henrymoby.tech/save-order',
+
+        'https://testing.henrymoby.tech/clear-cart',
+        'https://testing.henrymoby.tech/push-to-vendors',
+        'https://testing.henrymoby.tech/clear-temp',
+        'https://testing.henrymoby.tech/approve-collection',
+        'https://testing.henrymoby.tech/approve-vendor',
+        'https://testing.henrymoby.tech/decline-vendor',
+
     ];
 }
