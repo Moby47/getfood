@@ -151,6 +151,23 @@
 
         </v-list-item>
 
+  <v-list-item link @click.prevent='login()' v-show='isAuth()'>
+
+          <v-list-item-action>
+
+            <v-icon>dashboard</v-icon>
+
+          </v-list-item-action>
+
+
+
+          <v-list-item-content>
+
+            <v-list-item-title >Dashboard</v-list-item-title>
+
+          </v-list-item-content>
+
+        </v-list-item>
 
          <v-list-item link @click.prevent='login()' v-show='loggedOut'>
 
