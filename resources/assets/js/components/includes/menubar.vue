@@ -181,7 +181,7 @@
 
           <v-list-item-content>
 
-            <v-list-item-title >Login</v-list-item-title>
+            <v-list-item-title >Sign in</v-list-item-title>
 
           </v-list-item-content>
 

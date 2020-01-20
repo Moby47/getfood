@@ -21,7 +21,7 @@
                   <img src="/images/icons/black/user.png" alt="" title="" />
                   <p>Your Account <br />Has Been successfully created.</p> 
                   <p><router-link to='/resend-email'>Resend email verification</router-link></p> 
-                  <p><router-link to='/user-signin'>Login</router-link></p>   
+                  <p><router-link to='/user-signin'>Sign in</router-link></p>   
                   <p><router-link to='/'>Go Home</router-link></p> 
                   </div>
             </div>
@@ -45,7 +45,7 @@
        metaInfo: {
            charset: 'utf-8' ,
            name: 'viewport', content: 'width=device-width, initial-scale=1',
-          title: 'Registeration Successful',
+          title: 'Sign up Successful',
              meta: [{
                'name': 'description',
             'content': 'Online food reservation and ordering platform to maintain a reliable and efficient system',

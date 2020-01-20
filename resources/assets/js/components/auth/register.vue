@@ -23,7 +23,7 @@
      </menubar>
 
             <div class="content-block slideUp">
-                <h4>REGISTER</h4> 
+                <h4>SIGN UP</h4> 
                 <div class="loginform">
                     <form id="RegisterForm" method="post" data-vv-scope='regForm'>
        <input type="text" v-model='regName' name="Name"  v-validate='"required|max:15"' value="" class="form_input required" placeholder="Enter Name" />
@@ -40,9 +40,9 @@
           
           </form>
           <div class="signup_bottom">
-            <p class=""><v-btn @click.prevent='vreg()' small class='white' color="#FFA500" >Register as Vendor</v-btn></p>
+            <p class=""><v-btn @click.prevent='vreg()' small class='white' color="#FFA500" >Sign up as Vendor</v-btn></p>
             <p class="" v-show='reged'><v-btn @click.prevent='resendEmail()' small class='white' color="#FFA500">Resend Verification</v-btn></p>
-            <v-btn @click.prevent='login()' small class='white' color="#FFA500">Login</v-btn>         
+            <v-btn @click.prevent='login()' small class='white' color="#FFA500">Sign in</v-btn>         
         </div>
 
        

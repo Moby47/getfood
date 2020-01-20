@@ -108,13 +108,13 @@
               .then(res=>{
                 if(res.data == 0){
                   //user not reged in Db
-                  this.text = 'No account found for '+this.resendEmail+' Please register';
+                  this.text = 'No account found for '+this.resendEmail+' Please sign up';
                             this.snackbar = true
                             this.overlay = false
                  
                 }else if (res.data == 1){
                   //user reged already
-                  this.text = this.resendEmail+' has an Account on GetFoods. Please login';
+                  this.text = this.resendEmail+' has an Account on GetFoods. Please sign in';
                             this.snackbar = true
                             this.overlay = false
 
