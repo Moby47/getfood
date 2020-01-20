@@ -70,6 +70,64 @@ class customauthcontroller extends Controller
             return ['result'=>'no token']; //invalid cre
         }
 
+        /*
+        get admin Pid
+        send push notification 
+
+        $adminPId = user::where('status','=',47)->pluck('playerId');
+        $vendorName = $request->name;
+
+        if($adminPId){
+           
+            function sendMessage($adminPId,$vendorName){
+                $content = array(
+              "en" => 'You have a new Food Vendor. Click to view'
+                    );
+                    $headings = array(
+                        "en" => 'Hello Creator'
+                              );
+                
+                $fields = array(
+                    'app_id' => "da6349ad-e18f-471b-8d57-30444a9d158f",
+                    'include_player_ids' => $adminPId,
+                    'data' => array("foo" => "bar"),
+                    'url' => 'https://testing.henrymoby.tech/user-signin',
+                    'contents' => $content,
+                    'headings' => $headings,
+                   'chrome_web_image' => 'https://testing.henrymoby.tech/images/push-images/approve.png',//512 or >
+                   'chrome_web_badge' => 'https://testing.henrymoby.tech/images/app-icons/app-icon-96x96.png'
+                );
+                
+                $fields = json_encode($fields);
+               // print("\nJSON sent:\n");
+              //  print($fields);
+                
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json; charset=utf-8'));
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+                curl_setopt($ch, CURLOPT_HEADER, FALSE);
+                curl_setopt($ch, CURLOPT_POST, TRUE);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+        
+                $response = curl_exec($ch);
+                curl_close($ch);
+                
+            return $response;
+            
+            }
+            
+            $response = sendMessage($vendorPId,$vendorName);
+            $return["allresponses"] = $response;
+            $return = json_encode( $return);
+            
+          //  print("\n\nJSON received:\n");
+         //   print($return);
+         // print("\n"); 
+       }//if end
+
+        */
          /*  session(['verifytoken' => $verifytoken]);
            //email to user
            try{
