@@ -70,7 +70,7 @@
                             </div>
                             <div class="form-group">
                                  <v-text-field
-                            v-model='quantity' name='quantity' v-validate='"required|max:2|numeric"'
+                            v-model='quantity' name='quantity' v-validate='"required|numeric"'
                               :counter="2"
                               label="Available Quantity"
                               required
@@ -350,6 +350,7 @@ this.overlay = false
                 this.id = con.con.id
                 this.quantity = con.con.qty
                 this.price = con.con.amt
+                 this.picture = con.con.img
                 this.selected = con.con.unit
 
                 var online = navigator.onLine; 

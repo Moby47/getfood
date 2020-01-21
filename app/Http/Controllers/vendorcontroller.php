@@ -18,7 +18,7 @@ class vendorcontroller extends Controller
 
       public  function vendor_food($userId){
         $food = food::orderby('id','desc')->where('vendor_id','=',$userId)
-        ->select('id','amt','qty','title','created_at')->paginate(7);
+        ->select('id','amt','img','qty','title','created_at')->paginate(7);
         return foodres::collection($food);
       }
 
@@ -198,7 +198,7 @@ class vendorcontroller extends Controller
          // return redirect('images')->with('success', "Image uploaded successfully.");
         // return response()->Json('success!');
       }else{
-          $filenametostore = 'noimage.jpg';
+          $filenametostore = $request->input('picture');;
       }
   
       //.................compression algorithm...............//
