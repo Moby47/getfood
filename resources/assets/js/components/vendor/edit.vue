@@ -51,7 +51,7 @@
                             <div class="form-group">
                                 <label for="">Food Image</label>
                                 <input type="file" class="form-control" name='picture'
-                                @change='ImageSelect' v-validate='"required|image"'>
+                                @change='ImageSelect' v-validate='"image"'>
       
                                 <transition  name="fadeLeft">
                                     <span class='text-danger shake' v-show="errors.has('picture')">{{ errors.first('picture') }}</span>
