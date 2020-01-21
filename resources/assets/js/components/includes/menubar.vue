@@ -55,6 +55,25 @@
 
 
 
+ <v-list-item link @click.prevent='login()' v-show='isAuth()'>
+
+          <v-list-item-action>
+
+            <v-icon>dashboard</v-icon>
+
+          </v-list-item-action>
+
+
+
+          <v-list-item-content>
+
+            <v-list-item-title >Dashboard</v-list-item-title>
+
+          </v-list-item-content>
+
+        </v-list-item>
+
+        
         <v-list-item link @click.prevent='kitchen()'>
 
           <v-list-item-action>
@@ -105,7 +124,7 @@
 
           <v-list-item-content>
 
-            <v-list-item-title >My favorites</v-list-item-title>
+            <v-list-item-title >My Favorites</v-list-item-title>
 
           </v-list-item-content>
 
@@ -151,23 +170,9 @@
 
         </v-list-item>
 
-  <v-list-item link @click.prevent='login()' v-show='isAuth()'>
-
-          <v-list-item-action>
-
-            <v-icon>dashboard</v-icon>
-
-          </v-list-item-action>
+ 
 
 
-
-          <v-list-item-content>
-
-            <v-list-item-title >Dashboard</v-list-item-title>
-
-          </v-list-item-content>
-
-        </v-list-item>
 
          <v-list-item link @click.prevent='login()' v-show='loggedOut'>
 
@@ -181,11 +186,31 @@
 
           <v-list-item-content>
 
-            <v-list-item-title >Sign in</v-list-item-title>
+            <v-list-item-title >Sign In</v-list-item-title>
 
           </v-list-item-content>
 
         </v-list-item>
+
+
+ <v-list-item link @click.prevent='signup()' v-show='loggedOut'>
+
+          <v-list-item-action>
+
+            <v-icon>person_add</v-icon>
+
+          </v-list-item-action>
+
+
+
+          <v-list-item-content>
+
+            <v-list-item-title > Sign Up</v-list-item-title>
+
+          </v-list-item-content>
+
+        </v-list-item>
+
 
 
          <v-list-item link @click.prevent='logout()' v-show='isAuth()'>
@@ -285,6 +310,11 @@ import {eventBus} from "../../app.js";
      login(){
  this.$router.push({name: "login"});
      },
+
+      signup(){
+ this.$router.push({name: "register"});
+     },
+
        //meth to check Auth
                       isAuth(){
                     if(localStorage.getItem('userToken')){
