@@ -198,7 +198,7 @@ class vendorcontroller extends Controller
          // return redirect('images')->with('success', "Image uploaded successfully.");
         // return response()->Json('success!');
       }else{
-          $filenametostore = $request->input('picture');;
+          $filenametostore = $request->input('img');;
       }
   
       //.................compression algorithm...............//

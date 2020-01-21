@@ -208,9 +208,9 @@
             axios.post('/edit-food',formdata).then(res=>{
                 if(res.data == 1){
             this.overlay=false
-    
-                    this.text='Food  Successfully'
-                            this.snackbar = true;
+     this.$toasted.show("Food updated successfully");
+                  //  this.text='Food  Successfully'
+                      //      this.snackbar = true;
                             this.$router.push({name: "manage"});
                 }else{
             this.overlay=false
