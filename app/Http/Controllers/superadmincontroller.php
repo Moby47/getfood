@@ -199,15 +199,15 @@ class superadmincontroller extends Controller
     public function due_vendors(){
       // writing this one.
 
-      /*code to show the exact money a vendor should be paid after 7days (1wk)
-      we pay them weekly, paystack pays us daily*/
+      /*code to show the exact money a vendor should be paid daily (1day)
+      we pay them daily, paystack pays us daily*/
         
-         $sevenDaysAgo = \carbon\carbon::now()->subDays(7);
+         $oneDaysAgo = \carbon\carbon::now()->subDays(1);
          $now = \carbon\carbon::now();
 
       return   $rec= \DB::table('orders')
           ->select('vendorName', \DB::raw('sum(total) as total'))
-          ->whereBetween('created_at',array($sevenDaysAgo,$now))
+          ->whereBetween('created_at',array($oneDaysAgo,$now))
           ->groupBy('vendorName')->paginate(8);
          
      }
