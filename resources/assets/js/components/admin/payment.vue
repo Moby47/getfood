@@ -17,7 +17,7 @@
                           >
                       <nav aria-label="breadcrumb ">
                               <ol class="breadcrumb">
-                                <li class="breadcrumb-item active" aria-current="page">Vendor's Payment This Week</li>
+                                <li class="breadcrumb-item active" aria-current="page">Vendor's Payment For Today</li>
                               </ol>
                             </nav>
                           </v-card>
