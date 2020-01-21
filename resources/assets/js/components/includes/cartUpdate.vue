@@ -106,7 +106,7 @@ data: function() {
 return {
     snackbar: false,
         text: '',
-        timeout: 3000,
+        timeout: 6000,
         qty:0,
         overlay:false,
         loading_text:'Loading Cart...',

@@ -37,7 +37,7 @@
 
                  
                     
-                    <form>
+                    <form id='addForm'>
                         <div class="form-group">
                          
                           <v-text-field
@@ -78,7 +78,7 @@
                         <div class="form-group">
 
                             <v-text-field
-                            v-model='quantity' name='quantity' v-validate='"required|max:2|numeric"'
+                            v-model='quantity' name='quantity' v-validate='"required|numeric"'
                               :counter="2"
                               label="Available Quantity"
                               required
@@ -141,11 +141,11 @@
       >
       {{ text }}
       <v-btn
-        color="blue"
+        color="orange"
         text
-        @click='snackbar=!snackbar'
+        @click.prevent='manage()'
       >
-        Close
+        Yes
       </v-btn>
       </v-snackbar>
       </template>
@@ -182,7 +182,7 @@
 
               snackbar: false,
             text: '',
-            timeout: 3000,
+            timeout: 7000,
 
             picture:'',
             online:null,
@@ -194,6 +194,10 @@
 
           ImageSelect(event){
           this.picture = event.target.files[0];
+        },
+
+        manage(){
+           this.$router.push({name: "manage"});
         },
 
           post(){
@@ -220,13 +224,14 @@
         axios.post('/new-food',formdata).then(res=>{
 			if(res.data == 1){
         this.overlay=false
-
-                this.text='Food  Successfully'
+ this.$toasted.show("Food added successfully");
+                this.text='Manage food menu?'
                         this.snackbar = true;
 
-				this.food = '';
-				this.quantity = '';
-				this.price = '';
+			//	this.food = '';
+		//		this.quantity = '';
+      //  this.price = '';
+        document.getElementById("addForm").reset();
 				
 				setTimeout(func=>{
 					this.errors.clear();
@@ -234,8 +239,9 @@
 				
 			}else{
         this.overlay=false
-        this.text='Operatiion Failed. Try again'
-                        this.snackbar = true;
+        this.$toasted.show("Operatiion Failed. Try refresh and again");
+      //  this.text='Operatiion Failed. Try again'
+                      //  this.snackbar = true;
 			}
 				
 			})
@@ -283,7 +289,8 @@
     'vendorId': localStorage.getItem('userId'),'vendorName': localStorage.getItem('userName'),
     'img':'noimage.jpg','address': localStorage.getItem('vendorAddress'),'quantity': this.quantity}
 
-          this.text = 'Food queued for addition to Food Menu...'
+this.$toasted.show("Food queued for addition to Food Menu...");
+          this.text = 'manage Food Menu?'
           this.snackbar = true
 
           setTimeout(func=>{

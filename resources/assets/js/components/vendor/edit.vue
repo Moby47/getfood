@@ -174,7 +174,7 @@
     
                   snackbar: false,
                 text: '',
-                timeout: 3000,
+                timeout: 6000,
     
                 picture:'',
                 online:null,

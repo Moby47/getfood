@@ -42,7 +42,7 @@ data(){
           return {
         snackbar: false,
         text: '',
-        timeout: 3000,
+        timeout: 6000,
         isFavorited: '',
     }
 },

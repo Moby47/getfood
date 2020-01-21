@@ -216,7 +216,7 @@ import {eventBus} from "../app.js";
                 online:null,
                 snackbar: false,
                 text: '',
-                timeout: 3000,
+                timeout: 6000,
 
                 qty:0,
                 subtotal:'',
