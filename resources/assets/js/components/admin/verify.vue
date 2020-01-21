@@ -275,6 +275,12 @@
               this.snackbar = true;
                 this.fetch()
                 this.refCon = false
+      }else if(res.data === 0){
+        this.overlay=false
+            this.text='Vendor Approved, though email failed'
+              this.snackbar = true;
+                this.fetch()
+                this.refCon = false
 			}else{
         this.overlay=false
         this.text='Operatiion Failed. Try again'
@@ -305,6 +311,12 @@
 			if(res.data === 1){
          this.overlay=false
             this.text='Vendor Rejected'
+              this.snackbar = true;
+                this.fetch()
+                this.refCon = false
+       }else if(res.data === 0){
+        this.overlay=false
+            this.text='Vendor Rejected, and email failed'
               this.snackbar = true;
                 this.fetch()
                 this.refCon = false

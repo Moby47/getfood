@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use App\order;
 use App\User;
 
+//mail
+use Mail;
+use App\Mail\Approve;
+use App\Mail\Decline;
 
 //resource
 use App\Http\Resources\userresource as userres;
@@ -106,7 +110,16 @@ class superadmincontroller extends Controller
          // print("\n"); 
        }//if end
            
+       //email vendor on approval
+       try{
+           $vendorEmail = user::where('id','=',$vendorId)->pluck('email')->first();
+         Mail::to($vendorEmail)->send(new Approve());  
+           }
+              catch(\Exception $e){
+         return 0;
+          }
           
+
             return 1;
        
     }
@@ -170,7 +183,15 @@ class superadmincontroller extends Controller
          //   print($return);
          // print("\n"); 
        }//if end
-           
+            //email vendor on approval
+       try{
+        $vendorEmail = user::where('id','=',$vendorId)->pluck('email')->first();
+      Mail::to($vendorEmail)->send(new Decline());  
+        }
+           catch(\Exception $e){
+      return 0;
+       }
+
            return 1;
 
     }

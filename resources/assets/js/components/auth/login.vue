@@ -48,7 +48,7 @@
                       </div>
 
                 <div class="my-2 text-center"  v-show='reged'>
-                    <v-btn @click.prevent='resendEmail()' small color="#FFA500">Resend Verification</v-btn>   
+                    <v-btn @click.prevent='resendEmail()' small class='white' color="#FFA500">Resend Verification</v-btn>   
                     </div>
                   
               </div>
