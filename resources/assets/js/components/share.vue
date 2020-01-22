@@ -105,8 +105,8 @@
           mounted(){
             //url issues
         
-         var url = String(window.location)
-         this.url = url
+        // var url = String(window.location)
+         this.url = 'https://www.getfoods.ng'
           },
         }
       
