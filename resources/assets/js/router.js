@@ -33,6 +33,7 @@ import terms from './components/terms.vue'
 import superadmindash from './components/admin/superadmindash.vue'
 import payment from './components/admin/payment.vue'
 import verify from './components/admin/verify.vue'
+import survey from './components/admin/survey.vue'
 
 export default new Router({
     mode: 'history',
@@ -219,7 +220,7 @@ export default new Router({
             name: 'superadmindash',
             component: superadmindash,
              meta:{
-              //  auth: true
+                auth: true
             }
         },
         {
@@ -234,6 +235,14 @@ export default new Router({
             path: '/verify-vendor',
             name: 'verify',
             component: verify,
+             meta:{
+              //  auth: true
+            }
+        },
+        {
+            path: '/customer-survey',
+            name: 'survey',
+            component: survey,
              meta:{
               //  auth: true
             }

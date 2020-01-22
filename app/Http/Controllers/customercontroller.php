@@ -120,7 +120,7 @@ foreach($tempFood as $t){
   }
 }
 
-/*
+
 //save info for review
 $user_email = user::where('id','=',$cusId)->pluck('email')->first();
 $ratingInfo = [];
@@ -135,7 +135,7 @@ foreach($temp as $i){
   ];
 }
 rating::insert($ratingInfo);
-*/
+
 
 //email  to check  orders
 try{

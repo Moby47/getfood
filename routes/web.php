@@ -54,6 +54,7 @@ Route::get('/vendor-list', 'guestcontroller@vendorList');
 Route::post('/player-id','guestcontroller@playerId');
 Route::get('/get-player-id/{id}','guestcontroller@getPlayerId');
 
+Route::get('/my-surveys', 'guestcontroller@my_surveys');
 //vendor list for home
 //Route::get('/vendor-list-home', 'guestcontroller@vendorListHome');
 
@@ -102,6 +103,8 @@ Route::get('/vendor-search/{vendorname}', 'superadmincontroller@vendor_search');
 Route::post('/approve-vendor', 'superadmincontroller@approve_vendor');
 Route::post('/decline-vendor', 'superadmincontroller@decline_vendor');
 Route::get('/due-vendors', 'superadmincontroller@due_vendors');
+Route::get('/get-surveys', 'superadmincontroller@get_surveys');
+Route::post('/send-survey', 'superadmincontroller@send_survey');
 
 
 //don't delete,fixes route bug
