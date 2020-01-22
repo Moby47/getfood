@@ -7,6 +7,7 @@ use App\order;
 use App\temp;
 use App\food;
 use App\User;
+use App\rating;
 use DB;
 
 //mail
@@ -118,6 +119,23 @@ foreach($tempFood as $t){
     $f->save();
   }
 }
+
+/*
+//save info for review
+$user_email = user::where('id','=',$cusId)->pluck('email')->first();
+$ratingInfo = [];
+foreach($temp as $i){
+  $ratingInfo[]= [
+  'vendor_id'=> $i->vendorId,
+  'vendor_name'=> $i->vendorName,
+  'user_email'=> $user_email,
+  'user_id'=> $cusId,
+  'created_at'=> \Carbon\Carbon::now(),
+  'updated_at'=> \Carbon\Carbon::now()
+  ];
+}
+rating::insert($ratingInfo);
+*/
 
 //email  to check  orders
 try{
