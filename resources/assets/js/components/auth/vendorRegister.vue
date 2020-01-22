@@ -25,13 +25,13 @@
                 <h4>SIGN UP</h4> 
                 <div class="loginform">
                     <form id="RegisterForm" method="post" data-vv-scope='regForm'>
-       <input type="text" v-model='regName' name="Name"  v-validate='"required|max:15"' value="" class="form_input required" placeholder="Enter Vendor Name" />
+       <input type="text" v-model='regName' name="Name"  v-validate='"required|max:35"' value="" class="form_input required" placeholder="Enter Vendor Name" />
            <p class='text-danger shake' v-show="errors.has('regForm.Name')">{{ errors.first('regForm.Name') }}</p>
         
            <input type="text" v-model='regEmail' v-validate='"required|email|max:100"' name="Email" value="" class="form_input required" placeholder="Enter Email" />
            <p class='text-danger shake' v-show="errors.has('regForm.Email')">{{ errors.first('regForm.Email') }}</p>
 
-           <input type="text" v-model='regAddress' name="Address"  v-validate='"required|max:30"' value="" class="form_input required" placeholder="Enter Address" />
+           <input type="text" v-model='regAddress' name="Address"  v-validate='"required|max:35"' value="" class="form_input required" placeholder="Enter Address" />
            <p class='text-danger shake' v-show="errors.has('regForm.Address')">{{ errors.first('regForm.Address') }}</p>
 
            <input type="text" v-model='regPhone' name="Phone"  v-validate='"required|max:11|min:11"' value="" class="form_input required" placeholder="Enter Phone Number" />

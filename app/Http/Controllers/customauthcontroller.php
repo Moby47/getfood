@@ -49,7 +49,7 @@ class customauthcontroller extends Controller
         //check if vendor reg
         if($request->input('vendor')){
             $this->validate($request, [
-                'name' => 'required|string|max:15',
+                'name' => 'required|string|max:36',
                 'email' => 'required|string|email|max:100|unique:users',
                 'password' => 'required|string|min:6', //|confirmed
                 'address' => 'required|string|max:255',
