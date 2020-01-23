@@ -15,6 +15,7 @@ class VerifyCsrfToken extends Middleware
         //allow url, no csrf token needed
         'https://testing.henrymoby.tech/add-favorite',
         'https://testing.henrymoby.tech/remove-favorite',
+        'https://testing.henrymoby.tech/rate-vendor',
 
         'https://testing.henrymoby.tech/add-to-cart',
         'https://testing.henrymoby.tech/remove-from-cart',

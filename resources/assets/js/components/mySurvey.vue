@@ -42,17 +42,12 @@
       Rate this vendor
       <v-spacer></v-spacer>
 
-      <star-rating
-      v-model="rating"
-      :star-size="30"
-      active-color="#ffb42e"
-      :border-width="3"
-      text-class="custom-text"
-      :glow="10" 
-      :rounded-corners="true" 
-      :star-points="[23,2, 14,17, 0,19, 10,34, 7,50, 23,43, 38,50, 36,34, 46,19, 31,17]"
+      <star
+      :userId=con.user_id
+      :vendor=con.vendor_name
+      :vendorId='con.vendor_id'
       >
-      </star-rating>
+      </star>
 
     </v-card-actions>
   </v-card>
@@ -110,7 +105,7 @@
     export default {
       data () {
       return {
-        rating: 0,
+        
         content:[],
         overlay:false,
         empty:null,
@@ -120,30 +115,7 @@
   },
 
   methods: {
-/*
-     send(con){
-      NProgress.start()
-      var input = {'userId':con.user_id, 'userEmail':con.user_email}
-  axios.post('/send-survey',input)
-  .then(res=>{
-      if(res.data === 1){
-          this.$toasted.show("Survey sent to "+con.user_email);
-          NProgress.done()
-          this.fetch()
-      }else if(res.data == 0){
-          this.$toasted.show("Survey to "+con.user_email+' failed. Please refresh and retry');
-          NProgress.done()
-      }else{
-          this.$toasted.show('Any error occured, please refresh and try again');
-          NProgress.done()
-      }
-  })
-  .catch(error =>{
-      console.log(error) 
-      NProgress.done()   
-     })
-   },
-*/
+
 done(){
   var prompt = confirm('Leave a comment?')
                 if(prompt){

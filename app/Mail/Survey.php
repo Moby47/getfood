@@ -32,7 +32,7 @@ class Survey extends Mailable
          $userId = session('userId');
  
         return $this->from('henryonyemaobi@gmail.com','GETFOODS')
-         ->subject('GETFOODS vendor survey')
+         ->subject('Vendor survey')
          ->markdown('email.surveyMarkdown')
          ->with('userId',$userId);
     }

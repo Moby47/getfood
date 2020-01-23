@@ -303,4 +303,13 @@ public function get_my_surveys($userId){
   return ratingres::collection($surveys);
     }
 
+
+
+    public function rateVendor(Request $request){
+     
+      return 1;
+        }
+
+
+
 }

@@ -53,6 +53,7 @@ Route::get('/vendor-list', 'guestcontroller@vendorList');
 
 Route::post('/player-id','guestcontroller@playerId');
 Route::get('/get-player-id/{id}','guestcontroller@getPlayerId');
+Route::post('/rate-vendor','guestcontroller@rateVendor');
 
 //Route::get('/my-surveys/{userId}', 'guestcontroller@my_surveys');
 Route::get('/get-my-surveys/{userId}', 'guestcontroller@get_my_surveys');

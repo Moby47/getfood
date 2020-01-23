@@ -166,6 +166,7 @@ Vue.component('floatings', require('./components/includes/floatings.vue'));
 Vue.component('back', require('./components/includes/back.vue'));
 Vue.component('foot', require('./components/includes/foot.vue'));
 Vue.component('confirmBtn', require('./components/includes/confirmBtn.vue'));
+Vue.component('star', require('./components/includes/star.vue'));
 
 const vuetifyOptions = { }
 Vue.use(Vuetify)
