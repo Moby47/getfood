@@ -9,19 +9,26 @@ import about from './components/about.vue'
 import table from './components/table.vue'
 import checkout from './components/checkout.vue'
 import favorite from './components/favorite.vue'
+
 import resendEmail from './components/auth/resendEmail.vue'
+
 import vendordashboard from './components/vendor/vendordashboard.vue'
+
 import userdashboard from './components/customer/userdashboard.vue'
 import filterorders from './components/customer/filterorders.vue'
+
 import login from './components/auth/login.vue'
+
 import add from './components/vendor/add.vue'
 import orders from './components/vendor/orders.vue'
 import manage from './components/vendor/manage.vue'
 import edit from './components/vendor/edit.vue'
 import favorites from './components/vendor/favorites.vue'
+
 import register from './components/auth/register.vue'
 import registered from './components/auth/registered.vue'
 import vendorRegister from './components/auth/vendorRegister.vue'
+
 import share from './components/share.vue'
 import kitchen from './components/kitchen.vue'
 import success from './components/success.vue'
@@ -29,6 +36,7 @@ import notfound from './components/notfound.vue'
 import vendor from './components/vendor.vue'
 import privacy from './components/privacy.vue'
 import terms from './components/terms.vue'
+import mySurvey from './components/mySurvey.vue'
 
 import superadmindash from './components/admin/superadmindash.vue'
 import payment from './components/admin/payment.vue'
@@ -58,6 +66,14 @@ export default new Router({
             path: '/table',
             name: 'table',
             component: table,
+             meta:{
+              //  auth: true
+            }
+        },
+        {
+            path: '/my-survey/:userId',
+            name: 'mySurvey',
+            component: mySurvey,
              meta:{
               //  auth: true
             }
