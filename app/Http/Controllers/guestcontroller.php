@@ -7,6 +7,7 @@ use App\food;
 use App\favourite;
 use App\temp;
 use App\User;
+use App\rating;
 use DB;
 
 //mail
@@ -17,6 +18,7 @@ use App\Mail\CusOrders;
 //resource
 use App\Http\Resources\foodresource as foodres;
 use App\Http\Resources\favresource as favres;
+use App\Http\Resources\ratingresource as ratingres;
 
 class guestcontroller extends Controller
 {
@@ -292,5 +294,13 @@ return $id;
 
   }
 */
+
+
+public function get_my_surveys($userId){
+  $surveys = rating::select('user_id','vendor_name','vendor_id')
+  ->where('sent','=',1)
+  ->groupBy('user_id','vendor_name','vendor_id')->get();
+  return ratingres::collection($surveys);
+    }
 
 }

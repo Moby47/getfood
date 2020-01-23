@@ -217,9 +217,10 @@ class superadmincontroller extends Controller
 
 
      public function get_surveys(){
-     $surveys = rating::select('user_id','user_email','vendor_name','vendor_id','created_at')
+     
+     $surveys = rating::select('user_id','user_email')
      ->where('sent','=',0)
-     ->groupBy('user_id','user_email','vendor_name','vendor_id','created_at')->paginate(5);
+     ->groupBy('user_id','user_email')->paginate(5);
      return ratingres::collection($surveys);
      }
 
@@ -244,7 +245,7 @@ class superadmincontroller extends Controller
       if($pId){
             function sendMessage($pId, $userId){
                 $content = array(
-              "en" => 'Please click to rate vendors on GetFoods'
+              "en" => 'Please click to rate vendor on GetFoods'
                     );
                     $headings = array(
                         "en" => 'Hello'
@@ -254,7 +255,7 @@ class superadmincontroller extends Controller
                     'app_id' => "da6349ad-e18f-471b-8d57-30444a9d158f",
                     'include_player_ids' => $pId,
                     'data' => array("foo" => "bar"),
-                    'url' => 'http://localhost:8000/my-surveys/'.$userId,
+                    'url' => 'http://localhost:8000/my-survey/'.$userId,
                     'contents' => $content,
                     'headings' => $headings,
                     'chrome_web_image' => 'http://localhost:8000/images/push-images/survey.png',//512 or >

@@ -41,15 +41,13 @@
                           <thead class='thead-dark'>
                              <tr>
                           <th>Customer</th>
-                          <th>Purchase Time</th>
-                          <th>Vendor</th>
+                        <!--  <th>Vendor</th>-->
                           <th>Action</th>
                         </tr>
                         </thead>
                             <tr class='animated tdFadeIn' v-for='con in content' v-bind:key='con.id'>
                          <td><a :href="`mailto:`+con.user_email">Email Customer</a></td>
-                          <td>{{con.created_at}}</td>
-                          <td>{{con.vendor_name}}</td>
+                        <!-- <td>{{con.vendor_name}}</td>--> 
                           <td @click.prevent='send(con)'><v-icon>send</v-icon></td>
                                                 </tr>
                                             

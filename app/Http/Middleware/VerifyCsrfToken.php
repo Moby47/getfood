@@ -40,6 +40,7 @@ class VerifyCsrfToken extends Middleware
         'https://testing.henrymoby.tech/approve-collection',
         'https://testing.henrymoby.tech/approve-vendor',
         'https://testing.henrymoby.tech/decline-vendor',
+        'https://testing.henrymoby.tech/send-survey',
 
     ];
 }
