@@ -217,7 +217,9 @@ class superadmincontroller extends Controller
 
 
      public function get_surveys(){
-     $surveys = rating::select('user_id','user_email','vendor_name','vendor_id','created_at')->paginate(5);
+     $surveys = rating::select('user_id','user_email','vendor_name','vendor_id','created_at')
+     ->where('sent','=',0)
+     ->groupBy('user_id','user_email','vendor_name','vendor_id','created_at')->paginate(5);
      return ratingres::collection($surveys);
      }
 
@@ -290,7 +292,7 @@ class superadmincontroller extends Controller
 
 
       //turn sent for all ratings for that user to 1
-       
+       $sent = rating::where('user_id','=',$userId)->update(['sent' => 1]);
       
       return 1;
       }
