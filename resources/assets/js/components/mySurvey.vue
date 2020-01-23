@@ -13,7 +13,7 @@
     <div class="page_single layout_fullwidth_padding bounceIn">
   <v-card
     class="mx-auto elevation-20"
-    color="#ffb42e"
+    color="grey"
     style="max-width: 400px;"
   >
     <v-row justify="space-between">
@@ -40,24 +40,24 @@
       Rate this vendor
       <v-spacer></v-spacer>
 
-      <span class="grey--text text--lighten-2 caption mr-2">
-        ({{ rating }})
-      </span>
-
-      <v-rating
-        v-model="rating"
-        background-color="white"
-        color="yellow accent-4"
-        dense
-        half-increments
-        hover
-        size="18"
-      ></v-rating>
+      <star-rating
+      v-model="rating"
+      :star-size="30"
+      active-color="#ffb42e"
+      :border-width="3"
+      text-class="custom-text"
+      :glow="10" 
+      :rounded-corners="true" 
+      :star-points="[23,2, 14,17, 0,19, 10,34, 7,50, 23,43, 38,50, 36,34, 46,19, 31,17]"
+      >
+      </star-rating>
 
     </v-card-actions>
   </v-card>
 
-
+ <div class="my-2 text-center" >
+          <v-btn  outlined color="#FFA500">FINISH</v-btn>   
+          </div>
 
     </div>
      </div>
@@ -71,12 +71,23 @@
 </template>
 
 
-
+<style>
+.custom-text {
+  font-weight: bold;
+  font-size: 1.1em;
+  border: 1px solid #cfcfcf;
+  padding-left: 7px;
+  padding-right: 7px;
+  border-radius: 5px;
+  color: #999;
+  background: #fff;
+}
+</style>
 
 <script>
   export default {
     data: () => ({
-      rating: 4.3,
+      rating: 0,
     }),
   }
 </script>

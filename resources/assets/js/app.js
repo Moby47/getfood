@@ -52,6 +52,10 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Meta from 'vue-meta'
 Vue.use(Meta)
 
+
+//rating star
+import StarRating from 'vue-star-rating'
+Vue.component('star-rating', StarRating);
 /* ------------------------- Imports -------------------- */
 
 

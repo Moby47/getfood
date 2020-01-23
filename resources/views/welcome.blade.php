@@ -30,6 +30,7 @@
   <meta name="msapplication-TileColor" content="#fff">
   <meta name="theme-color" content="#ffb42e">
 
+
 <title>GetFoods</title>
 
     <!-- CSRF Token -->
