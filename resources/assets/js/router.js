@@ -9,6 +9,7 @@ import about from './components/about.vue'
 import table from './components/table.vue'
 import checkout from './components/checkout.vue'
 import favorite from './components/favorite.vue'
+import vendorReview from './components/vendorReview.vue'
 
 import resendEmail from './components/auth/resendEmail.vue'
 
@@ -74,6 +75,14 @@ export default new Router({
             path: '/my-survey/:userId',
             name: 'mySurvey',
             component: mySurvey,
+             meta:{
+              //  auth: true
+            }
+        },
+        {
+            path: '/vendor-reviews/:vendorName?',
+            name: 'vendorReview',
+            component: vendorReview,
              meta:{
               //  auth: true
             }
