@@ -45,7 +45,7 @@
       <star
       :userId=con.user_id
       :vendor=con.vendor_name
-      :vendorId='con.vendor_id'
+      :vendorId=con.vendor_id
       >
       </star>
 

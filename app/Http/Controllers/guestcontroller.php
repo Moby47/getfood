@@ -298,7 +298,7 @@ return $id;
 
 public function get_my_surveys($userId){
   $surveys = rating::select('user_id','vendor_name','vendor_id')
-  ->where('sent','=',1)
+  ->where('sent','=',1)->where('user_id','=',$userId)
   ->groupBy('user_id','vendor_name','vendor_id')->get();
   return ratingres::collection($surveys);
     }
@@ -307,6 +307,14 @@ public function get_my_surveys($userId){
 
     public function rateVendor(Request $request){
      
+      //update rating and raters fields in user table
+
+      //get vendor Pid for push
+
+      //push to vendor. link - /vendor-reviews
+
+      //clear that vendor review for user from rev table
+      
       return 1;
         }
 

@@ -40,8 +40,6 @@
                   
                  rate(vendorId,vendor){
 
-                    console.log(vendorId,vendor)
-
                     NProgress.start()
       var input = {'vendorId':vendorId}
   axios.post('/rate-vendor',input)

@@ -20,6 +20,7 @@ class CreateRatingsTable extends Migration
             $table->integer('vendor_id');
             $table->string('vendor_name');
             $table->integer('sent')->default(0);
+            $table->integer('rated')->default(0);
             $table->timestamps();
         });
     }
