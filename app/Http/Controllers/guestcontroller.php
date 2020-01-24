@@ -298,7 +298,7 @@ return $id;
 
 public function get_my_surveys($userId){
   $surveys = rating::select('user_id','vendor_name','vendor_id')
-  ->where('sent','=',1)->where('user_id','=',$userId)
+  ->where('sent','=',1)->where('user_id','=',$userId)->where('rated','=',0)
   ->groupBy('user_id','vendor_name','vendor_id')->get();
   return ratingres::collection($surveys);
     }
@@ -306,15 +306,72 @@ public function get_my_surveys($userId){
 
 
     public function rateVendor(Request $request){
-     
+      $vendorId = $request->input('vendorId');
+      $rating = $request->input('rating');
+      $vendorName = $request->input('vendorName');
+
       //update rating and raters fields in user table
+      $vendor = user::findorfail($vendorId);
+      $vendor->rating = $vendor->rating + $rating;
+      $vendor->rater = $vendor->rater + 1;
+      $vendor->save();
 
-      //get vendor Pid for push
+      //get vendor Pid and push link - /vendor-reviews
+      $vendorPId = $vendor->playerId;
+      if($vendorPId){
+           
+        function sendMessage($vendorPId,$vendorName){
+            $content = array(
+          "en" => 'A customer just rated your services. Click to view'
+                );
+                $headings = array(
+                    "en" => 'Hello '.$vendorName
+                          );
+            
+            $fields = array(
+                'app_id' => "da6349ad-e18f-471b-8d57-30444a9d158f",
+                'include_player_ids' => array($vendorPId),
+                'data' => array("foo" => "bar"),
+                'url' => 'https://testing.henrymoby.tech/vendor-reviews/'.$vendorName,
+                'contents' => $content,
+                'headings' => $headings,
+                'chrome_web_image' => 'https://testing.henrymoby.tech/images/push-images/survey.png',//512 or >
+                'chrome_web_badge' => 'https://testing.henrymoby.tech/images/app-icons/app-icon-96x96.png'
+            );
+            
+            $fields = json_encode($fields);
+           // print("\nJSON sent:\n");
+          //  print($fields);
+            
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json; charset=utf-8'));
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+            curl_setopt($ch, CURLOPT_HEADER, FALSE);
+            curl_setopt($ch, CURLOPT_POST, TRUE);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+    
+            $response = curl_exec($ch);
+            curl_close($ch);
+            
+        return $response;
+        
+        }
+        
+        $response = sendMessage($vendorPId,$vendorName);
+        $return["allresponses"] = $response;
+        $return = json_encode( $return);
+        
+      //  print("\n\nJSON received:\n");
+     //   print($return);
+     // print("\n"); 
+   }//if end
 
-      //push to vendor. link - /vendor-reviews
 
-      //clear that vendor review for user from rev table
+      //mark as rated, rather than delete
       
+
       return 1;
         }
 

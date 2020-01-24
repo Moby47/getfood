@@ -41,14 +41,14 @@
                  rate(vendorId,vendor){
 
                     NProgress.start()
-      var input = {'vendorId':vendorId}
+      var input = {'vendorId':vendorId, 'rating':this.rating, 'vendorName':vendor}
   axios.post('/rate-vendor',input)
   .then(res=>{
       if(res.data === 1){
           this.$toasted.show(vendor +" was rated "+ this.rating +' star(s)');
           NProgress.done()
           //hide this comp
-            this.star = false
+           // this.star = false
       }else{
           this.$toasted.show('Any error occured, please refresh and try again');
           NProgress.done()
