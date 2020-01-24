@@ -1,7 +1,9 @@
 <template>
 
     <div>
-
+<span class="grey--text text--lighten-2 caption mr-2" v-show='star == false'>
+        (Awarded {{ rating }} star(s))
+      </span>
             <star-rating
             @rating-selected ="rate(vendorId,vendor)"
             v-show='star'
@@ -48,7 +50,7 @@
           this.$toasted.show(vendor +" was rated "+ this.rating +' star(s)');
           NProgress.done()
           //hide this comp
-           // this.star = false
+            this.star = false
       }else{
           this.$toasted.show('Any error occured, please refresh and try again');
           NProgress.done()

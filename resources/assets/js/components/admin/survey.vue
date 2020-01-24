@@ -62,7 +62,7 @@
     
                         </span>
       <div v-if='empty' class='text-center alert alert-info'>
-        No surveys to send
+        No surveys(s) to send
         </div>
     
                       </main>

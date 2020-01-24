@@ -16,7 +16,7 @@
   <v-card
     class="mx-auto elevation-20 mb-3"
     color="grey"
-    style="max-width: 400px;"
+    style="max-width: 375px;"
     v-for='con in content' v-bind:key='con.id'
   >
     <v-row justify="space-between">

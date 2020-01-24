@@ -370,8 +370,11 @@ public function get_my_surveys($userId){
 
 
       //mark as rated, rather than delete
+      $id = rating::where('vendor_id','=',$vendorId)->pluck('id')->first();
+      $mark = rating::findorfail($id);
+      $mark->rated = 1;
+      $mark->save();
       
-
       return 1;
         }
 
