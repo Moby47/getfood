@@ -182,9 +182,7 @@
                     //off loader
                   //  this.data_load = false;
                   //    this.wait = true;
-                      setTimeout(func=>{
-                          this.fetch();
-                      },3000)
+                     this.$toasted.show("Failed to fetch surveys. Please refresh page.");
                       this.overlay = false
                       NProgress.done();        
                     }) 

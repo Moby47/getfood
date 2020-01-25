@@ -234,14 +234,18 @@
                   this.vendor_count = res.meta.total;
                   NProgress.done();
                 })
+               /*  .then(res=>{
+                  setTimeout(func=>{
+                    this.clearAndWriteData('vendors',this.content)
+                      },2000)
+                })*/ //check down dwn
                 .catch(error =>{
                   console.log(error)
                     //off loader
                     this.overlay = false
-                     //   this.errMessage ='An error occured. Relaoding food list...'
-                      setTimeout(func=>{
-                          this.fetch();
-                      },2000)
+                     //offline data
+                     this.readVendorData('vendors')
+
                       NProgress.done();        
                     })
                     
@@ -276,21 +280,138 @@
                  // this.wait = false;
                 //  this.overlay = !this.overlay
                 })
-                 .then(res=>{
+              /*   .then(res=>{
                   setTimeout(func=>{
-                //    this.clearAndWriteData('vendor-list',this.vendor_list)
+                    this.clearAndWriteData('vendor-list',this.vendor_list)
                       },4000)
-                })
+                })*/
                 .catch(error =>{
                     //off loader
                     NProgress.done();
                  //   this.overlay = false
                   //  this.wait = true;
                       //offline data
-                  //    this.readAllVendorList('vendor-list')     
+                      this.readAllVendorList('vendor-list')     
                     })
               },
 
+
+              
+              clearAndWriteData(table,data){
+              console.log('connecting to db')
+                var dbPromise = idb.open('getFoodsDB', 14, function (db) {
+              if (!db.objectStoreNames.contains(table)) {
+                db.createObjectStore(table, {keyPath: 'id'});
+              }
+            });
+              console.log('db ready to be cleared..')
+              console.log('data to save:',data)
+          //clear data func
+          function clearAllData(table){
+              return dbPromise
+              .then(function(db){
+                  var tx = db.transaction(table, 'readwrite');
+                  var store = tx.objectStore(table);
+                  store.clear();
+                  return tx.complete
+                })
+                .catch(error =>{
+                    console.log(error)    
+                    })
+              }
+              //call clear
+              clearAllData(table)
+              .then(function(){
+                //gives a promise 
+                console.log('cleared')
+
+                for(var key in data){
+              console.log('data keys:',key)
+                dbPromise
+            .then(function(db) {
+              var tx = db.transaction(table, 'readwrite');
+              var store = tx.objectStore(table);
+              for(var i in data){
+              store.put(data[i]);
+              }
+              console.log('saved to indexdb')
+              return tx.complete;
+            })
+            .catch(error =>{
+                    console.log(error)    
+                    })
+            }
+              })
+              .catch(error =>{
+                    console.log(error)    
+                    })
+            }, //end of clear and write data
+
+
+
+
+    readAllVendorList(table){
+                var dbPromise = idb.open('getFoodsDB', 14, function (db) {
+              if (!db.objectStoreNames.contains(table)) {
+                db.createObjectStore(table, {keyPath: 'id'});
+              }
+            });
+             //read
+            function readAllData(table){
+            return dbPromise.then(function(db){
+              var tx = db.transaction(table, 'readonly');
+              var store = tx.objectStore(table);
+              return store.getAll();
+            })
+            .catch(error =>{
+                    console.log(error)    
+                    })
+          }
+          //call fetch indexeddb
+          readAllData(table)
+          .then(res=>{
+            //gives a promise to use data
+            this.vendor_list = res
+           // this.awaitingList = 'Offline mode'
+            console.log('fetched from inDB venlist:',this.vendor_list)
+          })
+          .catch(error =>{
+                    console.log(error)    
+                    })
+},
+
+
+
+
+readVendorData(table){
+                var dbPromise = idb.open('getFoodsDB', 14, function (db) {
+              if (!db.objectStoreNames.contains(table)) {
+                db.createObjectStore(table, {keyPath: 'id'});
+              }
+            });
+             //read
+            function readAllData(table){
+            return dbPromise.then(function(db){
+              var tx = db.transaction(table, 'readonly');
+              var store = tx.objectStore(table);
+              return store.getAll();
+            })
+            .catch(error =>{
+                    console.log(error)    
+                    })
+          }
+          //call fetch indexeddb
+          readAllData(table)
+          .then(res=>{
+            //gives a promise to use data
+            this.content= res
+           // this.awaitingList = 'Offline mode'
+            console.log('fetched from inDB vendors:',this.content)
+          })
+          .catch(error =>{
+                    console.log(error)    
+                    })
+},
 
               comment(con){
                 this.$router.push({name:'comments', params:{'name':con.name, 'phone':con.phone, 'id':con.id, 'score':con.score, 'address':con.address}});
@@ -302,27 +423,40 @@
   mounted() {
 
     this.vendorName = this.$route.params.vendorName;
-    this.vendors()
-    this.fetch()
-  
+    var online = navigator.onLine; 
+            if(online){
+                //online
+                console.log('on')
+                this.fetch()
+              this.vendors()
+            }else{
+                //offline
+                console.log('off')
+                this.readAllVendorList('vendor-list')
+                this.readVendorData('vendors')
+                      this.$toasted.show("Offline mode...");
+            }
+
+             setTimeout(func=>{
+                    this.clearAndWriteData('vendor-list',this.vendor_list)
+                      },7000)
+                      setTimeout(func=>{
+                        this.clearAndWriteData('vendors',this.content)
+                      },5000)
   },
 
   watch : {
             vendorName(a,b){
              if(a){
               console.log('selected vendor')
-              this.fetch()
-             /*
                   var online = navigator.onLine; 
             if(!online){
                 //not online
                 console.log('not online')
                 this.$toasted.show("This feature is currently unsupported in offline mode...");
-                this.wait = false
                 return;
             }
               this.fetch()
-              */
              }
           },
       },

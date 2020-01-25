@@ -151,9 +151,7 @@ done(){
         NProgress.done();
       })
       .catch(error =>{
-            setTimeout(func=>{
-                this.fetch();
-            },3000)
+        this.$toasted.show("Failed to fetch surveys. Please refresh page.");
             this.overlay = false
             NProgress.done();        
           }) 
