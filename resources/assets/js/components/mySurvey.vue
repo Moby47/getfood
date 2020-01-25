@@ -30,7 +30,7 @@
       <v-img
         class="shrink ma-2"
         contain
-        height="120px"
+        height="115px"
         src="/images/vendor.png"
         alt='Getfoods - online food ordering and reservation system'
           :lazy-src="`/images/black-spinner.gif`"

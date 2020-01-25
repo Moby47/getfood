@@ -16,6 +16,7 @@ use App\Mail\CusOrders;
 
 
 //resource
+use App\Http\Resources\userresource as userres;
 use App\Http\Resources\foodresource as foodres;
 use App\Http\Resources\favresource as favres;
 use App\Http\Resources\ratingresource as ratingres;
@@ -310,10 +311,18 @@ public function get_my_surveys($userId){
       $rating = $request->input('rating');
       $vendorName = $request->input('vendorName');
 
-      //update rating and raters fields in user table
+      //update rating  in user table
       $vendor = user::findorfail($vendorId);
       $vendor->rating = $vendor->rating + $rating;
-      $vendor->rater = $vendor->rater + 1;
+      $vendor->raters = $vendor->raters + 1;
+      $vendor->save();
+
+      $sumRating = $vendor->rating;
+      $frq = $vendor->raters;
+
+      $result = $sumRating / $frq;
+
+      $vendor->score = $result;
       $vendor->save();
 
       //get vendor Pid and push link - /vendor-reviews
@@ -370,14 +379,34 @@ public function get_my_surveys($userId){
 
 
       //mark as rated, rather than delete
-      $id = rating::where('vendor_id','=',$vendorId)->pluck('id')->first();
-      $mark = rating::findorfail($id);
-      $mark->rated = 1;
-      $mark->save();
-      
+      //turn rated for all vendor ratings for that user to 1
+      $rated = rating::where('vendor_id','=',$vendorId )->update(['rated' => 1]);
       return 1;
         }
 
+
+        public function vendors($vendorName){
+
+          if($vendorName == 'all'){
+            $vendors = user::where('verification','=',1)->where('status','=',1)
+          ->select('id','score','name','email','address','phone')
+          ->paginate(7);
+          return userres::collection($vendors);
+          }
+          
+          if($vendorName != 'undefined'){
+            $vendors = user::where('verification','=',1)->where('status','=',1)
+            ->where('name','=',$vendorName)
+           ->select('id','score','name','email','address','phone')
+           ->paginate(7);
+           return userres::collection($vendors);
+          }
+
+          $vendors = user::where('verification','=',1)->where('status','=',1)
+          ->select('id','score','name','email','address','phone')
+          ->paginate(7);
+          return userres::collection($vendors);
+          }
 
 
 }

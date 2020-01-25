@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->integer('rating')->nullable();
             $table->integer('raters')->nullable();
+            $table->integer('score')->nullable();
             $table->string('address')->nullable();
             $table->string('phone')->nullable();
             $table->boolean('verification')->default(0);

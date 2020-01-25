@@ -50,6 +50,7 @@ Route::get('/sumtotal/{id}', 'cartcontroller@sumtotal');
 Route::get('/get-fav/{id}', 'guestcontroller@getFavorites');
 Route::get('/vendor-food/{vendor}', 'guestcontroller@vendorFood');
 Route::get('/vendor-list', 'guestcontroller@vendorList');
+Route::get('/get-vendors/{vendorName}', 'guestcontroller@vendors');
 
 Route::post('/player-id','guestcontroller@playerId');
 Route::get('/get-player-id/{id}','guestcontroller@getPlayerId');
