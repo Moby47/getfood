@@ -135,6 +135,23 @@
 
 
 
+        <v-list-item link @click.prevent='reviews()'>
+
+            <v-list-item-action>
+  
+              <v-icon>stars</v-icon>
+  
+            </v-list-item-action>
+  
+            <v-list-item-content>
+  
+              <v-list-item-title > Vendor Reviews</v-list-item-title>
+  
+            </v-list-item-content>
+  
+          </v-list-item>
+
+
          <v-list-item link @click.prevent='fav()'>
 
           <v-list-item-action>
@@ -245,6 +262,10 @@
    }),
 
    methods:{
+     
+    reviews(){
+ this.$router.push({name: "vendorReview"});
+     },
         home(){
  this.$router.push({name: "index"});
      },

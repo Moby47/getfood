@@ -14,9 +14,9 @@
         <br>
     <div class="page_single layout_fullwidth_padding bounceIn">
   <v-card
-    class="mx-auto elevation-20 mb-3"
+    class="mx-auto elevation-20 mb-2"
     color="grey"
-    style="max-width: 375px;"
+    style="max-width: 374px;"
     v-for='con in content' v-bind:key='con.id'
   >
     <v-row justify="space-between">

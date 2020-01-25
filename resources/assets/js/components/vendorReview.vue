@@ -53,9 +53,9 @@
 
   <template>
   <v-card
-    class="mx-auto elevation-20 mb-3"
+    class="mx-auto elevation-20 mb-2"
     color="grey"
-    style="max-width: 375px;"
+    style="max-width: 374px;"
     v-for='con in content' v-bind:key='con.id'
   >
     <v-row justify="space-between">
@@ -100,22 +100,19 @@
         <v-expansion-panels>
           <v-expansion-panel
           >
-            <v-expansion-panel-header>
               <v-btn
+              class='text-center m-1'
               color="#ffb42e"
               outlined
               text
               >
-              View comments
+              Comments
             </v-btn>
-          </v-expansion-panel-header>
-
-            <v-expansion-panel-content>
-              Lorem ipsum dolor sit amet, consectetur a
-              dipiscing elit, sed do eiusmod tempor incididunt ut labore et
-               dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exe
-               rcitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            </v-expansion-panel-content>
+              <!--  <vue-disqus shortname="getfoods"
+                :identifier="`con.id`"
+    :url="`http://localhost:8000/vendor-reviews/`">
+               </vue-disqus>
+<!--+con.name.replace(/[.,/*%' '?!()@]/g,'-')-->
           </v-expansion-panel>
         </v-expansion-panels>
       </template>

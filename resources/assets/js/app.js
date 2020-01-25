@@ -56,6 +56,11 @@ Vue.use(Meta)
 //rating star
 import StarRating from 'vue-star-rating'
 Vue.component('star-rating', StarRating);
+
+
+import VueDisqus from 'vue-disqus'
+
+Vue.use(VueDisqus)
 /* ------------------------- Imports -------------------- */
 
 
