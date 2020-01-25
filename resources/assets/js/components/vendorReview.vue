@@ -105,14 +105,10 @@
               color="#ffb42e"
               outlined
               text
+              @click.prevent="comment(con)"
               >
               Comments
             </v-btn>
-              <!--  <vue-disqus shortname="getfoods"
-                :identifier="`con.id`"
-    :url="`http://localhost:8000/vendor-reviews/`">
-               </vue-disqus>
-<!--+con.name.replace(/[.,/*%' '?!()@]/g,'-')-->
           </v-expansion-panel>
         </v-expansion-panels>
       </template>
@@ -296,6 +292,9 @@
               },
 
 
+              comment(con){
+                this.$router.push({name:'comments', params:{'name':con.name, 'phone':con.phone, 'id':con.id, 'score':con.score, 'address':con.address}});
+              },
 
 
   },

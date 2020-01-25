@@ -10,6 +10,7 @@ import table from './components/table.vue'
 import checkout from './components/checkout.vue'
 import favorite from './components/favorite.vue'
 import vendorReview from './components/vendorReview.vue'
+import comments from './components/comments.vue'
 
 import resendEmail from './components/auth/resendEmail.vue'
 
@@ -83,6 +84,14 @@ export default new Router({
             path: '/vendor-reviews/:vendorName?',
             name: 'vendorReview',
             component: vendorReview,
+             meta:{
+              //  auth: true
+            }
+        },
+        {
+            path: '/comments/:con?',
+            name: 'comments',
+            component: comments,
              meta:{
               //  auth: true
             }
