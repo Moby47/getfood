@@ -73,7 +73,102 @@
 
         </v-list-item>
 
-        
+
+<!--customer only-->
+        <v-list-item link @click.prevent='filter()' v-if="isAuth()" v-show='identity == "user"'>
+
+            <v-list-item-action>
+  
+              <v-icon>filter_list</v-icon>
+  
+            </v-list-item-action>
+            <v-list-item-content>
+  
+              <v-list-item-title >Filter Orders</v-list-item-title>
+  
+            </v-list-item-content>
+  
+          </v-list-item>
+
+
+          <!--Vendor only-->
+          <v-list-item link @click.prevent='add()' v-if="isAuth()" v-show='identity == "vendor"'>
+
+              <v-list-item-action>
+    
+                <v-icon>add_shopping_cart</v-icon>
+    
+              </v-list-item-action>
+    
+    
+    
+              <v-list-item-content>
+    
+                <v-list-item-title >Add Food</v-list-item-title>
+    
+              </v-list-item-content>
+    
+            </v-list-item>
+    
+    
+    
+             <v-list-item link @click.prevent='manage()'  v-if="isAuth()" v-show='identity == "vendor"'>
+    
+              <v-list-item-action>
+    
+                <v-icon>edit</v-icon>
+    
+              </v-list-item-action>
+    
+    
+    
+              <v-list-item-content>
+    
+                <v-list-item-title >Manage Food</v-list-item-title>
+    
+              </v-list-item-content>
+    
+            </v-list-item>
+    
+            
+             <v-list-item link @click.prevent='orders()' v-if="isAuth()" v-show='identity == "vendor"'>
+    
+              <v-list-item-action>
+    
+                <v-icon>shopping_cart</v-icon>
+    
+              </v-list-item-action>
+    
+    
+    
+              <v-list-item-content>
+    
+                <v-list-item-title >Customer Orders</v-list-item-title>
+    
+              </v-list-item-content>
+    
+            </v-list-item>
+    
+    
+    
+       <v-list-item link @click.prevent='vendorFav()' v-if="isAuth()" v-show='identity == "vendor"'>
+    
+              <v-list-item-action>
+    
+                <v-icon>favorite</v-icon>
+    
+              </v-list-item-action>
+    
+              <v-list-item-content>
+    
+                <v-list-item-title >Customer Favorites</v-list-item-title>
+    
+              </v-list-item-content>
+    
+            </v-list-item>
+
+
+
         <v-list-item link @click.prevent='kitchen()'>
 
           <v-list-item-action>
@@ -299,7 +394,8 @@ import {eventBus} from "../../app.js";
         text: '',
         timeout: 6000,
         status:'',
-          sheet: false,
+        identity: '',
+        sheet: false
    }),
 
    methods:{
@@ -338,7 +434,25 @@ import {eventBus} from "../../app.js";
       signup(){
  this.$router.push({name: "register"});
      },
+     add(){
+ this.$router.push({name: "add"});
+     },
+     
+     vendorFav(){
+ this.$router.push({name: "favorites"});
+     },
+     
+     manage(){
+ this.$router.push({name: "edit"});
+     },
+     
+     orders(){
+ this.$router.push({name: "orders"});
+     },
 
+     filter(){
+ this.$router.push({name: "filterorders"});
+     },
        //meth to check Auth
                       isAuth(){
                     if(localStorage.getItem('userToken')){
@@ -387,6 +501,19 @@ import {eventBus} from "../../app.js";
 
    mounted(){
      this.isAuth()
+
+     //toggle view
+     if(localStorage.removeItem('userStatus')){
+       if(localStorage.removeItem('userStatus') == 0){
+         this.identity = 'user'
+         console.log('user')
+       }else if(localStorage.removeItem('userStatus') == 1){
+         this.identity = 'vendor'
+         console.log('admin')
+       }
+     }
+
+
    },
  }
 
