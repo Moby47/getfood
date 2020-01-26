@@ -18,7 +18,8 @@
                       <v-icon>menu</v-icon>
                     </v-btn>
 
-                    <v-toolbar-title>GetFoods</v-toolbar-title>
+       <v-toolbar-title><img class="logo-size" src='/images/logo/inline/getfoods-trans-1001x1001.png'
+         alt='getfoods food reservation and ordering in nigeria'/></v-toolbar-title>
 
                   <!--  <v-spacer></v-spacer>
 
