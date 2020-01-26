@@ -14,6 +14,23 @@
         <br>
     <div class="page_single layout_fullwidth_padding bounceIn">
         <!---->
+
+        <template>
+            <v-card
+              class="mx-auto"
+              max-width="344"
+             
+            >
+                      <nav aria-label="breadcrumb ">
+                              <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><router-link to='/'>Home</router-link></li>
+                               <li class="breadcrumb-item active" aria-current="page" >Vendor Reviews</li>
+                                
+                              </ol>
+                            </nav>
+                            
+                  </v-card>
+ </template>
    
         <template>
             <v-card

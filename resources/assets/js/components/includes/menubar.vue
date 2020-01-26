@@ -17,6 +17,15 @@
                     <v-btn icon  @click="sheet = !sheet">
                       <v-icon>menu</v-icon>
                     </v-btn>
+
+                    <v-toolbar-title>GetFoods</v-toolbar-title>
+
+                  <!--  <v-spacer></v-spacer>
+
+                    <v-btn icon >
+                        <v-icon>search</v-icon>
+                      </v-btn>
+                  -->
                   </v-toolbar>
                 </v-card>
               </template>
