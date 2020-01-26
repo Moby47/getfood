@@ -78,7 +78,7 @@
     <v-row justify="space-between">
       <v-col cols="8" >
           <div class="p-3">
-            <div>{{con.name}}</div>
+            <div><router-link :to='`/vendor/`+con.name'>{{con.name}}</router-link></div>
             <div>{{con.address}}</div>
             <div>  <a :href="`tel:`+con.phone"> {{con.phone}} </a></div>
           </div>
@@ -95,7 +95,14 @@
     </v-row>
    
     <v-card-actions class="pa-4">
-      Current rating
+        <div class="">
+            <whats-app  :url="url+con.name" title="Find us on GetFoods" scale="1" ></whats-app> 
+             <email  :url="url+con.name" subject="Find us on GetFoods" scale="1"></email>  
+             <facebook  :url="url+con.name" scale="1"></facebook> 
+              <twitter  :url="url+con.name" title="Find us on GetFoods" scale="1"></twitter>  
+             <linkedin  :url="url+con.name" scale="1"></linkedin>  
+             <telegram  :url="url+con.name" scale="1"></telegram>  
+        </div>
       <v-spacer></v-spacer>
       
       <star-rating
@@ -200,8 +207,37 @@
 
 
 <script>
-               
+     
+     //share icons
+     import {
+      Facebook,
+      Twitter,
+      Linkedin,
+      Pinterest,
+      Reddit,
+      Telegram,
+      WhatsApp,
+      Email,
+      Google
+    } from "vue-socialmedia-share";
+    //share icons
+
     export default {
+
+      //share icons
+      components: {
+        Facebook,
+        Twitter,
+        Linkedin,
+        Pinterest,
+        Reddit,
+        Telegram,
+        WhatsApp,
+        Email,
+        Google
+      },
+      //share icons
+
       data () {
       return {
         vendorName:'',
@@ -212,8 +248,9 @@
          rating:0,
 
          vendor_list:[],
-         vendor_count:''
+         vendor_count:'',
         // selected:'',
+        url:'',
       }
   },
 
@@ -453,6 +490,9 @@ readVendorData(table){
                 this.readVendorData('vendors')
                       this.$toasted.show("Offline mode...");
             }
+
+              // var url = String(window.location)
+              this.url = 'https://www.testing.henrymoby.tech/vendor-reviews/'
 
              setTimeout(func=>{
                     this.clearAndWriteData('vendor-list',this.vendor_list)
