@@ -254,7 +254,7 @@ export default new Router({
             name: 'superadmindash',
             component: superadmindash,
              meta:{
-                auth: true
+            superman: true
             }
         },
         {
@@ -262,7 +262,7 @@ export default new Router({
             name: 'payment',
             component: payment,
              meta:{
-              //  auth: true
+              superman: true
             }
         },
         {
@@ -270,7 +270,7 @@ export default new Router({
             name: 'verify',
             component: verify,
              meta:{
-              //  auth: true
+              superman: true
             }
         },
         {
@@ -278,7 +278,7 @@ export default new Router({
             name: 'survey',
             component: survey,
              meta:{
-              //  auth: true
+              superman: true
             }
         },
         {

@@ -136,7 +136,22 @@ router.beforeEach((to, from, next) => {
         next()
     } //inner if close
         /************************** */
-}else{
+    }else if(to.matched.some(record => record.meta.superman)){
+        /***************** redirect if not auth customer********* */
+      if(localStorage.getItem('userToken')){
+          //continue
+          if(localStorage.getItem('userStatus') == 47){
+              next()
+          }else{
+              next({path: '/super-admin-dashboard'})
+          }        
+      }else{
+          //redirect
+          next({path: '/'})
+      } //inner if close
+          /************************** */
+        
+   }else{
     /*********No redirect, just go on***************** */
  next() 
 
