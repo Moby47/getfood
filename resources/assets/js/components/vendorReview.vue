@@ -78,9 +78,9 @@
     <v-row justify="space-between">
       <v-col cols="8" >
           <div class="p-3">
-            <div><router-link :to='`/vendor/`+con.name'>{{con.name}}</router-link></div>
+            <div><router-link :to='`/vendor/`+con.name' class='link'>{{con.name}}</router-link></div>
             <div>{{con.address}}</div>
-            <div>  <a :href="`tel:`+con.phone"> {{con.phone}} </a></div>
+            <div>  <a :href="`tel:`+con.phone" class='link'> {{con.phone}} </a></div>
           </div>
       </v-col>
       <v-img
@@ -202,6 +202,9 @@
   border-radius: 5px;
   color: #999;
   background: #fff;
+}
+.link{
+  text-decoration: underline  !important;
 }
 </style>
 

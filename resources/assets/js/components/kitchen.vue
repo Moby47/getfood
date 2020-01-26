@@ -192,7 +192,7 @@
       outlined
     >
       <v-icon left>local_dining</v-icon>
-     {{con.vendor_name}}
+      <router-link :to='`/vendor/`+con.vendor_name' class='link'>{{con.vendor_name}}</router-link>
     </v-chip>
   </div>
 </template>
@@ -337,6 +337,12 @@
   </div>
 </template>
 
+<style scoped>
+.link{
+  color:white !important;
+  text-decoration: underline  !important;
+}
+</style>
 
 <script>
 
