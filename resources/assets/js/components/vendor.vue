@@ -491,14 +491,14 @@
           },
       },
             mounted() {
-              /*
+              
               //get url param #vendorName
       var param = this.$route.params.vendorName;
 
       if (param){
         this.selected = param
-        this.fetch()
-      }*/
+      }
+
       this.vendors()
        var online = navigator.onLine; 
             if(online){
