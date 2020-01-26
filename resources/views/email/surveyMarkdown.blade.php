@@ -1,6 +1,6 @@
 @component('mail::message')
  
-<a href="http://localhost:8000/my-survey/{{$userId}}">
+<a href="https://testng.henrymoby.tech/my-survey/{{$userId}}">
     Click here to review your best food vendors
 </a> 
 

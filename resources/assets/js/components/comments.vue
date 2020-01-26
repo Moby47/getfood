@@ -67,7 +67,7 @@
                      
                        <vue-disqus shortname="getfoods" class='p-2'
                        :identifier="`id`"
-           :url="`http://localhost:8000/comments/`">
+           :url="`https://testng.henrymoby.tech/comments/`">
                       </vue-disqus>
        <!--+con.name.replace(/[.,/*%' '?!()@]/g,'-')-->
                  </v-expansion-panel>
