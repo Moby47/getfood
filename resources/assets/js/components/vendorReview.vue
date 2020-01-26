@@ -78,9 +78,11 @@
     <v-row justify="space-between">
       <v-col cols="8" >
           <div class="p-3">
-            <div><router-link :to='`/vendor/`+con.name' class='link'>{{con.name}}</router-link></div>
+             
+            <div><router-link :to='`/vendor/`+con.name'>{{con.name}}</router-link></div>
+            
             <div>{{con.address}}</div>
-            <div>  <a :href="`tel:`+con.phone" class='link'> {{con.phone}} </a></div>
+            <div> <v-btn text> <a :href="`tel:`+con.phone"> Call </a> </v-btn> </div>
           </div>
       </v-col>
       <v-img
@@ -96,19 +98,19 @@
    
     <v-card-actions class="pa-4">
         <div class="">
-            <whats-app  :url="url+con.name" title="Find us on GetFoods" scale="1" ></whats-app> 
-             <email  :url="url+con.name" subject="Find us on GetFoods" scale="1"></email>  
-             <facebook  :url="url+con.name" scale="1"></facebook> 
-              <twitter  :url="url+con.name" title="Find us on GetFoods" scale="1"></twitter>  
-             <linkedin  :url="url+con.name" scale="1"></linkedin>  
-             <telegram  :url="url+con.name" scale="1"></telegram>  
+            <whats-app  :url="url+con.name" title="Find us on GetFoods" scale="1.5" ></whats-app> 
+             <email  :url="url+con.name" subject="Find us on GetFoods" scale="1.5"></email>  
+             <facebook  :url="url+con.name" scale="1.5"></facebook> 
+              <twitter  :url="url+con.name" title="Find us on GetFoods" scale="1.5"></twitter>  
+             <linkedin  :url="url+con.name" scale="1.5"></linkedin>  
+             <telegram  :url="url+con.name" scale="1.5"></telegram>  
         </div>
       <v-spacer></v-spacer>
       
       <star-rating
             :rating="con.score" 
             :read-only="true"
-            :star-size="30"
+            :star-size="20"
             active-color="#ffb42e"
             :border-width="3"
             text-class="custom-text"

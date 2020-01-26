@@ -8,7 +8,7 @@
             @rating-selected ="rate(vendorId,vendor)"
             v-show='star'
             v-model="rating"
-            :star-size="30"
+            :star-size="20"
             active-color="#ffb42e"
             :border-width="3"
             text-class="custom-text"

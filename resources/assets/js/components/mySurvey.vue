@@ -37,7 +37,7 @@
         style="flex-basis: 120px"
       ></v-img>
     </v-row>
-    <v-divider dark></v-divider>
+    
     <v-card-actions class="pa-4">
       Rate this vendor
       <v-spacer></v-spacer>
