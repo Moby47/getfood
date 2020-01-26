@@ -26,6 +26,16 @@ var filesToCache = [
     '/images/app-icons/app-icon-256x256.png',
     '/images/app-icons/app-icon-384x384.png',
     '/images/app-icons/app-icon-512x512.png',
+
+    '/images/apple-icons/apple-icon-57x57.png',
+    '/images/apple-icons/apple-icon-60x60.png',
+    '/images/apple-icons/apple-icon-72x72.png',
+    '/images/apple-icons/apple-icon-76x76.png',
+    '/images/apple-icons/apple-icon-114x114.png',
+    '/images/apple-icons/apple-icon-120x120.png',
+    '/images/apple-icons/apple-icon-144x144.png',
+    '/images/apple-icons/apple-icon-152x152.png',
+    '/images/apple-icons/apple-icon-180x180.png',
     
 
     '/images/bullet.png',
