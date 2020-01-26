@@ -29,6 +29,8 @@ var filesToCache = [
     
 
     '/images/bullet.png',
+    '/images/logo/inline/getfoods-trans-1001x1001.png',
+    '/images/logo/symbol/fav.png',
     '/images/confused.gif',
     '/images/black-spinner.gif',
     '/images/home.png',
@@ -36,7 +38,6 @@ var filesToCache = [
     '/images/vendor.png',
     '/images/food.png',
     '/images/loader.gif',
-    '/images/icons/black/food.png',
     '/images/icons/black/love.png',
     '/images/icons/black/rocket.png',
     '/images/icons/black/menu_close.png',

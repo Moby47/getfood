@@ -37,7 +37,7 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">   
 
  <!--fav icon -->
- <link rel="icon" href="{{ asset('images/icons/black/food.png') }}">
+ <link rel="icon" href="{{ asset('images/logo/symbol/fav.png') }}">
 
 <!--vuetify material icons-->
 <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
