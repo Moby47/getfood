@@ -89,7 +89,7 @@ export default new Router({
             }
         },
         {
-            path: '/comments/:con?',
+            path: '/comments/:id/:name/:add/:score/:phone',
             name: 'comments',
             component: comments,
              meta:{

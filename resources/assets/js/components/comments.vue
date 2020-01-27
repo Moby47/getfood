@@ -48,7 +48,7 @@
              <star-rating
                    :rating="score" 
                    :read-only="true"
-                   :star-size="30"
+                   :star-size="20"
                    active-color="#ffb42e"
                    :border-width="3"
                    text-class="custom-text"
@@ -66,8 +66,8 @@
                  >
                      
                        <vue-disqus shortname="getfoods" class='p-2'
-                       :identifier="`id`"
-           :url="`https://testng.henrymoby.tech/comments/`">
+                       :identifier="id"
+           :url="url">
                       </vue-disqus>
        <!--+con.name.replace(/[.,/*%' '?!()@]/g,'-')-->
                  </v-expansion-panel>
@@ -127,8 +127,9 @@
                address:'',
                phone:'',
                score:0,
-               id:'',
                overlay:false,
+               id:'',
+               url:''
              }
          },
        
@@ -141,15 +142,23 @@
        
             this.overlay = !this.overlay
 
+            var name = this.$route.params.name
             var id = this.$route.params.id
-            
-                if(id){
+                if(name){
+                  
                     this.name = this.$route.params.name
-                    this.address= this.$route.params.address
-                    this.phone = this.$route.params.phone
-                    this.score = this.$route.params.score
                     this.id = this.$route.params.id
-                    this.overlay = !this.overlay
+                    this.address= this.$route.params.add
+                    this.phone = this.$route.params.phone
+                    var score = this.$route.params.score
+  this.url = `https://testing.henrymoby.tech/comments/`+id
+  console.log(this.url)
+                    if(score == null){
+                      this.score = 0
+                    }else{
+                      this.score = Number(score)
+                    }
+                    this.overlay = false
                 }else{
                     this.$router.push({name: "vendorReview"});
                 }
@@ -158,7 +167,48 @@
          },
        
        
-             
+         watch: { 
+            //watch for url param changes
+          /*   name(a,b){
+            if(a){
+                //data content loaded, it is safe to display
+                console.log('name changed')
+                this.name = this.$route.params.name
+                    this.address= this.$route.params.add
+                    this.phone = this.$route.params.phone
+                    var score = this.$route.params.score
+                    if(score == null){
+                      this.score = 0
+                    }else{
+                      this.score = this.$route.params.score
+                    }
+                    this.overlay = false
+            }
+            },*/
+          /*  $route (to,from){
+                 this.overlay = true
+
+            var name = this.$route.params.name
+            
+                if(name){
+                    this.name = this.$route.params.name
+                    this.address= this.$route.params.add
+                    this.phone = this.$route.params.phone
+                    var score = this.$route.params.score
+                    if(score == null){
+                      this.score = 0
+                    }else{
+                      this.score = this.$route.params.score
+                    }
+                    this.overlay = false
+                }else{
+                    this.$router.push({name: "vendorReview"});
+                }
+            }*/
+            
+        },
+
+
        }
        </script>
        

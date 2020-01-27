@@ -131,7 +131,7 @@
               color="#ffb42e"
               outlined
               text
-              @click.prevent="comment(con)"
+              :to="`/comments/`+con.id+'/'+con.name.replace(/[.,/*%' '?!()@]/g,'-')+`/`+con.address+`/`+con.score+`/`+con.phone"
               >
               Comments
             </v-btn>
@@ -472,9 +472,9 @@ readVendorData(table){
                     })
 },
 
-              comment(con){
-                this.$router.push({name:'comments', params:{'name':con.name, 'phone':con.phone, 'id':con.id, 'score':con.score, 'address':con.address}});
-              },
+          //    comment(con){
+            //    this.$router.push({name:'comments', params:{'name':con.name, 'phone':con.phone, 'id':con.id, 'score':con.score, 'address':con.address}});
+              //},
 
 
   },
