@@ -69,7 +69,7 @@
 
 
 
- <v-list-item link @click.prevent='login()'>
+ <v-list-item link @click.prevent='dash()'>
 
           <v-list-item-action>
 
@@ -286,8 +286,8 @@
      kitchen(){
  this.$router.push({name: "kitchen"});
      },
-      login(){
- this.$router.push({name: "login"});
+      dash(){
+ this.$router.push({name: "userdashboard"});
      },
       vendors(){
  this.$router.push({name: "vendor"});

@@ -69,7 +69,7 @@
         </v-list-item>
         
         
- <v-list-item link @click.prevent='login()'>
+ <v-list-item link @click.prevent='dash()'>
 
           <v-list-item-action>
 
@@ -123,6 +123,26 @@
           <v-list-item-content>
 
             <v-list-item-title >Vendor Payment</v-list-item-title>
+
+          </v-list-item-content>
+
+        </v-list-item>
+
+
+
+  <v-list-item link @click.prevent='survey()'>
+
+          <v-list-item-action>
+
+            <v-icon>send</v-icon>
+
+          </v-list-item-action>
+
+
+
+          <v-list-item-content>
+
+            <v-list-item-title >Send Survey</v-list-item-title>
 
           </v-list-item-content>
 
@@ -236,7 +256,10 @@
     
        methods:{
 
-        reviews(){
+        survey(){
+ this.$router.push({name: "survey"});
+     },
+       reviews(){
  this.$router.push({name: "vendorReview"});
      },
            home(){
@@ -246,8 +269,8 @@
      kitchen(){
  this.$router.push({name: "kitchen"});
      },
-      login(){
- this.$router.push({name: "login"});
+      dash(){
+ this.$router.push({name: "superadmindash"});
      },
       verify(){
  this.$router.push({name: "verify"});
