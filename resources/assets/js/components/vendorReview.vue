@@ -82,7 +82,7 @@
             <div><router-link :to='`/vendor/`+con.name'>{{con.name}}</router-link></div>
             
             <div>{{con.address}}</div>
-            <div> <v-btn text> <a :href="`tel:`+con.phone"> Call </a> </v-btn> </div>
+            <div>  <a :href="`tel:`+con.phone"> Call </a>  </div>
           </div>
       </v-col>
       <v-img

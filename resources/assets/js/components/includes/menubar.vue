@@ -78,7 +78,6 @@
           </v-list-item-action>
 
 
-
           <v-list-item-content>
 
             <v-list-item-title >Dashboard</v-list-item-title>
@@ -88,8 +87,48 @@
         </v-list-item>
 
 
-<!--customer only-->
-        <v-list-item link @click.prevent='filter()' v-if="isAuth()" v-show='identity == "user"'>
+<!--
+
+        <v-list-item link @click.prevent='login()' v-show='isAuth() && identity == 47'>
+
+          <v-list-item-action>
+
+            <v-icon>dashboard</v-icon>
+
+          </v-list-item-action>
+
+
+
+          <v-list-item-content>
+
+            <v-list-item-title >Admin Dashboard</v-list-item-title>
+
+          </v-list-item-content>
+
+        </v-list-item>
+
+
+     <v-list-item link @click.prevent='login()' v-show='isAuth() && identity == 0'>
+
+          <v-list-item-action>
+
+            <v-icon>dashboard</v-icon>
+
+          </v-list-item-action>
+
+
+
+          <v-list-item-content>
+
+            <v-list-item-title >Customer Dashboard</v-list-item-title>
+
+          </v-list-item-content>
+
+        </v-list-item>
+
+
+<--customer only--
+        <v-list-item link @click.prevent='filter()' v-if="isAuth()" v-show='!identity'>
 
             <v-list-item-action>
   
@@ -105,8 +144,8 @@
           </v-list-item>
 
 
-          <!--Vendor only-->
-          <v-list-item link @click.prevent='add()' v-if="isAuth()" v-show='identity == "vendor"'>
+          <!-Vendor only--
+          <v-list-item link @click.prevent='add()' v-if="isAuth()" v-show='identity'>
 
               <v-list-item-action>
     
@@ -126,7 +165,7 @@
     
     
     
-             <v-list-item link @click.prevent='manage()'  v-if="isAuth()" v-show='identity == "vendor"'>
+             <v-list-item link @click.prevent='manage()'  v-if="isAuth()" v-show='identity'>
     
               <v-list-item-action>
     
@@ -145,7 +184,7 @@
             </v-list-item>
     
             
-             <v-list-item link @click.prevent='orders()' v-if="isAuth()" v-show='identity == "vendor"'>
+             <v-list-item link @click.prevent='orders()' v-if="isAuth()" v-show='identity'>
     
               <v-list-item-action>
     
@@ -165,7 +204,7 @@
     
     
     
-       <v-list-item link @click.prevent='vendorFav()' v-if="isAuth()" v-show='identity == "vendor"'>
+       <v-list-item link @click.prevent='vendorFav()' v-if="isAuth()" v-show='identity'>
     
               <v-list-item-action>
     
@@ -180,7 +219,7 @@
               </v-list-item-content>
     
             </v-list-item>
-
+-->
 
 
         <v-list-item link @click.prevent='kitchen()'>
@@ -408,7 +447,7 @@ import {eventBus} from "../../app.js";
         text: '',
         timeout: 6000,
         status:'',
-        identity: '',
+        identity: false,
         sheet: false
    }),
 
@@ -516,17 +555,18 @@ import {eventBus} from "../../app.js";
    mounted(){
      this.isAuth()
 
-     //toggle view
+     /*toggle view
      if(localStorage.removeItem('userStatus')){
        if(localStorage.removeItem('userStatus') == 0){
-         this.identity = 'user'
-         console.log('user')
+         this.identity = 0
        }else if(localStorage.removeItem('userStatus') == 1){
-         this.identity = 'vendor'
-         console.log('admin')
+         this.identity = true
+       }else if(localStorage.removeItem('userStatus') == 47){
+          this.identity = 47
        }
-     }
 
+     }
+*/
 
    },
  }
