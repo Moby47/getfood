@@ -24,7 +24,7 @@
 
 
       <div class="content-block slideUp">
-          <h4>SIGN IN</h4> 
+        <!--  <h4>SIGN IN</h4> -->
           <div class="loginform">
               <form id="LoginForm" method="post" data-vv-scope='loginForm'>
                   <input type="text" name="Email" v-model='logEmail' v-validate='"required|email|max:100"' class="form_input required" placeholder="Enter Email" />

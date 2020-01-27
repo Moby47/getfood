@@ -22,7 +22,7 @@
      </menubar>
 
             <div class="content-block slideUp">
-                <h4>SIGN UP</h4> 
+               <!-- <h4>SIGN UP</h4> -->
                 <div class="loginform">
                     <form id="RegisterForm" method="post" data-vv-scope='regForm'>
        <input type="text" v-model='regName' name="Name"  v-validate='"required|max:35"' value="" class="form_input required" placeholder="Enter Vendor Name" />
