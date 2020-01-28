@@ -25,10 +25,10 @@
            <v-row justify="space-between">
              <v-col cols="8" >
                  <div class="p-3">
-                   <div>{{name}}</div>
-                   <div>{{address}}</div>
+                     <!--   <div>{{name}}</div>
+              <div>{{address}}</div>
                    <div>  <a :href="`tel:`+phone"> {{phone}} </a></div>
-                 </div>
+               -->  </div>
              </v-col>
              <v-img
                class="shrink ma-2"
@@ -123,9 +123,9 @@
            export default {
              data () {
              return {
-               name:'',
-               address:'',
-               phone:'',
+              // name:'',
+              // address:'',
+             //  phone:'',
                score:0,
                overlay:false,
                id:'',
@@ -142,14 +142,14 @@
        
             this.overlay = !this.overlay
 
-            var name = this.$route.params.name
+        //    var name = this.$route.params.name
             var id = this.$route.params.id
-                if(name){
+                if(id){
                   
-                    this.name = this.$route.params.name
+                 //   this.name = this.$route.params.name
                     this.id = this.$route.params.id
-                    this.address= this.$route.params.add
-                    this.phone = this.$route.params.phone
+                    //this.address= this.$route.params.add
+                   // this.phone = this.$route.params.phone
                     var score = this.$route.params.score
   this.url = `https://testing.henrymoby.tech/comments/`+id
   console.log(this.url)

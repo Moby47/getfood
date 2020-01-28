@@ -103,7 +103,6 @@
              <facebook  :url="url+con.name" scale="1.5"></facebook> 
               <twitter  :url="url+con.name" title="Find us on GetFoods" scale="1.5"></twitter>  
              <linkedin  :url="url+con.name" scale="1.5"></linkedin>  
-             <telegram  :url="url+con.name" scale="1.5"></telegram>  
         </div>
       <v-spacer></v-spacer>
       
@@ -131,7 +130,7 @@
               color="#ffb42e"
               outlined
               text
-              :to="`/comments/`+con.id+'/'+con.name.replace(/[.,/*%' '?!()@]/g,'-')+`/`+con.address+`/`+con.score+`/`+con.phone"
+              :to="`/comments/`+con.id+'/'+con.score"
               >
               Comments
             </v-btn>
