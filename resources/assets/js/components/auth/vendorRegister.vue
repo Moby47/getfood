@@ -42,6 +42,7 @@
 
 <label class='text-center'>Do you support food delivery?</label>
             <select class="form-control" v-model='selected' v-validate='"required|min:1"' name='delivery'> 
+     <option value=''> - Select - </option>
       <option value='1'> Yes </option>
        <option  value='0'> No </option>
       </select>
