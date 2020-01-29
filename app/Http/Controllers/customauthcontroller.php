@@ -96,11 +96,11 @@ class customauthcontroller extends Controller
                     'app_id' => "da6349ad-e18f-471b-8d57-30444a9d158f",
                     'include_player_ids' => $adminPId,
                     'data' => array("foo" => "bar"),
-                    'url' => 'https://testing.henrymoby.tech/user-signin',
+                    'url' => 'https://getfoods.ng/user-signin',
                     'contents' => $content,
                     'headings' => $headings,
-                   'chrome_web_image' => 'https://testing.henrymoby.tech/images/push-images/new_user.png',//512 or >
-                   'chrome_web_badge' => 'https://testing.henrymoby.tech/images/app-icons/app-icon-96x96.png'
+                   'chrome_web_image' => 'https://getfoods.ng/images/push-images/new_user.png',//512 or >
+                   'chrome_web_badge' => 'https://getfoods.ng/images/app-icons/app-icon-96x96.png'
                 );
                 
                 $fields = json_encode($fields);
@@ -214,14 +214,14 @@ class customauthcontroller extends Controller
         $user =User::where('verifytoken','=',$crypt)->select('verifytoken','id')->first();
         //if user not found
         if(!isset($user)){
-            return '<a href="http://testing.henrymoby.tech/user-signin">Verification token expired. Click here to resend</a>';
+            return '<a href="https://getfoods.ng/user-signin">Verification token expired. Click here to resend</a>';
         }
         $id = $user->id;
         $act = User::findorfail($id);
         $act->verification = 1;
         $act->verifytoken = Null;
         $act->save();
-        return redirect('http://testing.henrymoby.tech/user-signin');
+        return redirect('https://getfoods.ng/user-signin');
    }
 
 

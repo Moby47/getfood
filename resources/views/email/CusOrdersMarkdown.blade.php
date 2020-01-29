@@ -5,7 +5,7 @@
 
 <p>You made an order.</p>
 
-<a href="https://testing.henrymoby.tech/userdashboard">
+<a href="https://getfoods.ng/userdashboard">
     View Now
 </a> 
 

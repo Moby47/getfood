@@ -496,7 +496,7 @@ readVendorData(table){
             }
 
               // var url = String(window.location)
-              this.url = 'https://www.testing.henrymoby.tech/vendor-reviews/'
+              this.url = 'https://getfoods.ng/vendor-reviews/'
 
              setTimeout(func=>{
                     this.clearAndWriteData('vendor-list',this.vendor_list)

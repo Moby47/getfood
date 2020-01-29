@@ -13,35 +13,35 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         //allow url, no csrf token needed
-        'https://testing.henrymoby.tech/add-favorite',
-        'https://testing.henrymoby.tech/remove-favorite',
-        'https://testing.henrymoby.tech/rate-vendor',
+        'https://getfoods.ng.tech/add-favorite',
+        'https://getfoods.ng.tech/remove-favorite',
+        'https://getfoods.ng.tech/rate-vendor',
 
-        'https://testing.henrymoby.tech/add-to-cart',
-        'https://testing.henrymoby.tech/remove-from-cart',
+        'https://getfoods.ng.tech/add-to-cart',
+        'https://getfoods.ng.tech/remove-from-cart',
 
-        'https://testing.henrymoby.tech/add-fav-to-cart',
-        'https://testing.henrymoby.tech/remove-fav-from-cart',
+        'https://getfoods.ng.tech/add-fav-to-cart',
+        'https://getfoods.ng.tech/remove-fav-from-cart',
 
-        'https://testing.henrymoby.tech/remove-from-fav',
+        'https://getfoods.ng.tech/remove-from-fav',
 
-        'https://testing.henrymoby.tech/new-food',
-        'https://testing.henrymoby.tech/delete-food',
-        'https://testing.henrymoby.tech/edit-food',
+        'https://getfoods.ng.tech/new-food',
+        'https://getfoods.ng.tech/delete-food',
+        'https://getfoods.ng.tech/edit-food',
         
-        'https://testing.henrymoby.tech/player-id',
+        'https://getfoods.ng.tech/player-id',
 
-        'https://testing.henrymoby.tech/login-user',
-        'https://testing.henrymoby.tech/register-user',
-        'https://testing.henrymoby.tech/save-order',
+        'https://getfoods.ng.tech/login-user',
+        'https://getfoods.ng.tech/register-user',
+        'https://getfoods.ng.tech/save-order',
 
-        'https://testing.henrymoby.tech/clear-cart',
-        'https://testing.henrymoby.tech/push-to-vendors',
-        'https://testing.henrymoby.tech/clear-temp',
-        'https://testing.henrymoby.tech/approve-collection',
-        'https://testing.henrymoby.tech/approve-vendor',
-        'https://testing.henrymoby.tech/decline-vendor',
-        'https://testing.henrymoby.tech/send-survey',
+        'https://getfoods.ng.tech/clear-cart',
+        'https://getfoods.ng.tech/push-to-vendors',
+        'https://getfoods.ng.tech/clear-temp',
+        'https://getfoods.ng.tech/approve-collection',
+        'https://getfoods.ng.tech/approve-vendor',
+        'https://getfoods.ng.tech/decline-vendor',
+        'https://getfoods.ng.tech/send-survey',
 
     ];
 }

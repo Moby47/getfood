@@ -341,11 +341,11 @@ public function get_my_surveys($userId){
                 'app_id' => "da6349ad-e18f-471b-8d57-30444a9d158f",
                 'include_player_ids' => array($vendorPId),
                 'data' => array("foo" => "bar"),
-                'url' => 'https://testing.henrymoby.tech/vendor-reviews/'.$vendorName,
+                'url' => 'https://getfoods.ng/vendor-reviews/'.$vendorName,
                 'contents' => $content,
                 'headings' => $headings,
-                'chrome_web_image' => 'https://testing.henrymoby.tech/images/push-images/survey.png',//512 or >
-                'chrome_web_badge' => 'https://testing.henrymoby.tech/images/app-icons/app-icon-96x96.png'
+                'chrome_web_image' => 'https://getfoods.ng/images/push-images/survey.png',//512 or >
+                'chrome_web_badge' => 'https://getfoods.ng/images/app-icons/app-icon-96x96.png'
             );
             
             $fields = json_encode($fields);

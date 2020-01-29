@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'https://testing.henrymoby.tech'),
+    'url' => env('APP_URL', 'https://getfoods.ng'),
 
     /*
     |--------------------------------------------------------------------------

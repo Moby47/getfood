@@ -5,7 +5,7 @@
 
 <p>You have a new order.</p>
 
-<a href="https://testing.henrymoby.tech/orders">
+<a href="https://getfoods.ng/orders">
     View Now
 </a> 
 

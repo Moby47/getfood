@@ -5,7 +5,7 @@
 
 <p>Your account on Getfoods has been approved!</p>
 
-<a href="https://testing.henrymoby.tech/">
+<a href="https://getfoods.ng/">
     Visit GetFoods
 </a> 
 

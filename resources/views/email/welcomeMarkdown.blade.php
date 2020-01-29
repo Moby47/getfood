@@ -18,16 +18,16 @@
 
      
 
-     <a href="https://testing.henrymoby.tech/verify/{{$verifytoken}}">
+     <a href="https://getfoods.ng/verify/{{$verifytoken}}">
     Account Noy Verified? Click Here
 </a> 
 
 
-<a href="https://testing.henrymoby.tech/user-signin">
+<a href="https://getfoods.ng/user-signin">
    Vendor? Click Here
 </a> 
 
-<a href="https://testing.henrymoby.tech/">
+<a href="https://getfoods.ng/">
     Customer? Click Here
 </a> 
 

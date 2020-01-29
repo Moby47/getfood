@@ -5,7 +5,7 @@
 
 <p>Your account on Getfoods has been declined. Please contact our support team</p>
 
-<a href="https://testing.henrymoby.tech/">
+<a href="https://getfoods.ng/">
     Get Help
 </a> 
 

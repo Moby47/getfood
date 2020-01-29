@@ -389,19 +389,19 @@ fetch('https://onesignal.com/api/v1/notifications', {
                   'app_id':'da6349ad-e18f-471b-8d57-30444a9d158f',
                   'contents': {'en': localStorage.getItem('userName')+' just placed an order, view now'},
                   'headings': {'en': 'Hello'},
-                  'url': 'https://testing.henrymoby.tech/orders',
+                  'url': 'https://getfoods.ng/orders',
                   'include_player_ids': this.pId,
                   'web_push_topic': 'notify-admin',
-           'chrome_web_image':'https://testing.henrymoby.tech/images/push-images/order.png',//512 or >
-    'chrome_web_badge':'https://testing.henrymoby.tech/images/app-icons/app-icon-96x96.png',// 72 or >
-    // 'chrome_web_icon':'https://testing.henrymoby.tech/images/app-icons/app-icon-192x192.png' //192 or >
+           'chrome_web_image':'https://getfoods.ng/images/push-images/order.png',//512 or >
+    'chrome_web_badge':'https://getfoods.ng/images/app-icons/app-icon-96x96.png',// 72 or >
+    // 'chrome_web_icon':'https://getfoods.ng/images/app-icons/app-icon-192x192.png' //192 or >
                 })
               })
                 .then(res=> {
                     console.log('push to vendors ok');
                  //   console.log(res);
                    //read pId and push to self #func takes title,body,url,tag
-  this.pushToUser('Hello '+localStorage.getItem('userName'),'Click here to view your orders','https://testing.henrymoby.tech/userdashboard','thanks') 
+  this.pushToUser('Hello '+localStorage.getItem('userName'),'Click here to view your orders','https://getfoods.ng/userdashboard','thanks') 
 
                 }) 
                 .catch(error =>{
@@ -565,9 +565,9 @@ body: JSON.stringify({
  'url': url,
  'include_player_ids': [pId],
  'web_push_topic':tag,
-   'chrome_web_image':'https://testing.henrymoby.tech/images/push-images/success.png',//512 or >
- 'chrome_web_badge':'https://testing.henrymoby.tech/images/app-icons/app-icon-96x96.png',// 72 or >
-  //   'chrome_web_icon':'https://testing.henrymoby.tech/images/app-icons/app-icon-192x192.png' //192 or >
+   'chrome_web_image':'https://getfoods.ng/images/push-images/success.png',//512 or >
+ 'chrome_web_badge':'https://getfoods.ng/images/app-icons/app-icon-96x96.png',// 72 or >
+  //   'chrome_web_icon':'https://getfoods.ng/images/app-icons/app-icon-192x192.png' //192 or >
 })
 })
 .then(res=> {

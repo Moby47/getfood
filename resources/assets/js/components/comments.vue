@@ -151,7 +151,7 @@
                     //this.address= this.$route.params.add
                    // this.phone = this.$route.params.phone
                     var score = this.$route.params.score
-  this.url = `https://testing.henrymoby.tech/comments/`+id
+  this.url = `https://getfoods.ng/comments/`+id
   console.log(this.url)
                     if(score == null){
                       this.score = 0
