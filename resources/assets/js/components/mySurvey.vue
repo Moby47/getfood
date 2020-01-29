@@ -52,10 +52,15 @@
     </v-card-actions>
   </v-card>
 
+<v-card
+    class="mx-auto elevation-20 mb-2"
+    color="grey"
+    style="max-width: 374px;"
+  >
   <div v-if='empty' class='text-center alert alert-info'>
       No surveys for you now. <router-link to='/vendor'>Find a Vendor</router-link>
       </div>
-
+</v-card>
 
  <div class="my-2 text-center" v-if='empty == false' >
           <v-btn  outlined @click.prevent='done()' color="#FFA500">FINISH</v-btn>   
