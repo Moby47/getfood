@@ -31,7 +31,7 @@ class CusOrders extends Mailable
          //retrieve data from session66
          //$verifytoken = session('verifytoken');
  
-        return $this->from('henryonyemaobi@gmail.com','GETFOODS')
+        return $this->from('support@getfoods.ng','GETFOODS')
          ->subject('Your order on GETFOODS')
          ->markdown('email.CusOrdersMarkdown');
         // ->with('verifytoken',$verifytoken);

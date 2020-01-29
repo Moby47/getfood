@@ -31,7 +31,7 @@ class Welcome extends Mailable
          //retrieve data from session66
          $verifytoken = session('verifytoken');
  
-        return $this->from('henryonyemaobi@gmail.com','GETFOODS')
+        return $this->from('support@getfoods.ng','GETFOODS')
          ->subject('Welcome to GETFOODS')
          ->markdown('email.welcomeMarkdown')
          ->with('verifytoken',$verifytoken);

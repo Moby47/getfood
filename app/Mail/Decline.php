@@ -29,7 +29,7 @@ class Decline extends Mailable
     public function build()
     {
  
-        return $this->from('henryonyemaobi@gmail.com','GETFOODS')
+        return $this->from('support@getfoods.ng','GETFOODS')
          ->subject('Your Getfoods account has been Declined')
          ->markdown('email.declineMarkdown');
     }

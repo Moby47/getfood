@@ -31,7 +31,7 @@ class Survey extends Mailable
          //retrieve data from session66
          $userId = session('userId');
  
-        return $this->from('henryonyemaobi@gmail.com','GETFOODS')
+        return $this->from('support@getfoods.ng','GETFOODS')
          ->subject('Vendor survey')
          ->markdown('email.surveyMarkdown')
          ->with('userId',$userId);
