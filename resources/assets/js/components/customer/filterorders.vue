@@ -253,17 +253,40 @@
 
      fetch(page_url){
 
-         this.$validator.validateAll().then(() => {
+       if(page_url){
+         NProgress.start();
+           var   page_url = page_url || '/my-reporting/'+userId+'/'+ this.from+'/'+this.to;
+                 
+                fetch(page_url)
+                .then(res => res.json())
+                .then(res=>{
+                  this.content = res.data;
+
+                  this.content_details = true;
+
+                   //to determine if obj is empty 
+                          //console.log(res.data[0]);
+                          if(res.data[0] == undefined){
+                              this.empty = true;
+                          }else{
+                              this.empty = false;
+                          }
+                  //to determine if obj is empty
+                  this.makePagination(res.meta, res.links);
+
+                  NProgress.done();
+                })
+                .catch(error =>{
+                      NProgress.done(); 
+                      console.log(error)
+                    }) 
+       }else{
+
+ this.$validator.validateAll().then(() => {
 
              if (!this.errors.any()) {
 
  var userId = localStorage.getItem('userId')
-
-    if(page_url){
-                  NProgress.start();
-                  }else{
-                    this.overlay=true
-                  }
                 var   page_url = page_url || '/my-reporting/'+userId+'/'+ this.from+'/'+this.to;
                  
                 fetch(page_url)
@@ -283,25 +306,21 @@
                   //to determine if obj is empty
                   this.overlay = false
                   this.makePagination(res.meta, res.links);
-//this.wait = false;
-                
-                  NProgress.done();
                 })
                 .catch(error =>{
-                    //off loader
-                  //  this.data_load = false;
-                  //    this.wait = true;
-                      setTimeout(func=>{
-                          this.fetch();
-                      },2000)
                       this.overlay = false
-                      NProgress.done(); 
+                     
                       console.log(error)
                     }) 
                     
              }
              
          })
+         
+       }
+
+
+        
 
    
               },
