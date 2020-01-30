@@ -166,6 +166,11 @@
                     <v-list-item-title>Customer's Name: {{newContent.cusName}}</v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
+                 <v-list-item>
+                  <v-list-item-content>
+                    <v-list-item-title>Call Customer: <a :href="`tel:`+newContent.cusPhone"> {{newContent.cusPhone}}</a></v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
                 <v-list-item>
                   <v-list-item-content>
                     <v-list-item-title>Quantity: {{newContent.qty}}</v-list-item-title>
@@ -183,7 +188,7 @@
                     </v-list-item>
                     <v-list-item>
                         <v-list-item-content>
-                          <v-list-item-title>Delivery Mode: {{newContent.delivery}}</v-list-item-title>
+                          <v-list-item-title>Delivery Mode: By {{newContent.delivery}}</v-list-item-title>
                         </v-list-item-content>
                       </v-list-item>
                       <v-list-item>

@@ -201,7 +201,7 @@
                         </v-list-item>
                         <v-list-item>
                             <v-list-item-content>
-                              <v-list-item-title>Vendor's Number: <a :href="`tel:`+newContent.phone"> {{newContent.phone}}</a> </v-list-item-title>
+                              <v-list-item-title>Contact Vendor: <a :href="`tel:`+newContent.phone"> {{newContent.phone}}</a> </v-list-item-title>
                             </v-list-item-content>
                           </v-list-item>
                         <v-list-item>

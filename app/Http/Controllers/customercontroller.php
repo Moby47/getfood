@@ -78,6 +78,7 @@ $tempId = $request->input('tempId');
 
 $cusId = $request->input('cusId');
 $total = $request->input('total');
+$cusPhone = $request->input('phone');
 $ref = $request->input('ref');
 $trans = $request->input('trans');
 $add = $request->input('address');
@@ -100,6 +101,7 @@ foreach($temp as $t){
  'title'=> $t->foodName,
   'address' => $add,
   'phone' => $t->phone,
+  'cusPhone' => $cusPhone,
   'delivery'=> $deli,
   'total'=> $t->amt * $t->qty,
   'ref'=> $ref,

@@ -60,7 +60,7 @@ class vendorcontroller extends Controller
            //vendor to view orders made
     public  function vendor_orders($userId){
       $orders = order::orderby('id','desc')->where('vendorId','=',$userId)
-      ->select('id','amt','qty','ref','cusName','total','confirmation','title','address','delivery','created_at')->paginate(7);
+      ->select('id','amt','qty','ref','cusName','cusPhone','total','confirmation','title','address','delivery','created_at')->paginate(7);
     //  $orderT = order::where('cusId','=',$userId)->select('amt')->sum('amt');
     // return $obj = ['orders' => $orders, 'orderT' => $orderT];
       return orderres::collection($orders);
@@ -69,7 +69,7 @@ class vendorcontroller extends Controller
             //view reporting based on date range  
    public function vendor_reporting($userid, $from, $to){
     $rep =order::orderby('id','desc')->where('vendorId','=',$userid)
-    ->select('id','amt','qty','total','ref','cusName','trans','title','confirmation','address','delivery','created_at')
+    ->select('id','amt','qty','total','ref','cusName','cusPhone','trans','title','confirmation','address','delivery','created_at')
     ->whereBetween('created_at',array($from,$to))->paginate(5);
 
     return orderres::collection($rep);
