@@ -35,6 +35,13 @@
 
                     <div class="my-3 p-1 bg-white rounded shadow-sm">
                       <h6 class="border-bottom border-gray pb-2 mb-0">Statistics</h6>
+                       <div class="media text-muted pt-3">
+                        <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+                        <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                          <strong class="d-block text-gray-dark"> <span v-html='dayData'></span></strong>
+                          Day Pay
+                        </p>
+                      </div>
                       <div class="media text-muted pt-3">
                         <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#ffa500"/><text x="50%" y="50%" fill="#ffa500" dy=".3em">32x32</text></svg>
                         <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
@@ -219,6 +226,7 @@
             data () {
             return {
             //  moment:moment,
+            dayData:'Loading...',
               weeklyData:'Loading...',
               monthlyData:'Loading...',
               totalData:'Loading...',
@@ -247,6 +255,20 @@
          offline(){
           this.$toasted.show("This feature is currently unsupported in offline mode...");
          },
+
+           day(){
+            fetch('/daily-ex-vendor/'+ localStorage.getItem('userId'))
+                .then(res => res.json())
+                .then(res=>{
+                  this.dayData = '<strike>N</strike>'+res;
+                })
+                .catch(error =>{
+                      setTimeout(func=>{
+                          this.day();
+                      },2000)
+                              
+                    })
+          },
          
           weekly(){
             fetch('/weekly-ex-vendor/'+ localStorage.getItem('userId'))
@@ -364,6 +386,7 @@ if(page_url){
 
         mounted() {
           this.userName = localStorage.getItem('userName')
+          this.day()
             this.weekly()
             this.monthly()
             this.total()

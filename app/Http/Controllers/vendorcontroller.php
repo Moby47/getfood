@@ -22,6 +22,13 @@ class vendorcontroller extends Controller
         return foodres::collection($food);
       }
 
+      public  function daily_ex_vendor($userId){
+       
+        $start = \carbon\carbon::now()->subDays(1);
+        $now =  $expiration  = \carbon\carbon::now();
+      return $rec = order::select('total')->where('vendorId','=',$userId)
+      ->whereBetween('created_at',array($start,$now))->sum('total');
+    }
         public  function weekly_ex_vendor($userId){
        
             $start = \carbon\carbon::now()->subDays(7);

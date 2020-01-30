@@ -68,6 +68,7 @@ Route::get('/total-cash', 'vendorcontroller@total_cash');
 Route::get('/reporting', 'vendorcontroller@reporting');
 Route::get('/favorites', 'vendorcontroller@favorites');
 
+Route::get('/daily-ex-vendor/{userId}', 'vendorcontroller@daily_ex_vendor');
 Route::get('/weekly-ex-vendor/{userId}', 'vendorcontroller@weekly_ex_vendor');
 Route::get('/monthly-ex-vendor/{userId}', 'vendorcontroller@monthly_ex_vendor');
 Route::get('/total-ex-vendor/{userId}', 'vendorcontroller@total_ex_vendor');
