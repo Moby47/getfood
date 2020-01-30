@@ -119,7 +119,7 @@
                                   <v-btn small text icon color='#FFA500' @click.prevent="fetch(pagination.prev_page_url)" :disabled="!pagination.prev_page_url"><v-icon>arrow_back</v-icon></v-btn> 
                                   <span>{{pagination.current_page}} of {{pagination.last_page}}</span>
                                   <v-btn small text icon color='#FFA500'  @click.prevent="fetch(pagination.next_page_url)" :disabled="!pagination.next_page_url"><v-icon>arrow_forward</v-icon></v-btn>
-                                     </div>
+                                      </div>
                                   <!-- *************** filtered content ************ -->
                         </span> <!-- **to hide-->
 
@@ -313,9 +313,38 @@
                     })
           },
 
+
+
           fetch(page_url){
 
-       
+//pagination
+            if(page_url){
+              NProgress.start();
+              var   page_url = page_url || '/vendor-reporting/'+userId+'/'+ this.from+'/'+this.to;
+       fetch(page_url)
+       .then(res => res.json())
+       .then(res=>{
+         this.content = res.data;
+
+         this.content_details = true;
+
+                 if(res.data[0] == undefined){
+                     this.empty = true;
+                 }else{
+                     this.empty = false;
+                 }
+         //to determine if obj is empty
+         this.makePagination(res.meta, res.links);
+         NProgress.done();
+       })
+       .catch(error =>{
+             NProgress.done(); 
+             console.log(error)
+           }) 
+
+            }else{
+              
+//fetch by filter
 
 this.$validator.validateAll().then(() => {
 
@@ -323,13 +352,10 @@ this.$validator.validateAll().then(() => {
 
 var userId = localStorage.getItem('userId')
 
-if(page_url){
-         NProgress.start();
-         }else{
            this.overlay=true
-         }
+       
        var   page_url = page_url || '/vendor-reporting/'+userId+'/'+ this.from+'/'+this.to;
-        
+      
        fetch(page_url)
        .then(res => res.json())
        .then(res=>{
@@ -348,24 +374,26 @@ if(page_url){
          this.overlay = false
          this.makePagination(res.meta, res.links);
 //this.wait = false;
-       
-         NProgress.done();
+    
        })
        .catch(error =>{
            //off loader
          //  this.data_load = false;
          //    this.wait = true;
-             setTimeout(func=>{
-                 this.fetch();
-             },2000)
-             this.overlay = false
-             NProgress.done(); 
+            
+             this.overlay = false 
              console.log(error)
            }) 
            
     }
     
 })
+            }
+
+
+
+
+       
 
 
      },
