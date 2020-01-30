@@ -162,12 +162,14 @@ class customauthcontroller extends Controller
             'name' => 'required|string|max:15',
             'email' => 'required|string|email|max:100|unique:users',
             'password' => 'required|string|min:6', //|confirmed
+            'phone' => 'required|string',
         ]);
 
         //create
        $user = new User;
        $user->name = $request->name;
        $user->email = $request->email;
+       $user->phone = $request->phone;
        $user->playerId = $request->input('pId');
        $user->password = bcrypt($request->password);
        $user->verifytoken = $verifytoken = Str::random(40);
@@ -190,13 +192,15 @@ class customauthcontroller extends Controller
            */  
           }
              catch(\Exception $e){
-        return ['msg' => 0,'userToken'=>$token, 'userId'=>$user->id, 'userName'=> $user->name,'userMail'=>$user->email,
+        return ['msg' => 0,'userToken'=>$token, 'userId'=>$user->id,
+        'phone'=>$user->phone, 'userName'=> $user->name,'userMail'=>$user->email,
         'userStatus'=> 0, 'vendorAddress'=> null];
          }
 
 
    //response
-   return ['msg' => 1,'userToken'=>$token, 'userId'=>$user->id, 'userName'=> $user->name,'userMail'=>$user->email,
+   return ['msg' => 1,'userToken'=>$token, 'userId'=>$user->id,
+   'phone'=>$user->phone, 'userName'=> $user->name,'userMail'=>$user->email,
    'userStatus'=> 0, 'vendorAddress'=> null];
     }
 

@@ -32,6 +32,9 @@
            <input type="text" v-model='regEmail' v-validate='"required|email|max:100"' name="Email" value="" class="form_input required" placeholder="Enter Email" />
            <p class='text-danger shake' v-show="errors.has('regForm.Email')">{{ errors.first('regForm.Email') }}</p>
 
+ <input type="text" v-model='regPhone' name="Phone"  v-validate='"required|max:11|min:11"' value="" class="form_input required" placeholder="Enter Phone Number" />
+           <p class='text-danger shake' v-show="errors.has('regForm.Phone')">{{ errors.first('regForm.Phone') }}</p>
+           
            <input type="password" v-model='regPassword' v-validate='"required|min:6"' name="Password" value="" class="form_input required" placeholder="Enter Password" />
            <p class='text-danger shake' v-show="errors.has('regForm.Password')">{{ errors.first('regForm.Password') }}</p>
 
@@ -115,6 +118,7 @@
        regName:'',
           regEmail:'',
           regPassword:'',
+           regPhone:'',
           snackbar: false,
         text: '',
         timeout: 9000,
@@ -157,7 +161,8 @@
           //}  support@henrymoby.tech
 
           //start registeration
-          var input = {'name':this.regName,'email':this.regEmail,'password':this.regPassword,'pId':pId };
+          var input = {'name':this.regName,'email':this.regEmail,'phone':this.regPhone,
+          'password':this.regPassword,'pId':pId };
       
       //send to database with axios
           axios.post('/register-user',input)
@@ -256,7 +261,8 @@ var dbPromise = idb.open('getFoodsDB', 14, function (db) {
               });
 
 var dat = {id: new Date().toISOString(),'e':this.regEmail,'p':pass,
-'tok':regData.data.userToken,'id':regData.data.userId,'name':regData.data.userName,'stat':regData.data.userStatus}
+'tok':regData.data.userToken,'id':regData.data.userId,'phone':this.regPhone,
+'name':regData.data.userName,'stat':regData.data.userStatus}
 console.log('dat',dat)
 
               //clear data func

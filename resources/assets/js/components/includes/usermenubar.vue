@@ -323,6 +323,7 @@
                    localStorage.removeItem('userName');
                    localStorage.removeItem('userMail');
                    localStorage.removeItem('userStatus');
+                   localStorage.removeItem('phone');
                       //clear tempcartid
                        localStorage.removeItem('tempUserCartID');
                         //clear cart count

@@ -525,6 +525,7 @@ import {eventBus} from "../../app.js";
                    localStorage.removeItem('userName');
                    localStorage.removeItem('userMail');
                    localStorage.removeItem('userStatus');
+                   localStorage.removeItem('phone');
 
                    //clear username from index
                    eventBus.$emit('clearUsername')
