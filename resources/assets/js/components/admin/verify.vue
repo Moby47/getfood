@@ -104,7 +104,7 @@
                         </thead>
                             <tr class='animated tdFadeIn' v-for='con in content' v-bind:key='con.id'>
                          <td>{{con.name}}</td>
-                          <td>{{moment(con.created_at).fromNow()}}</td>
+                          <td>{{con.created_at}}</td>
                           <td @click.prevent='check(con)'><v-icon>remove_red_eye</v-icon></td>
                                                 </tr>
                                             
@@ -226,12 +226,12 @@
       </style>
     
     <script>
-                     var moment =require('moment');
+                  //   var moment =require('moment');
     
               export default {
                 data () {
                 return {
-                  moment:moment,
+                 // moment:moment,
                   content:[],
                   pagination: [],
                   overlay:false,

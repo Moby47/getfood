@@ -13,35 +13,35 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         //allow url, no csrf token needed
-        'https://getfoods.ng/add-favorite',
-        'https://getfoods.ng/remove-favorite',
-        'https://getfoods.ng/rate-vendor',
+        'https://www.getfoods.ng/add-favorite',
+        'https://www.getfoods.ng/remove-favorite',
+        'https://www.getfoods.ng/rate-vendor',
 
-        'https://getfoods.ng/add-to-cart',
-        'https://getfoods.ng/remove-from-cart',
+        'https://www.getfoods.ng/add-to-cart',
+        'https://www.getfoods.ng/remove-from-cart',
 
-        'https://getfoods.ng/add-fav-to-cart',
-        'https://getfoods.ng/remove-fav-from-cart',
+        'https://www.getfoods.ng/add-fav-to-cart',
+        'https://www.getfoods.ng/remove-fav-from-cart',
 
-        'https://getfoods.ng/remove-from-fav',
+        'https://www.getfoods.ng/remove-from-fav',
 
-        'https://getfoods.ng/new-food',
-        'https://getfoods.ng/delete-food',
-        'https://getfoods.ng/edit-food',
+        'https://www.getfoods.ng/new-food',
+        'https://www.getfoods.ng/delete-food',
+        'https://www.getfoods.ng/edit-food',
         
-        'https://getfoods.ng/player-id',
+        'https://www.getfoods.ng/player-id',
 
-        'https://getfoods.ng/login-user',
-        'https://getfoods.ng/register-user',
-        'https://getfoods.ng/save-order',
+        'https://www.getfoods.ng/login-user',
+        'https://www.getfoods.ng/register-user',
+        'https://www.getfoods.ng/save-order',
 
-        'https://getfoods.ng/clear-cart',
-        'https://getfoods.ng/push-to-vendors',
-        'https://getfoods.ng/clear-temp',
-        'https://getfoods.ng/approve-collection',
-        'https://getfoods.ng/approve-vendor',
-        'https://getfoods.ng/decline-vendor',
-        'https://getfoods.ng/send-survey',
+        'https://www.getfoods.ng/clear-cart',
+        'https://www.getfoods.ng/push-to-vendors',
+        'https://www.getfoods.ng/clear-temp',
+        'https://www.getfoods.ng/approve-collection',
+        'https://www.getfoods.ng/approve-vendor',
+        'https://www.getfoods.ng/decline-vendor',
+        'https://www.getfoods.ng/send-survey',
 
     ];
 }
