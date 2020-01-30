@@ -30,19 +30,19 @@ class customercontroller extends Controller
        
         $start = \carbon\carbon::now()->subDays(7);
         $now =  $expiration  = \carbon\carbon::now();
-      return $rec = order::select('amt')->where('cusId','=',$userId)->whereBetween('created_at',array($start,$now))->sum('amt');
+      return $rec = order::select('total')->where('cusId','=',$userId)->whereBetween('created_at',array($start,$now))->sum('total');
     }
 
     public  function monthly_ex($userId){
      
         $start = \carbon\carbon::now()->subMonth();
         $now =  $expiration  = \carbon\carbon::now();
-      return $rec = order::select('amt')->where('cusId','=',$userId)->whereBetween('created_at',array($start,$now))->sum('amt');
+      return $rec = order::select('total')->where('cusId','=',$userId)->whereBetween('created_at',array($start,$now))->sum('total');
     }
 
     public  function total_ex($userId){
       
-      return $rec = order::select('amt')->where('cusId','=',$userId)->sum('amt');
+      return $rec = order::select('total')->where('cusId','=',$userId)->sum('total');
     }
 
 
