@@ -81,7 +81,7 @@
                               <v-list-item two-line>
                                 <v-list-item-content>
                                   <v-list-item-title>{{con.title}}</v-list-item-title>
-                                  <v-list-item-subtitle>{{con.created_at}} 
+                                  <v-list-item-subtitle> <!--{{con.created_at}} -->
                                       <v-btn class="mx-2 ml-5"  @click.prevent='check(con)' fab x-small>
                                               <v-icon>pageview</v-icon>
                                             </v-btn>
