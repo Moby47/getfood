@@ -78,8 +78,8 @@
                         <div class="form-group">
 
                             <v-text-field
-                            v-model='quantity' name='quantity' v-validate='"required|numeric"'
-                              :counter="2"
+                            v-model='quantity' name='quantity' v-validate='"required|numeric|max:3"'
+                              :counter="3"
                               label="Available Quantity"
                               required
                             ></v-text-field>
