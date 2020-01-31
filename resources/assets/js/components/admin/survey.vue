@@ -48,7 +48,11 @@
                             <tr class='animated tdFadeIn' v-for='con in content' v-bind:key='con.id'>
                          <td><a :href="`mailto:`+con.user_email">Email Customer</a></td>
                         <!-- <td>{{con.vendor_name}}</td>--> 
-                          <td @click.prevent='send(con)'><v-icon>send</v-icon></td>
+                          <td >
+                            <v-btn text icon color="orange" @click.prevent='send(con)'>
+                            <v-icon>send</v-icon>
+                            </v-btn>
+                            </td>
                                                 </tr>
                                             
                           </table>
