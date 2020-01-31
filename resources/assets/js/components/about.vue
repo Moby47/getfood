@@ -38,7 +38,7 @@
                    
                   >
                 <blockquote class='slideUp p-3 m-3'>
-                    <a href='https://www.getfoods.ng'>GETFOODS.NG</a> simplifies the process of food reservation and ordering for customers and restaurants. 
+                    <a href='https://getfoods.ng'>GETFOODS.NG</a> simplifies the process of food reservation and ordering for customers and restaurants. 
                     It’s all about convenience and ease.
                     <br><br>
                     We offer our customers detailed meal order history including information on periodic expenses,

@@ -39,7 +39,7 @@
                   >
                 <blockquote class='slideUp'>
                  Please carefully read the terms and conditions ("Terms and Conditions") below before placing any order for any of the Goods or Services 
-                 from http://www.getfoods.com.ng. By placing an order for any of the Goods or column Services from this Website,
+                 from https://getfoods.ng. By placing an order for any of the Goods or column Services from this Website,
                   whereas it is by phone, or by any other available channel, you agree to be bound by these Terms and Conditions.
                 </blockquote>  
   
@@ -56,7 +56,7 @@
   <span>
                 <h4 class='slideUp p-3'>Section 1: GetFoods Introduction</h4>
                 <ul class="slideUp m-3">
-                <li>We are GetFoods, a brand of http://www.getfoods.com.ng, unless otherwise stated.
+                <li>We are GetFoods, a brand of https://getfoods.ng, unless otherwise stated.
                     </li>
                 </ul>
 
@@ -78,7 +78,7 @@
 <br>
 2.8. "Food Delivery" references perishable goods and any form of delivery service, both provided by our Partner restaurants and for both of which our Partner restaurants take full responsibility;
 <br>
-2.9. "Website" is a reference to our Website http://www.getfoods.com.ng, our mobile applications or any other platform we will choose to offer our Goods or services.</li>
+2.9. "Website" is a reference to our Website https://getfoods.ng, our mobile applications or any other platform we will choose to offer our Goods or services.</li>
                 </ul>
 
  <h4 class='slideUp p-3'>Section 3: Ordering</h4>

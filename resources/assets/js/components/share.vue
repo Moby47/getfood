@@ -106,7 +106,7 @@
             //url issues
         
         // var url = String(window.location)
-         this.url = 'https://www.getfoods.ng'
+         this.url = 'https://getfoods.ng'
           },
         }
       
