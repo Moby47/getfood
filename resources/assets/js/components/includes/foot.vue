@@ -14,17 +14,17 @@
                     class="text-center"
                     cols="12"
                   >
-                  ({{ new Date().getFullYear() }})  HenryMoby   <a href='tel:08053121695' >Contact Support </a> 
+                 	&#169; ({{ new Date().getFullYear() }})<router-link to='/about' > GetFoods </router-link>
                   </v-col>
                     
                   <v-col>
                       <div class="text-center">
-                          <whats-app  :url="url" title="Get Food" scale="2" ></whats-app> 
-                           <email  :url="url" subject="Get Food" scale="2"></email>  
-                           <facebook  :url="url" scale="2"></facebook> 
-                            <twitter  :url="url" title="Get Food" scale="2"></twitter>  
-                           <linkedin  :url="url" scale="2"></linkedin>  
-                           <telegram  :url="url" scale="2"></telegram>  
+                          <whats-app  :url="url" title="Get Food" scale="1.3" ></whats-app> 
+                           <email  :url="url" subject="Get Food" scale="1.3"></email>  
+                           <facebook  :url="url" scale="1.3"></facebook> 
+                            <twitter  :url="url" title="Get Food" scale="1.3"></twitter>  
+                           <linkedin  :url="url" scale="1.3"></linkedin>  
+                           <telegram  :url="url" scale="1.3"></telegram>  
                       </div>
                   </v-col>
 
