@@ -94,6 +94,9 @@
                               <label class='text-center'>Select Unit</label>
             <select class="form-control" v-model='selected'  name='Unit'> 
                 <option value=''> --None-- </option>
+                <option value='Piece'> Piece </option>
+                <option value='Loaf'> Loaf </option>
+                <option value='Can'>Can </option>
       <option value='Plate'> Plate </option>
        <option  value='Portion'> Portion </option>
        <option  value='Pack'> Pack </option>
