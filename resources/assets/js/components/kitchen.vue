@@ -498,7 +498,7 @@
                   if(page_url){
                   NProgress.start();
                   }else{
-                    this.awaitingList ="Cheking "+this.selected+"'s Food Menu. Please wait"
+                    this.awaitingList ="Checking "+this.selected+"'s Food Menu. Please wait"
                   }
                   var   page_url = page_url || '/vendor-food/'+this.selected;
       
