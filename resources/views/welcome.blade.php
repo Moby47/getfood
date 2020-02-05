@@ -84,6 +84,7 @@
          <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
         
         <script src="{{asset('/js/app.js')}}"></script>
+        <script src="{{asset('/js/voca.min.js')}}"></script>
 
 <!-- register service worker -->
 <script type="text/javascript">
