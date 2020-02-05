@@ -148,7 +148,7 @@
                     var result = res.data.result;
                   
                           if(result == 1){
-                            this.text = 'Acount not verified. Please resend a verification email';
+                            this.text = 'Account not verified. Are you a customer? resend verification email. Vendor please contact support';
                             this.snackbar = true
                             this.overlay = false
                           }else if(result == 2){
