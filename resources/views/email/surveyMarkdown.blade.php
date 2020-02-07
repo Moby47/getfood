@@ -1,6 +1,6 @@
 @component('mail::message')
  
-<a href="https://getfoods.ng/{{$userId}}">
+<a href="https://getfoods.ng/my-survey/{{$userId}}">
     Click here to review your best food vendors
 </a> 
 
