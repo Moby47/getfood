@@ -186,7 +186,7 @@
         <span v-else>
           <v-icon left>local_shipping</v-icon>
           No delivery support</span>
-          
+
     </v-chip>
   </div>
 </template>
@@ -198,7 +198,7 @@
       outlined
     >
       <v-icon left>local_dining</v-icon>
-      <router-link :to='`/vendor/`+con.vendor_name' class='link'>{{con.vendor_name}}</router-link>
+      <router-link :to='`/vendor/`+con.slug' class='link'>{{con.vendor_name}}</router-link>
     </v-chip>
   </div>
 </template>
