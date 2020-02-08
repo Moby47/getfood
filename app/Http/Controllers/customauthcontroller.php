@@ -60,6 +60,7 @@ class customauthcontroller extends Controller
             //create vendor
            $user = new User;
            $user->name = $request->name;
+           $user->slug = $request->slug;
            $user->email = $request->email;
            $user->address = $request->address;
            $user->phone = $request->phone;
@@ -168,6 +169,7 @@ class customauthcontroller extends Controller
         //create
        $user = new User;
        $user->name = $request->name;
+       $user->slug = $request->slug;
        $user->email = $request->email;
        $user->phone = $request->phone;
        $user->playerId = $request->input('pId');
