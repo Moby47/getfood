@@ -386,7 +386,7 @@ public function get_my_surveys($userId){
 
 
         public function vendors($vendorName){
-
+          //user selected all from drop down, fetch all
           if($vendorName == 'all'){
             $vendors = user::where('verification','=',1)->where('status','=',1)
           ->select('id','score','name','email','address','phone')
@@ -394,6 +394,7 @@ public function get_my_surveys($userId){
           return userres::collection($vendors);
           }
           
+          //selection made, fetch by vendorname
           if($vendorName != 'undefined'){
             $vendors = user::where('verification','=',1)->where('status','=',1)
             ->where('name','=',$vendorName)
@@ -402,6 +403,7 @@ public function get_my_surveys($userId){
            return userres::collection($vendors);
           }
 
+          //failsafe
           $vendors = user::where('verification','=',1)->where('status','=',1)
           ->select('id','score','name','email','address','phone')
           ->paginate(7);
