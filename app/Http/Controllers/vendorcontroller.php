@@ -102,7 +102,6 @@ class vendorcontroller extends Controller
                     $quantity = $request->input('quantity');
                     $vendorId = $request->input('vendorId');
                     $vendorName = $request->input('vendorName');
-                    $slug = $request->input('slug');
                     $phone = $request->input('phone');
                     $unit = $request->input('unit');
                     $deliverySupport = $request->input('deliverySupport');
@@ -150,7 +149,7 @@ class vendorcontroller extends Controller
                   $save->phone = $phone;
                   $save->title = $food;
                   $save->amt = $price;
-                  $save->slug = $slug;
+                  $save->slug =  str_slug($vendorName, "-");
                   $save->qty =$quantity;
                   $save->unit =$unit;
                  $save->delivery =$deliverySupport;

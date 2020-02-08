@@ -162,7 +162,6 @@
 
           //start registeration
           var input = {'name':this.regName,'email':this.regEmail,'phone':this.regPhone,
-          'slug':v.slugify(this.regName),
           'password':this.regPassword,'pId':pId };
       
       //send to database with axios

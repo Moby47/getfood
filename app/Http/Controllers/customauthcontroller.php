@@ -60,7 +60,7 @@ class customauthcontroller extends Controller
             //create vendor
            $user = new User;
            $user->name = $request->name;
-           $user->slug = $request->slug;
+           $user->slug =  str_slug($request->name, "-");
            $user->email = $request->email;
            $user->address = $request->address;
            $user->phone = $request->phone;
@@ -80,7 +80,7 @@ class customauthcontroller extends Controller
         get admin Pid
         send push notification 
 */
-        $adminPId = user::where('status','=',47)->pluck('playerId')->toArray();
+        $adminPId = '';//user::where('status','=',47)->pluck('playerId')->toArray();
         $vendorName = $request->name;
 
         if($adminPId){
@@ -169,7 +169,7 @@ class customauthcontroller extends Controller
         //create
        $user = new User;
        $user->name = $request->name;
-       $user->slug = $request->slug;
+       $user->slug =  str_slug($request->name, "-");
        $user->email = $request->email;
        $user->phone = $request->phone;
        $user->playerId = $request->input('pId');
