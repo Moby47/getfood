@@ -17,7 +17,7 @@ class CreateFoodsTable extends Migration
             $table->increments('id');
             $table->integer('vendor_id');
             $table->string('vendor_name');
-           // $table->string('slug');
+            $table->string('slug');
             $table->string('vendorAddress');
             $table->string('phone');
             $table->string('title');
