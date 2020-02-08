@@ -1,0 +1,80 @@
+
+[v-cloak]>*{display:none}[v-cloak]>*{display:none}[v-cloak]::before{background-image:url(/images/loader.gif);background-size:cover;content:'Get Foods';
+    position:absolute;left:27%;top:40%;z-index:1;padding-left:123px;color:rgb(8, 7, 7);
+    width:180px;height:180px;margin:-75px 0 0 -75px;width:290px;height:210px;font-weight: bolder;
+    font-family:impact,Georgia,'Times New Roman',Times,serif}.im{width:100%!important;height:117px!important}
+    .address-margin{margin-bottom:3px!important}.padd{padding-top:0px!important}@media(min-width:1024px){.ad-img{width:100%!important;height:200px!important}.post-margin{margin-left:15px;margin-right:15px}.search-btn{margin-top:29px}}@media(min-width:767px){.ad-img{width:100%!important;height:200px!important}.post-margin{margin-left:9px;margin-right:29.9px}}.wrap{white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word}@media(max-width:766px){.ad-img{width:100%!important;height:150px!important}.listing.vertical .img{height:69px!important}.stat-space{margin-top:8px!important}.post-margin{margin-left:13px;margin-right:13px}.footer-fix{margin-top:12px}.catform{margin-bottom:20px!important}.search-text{display:none!important}}.white{color:white!important}.cursor{cursor:pointer}.custom-pad{padding:0 0 1.4em!important;margin-top:-45px!important}.love-color{color:rgba(255,0,34,.979)!important}.search-btn2{margin-top:-21px}.search-fix{padding:3px!important}@media(max-width:766px){.search-btn2{margin-top:9px;margin-bottom:9px}}.logo{width:80px}.down-mg{margin-bottom:-70px!important}.top-color{background-color:rgb(229,230,236)}@media(max-width:766px){.reduce-margin{margin-bottom:-22px!important}}#nprogress .bar{height:6px!important;background:rgba(255,0,34,.979)!important;border:rgba(255,0,34,.979)!important}#nprogress .spinner-icon{border-top-color:#30e3ca!important;border-left-color:white!important}.underline{text-decoration:none!important}.line{text-decoration:underline!important}.fa-heart{color:red!important}.fa-whatsapp{color:rgb(43,204,123)}.fa-bug{color:rgb(4,80,17)}.bg{background-image:url(/images/bg.jpg)}.admin-img{width:200px;height:100px}#autosuggest__input{outline:none;position:relative;display:block;font-family:monospace;font-size:16px;border:1px solid black;border-radius:4px;padding:0 0 4px;background:none!important;width:100%;box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box}#autosuggest__input.autosuggest__input-open{border-bottom-left-radius:0;border-bottom-right-radius:0}.autosuggest__results-container{position:relative;width:100%}.autosuggest__results{font-weight:300;margin:0;position:absolute;z-index:10000001;width:100%;border:1px solid #e0e0e0;border-bottom-left-radius:4px;border-bottom-right-radius:4px;background:white;padding:0;overflow:scroll;max-height:200px}.autosuggest__results ul{list-style:none;padding-left:0;margin:0}.autosuggest__results .autosuggest__results_item{cursor:pointer;padding:15px}#autosuggest ul:nth-child(1)>.autosuggest__results_title{border-top:none}.autosuggest__results .autosuggest__results_title{color:gray;font-size:11px;margin-left:0;padding:15px 13px 5px;border-top:1px solid lightgray}.autosuggest__results .autosuggest__results_item:active,.autosuggest__results .autosuggest__results_item:hover,.autosuggest__results .autosuggest__results_item:focus,.autosuggest__results .autosuggest__results_item.autosuggest__results_item-highlighted{background-color:#ddd}::placeholder{color:black;text-align:center!important}:-ms-input-placeholder{color:black;text-align:center!important}::-ms-input-placeholder{color:black;text-align:center!important}.vs__dropdown-toggle{border-color:black!important}.blue-bg{background-color:#035096!important}.blue-color{color:#035096!important}.color-dark{color:rgba(0,0,0,.56)}
+    
+ .cart{
+    padding-left: 31px !important;
+ }
+
+
+.menu-over{
+    z-index: 100 !important;
+}
+
+.mist{
+    background-color: rgba(35, 33, 29, 0.58);
+    margin: 10px;
+    padding: 7px;
+    border-radius: 7px;
+    font-weight: 350 !important;
+}
+
+  .text-white{
+        color:white;
+    }
+
+    .text-black{
+color:black !important;
+    }
+
+    .back{
+        height:750px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-image: url('/images/jollof.jpg');
+    }
+
+
+    #nprogress .bar{
+        height:6px!important;
+        background:#FFA500!important;
+        border:#FFA500!important
+    }
+        #nprogress .spinner-icon{
+            border-top-color:#FFA500!important;
+            border-left-color:white!important
+    }
+
+    .radius{
+        border-radius: 6px;
+    }
+
+
+    #pay{
+        margin: 0 40px 20px 79px;
+    }
+
+
+.info{
+    margin-top: 113px !important;
+    background-color: #ffb42ed3;
+    border-radius: 2px;
+    padding: 5px !important;
+    font-size: 13px;
+    color:white;
+}
+
+.white{
+    color:white !important;
+}
+
+.icon-shift{
+    padding-top: 5px;
+}
+
+.img_size{
+    height:90px !important;
+}
