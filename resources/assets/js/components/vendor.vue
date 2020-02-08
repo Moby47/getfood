@@ -313,7 +313,7 @@
                   }else{
                       this.overlay2 = !this.overlay2
                   }
-                var   page_url = page_url || '/vendor-food/'+this.selected;
+                var   page_url = page_url || '/vendor-food/'+v.slugify(this.selected);
       
                 fetch(page_url)
                 .then(res => res.json())
