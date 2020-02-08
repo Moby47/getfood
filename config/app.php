@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'https://getfoods.ng'),
+    'url' => env('APP_URL', 'https://localhost:8000'),
 
     /*
     |--------------------------------------------------------------------------

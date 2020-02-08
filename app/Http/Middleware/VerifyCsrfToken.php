@@ -13,35 +13,35 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         //allow url, no csrf token needed
-        'https://getfoods.ng/add-favorite',
-        'https://getfoods.ng/remove-favorite',
-        'https://getfoods.ng/rate-vendor',
+        'https://localhost:8000/add-favorite',
+        'https://localhost:8000/remove-favorite',
+        'https://localhost:8000/rate-vendor',
 
-        'https://getfoods.ng/add-to-cart',
-        'https://getfoods.ng/remove-from-cart',
+        'https://localhost:8000/add-to-cart',
+        'https://localhost:8000/remove-from-cart',
 
-        'https://getfoods.ng/add-fav-to-cart',
-        'https://getfoods.ng/remove-fav-from-cart',
+        'https://localhost:8000/add-fav-to-cart',
+        'https://localhost:8000/remove-fav-from-cart',
 
-        'https://getfoods.ng/remove-from-fav',
+        'https://localhost:8000/remove-from-fav',
 
-        'https://getfoods.ng/new-food',
-        'https://getfoods.ng/delete-food',
-        'https://getfoods.ng/edit-food',
+        'https://localhost:8000/new-food',
+        'https://localhost:8000/delete-food',
+        'https://localhost:8000/edit-food',
         
-        'https://getfoods.ng/player-id',
+        'https://localhost:8000/player-id',
 
-        'https://getfoods.ng/login-user',
-        'https://getfoods.ng/register-user',
-        'https://getfoods.ng/save-order',
+        'https://localhost:8000/login-user',
+        'https://localhost:8000/register-user',
+        'https://localhost:8000/save-order',
 
-        'https://getfoods.ng/clear-cart',
-        'https://getfoods.ng/push-to-vendors',
-        'https://getfoods.ng/clear-temp',
-        'https://getfoods.ng/approve-collection',
-        'https://getfoods.ng/approve-vendor',
-        'https://getfoods.ng/decline-vendor',
-        'https://getfoods.ng/send-survey',
+        'https://localhost:8000/clear-cart',
+        'https://localhost:8000/push-to-vendors',
+        'https://localhost:8000/clear-temp',
+        'https://localhost:8000/approve-collection',
+        'https://localhost:8000/approve-vendor',
+        'https://localhost:8000/decline-vendor',
+        'https://localhost:8000/send-survey',
 
     ];
 }
