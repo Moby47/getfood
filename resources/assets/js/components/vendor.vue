@@ -150,8 +150,13 @@
       small
       outlined
     >
-      <v-icon left >local_shipping</v-icon>
-      <span v-if='con.delivery == 1'>Yes</span> <span v-else>No</span>
+    <span v-if='con.delivery == 1'>
+        <v-icon left class='sideToSide'>local_shipping</v-icon>
+        <span class='ml-3'>Vendor supports delivery</span> </span>
+        
+        <span v-else>
+          <v-icon left>local_shipping</v-icon>
+          No delivery support</span>
     </v-chip>
   </div>
 </template>
