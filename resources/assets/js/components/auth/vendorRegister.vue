@@ -168,7 +168,7 @@
           var pId = data[0].pp || null;
          }
 
-    var input = {'name':this.regName,'email':this.regEmail,'password':this.regPassword,
+    var input = {'name':this.regName,'email':this.regEmail,'password':this.regPassword,'slug':v.slugify(this.regName),
     'address':this.regAddress,'phone':this.regPhone, 'vendor':true,'pId':pId, 'delivery':this.selected };
       
                       //send to database with axios
