@@ -136,11 +136,11 @@
             
        <div class="my-2 text-center">
           <v-btn v-if='go == true' 
-             @click.prevent='back()' outlined color="#FFA500">Delivery Method</v-btn>   
+             @click.prevent='back()' outlined color="#FFA500">Delivery Methods</v-btn>   
           </div>
             
             <div class="my-2 text-center">
-       <v-btn v-if='choiceBtn == false' @click.prevent='self()' outlined color="#FFA500">Pick-up By Self</v-btn>   
+       <v-btn v-if='choiceBtn == false' @click.prevent='self()' outlined color="#FFA500">I will pick up</v-btn>   
             </div>
 
        <div class="form-group" v-if='addText == true'>
@@ -159,7 +159,7 @@
             </div>
 
   <div class="my-2 text-center">
-       <v-btn v-if='choiceBtn == false' @click.prevent='vendor()' outlined color="#FFA500">Vendor delivery</v-btn>   
+       <v-btn v-if='choiceBtn == false' @click.prevent='vendor()' outlined color="#FFA500">Vendor will deliver</v-btn>   
             </div>
                        
                 </span>
@@ -290,8 +290,13 @@ import paystack from 'vue-paystack';
           },
 
           vendor(){
-            this.addText = true
-            this.choiceBtn = !this.choiceBtn
+            var prompt = confirm('Please be sure that the selected Vendor(s) support delivery')
+                if(prompt){
+                  this.addText = true
+                 this.choiceBtn = !this.choiceBtn
+                 this.$toasted.show('Please provide a detailed address for delivery');
+                }
+            
           },
 
           reset(){
