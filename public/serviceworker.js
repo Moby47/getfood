@@ -58,7 +58,7 @@ var filesToCache = [
     'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js',
     'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js',
     '/js/idb.js',
-    //'/js/app.js', //don't cache this
+    '/js/voca.min.js'
     
 ];
 
