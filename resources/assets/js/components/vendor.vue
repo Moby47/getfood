@@ -51,7 +51,7 @@
             </v-chip>
 
 <select class="form-control" v-model='selected'> 
-<option :value='ven.name' v-for='ven in vendor_list' v-bind:key='ven.id'>
+<option :value='ven.slug' v-for='ven in vendor_list' v-bind:key='ven.id'>
 {{ven.name.slice(0, 25)}} - {{ven.address.slice(0, 25)}} 
 </option>
 </select>
@@ -313,7 +313,7 @@
                   }else{
                       this.overlay2 = !this.overlay2
                   }
-                var   page_url = page_url || '/vendor-food/'+v.slugify(this.selected);
+                var   page_url = page_url || '/vendor-food/'+this.selected;
       
                 fetch(page_url)
                 .then(res => res.json())
