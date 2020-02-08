@@ -50,8 +50,8 @@
               </v-chip>
   
   <select class="form-control" v-model='vendorName'> 
-    <option value='all'> View all vendors </option>
-  <option :value='ven.name' v-for='ven in vendor_list' v-bind:key='ven.id'>
+    <option value='all'> All vendors </option>
+  <option :value='ven.slug' v-for='ven in vendor_list' v-bind:key='ven.id'>
   {{ven.name.slice(0, 25)}} - {{ven.address.slice(0, 25)}} 
   </option>
   </select>
@@ -79,7 +79,7 @@
       <v-col cols="8" >
           <div class="p-3">
              
-            <div><router-link :to='`/vendor/`+con.name'>{{con.name}}</router-link></div>
+            <div><router-link class='link':to='`/vendor/`+con.slug'>{{con.name}}</router-link></div>
             
             <div>{{con.address}}</div>
             <div>  <a :href="`tel:`+con.phone"> Call </a>  </div>
@@ -98,11 +98,11 @@
    
     <v-card-actions class="pa-4">
         <div class="">
-            <whats-app  :url="url+con.name" title="Find us on GetFoods" scale="1.5" ></whats-app> 
-             <email  :url="url+con.name" subject="Find us on GetFoods" scale="1.5"></email>  
-             <facebook  :url="url+con.name" scale="1.5"></facebook> 
-              <twitter  :url="url+con.name" title="Find us on GetFoods" scale="1.5"></twitter>  
-             <linkedin  :url="url+con.name" scale="1.5"></linkedin>  
+            <whats-app  :url="url+con.slug" title="Find us on GetFoods." scale="1.5" ></whats-app> 
+             <email  :url="url+con.slug" subject="Find us on GetFoods." scale="1.5"></email>  
+             <facebook  :url="url+con.slug" scale="1.5"></facebook> 
+              <twitter  :url="url+con.slug" title="Find us on GetFoods." scale="1.5"></twitter>  
+             <linkedin  :url="url+con.slug" scale="1.5"></linkedin>  
         </div>
       <v-spacer></v-spacer>
       
@@ -496,7 +496,7 @@ readVendorData(table){
             }
 
               // var url = String(window.location)
-              this.url = 'https://getfoods.ng/vendor-reviews/'
+              this.url = 'http://localhost:8000/vendor-reviews/'
 
              setTimeout(func=>{
                     this.clearAndWriteData('vendor-list',this.vendor_list)
