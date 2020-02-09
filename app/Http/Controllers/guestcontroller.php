@@ -231,8 +231,8 @@ return 1;
 
 
 public function vendorFood($vendor){
-  $food = food::orderby('id','desc')->where('vendor_name','=',$vendor)
-  ->select('id','amt','qty','title','img','unit','vendor_id','vendor_name','vendorAddress','delivery')->paginate(5);
+  $food = food::orderby('id','desc')->where('slug','=',$vendor)
+  ->select('id','amt','qty','title','img','unit','vendor_id','slug','vendor_name','vendorAddress','delivery')->paginate(5);
 
   return foodres::collection($food);
   }
