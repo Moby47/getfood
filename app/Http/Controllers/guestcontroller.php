@@ -387,23 +387,25 @@ public function get_my_surveys($userId){
 
         public function vendors($vendorName){
 
-          if($vendorName == 'all'){
-            $vendors = user::where('verification','=',1)->where('status','=',1)
-          ->select('id','score','name','email','address','phone')
+           //user selected all from drop down, fetch all
+           if($vendorName == 'all'){
+            $vendors = user::orderby('id','desc')->where('verification','=',1)->where('status','=',1)
+          ->select('id','slug','score','name','email','address','phone')
           ->paginate(7);
           return userres::collection($vendors);
           }
-          
+          //selection made, fetch by vendorname
           if($vendorName != 'undefined'){
             $vendors = user::where('verification','=',1)->where('status','=',1)
-            ->where('name','=',$vendorName)
-           ->select('id','score','name','email','address','phone')
+            ->where('slug','=',$vendorName)
+           ->select('id','slug','score','name','email','address','phone')
            ->paginate(7);
            return userres::collection($vendors);
           }
 
-          $vendors = user::where('verification','=',1)->where('status','=',1)
-          ->select('id','score','name','email','address','phone')
+          //failsafe where $vendorName == undefined 
+          $vendors = user::orderby('id','desc')->where('verification','=',1)->where('status','=',1)
+          ->select('id','slug','score','name','email','address','phone')
           ->paginate(7);
           return userres::collection($vendors);
           }
