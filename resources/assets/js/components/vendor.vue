@@ -51,7 +51,7 @@
             </v-chip>
 
 <select class="form-control" v-model='selected'> 
-<option :value='ven.name' v-for='ven in vendor_list' v-bind:key='ven.id'>
+<option :value='ven.slug' v-for='ven in vendor_list' v-bind:key='ven.id'>
 {{ven.name.slice(0, 25)}} - {{ven.address.slice(0, 25)}} 
 </option>
 </select>
@@ -157,7 +157,7 @@
       <span v-else>
         <v-icon left>local_shipping</v-icon>
         No delivery support</span>
-        
+
     </v-chip>
   </div>
 </template>
