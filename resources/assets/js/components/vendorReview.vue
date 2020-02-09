@@ -98,11 +98,11 @@
    
     <v-card-actions class="pa-4">
         <div class="">
-            <whats-app  :url="url+con.name" title="Find us on GetFoods" scale="1.5" ></whats-app> 
-             <email  :url="url+con.name" subject="Find us on GetFoods" scale="1.5"></email>  
-             <facebook  :url="url+con.name" scale="1.5"></facebook> 
-              <twitter  :url="url+con.name" title="Find us on GetFoods" scale="1.5"></twitter>  
-             <linkedin  :url="url+con.name" scale="1.5"></linkedin>  
+            <whats-app  :url="url+con.slug" title="Find us on GetFoods" scale="1.5" ></whats-app> 
+             <email  :url="url+con.slug" subject="Find us on GetFoods" scale="1.5"></email>  
+             <facebook  :url="url+con.slug" scale="1.5"></facebook> 
+              <twitter  :url="url+con.slug" title="Find us on GetFoods" scale="1.5"></twitter>  
+             <linkedin  :url="url+con.slug" scale="1.5"></linkedin>  
         </div>
       <v-spacer></v-spacer>
       
