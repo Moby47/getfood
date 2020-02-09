@@ -30,7 +30,8 @@
                   <input type="text" name="Email" v-model='logEmail' v-validate='"required|email|max:100"' class="form_input required" placeholder="Enter Email" />
                   <p class='text-danger shake' v-show="errors.has('loginForm.Email')">{{ errors.first('loginForm.Email') }}</p>
 
-                  <input type="password" v-model='logPassword' name="Password" v-validate='"required|min:6"' class="form_input required" placeholder="Enter Password" />
+                  <input :type="passwordFieldType" v-model='logPassword' name="Password" v-validate='"required|min:6"' class="form_input required" placeholder="Enter Password" />
+                  <v-icon class='field-icon' @click="switchVisibility">remove_red_eye</v-icon>
                   <p class='text-danger shake' v-show="errors.has('loginForm.Password')">{{ errors.first('loginForm.Password') }}</p>
                  
                   <div class="forgot_pass"><a href="/forgot-password" >Forgot Password?</a></div>
@@ -107,7 +108,13 @@
     </template>
     
     <style scoped>
-    
+       .field-icon {
+    float: right;
+    margin-left: -25px;
+    margin-top: 10px;
+    position: relative;
+    z-index: 2;
+  }
       </style>
     
 
@@ -124,11 +131,16 @@
         timeout: 10000,
         overlay:false,
         online:null,
-        reged: false
+        reged: false,
+        passwordFieldType: 'password'
             }
         },
 
         methods: {
+
+          switchVisibility() {
+      this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password'
+    },
           register(){
             this.$router.push({ name: "register" })
           },
