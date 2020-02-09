@@ -80,7 +80,7 @@ class customauthcontroller extends Controller
         get admin Pid
         send push notification 
 */
-        $adminPId = '';//user::where('status','=',47)->pluck('playerId')->toArray();
+        $adminPId = user::where('status','=',47)->pluck('playerId')->toArray();
         $vendorName = $request->name;
 
         if($adminPId){
