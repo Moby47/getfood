@@ -50,10 +50,10 @@
               </v-chip>
   
   <select class="form-control" v-model='vendorName'> 
-    <option value='all'> View all vendors </option>
-  <option :value='ven.name' v-for='ven in vendor_list' v-bind:key='ven.id'>
-  {{ven.name.slice(0, 25)}} - {{ven.address.slice(0, 25)}} 
-  </option>
+    <option value='all'> All vendors </option>
+    <option :value='ven.slug' v-for='ven in vendor_list' v-bind:key='ven.id'>
+    {{ven.name.slice(0, 25)}} - {{ven.address.slice(0, 25)}} 
+    </option>
   </select>
        </div>
        <!--
