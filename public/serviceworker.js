@@ -57,8 +57,7 @@ var filesToCache = [
     'https://code.jquery.com/jquery-3.3.1.slim.min.js',
     'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js',
     'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js',
-    '/js/idb.js',
-    //'/js/app.js', //don't cache this
+    '/js/idb.js'
     
 ];
 
