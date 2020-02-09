@@ -79,7 +79,7 @@
       <v-col cols="8" >
           <div class="p-3">
              
-            <div><router-link :to='`/vendor/`+con.name'>{{con.name}}</router-link></div>
+            <div><router-link :to='`/vendor/`+con.slug'>{{con.name}}</router-link></div>
             
             <div>{{con.address}}</div>
             <div>  <a :href="`tel:`+con.phone"> Call </a>  </div>
