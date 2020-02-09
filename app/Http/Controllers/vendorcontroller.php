@@ -149,6 +149,7 @@ class vendorcontroller extends Controller
                   $save->phone = $phone;
                   $save->title = $food;
                   $save->amt = $price;
+                  $save->slug =  str_slug($vendorName, "-");
                   $save->qty =$quantity;
                   $save->unit =$unit;
                  $save->delivery =$deliverySupport;
