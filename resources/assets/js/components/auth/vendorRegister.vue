@@ -37,8 +37,9 @@
            <input type="text" v-model='regPhone' name="Phone"  v-validate='"required|max:11|min:11"' value="" class="form_input required" placeholder="Enter Phone Number" />
            <p class='text-danger shake' v-show="errors.has('regForm.Phone')">{{ errors.first('regForm.Phone') }}</p>
            
-           <input type="password" v-model='regPassword' v-validate='"required|min:6"' name="Password" value="" class="form_input required" placeholder="Enter Password" />
-           <p class='text-danger shake' v-show="errors.has('regForm.Password')">{{ errors.first('regForm.Password') }}</p>
+           <input :type="passwordFieldType" v-model='regPassword' v-validate='"required|min:6"' name="Password" value="" class="form_input required" placeholder="Enter Password" />
+           <v-icon class='field-icon' @click="switchVisibility">remove_red_eye</v-icon>
+            <p class='text-danger shake' v-show="errors.has('regForm.Password')">{{ errors.first('regForm.Password') }}</p>
 
 <label class='text-center'>Do you support food delivery?</label>
             <select class="form-control" v-model='selected' v-validate='"required|min:1"' name='delivery'> 
@@ -116,8 +117,14 @@
     </template>
     
     <style scoped>
-    
-      </style>
+      .field-icon {
+    float: right;
+    margin-left: -25px;
+    margin-top: 10px;
+    position: relative;
+    z-index: 2;
+  }
+        </style>
     
 
     
@@ -138,10 +145,15 @@
         valError:[],
         online:null,
         selected:'',
+        passwordFieldType: 'password'
             }
         },
 
         methods: {
+
+          switchVisibility() {
+      this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password'
+    },
           login(){
             this.$router.push({ name: "login" })
           },
