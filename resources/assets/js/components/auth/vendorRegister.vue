@@ -49,6 +49,10 @@
       </select>
 <p class='text-danger shake' v-show="errors.has('regForm.delivery')">{{ errors.first('regForm.delivery') }}</p>
 
+<span v-if='selected == 1'>
+<input type="text" v-model='deliveryFee' name="deliveryFee"  v-validate='"required|integer"' value="" class="form_input required" placeholder="Enter Delivery Fee" />
+<p class='text-danger shake' v-show="errors.has('regForm.deliveryFee')">{{ errors.first('regForm.deliveryFee') }}</p>
+</span>
            <input type="submit" v-if='online' @click.prevent='reg()' name="submit" class="form_submit" id="submit" value="SIGN UP" />
            <input type="submit" v-else @click.prevent='offline()' name="submit" class="form_submit" id="submit" value="SIGN UP" />
                   
@@ -145,7 +149,8 @@
         valError:[],
         online:null,
         selected:'',
-        passwordFieldType: 'password'
+        passwordFieldType: 'password',
+        deliveryFee:''
             }
         },
 
@@ -181,7 +186,8 @@
          }
 
     var input = {'name':this.regName,'email':this.regEmail,'password':this.regPassword,
-    'address':this.regAddress,'phone':this.regPhone, 'vendor':true,'pId':pId, 'delivery':this.selected };
+    'address':this.regAddress,'phone':this.regPhone, 'vendor':true,'pId':pId, 'delivery':this.selected,
+    'deliveryFee':this.deliveryFee };
       
                       //send to database with axios
                           axios.post('/register-user',input)
