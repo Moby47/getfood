@@ -50,7 +50,7 @@
 <p class='text-danger shake' v-show="errors.has('regForm.delivery')">{{ errors.first('regForm.delivery') }}</p>
 
 <span v-if='selected == 1'>
-<input type="text" v-model='deliveryFee' name="deliveryFee"  v-validate='"required|integer"' value="" class="form_input required" placeholder="Enter Delivery Fee" />
+<input type="text" v-model='deliveryFee' name="deliveryFee"  v-validate='"integer"' value="" class="form_input required" placeholder="Enter Delivery Fee" />
 <p class='text-danger shake' v-show="errors.has('regForm.deliveryFee')">{{ errors.first('regForm.deliveryFee') }}</p>
 </span>
            <input type="submit" v-if='online' @click.prevent='reg()' name="submit" class="form_submit" id="submit" value="SIGN UP" />
