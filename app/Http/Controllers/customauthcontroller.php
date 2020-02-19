@@ -40,7 +40,7 @@ class customauthcontroller extends Controller
 
         return ['userToken'=>$token, 'userId'=>$user->id, 'userName'=> $user->name,'userMail'=>$user->email,
         'userStatus'=>$user->status, 'vendorAddress'=>$user->address,'deliverySupport'=>$user->delivery,
-    'phone'=>$user->phone]; //ok
+    'phone'=>$user->phone,'deliveryFee'=>$user->deliveryFee]; //ok
 
     }
 
