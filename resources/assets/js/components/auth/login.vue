@@ -180,7 +180,7 @@
                                localStorage.setItem('phone',res.data.phone);
                                localStorage.setItem('userStatus',res.data.userStatus);
                                localStorage.setItem('deliverySupport',res.data.deliverySupport);
-
+                               localStorage.setItem('deliveryFee',res.data.deliveryFee);
                                //save for offline
                                this.clearSaveForOffline()
 
