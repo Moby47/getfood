@@ -26,7 +26,7 @@ class guestcontroller extends Controller
     //method to get food list for customers to see and buy
     public function get_foods(){
 
-        $food = food::orderby('id','desc')->select('id','amt','slug','qty','unit','title','img','vendor_id',
+        $food = food::orderby('id','desc')->select('id','amt','deliveryFee','slug','qty','unit','title','img','vendor_id',
         'vendor_name','vendorAddress','delivery')->paginate(10);
         return foodres::collection($food);
     }
