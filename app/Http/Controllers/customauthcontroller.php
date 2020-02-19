@@ -55,7 +55,6 @@ class customauthcontroller extends Controller
                 'address' => 'required|string|max:255',
                 'phone' => 'required|string',
                 'delivery'=> 'required|integer',
-                'deliveryFee'=> 'integer'
             ]);
     
             //create vendor
