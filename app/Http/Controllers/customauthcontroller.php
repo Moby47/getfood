@@ -54,7 +54,8 @@ class customauthcontroller extends Controller
                 'password' => 'required|string|min:6', //|confirmed
                 'address' => 'required|string|max:255',
                 'phone' => 'required|string',
-                'delivery'=> 'required|integer'
+                'delivery'=> 'required|integer',
+                'deliveryFee'=> 'integer'
             ]);
     
             //create vendor
@@ -66,6 +67,7 @@ class customauthcontroller extends Controller
            $user->phone = $request->phone;
            $user->status = 1;
            $user->delivery = $request->input('delivery');
+           $user->deliveryFee = $request->input('deliveryFee');
            $user->playerId = $request->input('pId');
            $user->password = bcrypt($request->password);
            $user->verifytoken = $verifytoken = Str::random(40);
