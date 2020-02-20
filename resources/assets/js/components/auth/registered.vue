@@ -19,7 +19,8 @@
                 <div class="page_single layout_fullwidth_padding bounceIn mt-5">
                   <div class="success_message">
                   <img src="/images/icons/black/user.png" alt="" title="" />
-                  <p>Your Account <br />Has Been successfully created.</p> 
+                  <p>Account created!<br/>
+                    Check your email for verification.</p> 
                   <p><router-link to='/resend-email'>Resend email verification</router-link></p> 
                   <p><router-link to='/user-signin'>Sign in</router-link></p>   
                   <p><router-link to='/'>Go Home</router-link></p> 
