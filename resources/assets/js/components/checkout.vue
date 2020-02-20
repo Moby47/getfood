@@ -108,7 +108,7 @@
                             <div class="carttotal_row_last">
                    <div class="carttotal_left">SERVICE CHARGE</div> <div class="carttotal_right"><strike>N</strike>{{charges}}</div>
                             <div class="carttotal_left">SUBTOTAL</div> <div class="carttotal_right"><strike>N</strike> {{subtotal}}</div>
-                           
+                            <div class="carttotal_left ">DELIVERY (X{{vendorCount}} vendors)</div> <div class="carttotal_right text-success"><strike>N</strike> {{deliveryFee}}</div>
                      <div class="carttotal_left ">TOTAL</div> <div class="carttotal_right text-success"><strike>N</strike> {{total}}</div>
                             </div>
                         </div> 
@@ -253,7 +253,9 @@ import paystack from 'vue-paystack';
                 amount: 0, //total in naira * 100 = Kobo equivalent 
 
                 loadingText: 'Loading Food Details...',
-                pId:[]
+                pId:[],
+                deliveryFee: 0,
+                vendorCount: 0
                 
             }
         },
@@ -498,9 +500,23 @@ fetch('https://onesignal.com/api/v1/notifications', {
                     //amount in naira
                     this.total = sum;
                     //amount to kobo N500
-                    this.amount = sum * 100;
+                   // this.amount = sum * 100;
+
+                    //fetch total delivery cost
+                    fetch('/delivery-fee'+'/'+ localStorage.getItem('tempUserCartID'))
+                  .then(res => res.json())
+                  .then(res=>{
+                    this.deliveryFee = res.data.deliveryFee
+                    this.vendorCount = res.data.vendorCount
+
+                    this.total = this.total + this.deliveryFee
+                    this.amount = this.total * 100
+
                     this.overlay = !this.overlay
                      this.TotalWait = false;
+                  })
+                  //fetch total delivery cost
+
                   })
                   .catch(error =>{
                     this.overlay = false

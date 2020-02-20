@@ -249,6 +249,18 @@ $ok->save();
               return \Cart::session($id)->getTotal();
               }
 
+  public function deliveryFee($id){
+    
+     $vendorCount= temp::select('deliveryFee')
+    ->where('tempid','=', 420395442)
+    ->groupBy('deliveryFee')->pluck('deliveryFee')->count();
+
+     $deliveryFee= temp::select('deliveryFee')
+      ->where('tempid','=', 420395442)
+     ->groupBy('deliveryFee')->pluck('deliveryFee')->sum();
+
+     return ['deleveryFee'=>$deliveryFee, 'vendorCount'=>$vendorCount];
+  }
 
               public function clearcart(Request $request){
                 \Cart::clear();

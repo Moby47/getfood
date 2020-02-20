@@ -47,6 +47,7 @@ Route::get('/offline-foods', 'guestcontroller@offline_foods');
 Route::get('/cartCount/{id}', 'cartcontroller@cartCount');
 Route::get('/checkout/{id}', 'cartcontroller@checkout');
 Route::get('/sumtotal/{id}', 'cartcontroller@sumtotal');
+Route::get('/delivery-fee/{id}', 'cartcontroller@deliveryFee');
 Route::get('/get-fav/{id}', 'guestcontroller@getFavorites');
 Route::get('/vendor-food/{vendor}', 'guestcontroller@vendorFood');
 Route::get('/vendor-list', 'guestcontroller@vendorList');
