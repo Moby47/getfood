@@ -68,6 +68,7 @@ public function addFavorite(Request $request){
         $save->qty = $food->qty;
         $save->img = $food->img;
         $save->delivery = $food->delivery;
+        $save->deliveryFee = $food->deliveryFee;
         $save->vendor_name= $food->vendor_name;
         $save->vendorAddress= $food->vendorAddress;
         $save->save();
