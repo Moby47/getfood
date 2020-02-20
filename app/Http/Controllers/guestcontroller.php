@@ -157,6 +157,7 @@ if($ok){
   $ok->vendorName = $food->vendor_name;
   $ok->foodId = $foodId;
   $ok->foodName = $food->title;
+  $ok->deliveryFee = $food->deliveryFee;
   $ok->amt = $food->amt;
   $ok->qty = $qty;
   $ok->save();
@@ -170,6 +171,7 @@ $ok->vendorId = $food->vendor_id;
 $ok->vendorName = $food->vendor_name;
 $ok->foodId = $foodId;
 $ok->foodName = $food->title;
+$ok->deliveryFee = $food->deliveryFee;
 $ok->amt = $food->amt;
 $ok->qty = $qty;
 $ok->save();

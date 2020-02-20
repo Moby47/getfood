@@ -250,13 +250,13 @@ $ok->save();
               }
 
   public function deliveryFee($id){
-    
+
      $vendorCount= temp::select('deliveryFee')
-    ->where('tempid','=', 420395442)
+    ->where('tempid','=', $id)
     ->groupBy('deliveryFee')->pluck('deliveryFee')->count();
 
      $deliveryFee= temp::select('deliveryFee')
-      ->where('tempid','=', 420395442)
+      ->where('tempid','=', $id)
      ->groupBy('deliveryFee')->pluck('deliveryFee')->sum();
 
      return ['deleveryFee'=>$deliveryFee, 'vendorCount'=>$vendorCount];
