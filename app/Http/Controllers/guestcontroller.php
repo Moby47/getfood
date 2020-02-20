@@ -89,7 +89,7 @@ public function removeFavorite(Request $request){
 
 
 public function getFavorites($id){
-  $fav = favourite::orderby('id', 'desc')->where('cusId','=',$id)->select('id','foodId','title','amt','qty','img',
+  $fav = favourite::orderby('id', 'desc')->where('cusId','=',$id)->select('id','foodId','deliveryFee','title','amt','qty','img',
   'cusId','vendor_name','vendorAddress','delivery')->paginate(6);
     return favres::collection($fav);
 }
@@ -232,7 +232,7 @@ return 1;
 
 public function vendorFood($vendor){
   $food = food::orderby('id','desc')->where('slug','=',$vendor)
-  ->select('id','amt','qty','title','img','unit','vendor_id','slug','vendor_name','vendorAddress','delivery')->paginate(5);
+  ->select('id','amt','qty','title','img','unit','deliveryFee','vendor_id','slug','vendor_name','vendorAddress','delivery')->paginate(5);
 
   return foodres::collection($food);
   }
