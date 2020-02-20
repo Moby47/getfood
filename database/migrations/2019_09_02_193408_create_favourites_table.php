@@ -22,6 +22,7 @@ class CreateFavouritesTable extends Migration
             $table->integer('qty');
             $table->string('img');
             $table->integer('delivery');
+            $table->integer('deliveryFee')->nullable();
             $table->string('vendor_name');
             $table->string('vendorAddress');
             $table->timestamps();
