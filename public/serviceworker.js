@@ -696,6 +696,8 @@ self.addEventListener('sync', function(event) {
                   address: dt.address,
                   img: dt.img,
                   quantity: dt.quantity,
+                  deliveryFee: dt.deliveryFee,
+                  deliverySupport: dt.deliverySupport,
                })
               })
                 .then(function(res) {

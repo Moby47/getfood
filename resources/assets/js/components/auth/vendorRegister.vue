@@ -263,7 +263,8 @@ var dbPromise = idb.open('getFoodsDB', 14, function (db) {
               });
 
 var dat = {id: new Date().toISOString(),'e':this.regEmail,'p':pass,
-'tok':regData.data.userToken,'id':regData.data.userId,'name':regData.data.userName,'stat':regData.data.userStatus,'del':regData.data.deliverySupport}
+'tok':regData.data.userToken,'id':regData.data.userId,'name':regData.data.userName,'stat':regData.data.userStatus,
+'del':regData.data.deliverySupport, 'delfee':regData.data.deliveryFee}
 console.log('dat',dat)
 
               //clear data func

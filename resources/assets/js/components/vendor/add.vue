@@ -291,7 +291,8 @@
 
     var input = {id:  new Date().toISOString(),'food': this.food,'price': this.price,
     'vendorId': localStorage.getItem('userId'),'vendorName': localStorage.getItem('userName'),
-    'img':'noimage.jpg','address': localStorage.getItem('vendorAddress'),'quantity': this.quantity}
+    'img':'noimage.jpg','address': localStorage.getItem('vendorAddress'),'quantity': this.quantity
+    ,'deliveryFee': localStorage.getItem('deliveryFee'),'deliverySupport': localStorage.getItem('deliverySupport')}
 
 this.$toasted.show("Food queued for addition to Food Menu...");
           this.text = 'manage Food Menu?'

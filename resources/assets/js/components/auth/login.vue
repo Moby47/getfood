@@ -322,7 +322,7 @@ function clearAllData(table){
   var dat = {id: new Date().toISOString(),'e':this.logEmail,'p':pass,
   'tok':localStorage.getItem('userToken'),'id':localStorage.getItem('userId'),'name':localStorage.getItem('userName'),
   'stat':localStorage.getItem('userStatus'),'del':localStorage.getItem('deliverySupport')
-  ,'phone':localStorage.getItem('phone')}
+  ,'phone':localStorage.getItem('phone'),'delfee':localStorage.getItem('deliveryFee')}
 
 //save data func
 function saveData(dat){
@@ -397,6 +397,7 @@ if(this.logEmail == data[0].e && this.logPassword == pass){
                                localStorage.setItem('userStatus',data[0].stat);
                                localStorage.setItem('phone',data[0].phone);
                                localStorage.setItem('deliverySupport',data[0].del);
+                               localStorage.setItem('deliveryFee',data[0].delfee);
                                var status = localStorage.getItem('userStatus')
                                     if(status == 1){
                                   //ven
