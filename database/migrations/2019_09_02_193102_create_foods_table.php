@@ -25,6 +25,7 @@ class CreateFoodsTable extends Migration
             $table->string('unit')->nullable();
             $table->integer('qty');
             $table->integer('delivery')->nullable();
+            $table->integer('deliveryFee')->nullable();
             $table->string('img');
             $table->timestamps();
         });
