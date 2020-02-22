@@ -40,7 +40,7 @@ class customauthcontroller extends Controller
 
         return ['userToken'=>$token, 'userId'=>$user->id, 'userName'=> $user->name,'userMail'=>$user->email,
         'userStatus'=>$user->status, 'vendorAddress'=>$user->address,'deliverySupport'=>$user->delivery,
-    'phone'=>$user->phone]; //ok
+        'phone'=>$user->phone,'deliveryFee'=>$user->deliveryFee]; //ok
 
     }
 
@@ -66,6 +66,7 @@ class customauthcontroller extends Controller
            $user->phone = $request->phone;
            $user->status = 1;
            $user->delivery = $request->input('delivery');
+           $user->deliveryFee = $request->input('deliveryFee');
            $user->playerId = $request->input('pId');
            $user->password = bcrypt($request->password);
            $user->verifytoken = $verifytoken = Str::random(40);
