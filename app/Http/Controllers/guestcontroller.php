@@ -26,7 +26,7 @@ class guestcontroller extends Controller
     //method to get food list for customers to see and buy
     public function get_foods(){
 
-        $food = food::orderby('id','desc')->select('id','amt','slug','qty','unit','title','img','vendor_id',
+        $food = food::orderby('id','desc')->select('id','amt','deliveryFee','slug','qty','unit','title','img','vendor_id',
         'vendor_name','vendorAddress','delivery')->paginate(10);
         return foodres::collection($food);
     }
@@ -68,6 +68,7 @@ public function addFavorite(Request $request){
         $save->qty = $food->qty;
         $save->img = $food->img;
         $save->delivery = $food->delivery;
+        $save->deliveryFee = $food->deliveryFee;
         $save->vendor_name= $food->vendor_name;
         $save->vendorAddress= $food->vendorAddress;
         $save->save();
@@ -89,7 +90,7 @@ public function removeFavorite(Request $request){
 
 
 public function getFavorites($id){
-  $fav = favourite::orderby('id', 'desc')->where('cusId','=',$id)->select('id','foodId','title','amt','qty','img',
+  $fav = favourite::orderby('id', 'desc')->where('cusId','=',$id)->select('id','foodId','deliveryFee','title','amt','qty','img',
   'cusId','vendor_name','vendorAddress','delivery')->paginate(6);
     return favres::collection($fav);
 }
@@ -156,6 +157,7 @@ if($ok){
   $ok->vendorName = $food->vendor_name;
   $ok->foodId = $foodId;
   $ok->foodName = $food->title;
+  $ok->deliveryFee = $food->deliveryFee;
   $ok->amt = $food->amt;
   $ok->qty = $qty;
   $ok->save();
@@ -169,6 +171,7 @@ $ok->vendorId = $food->vendor_id;
 $ok->vendorName = $food->vendor_name;
 $ok->foodId = $foodId;
 $ok->foodName = $food->title;
+$ok->deliveryFee = $food->deliveryFee;
 $ok->amt = $food->amt;
 $ok->qty = $qty;
 $ok->save();
@@ -232,7 +235,7 @@ return 1;
 
 public function vendorFood($vendor){
   $food = food::orderby('id','desc')->where('slug','=',$vendor)
-  ->select('id','amt','qty','title','img','unit','vendor_id','slug','vendor_name','vendorAddress','delivery')->paginate(5);
+  ->select('id','amt','qty','title','img','unit','vendor_id','slug','vendor_name','vendorAddress','deliveryFee','delivery')->paginate(5);
 
   return foodres::collection($food);
   }
