@@ -105,6 +105,7 @@ class vendorcontroller extends Controller
                     $phone = $request->input('phone');
                     $unit = $request->input('unit');
                     $deliverySupport = $request->input('deliverySupport');
+                    $deliveryFee = $request->input('deliveryFee');
                     //.................compression algorithm...............//
     
            if($request->hasfile('img')){
@@ -153,6 +154,7 @@ class vendorcontroller extends Controller
                   $save->qty =$quantity;
                   $save->unit =$unit;
                  $save->delivery =$deliverySupport;
+                 $save->deliveryFee =$deliveryFee;
                   $save->img = $filenametostore;
                   $save->vendorAddress = $request->input('address');
 

@@ -219,14 +219,11 @@
     formdata.append('vendorId', localStorage.getItem('userId'));
     formdata.append('phone', localStorage.getItem('phone'));
     formdata.append('vendorName', localStorage.getItem('userName'));
-    /*
- //slug name
-    formdata.append('slug', v.slugify(localStorage.getItem('userName')));
-    */
     formdata.append('img', this.picture);
     formdata.append('unit', this.selected);
     formdata.append('address', localStorage.getItem('vendorAddress'));
     formdata.append('deliverySupport', localStorage.getItem('deliverySupport'));
+    formdata.append('deliveryFee', localStorage.getItem('deliveryFee'));
 
         axios.post('/new-food',formdata).then(res=>{
 			if(res.data == 1){
