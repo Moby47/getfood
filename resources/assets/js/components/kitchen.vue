@@ -181,7 +181,8 @@
     >
       <span v-if='con.delivery == 1'>
         <v-icon left class='sideToSide'>local_shipping</v-icon>
-        <span class='ml-3'>This vendor supports delivery for </span> <i class='pulse text-success'><strike>N</strike>{{con.deliveryFee}}</i> </span>
+        <span class='ml-3'>This vendor supports delivery for </span>
+        <b> <i class='pulse text-danger'> <strike>N</strike>{{con.deliveryFee}}</i></b> </span>
         
         <span v-else>
           <v-icon left>local_shipping</v-icon>
