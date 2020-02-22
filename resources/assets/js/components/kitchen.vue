@@ -310,7 +310,7 @@
                     <v-icon right>fastfood</v-icon>
                   </v-chip>
       <select class="form-control"   v-model='selected'> 
-      <option :value='ven.name' v-for='ven in vendor_list' v-bind:key='ven.id'>
+      <option :value='ven.slug' v-for='ven in vendor_list' v-bind:key='ven.id'>
       {{ven.name.slice(0, 25)}} - {{ven.address.slice(0, 25)}} 
       </option>
       </select>
