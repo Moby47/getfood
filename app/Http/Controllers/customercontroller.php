@@ -72,7 +72,7 @@ class customercontroller extends Controller
 //get temp data
 $tempId = $request->input('tempId');
  $temp = temp::where('tempId','=',$tempId)->select('tempId','id','foodId','vendorName','vendorId',
- 'qty','amt','foodName','phone')->get();
+ 'qty','amt','foodName','phone','deliveryFee')->get();
 
 //get checkout data
 
@@ -103,7 +103,8 @@ foreach($temp as $t){
   'phone' => $t->phone,
   'cusPhone' => $cusPhone,
   'delivery'=> $deli,
-  'total'=> $t->amt * $t->qty,
+   //food cost * quantity + delivery fee
+   'total'=> $t->amt * $t->qty + $t->deliveryFee,
   'ref'=> $ref,
   'trans'=> $trans,
   'created_at'=> \Carbon\Carbon::now(),
