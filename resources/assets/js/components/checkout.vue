@@ -528,7 +528,8 @@ fetch('https://onesignal.com/api/v1/notifications', {
                     //amount in naira
                     this.total = sum;
                     //amount to kobo N500
-                   // this.amount = sum * 100;
+                    this.amount = sum * 100;
+                    console.log('current amount in Kobo, ready for stack',this.amount)
 
                     //fetch total delivery cost
                     fetch('/delivery-fee'+'/'+ localStorage.getItem('tempUserCartID'))
@@ -643,6 +644,7 @@ body: JSON.stringify({
         mounted() {
            this.checkout()
            
+           console.log('initial amount',this.amount)
         }
     }
 </script>
