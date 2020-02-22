@@ -58,6 +58,7 @@ if($ok){
   $ok->vendorName = $food->vendor_name;
   $ok->foodId = $foodId;
   $ok->foodName = $food->title;
+  $ok->deliveryFee = $food->deliveryFee;
   $ok->amt = $food->amt;
   $ok->qty = $qty;
   $ok->save();
@@ -71,6 +72,7 @@ $ok->vendorId = $food->vendor_id;
 $ok->vendorName = $food->vendor_name;
 $ok->foodId = $foodId;
 $ok->foodName = $food->title;
+$ok->deliveryFee = $food->deliveryFee;
 $ok->amt = $food->amt;
 $ok->qty = $qty;
 $ok->phone = $food->phone;
@@ -247,7 +249,19 @@ $ok->save();
               return \Cart::session($id)->getTotal();
               }
 
+              public function deliveryFee($id){
 
+                $vendorCount= temp::select('deliveryFee')
+               ->where('tempid','=', $id)
+               ->groupBy('deliveryFee')->pluck('deliveryFee')->count();
+           
+                $deliveryFee= temp::select('deliveryFee')
+                 ->where('tempid','=', $id)
+                ->groupBy('deliveryFee')->pluck('deliveryFee')->sum();
+           
+                return ['deliveryFee'=>$deliveryFee, 'vendorCount'=>$vendorCount];
+             }
+             
               public function clearcart(Request $request){
                 \Cart::clear();
                 \Cart::session($request->input('userId'))->clear();
