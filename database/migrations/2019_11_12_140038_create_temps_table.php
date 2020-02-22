@@ -27,7 +27,7 @@ class CreateTempsTable extends Migration
             $table->string('address')->nullable();
             $table->string('phone')->nullable();
             $table->string('delivery')->nullable();
-            $table->integer('deliveryFee')->nullable();
+            $table->integer('deliveryFee')->default(0);
             $table->timestamps();
         });
     }

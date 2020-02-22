@@ -27,7 +27,7 @@ class CreateUsersTable extends Migration
             $table->boolean('status')->default(0);
             $table->string('playerId')->nullable();
             $table->integer('delivery')->nullable();
-            $table->integer('deliveryFee')->nullable();
+            $table->integer('deliveryFee')->default(0);
             $table->string('password');
             $table->string('verifytoken')->nullable();
             $table->rememberToken();
