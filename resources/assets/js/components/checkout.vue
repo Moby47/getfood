@@ -108,10 +108,12 @@
                             <div class="carttotal_row_last">
                    <div class="carttotal_left">SERVICE CHARGE</div> <div class="carttotal_right"><strike>N</strike>{{charges}}</div>
                             <div class="carttotal_left">SUBTOTAL</div> <div class="carttotal_right"><strike>N</strike> {{subtotal}}</div>
-                           
-                     <div class="carttotal_left ">TOTAL</div> <div class="carttotal_right text-success"><strike>N</strike> {{total}}</div>
-                            </div>
-                        </div> 
+                            <span v-show='dFee'>
+                              <div class="carttotal_left" >DELIVERY FEE ({{vendorCount}} Vendors)</div> <div class="carttotal_right"><strike>N</strike> {{deliveryFee}}</div>
+                             </span> 
+                              <div class="carttotal_left ">TOTAL</div> <div class="carttotal_right text-success"><strike>N</strike> {{total}}</div>
+                               </div>
+                           </div> 
 
 
                         
@@ -253,7 +255,10 @@ import paystack from 'vue-paystack';
                 amount: 0, //total in naira * 100 = Kobo equivalent 
 
                 loadingText: 'Loading Food Details...',
-                pId:[]
+                pId:[],
+                deliveryFee: 0,
+                vendorCount: 0,
+                dFee: false
                 
             }
         },
@@ -287,6 +292,12 @@ import paystack from 'vue-paystack';
 
             this.choiceBtn = !this.choiceBtn
             this.go = !this.go
+             //hide and subtract delivery fee
+             if(this.dFee){
+              this.dFee = false
+            this.total = this.total - this.deliveryFee
+            this.amount = this.total * 100
+            }
           },
 
           vendor(){
@@ -294,6 +305,13 @@ import paystack from 'vue-paystack';
                 if(prompt){
                   this.addText = true
                  this.choiceBtn = !this.choiceBtn
+                 //show and add delivery fee
+                 this.dFee = true
+                 //code to add the deliver fee if delivery is selected
+                 this.total = this.total + this.deliveryFee
+                 this.amount = this.total * 100
+
+                 this.$toasted.show('Delivery fee has been added');
                  this.$toasted.show('Please provide a detailed address for delivery');
                 }
           },
@@ -302,6 +320,12 @@ import paystack from 'vue-paystack';
             this.addText = false
             this.choiceBtn = false
             this.addText = false
+               //hide and subtract delivery fee
+               if(this.dFee){
+              this.dFee = false
+            this.total = this.total - this.deliveryFee
+            this.amount = this.total * 100
+            }
           },
 
           ok(){
@@ -323,6 +347,12 @@ import paystack from 'vue-paystack';
             this.go = !this.go
             //this.addText = !this.addText
             this.choiceBtn = !this.choiceBtn
+             //hide and subtract delivery fee
+             if(this.dFee){
+              this.dFee = false
+            this.total = this.total - this.deliveryFee
+            this.amount = this.total * 100
+            }
           },
 
           paid(){            
@@ -497,9 +527,20 @@ fetch('https://onesignal.com/api/v1/notifications', {
                     //amount in naira
                     this.total = sum;
                     //amount to kobo N500
-                    this.amount = sum * 100;
+                   // this.amount = sum * 100;
+                   
+                    //fetch total delivery cost
+                    fetch('/delivery-fee'+'/'+ localStorage.getItem('tempUserCartID'))
+                  .then(res => res.json())
+                  .then(res=>{
+                    console.log(res)
+                    this.deliveryFee = res.deliveryFee
+                    this.vendorCount = res.vendorCount
+
                     this.overlay = !this.overlay
                      this.TotalWait = false;
+                  })
+                  //fetch total delivery cost
                   })
                   .catch(error =>{
                     this.overlay = false
