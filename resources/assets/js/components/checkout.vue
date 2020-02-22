@@ -108,8 +108,10 @@
                             <div class="carttotal_row_last">
                    <div class="carttotal_left">SERVICE CHARGE</div> <div class="carttotal_right"><strike>N</strike>{{charges}}</div>
                             <div class="carttotal_left">SUBTOTAL</div> <div class="carttotal_right"><strike>N</strike> {{subtotal}}</div>
-                            <div class="carttotal_left ">DELIVERY (X{{vendorCount}} vendors)</div> <div class="carttotal_right text-success"><strike>N</strike> {{deliveryFee}}</div>
-                     <div class="carttotal_left ">TOTAL</div> <div class="carttotal_right text-success"><strike>N</strike> {{total}}</div>
+                          <span v-show='dFee'>
+                           <div class="carttotal_left" >DELIVERY FEE ({{vendorCount}} Vendors)</div> <div class="carttotal_right"><strike>N</strike> {{deliveryFee}}</div>
+                          </span> 
+                           <div class="carttotal_left ">TOTAL</div> <div class="carttotal_right text-success"><strike>N</strike> {{total}}</div>
                             </div>
                         </div> 
 
@@ -255,7 +257,8 @@ import paystack from 'vue-paystack';
                 loadingText: 'Loading Food Details...',
                 pId:[],
                 deliveryFee: 0,
-                vendorCount: 0
+                vendorCount: 0,
+                dFee: false
                 
             }
         },
@@ -289,6 +292,12 @@ import paystack from 'vue-paystack';
 
             this.choiceBtn = !this.choiceBtn
             this.go = !this.go
+            //hide and subtract delivery fee
+            if(this.dFee){
+              this.dFee = false
+            this.total = this.total - this.deliveryFee
+            this.amount = this.total * 100
+            }
           },
 
           vendor(){
@@ -296,6 +305,13 @@ import paystack from 'vue-paystack';
                 if(prompt){
                   this.addText = true
                  this.choiceBtn = !this.choiceBtn
+                 //show and add delivery fee
+                 this.dFee = true
+                 //code to add the deliver fee if delivery is selected
+                 this.total = this.total + this.deliveryFee
+                 this.amount = this.total * 100
+
+                 this.$toasted.show('Delivery fee has been added');
                  this.$toasted.show('Please provide a detailed address for delivery');
                 }
             
@@ -305,6 +321,12 @@ import paystack from 'vue-paystack';
             this.addText = false
             this.choiceBtn = false
             this.addText = false
+             //hide and subtract delivery fee
+             if(this.dFee){
+              this.dFee = false
+            this.total = this.total - this.deliveryFee
+            this.amount = this.total * 100
+            }
           },
 
           ok(){
@@ -326,6 +348,12 @@ import paystack from 'vue-paystack';
             this.go = !this.go
             //this.addText = !this.addText
             this.choiceBtn = !this.choiceBtn
+             //hide and subtract delivery fee
+             if(this.dFee){
+              this.dFee = false
+            this.total = this.total - this.deliveryFee
+            this.amount = this.total * 100
+            }
           },
 
           paid(){            
@@ -506,11 +534,9 @@ fetch('https://onesignal.com/api/v1/notifications', {
                     fetch('/delivery-fee'+'/'+ localStorage.getItem('tempUserCartID'))
                   .then(res => res.json())
                   .then(res=>{
-                    this.deliveryFee = res.data.deliveryFee
-                    this.vendorCount = res.data.vendorCount
-
-                    this.total = this.total + this.deliveryFee
-                    this.amount = this.total * 100
+                    console.log(res)
+                    this.deliveryFee = res.deliveryFee
+                    this.vendorCount = res.vendorCount
 
                     this.overlay = !this.overlay
                      this.TotalWait = false;

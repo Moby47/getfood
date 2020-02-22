@@ -259,7 +259,7 @@ $ok->save();
       ->where('tempid','=', $id)
      ->groupBy('deliveryFee')->pluck('deliveryFee')->sum();
 
-     return ['deleveryFee'=>$deliveryFee, 'vendorCount'=>$vendorCount];
+     return ['deliveryFee'=>$deliveryFee, 'vendorCount'=>$vendorCount];
   }
 
               public function clearcart(Request $request){
