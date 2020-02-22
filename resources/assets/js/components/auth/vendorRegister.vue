@@ -48,7 +48,7 @@
        <option  value='0'> No </option>
       </select>
 <p class='text-danger shake' v-show="errors.has('regForm.delivery')">{{ errors.first('regForm.delivery') }}</p>
-
+<br>
 <span v-if='selected == 1'>
 <input type="text" v-model='deliveryFee' name="deliveryFee"  v-validate='"required"' value="" class="form_input required" placeholder="Enter Delivery Fee, Eg: 500" />
 <p class='text-danger shake' v-show="errors.has('regForm.deliveryFee')">{{ errors.first('regForm.deliveryFee') }}</p>
