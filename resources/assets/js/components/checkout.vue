@@ -294,10 +294,16 @@ import paystack from 'vue-paystack';
             this.go = !this.go
              //hide and subtract delivery fee
              if(this.dFee){
-              this.dFee = false
+            this.dFee = false
             this.total = this.total - this.deliveryFee
             this.amount = this.total * 100
+            console.log('you hit self and delivery was chosen','amount',this.amount)
+            }else{
+            this.dFee = false
+            this.amount = this.total * 100
+            console.log('you hit self and delivery is off','amount',this.amount)
             }
+            //console.log('total',this.total,'dfee',this.deliveryFee,'amount',this.amount)
           },
 
           vendor(){
@@ -313,6 +319,7 @@ import paystack from 'vue-paystack';
 
                  this.$toasted.show('Delivery fee has been added');
                  this.$toasted.show('Please provide a detailed address for delivery');
+                 console.log('you hit del by vendor','amount',this.amount)
                 }
           },
 
@@ -321,11 +328,10 @@ import paystack from 'vue-paystack';
             this.choiceBtn = false
             this.addText = false
                //hide and subtract delivery fee
-               if(this.dFee){
-              this.dFee = false
+               this.dFee = false
             this.total = this.total - this.deliveryFee
             this.amount = this.total * 100
-            }
+            console.log('you hit reset','amount',this.amount)
           },
 
           ok(){
@@ -352,6 +358,7 @@ import paystack from 'vue-paystack';
               this.dFee = false
             this.total = this.total - this.deliveryFee
             this.amount = this.total * 100
+            console.log('you hit delmeth wen delfee is true','amount',this.amount)
             }
           },
 
@@ -527,7 +534,7 @@ fetch('https://onesignal.com/api/v1/notifications', {
                     //amount in naira
                     this.total = sum;
                     //amount to kobo N500
-                   // this.amount = sum * 100;
+                    this.amount = sum * 100;
                    
                     //fetch total delivery cost
                     fetch('/delivery-fee'+'/'+ localStorage.getItem('tempUserCartID'))
