@@ -151,7 +151,7 @@
         online:null,
         selected:'',
         passwordFieldType: 'password',
-        deliveryFee:''
+        deliveryFee:0
             }
         },
 
@@ -341,6 +341,17 @@ console.log('dat',dat)
                 console.log('off')
                 this.online = false;
             }
-        }
+        },
+
+        watch : {
+             selected(a,b){
+               if(a || b){
+                this.deliveryFee = 0
+            }
+
+        },
+
+        },
+
     }
 </script>
