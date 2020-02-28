@@ -224,8 +224,9 @@
     formdata.append('address', localStorage.getItem('vendorAddress'));
     formdata.append('deliverySupport', localStorage.getItem('deliverySupport'));
     formdata.append('deliveryFee', localStorage.getItem('deliveryFee'));
-
+  console.log(formdata,'before')
         axios.post('/new-food',formdata).then(res=>{
+          console.log(formdata,'sent')
 			if(res.data == 1){
         this.overlay=false
  this.$toasted.show("Food added successfully");
